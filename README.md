@@ -8,6 +8,12 @@ At its core it offers a live editor for manipulating Pillar documents. The inter
 
 ## Documentation of existing code
 
+<blockquote class="twitter-tweet" data-partner="tweetdeck"><p lang="en" dir="ltr">The preview of code snippets execution can be resized as well in <a href="https://twitter.com/hashtag/gtoolkit?src=hash&amp;ref_src=twsrc%5Etfw">#gtoolkit</a> Documenter. <a href="https://t.co/BnoP4D5O3f">pic.twitter.com/BnoP4D5O3f</a></p>&mdash; feenk (@feenkcom) <a href="https://twitter.com/feenkcom/status/1002851190475026432?ref_src=twsrc%5Etfw">June 2, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+![Documenter: expanded pictures](./doc/gt-documenter-epicea-diff.gif)
+
 For example, Documenter can embed pictures right in place:
 
 ![Documenter: expanded pictures](./doc/documenter-mondrian-example-pictures.png)
