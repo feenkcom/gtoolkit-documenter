@@ -3,25 +3,14 @@ The GToolkit Documenter is the tool for creating and consuming live documents di
 
 At its core it offers a live editor for manipulating Pillar documents. The interaction happens seamlessly directly in the text editor, and it can be combined with different types of previews to serve several classes of use cases:
 - documentation of existing code
-- interactive data notebook
 - tutorials
+- interactive data notebook
 
 ## Documentation of existing code
 
-<blockquote class="twitter-tweet" data-partner="tweetdeck"><p lang="en" dir="ltr">The preview of code snippets execution can be resized as well in <a href="https://twitter.com/hashtag/gtoolkit?src=hash&amp;ref_src=twsrc%5Etfw">#gtoolkit</a> Documenter. <a href="https://t.co/BnoP4D5O3f">pic.twitter.com/BnoP4D5O3f</a></p>&mdash; feenk (@feenkcom) <a href="https://twitter.com/feenkcom/status/1002851190475026432?ref_src=twsrc%5Etfw">June 2, 2018</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+Documenter complements the [Glamorous Toolkit examples engine](https://github.com/feenkcom/gtoolkit-examples) to redefine code documentation. When practicing example-driven development, examples get written as part of the typical development. Once examples exist, they can be quickly put together in a document to form documentation. For example, the picture below shows the comment of a class containing a visual explanation:
 
-
-![Documenter: expanded pictures](./doc/gt-documenter-epicea-diff.gif)
-
-For example, Documenter can embed pictures right in place:
-
-![Documenter: expanded pictures](./doc/documenter-mondrian-example-pictures.png)
-
-And it can even embed live code that can be previewed in place:
-
-![Documenter: expanded examples](./doc/documenter-mondrian-expanded-examples.png)
-
+![Documenter: examples preview](./doc/gt-documenter-examples-preview.png)
 
 You can see a live example of documentation by inspecting the following snippet:
 ```
@@ -30,15 +19,38 @@ GtDocumenter editorForText: BrToggleExamples comment.
 
 ## Tutorials
 
+Documenter offers a new experience of writing tutorials for Pharo by enabling the creation and embedding of Epicea change sessions directly in the document. For example, take a look at the following animation:
+
+![Documenter: Epicea diff](./doc/gt-documenter-epicea-diff.gif)
+
+The document shows a method on top, and a change preview at the bottom showing both the code and the associated diff to the state from the image. Applying the change updates both the change view (no more diff), and method preview. This speeds up the process of going through a tutorial faster. Furthermore, given that now the document shows the diff to the current image, the reader can safely explore alternative scenario and come back to the tutorial at any time without losing the overview.
+
+By default, the code is shown in a scrollable preview. For convenience, the size of the preview can be adjusted at read time:
+
+![Documenter: Epicea diff expansion](./doc/gt-documenter-resizer.gif)
+
+Or the whole can be expanded:
+![Documenter: Epicea diff expansion](./doc/gt-documenter-resizer-expansion.gif)
+
+
+To explore a concrete tutorial example, take a look at:
+
 ```
 IceRepository repositoriesLocation / 'feenkcom'/ 'gtoolkit-examples' / 'doc' / 'tutorial' / 'examples-tutorial.pillar'. 
 ```
 
-```
-IceRepository repositoriesLocation / 'feenkcom'/ 'gtoolkit-documenter' / 'doc' / 'beacon' / 'index.pillar'. 
-```
 
 ## Interactive data notebook
+
+A Documenter document can also be used as an interactive notebook. Internally it essentially acts as a playground:
+- it supports defining variables in code snippets, and
+- the execution of code shows an embedded inspector.
+
+For example:
+![Documenter: snippet preview](./doc/gt-documenter-snippet-preview.gif)
+
+Furthermore, to make the manipulation of results more efficient, we can also resize the preview:
+![Documenter: snippet preview resize](./doc/gt-documenter-snippet-preview-resize.gif)
 
 
 ## How to load
