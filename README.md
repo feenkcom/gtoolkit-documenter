@@ -50,7 +50,7 @@ For example:
 ![Documenter: snippet preview](./doc/gt-documenter-snippet-preview.gif)
 
 Furthermore, to make the manipulation of results more efficient, we can also resize the preview:
-![Documenter: snippet preview resize](./doc/gt-documenter-snippet-preview-resizer.gif)
+![Documenter: snippet preview resize](./doc/gt-documenter-snipper-preview-resize.gif)
 
 
 ## How to load
