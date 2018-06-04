@@ -10,7 +10,7 @@ At its core it offers a live editor for manipulating Pillar documents. The inter
 
 Documenter complements the [Glamorous Toolkit examples engine](https://github.com/feenkcom/gtoolkit-examples) to redefine code documentation. When practicing example-driven development, examples get written as part of the typical development. Once examples exist, they can be quickly put together in a document to form documentation. For example, the picture below shows the comment of a class containing a visual explanation:
 
-<img src="./doc/gt-documenter-examples-preview.png" alternate="Documenter: examples preview" width="50%" text-align="center"/>
+<img src="./doc/gt-documenter-examples-preview.png" alt="Documenter: examples preview" width="50%" border="1"/>
 
 You can see a live example of documentation by inspecting the following snippet:
 ```
@@ -21,22 +21,21 @@ GtDocumenter editorForText: BrToggleExamples comment.
 
 Documenter offers a new experience of writing tutorials for Pharo by enabling the creation and embedding of Epicea change sessions directly in the document. For example, take a look at the following animation:
 
-<img src="./doc/gt-documenter-epicea-diff.gif" alternate="Documenter: Documenter: Epicea diff" width="50%"/>
+<img src="./doc/gt-documenter-epicea-diff.gif" alt="Documenter: Documenter: Epicea diff" width="50%"/>
 
 
 The document shows a method on top, and a change preview at the bottom showing both the code and the associated diff to the state from the image. Applying the change updates both the change view (no more diff), and method preview. This speeds up the process of going through a tutorial faster. Furthermore, given that now the document shows the diff to the current image, the reader can safely explore alternative scenario and come back to the tutorial at any time without losing the overview.
 
 By default, the code is shown in a scrollable preview. For convenience, the size of the preview can be adjusted at read time:
 
-<img src="./doc/gt-documenter-resizer.gif" alternate="Documenter: Epicea diff expansion" width="50%"/>
+<img src="./doc/gt-documenter-resizer.gif" alt="Documenter: Epicea diff expansion" width="50%"/>
 
 Or the whole can be expanded:
 
-<img src="./doc/gt-documenter-resizer-expansion.gif" alternate="Documenter: Epicea diff expansion" width="50%"/>
+<img src="./doc/gt-documenter-resizer-expansion.gif" alt="Documenter: Epicea diff expansion" width="50%"/>
 
 
-
-To explore a concrete tutorial example, take a look at:
+To explore a concrete tutorial example, inspect the following:
 
 ```
 IceRepository repositoriesLocation / 'feenkcom'/ 'gtoolkit-examples' / 'doc' / 'tutorial' / 'examples-tutorial.pillar'. 
@@ -51,12 +50,12 @@ A Documenter document can also be used as an interactive notebook. Internally it
 
 For example:
 
-<img src="./doc/gt-documenter-snippet-preview.gif" alternate="Documenter: snippet preview" width="50%"/>
+<img src="./doc/gt-documenter-snippet-preview.gif" alt="Documenter: snippet preview" width="50%"/>
 
 
 Furthermore, to make the manipulation of results more efficient, we can also resize the preview:
 
-<img src="./doc/gt-documenter-snipper-preview-resize.gif" alternate="Documenter: snippet preview resize" width="50%"/>
+<img src="./doc/gt-documenter-snipper-preview-resize.gif" alt="Documenter: snippet preview resize" width="50%"/>
 
 
 ## How to load
