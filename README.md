@@ -21,7 +21,7 @@ GtDocumenter editorForText: BrToggleExamples comment.
 
 Documenter offers a new experience of writing tutorials for Pharo by enabling the creation and embedding of Epicea change sessions directly in the document. For example, take a look at the following animation:
 
-<img src="./doc/gt-documenter-epicea-diff.gif" alt="Documenter: Epicea diff" style="width: 200px;"/>
+![Documenter: Documenter: Epicea diff](./doc/gt-documenter-epicea-diff.gif)
 
 The document shows a method on top, and a change preview at the bottom showing both the code and the associated diff to the state from the image. Applying the change updates both the change view (no more diff), and method preview. This speeds up the process of going through a tutorial faster. Furthermore, given that now the document shows the diff to the current image, the reader can safely explore alternative scenario and come back to the tutorial at any time without losing the overview.
 
@@ -50,7 +50,7 @@ For example:
 ![Documenter: snippet preview](./doc/gt-documenter-snippet-preview.gif)
 
 Furthermore, to make the manipulation of results more efficient, we can also resize the preview:
-![Documenter: snippet preview resize](./doc/gt-documenter-snippet-preview-resize.gif)
+![Documenter: snippet preview resize](./doc/gt-documenter-snippet-preview-resizer.gif)
 
 
 ## How to load
