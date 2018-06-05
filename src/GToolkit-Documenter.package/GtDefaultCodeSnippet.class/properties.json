@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "GtAnnouncableCodeSnippet",
+	"category" : "GToolkit-Documenter-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "GtDefaultCodeSnippet",
+	"type" : "normal"
+}

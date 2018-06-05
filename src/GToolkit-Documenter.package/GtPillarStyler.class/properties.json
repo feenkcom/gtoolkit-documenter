@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BrTextStyler",
+	"category" : "GToolkit-Documenter-Pillar",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"workspace",
+		"fileReference"
+	],
+	"name" : "GtPillarStyler",
+	"type" : "normal"
+}

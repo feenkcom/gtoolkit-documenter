@@ -1,0 +1,17 @@
+{
+	"classtraitcomposition" : "GtAssertingTrait classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"tokens",
+		"parameters",
+		"sourceFileReference"
+	],
+	"name" : "GtPillarScriptTokens",
+	"commentStamp" : "",
+	"super" : "Object",
+	"traitcomposition" : "GtAssertingTrait",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "GToolkit-Documenter-Pillar"
+}

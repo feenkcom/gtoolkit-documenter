@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "TudorGirba 8/25/2017 13:09",
+	"super" : "PRPillarGrammar",
+	"category" : "GToolkit-Documenter-Pillar",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"fileReference",
+		"workspace",
+		"targetText",
+		"scriptIndex"
+	],
+	"name" : "GtPillarHighlightingParser",
+	"type" : "normal"
+}

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "GtPillarCodeSnippetType",
+	"category" : "GToolkit-Documenter-CodeSnippets",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "GtPillarDefaultCodeSnippetType",
+	"type" : "normal"
+}

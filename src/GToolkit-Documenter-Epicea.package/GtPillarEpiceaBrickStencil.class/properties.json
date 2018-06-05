@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "GtPillarBrickStencil",
+	"category" : "GToolkit-Documenter-Epicea",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "GtPillarEpiceaBrickStencil",
+	"type" : "normal"
+}

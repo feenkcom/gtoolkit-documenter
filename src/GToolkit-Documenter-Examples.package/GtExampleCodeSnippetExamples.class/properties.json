@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "GtDebuggableCodeSnippetExamples",
+	"category" : "GToolkit-Documenter-Examples",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "GtExampleCodeSnippetExamples",
+	"type" : "normal"
+}

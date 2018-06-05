@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "GtPillarCodeblock",
+	"category" : "GToolkit-Documenter-Epicea",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"epiceaLog"
+	],
+	"name" : "GtPillarEpiceaCodeblock",
+	"type" : "normal"
+}

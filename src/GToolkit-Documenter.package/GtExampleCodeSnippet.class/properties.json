@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "",
+	"super" : "GtAnnouncableCodeSnippet",
+	"category" : "GToolkit-Documenter-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"showMessageName",
+		"previewHeight",
+		"shouldDisplayCode",
+		"shouldExpandPreview",
+		"methodDefinition"
+	],
+	"name" : "GtExampleCodeSnippet",
+	"type" : "normal"
+}

@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "GToolkit-Documenter-Examples",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"memory",
+		"rootDirectoryName"
+	],
+	"name" : "GtFileSystemExamples",
+	"type" : "normal"
+}

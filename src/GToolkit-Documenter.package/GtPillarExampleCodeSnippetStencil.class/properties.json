@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "GtPillarBrickStencil",
+	"category" : "GToolkit-Documenter-Brick-Stencils",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"withCode",
+		"gtExample"
+	],
+	"name" : "GtPillarExampleCodeSnippetStencil",
+	"type" : "normal"
+}

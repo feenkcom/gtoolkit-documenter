@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "BrStencil",
+	"category" : "GToolkit-Documenter-Brick-Stencils",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"text",
+		"editor",
+		"codeSnippet"
+	],
+	"name" : "GtPillarBrickStencil",
+	"type" : "normal"
+}

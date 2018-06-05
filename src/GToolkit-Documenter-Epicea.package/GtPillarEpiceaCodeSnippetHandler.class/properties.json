@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "GtPillarScriptHandler",
+	"category" : "GToolkit-Documenter-Epicea",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "GtPillarEpiceaCodeSnippetHandler",
+	"type" : "normal"
+}

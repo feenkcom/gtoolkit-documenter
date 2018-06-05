@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "GtPillarScriptHandler",
+	"category" : "GToolkit-Documenter-CodeSnippets",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"exampleMethod"
+	],
+	"name" : "GtPillarExampleCodeSnippetHandler",
+	"type" : "normal"
+}

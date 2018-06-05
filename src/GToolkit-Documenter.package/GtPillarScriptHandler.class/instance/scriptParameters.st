@@ -1,0 +1,3 @@
+accessing
+scriptParameters
+	^ tokens scriptParameters

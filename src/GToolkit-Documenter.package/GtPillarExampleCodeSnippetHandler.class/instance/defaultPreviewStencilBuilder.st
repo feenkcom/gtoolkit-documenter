@@ -1,0 +1,3 @@
+initialization
+defaultPreviewStencilBuilder
+	^ GtDocumenterExampleCodeSnippetStencilBuilder new

@@ -1,0 +1,20 @@
+{
+	"classtraitcomposition" : "GtDebuggingTrait classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"scriptParameters",
+		"tokens",
+		"sourceFile",
+		"targetText",
+		"codeSnippet",
+		"previewStencilBuilder"
+	],
+	"name" : "GtPillarScriptHandler",
+	"commentStamp" : "",
+	"super" : "Object",
+	"traitcomposition" : "GtDebuggingTrait",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "GToolkit-Documenter-CodeSnippets"
+}
