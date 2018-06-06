@@ -1,0 +1,3 @@
+*GToolkit-Documenter
+visitGtPillarExampleAnnotation: aGtPillarExampleAnnotation 
+	self visitAnnotation: aGtPillarExampleAnnotation

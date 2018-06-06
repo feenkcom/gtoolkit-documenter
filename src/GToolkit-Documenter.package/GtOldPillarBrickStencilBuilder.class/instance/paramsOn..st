@@ -2,6 +2,6 @@ api - instantiation
 paramsOn: aStencilExecutor
 
 	aStencilExecutor
-		push: self annotation;
+		push: self codeSnippet;
 		push: self editor;
 		push: self text

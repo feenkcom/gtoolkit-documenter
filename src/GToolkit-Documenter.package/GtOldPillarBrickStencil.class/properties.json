@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "BrStencilBuilder",
+	"super" : "BrStencil",
 	"category" : "GToolkit-Documenter-Brick-Stencils",
 	"classinstvars" : [ ],
 	"pools" : [ ],
@@ -8,8 +8,8 @@
 	"instvars" : [
 		"text",
 		"editor",
-		"annotation"
+		"codeSnippet"
 	],
-	"name" : "GtPillarBrickStencilBuilder",
+	"name" : "GtOldPillarBrickStencil",
 	"type" : "normal"
 }

@@ -1,3 +1,3 @@
 api - accessing
-text: anObject
-	text := anObject
+text: aBrText
+	text := aBrText

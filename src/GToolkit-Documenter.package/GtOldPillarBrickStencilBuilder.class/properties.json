@@ -8,8 +8,8 @@
 	"instvars" : [
 		"text",
 		"editor",
-		"annotation"
+		"codeSnippet"
 	],
-	"name" : "GtPillarBrickStencilBuilder",
+	"name" : "GtOldPillarBrickStencilBuilder",
 	"type" : "normal"
 }

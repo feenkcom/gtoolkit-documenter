@@ -8,4 +8,4 @@ previewStencil: aPreviewStencilBuilder
 
 	"
 
-	previewStencilBuilder := aPreviewStencilBuilder asStencilBuilder: GtPillarBrickStencilBuilder
+	previewStencilBuilder := aPreviewStencilBuilder asStencilBuilder: GtOldPillarBrickStencilBuilder

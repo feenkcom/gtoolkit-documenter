@@ -1,6 +1,6 @@
 private
 privateStyle: aText 
-	GtPillarHighlightingParser new 
+	GtOldPillarHighlightingParser new 
 		fileReference: fileReference;
 		targetText: aText;
 		workspace: workspace;

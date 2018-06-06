@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "GtPillarBrickStencilBuilder",
+	"super" : "GtOldPillarBrickStencilBuilder",
 	"category" : "GToolkit-Documenter-Epicea",
 	"classinstvars" : [ ],
 	"pools" : [ ],

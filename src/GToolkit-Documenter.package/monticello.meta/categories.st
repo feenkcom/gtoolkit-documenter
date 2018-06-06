@@ -7,6 +7,7 @@ SystemOrganization addCategory: 'GToolkit-Documenter-Brick-Stencils'!
 SystemOrganization addCategory: 'GToolkit-Documenter-CodeSnippets'!
 SystemOrganization addCategory: 'GToolkit-Documenter-Core'!
 SystemOrganization addCategory: 'GToolkit-Documenter-Manifest'!
+SystemOrganization addCategory: 'GToolkit-Documenter-Obsolete'!
 SystemOrganization addCategory: 'GToolkit-Documenter-Pillar'!
 SystemOrganization addCategory: 'GToolkit-Documenter-Tests'!
 SystemOrganization addCategory: 'GToolkit-Documenter-Utility'!

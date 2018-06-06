@@ -1,5 +1,5 @@
 common
 parserInstance
 	<gtExample>
-	^ GtPillarHighlightingParser new
+	^ GtOldPillarHighlightingParser new
 		workspace: GtDocument new.
