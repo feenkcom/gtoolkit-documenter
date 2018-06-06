@@ -1,0 +1,16 @@
+{
+	"classtraitcomposition" : "GtAssertingTrait classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"targetText",
+		"listItemCounter"
+	],
+	"name" : "GtPillarNewHighlighter",
+	"commentStamp" : "",
+	"super" : "PRVisitor",
+	"traitcomposition" : "GtAssertingTrait",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "GToolkit-Documenter-Pillar"
+}

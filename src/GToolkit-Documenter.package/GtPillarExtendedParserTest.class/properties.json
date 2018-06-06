@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "PRPillarParserTest",
+	"category" : "GToolkit-Documenter-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "GtPillarExtendedParserTest",
+	"type" : "normal"
+}
