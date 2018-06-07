@@ -1,0 +1,3 @@
+testing
+shouldExpandPreview
+	^ true

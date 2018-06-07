@@ -1,0 +1,3 @@
+testing
+shouldDisplayResult
+	^ true

@@ -1,3 +1,7 @@
 accessing
 possibleParameters
-	^ #(name show expanded previewExpanded noCode)
+	^ {#name.
+	self showParameterName.
+	#expanded.
+	#previewExpanded.
+	#noCode}

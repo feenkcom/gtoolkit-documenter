@@ -5,18 +5,18 @@ create
 	| aChildrenElementBlock aComposite |
 	
 	aChildrenElementBlock := [ 
-		self codeSnippet isMethodDefined 
+		self annotation isMethodDefined 
 			ifFalse: [ self newErrorMessageElement ]
-			ifTrue: [ self codeSnippet shouldDisplayResult
+			ifTrue: [ self annotation shouldDisplayResult
 				ifTrue: [ self newPreviewElementFromShowParameter ]
 				ifFalse: [ self newPreviewEditorElement ] ] ].
 		
-	aComposite := self newTransparentCompositeElement.
+	aComposite := BlElement new look: GtPillarTransparentCompositeLook new.
 	aComposite addChild: aChildrenElementBlock value.
 
-	self codeSnippet 
+	"self annotation 
 		subscribe: GtExampleClassUpdatedAnnouncement 
 		do: [ aComposite removeChildren. aComposite addChild: aChildrenElementBlock value ] 
-		for: aComposite.
+		for: aComposite."
 	
 	^ aComposite

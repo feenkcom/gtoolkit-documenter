@@ -2,14 +2,12 @@
 	"classtraitcomposition" : "GtAssertingTrait classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"targetText",
-		"listItemCounter",
-		"outsCounter",
-		"document"
+		"pillarNode",
+		"result"
 	],
-	"name" : "GtPillarDocumenterHighlighter",
+	"name" : "GtPillarExecutableNode",
 	"commentStamp" : "",
-	"super" : "PRVisitor",
+	"super" : "Object",
 	"traitcomposition" : "GtAssertingTrait",
 	"type" : "normal",
 	"classinstvars" : [ ],
