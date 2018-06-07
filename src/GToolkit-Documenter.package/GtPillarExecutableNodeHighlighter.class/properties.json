@@ -1,0 +1,16 @@
+{
+	"classtraitcomposition" : "GtAssertingTrait classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"executableNode",
+		"rootHighlighter"
+	],
+	"name" : "GtPillarExecutableNodeHighlighter",
+	"commentStamp" : "",
+	"super" : "Object",
+	"traitcomposition" : "GtAssertingTrait",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "GToolkit-Documenter-Pillar"
+}

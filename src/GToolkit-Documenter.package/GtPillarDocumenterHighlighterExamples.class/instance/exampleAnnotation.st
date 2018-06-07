@@ -2,7 +2,6 @@ highlighted text
 exampleAnnotation
 	<gtExample>
 	| aText |
-	aText := '${example:GtPillarNewHighlighterExamples>>#exampleAnnotation}$' asRopedText.
+	aText := '${example:GtPillarDocumenterHighlighterExamples>>#exampleAnnotation}$' asRopedText.
 	GtPillarDocumenterHighlighter highlight: aText.
-	self assert: aText rope attributes size equals: 2.
 	^ aText
