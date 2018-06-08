@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "GtPillarCodeblock",
+	"super" : "GtOldPillarCodeblock",
 	"category" : "GToolkit-Documenter-Epicea",
 	"classinstvars" : [ ],
 	"pools" : [ ],

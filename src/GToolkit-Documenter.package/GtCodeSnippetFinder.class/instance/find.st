@@ -2,7 +2,7 @@ actions
 find
 	"If there is less scripts, create new one."
 
-	<return: #GtCodeSnippetResult>
+	<return: #GtOldCodeSnippetResult>
 	self scriptIndex > self numberOfCodeSnippets
 		ifTrue: [ ^ self newOrExistingCodeSnippet ].
 	self hasSimilarSourceCodeAtSameIndex

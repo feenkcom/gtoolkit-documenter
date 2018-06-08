@@ -1,11 +1,13 @@
 {
 	"commentStamp" : "",
-	"super" : "GtPillarExecutableNode",
+	"super" : "GtPillarDocumentExecutablePart",
 	"category" : "GToolkit-Documenter-Pillar",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "GtPillarExecutableCodeSnippet",
+	"instvars" : [
+		"isException"
+	],
+	"name" : "GtPillarCodeblock",
 	"type" : "normal"
 }

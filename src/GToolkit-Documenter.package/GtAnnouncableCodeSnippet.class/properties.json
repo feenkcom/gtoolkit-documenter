@@ -6,7 +6,7 @@
 	],
 	"name" : "GtAnnouncableCodeSnippet",
 	"commentStamp" : "",
-	"super" : "GtCodeSnippetResult",
+	"super" : "GtOldCodeSnippetResult",
 	"traitcomposition" : "GtAnnouncerTrait",
 	"type" : "normal",
 	"classinstvars" : [ ],

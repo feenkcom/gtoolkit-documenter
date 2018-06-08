@@ -1,0 +1,17 @@
+{
+	"classtraitcomposition" : "GtAssertingTrait classTrait + GtAnnouncerTrait classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"document",
+		"announcer",
+		"pillarNode"
+	],
+	"name" : "GtPillarDocumentPart",
+	"commentStamp" : "",
+	"super" : "Object",
+	"traitcomposition" : "GtAssertingTrait + GtAnnouncerTrait",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "GToolkit-Documenter-Pillar"
+}

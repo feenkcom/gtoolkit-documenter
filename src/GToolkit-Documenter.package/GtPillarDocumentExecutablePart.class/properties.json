@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "GtPillarDocumentPart",
+	"category" : "GToolkit-Documenter-Pillar",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"result"
+	],
+	"name" : "GtPillarDocumentExecutablePart",
+	"type" : "normal"
+}

@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "GtOutBindings",
+	"category" : "GToolkit-Documenter-Bindings",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"index",
+		"sourceCode"
+	],
+	"name" : "GtOldCodeSnippetResult",
+	"type" : "normal"
+}

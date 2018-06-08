@@ -4,5 +4,7 @@ visitCodeblock: aPRCodeblock
 	outsCounter incrementAt: 1.
 	aPRCodeblock counter: outsCounter copy.
 	self flag: 'Here we should search for an existing executable node in document'.
-	anExecutableNode := GtPillarExecutableExampleNode pillarNode: aPRCodeblock.
+	anExecutableNode := GtPillarCodeblock
+		document: self document
+		pillarNode: aPRCodeblock.
 	GtPillarExecutableCodeblockNodeHighlighter highlight: anExecutableNode using: self.

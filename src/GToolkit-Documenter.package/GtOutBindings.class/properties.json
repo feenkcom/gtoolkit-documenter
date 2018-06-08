@@ -6,11 +6,9 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"index",
-		"sourceCode",
 		"result",
 		"bindings"
 	],
-	"name" : "GtCodeSnippetResult",
+	"name" : "GtOutBindings",
 	"type" : "normal"
 }

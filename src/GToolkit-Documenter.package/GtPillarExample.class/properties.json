@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "GtPillarExecutableNode",
+	"super" : "GtPillarDocumentExecutablePart",
 	"category" : "GToolkit-Documenter-Pillar",
 	"classinstvars" : [ ],
 	"pools" : [ ],
@@ -8,6 +8,6 @@
 	"instvars" : [
 		"methodDefinition"
 	],
-	"name" : "GtPillarExecutableExampleNode",
+	"name" : "GtPillarExample",
 	"type" : "normal"
 }

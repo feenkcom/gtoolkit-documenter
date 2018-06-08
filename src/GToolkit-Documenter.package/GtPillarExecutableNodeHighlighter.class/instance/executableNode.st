@@ -1,4 +1,4 @@
 accessing
 executableNode
-	<return: #GtPillarExecutableNode>
+	<return: #GtPillarDocumentExecutablePart>
 	^ executableNode

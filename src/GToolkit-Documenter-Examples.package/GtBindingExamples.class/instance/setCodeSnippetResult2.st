@@ -1,4 +1,4 @@
-code snippet result
+out bindings
 setCodeSnippetResult2
 	<gtExample>
 	| bindings |

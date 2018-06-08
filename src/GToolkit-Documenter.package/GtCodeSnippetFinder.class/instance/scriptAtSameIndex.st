@@ -1,4 +1,4 @@
 accessing - computed
 scriptAtSameIndex
-	<return: #GtCodeSnippetResult>
+	<return: #GtOldCodeSnippetResult>
 	^ self outs codeSnippetAt: self scriptIndex

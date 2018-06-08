@@ -3,7 +3,7 @@ documentWithTwoCodeSnippets
 	<gtExample>
 	| codeSnippet document out |
 	document := self documentWithOneCodeSnippet.
-	codeSnippet := self codeSnippetResult.
+	codeSnippet := self outBindings.
 	codeSnippet value: 7.
 	codeSnippet index: 2.
 	codeSnippet document: document.

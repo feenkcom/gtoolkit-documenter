@@ -4,7 +4,7 @@
 	"instvars" : [
 		"tokens"
 	],
-	"name" : "GtPillarCodeblock",
+	"name" : "GtOldPillarCodeblock",
 	"commentStamp" : "",
 	"super" : "PRCodeblock",
 	"traitcomposition" : "GtAssertingTrait",

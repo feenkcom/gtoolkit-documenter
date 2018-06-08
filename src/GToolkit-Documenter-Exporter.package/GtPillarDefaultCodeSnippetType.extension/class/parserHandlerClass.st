@@ -1,3 +1,3 @@
 *GToolkit-Documenter-Exporter
 parserHandlerClass
-	^ GtPillarCodeblock
+	^ GtOldPillarCodeblock

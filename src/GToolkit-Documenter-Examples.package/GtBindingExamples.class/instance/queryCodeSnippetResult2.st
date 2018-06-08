@@ -1,4 +1,4 @@
-code snippet result
+out bindings
 queryCodeSnippetResult2
 	<gtExample>
 	<label: 'Set code snippet result'>

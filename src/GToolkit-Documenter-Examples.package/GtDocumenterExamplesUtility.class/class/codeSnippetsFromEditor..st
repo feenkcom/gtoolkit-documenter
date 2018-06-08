@@ -1,6 +1,6 @@
 utility - accessing
 codeSnippetsFromEditor: aBrTextEditor 
-	<return: #Array of: #GtCodeSnippetResult>
+	<return: #Array of: #GtOldCodeSnippetResult>
 	| outs |
 	outs := self outsFromEditor: aBrTextEditor.
 	^ Array new: outs size streamContents: [ :aStream | 

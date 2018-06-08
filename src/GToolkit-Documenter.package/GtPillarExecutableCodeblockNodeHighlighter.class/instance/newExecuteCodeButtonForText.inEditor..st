@@ -10,14 +10,14 @@ newExecuteCodeButtonForText: aBrText inEditor: aTextElement
 		"create a `once` subscription to restyle text once code snippet is executed.
 		We should not restyle text right after the `execute` statement since execution
 		could happen asynchronous"
-		(self
+		(self executableNode
 			when: GtCodeSnippetExecutionAnnouncement
 			doOnce: [ aTextElement editor styleText ]
 			for: anAction).
-		self executeWithPlaygroundStrategy ].
+		self executableNode executeWithPlaygroundStrategy ].
 
 	aStencil := GtPillarPlayButtonStencil new.
-	aStencil label: 'codeSnippet label'.
+	aStencil label: self runButtonLabel.
 	aStencil action: anAction.
 
 	^ aStencil asElement
