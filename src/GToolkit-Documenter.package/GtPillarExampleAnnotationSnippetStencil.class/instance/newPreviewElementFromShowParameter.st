@@ -3,7 +3,7 @@ newPreviewElementFromShowParameter
 	| exampleElement |
 	
 	exampleElement := GtPillarExampleElement
-		withCode: self annotation shouldDisplayCode.
+		withCode: self documentPart shouldDisplayCode.
 	
 	self maySetHeightOfPreview: exampleElement.
 	
@@ -14,11 +14,11 @@ newPreviewElementFromShowParameter
 			c horizontal matchParent.
 			c vertical fitContent ].
 	exampleElement
-		example: self annotation exampleMethod gtExample
+		example: self documentPart exampleMethod gtExample
 		showBlock: [ :returnValue | 
 			| view |
 			view := GtPhlowExplicitView new.
-			returnValue perform: self annotation showMessageName withArguments: {view}.
+			returnValue perform: self documentPart showMessageName withArguments: {view}.
 			view asElementDo: [ :element |
 				element constraintsDo: [ :c | 
 					c vertical matchParent.

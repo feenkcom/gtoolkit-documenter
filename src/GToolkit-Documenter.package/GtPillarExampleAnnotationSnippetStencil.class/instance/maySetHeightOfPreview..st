@@ -1,4 +1,4 @@
 private
 maySetHeightOfPreview: exampleElement
-	self annotation isPreviewHeightDefined
-		ifTrue: [ exampleElement previewHeight: self annotation previewHeight ]
+	self documentPart isPreviewHeightDefined
+		ifTrue: [ exampleElement previewHeight: self documentPart previewHeight ]

@@ -1,9 +1,8 @@
 private-styles
-expandingAttributesForExampleAnnotation: aGtPillarExecutableNode
+expandingAttributes
 	| expandingAttribute |
 	expandingAttribute := BrTextExpandButtonAttribute new
-		attributesCreatingBlock: [ 
-			self newPreviewAttributeForExample: aGtPillarExecutableNode ].
+		attributesCreatingBlock: [ self newPreviewAttribute ].
 	^ Array with: expandingAttribute.
 	"^ aGtPillarExampleAnnotation shouldBeExpanded
 		ifFalse: [ attributes ]
