@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "GtPillarExecutableNodeHighlighter",
+	"super" : "GtPillarDocumentPartHighlighter",
 	"category" : "GToolkit-Documenter-Pillar",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "GtPillarExecutableCodeblockNodeHighlighter",
+	"name" : "GtPillarCodeblockHighlighter",
 	"type" : "normal"
 }

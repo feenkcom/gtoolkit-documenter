@@ -2,10 +2,10 @@
 	"classtraitcomposition" : "GtAssertingTrait classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"executableNode",
-		"rootHighlighter"
+		"rootHighlighter",
+		"documentPart"
 	],
-	"name" : "GtPillarExecutableNodeHighlighter",
+	"name" : "GtPillarDocumentPartHighlighter",
 	"commentStamp" : "",
 	"super" : "Object",
 	"traitcomposition" : "GtAssertingTrait",

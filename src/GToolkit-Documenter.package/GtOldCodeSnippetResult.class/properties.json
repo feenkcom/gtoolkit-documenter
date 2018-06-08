@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "GtOutBindings",
-	"category" : "GToolkit-Documenter-Bindings",
+	"category" : "GToolkit-Documenter-Obsolete",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

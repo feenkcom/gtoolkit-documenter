@@ -1,7 +1,7 @@
 instance creation
 highlight: aGtPillarExecutableNode using: aGtPillarDocumenterHighlighter
-	<return: #GtPillarExecutableNodeHighlighter>
+	<return: #GtPillarDocumentPartHighlighter>
 	^ self new
-		executableNode: aGtPillarExecutableNode;
+		documentPart: aGtPillarExecutableNode;
 		rootHighlighter: aGtPillarDocumenterHighlighter;
 		highlight

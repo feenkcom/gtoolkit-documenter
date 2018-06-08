@@ -1,3 +1,3 @@
 executable node - accessing
 executableNodeStart
-	^ self executableNode pillarNode start
+	^ self documentPart pillarNode start

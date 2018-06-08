@@ -1,5 +1,5 @@
 as yet unclassified
 runButtonLabel
 	<return: #String>
-	^ self executableNode pillarNode label 
+	^ self documentPart pillarNode label 
 		ifEmpty: [ GtDocumenterConstants defaultExecuteButtonLabel ]

@@ -7,4 +7,4 @@ visitCodeblock: aPRCodeblock
 	anExecutableNode := GtPillarCodeblock
 		document: self document
 		pillarNode: aPRCodeblock.
-	GtPillarExecutableCodeblockNodeHighlighter highlight: anExecutableNode using: self.
+	GtPillarCodeblockHighlighter highlight: anExecutableNode using: self.
