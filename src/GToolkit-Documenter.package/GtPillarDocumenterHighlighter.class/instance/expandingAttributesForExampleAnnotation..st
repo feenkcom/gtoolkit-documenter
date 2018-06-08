@@ -3,7 +3,7 @@ expandingAttributesForExampleAnnotation: aGtPillarExecutableNode
 	| expandingAttribute |
 	expandingAttribute := BrTextExpandButtonAttribute new
 		attributesCreatingBlock: [ 
-			self newPreviewAttributeForExampleAnnotation: aGtPillarExecutableNode ].
+			self newPreviewAttributeForExample: aGtPillarExecutableNode ].
 	^ Array with: expandingAttribute.
 	"^ aGtPillarExampleAnnotation shouldBeExpanded
 		ifFalse: [ attributes ]

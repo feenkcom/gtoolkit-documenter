@@ -12,7 +12,12 @@ newExecuteCodeButtonForText: aBrText inEditor: aTextElement
 		could happen asynchronous"
 		(self documentPart
 			when: GtCodeSnippetExecutionAnnouncement
-			doOnce: [ aTextElement editor styleText ]
+			doOnce: [ 
+				self inform: 'styling'.
+				self styleScriptBody.
+				self styleResultPreview.
+				aTextElement fireEvent: (BrTextStyledEvent new text: self targetText).
+				"aTextElement editor styleText" ]
 			for: anAction).
 		self documentPart executeWithPlaygroundStrategy ].
 

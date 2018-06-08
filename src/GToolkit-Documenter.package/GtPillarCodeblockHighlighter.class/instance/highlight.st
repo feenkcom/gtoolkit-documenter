@@ -3,4 +3,4 @@ highlight
 	self styleParameters.
 	self styleScriptBody.
 	self styleExecutableCode.
-	"self codeSnippet hasResult ifTrue: [ self styleExpandingCode ]."
+	self documentPart hasResult ifTrue: [ self styleResultPreview ].

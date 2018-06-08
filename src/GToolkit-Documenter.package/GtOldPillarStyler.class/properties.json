@@ -1,13 +1,14 @@
 {
 	"commentStamp" : "",
 	"super" : "BrTextStyler",
-	"category" : "GToolkit-Documenter-Pillar",
+	"category" : "GToolkit-Documenter-Obsolete",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"document"
+		"workspace",
+		"fileReference"
 	],
-	"name" : "GtPillarStyler",
+	"name" : "GtOldPillarStyler",
 	"type" : "normal"
 }

@@ -4,8 +4,8 @@ editorForText: aString fileReference: aFileReference
 
 	text := aString asRopedText.
 	document := GtDocument new.
-	styler := GtPillarStyler new "fileReference: aFileReference".
-	styler document: document.
+	styler := GtOldPillarStyler new fileReference: aFileReference.
+	styler workspace: document.
 	editor := BrTextEditor new.
 	editor styler: styler.
 	editor text: text.

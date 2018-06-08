@@ -3,4 +3,4 @@ gtInspectorPillarCommentWithBlocIn: composite
 	<gtInspectorPresentationOrder: 19>
 	^ composite bloc
 		title: '_Comment';
-		element: [ GtDocumenter editorForText: self comment ]
+		element: [ GtOldDocumenter editorForText: self comment ]

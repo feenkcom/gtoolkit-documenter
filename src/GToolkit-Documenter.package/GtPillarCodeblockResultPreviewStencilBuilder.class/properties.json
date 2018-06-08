@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "GtDocumenterPillarExampleAnnotationStencilBuilder",
+	"name" : "GtPillarCodeblockResultPreviewStencilBuilder",
 	"type" : "normal"
 }

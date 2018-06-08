@@ -1,9 +1,8 @@
 highlighted text
-executableScriptAnnotation
+executableScriptAnnotation2
 	<gtExample>
 	| aText |
 	aText := '[[[
 aResult := 4 factorial.
 ]]]' asRopedText.
-	GtPillarDocumenterHighlighter highlight: aText.
-	^ aText
+	^ GtDocumenter editorForText: aText.

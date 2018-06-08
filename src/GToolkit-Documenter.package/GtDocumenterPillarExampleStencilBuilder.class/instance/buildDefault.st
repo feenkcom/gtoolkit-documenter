@@ -3,4 +3,4 @@ buildDefault
 	^ GtPillarExampleAnnotationSnippetStencil new
 		text: self text;
 		editor: self editor;
-		annotation: self annotation
+		annotation: self documentPart

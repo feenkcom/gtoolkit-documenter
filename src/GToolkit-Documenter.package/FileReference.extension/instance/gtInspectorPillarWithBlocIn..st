@@ -5,7 +5,7 @@ gtInspectorPillarWithBlocIn: composite
 		title: '_Pillar';
 		element: [ 
 			| element |
-			element := (GtDocumenter editorForPillar: self).
+			element := (GtOldDocumenter editorForPillar: self).
 			element
 				addShortcut: (BlShortcut new
 					combination: (BlKeyCombination builder meta; key: Key v; build);

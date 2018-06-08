@@ -1,11 +1,11 @@
 instance creation
-newPreviewAttributeForExampleAnnotation: aGtPillarExecutableNode
+newPreviewAttributeForExample: aGtPillarDocumentPart
 	self flag: 'Use elementBlockWithErrorCatching: later'.
 	^ BrTextAdornmentDynamicAttribute new
 		beAppend;
 		elementBlock: [ :aBrText :aTextElement | 
-			((GtDocumenterPillarExampleAnnotationStencilBuilder new 
+			((GtDocumenterPillarExampleStencilBuilder new 
 				asStencilBuilder: GtPillarBrickStencilBuilder)
-					annotation: aGtPillarExecutableNode;
+					documentPart: aGtPillarDocumentPart;
 					text: aBrText;
 					editor: aTextElement) asElement ]

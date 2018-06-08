@@ -5,4 +5,4 @@ gtPillarFor: aView
 	^ aView
 		title: 'Pillar';
 		stencil: [ 
-			GtDocumenter editorForPillar: self ]
+			GtOldDocumenter editorForPillar: self ]

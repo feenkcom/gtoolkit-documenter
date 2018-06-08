@@ -2,7 +2,7 @@ utility - accessing
 pillarElementForPillarFileReference: aFileReference
 	<return: #GtPillarEditorElement>
 	| pillarElement document editor |
-	pillarElement := GtDocumenter editorForPillar: aFileReference.
+	pillarElement := GtOldDocumenter editorForPillar: aFileReference.
 	self assert: pillarElement notNil.
 	document := pillarElement document.
 	editor := self editorElementFromPillarElement: pillarElement.
