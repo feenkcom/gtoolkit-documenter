@@ -1,4 +1,4 @@
 accessing
 outs
-	<return: #GtCodeSnippets>
+	<return: #GtOldCodeSnippets>
 	^ self codeSnippets

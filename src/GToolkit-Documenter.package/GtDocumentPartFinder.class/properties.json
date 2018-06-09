@@ -6,10 +6,9 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"tokens",
-		"scriptIndex",
-		"document"
+		"document",
+		"pillarNode"
 	],
-	"name" : "GtCodeSnippetFinder",
+	"name" : "GtDocumentPartFinder",
 	"type" : "normal"
 }

@@ -6,7 +6,7 @@ handleScriptWithTokens: tokens
 		scriptTokens sourceFileReference: self fileReference ].
 	scriptTokens tokens: tokens.
 	scriptIndex := scriptIndex + 1.
-	codeSnippet := GtCodeSnippetFinder new
+	codeSnippet := GtOldCodeSnippetFinder new
 		document: workspace;
 		scriptIndex: scriptIndex;
 		tokens: scriptTokens;

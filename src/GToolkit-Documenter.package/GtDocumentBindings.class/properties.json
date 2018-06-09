@@ -8,6 +8,6 @@
 	"instvars" : [
 		"bindings"
 	],
-	"name" : "GtPlaygroundBindings",
+	"name" : "GtDocumentBindings",
 	"type" : "normal"
 }

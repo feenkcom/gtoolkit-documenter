@@ -6,7 +6,7 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"result"
+		"outBindings"
 	],
 	"name" : "GtPillarDocumentExecutablePart",
 	"type" : "normal"

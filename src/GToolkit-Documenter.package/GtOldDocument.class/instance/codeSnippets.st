@@ -1,4 +1,4 @@
 accessing
 codeSnippets
-	<return: #GtCodeSnippets>
+	<return: #GtOldCodeSnippets>
 	^ codeSnippets

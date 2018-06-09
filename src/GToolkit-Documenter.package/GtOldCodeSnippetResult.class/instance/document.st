@@ -1,4 +1,4 @@
 accessing
 document
-	<return: #GtDocument>
+	<return: #GtOldDocument>
 	^ self bindings

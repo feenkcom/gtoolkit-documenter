@@ -7,6 +7,6 @@ aResult := 4 factorial.
 ]]]' asRopedText.
 	GtOldPillarHighlightingParser new
 		targetText: aText;
-		workspace: GtDocument new;
+		workspace: GtOldDocument new;
 		parse: aText asString.
 	^ aText

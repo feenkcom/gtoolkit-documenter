@@ -1,9 +1,9 @@
 initialization
 initialize
 	super initialize.
-	documentParts := GtDocumentParts new.
-	globalBindings := GtDocumentBindings new.
-	globalBindings 
+	codeSnippets := GtOldCodeSnippets new.
+	bindings := GtDocumentBindings new.
+	bindings 
 		addNamed: GtDocumenterConstants resultsVariableName 
-		value: documentParts.
+		value: codeSnippets.
 	systemChangesHandler := GtSystemChangesHandler new.

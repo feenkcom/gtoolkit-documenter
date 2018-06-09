@@ -2,16 +2,14 @@
 	"classtraitcomposition" : "GtAssertingTrait classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"globalBindings",
-		"systemChangesHandler",
-		"documentParts"
+		"collection"
 	],
-	"name" : "GtDocument",
+	"name" : "GtOldCodeSnippets",
 	"commentStamp" : "",
 	"super" : "Object",
 	"traitcomposition" : "GtAssertingTrait",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"category" : "GToolkit-Documenter-Core"
+	"category" : "GToolkit-Documenter-Obsolete"
 }

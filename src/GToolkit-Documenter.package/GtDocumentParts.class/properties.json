@@ -4,7 +4,7 @@
 	"instvars" : [
 		"collection"
 	],
-	"name" : "GtCodeSnippets",
+	"name" : "GtDocumentParts",
 	"commentStamp" : "",
 	"super" : "Object",
 	"traitcomposition" : "GtAssertingTrait",

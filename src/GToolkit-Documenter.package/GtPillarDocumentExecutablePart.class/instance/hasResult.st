@@ -1,3 +1,3 @@
 testing
 hasResult
-	^ result notNil
+	^ outBindings hasResult

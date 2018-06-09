@@ -1,11 +1,11 @@
 {
-	"classtraitcomposition" : "GtDocumenterAssertingTrait classTrait + GtBindingsTrait classTrait",
+	"classtraitcomposition" : "GtAssertingTrait classTrait + GtBindingsTrait classTrait",
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "GtBindings",
 	"commentStamp" : "",
 	"super" : "Object",
-	"traitcomposition" : "GtDocumenterAssertingTrait + GtBindingsTrait",
+	"traitcomposition" : "GtAssertingTrait + GtBindingsTrait",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],

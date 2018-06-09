@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "GToolkit-Documenter-Obsolete",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"tokens",
+		"scriptIndex",
+		"document"
+	],
+	"name" : "GtOldCodeSnippetFinder",
+	"type" : "normal"
+}

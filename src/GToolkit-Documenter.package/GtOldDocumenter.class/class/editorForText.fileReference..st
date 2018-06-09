@@ -3,7 +3,7 @@ editorForText: aString fileReference: aFileReference
 	| text styler editor editorElement document |
 
 	text := aString asRopedText.
-	document := GtDocument new.
+	document := GtOldDocument new.
 	styler := GtOldPillarStyler new fileReference: aFileReference.
 	styler workspace: document.
 	editor := BrTextEditor new.
