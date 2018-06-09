@@ -6,7 +6,7 @@
 		"parameters",
 		"sourceFileReference"
 	],
-	"name" : "GtPillarScriptTokens",
+	"name" : "GtOldPillarScriptTokens",
 	"commentStamp" : "",
 	"super" : "Object",
 	"traitcomposition" : "GtAssertingTrait",

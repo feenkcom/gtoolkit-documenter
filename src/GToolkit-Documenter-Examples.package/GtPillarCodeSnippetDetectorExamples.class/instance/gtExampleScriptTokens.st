@@ -1,7 +1,7 @@
 gt-examples
 gtExampleScriptTokens
 	<gtExample>
-	<return: #GtPillarScriptTokens>
+	<return: #GtOldPillarScriptTokens>
 	| scriptTokens |
 	scriptTokens := self scriptTokensFor: self gtExamplePillarContent.
 	self assert: scriptTokens hasExampleParameter.

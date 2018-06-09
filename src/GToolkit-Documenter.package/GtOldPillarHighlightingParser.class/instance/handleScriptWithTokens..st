@@ -1,7 +1,7 @@
 handling
 handleScriptWithTokens: tokens
 	| handlerClass handler codeSnippet scriptTokens type |
-	scriptTokens := GtPillarScriptTokens new.
+	scriptTokens := GtOldPillarScriptTokens new.
 	self fileReference ifNotNil: [ 
 		scriptTokens sourceFileReference: self fileReference ].
 	scriptTokens tokens: tokens.

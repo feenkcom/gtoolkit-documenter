@@ -1,7 +1,7 @@
 default handler
 defaultScriptTokens
 	<gtExample>
-	<return: #GtPillarScriptTokens>
+	<return: #GtOldPillarScriptTokens>
 	| scriptTokens parameterValue |
 	scriptTokens := self scriptTokensFor: self defaultPillarContent.
 	self assert: scriptTokens hasParameters.

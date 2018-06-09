@@ -5,7 +5,7 @@ script
 		==> [ :t | t first ].
 	startParser := (Markups at: PRCodeblock) asParser token, scriptParameters , endParser negate star token, endParser.
 	^ startParser ==> [ :tokens | | scriptTokens scriptType |
-		scriptTokens := GtPillarScriptTokens new.
+		scriptTokens := GtOldPillarScriptTokens new.
 		scriptTokens sourceFileReference: self sourceFile.
 		scriptTokens tokens: tokens.
 		scriptType := GtPillarCodeSnippetDetector typeForScriptTokens: scriptTokens.

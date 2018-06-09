@@ -1,7 +1,7 @@
 script executor
 executableScriptTokens
 	<gtExample>
-	<return: #GtPillarScriptTokens>
+	<return: #GtOldPillarScriptTokens>
 	| scriptTokens |
 	scriptTokens := self scriptTokensFor: self executableScriptPillarContent.
 	self assert: scriptTokens hasParameters not.

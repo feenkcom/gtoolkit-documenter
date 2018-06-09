@@ -1,14 +1,17 @@
 {
-	"commentStamp" : "",
-	"super" : "Object",
-	"category" : "GToolkit-Documenter-Utility",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "GtAssertingTrait classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"document",
-		"pillarNode"
+		"pillarNode",
+		"documentPartClass"
 	],
 	"name" : "GtDocumentPartFinder",
-	"type" : "normal"
+	"commentStamp" : "",
+	"super" : "Object",
+	"traitcomposition" : "GtAssertingTrait",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "GToolkit-Documenter-Utility"
 }
