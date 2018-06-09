@@ -17,7 +17,7 @@ newExecuteCodeButtonForText: aBrText inEditor: aTextElement
 				self styleScriptBody.
 				self styleResultPreview.
 				aTextElement fireEvent: (BrTextStyledEvent new text: self targetText).
-				"aTextElement editor styleText" ]
+				aTextElement editor styleText ]
 			for: anAction).
 		self documentPart executeWithPlaygroundStrategy ].
 

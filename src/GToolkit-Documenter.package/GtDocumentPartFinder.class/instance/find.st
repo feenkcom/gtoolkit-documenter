@@ -7,9 +7,10 @@ find
 	(self pillarNodeIndex = (self numberOfDocumentParts + 1))
 		ifTrue: [ ^ self newDocumentPartAtSameIndex ].
 	self hasSimilarSourceCodeAtSameIndex
-		ifTrue: [ ^ self scriptAtSameIndex ].
+		ifTrue: [ ^ self documentPartAtSameIndex ].
+	self halt.
 	self hasSimilarSourceCodeAtFollowingIndex
 		ifTrue: [
 			self removeScriptAtSameIndex. 
-			^ self scriptAtSameIndex ]. 
+			^ self documentPartAtSameIndex ]. 
 	^ self newDocumentPartAtSameIndex

@@ -3,6 +3,7 @@ executableScriptAnnotation2
 	<gtExample>
 	| aText |
 	aText := '[[[
-aResult := 4 factorial.
+aResult ifNil: [ aResult := 2 ].
+aResult := aResult * aResult.
 ]]]' asRopedText.
 	^ GtDocumenter editorForText: aText.
