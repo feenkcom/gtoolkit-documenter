@@ -1,4 +1,4 @@
-as yet unclassified
+accessing - pillar node
 scriptBodyStartingPosition
 	| aPillarNode |
 	aPillarNode := self documentPart pillarNode.

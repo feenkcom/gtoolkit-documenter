@@ -1,7 +1,7 @@
 accessing
 possibleParameters
-	^ {#name.
+	^ {self defaultParameterName.
 	self showParameterName.
-	#expanded.
-	#previewExpanded.
+	self expandedParameterName.
+	self expandedPreviewParemeterName.
 	#noCode}

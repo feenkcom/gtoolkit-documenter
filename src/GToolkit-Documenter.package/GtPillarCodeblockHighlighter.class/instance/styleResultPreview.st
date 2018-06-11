@@ -1,4 +1,4 @@
-as yet unclassified
+private-styles
 styleResultPreview
 	self targetText
 		attributes: self resultPreviewAttributes

@@ -1,4 +1,4 @@
-as yet unclassified
+private-styles
 styleExecutableCode
 	self targetText
 		attributes: { self newExecuteCodeSnippetAttribute }

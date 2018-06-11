@@ -3,11 +3,10 @@ expandingStyleAttributes
 	| expandingAttribute |
 	expandingAttribute := BrTextExpandButtonAttribute new
 		attributesCreatingBlock: [ self newPreviewAttribute ].
-	^ Array with: expandingAttribute.
-	"^ aGtPillarExampleAnnotation shouldBeExpanded
-		ifFalse: [ attributes ]
+	^ self documentPart shouldBeExpanded
+		ifFalse: [ Array with: expandingAttribute ]
 		ifTrue: [ | previewAttribute |
 			previewAttribute := self newPreviewAttribute.
 			expandingAttribute isExpanded: true.
 			expandingAttribute createdAttributes: { previewAttribute }.
-			attributes copyWith: previewAttribute ]."
+			Array with: expandingAttribute with: previewAttribute ].

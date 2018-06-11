@@ -1,4 +1,4 @@
-as yet unclassified
+accessing - pillar node
 closingBracketsStartingPosition
 	<return: #Integer>
 	| aPillarNode |

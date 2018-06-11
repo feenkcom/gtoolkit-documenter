@@ -1,4 +1,4 @@
-as yet unclassified
+private-styles
 resultPreviewAttributes
 	self flag: 'Use elementBlockWithErrorCatching: instead of elementBlock:'.
 	^ Array with: (BrTextAdornmentDynamicAttribute new

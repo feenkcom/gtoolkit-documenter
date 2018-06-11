@@ -1,4 +1,4 @@
-as yet unclassified
+instance creation
 newExecuteCodeSnippetAttribute
 	self flag: 'Use elementBlockWithErrorCatching: instead of elementBlock:'.
 	^ GtPillarInlinedTextAdornmentDynamicAttribute new

@@ -1,4 +1,4 @@
-private-container protocol
+protocol - actions
 highlight
 	self styleParameters.
 	self styleScriptBody.

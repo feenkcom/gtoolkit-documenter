@@ -1,4 +1,4 @@
-as yet unclassified
+private-styles
 styleScriptBody
 	| styler strategy |
 	styler := BrRBTextStyler new.
