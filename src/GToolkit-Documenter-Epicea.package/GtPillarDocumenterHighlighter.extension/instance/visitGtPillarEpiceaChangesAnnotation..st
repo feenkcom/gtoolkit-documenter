@@ -1,4 +1,4 @@
-visiting
+*GToolkit-Documenter-Epicea
 visitGtPillarEpiceaChangesAnnotation: aGtPillarEpiceaChangesAnnotation
 	| aPillarDocumentPart |
 	aPillarDocumentPart := GtEpiceaChanges new

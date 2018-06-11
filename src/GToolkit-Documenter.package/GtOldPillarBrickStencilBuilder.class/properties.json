@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "BrStencilBuilder",
-	"category" : "GToolkit-Documenter-Brick-Stencils",
+	"category" : "GToolkit-Documenter-Obsolete",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

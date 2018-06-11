@@ -1,4 +1,4 @@
-as yet unclassified
+instance creation
 newPreviewAttribute
 	self flag: 'use elementBlockWithErrorCatching: instead of elementBlock:'.
 	^ BrTextAdornmentDynamicAttribute new
