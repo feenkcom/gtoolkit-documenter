@@ -2,10 +2,10 @@ instance creation
 errorMessageText
 	<return: #BrRopedText>
 
-	self annotation isMethodClassDefined ifFalse: [ 
-		^ ('Example class (', self annotation methodClassName , ') is not defined (yet).') asRopedText ].
+	self documentPart isMethodClassDefined ifFalse: [ 
+		^ ('Example class (', self documentPart methodClassName , ') is not defined (yet).') asRopedText ].
 
-	self annotation isMethodDefined ifFalse: [ 
-		^ ('Example method (', self annotation methodSelectorName , ') is not defined (yet).') asRopedText ].
+	self documentPart isMethodDefined ifFalse: [ 
+		^ ('Example method (', self documentPart methodSelectorName , ') is not defined (yet).') asRopedText ].
 
-	^ ('Something wrong with ', self annotation methodName) asRopedText
+	^ ('Something wrong with ', self documentPart methodName) asRopedText
