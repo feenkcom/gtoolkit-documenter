@@ -4,5 +4,5 @@ documentFromPillarElement: aGtPillarEditorElement
 	| aDocument |
 	aDocument := aGtPillarEditorElement document.
 	self assert: aDocument notNil.
-	self assert: aDocument documentParts notNil.
+	self assert: aDocument outs notNil.
 	^ aDocument

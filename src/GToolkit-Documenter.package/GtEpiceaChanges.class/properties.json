@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "GtPillarDocumentPart",
+	"category" : "GToolkit-Documenter-Pillar",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "GtEpiceaChanges",
+	"type" : "normal"
+}

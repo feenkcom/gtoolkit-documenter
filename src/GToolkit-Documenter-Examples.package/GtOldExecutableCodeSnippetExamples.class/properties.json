@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "TudorGirba 5/13/2018 22:41",
+	"super" : "GtOldDebuggableCodeSnippetExamples",
+	"category" : "GToolkit-Documenter-Examples",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "GtOldExecutableCodeSnippetExamples",
+	"type" : "normal"
+}
