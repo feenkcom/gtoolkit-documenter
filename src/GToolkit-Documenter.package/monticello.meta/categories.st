@@ -4,7 +4,6 @@ SystemOrganization addCategory: 'GToolkit-Documenter-Bindings'!
 SystemOrganization addCategory: 'GToolkit-Documenter-Brick'!
 SystemOrganization addCategory: 'GToolkit-Documenter-Brick-Looks'!
 SystemOrganization addCategory: 'GToolkit-Documenter-Brick-Stencils'!
-SystemOrganization addCategory: 'GToolkit-Documenter-CodeSnippets'!
 SystemOrganization addCategory: 'GToolkit-Documenter-Core'!
 SystemOrganization addCategory: 'GToolkit-Documenter-Manifest'!
 SystemOrganization addCategory: 'GToolkit-Documenter-Obsolete'!
