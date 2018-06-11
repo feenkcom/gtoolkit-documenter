@@ -13,10 +13,15 @@ newExecuteCodeButtonForText: aBrText inEditor: aTextElement
 		(self documentPart
 			when: GtCodeSnippetExecutionAnnouncement
 			doOnce: [ 
-				self inform: 'styling'.
 				self styleScriptBody.
 				self styleResultPreview.
-				aTextElement fireEvent: (BrTextStyledEvent new text: self targetText).
+				aTextElement editor 
+					invalidate: self scriptBodyStartingPosition 
+					to: self closingBracketsEndPosition. "<- rebuild segments"
+				aTextElement editor 
+					update: self scriptBodyStartingPosition 
+					to: self closingBracketsEndPosition. "<- recreate visual representation"
+				self flag: 'I do not understand why styleText has to be executed'.
 				aTextElement editor styleText ]
 			for: anAction).
 		self documentPart executeWithPlaygroundStrategy ].
