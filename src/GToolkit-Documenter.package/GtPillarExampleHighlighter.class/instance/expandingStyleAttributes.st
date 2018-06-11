@@ -1,5 +1,5 @@
 private-styles
-expandingAttributes
+expandingStyleAttributes
 	| expandingAttribute |
 	expandingAttribute := BrTextExpandButtonAttribute new
 		attributesCreatingBlock: [ self newPreviewAttribute ].

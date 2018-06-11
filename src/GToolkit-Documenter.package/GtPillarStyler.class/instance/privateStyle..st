@@ -1,4 +1,7 @@
 private
 privateStyle: aText 
-	GtPillarDocumenterHighlighter highlight: aText ofDocument: self document.
+	GtPillarDocumenterHighlighter 
+		highlight: aText 
+		ofFileReference: self fileReference
+		ofDocument: self document.
 	^ aText

@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "GtOldPillarBrickStencilBuilder",
+	"super" : "GtOldPillarBrickStencil",
 	"category" : "GToolkit-Documenter-Epicea",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "GtPillarEpiceaBrickStencilBuilder",
+	"name" : "GtOldPillarEpiceaBrickStencil",
 	"type" : "normal"
 }

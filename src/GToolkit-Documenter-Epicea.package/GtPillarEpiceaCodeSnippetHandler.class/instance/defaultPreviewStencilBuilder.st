@@ -1,3 +1,3 @@
 initialization
 defaultPreviewStencilBuilder
-	^ GtPillarEpiceaBrickStencilBuilder new
+	^ GtOldPillarEpiceaBrickStencilBuilder new

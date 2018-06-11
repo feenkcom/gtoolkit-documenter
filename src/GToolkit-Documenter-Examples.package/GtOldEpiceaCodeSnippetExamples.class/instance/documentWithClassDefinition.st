@@ -9,6 +9,6 @@ documentWithClassDefinition
 	codeSnippet := aDocument codeSnippets codeSnippetAt: 1.
 	self 
 		assert: codeSnippet class 
-		equals: GtEpiceaCodeSnippet.
+		equals: GtOldEpiceaCodeSnippet.
 	self assert: codeSnippet result isNil.
 	^ aDocument

@@ -41,9 +41,9 @@ create
 	aComposite addChild: aResizerElement.
 	
 	
-	self codeSnippet epiceaLog hasImpact
+	self epiceaLog hasImpact
 		ifFalse: [ aTabGroup removeTab: aDiffTab ].
-	self codeSnippet
+	self documentPart
 		subscribe: GtEpiceaImpactChangedAnnouncement
 		do: [ :anAnnouncement | 
 			self

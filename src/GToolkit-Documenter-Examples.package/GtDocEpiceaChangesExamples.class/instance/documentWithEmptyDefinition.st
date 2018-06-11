@@ -5,10 +5,10 @@ documentWithEmptyDefinition
 	| aPillarElement aDocument codeSnippet |
 	aPillarElement := self pillarElementWithEmptyDefinition.
 	aDocument := GtDocumenterExamplesUtility documentFromPillarElement: aPillarElement.
-	self assert: aDocument documentParts size equals: 1.
-	codeSnippet := aDocument documentParts codeSnippetAt: 1.
+	self assert: aDocument documentParts size equals: 0.
+	"codeSnippet := aDocument documentParts codeSnippetAt: 1.
 	self 
 		assert: codeSnippet class 
 		equals: GtEpiceaChanges.
-	self assert: codeSnippet result isNil.
+	self assert: codeSnippet result isNil."
 	^ aDocument

@@ -1,11 +1,15 @@
 {
+	"classtraitcomposition" : "TGtPillarPreviewStencil classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"documentPart"
+	],
+	"name" : "GtPillarEpiceaBrickStencil",
 	"commentStamp" : "",
-	"super" : "GtOldPillarBrickStencil",
-	"category" : "GToolkit-Documenter-Epicea",
+	"super" : "BrStencil",
+	"traitcomposition" : "TGtPillarPreviewStencil",
+	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "GtPillarEpiceaBrickStencil",
-	"type" : "normal"
+	"category" : "GToolkit-Documenter-Epicea"
 }

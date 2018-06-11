@@ -1,3 +1,3 @@
-private-container protocol
+protocol - actions
 highlight
 	self subclassResponsibility

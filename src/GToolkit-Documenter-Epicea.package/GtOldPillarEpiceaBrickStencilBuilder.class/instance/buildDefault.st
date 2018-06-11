@@ -1,4 +1,4 @@
 api - instantiation
 buildDefault
-	^ GtPillarEpiceaBrickStencil new
+	^ GtOldPillarEpiceaBrickStencil new
 		codeSnippet: self codeSnippet
