@@ -1,4 +1,4 @@
 accessing
 brickHandlerClass
 	<return: #GtPillarScriptHandler>
-	^ GtPillarEpiceaCodeSnippetHandler 
+	^ GtOldPillarEpiceaCodeSnippetHandler 

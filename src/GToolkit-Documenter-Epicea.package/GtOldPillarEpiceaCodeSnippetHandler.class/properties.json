@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "GtPillarEpiceaCodeSnippetHandler",
+	"name" : "GtOldPillarEpiceaCodeSnippetHandler",
 	"type" : "normal"
 }

@@ -1,4 +1,4 @@
-as yet unclassified
+accessing
 pillarNodeAtSameIndex
 	<return: #PRDocumentItem>
 	^ self documentPartAtSameIndex pillarNode
