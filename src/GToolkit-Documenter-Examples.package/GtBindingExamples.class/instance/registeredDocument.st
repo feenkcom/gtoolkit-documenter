@@ -4,7 +4,7 @@ registeredDocument
 	<label: 'Ensure that document is registered to system changes'>
 	| aDocument aSubscriptions aCodeSnippet |
 	aDocument := self emptyDocument.
-	aCodeSnippet := GtExampleCodeSnippet new.
+	aCodeSnippet := GtOldExampleCodeSnippet new.
 	aCodeSnippet index: 1.
 	aCodeSnippet document: aDocument.
 	aSubscriptions := SystemAnnouncer uniqueInstance subscriptions subscriptions 

@@ -4,7 +4,7 @@
 	"instvars" : [
 		"announcer"
 	],
-	"name" : "GtAnnouncableCodeSnippet",
+	"name" : "GtOldAnnouncableCodeSnippet",
 	"commentStamp" : "",
 	"super" : "GtOldCodeSnippetResult",
 	"traitcomposition" : "GtAnnouncerTrait",

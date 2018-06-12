@@ -9,6 +9,6 @@ documentWithFailedExecutableCodeSnippet
 	codeSnippet := aDocument codeSnippets codeSnippetAt: 1.
 	self 
 		assert: codeSnippet class 
-		equals: GtExecutableCodeSnippet.
+		equals: GtOldExecutableCodeSnippet.
 	self assert: codeSnippet result isNil.
 	^ aDocument

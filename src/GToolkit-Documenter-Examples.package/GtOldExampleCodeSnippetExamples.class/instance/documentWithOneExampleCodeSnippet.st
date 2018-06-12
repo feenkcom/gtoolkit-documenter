@@ -9,6 +9,6 @@ documentWithOneExampleCodeSnippet
 	codeSnippet := aDocument codeSnippets codeSnippetAt: 1.
 	self 
 		assert: codeSnippet class 
-		equals: GtExampleCodeSnippet.
+		equals: GtOldExampleCodeSnippet.
 	self assert: codeSnippet result isNil.
 	^ aDocument
