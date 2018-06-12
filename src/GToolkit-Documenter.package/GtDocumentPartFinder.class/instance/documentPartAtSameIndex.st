@@ -1,4 +1,7 @@
 accessing
 documentPartAtSameIndex
 	<return: #GtPillarDocumentPart>
-	^ self document documentParts documentPartAt: self pillarNodeIndex
+	| aDocumentPart |
+	aDocumentPart := self document documentParts documentPartAt: self pillarNodeIndex.
+	aDocumentPart pillarNode: self pillarNode.
+	^ aDocumentPart
