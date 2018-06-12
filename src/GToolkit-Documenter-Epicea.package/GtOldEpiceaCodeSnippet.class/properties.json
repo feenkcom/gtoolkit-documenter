@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "GtAnnouncableCodeSnippet",
+	"super" : "GtOldAnnouncableCodeSnippet",
 	"category" : "GToolkit-Documenter-Epicea",
 	"classinstvars" : [ ],
 	"pools" : [ ],

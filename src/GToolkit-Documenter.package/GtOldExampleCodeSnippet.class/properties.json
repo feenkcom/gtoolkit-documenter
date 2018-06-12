@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "GtAnnouncableCodeSnippet",
+	"super" : "GtOldAnnouncableCodeSnippet",
 	"category" : "GToolkit-Documenter-Core",
 	"classinstvars" : [ ],
 	"pools" : [ ],
@@ -12,6 +12,6 @@
 		"shouldExpandPreview",
 		"methodDefinition"
 	],
-	"name" : "GtExampleCodeSnippet",
+	"name" : "GtOldExampleCodeSnippet",
 	"type" : "normal"
 }

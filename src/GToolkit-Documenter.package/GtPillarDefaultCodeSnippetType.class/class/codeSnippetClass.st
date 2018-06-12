@@ -1,4 +1,4 @@
 accessing
 codeSnippetClass
-	<return: #GtAnnouncableCodeSnippet>
-	^ GtDefaultCodeSnippet
+	<return: #GtOldAnnouncableCodeSnippet>
+	^ GtOldDefaultCodeSnippet
