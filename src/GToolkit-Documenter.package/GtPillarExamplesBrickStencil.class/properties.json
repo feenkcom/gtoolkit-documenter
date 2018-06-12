@@ -6,7 +6,7 @@
 		"editor",
 		"documentPart"
 	],
-	"name" : "GtPillarExampleAnnotationBrickStencil",
+	"name" : "GtPillarExamplesBrickStencil",
 	"commentStamp" : "",
 	"super" : "BrStencil",
 	"traitcomposition" : "TGtPillarPreviewStencil",

@@ -2,5 +2,5 @@ private-styles
 styleExecutableCode
 	self targetText
 		attributes: { self newExecuteCodeSnippetAttribute }
-		from: self closingBracketsEndPosition
-		to: self closingBracketsEndPosition
+		from: self closingBracketsStartingPosition
+		to: self closingBracketsEndPosition - 1

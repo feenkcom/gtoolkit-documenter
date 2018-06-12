@@ -14,9 +14,9 @@ create
 	aComposite := BlElement new look: GtPillarTransparentCompositeLook new.
 	aComposite addChild: aChildrenElementBlock value.
 
-	"self documentPart 
+	self documentPart 
 		subscribe: GtExampleClassUpdatedAnnouncement 
 		do: [ aComposite removeChildren. aComposite addChild: aChildrenElementBlock value ] 
-		for: aComposite."
+		for: aComposite.
 	
 	^ aComposite
