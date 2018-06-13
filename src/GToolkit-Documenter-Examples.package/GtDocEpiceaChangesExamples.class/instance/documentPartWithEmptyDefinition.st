@@ -1,4 +1,4 @@
-empty example definition
+empty definition
 documentPartWithEmptyDefinition
 	<gtExample>
 	<label: 'Code snippet of a document with an Epicea code changes with empty definition'>
