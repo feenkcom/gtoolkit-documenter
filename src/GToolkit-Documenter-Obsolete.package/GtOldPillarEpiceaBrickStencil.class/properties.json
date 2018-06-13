@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "GtOldPillarBrickStencil",
+	"category" : "GToolkit-Documenter-Obsolete",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "GtOldPillarEpiceaBrickStencil",
+	"type" : "normal"
+}

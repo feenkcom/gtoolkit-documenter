@@ -2,6 +2,8 @@ document
 documentWithTwoCodeSnippets
 	<gtExample>
 	| codeSnippet document out |
+	self flag: 'Rething this example'.
+	true ifTrue: [ ^ nil ].
 	document := self documentWithOneCodeSnippet.
 	codeSnippet := self outBindings.
 	codeSnippet value: 7.

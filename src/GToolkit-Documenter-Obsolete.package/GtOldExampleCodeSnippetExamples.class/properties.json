@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "GtOldDebuggableCodeSnippetExamples",
+	"category" : "GToolkit-Documenter-Obsolete",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "GtOldExampleCodeSnippetExamples",
+	"type" : "normal"
+}

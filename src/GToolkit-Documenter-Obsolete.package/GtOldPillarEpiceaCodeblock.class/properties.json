@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "GtOldPillarCodeblock",
+	"category" : "GToolkit-Documenter-Obsolete",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"epiceaLog"
+	],
+	"name" : "GtOldPillarEpiceaCodeblock",
+	"type" : "normal"
+}

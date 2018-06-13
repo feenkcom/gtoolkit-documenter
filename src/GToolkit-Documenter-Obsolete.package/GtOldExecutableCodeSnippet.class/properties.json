@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "GtOldAnnouncableCodeSnippet",
+	"category" : "GToolkit-Documenter-Obsolete",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"label",
+		"isException"
+	],
+	"name" : "GtOldExecutableCodeSnippet",
+	"type" : "normal"
+}

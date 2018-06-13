@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "GtPillarScriptHandler",
+	"category" : "GToolkit-Documenter-Obsolete",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "GtOldPillarEpiceaCodeSnippetHandler",
+	"type" : "normal"
+}

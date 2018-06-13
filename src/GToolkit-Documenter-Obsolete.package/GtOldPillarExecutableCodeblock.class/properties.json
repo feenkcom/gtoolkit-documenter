@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "GtOldPillarCodeblock",
+	"category" : "GToolkit-Documenter-Obsolete",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "GtOldPillarExecutableCodeblock",
+	"type" : "normal"
+}

@@ -5,10 +5,10 @@ documentWithFailedExecutableCodeSnippet
 	| aPillarElement aDocument codeSnippet |
 	aPillarElement := self pillarElementWithFailedExecutableCodeSnippet.
 	aDocument := GtDocumenterExamplesUtility documentFromPillarElement: aPillarElement.
-	self assert: aDocument codeSnippets size equals: 1.
-	codeSnippet := aDocument codeSnippets codeSnippetAt: 1.
+	self assert: aDocument documentParts size equals: 1.
+	codeSnippet := aDocument documentParts documentPartAt: 1.
 	self 
 		assert: codeSnippet class 
-		equals: GtOldExecutableCodeSnippet.
+		equals: GtPillarCodeblock.
 	self assert: codeSnippet result isNil.
 	^ aDocument

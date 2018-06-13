@@ -1,0 +1,15 @@
+{
+	"classtraitcomposition" : "GtAnnouncerTrait classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"announcer"
+	],
+	"name" : "GtOldAnnouncableCodeSnippet",
+	"commentStamp" : "",
+	"super" : "GtOldCodeSnippetResult",
+	"traitcomposition" : "GtAnnouncerTrait",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "GToolkit-Documenter-Obsolete"
+}

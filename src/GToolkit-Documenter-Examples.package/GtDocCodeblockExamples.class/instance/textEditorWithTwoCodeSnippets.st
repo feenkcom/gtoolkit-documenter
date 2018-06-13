@@ -6,6 +6,6 @@ textEditorWithTwoCodeSnippets
 	pillarElement := self pillarElementWithTwoCodeSnippets.
 	editor := pillarElement contentElement editor.
 	self assert: editor notNil.
-	self assert: editor styler workspace notNil.
-	self assert: editor styler workspace outs size equals: 2.
+	self assert: editor styler document notNil.
+	self assert: editor styler document documentParts size equals: 2.
 	^ editor

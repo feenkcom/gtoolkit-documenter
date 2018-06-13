@@ -2,6 +2,8 @@ document
 documentWithTwoUninitializedCodeSnippets
 	<gtExample>
 	| codeSnippetOne document codeSnippetTwo result |
+	self flag: 'Rething this example'.
+	true ifTrue: [ ^ nil ].
 	document := self emptyDocument.
 	codeSnippetOne := self outBindings.
 	codeSnippetOne index: 1.

@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "GtOldAnnouncableCodeSnippet",
+	"category" : "GToolkit-Documenter-Obsolete",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"epiceaLog"
+	],
+	"name" : "GtOldEpiceaCodeSnippet",
+	"type" : "normal"
+}

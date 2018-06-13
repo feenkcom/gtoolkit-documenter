@@ -5,5 +5,5 @@ pillarElementWithTwoCodeSnippets
 	| rootDocument pillarElement |
 	rootDocument := self rootDocumentForAddingAndRemovingCodeSnippets.
 	pillarElement := GtDocumenterExamplesUtility pillarElementForPillarFileReference: rootDocument.
-	self assert: pillarElement document outs size equals: 2.
+	self assert: pillarElement document documentParts size equals: 2.
 	^ pillarElement

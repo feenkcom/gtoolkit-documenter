@@ -10,7 +10,6 @@ find
 		ifTrue: [ ^ self documentPartAtSameIndex ].
 	self hasSimilarSourceCodeAtFollowingIndex
 		ifTrue: [
-			self halt.
 			self removeScriptAtSameIndex. 
 			^ self documentPartAtSameIndex ]. 
 	^ self newDocumentPartAtSameIndex

@@ -2,11 +2,13 @@ document registered to system changes
 registeredDocument
 	<gtExample>
 	<label: 'Ensure that document is registered to system changes'>
-	| aDocument aSubscriptions aCodeSnippet |
+	| aDocument aSubscriptions aDocumentPart aCounter |
 	aDocument := self emptyDocument.
-	aCodeSnippet := GtOldExampleCodeSnippet new.
-	aCodeSnippet index: 1.
-	aCodeSnippet document: aDocument.
+	aDocumentPart := GtPillarExample new.
+	aCounter := PRCascadingCounter maxLevel: 1.
+	aCounter incrementAt: 1.
+	aDocumentPart pillarNode: (GtPillarExampleAnnotation new counter: aCounter).
+	aDocumentPart document: aDocument.
 	aSubscriptions := SystemAnnouncer uniqueInstance subscriptions subscriptions 
 		select: [ :eachSubscription | eachSubscription subscriber = aDocument systemChangesHandler ].
 	self assert: aSubscriptions isCollection.
