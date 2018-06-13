@@ -1,4 +1,4 @@
-empty example definition
+empty definition
 fileReferenceWithEmptyDefinition
 	<gtExample>
 	<label: 'Pillar file reference with an example code snippet with empty definition'>
