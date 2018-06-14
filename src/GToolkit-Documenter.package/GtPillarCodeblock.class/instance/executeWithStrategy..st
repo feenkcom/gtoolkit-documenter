@@ -7,7 +7,7 @@ executeWithStrategy: aGtBindingStrategy
 
 	aGtBindingStrategy bindings: outBindings.
 	aCompiler := self documentClass compiler
-		source: self sourceCode readStream;
+		source: self sourceCode asString readStream;
 		compilationContext: (CompilationContext new
 			class: self documentClass;
 			forSyntaxHighlighting: false;

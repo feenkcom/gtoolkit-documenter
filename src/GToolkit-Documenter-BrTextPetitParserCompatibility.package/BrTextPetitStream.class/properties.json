@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "PPStream",
+	"category" : "GToolkit-Documenter-BrTextPetitParserCompatibility",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BrTextPetitStream",
+	"type" : "normal"
+}

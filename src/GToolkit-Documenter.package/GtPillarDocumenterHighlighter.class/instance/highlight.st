@@ -4,7 +4,7 @@ highlight
 	It modifies the given target text."
 	| aPRDocument |
 	aPRDocument := GtPillarExtendedParser new
-		parse: self targetText asString.
+		parse: self targetText.
 	self
 		assert: [ aPRDocument notNil ] 
 		description: [ 'Parsing text should return a Pillar document' ].
