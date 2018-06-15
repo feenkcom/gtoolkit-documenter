@@ -14,6 +14,9 @@ baseline: spec
 				repository: 'github://feenkcom/gtoolkit-inspector/src' ];
 			baseline: 'Pillar' with: [ spec
 				repository: 'github://pillar-markup/pillar/src' ];
+			baseline: 'PetitParser2' with: [
+				spec
+				 	repository: 'github://kursjan/petitparser2' ];
 			project: 'DeepTraverser' with: [ spec
 				className: #ConfigurationOfDeepTraverser;
 				versionString: #development;
@@ -21,6 +24,7 @@ baseline: spec
 			package: 'GToolkit-Documenter-BrTextPetitParserCompatibility' with: [ spec requires: #( 
 				#Pillar #GToolkitUtility ) ];
 			package: 'GToolkit-Documenter' with: [ spec requires: #( 
+				#'PetitParser2'
 				#Brick #Pillar #GToolkitUtility #GToolkitExamples #GToolkitInspector
 				#'GToolkit-Documenter-BrTextPetitParserCompatibility' ) ];
 			package: 'GToolkit-Documenter-Exporter' with: [ spec requires: #( 
