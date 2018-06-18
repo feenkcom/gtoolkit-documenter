@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "PP2CompositeNodeTest",
+	"category" : "Pillar2-Tests-PetitPillar",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "PR2PillarGrammarTest",
+	"type" : "normal"
+}

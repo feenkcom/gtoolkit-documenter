@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "PR2PillarGrammar",
+	"category" : "Pillar2-PetitPillar",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "PR2PillarParser",
+	"type" : "normal"
+}
