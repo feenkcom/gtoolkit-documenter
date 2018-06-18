@@ -1,4 +1,9 @@
 grammar - Paragraph
 annotatedParagraph
 	^ super annotatedParagraph
-		==> [ :array | PRAnnotatedParagraph withAll: (array third ifNil: [ {} ] ifNotNil: [ :elem | elem second ]) annotation: array second ]
+		==> [ :array | 
+				self halt.
+				PRAnnotatedParagraph withAll: (array third value
+					ifNil: [ {} ] 
+					ifNotNil: [ :value | value ]) 
+						annotation: array second value ]
