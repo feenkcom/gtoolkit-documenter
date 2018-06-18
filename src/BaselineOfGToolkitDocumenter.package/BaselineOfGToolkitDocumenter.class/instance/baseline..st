@@ -35,8 +35,5 @@ baseline: spec
 				 'Brick' 'GToolkitUtility' 'GToolkit-Documenter' 'GToolkit-Documenter-Exporter' ) ];
 			package: 'GToolkit-Documenter-Examples' with: [ spec requires: #( 
 				'GToolkitExamples' 'GToolkit-Documenter' 'GToolkit-Documenter-Exporter'
-				'GToolkit-Documenter-Epicea' ) ];
-			group: 'Core' with: #( 'GToolkit-Documenter' 'GToolkit-Documenter-Exporter'
-				'GToolkit-Documenter-Epicea' 'GToolkit-Documenter-Examples' );
-			group: 'Tests' with: #( 'GToolkit-Documenter-Exporter-Tests' )
+				'GToolkit-Documenter-Epicea' ) ]
 	]
