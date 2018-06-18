@@ -8,4 +8,5 @@ testAnnotationAreTrimedAtTheRight
 				withParameters:
 					(OrderedDictionary new
 						at: 'value' put: 'Foo';
-						yourself))
+						yourself)).
+	self assertStart: 1 stop: 23.
