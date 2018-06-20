@@ -16,16 +16,22 @@ baseline: spec
 				repository: 'github://pillar-markup/pillar/src' ];
 			baseline: 'PetitParser2' with: [
 				spec
-				 	repository: 'github://kursjan/petitparser2' ];
+				 	repository: 'github://kursjan/petitparser2';
+					loads: 'Headless' ];
 			project: 'DeepTraverser' with: [ spec
 				className: #ConfigurationOfDeepTraverser;
 				versionString: #development;
 				repository: 'http://smalltalkhub.com/mc/Moose/DeepTraverser/main/' ];
 			package: 'GToolkit-Documenter-BrTextPetitParserCompatibility' with: [ spec requires: #( 
 				#Pillar #GToolkitUtility ) ];
+			package: 'Pillar2-PetitPillar' with: [ spec requires: #( 
+				#'PetitParser2' #'Pillar' ) ];
+			package: 'Pillar2-Tests-PetitPillar' with: [ spec requires: #( 
+				#'Pillar2-PetitPillar' ) ];
 			package: 'GToolkit-Documenter' with: [ spec requires: #( 
-				#'PetitParser2'
-				#Brick #Pillar #GToolkitUtility #GToolkitExamples #GToolkitInspector
+				#Brick #Pillar 
+				#GToolkitUtility #GToolkitExamples #GToolkitInspector
+				#'Pillar2-Tests-PetitPillar'
 				#'GToolkit-Documenter-BrTextPetitParserCompatibility' ) ];
 			package: 'GToolkit-Documenter-Exporter' with: [ spec requires: #( 
 				#Brick #Pillar #GToolkitUtility 'GToolkit-Documenter' ) ];
