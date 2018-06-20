@@ -3,11 +3,9 @@ annotatedParagraph
 	^ super annotatedParagraph
 		==> [ :array | 
 				(PRAnnotatedParagraph 
-					withAll: (array third
+					withAll: (array fourth
 						ifNil: [ {} ] 
 						ifNotNil: [ :elem | elem second ]) 
-					annotation: array second value)
+					annotation: array third)
 						start: array first start;
-						stop: (array third
-							ifNil: [ array second stop ] 
-							ifNotNil: [ :elem | elem second last stop ]) ]
+						stop: array last stop ]
