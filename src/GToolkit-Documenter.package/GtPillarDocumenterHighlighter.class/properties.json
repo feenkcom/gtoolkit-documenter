@@ -6,7 +6,8 @@
 		"listItemCounter",
 		"outsCounter",
 		"document",
-		"fileReference"
+		"fileReference",
+		"parser"
 	],
 	"name" : "GtPillarDocumenterHighlighter",
 	"commentStamp" : "",

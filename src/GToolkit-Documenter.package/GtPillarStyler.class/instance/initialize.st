@@ -1,4 +1,4 @@
 initialization
 initialize
 	super initialize.
-	document := nil.
+	highlighter := GtPillarDocumenterHighlighter new.
