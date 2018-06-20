@@ -1,6 +1,6 @@
 grammar - Text
 text
 	"Everything that is a pure text and nothing else (not a format, not a link, ...)"
-	^  #epsilon asPParser token, 
+	^  epsilonToken, 
 		(escapedCharacter / ((newline , elementsAtLineBeginning) / otherContent / lineEnd) negate) plus, 
-		#epsilon asPParser token
+		epsilonToken
