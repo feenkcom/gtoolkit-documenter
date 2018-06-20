@@ -1,3 +1,3 @@
 grammar - Format
 monospaceMarkup
-	^ (Markups at: PRMonospaceFormat) asPParser token
+	^ (Markups at: PRMonospaceFormat) asPParser

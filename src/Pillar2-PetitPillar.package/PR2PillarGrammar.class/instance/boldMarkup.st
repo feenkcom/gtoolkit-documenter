@@ -1,3 +1,3 @@
 grammar - Format
 boldMarkup
-	^ (Markups at: PRBoldFormat) asPParser token
+	^ (Markups at: PRBoldFormat) asPParser

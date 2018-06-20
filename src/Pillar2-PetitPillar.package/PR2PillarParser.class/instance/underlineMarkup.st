@@ -1,4 +1,3 @@
 grammar - Format
 underlineMarkup
-	^ super underlineMarkup ==> [ :token | 
-		PRUnderlineFormat new start: token start; stop: token stop ]
+	^ super underlineMarkup ==> [ :token | PRUnderlineFormat ]

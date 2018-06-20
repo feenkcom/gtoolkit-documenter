@@ -1,3 +1,3 @@
 grammar - Format
 superscriptMarkup
-	^ (Markups at: PRSuperscriptFormat) asPParser token
+	^ (Markups at: PRSuperscriptFormat) asPParser
