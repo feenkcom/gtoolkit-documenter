@@ -1,4 +1,4 @@
 *GToolkit-Documenter-Exporter
 parseWithGtDocumenter
 	^ self readStreamDo: [ :aStream | 
-		GtPillarExtendedParser parse: aStream ].
+		PR2PillarParser parse: aStream ].
