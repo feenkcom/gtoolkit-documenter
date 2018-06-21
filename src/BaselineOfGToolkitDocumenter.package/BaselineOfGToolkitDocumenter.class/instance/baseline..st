@@ -14,7 +14,7 @@ baseline: spec
 				repository: 'github://feenkcom/gtoolkit-inspector/src' ];
 			baseline: 'Pillar' with: [ spec
 				repository: 'github://pillar-markup/pillar/src' ];
-			baseline: 'PetitParser2' with: [
+			baseline: 'PetitParser2Core' with: [
 				spec
 				 	repository: 'github://kursjan/petitparser2' ];
 			project: 'DeepTraverser' with: [ spec
@@ -24,7 +24,7 @@ baseline: spec
 			package: 'GToolkit-Documenter-BrTextPetitParserCompatibility' with: [ spec requires: #( 
 				#Pillar #GToolkitUtility ) ];
 			package: 'Pillar2-PetitPillar' with: [ spec requires: #( 
-				#'PetitParser2' #'Pillar' ) ];
+				#'PetitParser2Core' #'Pillar' ) ];
 			package: 'Pillar2-Tests-PetitPillar' with: [ spec requires: #( 
 				#'Pillar2-PetitPillar' ) ];
 			package: 'GToolkit-Documenter' with: [ spec requires: #( 
