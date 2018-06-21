@@ -16,7 +16,7 @@ baseline: spec
 				repository: 'github://pillar-markup/pillar/src' ];
 			baseline: 'PetitParser2' with: [
 				spec
-				 	repository: 'github://feenkcom/petitparser2' ];
+				 	repository: 'github://kursjan/petitparser2' ];
 			project: 'DeepTraverser' with: [ spec
 				className: #ConfigurationOfDeepTraverser;
 				versionString: #development;
