@@ -10,5 +10,6 @@ highlight
 	self
 		assert: [ aPRDocument isPetit2Failure not ] 
 		description: [ 'Target text should be a valid Pillar format' ].
+	self resetOutCounter.
 	aPRDocument accept: self.
 	^ self targetText
