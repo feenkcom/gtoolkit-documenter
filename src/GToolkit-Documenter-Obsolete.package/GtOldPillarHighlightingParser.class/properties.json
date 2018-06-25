@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "TudorGirba 8/25/2017 13:09",
-	"super" : "PRPillarGrammar",
+	"super" : "PRPillarGrammarOld",
 	"category" : "GToolkit-Documenter-Obsolete",
 	"classinstvars" : [ ],
 	"pools" : [ ],

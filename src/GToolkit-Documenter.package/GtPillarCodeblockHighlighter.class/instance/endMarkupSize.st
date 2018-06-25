@@ -1,3 +1,3 @@
 accessing - pillar node
 endMarkupSize
-	^ (PRPillarGrammar endMarkups at: PRCodeblock) size
+	^ (PR2PillarGrammar endMarkups at: PRCodeblock) size
