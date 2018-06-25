@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "PRPillarParserOldTest",
-	"category" : "GToolkit-Documenter-Obsolete",
+	"super" : "PR2PillarGrammarTest",
+	"category" : "Pillar2-Tests-PetitPillar",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "GtPillarExtendedParserTest",
+	"name" : "PR2PillarParserTest",
 	"type" : "normal"
 }

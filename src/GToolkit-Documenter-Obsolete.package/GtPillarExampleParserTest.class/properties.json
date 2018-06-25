@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "<historical>",
-	"super" : "PRPillarParserTest",
+	"super" : "PRPillarParserOldTest",
 	"category" : "GToolkit-Documenter-Obsolete",
 	"classinstvars" : [ ],
 	"pools" : [ ],
