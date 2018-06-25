@@ -40,7 +40,11 @@ To explore a concrete tutorial example, inspect the following:
 ```
 IceRepository repositoriesLocation / 'feenkcom'/ 'gtoolkit-examples' / 'doc' / 'tutorial' / 'examples-tutorial.pillar'. 
 ```
+Note - If using Pharo 7 or a newer version of Iceberg, use the following instead:
 
+```
+IceLibgitRepository repositoriesLocation / 'feenkcom'/ 'gtoolkit-examples' / 'doc' / 'tutorial' / 'examples-tutorial.pillar'. 
+```
 
 ## Interactive data notebook
 
@@ -60,7 +64,7 @@ Furthermore, to make the manipulation of results more efficient, we can also res
 
 ## How to load
 
-The ideal way to load the code is by loading the entire [Glamorous Toolkit code](https://github.com/feenkcom/gtoolkit). However, you can load the Documenter code in Pharo 6.1 using the following snippet:
+The ideal way to load the code is by loading the entire [Glamorous Toolkit code](https://github.com/feenkcom/gtoolkit). However, you can load the Documenter code in Pharo 6.1 using the following snippet (however some graphical visualisations will not work):
 
 ```
 Metacello new
