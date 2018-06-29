@@ -3,7 +3,8 @@ highlight
 	"Highlight a given Pillar text.
 	It modifies the given target text."
 	| aPRDocument |
-	aPRDocument := parser parse: self targetText asString.
+	PRValidation beSilentDuring: [ 
+		aPRDocument := parser parse: self targetText asString ].
 	self
 		assert: [ aPRDocument notNil ] 
 		description: [ 'Parsing text should return a Pillar document' ].
