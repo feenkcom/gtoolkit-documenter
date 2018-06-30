@@ -1,4 +1,4 @@
-as yet unclassified
+accessing - parameters
 fileParameterValue
 	<return: #FileReference or: nil>
 	^ self 
