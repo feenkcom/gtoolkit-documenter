@@ -1,11 +1,18 @@
 visiting
 visitPillarClassAnnotation: aGtPillarClassAnnotation 
-	| aClassParameterNode |
+	| aClassParameterNode aClassColor |
+	aClassColor := Color blue muchDarker.
 	aClassParameterNode := aGtPillarClassAnnotation children first children
 		detect: [ :eachParameter | 
 			eachParameter key = aGtPillarClassAnnotation defaultParameterName or: [ 
 				eachParameter value isNil ] ] 
-		ifNone: [ self inform: 'a'. aGtPillarClassAnnotation ].
+		ifFound: [ :aParameter | 
+			self document class environment 
+				at: aParameter value asSymbol
+				ifPresent: [ :aClass | "do nothing" ]
+				ifAbsent: [ aClassColor := Color red ].
+			aParameter ]
+		ifNone: [ aGtPillarClassAnnotation ].
 	self targetText 
 		attributes: {
 			BrTextForegroundAttribute paint: Color gray }
@@ -14,7 +21,7 @@ visitPillarClassAnnotation: aGtPillarClassAnnotation
 	self targetText 
 		attributes: {
 			BrTextForegroundAttribute new
-				paint: Color blue muchDarker;	
+				paint: aClassColor;	
 				beNotOverwritableByStyler.
 			BrTextHoverAttribute new 
 				beNotOverwritableByStyler;
