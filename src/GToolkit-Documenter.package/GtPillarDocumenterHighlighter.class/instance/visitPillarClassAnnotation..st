@@ -13,10 +13,13 @@ visitPillarClassAnnotation: aGtPillarClassAnnotation
 		to: aGtPillarClassAnnotation stop.
 	self targetText 
 		attributes: {
+			BrTextForegroundAttribute new
+				paint: Color blue muchDarker;	
+				beNotOverwritableByStyler.
 			BrTextHoverAttribute new 
 				beNotOverwritableByStyler;
-				textAttribute: (BrTextForegroundAttribute paint: Color blue);
-				leaveTextAttribute: (BrTextForegroundAttribute paint: Color gray).
+				textAttribute: (BrTextBackgroundAttribute paint: (Color gray alpha: 0.2));
+				leaveTextAttribute: (BrTextBackgroundAttribute paint: Color transparent).
 			BrTextClickAttribute new 
 				beNotOverwritableByStyler;
 				action: [ :aText :aTarget :anEvent | 
