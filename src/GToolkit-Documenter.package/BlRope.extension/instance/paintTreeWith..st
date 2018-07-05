@@ -2,7 +2,7 @@
 paintTreeWith: view
 	view nodes
 		shape: [ :each | 
-			(each isKindOf: BrCollectionRope)
+			(each isKindOf: BlCollectionRope)
 				ifTrue: [
 					BlTextElement new 
 						zIndex: 10;
