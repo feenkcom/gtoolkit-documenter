@@ -9,9 +9,9 @@ styleScriptBody
 			(self targetText
 				from: self scriptBodyStartingPosition
 				to: self scriptBodyEndPosition).
-	self targetText
-		attributes:
-			{BrFontGenericFamilyAttribute monospace.
-			(BrFontSizeAttribute size: 14)}
+
+	(self targetText
 		from: self scriptBodyStartingPosition
-		to: self scriptBodyEndPosition
+		to: self scriptBodyEndPosition)
+			monospace;
+			fontSize: 14

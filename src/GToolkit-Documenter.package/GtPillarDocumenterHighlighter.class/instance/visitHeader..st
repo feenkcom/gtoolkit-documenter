@@ -1,7 +1,6 @@
 visiting
 visitHeader: aPRHeader
-	self targetText  
-			attributes: { 
-				BrFontSizeAttribute size: 20 - aPRHeader level }
-			from: aPRHeader start 
-			to: aPRHeader stop
+	(self targetText
+		from: aPRHeader start
+		to: aPRHeader stop)
+			fontSize: 20 - aPRHeader level

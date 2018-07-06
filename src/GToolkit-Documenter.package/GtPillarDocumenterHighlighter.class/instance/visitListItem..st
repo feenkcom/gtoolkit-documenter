@@ -10,9 +10,8 @@ visitListItem: aPRListItem
 				elementBlock: [ 
 					| indexText |
 					indexText := anItemIndex asRopedText.
-					indexText attributes: { 
-						BrFontSizeAttribute size: 9. 
-						BrTextForegroundAttribute paint: Color lightGray }.
+					indexText fontSize: 9.
+					indexText foreground: Color lightGray.
 					BlTextElement new text: indexText ] }
 		from: aPRListItem start
 		to: aPRListItem start
