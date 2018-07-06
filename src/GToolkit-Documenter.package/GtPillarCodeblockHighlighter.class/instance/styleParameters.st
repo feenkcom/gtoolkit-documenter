@@ -1,6 +1,6 @@
 private-styles
 styleParameters
-	self targetText 
-		attributes: { BrTextForegroundAttribute paint: Color gray }
+	(self targetText
 		from: self pillarNodeStart 
-		to: self parametersStop.
+		to: self parametersStop)
+			foreground: Color gray

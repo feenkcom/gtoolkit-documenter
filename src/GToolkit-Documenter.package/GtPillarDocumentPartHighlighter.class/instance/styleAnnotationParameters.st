@@ -1,6 +1,6 @@
 private - styling
 styleAnnotationParameters
-	self targetText
-		attributes: {(BrTextForegroundAttribute paint: Color gray)}
+	(self targetText
 		from: self pillarNodeStart
-		to: self pillarNodeStop
+		to: self pillarNodeStop)
+			foreground: Color gray

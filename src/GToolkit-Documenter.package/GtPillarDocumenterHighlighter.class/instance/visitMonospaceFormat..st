@@ -1,8 +1,7 @@
 visiting
 visitMonospaceFormat: aPRMonospaceFormat
-	self targetText 
-			attributes: { 
-				BrFontGenericFamilyAttribute monospace. 
-				BrTextForegroundAttribute paint: Color darkGray }
-			from: aPRMonospaceFormat start
-			to: aPRMonospaceFormat stop 
+	(self targetText
+		from: aPRMonospaceFormat start
+		to: aPRMonospaceFormat stop)
+			monospace;
+			foreground: Color darkGray

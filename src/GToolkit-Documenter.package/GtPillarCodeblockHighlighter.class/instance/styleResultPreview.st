@@ -1,6 +1,6 @@
 private-styles
 styleResultPreview
-	self targetText
-		attributes: self resultPreviewAttributes
+	(self targetText
 		from: self closingBracketsEndPosition
-		to: self closingBracketsEndPosition
+		to: self closingBracketsEndPosition)
+			attributes: self resultPreviewAttributes

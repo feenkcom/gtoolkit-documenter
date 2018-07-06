@@ -11,25 +11,22 @@ ropeDiff
 			initialPosition := text size max: 1.
 			text insertString: '  ' at: text size.
 			text insertString: string at: text size.
-			text 
-				attributes: { BrTextForegroundAttribute paint: Color black } 
-				from: initialPosition to: text size.
+			(text from: initialPosition to: text size)
+				foreground: Color black.
 			text insertString: String cr at: text size. ]
 		ifInsert: [ :string | | initialPosition |
 			initialPosition := text size max: 1.
 			text insertString: '+ ' at: text size.
 			text insertString: string at: text size.
-			text 
-				attributes: { BrTextForegroundAttribute paint: Color green muchDarker } 
-				from: initialPosition to: text size.
+			(text from: initialPosition to: text size)
+				foreground: Color green muchDarker.
 			text insertString: String cr at: text size. ]
 		ifRemove: [ :string | | initialPosition |
 			initialPosition := text size max: 1.
 			text insertString: '- ' at: text size.
 			text insertString: string at: text size.
-			text 
-				attributes: { BrTextForegroundAttribute paint: Color red muchDarker } 
-				from: initialPosition to: text size.
+			(text from: initialPosition to: text size)
+				foreground: Color red muchDarker.
 			text insertString: String cr at: text size. ].
 	text attributes: { BrFontGenericFamilyAttribute monospace }.
 	^ text

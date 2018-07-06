@@ -1,8 +1,8 @@
 visiting
 visitParameter: aParameter
 	aParameter isValid ifFalse: [ 
-		self targetText 
-			attributes: { BrTextForegroundAttribute paint: Color red }
+		(self targetText
 			from: aParameter start 
-			to: aParameter stop ].
+			to: aParameter stop)
+				foreground: Color red ].
 	super visitParameter: aParameter

@@ -1,6 +1,6 @@
 visiting
 visitUndefinedAnnotation: anAnnotation
-	self targetText 
-		attributes: { BrTextForegroundAttribute paint: Color red }
+	(self targetText
 		from: anAnnotation start 
-		to: anAnnotation stop.
+		to: anAnnotation stop)
+			foreground: Color red

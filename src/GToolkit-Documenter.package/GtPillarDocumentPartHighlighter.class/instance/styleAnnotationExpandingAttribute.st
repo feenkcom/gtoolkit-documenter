@@ -1,6 +1,6 @@
 private - styling
 styleAnnotationExpandingAttribute
-	self targetText
-		attributes: self expandingStyleAttributes
+	(self targetText
 		from: self pillarNodeStop
-		to: self pillarNodeStop
+		to: self pillarNodeStop)
+			attributes: self expandingStyleAttributes

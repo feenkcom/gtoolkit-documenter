@@ -13,23 +13,24 @@ visitPillarClassAnnotation: aGtPillarClassAnnotation
 				ifAbsent: [ aClassColor := Color red ].
 			aParameter ]
 		ifNone: [ aGtPillarClassAnnotation ].
-	self targetText 
-		attributes: {
-			BrTextForegroundAttribute paint: Color gray }
+
+	(self targetText
 		from: aGtPillarClassAnnotation start 
-		to: aGtPillarClassAnnotation stop.
-	self targetText 
-		attributes: {
-			BrTextForegroundAttribute new
-				paint: aClassColor;	
-				beNotOverwritableByStyler.
-			BrTextHoverAttribute new 
-				beNotOverwritableByStyler;
-				textAttribute: (BrTextBackgroundAttribute paint: (Color gray alpha: 0.2));
-				leaveTextAttribute: (BrTextBackgroundAttribute paint: Color transparent).
-			BrTextClickAttribute new 
-				beNotOverwritableByStyler;
-				action: [ :aText :aTarget :anEvent | 
-					aGtPillarClassAnnotation browseClassFrom: anEvent ] }
+		to: aGtPillarClassAnnotation stop)
+			foreground: Color gray.
+
+	(self targetText 
 		from: aClassParameterNode start 
-		to: aClassParameterNode stop.
+		to: aClassParameterNode stop)
+			attributes: {
+				BrTextForegroundAttribute new
+					paint: aClassColor;	
+					beNotOverwritableByStyler.
+				BrTextHoverAttribute new 
+					beNotOverwritableByStyler;
+					textAttribute: (BrTextBackgroundAttribute paint: (Color gray alpha: 0.2));
+					leaveTextAttribute: (BrTextBackgroundAttribute paint: Color transparent).
+				BrTextClickAttribute new 
+					beNotOverwritableByStyler;
+					action: [ :aText :aTarget :anEvent | 
+						aGtPillarClassAnnotation browseClassFrom: anEvent ] }
