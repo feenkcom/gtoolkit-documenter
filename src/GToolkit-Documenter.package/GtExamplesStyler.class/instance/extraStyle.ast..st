@@ -12,7 +12,7 @@ extraStyle: aText ast: ast
 		aText 
 			attributes: { 
 				BrTextExpandButtonAttribute new attributesCreatingBlock: [ 
-					BrTextAdornmentDynamicAttribute new beAppend; elementBlock: [	 
+					BrTextAdornmentDynamicAttribute new beAppend; stencil: [	 
 						| editorElement |
 						editorElement := self class 
 							editorElementOnSourceCode: (ast methodNode methodClass lookupSelector: each selector) sourceCode

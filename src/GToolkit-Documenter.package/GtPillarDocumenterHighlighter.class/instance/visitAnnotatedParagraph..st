@@ -1,6 +1,6 @@
 visiting
 visitAnnotatedParagraph: aPRAnnotatedParagraph
-	self targetText 
-		attributes: { BrTextForegroundAttribute paint: Color red muchDarker }
-		from: aPRAnnotatedParagraph start 
-		to: aPRAnnotatedParagraph stop.
+	(self targetText
+		from: aPRAnnotatedParagraph start
+		to: aPRAnnotatedParagraph stop)
+			foreground: Color red muchDarker

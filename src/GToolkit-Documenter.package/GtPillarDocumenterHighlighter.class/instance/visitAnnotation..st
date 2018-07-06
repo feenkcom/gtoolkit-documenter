@@ -1,7 +1,8 @@
 visiting
 visitAnnotation: anAnnotation
-	self targetText 
-		attributes: { BrTextForegroundAttribute paint: Color gray }
+	(self targetText 
 		from: anAnnotation start 
-		to: anAnnotation stop.
+		to: anAnnotation stop)
+			foreground: Color gray.
+
 	super visitAnnotation: anAnnotation

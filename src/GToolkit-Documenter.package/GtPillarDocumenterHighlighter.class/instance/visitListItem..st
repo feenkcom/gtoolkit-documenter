@@ -7,7 +7,7 @@ visitListItem: aPRListItem
 		attributes: {
 			BrTextAdornmentDynamicAttribute new 
 				beAppend; 
-				elementBlock: [ 
+				stencil: [
 					| indexText |
 					indexText := anItemIndex asRopedText.
 					indexText fontSize: 9.
