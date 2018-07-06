@@ -3,7 +3,5 @@ valueOf: aString value: valueBlock emptyValue: emptyBlock defaultValue: defaultB
 	^ self parameters
 		at: aString
 		ifPresent: [ :aValue | 
-			aValue isEmptyOrNil 
-				ifTrue: [ emptyBlock value ]
-				ifFalse: [ valueBlock cull: aValue ] ]
+			valueBlock cull: aValue ]
 		ifAbsent: [ defaultBlock value ]
