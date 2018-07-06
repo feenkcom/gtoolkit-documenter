@@ -9,7 +9,7 @@ visitListItem: aPRListItem
 				beAppend; 
 				elementBlock: [ 
 					| indexText |
-					indexText := BrRopedText string: anItemIndex.
+					indexText := anItemIndex asRopedText.
 					indexText attributes: { 
 						BrFontSizeAttribute size: 9. 
 						BrTextForegroundAttribute paint: Color lightGray }.

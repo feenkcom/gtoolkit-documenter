@@ -1,6 +1,6 @@
 accessing - parameters
 finalCodeRope
-	<return: #BrRopedText>
+	<return: #BlRopedText>
 	| aRopedText |
 	aRopedText := self epiceaLog newStateString asRopedText.
 	aRopedText isEmpty ifFalse: [ 

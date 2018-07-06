@@ -1,6 +1,6 @@
 instance creation
 errorMessageText
-	<return: #BrRopedText>
+	<return: #BlRopedText>
 
 	self documentPart isMethodClassDefined ifFalse: [ 
 		^ ('Example class (', self documentPart methodClassName , ') is not defined (yet).') asRopedText ].

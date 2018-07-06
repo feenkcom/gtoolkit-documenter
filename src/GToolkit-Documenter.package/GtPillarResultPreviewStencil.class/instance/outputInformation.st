@@ -1,5 +1,5 @@
 api - accessing
 outputInformation
-	<return: #BrText>
+	<return: #BlText>
 
 	^ outputInformationText

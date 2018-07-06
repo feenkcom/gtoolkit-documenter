@@ -5,7 +5,7 @@ gtInspectorBlocSourceIn: composite
 		title: '_Source';
 		element: [ 
 			| text styler editor editorElement |
-			text := BrRopedText string: self method sourceCode.
+			text := self method sourceCode asRopedText.
 			text attributes: { BrFontGenericFamilyAttribute monospace beNotOverwritableByStyler}.
 			styler := GtExamplesStyler new classOrMetaClass: self methodClass.
 			editor := BrTextEditor new.

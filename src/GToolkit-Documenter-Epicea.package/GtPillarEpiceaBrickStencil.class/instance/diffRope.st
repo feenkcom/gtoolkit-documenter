@@ -1,6 +1,6 @@
 accessing - parameters
 diffRope
-	<return: #BrRopedText>
+	<return: #BlRopedText>
 	| aBuilder aRopedText |
 	aBuilder := PrettyTextDiffBuilder 
 		from: self epiceaLog currentStateString 
