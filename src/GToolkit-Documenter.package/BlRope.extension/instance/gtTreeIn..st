@@ -2,5 +2,5 @@
 gtTreeIn: anElement
 	| view |
 	view := GtMondrian new.
-	self viewBlocTreeOn: view.
+	self paintTreeWith: view.
 	view gtLiveIn: anElement
