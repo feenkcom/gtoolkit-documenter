@@ -8,13 +8,13 @@ paintTreeWith: view
 						zIndex: 10;
 						background: Color white;
 						constraintsDo: [ :c | c padding: (BlInsets all: 5) ];
-						text: each asString asRopedText ]
+						text: (BlRopedText rope: each) ]
 				ifFalse: [ 
 					BlElement new 
 						zIndex: 10;
 						geometry: BlEllipse new;
 						border: (BlBorder paint: Color black width: 1);
-						background: Color white;
+						background: ((each isKindOf: BlAttributeRope) ifTrue: [ Color orange ] ifFalse: [ Color white ]);
 						size: 10@10 ] ];
 		with: (self withDeepCollect: #children).
 	view edges
