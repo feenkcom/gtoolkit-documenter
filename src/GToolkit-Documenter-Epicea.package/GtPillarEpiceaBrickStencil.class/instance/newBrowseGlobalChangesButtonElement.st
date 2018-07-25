@@ -1,8 +1,7 @@
 instance creation
 newBrowseGlobalChangesButtonElement
-	<return: #BlElement>
-	| aButton aModel |
-	aButton := self newSlimButtonElement.
-	aModel := self newBrowseGlobalChangesButtonModel.
-	aButton viewModel: aModel.
-	^ aButton
+	<return: #BrButton>
+
+	^ self newSlimButton
+		label: 'Edit';
+		action: [ :anElement :theModel | self displayGlobalChanges: anElement ]
