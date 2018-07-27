@@ -8,6 +8,8 @@ baseline: spec
 				loads: #core ];
 			baseline: 'GToolkitUtility' with: [ spec 
 				repository: 'github://feenkcom/gtoolkit/src' ];
+			baseline: 'GToolkitVariableBindings' with: [ spec 
+				repository: 'github://feenkcom/gtoolkit-playground/src' ];
 			baseline: 'GToolkitExamples' with: [ spec 
 				repository: 'github://feenkcom/gtoolkit-examples/src' ];
 			baseline: 'GToolkitInspector' with: [ spec
@@ -30,7 +32,10 @@ baseline: spec
 				#'Pillar2-PetitPillar' ) ];
 			package: 'GToolkit-Documenter' with: [ spec requires: #( 
 				#Brick #Pillar 
-				#GToolkitUtility #GToolkitExamples #GToolkitInspector
+				#GToolkitUtility 
+				#GToolkitVariableBindings
+				#GToolkitExamples 
+				#GToolkitInspector
 				#'Pillar2-Tests-PetitPillar'
 				#'GToolkit-Documenter-BrTextPetitParserCompatibility' ) ];
 			package: 'GToolkit-Documenter-Exporter' with: [ spec requires: #( 

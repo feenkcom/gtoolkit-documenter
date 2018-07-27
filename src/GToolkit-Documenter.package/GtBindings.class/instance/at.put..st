@@ -1,4 +1,4 @@
 adding
-addNamed: aSymbol value: anObject 
+at: aSymbol put: anObject 
 	"Set bindings for a variable named aSymbol and value anObject."
-	self explicitRequirement
+	self subclassResponsibility

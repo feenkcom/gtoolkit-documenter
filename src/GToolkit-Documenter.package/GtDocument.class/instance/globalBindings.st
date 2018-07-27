@@ -1,4 +1,4 @@
 accessing
 globalBindings
-	<return: #GtDocumentBindings>
+	<return: #GtPlaygroundBindings>
 	^ globalBindings

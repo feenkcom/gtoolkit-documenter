@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "GtBindingStrategy",
-	"category" : "GToolkit-Documenter-Bindings",
+	"super" : "Object",
+	"category" : "GToolkit-Documenter-Examples",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "GtPlaygroundBindingStrategy",
+	"name" : "GtDocBindingExamples",
 	"type" : "normal"
 }

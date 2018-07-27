@@ -3,6 +3,6 @@ setCodeSnippetResult
 	<gtExample>
 	| bindings |
 	bindings := self codeSnippetWithPlaygroundBindings.
-	bindings addNamed: self variableOneName value: 42.
+	bindings at: self variableOneName put: 42.
 	self assert: bindings result value isNil.
 	^ bindings

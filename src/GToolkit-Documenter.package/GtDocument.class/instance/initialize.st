@@ -2,8 +2,8 @@ initialization
 initialize
 	super initialize.
 	documentParts := GtDocumentParts new.
-	globalBindings := GtDocumentBindings new.
+	globalBindings := GtPlaygroundBindings new.
 	globalBindings 
-		addNamed: GtDocumenterConstants resultsVariableName 
-		value: documentParts.
+		at: GtDocumenterConstants resultsVariableName 
+		put: documentParts.
 	systemChangesHandler := GtSystemChangesHandler new.
