@@ -17,8 +17,7 @@ newPreviewElementFromShowParameter
 		example: self documentPart exampleMethod gtExample
 		showBlock: [ :returnValue | 
 			| view |
-			view := GtPhlowExplicitView new.
-			returnValue perform: self documentPart showMessageName withArguments: {view}.
+			view := returnValue perform: self documentPart showMessageName withArguments: {GtPhlowExplicitView new}.
 			view asElementDo: [ :element |
 				element constraintsDo: [ :c | 
 					c vertical matchParent.
