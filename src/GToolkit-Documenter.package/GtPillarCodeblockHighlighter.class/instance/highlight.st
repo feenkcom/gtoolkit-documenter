@@ -1,4 +1,4 @@
-protocol - actions
+api - actions
 highlight
 	self styleParameters.
 	self styleScriptBody.

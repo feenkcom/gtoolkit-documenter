@@ -1,34 +1,24 @@
-private-container protocol
+api - actions
 highlight
-	| expandingAttribute previewAttribute attributeCreatingBlock fileNameWithoutPrefix pictureFileReference anImageForm |
-	fileNameWithoutPrefix := self pillarNode reference.
-    (fileNameWithoutPrefix beginsWith: 'file://')
-        ifTrue: [ fileNameWithoutPrefix := fileNameWithoutPrefix
-                copyFrom: 'file://' size + 1
-                to: fileNameWithoutPrefix size ].
-    pictureFileReference := self fileReference parent
-        resolveString: fileNameWithoutPrefix.
-    (pictureFileReference exists and: [ 
-		pictureFileReference isFile
-			and: [ pictureFileReference mimeTypes notNil
-				and: [ pictureFileReference mimeTypes first matches: ZnMimeType imagePng ] ] ] )ifFalse: [ 
-		(self targetText 
-			from: self pillarNode start
-			to: self pillarNode stop) foreground: Color red.
-		^ self ].
+	| anExpandingAttribute aPreviewAttribute anAttributeCreatingBlock aFigureFileReference |
+	aFigureFileReference := self figureFileReferenceOrNil.
+	aFigureFileReference ifNil: [ ^ self styleTextNotFileReference ].
+	aFigureFileReference exists ifFalse: [ ^ self styleTextAsNotExistingFile ].
+	(aFigureFileReference binaryReadStreamDo: [ :aStream | 
+		ImageReadWriter gtReaderClassFromStream: aStream ]) 
+			ifNil: [ ^ self styleTextAsUnknownFigure ].
 	
-	attributeCreatingBlock := [ 
-		anImageForm := pictureFileReference binaryReadStreamDo: [ :stream | PNGReadWriter formFromStream: stream ].
+	anAttributeCreatingBlock := [ | anImageForm |
+		anImageForm := aFigureFileReference binaryReadStreamDo: [ :stream | 
+			ImageReadWriter formFromStream: stream ].
 		GtPillarPictureAttribute new image: anImageForm ].
-	expandingAttribute := BrTextExpandButtonAttribute new
-		attributesCreatingBlock: attributeCreatingBlock.
-	previewAttribute := attributeCreatingBlock value.
-	expandingAttribute isExpanded: true.
-	expandingAttribute createdAttributes: { previewAttribute }.
-	(self targetText 
-			from: self pillarNode start
-			to: self pillarNode stop) foreground: Color gray.
+	anExpandingAttribute := BrTextExpandButtonAttribute new
+		attributesCreatingBlock: anAttributeCreatingBlock.
+	aPreviewAttribute := anAttributeCreatingBlock value.
+	anExpandingAttribute isExpanded: true.
+	anExpandingAttribute createdAttributes: { aPreviewAttribute }.
+	self styleTextAsDefault.
 	self targetText 
-		attributes: { expandingAttribute . previewAttribute }
-		from: self pillarNode stop
-		to: self pillarNode stop
+		attributes: { anExpandingAttribute . aPreviewAttribute }
+		from: self pillarNodeStop
+		to: self pillarNodeStop
