@@ -1,4 +1,4 @@
-existing figure file
+figure - existing file
 textEditorWithExistingFigureFile
 	<gtExample>
 	| aPillarElement aBrTextEditor anAttributes |

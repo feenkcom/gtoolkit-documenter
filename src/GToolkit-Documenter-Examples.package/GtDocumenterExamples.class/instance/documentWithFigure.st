@@ -1,4 +1,4 @@
-document
+figure - basic
 documentWithFigure
 	<gtExample>
 	<label: 'Pillar document with figure'>

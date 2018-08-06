@@ -1,10 +1,8 @@
-existing figure file
-pillarElementWithExistingFigureFile
+figure - not existing file
+pillarElementWithNonExistingFigureFile
 	<gtExample>
-	| aFileReference aPillarElement aFigureFile |
+	| aFileReference aPillarElement |
 	aFileReference := self documentWithFigure.
-	aFigureFile := self figureFileReference.
 	aPillarElement := GtDocumenterExamplesUtility pillarElementForPillarFileReference: aFileReference.
 	self assert: aPillarElement notNil.
-	self assert: aFigureFile exists.
 	^ aPillarElement

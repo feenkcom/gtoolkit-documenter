@@ -1,11 +1,13 @@
 {
 	"commentStamp" : "",
-	"super" : "GtDocumenterExamples",
+	"super" : "Object",
 	"category" : "GToolkit-Documenter-Examples",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "GtFigureExamples",
+	"instvars" : [
+		"fileSystemExamples"
+	],
+	"name" : "GtDocAbstractExamples",
 	"type" : "normal"
 }

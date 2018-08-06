@@ -1,4 +1,4 @@
-document
+figure - basic
 figureFileReference
 	<gtExample>
 	<label: 'PNG figure file reference'>

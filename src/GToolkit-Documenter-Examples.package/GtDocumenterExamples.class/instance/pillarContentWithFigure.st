@@ -1,4 +1,4 @@
-document
+figure - basic
 pillarContentWithFigure
 	<gtExample>
 	<label: 'Pillar content with Figure node'>

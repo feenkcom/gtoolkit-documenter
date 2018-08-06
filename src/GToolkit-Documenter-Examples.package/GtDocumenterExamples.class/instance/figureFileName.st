@@ -1,4 +1,4 @@
-document
+figure - basic
 figureFileName
 	<gtExample>
 	<label: 'Figure file name'>

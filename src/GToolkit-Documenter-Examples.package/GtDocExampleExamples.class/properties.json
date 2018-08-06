@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "GtDocumenterExamples",
+	"super" : "GtDocAbstractExamples",
 	"category" : "GToolkit-Documenter-Examples",
 	"classinstvars" : [ ],
 	"pools" : [ ],

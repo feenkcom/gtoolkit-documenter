@@ -1,4 +1,4 @@
-document
+figure - basic
 figureContent
 	<gtExample>
 	<label: 'Pharo log PNG contents'>

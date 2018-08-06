@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "GtPillarNodeHighlighter",
+	"category" : "GToolkit-Documenter-Pillar",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "GtPillarClassAnnottionHighlighter",
+	"type" : "normal"
+}
