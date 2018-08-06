@@ -1,4 +1,4 @@
 pillar node - accessing
 pillarNodeStop
 	<return: #Integer>
-	^ self documentPart pillarNode stop
+	^ self pillarNode stop

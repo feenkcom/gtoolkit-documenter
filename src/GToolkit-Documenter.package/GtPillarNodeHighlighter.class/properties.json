@@ -6,8 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"documentPart"
+		"pillarNode"
 	],
-	"name" : "GtPillarDocumentPartHighlighter",
+	"name" : "GtPillarNodeHighlighter",
 	"type" : "normal"
 }

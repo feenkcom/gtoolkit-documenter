@@ -1,13 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "GtPillarPartHighlighter",
+	"super" : "GtPillarNodeHighlighter",
 	"category" : "GToolkit-Documenter-Pillar",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [
-		"documentPart"
-	],
-	"name" : "GtPillarDocumentPartHighlighter",
+	"instvars" : [ ],
+	"name" : "GtPillarFigureHighlighter",
 	"type" : "normal"
 }
