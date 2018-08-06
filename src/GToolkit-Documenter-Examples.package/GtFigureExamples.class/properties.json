@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "GtDocumenterExamples",
+	"category" : "GToolkit-Documenter-Examples",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "GtFigureExamples",
+	"type" : "normal"
+}
