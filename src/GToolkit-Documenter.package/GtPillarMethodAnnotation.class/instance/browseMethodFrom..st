@@ -2,7 +2,7 @@ actions
 browseMethodFrom: anEvent
 	| aMethodName aMethod |
 	aMethodName := GtDocumenterUtility 
-		valueOf: self class referencedClassParameterName 
+		valueOf: self class referencedMethodParameterName 
 		in: self parameters 
 		value: [ :aValue | aValue ] 
 		emptyValue: [ ^ self inform: 'Missing method name' ] 

@@ -1,6 +1,6 @@
 protected
 possibleParameters
 	^ {
-		self referencedClassParameterName.
+		self referencedMethodParameterName.
 		self expandedViewParameterName 
 		}
