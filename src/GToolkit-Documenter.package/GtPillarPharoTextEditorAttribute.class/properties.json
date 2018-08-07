@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BrTextAdornmentAttribute",
+	"category" : "GToolkit-Documenter-Brick",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "GtPillarPharoTextEditorAttribute",
+	"type" : "normal"
+}

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "PRAbstractAnnotation",
+	"category" : "GToolkit-Documenter-Pillar - Nodes",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "GtPillarMethodAnnotation",
+	"type" : "normal"
+}

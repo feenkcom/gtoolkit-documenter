@@ -1,3 +1,3 @@
 protected
 expandedViewParameterName
-	^ #show
+	^ #expanded

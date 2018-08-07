@@ -1,4 +1,4 @@
-*GToolkit-Documenter-Epicea
+as yet unclassified
 visitGtPillarEpiceaChangesAnnotation: aGtPillarEpiceaChangesAnnotation
 	| aPillarDocumentPart |
 	aPillarDocumentPart := GtEpiceaChanges new

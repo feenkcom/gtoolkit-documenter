@@ -1,6 +1,7 @@
 accessing - parameter values
 expandedParameterValue
-	^ self 
+	^ GtDocumenterUtility 
 		booleanValueOf: self class expandedParameterName
+		in: self parameters
 		emptyValue: [ true ]
 		defaultValue: [ true ]

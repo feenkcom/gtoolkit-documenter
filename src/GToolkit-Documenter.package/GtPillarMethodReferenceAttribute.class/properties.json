@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "GtPillarPharoTextEditorAttribute",
+	"category" : "GToolkit-Documenter-Brick",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"methodReference"
+	],
+	"name" : "GtPillarMethodReferenceAttribute",
+	"type" : "normal"
+}

@@ -1,6 +1,7 @@
 accessing - parameter values
 expandedPreviewParameterValue
-	^ self 
+	^ GtDocumenterUtility 
 		booleanValueOf: self class expandedPreviewParemeterName
+		in: self parameters
 		emptyValue: [ true ]
 		defaultValue: [ false ]

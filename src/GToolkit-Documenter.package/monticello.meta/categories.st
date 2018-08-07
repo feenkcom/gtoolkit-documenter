@@ -7,4 +7,6 @@ SystemOrganization addCategory: 'GToolkit-Documenter-Brick-Stencils'!
 SystemOrganization addCategory: 'GToolkit-Documenter-Core'!
 SystemOrganization addCategory: 'GToolkit-Documenter-Manifest'!
 SystemOrganization addCategory: 'GToolkit-Documenter-Pillar'!
+SystemOrganization addCategory: 'GToolkit-Documenter-Pillar - Highlighter'!
+SystemOrganization addCategory: 'GToolkit-Documenter-Pillar - Nodes'!
 SystemOrganization addCategory: 'GToolkit-Documenter-Utility'!

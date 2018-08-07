@@ -1,3 +1,6 @@
 protected
 possibleParameters
-	^ #(#class self #expandedViewParameterName)
+	^ {
+		self referencedClassParameterName.
+		self expandedViewParameterName
+		}
