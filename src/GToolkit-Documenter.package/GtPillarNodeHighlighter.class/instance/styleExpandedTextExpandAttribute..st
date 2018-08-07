@@ -1,4 +1,4 @@
-as yet unclassified
+private - styling
 styleExpandedTextExpandAttribute: anAttributeCreatingBlock
 	| anExpandingAttribute aPreviewAttribute |
 	anExpandingAttribute := BrTextExpandButtonAttribute new
