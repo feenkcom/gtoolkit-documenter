@@ -1,10 +1,10 @@
 accessing
 affect: aBrText in: anEditorElement
-	| aText aClassDefinitionEditorElement |
+	| aText aPharoEditorElement |
 	
 	aText := self textEditorText asRopedText.
-	aClassDefinitionEditorElement := GtDocumenterUtility newPharoEditorElementFor: aText.
-	^ aClassDefinitionEditorElement constraintsDo: [ :c |
+	aPharoEditorElement := GtDocumenterUtility newPharoEditorElementFor: aText styler: self newStyler.
+	^ aPharoEditorElement constraintsDo: [ :c |
 			c textFlow pushLine.
 			c horizontal matchParent.
 			c vertical fitContent.

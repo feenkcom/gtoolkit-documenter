@@ -6,8 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"referencedClass"
+		"referencedMethod"
 	],
-	"name" : "GtPillarClassAnnottionHighlighter",
+	"name" : "GtPillarMethodAnnotationHighlighter",
 	"type" : "normal"
 }

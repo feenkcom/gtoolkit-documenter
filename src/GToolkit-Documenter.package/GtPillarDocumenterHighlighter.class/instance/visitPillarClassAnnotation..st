@@ -1,3 +1,3 @@
 visiting
 visitPillarClassAnnotation: aGtPillarClassAnnotation 
-	GtPillarClassAnnottionHighlighter highlight: aGtPillarClassAnnotation using: self.
+	GtPillarClassAnnotationHighlighter highlight: aGtPillarClassAnnotation using: self.
