@@ -9,11 +9,9 @@ textEditorWithNonExistingClassAnnotation
 	self assert: anAttributes size equals: 1.
 	self assert: anAttributes first paint equals: Color gray.
 	anAttributes := aBrTextEditor text attributesAt: 9.
-	self assert: anAttributes size equals: 4.
+	self assert: anAttributes size equals: 2.
 	self assert: anAttributes first paint equals: Color gray.
-	self assert: anAttributes second class equals: BrTextForegroundAttribute.
-	self assert: anAttributes third class equals: BrTextHoverAttribute.
-	self assert: anAttributes fourth class equals: BrTextClickAttribute.
+	self assert: anAttributes second paint equals: Color red.
 	anAttributes := aBrTextEditor text attributesAt: aBrTextEditor text size.
 	self assert: anAttributes size equals: 1.
 	self assert: anAttributes first paint equals: Color gray.

@@ -1,4 +1,6 @@
 accessing
 textEditorText
 	<return: #BlText>
-	^ self classReference definition asRopedText
+	^ self classReference isDefined 
+		ifTrue: [ self classReference realClass definition asRopedText ]
+		ifFalse: [ self classReference definition asRopedText ]

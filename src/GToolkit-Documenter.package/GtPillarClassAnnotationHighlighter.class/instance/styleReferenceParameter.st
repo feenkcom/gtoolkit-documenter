@@ -1,32 +1,30 @@
 private - styling
 styleReferenceParameter
 	"Make class name clickable and red if the class does not exist"
-	| aClassParameterNode aClassColor |
-	aClassColor := Color blue muchDarker.
+	| aClassParameterNode aClassColor theAttributes |
+	self isClassDefined 
+		ifTrue: [ aClassColor := Color blue muchDarker ]
+		ifFalse: [ aClassColor := Color red ].
 	aClassParameterNode := self pillarNode children first children
 		detect: [ :eachParameter | 
-			eachParameter key = self pillarNode defaultParameterName or: [ 
-				eachParameter value isNil ] ] 
-		ifFound: [ :aParameter | 
-			self document class environment 
-				at: aParameter value asSymbol
-				ifPresent: [ :aClass | referencedClass := aClass asRingDefinition ]
-				ifAbsent: [ aClassColor := Color red ].
-			aParameter ]
+			eachParameter key = self pillarNode referencedClassParameterName ] 
+		ifFound: [ :aParameter | aParameter ]
 		ifNone: [ self pillarNode ].
 
-	(self targetText 
-		from: aClassParameterNode start 
-		to: aClassParameterNode stop)
-			attributes: {
-				BrTextForegroundAttribute new
+	theAttributes := Array with: (BrTextForegroundAttribute new
 					paint: aClassColor;	
-					beNotOverwritableByStyler.
+					beNotOverwritableByStyler).
+	self isClassDefined ifTrue: [ 
+		theAttributes := theAttributes , {
 				BrTextHoverAttribute new 
 					beNotOverwritableByStyler;
-					textAttribute: (BrTextBackgroundAttribute paint: (Color gray alpha: 0.2));
-					leaveTextAttribute: (BrTextBackgroundAttribute paint: Color transparent).
+					removableTextAttribute: (BrTextBackgroundAttribute paint: (Color gray alpha: 0.2)).
 				BrTextClickAttribute new 
 					beNotOverwritableByStyler;
 					action: [ :aText :aTarget :anEvent | 
-						self pillarNode browseClassFrom: anEvent ] }
+						self pillarNode browseClassFrom: anEvent ] } ].
+
+	(self targetText 
+		from: aClassParameterNode start 
+		to: aClassParameterNode stop) 
+			attributes: theAttributes.

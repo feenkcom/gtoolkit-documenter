@@ -4,4 +4,4 @@ highlight
 		foreground: Color gray.
 	self initializeReferencedMethod.
 	self styleReferenceParameter.
-	self styleExpandingParameter
+	self styleExpandingView

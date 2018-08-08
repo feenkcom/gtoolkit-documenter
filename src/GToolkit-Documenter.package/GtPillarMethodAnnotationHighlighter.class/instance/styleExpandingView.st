@@ -1,5 +1,5 @@
 private - styling
-styleExpandingParameter
+styleExpandingView
 	| anAttributeCreatingBlock |
 	self isMethodDefined ifFalse: [ ^ self ].
 	anAttributeCreatingBlock := [ GtPillarMethodReferenceAttribute new
