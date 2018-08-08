@@ -19,8 +19,7 @@ styleReferenceParameter
 		theAttributes := theAttributes , {
 				BrTextHoverAttribute new 
 					beNotOverwritableByStyler;
-					textAttribute: (BrTextBackgroundAttribute paint: (Color gray alpha: 0.2));
-					leaveTextAttribute: (BrTextBackgroundAttribute paint: Color transparent).
+					removableTextAttribute: (BrTextBackgroundAttribute paint: (Color gray alpha: 0.2)).
 				BrTextClickAttribute new 
 					beNotOverwritableByStyler;
 					action: [ :aText :aTarget :anEvent | 
