@@ -1,8 +1,8 @@
 examples - methods
-pillarElementWithExamplesAnnotation
+pillarElementWithExamplesAnnotationUsingMethods
 	<gtExample>
 	| aFileReference aPillarElement |
-	aFileReference := self documentWithExamplesAnnotation.
+	aFileReference := self documentWithExamplesAnnotationUsingMethods.
 	aPillarElement := GtDocumenterExamplesUtility pillarElementForPillarFileReference: aFileReference.
 	self assert: aPillarElement notNil.
 	^ aPillarElement

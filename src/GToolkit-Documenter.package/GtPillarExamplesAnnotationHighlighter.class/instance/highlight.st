@@ -1,7 +1,7 @@
 api - actions
 highlight
 	self stylePillarNodeText.
-	self pillarNode methodsParameterValue ifEmpty: [ ^ self ].
+	self pillarNode hasExamples ifFalse: [ ^ self ].
 	self styleExpandedTextExpandAttribute: [ | aGroup |
 		aGroup := self pillarNode exampleGroup.
 		BrTextAdornmentDynamicAttribute new

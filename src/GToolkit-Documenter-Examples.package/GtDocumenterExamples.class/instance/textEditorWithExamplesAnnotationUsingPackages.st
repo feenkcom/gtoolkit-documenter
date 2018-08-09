@@ -1,8 +1,8 @@
-examples - methods
-textEditorWithExamplesAnnotation
+examples - packages
+textEditorWithExamplesAnnotationUsingPackages
 	<gtExample>
 	| aPillarElement aBrTextEditor anAttributes |
-	aPillarElement := self pillarElementWithExamplesAnnotation.
+	aPillarElement := self pillarElementWithExamplesAnnotationUsingPackages.
 	aBrTextEditor := (GtDocumenterExamplesUtility editorFromPillarElement: aPillarElement).
 	self assert: aBrTextEditor notNil.
 	anAttributes := aBrTextEditor text attributesAt: 1.

@@ -1,12 +1,14 @@
 examples - methods
-pillarContentWithExamplesAnnotation
+pillarContentWithExamplesAnnotationUsingMethods
 	<gtExample>
 	<label: 'Pillar content with examples annotation'>
 	^ String streamContents: [ :aStream | 
 		aStream 
 			nextPutAll: '${';
 			nextPutAll: self constants examplesTag;
-			nextPutAll: ':#(';
+			nextPutAll: ':';
+			nextPutAll: self constants methodsParameterName;
+			nextPutAll: '=#(';
 			print: self referencedMethod;
 			space;
 			print: self referencedMethodTwo;

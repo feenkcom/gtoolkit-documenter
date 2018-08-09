@@ -1,4 +1,4 @@
-pillar - parsing examples method collection
+pillar - parsing parameter values
 methodDefinitionsFromArray: aCollection 
 	<return: #Array of: #RGMethodDefinition>
 	| aStep anIndex |
