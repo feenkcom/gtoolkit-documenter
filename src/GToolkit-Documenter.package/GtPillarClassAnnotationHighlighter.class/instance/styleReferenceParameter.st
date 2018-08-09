@@ -7,7 +7,7 @@ styleReferenceParameter
 		ifFalse: [ aClassColor := Color red ].
 	aClassParameterNode := self pillarNode children first children
 		detect: [ :eachParameter | 
-			eachParameter key = self pillarNode referencedClassParameterName ] 
+			eachParameter key = self constants nameParameterName ] 
 		ifFound: [ :aParameter | aParameter ]
 		ifNone: [ self pillarNode ].
 

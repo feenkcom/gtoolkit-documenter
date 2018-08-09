@@ -2,7 +2,7 @@ actions
 browseClassFrom: anEvent
 	| aClassName aClass |
 	aClassName := GtDocumenterUtility 
-		valueOf: self class referencedClassParameterName 
+		valueOf: self constants nameParameterName 
 		in: self parameters 
 		value: [ :aValue | aValue asSymbol ] 
 		emptyValue: [ ^ self inform: 'Missing class name' ] 

@@ -2,7 +2,7 @@
 	"classtraitcomposition" : "GtDocumenterConstantsTrait classTrait + GtAssertingTrait classTrait",
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "GtPillarMethodAnnotation",
+	"name" : "GtPillarExamplesAnnotation",
 	"commentStamp" : "",
 	"super" : "PRAbstractAnnotation",
 	"traitcomposition" : "GtDocumenterConstantsTrait + GtAssertingTrait",

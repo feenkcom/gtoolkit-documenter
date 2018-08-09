@@ -1,13 +1,15 @@
 {
-	"commentStamp" : "",
-	"super" : "Object",
-	"category" : "GToolkit-Documenter-Examples",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "GtDocumenterConstantsTrait classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"fileSystemExamples"
 	],
 	"name" : "GtDocAbstractExamples",
-	"type" : "normal"
+	"commentStamp" : "",
+	"super" : "Object",
+	"traitcomposition" : "GtDocumenterConstantsTrait",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "GToolkit-Documenter-Examples"
 }

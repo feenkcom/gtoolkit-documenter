@@ -1,3 +1,3 @@
 accessing
 possibleParameters
-	^ { #file }
+	^ { self constants fileParameterName }

@@ -1,5 +1,5 @@
 {
-	"classtraitcomposition" : "GtAssertingTrait classTrait",
+	"classtraitcomposition" : "GtDocumenterConstantsTrait classTrait + GtAssertingTrait classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"rootHighlighter"
@@ -7,7 +7,7 @@
 	"name" : "GtPillarPartHighlighter",
 	"commentStamp" : "",
 	"super" : "Object",
-	"traitcomposition" : "GtAssertingTrait",
+	"traitcomposition" : "GtDocumenterConstantsTrait + GtAssertingTrait",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],

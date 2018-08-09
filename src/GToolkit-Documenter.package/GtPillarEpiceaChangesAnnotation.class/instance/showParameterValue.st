@@ -2,7 +2,7 @@ accessing - parameters
 showParameterValue
 	<return: #Symbol>
 	^ GtDocumenterUtility 
-		valueOf: self class showParameterName
+		valueOf: self constants showParameterName
 		in: self parameters
 		value: [ :selector | selector asSymbol ]
 		emptyValue: [ GtDocumenterConstants defaultShowMethodName ]

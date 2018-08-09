@@ -1,7 +1,7 @@
 accessing
 possibleParameters
-	^ {self constants nameParameterName.
+	^ {#name.
 		self constants showParameterName.
 		self constants expandedViewParameterName.
 		self constants expandedPreviewParemeterName.
-		self constants doNotDisplaySourceCodeParemeterName}
+		#noCode}

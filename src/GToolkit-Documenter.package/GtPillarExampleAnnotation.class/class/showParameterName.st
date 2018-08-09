@@ -1,3 +1,0 @@
-accessing
-showParameterName
-	^ #show

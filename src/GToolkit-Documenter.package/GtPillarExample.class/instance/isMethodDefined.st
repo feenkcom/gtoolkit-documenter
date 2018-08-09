@@ -1,3 +1,3 @@
 testing
 isMethodDefined
-	^ self methodDefinition isDefined
+	^ self methodDefinition notNil and: [ self methodDefinition isDefined ]

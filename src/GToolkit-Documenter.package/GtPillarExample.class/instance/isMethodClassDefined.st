@@ -1,3 +1,3 @@
 testing
 isMethodClassDefined
-	^ self methodDefinition parent isDefined
+	^ self methodDefinition notNil and: [ self methodDefinition parent isDefined ]
