@@ -1,4 +1,4 @@
-pillar
+pillar - parameter values
 convertToBoolean: aStringOrBoolean 
 	<return: #Boolean or: nil>
 	| aValue |

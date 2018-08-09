@@ -1,4 +1,4 @@
-as yet unclassified
+visiting
 visitGtPillarEpiceaChangesAnnotation: aGtPillarEpiceaChangesAnnotation
 	| aPillarDocumentPart |
 	aPillarDocumentPart := GtEpiceaChanges new

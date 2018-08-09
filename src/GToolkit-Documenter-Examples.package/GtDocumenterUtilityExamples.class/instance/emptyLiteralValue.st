@@ -1,4 +1,4 @@
-pillar
+pillar - parameter values
 emptyLiteralValue
 	<gtExample>
 	| aValue |

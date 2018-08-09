@@ -1,4 +1,4 @@
-pillar
+pillar - parameter values
 booleanValueOf: aString in: aDictionary emptyValue: emptyBooleanOrBlock defaultValue: defaultBooleanOrBlock
 	^ self 
 		valueOf: aString

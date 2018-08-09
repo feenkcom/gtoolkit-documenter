@@ -1,0 +1,3 @@
+visiting
+visitGtPillarExamplesAnnotation: aGtPillarExamplesAnnotation
+	GtPillarExamplesAnnotationHighlighter highlight: aGtPillarExamplesAnnotation using: self.

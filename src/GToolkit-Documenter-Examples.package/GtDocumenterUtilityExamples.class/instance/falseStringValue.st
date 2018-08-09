@@ -1,4 +1,4 @@
-pillar
+pillar - parameter values
 falseStringValue
 	<gtExample>
 	| aValue |

@@ -1,3 +1,3 @@
 protected
 tag
-	^ #example
+	^ self constants exampleTag

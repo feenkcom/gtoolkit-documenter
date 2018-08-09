@@ -1,6 +1,6 @@
 protected
 possibleParameters
 	^ {
-		self constants referencedMethodParameterName.
+		self constants nameParameterName.
 		self constants expandedViewParameterName 
 		}

@@ -1,7 +1,5 @@
 accessing
 possibleParameters
-	^ {#name.
-		self constants showParameterName.
-		self constants expandedViewParameterName.
-		self constants expandedPreviewParemeterName.
-		#noCode}
+	^ {self constants methodsParameterName.
+		self constants classesParameterName.
+		self constants packagesParameterName}

@@ -1,4 +1,4 @@
-pillar
+pillar - parameter values
 valueOf: aString in: aDictionary value: valueBlock emptyValue: emptyBlock defaultValue: defaultBlock
 	^ aDictionary
 		at: aString
