@@ -1,7 +1,7 @@
 *GToolkit-Documenter-Exporter
 visitGtPillarExampleCodeblock: aGtPillarExampleScript
 	| figure fileName |
-	aGtPillarExampleScript shouldDisplayCode
+	aGtPillarExampleScript shouldDisplaySourceCode
 		ifTrue: [ self visitCodePartOfGtPillarExampleScript: aGtPillarExampleScript ].
 	aGtPillarExampleScript example ifNil: [ ^ nil ].
 	aGtPillarExampleScript show ifNil: [ ^ nil ].

@@ -4,4 +4,4 @@ possibleParameters
 		self constants showParameterName.
 		self constants expandedViewParameterName.
 		self constants expandedPreviewParemeterName.
-		self constants doNotDisplaySourceCodeParemeterName}
+		self constants doNotDisplaySourceCodeParameterName}

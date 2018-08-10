@@ -1,9 +1,9 @@
 instance creation
 newPreviewElementFromShowParameter
 	| exampleElement |
-	
+
 	exampleElement := GtPillarExampleElement
-		withCode: self documentPart shouldDisplayCode.
+		withCode: self documentPart shouldDisplaySourceCode.
 	
 	self maySetHeightOfPreview: exampleElement.
 	

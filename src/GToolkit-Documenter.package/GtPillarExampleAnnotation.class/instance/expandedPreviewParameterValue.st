@@ -4,4 +4,5 @@ expandedPreviewParameterValue
 		booleanValueOf: self constants expandedPreviewParemeterName
 		in: self parameters
 		emptyValue: [ true ]
-		defaultValue: [ false ]
+		defaultValue: [ 
+			self doNotDisplaySourceCodeParameterValue ]

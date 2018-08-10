@@ -1,3 +1,3 @@
 accessing - pillar parameter names
-doNotDisplaySourceCodeParemeterName
+doNotDisplaySourceCodeParameterName
 	^ #noCode
