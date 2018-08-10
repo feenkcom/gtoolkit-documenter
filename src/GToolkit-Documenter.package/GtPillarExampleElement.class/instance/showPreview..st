@@ -19,7 +19,7 @@ showPreview: aBlockOrSymbol
 	exampleResult := self example result.
 	aResultElement := exampleResult hasException 
 		ifTrue: [ exampleResult exampleException asDebuggableElement ]
-		ifFalse: [ aBlockOrSymbol value: exampleResult returnValue ].
+		ifFalse: [ self ensurePreviewElement: [ aBlockOrSymbol value: exampleResult returnValue ] ].
 	self
 		assert: [ aResultElement isNotNil ]
 		description: [ 'Resulting element must not be nil' ].
