@@ -1,6 +1,10 @@
 api - actions
 highlight
 	self styleParameters.
-	self styleScriptBody.
+	self styleClosingBrackets.
+	self pillarNode isSmalltalkLanguage ifFalse: [
+		self styleScriptBody.
+		^ self ].
+	self styleSmalltalkScriptBody.
 	self styleExecutableCode.
 	self documentPart hasResult ifTrue: [ self styleResultPreview ].
