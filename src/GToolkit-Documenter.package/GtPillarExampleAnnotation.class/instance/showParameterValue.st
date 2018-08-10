@@ -1,4 +1,4 @@
-accessing - parameters
+accessing - parameter values
 showParameterValue
 	<return: #Symbol>
 	^ GtDocumenterUtility 

@@ -3,7 +3,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"result",
-		"outputInformationText"
+		"outputInformationText",
+		"showMethod"
 	],
 	"name" : "GtPillarResultPreviewStencil",
 	"commentStamp" : "AliakseiSyrel 5/29/2018 13:16",

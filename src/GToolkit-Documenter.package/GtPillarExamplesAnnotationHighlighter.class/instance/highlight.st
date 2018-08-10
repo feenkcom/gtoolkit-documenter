@@ -8,4 +8,5 @@ highlight
 			beAppend;
 			stencil: (GtPillarResultPreviewStencil new
 				result: aGroup ;
-				outputInformation: aGroup size asString , ' examples')  ]
+				outputInformation: aGroup size asString , ' examples';
+				showMethod: self pillarNode showParameterValue) ]

@@ -1,4 +1,4 @@
-accessing - parameters
+accessing - parameter values
 methodName
 	<return: #String or: nil>
 	^ GtDocumenterUtility 
