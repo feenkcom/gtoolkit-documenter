@@ -26,4 +26,7 @@ initializeElements
 		c linear vertical alignCenter ].
 
 	"we don't add previewElement by default"
-	self addChildren: { editorElement . arrowElement }
+	self addChildren: { editorElement . arrowElement }.
+	self flag: 'Does not work. And maybe remove GtPillarResizerBarStencil.'
+	"(GtPillarResizerBarStencil new 
+		stencil: editorElement) asElement."

@@ -9,6 +9,7 @@ showPreview: aBlockOrSymbol
 		assert: [ previewElement hasParent not ]
 		description: [ 'Can not show preview if it is already opened' ].
 
+	"Only resizer bar is present"
 	self
 		assert: [ previewElement hasChildren not ]
 		description: [ 'Preview container must be empty' ].
@@ -24,5 +25,7 @@ showPreview: aBlockOrSymbol
 		assert: [ aResultElement isNotNil ]
 		description: [ 'Resulting element must not be nil' ].
 
-	previewElement addChild: aResultElement.
+	previewElement addChildFirst: aResultElement.
+	(GtPillarResizerBarStencil new 
+		stencil: previewElement) asElement.
 	self addChild: previewElement

@@ -6,6 +6,6 @@ newArrowElement
 
 	^ BlElement new
 		size: 16@24;
-		geometry: (BlPolygon vertices: { 0@0 . 16@12 . 0@24 });
-		margin: (BlInsets top: 0 right: 5 bottom: 0 left: 5);
+		geometry: (BlPolygon vertices: { 0@0 . 24@0 . 12@16 } );
+		margin: (BlInsets top: 5 right: 0 bottom: 5 left: 0);
 		background: Color veryVeryLightGray

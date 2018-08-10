@@ -1,3 +1,3 @@
 initialization
 defaultLayout
-	^ BlLinearLayout horizontal
+	^ BlLinearLayout vertical

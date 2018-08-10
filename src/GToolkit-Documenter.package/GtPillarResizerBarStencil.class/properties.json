@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BrStencil",
+	"category" : "GToolkit-Documenter-Brick-Stencils",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"contentStencilBuilder",
+		"minimumExtent"
+	],
+	"name" : "GtPillarResizerBarStencil",
+	"type" : "normal"
+}

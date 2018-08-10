@@ -9,6 +9,7 @@ initializeElements
 		
 		self hasCustomPreviewHeight
 			ifTrue: [ c vertical exact: previewHeight ]
-			ifFalse: [ c vertical matchParent ].
+			ifFalse: [ c vertical exact: 200 ].
+		self flag: 'I do not understand why I have to say exact: 200'.
 		"since parent is horizontal, I will take 50% of the available width"
 		c linear weight: 0.5 ]

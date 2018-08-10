@@ -1,7 +1,7 @@
 api - instantiation
 create
 	| view |
-	view := self inspectedObject perform: self showMethod with: GtPhlowExplicitView new.	
+	view := GtPhlowExplicitView on: self inspectedObject perform: self showMethod.
 	^ view asElementDo: [ :element |
 		element constraintsDo: [ :c | 
 			c horizontal matchParent.
