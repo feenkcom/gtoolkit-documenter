@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BrEditorElement",
+	"category" : "GToolkit-Documenter-Brick",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"document"
+	],
+	"name" : "GtPillarElement",
+	"type" : "normal"
+}

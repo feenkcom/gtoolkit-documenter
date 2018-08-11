@@ -15,10 +15,4 @@ editorForText: aString fileReference: aFileReference
 	    c horizontal matchParent.
 	    c vertical matchParent ].
 	editorElement editor: editor.
-
-	^ GtPillarEditorElement new
-		editorElement: editorElement;
-		document: document;
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ]
+	^ editorElement
