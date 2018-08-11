@@ -9,13 +9,13 @@ gtInspectorPillarWithBlocIn: composite
 			element
 				addShortcut: (BlShortcut new
 					combination: (BlKeyCombination builder meta; key: Key v; build);
-					action: [ element contentElement editor insertString: Clipboard clipboardText asString at: element contentElement editor cursor position ]) ];
+					action: [ element editor insertString: Clipboard clipboardText asString at: element editor cursor position ]) ];
 		act: [ :bloc |
-				self ensureDelete; writeStreamDo: [ :s | s nextPutAll: bloc element contentElement editor text asString ] ]
+				self ensureDelete; writeStreamDo: [ :s | s nextPutAll: bloc element editor text asString ] ]
 				icon: GLMUIThemeExtraIcons glamorousSave
 				on: $s
 				entitled: 'Save';
-		act: [ :aBlocPresentation | aBlocPresentation element zoomIn ]
+"		act: [ :aBlocPresentation | aBlocPresentation element zoomIn ]
 			icon: GLMUIThemeExtraIcons glamorousZoomIn
 			entitled: 'Zoom in';
 		act: [ :aBlocPresentation | aBlocPresentation element zoomOut ]
@@ -24,7 +24,7 @@ gtInspectorPillarWithBlocIn: composite
 		act: [ :aBlocPresentation | aBlocPresentation element zoomReset ]
 			icon: GLMUIThemeExtraIcons glamorousZoomToFit
 			entitled: 'Zoom reset';
-		act: [ :aBlocPresentation | aBlocPresentation element contentElement editor inspect ]
+"		act: [ :aBlocPresentation | aBlocPresentation element editor inspect ]
 			icon: GLMUIThemeExtraIcons glamorousInspect
 			entitled: 'Inspect'; 
 		when: [ 
