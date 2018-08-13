@@ -6,7 +6,7 @@ baseline: spec
 			baseline: 'Brick' with: [ spec
 				repository: 'github://pharo-graphics/Brick/src';
 				loads: #core ];
-			baseline: 'Completer' with: [ spec
+			baseline: 'GToolkitCompleter' with: [ spec
 				repository: 'github://feenkcom/gtoolkit-completer/src' ];
 			baseline: 'GToolkitUtility' with: [ spec 
 				repository: 'github://feenkcom/gtoolkit/src' ];
@@ -34,7 +34,7 @@ baseline: spec
 			package: 'Pillar2-Tests-PetitPillar' with: [ spec requires: #( 
 				#'Pillar2-PetitPillar' ) ];
 			package: 'GToolkit-Documenter' with: [ spec requires: #( 
-				#Brick #Pillar #Completer
+				#Brick #Pillar #GToolkitCompleter
 				#GToolkitUtility 
 				#GToolkitVariableBindings
 				#GToolkitExamples 
