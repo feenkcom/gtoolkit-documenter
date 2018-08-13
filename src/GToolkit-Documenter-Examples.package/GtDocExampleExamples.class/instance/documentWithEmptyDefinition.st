@@ -4,8 +4,6 @@ documentWithEmptyDefinition
 	<label: 'Document with an example with empty definition'>
 	| aTextElement aDocument aDocumentPart |
 	aTextElement := self textElementWithEmptyDefinition.
-	self flag: 'We should handle PRError differently'.
-	aTextElement class = PRError ifTrue: [ ^ aTextElement ].
 	aDocument := GtDocumenterExamplesUtility documentFromTextElement: aTextElement.
 	self assert: aDocument documentParts size equals: 1.
 	aDocumentPart := aDocument documentParts documentPartAt: 1.
