@@ -2,9 +2,9 @@ example with noCode parameter
 documentWithNoCodeParameter
 	<gtExample>
 	<label: 'Document with an example'>
-	| aPillarElement aDocument aDocumentPart |
-	aPillarElement := self pillarElementWithNoCodeParameter.
-	aDocument := GtDocumenterExamplesUtility documentFromPillarElement: aPillarElement.
+	| aTextElement aDocument aDocumentPart |
+	aTextElement := self textElementWithNoCodeParameter.
+	aDocument := GtDocumenterExamplesUtility documentFromTextElement: aTextElement.
 	self assert: aDocument documentParts size equals: 1.
 	aDocumentPart := aDocument documentParts documentPartAt: 1.
 	self 

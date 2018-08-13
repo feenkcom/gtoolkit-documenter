@@ -2,8 +2,8 @@ class - existing one
 textEditorWithExistingClassAnnotation
 	<gtExample>
 	| aPillarElement aBrTextEditor anAttributes |
-	aPillarElement := self pillarElementWithExistingClassAnnotation.
-	aBrTextEditor := (GtDocumenterExamplesUtility editorFromPillarElement: aPillarElement).
+	aPillarElement := self textElementWithExistingClassAnnotation.
+	aBrTextEditor := (GtDocumenterExamplesUtility editorFromTextElement: aPillarElement).
 	self assert: aBrTextEditor notNil.
 	anAttributes := aBrTextEditor text attributesAt: 1.
 	self assert: anAttributes size equals: 1.

@@ -3,7 +3,7 @@ textEditorWithTwoCodeSnippets
 	<gtExample>
 	<label: 'Text editor'>
 	| pillarElement editor |
-	pillarElement := self pillarElementWithTwoCodeSnippets.
+	pillarElement := self textElementWithTwoCodeSnippets.
 	editor := pillarElement contentElement editor.
 	self assert: editor notNil.
 	self assert: editor styler document notNil.

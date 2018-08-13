@@ -2,9 +2,9 @@ self reference
 documentWithSelfReference
 	<gtExample>
 	<label: 'Document with an executable code snippet'>
-	| aPillarElement aDocument codeSnippet |
-	aPillarElement := self pillarElementWithSelfReference.
-	aDocument := GtDocumenterExamplesUtility documentFromPillarElement: aPillarElement.
+	| aTextElement aDocument codeSnippet |
+	aTextElement := self textElementWithSelfReference.
+	aDocument := GtDocumenterExamplesUtility documentFromTextElement: aTextElement.
 	self assert: aDocument documentParts size equals: 1.
 	codeSnippet := aDocument documentParts documentPartAt: 1.
 	self 

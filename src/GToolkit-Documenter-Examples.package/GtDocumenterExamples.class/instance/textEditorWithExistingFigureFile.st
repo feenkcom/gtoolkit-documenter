@@ -1,9 +1,9 @@
 figure - existing file
 textEditorWithExistingFigureFile
 	<gtExample>
-	| aPillarElement aBrTextEditor anAttributes |
-	aPillarElement := self pillarElementWithExistingFigureFile.
-	aBrTextEditor := (GtDocumenterExamplesUtility editorFromPillarElement: aPillarElement).
+	| aTextElement aBrTextEditor anAttributes |
+	aTextElement := self textElementWithExistingFigureFile.
+	aBrTextEditor := GtDocumenterExamplesUtility editorFromTextElement: aTextElement.
 	self assert: aBrTextEditor notNil.
 	anAttributes := aBrTextEditor text attributesAt: 1.
 	self assert: anAttributes size equals: 1.

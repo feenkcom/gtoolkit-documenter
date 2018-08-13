@@ -2,8 +2,8 @@ method - existing one
 textEditorWithExistingMethodAnnotation
 	<gtExample>
 	| aPillarElement aBrTextEditor anAttributes |
-	aPillarElement := self pillarElementWithExistingMethodAnnotation.
-	aBrTextEditor := (GtDocumenterExamplesUtility editorFromPillarElement: aPillarElement).
+	aPillarElement := self textElementWithExistingMethodAnnotation.
+	aBrTextEditor := (GtDocumenterExamplesUtility editorFromTextElement: aPillarElement).
 	self assert: aBrTextEditor notNil.
 	anAttributes := aBrTextEditor text attributesAt: 1.
 	self assert: anAttributes size equals: 1.

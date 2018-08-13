@@ -2,9 +2,9 @@ simple example definition
 documentWithOneExampleCodeSnippet
 	<gtExample>
 	<label: 'Document with an example code snippet'>
-	| aPillarElement aDocument documentPart |
-	aPillarElement := self pillarElementWithOneExampleCodeSnippet.
-	aDocument := GtDocumenterExamplesUtility documentFromPillarElement: aPillarElement.
+	| aTextElement aDocument documentPart |
+	aTextElement := self textElementWithOneExampleCodeSnippet.
+	aDocument := GtDocumenterExamplesUtility documentFromTextElement: aTextElement.
 	self assert: aDocument documentParts size equals: 1.
 	documentPart := aDocument documentParts documentPartAt: 1.
 	self 

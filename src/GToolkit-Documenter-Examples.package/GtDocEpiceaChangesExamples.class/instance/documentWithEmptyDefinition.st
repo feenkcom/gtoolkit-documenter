@@ -2,9 +2,9 @@ empty definition
 documentWithEmptyDefinition
 	<gtExample>
 	<label: 'Document with an Epicea code changes with empty definition'>
-	| aPillarElement aDocument codeSnippet |
-	aPillarElement := self pillarElementWithEmptyDefinition.
-	aDocument := GtDocumenterExamplesUtility documentFromPillarElement: aPillarElement.
+	| aTextElement aDocument codeSnippet |
+	aTextElement := self textElementWithEmptyDefinition.
+	aDocument := GtDocumenterExamplesUtility documentFromTextElement: aTextElement.
 	self assert: aDocument documentParts size equals: 0.
 	"codeSnippet := aDocument documentParts codeSnippetAt: 1.
 	self 

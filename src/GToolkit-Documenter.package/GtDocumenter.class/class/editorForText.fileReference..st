@@ -10,9 +10,9 @@ editorForText: aString fileReference: aFileReference
 	editor styler: styler.
 	editor text: text.
 	editorElement := BrEditorElement new.
-	editorElement padding: (BlInsets all: 10).
 	editorElement constraintsDo: [ :c |
-	    c horizontal matchParent.
-	    c vertical matchParent ].
+		c horizontal matchParent.
+		c vertical matchParent.
+		c padding: (BlInsets all: 10) ].
 	editorElement editor: editor.
 	^ editorElement

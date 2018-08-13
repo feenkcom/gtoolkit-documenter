@@ -2,8 +2,8 @@ examples - classes
 textEditorWithExamplesAnnotationUsingClasses
 	<gtExample>
 	| aPillarElement aBrTextEditor anAttributes |
-	aPillarElement := self pillarElementWithExamplesAnnotationUsingClasses.
-	aBrTextEditor := (GtDocumenterExamplesUtility editorFromPillarElement: aPillarElement).
+	aPillarElement := self textElementWithExamplesAnnotationUsingClasses.
+	aBrTextEditor := (GtDocumenterExamplesUtility editorFromTextElement: aPillarElement).
 	self assert: aBrTextEditor notNil.
 	anAttributes := aBrTextEditor text attributesAt: 1.
 	self assert: anAttributes size equals: 1.
