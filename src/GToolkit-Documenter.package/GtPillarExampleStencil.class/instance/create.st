@@ -11,7 +11,7 @@ create
 				ifTrue: [ self newPreviewElementFromShowParameter ]
 				ifFalse: [ self newPreviewEditorElement ] ] ].
 		
-	aComposite := BlElement new look: GtPillarTransparentCompositeLook new.
+	aComposite := BlElement new look: GtPillarTransparentCompositeLook.
 	aComposite addChild: aChildrenElementBlock value.
 
 	self documentPart 

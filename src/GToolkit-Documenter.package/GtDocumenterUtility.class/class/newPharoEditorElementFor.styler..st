@@ -1,5 +1,6 @@
 brick
 newPharoEditorElementFor: aBlText styler: aStyler
+	<return: #BrEditorElement>
 	| aTextEditor anEditorElement |
 	aBlText attributes: {
 		BrFontGenericFamilyAttribute monospace beNotOverwritableByStyler.

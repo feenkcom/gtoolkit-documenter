@@ -7,4 +7,4 @@ affect: aBrText in: anEditorElement
 		background: (BlBackground builder image: self image; build);
 		yourself.
 
-	^ GtDocumenterUtility newResizableElementFor: anImageElement
+	^ GtDocumenterUtility newResizableElementFor: anImageElement height: self image height

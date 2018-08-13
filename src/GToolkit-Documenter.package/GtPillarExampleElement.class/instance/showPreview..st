@@ -26,6 +26,5 @@ showPreview: aBlockOrSymbol
 		description: [ 'Resulting element must not be nil' ].
 
 	previewElement addChildFirst: aResultElement.
-	(GtPillarResizerBarStencil new 
-		stencil: previewElement) asElement.
+	previewElement := GtDocumenterUtility newResizableElementFor: previewElement.
 	self addChild: previewElement

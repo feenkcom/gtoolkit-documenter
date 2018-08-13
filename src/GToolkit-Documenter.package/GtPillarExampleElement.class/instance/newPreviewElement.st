@@ -5,6 +5,4 @@ newPreviewElement
 	<return: #BlElement>
 
 	^ BlElement new
-		layout: BlLinearLayout new;
-		padding: (BlInsets all: 2);
-		border: (BlBorder paint: Color veryLightGray width: 1)
+		layout: BlLinearLayout new

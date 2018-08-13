@@ -1,6 +1,6 @@
 api - instantiation
 buildDefault
-	^ GtPillarExamplesBrickStencil new
+	^ GtPillarExampleStencil new
 		text: self text;
 		editor: self editor;
 		documentPart: self documentPart

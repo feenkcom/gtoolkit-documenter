@@ -13,11 +13,7 @@ initializeElements
 		description: [ 'Arrow element must not be initialized' ].
 
 	editorElement := self newEditorElement: self example.
-	editorElement constraintsDo: [ :c |
-		c horizontal matchParent.
-		c vertical fitContent.
-		"since parent is horizontal, I will take 50% of the available width"
-		c linear weight: 0.5 ].
+	editorElement look: GtPillarExpandedPreviewLook.
 
 	arrowElement := self newArrowElement.
 	arrowElement constraintsDo: [ :c |
@@ -27,6 +23,3 @@ initializeElements
 
 	"we don't add previewElement by default"
 	self addChildren: { editorElement . arrowElement }.
-	self flag: 'Does not work. And maybe remove GtPillarResizerBarStencil.'
-	"(GtPillarResizerBarStencil new 
-		stencil: editorElement) asElement."
