@@ -1,3 +1,0 @@
-testing
-shouldExpandPreview
-	^ self pillarNode expandedPreviewParameterValue

@@ -2,4 +2,4 @@ instance creation
 newPreviewAttribute
 	^ BrTextAdornmentDynamicAttribute new
 		beAppend;
-		stencil: (GtPillarExampleStencilBuilder new documentPart: self documentPart)
+		stencil: (GtPillarExampleStencilBuilder new documentPart: self pillarNode)

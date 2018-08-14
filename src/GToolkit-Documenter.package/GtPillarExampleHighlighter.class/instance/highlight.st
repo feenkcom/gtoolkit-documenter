@@ -1,4 +1,4 @@
 api - actions
 highlight
-	self styleAnnotationParameters.
-	self styleAnnotationExpandingAttribute.
+	self stylePillarNodeText.
+	self styleExpandingView.

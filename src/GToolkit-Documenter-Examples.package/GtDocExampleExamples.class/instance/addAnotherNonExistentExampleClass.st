@@ -2,17 +2,20 @@ adding non-existent example class
 addAnotherNonExistentExampleClass
 	<gtExample>
 	<label: 'Add another non-existent example class'>
-	| aCodeSnippet anAnnouncements |
-	aCodeSnippet := self documentPartWithNonExistentExampleClass.
-	self assert: aCodeSnippet isMethodClassDefined not.
+	| aDocument aPillarNode anAnnouncements |
+	aDocument := self documentWithNonExistentExampleClass.
+	aPillarNode := GtDocumenterExamplesUtility 
+		subscriberThat: [ :eachSubscriber | eachSubscriber class = GtPillarExampleAnnotation ] 
+		in: aDocument systemChangesHandler announcer.
+	self assert: aPillarNode isMethodClassDefined not.
 	anAnnouncements := OrderedCollection new.
-	aCodeSnippet subscribe: GtDocumentAnnouncement do: [ :anAnnouncement | 
+	aPillarNode subscribe: GtDocumentAnnouncement do: [ :anAnnouncement | 
 		anAnnouncements add: anAnnouncement ].
 	GtDocumenterExamplesUtility 
-		createClassNamed: (aCodeSnippet methodClassName, 'Two') asSymbol
+		createClassNamed: (aPillarNode methodClassName, 'Two') asSymbol
 		during: [ 
 			self assert: anAnnouncements isEmpty.
-			self assert: aCodeSnippet isMethodClassDefined not.
-			self assert: aCodeSnippet isMethodDefined not ].
+			self assert: aPillarNode isMethodClassDefined not.
+			self assert: aPillarNode isMethodDefined not ].
 	self assert: anAnnouncements isEmpty.
-	^ aCodeSnippet
+	^ aPillarNode

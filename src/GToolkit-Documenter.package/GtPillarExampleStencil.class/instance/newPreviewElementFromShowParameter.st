@@ -3,7 +3,7 @@ newPreviewElementFromShowParameter
 	| exampleElement |
 
 	exampleElement := GtPillarExampleElement
-		withCode: self documentPart shouldDisplaySourceCode.
+		withCode: self documentPart doNotDisplaySourceCodeParameterValue not.
 	
 	self maySetHeightOfPreview: exampleElement.
 	
@@ -18,7 +18,7 @@ newPreviewElementFromShowParameter
 		showBlock: [ :returnValue | 
 			| view |
 			self flag: 'Maybe use GtPillarInspectorStencil instead of this code?'.
-			view := GtPhlowExplicitView on: returnValue perform: self documentPart showMessageName.
+			view := GtPhlowExplicitView on: returnValue perform: self documentPart showParameterValue.
 			view asElementDo: [ :element |
 				element constraintsDo: [ :c | 
 					c vertical matchParent.
