@@ -7,9 +7,7 @@ create
 	aChildrenElementBlock := [ 
 		self documentPart isMethodDefined 
 			ifFalse: [ self newErrorMessageElement ]
-			ifTrue: [ self documentPart shouldDisplayResult
-				ifTrue: [ self newPreviewElementFromShowParameter ]
-				ifFalse: [ self newPreviewEditorElement ] ] ].
+			ifTrue: [ self newPreviewElementFromShowParameter ] ].
 		
 	aComposite := BlElement new look: GtPillarTransparentCompositeLook.
 	aComposite addChild: aChildrenElementBlock value.

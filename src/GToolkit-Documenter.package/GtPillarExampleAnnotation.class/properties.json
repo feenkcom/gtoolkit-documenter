@@ -1,11 +1,13 @@
 {
-	"classtraitcomposition" : "GtDocumenterConstantsTrait classTrait + GtAssertingTrait classTrait",
+	"classtraitcomposition" : "GtDocumenterConstantsTrait classTrait + GtAssertingTrait classTrait + GtAnnouncerTrait classTrait + GtPillarNodeWithDocumentTrait classTrait",
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"announcer"
+	],
 	"name" : "GtPillarExampleAnnotation",
 	"commentStamp" : "",
 	"super" : "PRAbstractAnnotation",
-	"traitcomposition" : "GtDocumenterConstantsTrait + GtAssertingTrait",
+	"traitcomposition" : "GtDocumenterConstantsTrait + GtAssertingTrait + GtAnnouncerTrait + GtPillarNodeWithDocumentTrait",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],

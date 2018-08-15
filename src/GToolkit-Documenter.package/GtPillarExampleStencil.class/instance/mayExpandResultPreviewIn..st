@@ -1,4 +1,4 @@
 private
 mayExpandResultPreviewIn: exampleElement
-	self documentPart shouldDisplaySourceCode ifFalse: [ ^ self ].
-	self documentPart shouldExpandPreview ifTrue: [ exampleElement showPreview ]
+	self documentPart doNotDisplaySourceCodeParameterValue ifTrue: [ ^ self ].
+	self documentPart expandedPreviewParameterValue ifTrue: [ exampleElement showPreview ]
