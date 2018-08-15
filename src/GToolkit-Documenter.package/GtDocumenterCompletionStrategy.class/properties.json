@@ -8,12 +8,14 @@
 		"ParameterValueCompletionSelectors"
 	],
 	"instvars" : [
+		"directory",
 		"annotationTags",
 		"max",
 		"position",
 		"string",
 		"tagName",
-		"exampleClasses"
+		"exampleClasses",
+		"allClasses"
 	],
 	"name" : "GtDocumenterCompletionStrategy",
 	"type" : "normal"
