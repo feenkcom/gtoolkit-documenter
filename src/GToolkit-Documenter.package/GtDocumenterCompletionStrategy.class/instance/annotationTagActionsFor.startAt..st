@@ -6,6 +6,6 @@ annotationTagActionsFor: tagString startAt: annotationStart
 		collect: [ :each | 
 			self
 				complete: each
-				with: (each copyFrom: prefix size + 1 to: each size)
+				with: (each allButFirst: prefix size)
 				deleting: tagString size - prefix size
 				at: position ]

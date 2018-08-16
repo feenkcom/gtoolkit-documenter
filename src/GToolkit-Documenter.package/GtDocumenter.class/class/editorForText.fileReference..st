@@ -16,6 +16,7 @@ editorForText: aString fileReference: aFileReference
 		c padding: (BlInsets all: 10) ].
 	editorElement editor: editor.
 	completionStrategy := GtDocumenterCompletionStrategy new.
+	completionStrategy fileReference: aFileReference.
 	completionController := GtCompletionController on: editorElement strategy: completionStrategy.
 	completionController install.
 	^ editorElement
