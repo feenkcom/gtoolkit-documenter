@@ -24,8 +24,11 @@ filenamesStartingWith: aString
 								ifFalse: [ '' ]) ]).
 	^ (names first: max startingWith: filenamePart)
 		collect: [ :each | 
-			self
+			| action |
+			action := self
 				complete: each
 				with: (each allButFirst: filenamePart size)
 				deleting: 0
-				at: position ]
+				at: position.
+			action partial: each last = $/.
+			action ]
