@@ -1,3 +1,3 @@
 accessing
-directory
+directoryReference
 	^ directory ifNil: [ FileSystem workingDirectory ]

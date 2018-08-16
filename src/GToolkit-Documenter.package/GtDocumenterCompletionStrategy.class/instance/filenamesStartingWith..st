@@ -1,7 +1,7 @@
 private
 filenamesStartingWith: aString
 	| fileReference segments currentDirectory filenamePart names |
-	currentDirectory := self directory.
+	currentDirectory := self directoryReference.
 	fileReference := aString asFileReference.
 	segments := fileReference pathSegments.
 	1 to: segments size - 1 do: [ :i | currentDirectory := currentDirectory / (segments at: i) ].
