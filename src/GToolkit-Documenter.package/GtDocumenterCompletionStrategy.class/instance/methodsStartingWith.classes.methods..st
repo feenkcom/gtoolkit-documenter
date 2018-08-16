@@ -18,11 +18,8 @@ methodsStartingWith: aString classes: classesTree methods: methodBlock
 						at: position ] ].
 	^ (classesTree first: max startingWith: aString)
 		collect: [ :each | 
-			| action |
-			action := self
+			self
 				complete: each
 				with: (each allButFirst: aString size) , '>>#'
 				deleting: 0
-				at: position.
-			action partial: true.
-			action ]
+				at: position ]

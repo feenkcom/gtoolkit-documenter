@@ -1,6 +1,6 @@
 opening
 editorForText: aString fileReference: aFileReference
-	| text styler editor editorElement document |
+	| text styler editor editorElement document completionStrategy completionController |
 
 	text := aString asRopedText.
 	document := GtDocument new.
@@ -15,4 +15,7 @@ editorForText: aString fileReference: aFileReference
 		c vertical matchParent.
 		c padding: (BlInsets all: 10) ].
 	editorElement editor: editor.
+	completionStrategy := GtDocumenterCompletionStrategy new.
+	completionController := GtCompletionController on: editorElement strategy: completionStrategy.
+	completionController install.
 	^ editorElement
