@@ -29,6 +29,7 @@ filenamesStartingWith: aString
 				complete: each
 				with: (each allButFirst: filenamePart size)
 				deleting: 0
-				at: position.
+				at: position
+				prefixSize: filenamePart size.
 			action partial: each last = $/.
 			action ]

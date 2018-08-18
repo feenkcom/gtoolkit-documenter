@@ -15,7 +15,8 @@ methodsStartingWith: aString classes: classesTree methods: methodBlock
 						complete: each
 						with: (each allButFirst: prefix size)
 						deleting: 0
-						at: position ] ].
+						at: position
+						prefixSize: prefix size ] ].
 	^ (classesTree first: max startingWith: aString)
 		collect: [ :each | 
 			| action |
@@ -23,6 +24,7 @@ methodsStartingWith: aString classes: classesTree methods: methodBlock
 				complete: each
 				with: (each allButFirst: aString size) , '>>#'
 				deleting: 0
-				at: position.
+				at: position
+				prefixSize: aString size.
 			action partial: true.
 			action ]

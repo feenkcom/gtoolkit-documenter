@@ -6,4 +6,5 @@ exampleClassesStartingWith: aString
 				complete: each
 				with: (each allButFirst: aString size)
 				deleting: 0
-				at: position ]
+				at: position
+				prefixSize: aString size ]

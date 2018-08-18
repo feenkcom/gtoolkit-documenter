@@ -8,7 +8,8 @@ parametersStartingWith: aString delete: anInteger includeDefaultValues: aBoolean
 						complete: each , '='
 						with: (each allButFirst: aString size) , '='
 						deleting: anInteger
-						at: position ])
+						at: position
+						prefixSize: aString size ])
 				,
 					(aBoolean
 						ifTrue: [ self defaultParameterValueActionsFor: class startingWith: aString ]

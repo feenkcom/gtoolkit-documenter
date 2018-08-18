@@ -8,4 +8,5 @@ annotationTagActionsFor: tagString startAt: annotationStart
 				complete: each
 				with: (each allButFirst: prefix size)
 				deleting: tagString size - prefix size
-				at: position ]
+				at: position
+				prefixSize: prefix size ]

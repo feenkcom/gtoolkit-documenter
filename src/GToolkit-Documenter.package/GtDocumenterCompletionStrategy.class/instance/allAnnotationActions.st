@@ -6,4 +6,5 @@ allAnnotationActions
 				complete: each
 				with: each allButFirst
 				deleting: 0
-				at: position ]
+				at: position
+				prefixSize: 1 ]
