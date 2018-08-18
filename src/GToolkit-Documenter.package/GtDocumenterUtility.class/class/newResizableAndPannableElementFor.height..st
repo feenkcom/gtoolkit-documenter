@@ -1,9 +1,17 @@
 brick
-newResizableElementFor: aWrappedElement height: aHeightInteger
+newResizableAndPannableElementFor: aWrappedElement height: aHeightInteger
 	<return: #BlElement>
-	| aResizer aContainer |
+	| aScalableElement aResizer aContainer |
 
 	aContainer := BlElement new.
+
+	aScalableElement := BlPannableElement new.
+
+	aScalableElement constraintsDo: [ :c |
+		c horizontal matchParent.
+		c vertical matchParent ].
+
+	aScalableElement contentElement: aWrappedElement.
 
 	aResizer := BlElement new
 		look: BrMaterialResizerBottomBarLook new;
@@ -14,6 +22,6 @@ newResizableElementFor: aWrappedElement height: aHeightInteger
 		constraintsDo: [ :c | 
 			c horizontal matchParent.
 			c vertical exact: aHeightInteger ];
-		addChild: aWrappedElement;
+		addChild: aScalableElement; 
 		addChild: aResizer.
 	 ^ aContainer
