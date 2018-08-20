@@ -4,5 +4,5 @@ gtPillarFor: aView
 	(#('pier' 'pillar') includes: self extension) ifFalse: [ ^ aView empty ].
 	^ aView explicit
 		title: 'Pillar';
-		stencil: [ 
-			GtDocumenter editorForPillar: self ]
+		priority: 10;
+		stencil: [ GtDocumenter editorForPillar: self ]
