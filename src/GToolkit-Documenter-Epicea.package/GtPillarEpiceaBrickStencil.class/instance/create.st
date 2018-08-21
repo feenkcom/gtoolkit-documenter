@@ -29,7 +29,7 @@ create
 	
 	aResizerElement := self newResizerBarElementOn: aComposite.
 	aResizerElement
-		when: BlDblClickEvent
+		when: BlDoubleClickEvent
 		do: [ aFinalCodeElement ifNotNil: [
 			aFinalCodeElement constraintsDo: [ :c | c vertical fitContent ].
 			aComposite constraintsDo: [ :c | c vertical fitContent ] ] ].
