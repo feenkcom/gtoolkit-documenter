@@ -4,8 +4,7 @@ baseline: spec
 	spec for: #common do: [ 
 		spec
 			baseline: 'Brick' with: [ spec
-				repository: 'github://pharo-graphics/Brick/src';
-				loads: #core ];
+				repository: 'github://pharo-graphics/Brick/src' ];
 			baseline: 'GToolkitCompleter' with: [ spec
 				repository: 'github://feenkcom/gtoolkit-completer/src' ];
 			baseline: 'GToolkitUtility' with: [ spec 
