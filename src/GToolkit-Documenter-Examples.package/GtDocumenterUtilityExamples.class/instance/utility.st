@@ -1,4 +1,0 @@
-accessing
-utility
-	<gtExample>
-	^ GtDocumenterUtility

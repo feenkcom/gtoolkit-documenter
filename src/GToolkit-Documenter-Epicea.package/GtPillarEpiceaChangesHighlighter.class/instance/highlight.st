@@ -1,4 +1,0 @@
-private-container protocol
-highlight
-	self styleAnnotationParameters.
-	self styleAnnotationExpandingAttribute.

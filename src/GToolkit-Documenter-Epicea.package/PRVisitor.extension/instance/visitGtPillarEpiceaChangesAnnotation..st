@@ -1,3 +1,0 @@
-*GToolkit-Documenter-Epicea
-visitGtPillarEpiceaChangesAnnotation: aGtPillarEpiceaChangesAnnotation
-	self visitAnnotation: aGtPillarEpiceaChangesAnnotation

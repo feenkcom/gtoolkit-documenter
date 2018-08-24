@@ -1,3 +1,0 @@
-initialization
-defaultPreviewStencilBuilder
-	^ GtOldDocumenterCodeSnippetResultPreviewStencilBuilder new

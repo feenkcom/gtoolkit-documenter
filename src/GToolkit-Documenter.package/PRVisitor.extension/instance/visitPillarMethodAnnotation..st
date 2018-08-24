@@ -1,3 +1,0 @@
-*GToolkit-Documenter
-visitPillarMethodAnnotation: aGtPillarMethodAnnotation 
-	self visitAnnotation: aGtPillarMethodAnnotation

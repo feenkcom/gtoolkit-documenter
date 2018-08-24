@@ -1,3 +1,0 @@
-visiting
-visitPillarMethodAnnotation: aGtPillarMethodAnnotation 
-	GtPillarMethodAnnotationHighlighter highlight: aGtPillarMethodAnnotation using: self.
