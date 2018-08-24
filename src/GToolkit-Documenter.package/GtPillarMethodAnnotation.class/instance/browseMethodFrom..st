@@ -9,4 +9,7 @@ browseMethodFrom: anEvent
 		defaultValue: [ ^ self inform: 'Missing method name' ].
 	aMethod := GtSystemUtility methodDefinitionFromString: aMethodName.
 	aMethod isDefined ifFalse: [ ^ self inform: 'Method is not defined' ].
-	anEvent target fireEvent: (GLMBlocObjectToSelect new toSelect: aMethod)
+	anEvent target fireEvent: (GLMBlocObjectToSelect new toSelect: aMethod).
+	anEvent target fireEvent: (GtPhlowObjectToSpawn new 
+		object: self;
+		sourceElement: anEvent target)

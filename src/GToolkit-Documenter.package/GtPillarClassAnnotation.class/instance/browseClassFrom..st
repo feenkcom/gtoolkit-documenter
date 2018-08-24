@@ -1,4 +1,4 @@
-actions
+menu messages
 browseClassFrom: anEvent
 	| aClassName aClass |
 	aClassName := GtDocumenterUtility 
@@ -8,4 +8,7 @@ browseClassFrom: anEvent
 		emptyValue: [ ^ self inform: 'Missing class name' ] 
 		defaultValue: [ ^ self inform: 'Missing class name' ].
 	aClass := self class environment at: aClassName ifAbsent: [ ^ self inform: 'Class does not exist' ].
-	anEvent target fireEvent: (GLMBlocObjectToSelect new toSelect: aClass)
+	anEvent target fireEvent: (GLMBlocObjectToSelect new toSelect: aClass).
+	anEvent target fireEvent: (GtPhlowObjectToSpawn new 
+		object: self;
+		sourceElement: anEvent target)
