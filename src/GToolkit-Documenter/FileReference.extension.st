@@ -5,13 +5,7 @@ FileReference >> gtInspectorPillarWithBlocIn: composite [
 	<gtInspectorPresentationOrder: -1>
 	^ composite bloc
 		title: '_Pillar';
-		element: [ 
-			| element |
-			element := (GtDocumenter editorForPillar: self).
-			element
-				addShortcut: (BlShortcut new
-					combination: (BlKeyCombination builder meta; key: Key v; build);
-					action: [ element editor insertString: Clipboard clipboardText asString at: element editor cursor position ]) ];
+		element: [ GtDocumenter editorForPillar: self ];
 		act: [ :bloc |
 				self ensureDelete; writeStreamDo: [ :s | s nextPutAll: bloc element editor text asString ] ]
 				icon: GLMUIThemeExtraIcons glamorousSave
