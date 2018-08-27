@@ -21,6 +21,7 @@ GtDocumenterPillarString >> gtPillarFor: aView [
 	<gtView: 0>
 	^ aView explicit
 		title: 'Pillar';
+		priority: 50;
 		stencil: [ GtDocumenter editorForText: self string ]
 ]
 
