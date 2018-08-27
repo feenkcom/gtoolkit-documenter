@@ -18,7 +18,7 @@ Class {
 
 { #category : #ui }
 GtDocumenterPillarString >> gtPillarFor: aView [
-	<gtView: 0>
+	<gtView>
 	^ aView explicit
 		title: 'Pillar';
 		priority: 50;
