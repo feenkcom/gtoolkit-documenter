@@ -183,6 +183,10 @@ GtDocumenterCompletionStrategy >> completionActionsFor: aText at: positionIntege
 		do: [ :each | 
 			(positionInteger between: each first and: each last)
 				ifTrue: [ ^ self annotationActionsIn: (string copyFrom: each first to: each last) startAt: each first ] ].
+	(self fileRegex matchingRangesIn: string)
+		do: [ :each | 
+			(positionInteger between: each first and: each last)
+				ifTrue: [ ^ self fileReferenceActionsIn: (string copyFrom: each first to: each last) ] ].
 	((string at: positionInteger) = $$ and: [ positionInteger = 1 or: [ (string at: positionInteger - 1) ~= $} ] ])
 		ifTrue: [ ^ self allAnnotationActions ].
 	^ #()
@@ -234,6 +238,16 @@ GtDocumenterCompletionStrategy >> fileReference: aFileReference [
 	directory := (aFileReference exists and: [ aFileReference isDirectory ])
 		ifTrue: [ aFileReference ]
 		ifFalse: [ aFileReference parent ]
+]
+
+{ #category : #'private-annotations' }
+GtDocumenterCompletionStrategy >> fileReferenceActionsIn: aString [
+	^ self filenamesStartingWith: (aString allButFirst: 8)
+]
+
+{ #category : #private }
+GtDocumenterCompletionStrategy >> fileRegex [
+	^ '\+file\://[^[:cntrl:]+]*\+?' asRegex
 ]
 
 { #category : #private }
