@@ -46,5 +46,17 @@ FileReference >> gtPillarFor: aView [
 						object: self parseWithGtDocumenter;
 						sourceElement: button) ];
 				icon: BrGlamorousIcons play asElement;
-				label: 'Parse using GToolkit Documenter' translated ]
+				label: 'Parse using GToolkit Documenter' translated ];
+		actionStencil: [ :element | 
+			BrButton new 
+				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
+				icon: BrGlamorousIcons accept asElement;
+				action: [ 
+					| newContents |
+					(element deep: #parent select: [ :each | each isKindOf: BrTabGroup ])
+						first allChildrenBreadthFirstDo: [ :el | (el isKindOf: BrEditorElement) ifTrue: [
+							newContents := el editor text asString.
+							(self fullName, '.backup') asFileReference ensureDelete.
+							self copyTo: (self fullName, '.backup') asFileReference.
+							self ensureDelete; writeStreamDo: [ :s | s nextPutAll: newContents ] ] ] ] ]
 ]
