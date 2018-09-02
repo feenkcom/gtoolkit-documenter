@@ -45,7 +45,7 @@ FileReference >> gtPillarFor: aView [
 					button fireEvent: (GtPhlowObjectToSpawn new
 						object: self parseWithGtDocumenter;
 						sourceElement: button) ];
-				icon: BrGlamorousIcons play asElement;
+				icon: BrGlamorousIcons tree asElement;
 				label: 'Parse using GToolkit Documenter' translated ];
 		actionStencil: [ :element | 
 			BrButton new 
