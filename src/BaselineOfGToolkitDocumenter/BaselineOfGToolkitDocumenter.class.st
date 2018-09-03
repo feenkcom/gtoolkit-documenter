@@ -55,6 +55,27 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 			package: 'GToolkit-Documenter-Examples' with: [ spec requires: #( 
 				'GToolkitExamples' 'GToolkit-Documenter' 'GToolkit-Documenter-Exporter'
 				'GToolkit-Documenter-Epicea' ) ]
-	]
+	].
 
+	spec for: #'pharo6.x' do: [ 
+		spec
+			preLoadDoIt: #updateZincHTTPComponetns:;
+			project: 'ZincHTTPComponentsCharacterEncoding' with: [ 
+				spec
+					className: #ConfigurationOfZincHTTPComponents;
+					repository: 'http://smalltalkhub.com/mc/SvenVanCaekenberghe/ZincHTTPComponents/main/';
+					versionString: #stable;
+					loads: 'Character-Encoding' ];
+			package: 'GToolkit-Documenter-Exporter' with: [ spec requires: #( 
+				#ZincHTTPComponentsCharacterEncoding "
+				#Brick #Pillar #GToolkitUtility 'GToolkit-Documenter'" ) ]
+	].
+]
+
+{ #category : #private }
+BaselineOfGToolkitDocumenter >> updateZincHTTPComponetns: spec [
+	Gofer it
+		smalltalkhubUser: 'SvenVanCaekenberghe' project: 'ZincHTTPComponents';
+		package: 'ConfigurationOfZincHTTPComponents';
+		load
 ]
