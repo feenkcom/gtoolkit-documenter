@@ -37,7 +37,7 @@ GtPillarMethodAnnotation >> browseMethodFrom: anEvent [
 	aMethod isDefined ifFalse: [ ^ self inform: 'Method is not defined' ].
 	anEvent target fireEvent: (GLMBlocObjectToSelect new toSelect: aMethod).
 	anEvent target fireEvent: (GtPhlowObjectToSpawn new 
-		object: self;
+		object: aMethod;
 		sourceElement: anEvent target)
 ]
 

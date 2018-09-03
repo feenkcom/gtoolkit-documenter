@@ -36,7 +36,7 @@ GtPillarClassAnnotation >> browseClassFrom: anEvent [
 	aClass := self class environment at: aClassName ifAbsent: [ ^ self inform: 'Class does not exist' ].
 	anEvent target fireEvent: (GLMBlocObjectToSelect new toSelect: aClass).
 	anEvent target fireEvent: (GtPhlowObjectToSpawn new 
-		object: self;
+		object: aClass;
 		sourceElement: anEvent target)
 ]
 

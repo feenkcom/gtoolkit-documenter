@@ -25,7 +25,7 @@ GtDocumenterConstants class >> defaultExecuteButtonLabel [
 
 { #category : #'accessing - pillar default parameter values' }
 GtDocumenterConstants class >> defaultShowExamplesMethodName [
-	^ #gtExamplesIn:
+	^ #gtExamplesFor:
 ]
 
 { #category : #'accessing - pillar default parameter values' }
