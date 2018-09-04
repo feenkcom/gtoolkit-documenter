@@ -18,7 +18,7 @@ AbstractFileReference >> parseWithGtDocumenter [
 		on: ZnCharacterEncodingError
 		do: [ nil ].
 	^ self binaryReadStreamDo: [ :in | 
-		PR2PillarParser new optimize parse: (ZnCharacterReadStream on: in encoding: encoding) upToEnd ]
+		PRPillarParser new optimize parse: (ZnCharacterReadStream on: in encoding: encoding) upToEnd ]
 ]
 
 { #category : #'*GToolkit-Documenter-Exporter' }
