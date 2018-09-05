@@ -97,6 +97,16 @@ GtPillarExampleAnnotation >> handleMethodAnnouncement: aMethodModified [
 		codeSnippet: self)
 ]
 
+{ #category : #testing }
+GtPillarExampleAnnotation >> hasCaption [
+	^ false
+]
+
+{ #category : #testing }
+GtPillarExampleAnnotation >> hasLabel [
+	^ false
+]
+
 { #category : #'accessing - parameter values' }
 GtPillarExampleAnnotation >> heightParameterValue [
 	^ GtDocumenterUtility 
