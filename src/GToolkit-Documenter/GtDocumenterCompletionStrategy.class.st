@@ -387,13 +387,13 @@ GtDocumenterCompletionStrategy >> parametersStartingWith: aString delete: anInte
 GtDocumenterCompletionStrategy >> scriptCompletionsFor: source at: anIndex [
 	| startIndex endIndex actions |
 	(self scriptStartRegex matchingRangesIn: source)
-		reverseDo: [ :each | 
+		do: [ :each | 
 			each last < anIndex
 				ifTrue: [ startIndex := each last + 1 ] ].
 	startIndex isNil
 		ifTrue: [ ^ nil ].
 	(self scriptEndRegex matchingRangesIn: source)
-		do: [ :each | 
+		reverseDo: [ :each | 
 			each first > anIndex
 				ifTrue: [ endIndex := each first - 1 ] ].
 	endIndex isNil
