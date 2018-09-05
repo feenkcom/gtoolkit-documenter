@@ -35,9 +35,7 @@ GtPillarPlayButtonStencil >> action: aValuable [
 GtPillarPlayButtonStencil >> create [
 	| aButton aLook |
 	
-	aLook := BrMaterialToggleIconifiedLook 
-		+ BrMaterialToggleLabelledLook 
-		+ GtPillarSlimButtonLook.
+	aLook := BrGlamorousButtonWithIconLook + GtPillarSlimButtonLook.
 
 	aButton := BrButton new.
 	aButton look: aLook.
@@ -65,7 +63,7 @@ GtPillarPlayButtonStencil >> icon: aStencilBuilder [
 GtPillarPlayButtonStencil >> initialize [
 	super initialize.
 
-	self icon: GtPillarPlayButtonIconStencil new.
+	self icon: BrGlamorousIcons play.
 	self label: 'Run'.
 	self action: [ self inform: 'Executed' ]
 ]
