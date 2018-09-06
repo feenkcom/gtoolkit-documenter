@@ -112,9 +112,7 @@ GtPillarExampleAnnotation >> heightParameterValue [
 	^ GtDocumenterUtility 
 		valueOf: self constants heightParameterName
 		in: self parameters
-		value: [ :aString | (NumberParser on: aString)
-			failBlock: [ nil ];
-			nextNumber ]
+		value: [ :aNumber | aNumber ]
 		emptyValue: [ nil ]
 		defaultValue: [ nil ]
 ]
