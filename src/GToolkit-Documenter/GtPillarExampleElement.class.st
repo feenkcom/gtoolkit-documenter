@@ -125,11 +125,11 @@ GtPillarExampleElement >> initializeElements [
 		c horizontal matchParent.
 		
 		self hasCustomPreviewHeight
-			ifTrue: [ c vertical exact: previewHeight ]
+			ifTrue: [ c vertical exact: previewHeight traceCr ]
 			ifFalse: [ c vertical exact: 200 ].
 		self flag: 'I do not understand why I have to say exact: 200'.
 		"since parent is horizontal, I will take 50% of the available width"
-		c linear weight: 0.5 ]
+		"c linear weight: 0.5" ]
 ]
 
 { #category : #initialization }
@@ -166,7 +166,7 @@ GtPillarExampleElement >> newPreviewElement [
 	<return: #BlElement>
 
 	^ BlElement new
-		layout: BlLinearLayout new
+		layout: BlLinearLayout vertical
 ]
 
 { #category : #accessing }
@@ -186,7 +186,7 @@ GtPillarExampleElement >> showPreview: aBlockOrSymbol [
 	"Get return value of attached example and evaluate a given block
 	with resulting object as an argument in order to transform it
 	into a visual element to be opened as a preview"
-	| aResultElement exampleResult |
+	| aResultElement exampleResult aResizer |
 
 	self
 		assert: [ previewElement hasParent not ]
@@ -209,6 +209,11 @@ GtPillarExampleElement >> showPreview: aBlockOrSymbol [
 		description: [ 'Resulting element must not be nil' ].
 
 	previewElement addChildFirst: aResultElement.
-	previewElement := GtDocumenterUtility newResizableElementFor: previewElement.
+
+	aResizer := BlElement new
+		look: BrMaterialResizerBottomBarLook new;
+		addEventHandler: (BlResizerBottomListener new 
+			resizeTarget: previewElement; minimumExtent: 0@75).
+	previewElement addChild: aResizer.
 	self addChild: previewElement
 ]
