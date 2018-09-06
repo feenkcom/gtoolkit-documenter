@@ -187,6 +187,7 @@ GtDocumenterCompletionStrategy >> completionActionsFor: aText at: positionIntege
 		do: [ :each | 
 			(positionInteger between: each first and: each last)
 				ifTrue: [ ^ self fileReferenceActionsIn: (string copyFrom: each first to: each last) ] ].
+	(self scriptCompletionsFor: string at: positionInteger) ifNotNil: [ :completions | ^ completions ].
 	((string at: positionInteger) = $$ and: [ positionInteger = 1 or: [ (string at: positionInteger - 1) ~= $} ] ])
 		ifTrue: [ ^ self allAnnotationActions ].
 	^ #()
@@ -380,4 +381,37 @@ GtDocumenterCompletionStrategy >> parametersStartingWith: aString delete: anInte
 						ifTrue: [ self defaultParameterValueActionsFor: class startingWith: aString ]
 						ifFalse: [ #() ]) ].
 	^ #()
+]
+
+{ #category : #private }
+GtDocumenterCompletionStrategy >> scriptCompletionsFor: source at: anIndex [
+	| startIndex endIndex actions |
+	(self scriptStartRegex matchingRangesIn: source)
+		do: [ :each | 
+			each last < anIndex
+				ifTrue: [ startIndex := each last + 1 ] ].
+	startIndex isNil
+		ifTrue: [ ^ nil ].
+	(self scriptEndRegex matchingRangesIn: source)
+		reverseDo: [ :each | 
+			each first > anIndex
+				ifTrue: [ endIndex := each first - 1 ] ].
+	endIndex isNil
+		ifTrue: [ ^ nil ].
+	actions := GtPharoCompletionStrategy newForSnippet
+		completionActionsFor: (source copyFrom: startIndex to: endIndex) asRopedText
+		at: anIndex - startIndex + 1
+		max: max.
+	actions do: [ :each | each translateBy: startIndex - 1].
+	^ actions
+]
+
+{ #category : #private }
+GtDocumenterCompletionStrategy >> scriptEndRegex [
+	^ '^\]\]\] *$' asRegex
+]
+
+{ #category : #private }
+GtDocumenterCompletionStrategy >> scriptStartRegex [
+	^ '\[\[\[(([^[:space:]]+[ 	]*)*[ 	]*(\r\n?|\n))' asRegex
 ]
