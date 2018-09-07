@@ -23,9 +23,9 @@ GtExamplesStyler class >> editorElementOnSourceCode: aString inClass: aClass [
 		constraintsDo: [ :c | 
 			c textFlow pushLine.
 			c horizontal matchParent.
-			c vertical fitContent ]";
+			c vertical fitContent ];
 		background: Color white;
-		border: (BlBorder paint: Color veryLightGray width: 1)".
+		border: (BlBorder paint: Color veryLightGray width: 1).
 	^ editorElement
 ]
 
