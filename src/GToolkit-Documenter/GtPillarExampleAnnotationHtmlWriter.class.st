@@ -13,6 +13,7 @@ GtPillarExampleAnnotationHtmlWriter >> write [
 { #category : #writing }
 GtPillarExampleAnnotationHtmlWriter >> writeExampleResult [
 	| figure fileName directory fileReference |
+	self node isMethodDefined ifFalse: [ ^ self ].
 	figure := PRFigure new.
 	figure label: 'figure-' , self node methodName.
 	figure
@@ -66,7 +67,9 @@ GtPillarExampleAnnotationHtmlWriter >> writeSourceCode [
 									language := PRSmalltalkScriptLanguage default.
 									language isSyntaxHighlightingPossible
 										ifTrue: [ code parameterAt: 'class' put: language printString ].
-									code with: [ self canvas lines: self node methodDefinition sourceCode ] ].
+									code with: [ self node isMethodDefined 
+										ifTrue: [ self canvas lines: self node methodDefinition sourceCode ]
+										ifFalse: [ self canvas lines: self node methodDefinition printString ] ] ].
 					self canvas tag
 						name: 'figcaption';
 						with: [ 
