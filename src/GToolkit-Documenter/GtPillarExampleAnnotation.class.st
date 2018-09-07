@@ -16,7 +16,8 @@ GtPillarExampleAnnotation class >> possibleParameters [
 		self constants expandedViewParameterName.
 		self constants expandedPreviewParemeterName.
 		self constants doNotDisplaySourceCodeParameterName.
-		self constants heightParameterName}
+		self constants heightParameterName.
+		self constants previewHeightParameterName}
 ]
 
 { #category : #protected }
@@ -139,7 +140,7 @@ GtPillarExampleAnnotation >> isMethodDefined [
 
 { #category : #testing }
 GtPillarExampleAnnotation >> isPreviewHeightDefined [
-	^ self heightParameterValue notNil
+	^ self previewHeightParameterValue notNil
 ]
 
 { #category : #accessing }
@@ -169,6 +170,16 @@ GtPillarExampleAnnotation >> methodName [
 		valueOf: self constants nameParameterName
 		in: self parameters
 		value: [ :aString | aString ]
+		emptyValue: [ nil ]
+		defaultValue: [ nil ]
+]
+
+{ #category : #'accessing - parameter values' }
+GtPillarExampleAnnotation >> previewHeightParameterValue [
+	^ GtDocumenterUtility 
+		valueOf: self constants previewHeightParameterName
+		in: self parameters
+		value: [ :aNumber | aNumber ]
 		emptyValue: [ nil ]
 		defaultValue: [ nil ]
 ]

@@ -102,7 +102,8 @@ GtPillarEpiceaBrickStencil >> diffRope [
 { #category : #'event handling' }
 GtPillarEpiceaBrickStencil >> displayGlobalChanges: aBlElement [
 	"Trigger event to display ${class:GtEpiceaLog}$ in an inspector"
-	aBlElement fireEvent: (GLMBlocObjectToSelect new toSelect: self epiceaLog)
+	aBlElement fireEvent: (GLMBlocObjectToSelect new toSelect: self epiceaLog).
+	aBlElement fireEvent: (GtPhlowObjectToSpawn new object: self epiceaLog; sourceElement: aBlElement)
 ]
 
 { #category : #accessing }

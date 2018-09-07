@@ -89,7 +89,7 @@ GtPillarExampleStencil >> mayExpandResultPreviewIn: exampleElement [
 { #category : #private }
 GtPillarExampleStencil >> maySetHeightOfPreview: exampleElement [
 	self documentPart isPreviewHeightDefined
-		ifTrue: [ exampleElement previewHeight: self documentPart heightParameterValue ]
+		ifTrue: [ exampleElement previewHeight: self documentPart previewHeightParameterValue ]
 ]
 
 { #category : #'instance creation' }

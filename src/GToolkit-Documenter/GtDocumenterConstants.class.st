@@ -88,6 +88,11 @@ GtDocumenterConstants class >> packagesParameterName [
 	^ #packages
 ]
 
+{ #category : #'accessing - pillar parameter names' }
+GtDocumenterConstants class >> previewHeightParameterName [
+	^ #previewHeight
+]
+
 { #category : #'accessing - variables' }
 GtDocumenterConstants class >> resultVariableName [
 	"Return a variable name to which code snippet results are assigned"
