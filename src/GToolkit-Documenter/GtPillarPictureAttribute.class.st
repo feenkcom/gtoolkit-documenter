@@ -24,7 +24,7 @@ GtPillarPictureAttribute >> affect: aBrText in: anEditorElement [
 		background: (BlBackground builder image: self image; build);
 		yourself.
 
-	^ GtDocumenterUtility newResizableAndPannableElementFor: anImageElement height: self image height
+	^ GtDocumenterUtility newResizableAndPannableElementFor: anImageElement height: 300
 ]
 
 { #category : #accessing }
