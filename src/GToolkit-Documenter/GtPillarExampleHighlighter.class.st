@@ -21,7 +21,7 @@ GtPillarExampleHighlighter >> newPreviewAttribute [
 GtPillarExampleHighlighter >> styleExpandingView [
 	| anAttributeCreatingBlock |
 	anAttributeCreatingBlock := [ self newPreviewAttribute ].
-	self pillarNode expandedPreviewParameterValue
+	self pillarNode expandedParameterValue
 		ifTrue: [ self styleExpandedTextExpandAttribute: anAttributeCreatingBlock ]
 		ifFalse: [ self styleCollapsedTextExpandAttribute: anAttributeCreatingBlock ]
 ]
