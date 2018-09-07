@@ -23,9 +23,10 @@ Class {
 		'previewElement',
 		'example',
 		'previewShowBlock',
-		'previewHeight'
+		'previewHeight',
+		'previewContainer'
 	],
-	#category : 'GToolkit-Documenter-Brick'
+	#category : #'GToolkit-Documenter-Brick'
 }
 
 { #category : #'instance creation' }
@@ -104,14 +105,14 @@ GtPillarExampleElement >> hidePreview [
 	"Hide preview removing example element from its container"
 	
 	self
-		assert: [ previewElement hasParent ]
+		assert: [ previewContainer hasParent ]
 		description: [ 'Can not hide preview if it is not shown' ].
 	
 	self
 		assert: [ previewElement hasChildren ]
 		description: [ 'Preview container must have example result element' ].
 		
-	self removeChild: previewElement.
+	self removeChild: previewContainer.
 	previewElement removeChildren
 ]
 
@@ -120,16 +121,16 @@ GtPillarExampleElement >> initializeElements [
 	"Initalize elements and add them as children.
 	Note: Must be done only after attaching a GT-Example"
 
-	previewElement := self newPreviewElement.
+	| aHeight |
+	previewElement := BlElement new
+		layout: BlLinearLayout vertical.
 	previewElement constraintsDo: [ :c |
 		c horizontal matchParent.
-		
-		self hasCustomPreviewHeight
-			ifTrue: [ c vertical exact: previewHeight traceCr ]
-			ifFalse: [ c vertical exact: 200 ].
-		self flag: 'I do not understand why I have to say exact: 200'.
-		"since parent is horizontal, I will take 50% of the available width"
-		"c linear weight: 0.5" ]
+		c vertical fitContent ].
+
+	aHeight := self hasCustomPreviewHeight ifTrue: [ previewHeight ] ifFalse: [ 300 ].
+	previewContainer := GtDocumenterUtility newResizableElementFor: previewElement height: aHeight.
+	previewContainer look: GtPillarExpandedPreviewLook.
 ]
 
 { #category : #initialization }
@@ -143,7 +144,7 @@ GtPillarExampleElement >> isPreviewShown [
 	"Return true if preview is already shown (added to myself), false otherwise"
 	<return: #Boolean>
 	
-	^ previewElement hasParent
+	^ previewContainer hasParent
 ]
 
 { #category : #'instance creation' }
@@ -157,16 +158,6 @@ GtPillarExampleElement >> newArrowElement [
 		geometry: (BlPolygon vertices: { 0@0 . 24@0 . 12@16 } );
 		margin: (BlInsets top: 5 right: 0 bottom: 5 left: 0);
 		background: Color veryVeryLightGray
-]
-
-{ #category : #'instance creation' }
-GtPillarExampleElement >> newPreviewElement [
-	"Instantiate and return an element playing a role of a container for
-	the resulting GT-Example element"
-	<return: #BlElement>
-
-	^ BlElement new
-		layout: BlLinearLayout vertical
 ]
 
 { #category : #accessing }
@@ -186,10 +177,10 @@ GtPillarExampleElement >> showPreview: aBlockOrSymbol [
 	"Get return value of attached example and evaluate a given block
 	with resulting object as an argument in order to transform it
 	into a visual element to be opened as a preview"
-	| aResultElement exampleResult aResizer |
+	| aResultElement exampleResult |
 
 	self
-		assert: [ previewElement hasParent not ]
+		assert: [ previewContainer hasParent not ]
 		description: [ 'Can not show preview if it is already opened' ].
 
 	"Only resizer bar is present"
@@ -210,10 +201,5 @@ GtPillarExampleElement >> showPreview: aBlockOrSymbol [
 
 	previewElement addChildFirst: aResultElement.
 
-	aResizer := BlElement new
-		look: BrMaterialResizerBottomBarLook new;
-		addEventHandler: (BlResizerBottomListener new 
-			resizeTarget: previewElement; minimumExtent: 0@75).
-	previewElement addChild: aResizer.
-	self addChild: previewElement
+	self addChild: previewContainer.
 ]

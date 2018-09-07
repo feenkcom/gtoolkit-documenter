@@ -145,7 +145,7 @@ GtDocumenterUtility class >> newResizableElementFor: aWrappedElement height: aHe
 		c horizontal matchParent.
 		c vertical matchParent ].
 	aContainer 
-		look: GtPillarExpandedPreviewLook;
+		layout: BlLinearLayout vertical;
 		constraintsDo: [ :c | 
 			c horizontal matchParent.
 			c vertical exact: aHeightInteger ];

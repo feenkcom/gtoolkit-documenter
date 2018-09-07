@@ -23,7 +23,6 @@ GtPillarExampleWithCodeElement >> initializeElements [
 		description: [ 'Arrow element must not be initialized' ].
 
 	editorElement := self newEditorElement: self example.
-	editorElement look: GtPillarExpandedPreviewLook.
 
 	arrowElement := self newArrowElement.
 	arrowElement constraintsDo: [ :c |
@@ -56,7 +55,13 @@ GtPillarExampleWithCodeElement >> newEditorElement: aGTExample [
 	"Instantiate a new editor for a given GT-Example"
 	<return: #BrEditorElement>
 	
-	^ GtExamplesStyler 
+	| anEditor aContainer |
+	anEditor := GtExamplesStyler 
 		editorElementOnSourceCode: aGTExample sourceCode
-		inClass: aGTExample methodClass
+		inClass: aGTExample methodClass.
+	aContainer := GtDocumenterUtility newResizableElementFor: anEditor.
+	aContainer look: GtPillarExpandedPreviewLook.
+	aContainer constraintsDo: [ :c | 
+			c vertical fitContent ].
+	^ aContainer
 ]
