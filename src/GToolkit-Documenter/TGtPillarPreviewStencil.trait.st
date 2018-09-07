@@ -38,5 +38,5 @@ TGtPillarPreviewStencil >> newSlimButton [
 	<return: #BlElement>
 
 	^ BrButton new
-		look: BrMaterialToggleLabelledLook + GtPillarSlimButtonLook
+		look: BrGlamorousButtonWithLabelLook + GtPillarSlimButtonLook
 ]
