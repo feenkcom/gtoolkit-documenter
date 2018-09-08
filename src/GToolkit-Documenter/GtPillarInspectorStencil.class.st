@@ -19,9 +19,9 @@ Class {
 
 { #category : #'api - instantiation' }
 GtPillarInspectorStencil >> create [
-	| view button |
-	view := GtPhlowEmptyView on: self inspectedObject perform: self showMethod.
-	^ view asElementDo: [ :element |
+	| aView |
+	aView := GtPhlowView empty on: self inspectedObject perform: self showMethod.
+	^ aView asElementDo: [ :element |
 		element constraintsDo: [ :c | 
 			c horizontal matchParent.
 			c vertical matchParent ] ]

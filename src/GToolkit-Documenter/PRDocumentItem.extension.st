@@ -48,13 +48,12 @@ PRDocumentItem >> gtExportsFor: aView [
 	^ aView explicit
 		title: 'Exports';
 		stencil: [ 
-			| thePragmas aExportsViews aCompositeView |
-			thePragmas := Pragma
-				allNamed: #gtViewExports
-				from: self class
-				to: ProtoObject.
-			aExportsViews := self gtViewsFromPragmas: thePragmas inContext: nil.
-			aCompositeView := GtPhlowView sequentialExplicit composite views: aExportsViews.
+			| aExportsViews aCompositeView |
+			aExportsViews :=  GtPhlowViewsCollector new
+				pragmaName: #gtViewExports;
+				fromObject: self;
+				collect.
+			aCompositeView := GtPhlowView composite views: aExportsViews.
 			aCompositeView asElementDo: [ :anElement | anElement ]
 		]
 ]
