@@ -24,8 +24,8 @@ GtExamplesStyler class >> editorElementOnSourceCode: aString inClass: aClass [
 			c textFlow pushLine.
 			c horizontal matchParent.
 			c vertical fitContent ];
-		background: Color white;
-		border: (BlBorder paint: Color veryLightGray width: 1).
+		background: Color white";
+		border: (BlBorder paint: Color veryLightGray width: 1)".
 	^ editorElement
 ]
 
@@ -48,6 +48,7 @@ GtExamplesStyler >> extraStyle: aText ast: ast [
 						editorElement := self class 
 							editorElementOnSourceCode: (ast methodNode methodClass lookupSelector: each selector) sourceCode
 							inClass: ast methodNode methodClass.
+						editorElement border: (BlBorder paint: Color veryLightGray width: 1).
 						editorElement margin: (BlInsets top: 0 right: 10 bottom: 10 left: 10) ]] } 
 			from: each stop
 			to: each stop ]
