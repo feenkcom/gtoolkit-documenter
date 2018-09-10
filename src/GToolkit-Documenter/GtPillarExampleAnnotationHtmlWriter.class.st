@@ -18,8 +18,10 @@ GtPillarExampleAnnotationHtmlWriter >> writeExampleResult [
 	figure label: 'figure-' , self node methodName.
 	figure
 		add: (PRText content: 'Result of ' , self node methodName).
+	self flag: 'fix this hack'.
+	fileName := self node methodName identityHash asString asLowercase.
 	fileName := GtFileUtility 
-		secureFileName: self node methodName asLowercase 
+		secureFileName: fileName 
 		extension: 'svg'.
 	figure reference: 'file://gt-figures/' , fileName.
 	self writer visitFigure: figure.
