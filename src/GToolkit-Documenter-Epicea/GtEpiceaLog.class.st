@@ -123,12 +123,18 @@ GtEpiceaLog >> gtGlobalEntriesIn: aView [
 				title: 'Description';
 				stencil: [ :anOmEntry :anIndex |
 					| anAddButton aContainer | 
-					anAddButton := BrButton new
+					anAddButton := BrButton new.
+					anAddButton
 						layout: BlLinearLayout new;
 						look: BrIconLook;
 						size: 30@30;
 						icon: GtInspectorPlusIconStencil new asElement;
-						action: [ self addEntryWith: anOmEntry content tags: [ :tags | ] ];
+						action: [ 
+							self addEntryWith: anOmEntry content tags: [ :tags | ].
+							anAddButton enqueueTask: (BlTaskAction new 
+								action: [ anAddButton visibility: BlVisibility hidden ]).
+							anAddButton enqueueTask: (BlDelayedTaskAction new 
+								action: [ anAddButton visibility: BlVisibility visible  ]) ];
 						padding: (BlInsets top: 0 left: 3 bottom: 0 right: 0);
 						visibility: BlVisibility hidden;
 						constraintsDo: [ :c | 
@@ -179,8 +185,61 @@ GtEpiceaLog >> gtInspectorGlobalEntriesIn: composite [
 GtEpiceaLog >> gtTutorialEntriesIn: aView [
 	<gtView>
 	theLog ifNil: [ ^ aView empty ].
-	^ (theLog gtEntriesFor: aView)
-		title: 'Tutorial'
+	^ aView explicit 
+		title: 'Tutorial';
+		priority: 0;
+		stencil: [ 
+			| aList anEntries |
+			anEntries := theLog store entries.
+			aList := BrColumnedList new display: anEntries.
+			aList addEventHandler: GtInspectorListToSelectHandler new.
+			aList constraintsDo: [ :c | c padding: (BlInsets top: 10) ].
+			self announcer 
+				when: EpEntryAdded 
+				do: [ :anAnnouncement | aList display: theLog store entries ].
+			
+			aList column 
+				title: 'Icon';
+				stencil: [ :anOmEntry :anIndex | 
+					(anOmEntry content accept: EpIconVisitor new) asElement ].
+				
+			aList column 
+				title: 'Description';
+				stencil: [ :anOmEntry :anIndex |
+					| anAddButton aContainer | 
+					anAddButton := BrButton new.
+					anAddButton
+						layout: BlLinearLayout new;
+						look: BrIconLook;
+						icon: (BlElement new 
+							geometry: BlRectangle new;
+							layout: BlLinearLayout new;
+							background: Color lightGray;
+							size: 10@3);
+						action: [ 
+							self removeEntity: anOmEntry.
+							anAddButton enqueueTask: (BlTaskAction new 
+								action: [ anAddButton visibility: BlVisibility hidden ]) ];
+						padding: (BlInsets top: 0 left: 3 bottom: 0 right: 0);
+						visibility: BlVisibility hidden;
+						constraintsDo: [ :c | 
+							c horizontal fitContent.
+							c vertical fitContent.
+							c linear vertical alignCenter ].
+					aContainer := BlElement new 
+						layout: BlLinearLayout horizontal;
+						addChildren: (anOmEntry content accept: GtEpiceaBrickVisitor new);
+						addChild: anAddButton;
+						constraintsDo: [ :c | 
+							c horizontal fitContent.
+							c vertical fitContent ].
+					aContainer when: BlMouseEnterEvent do: [ :anEvent | 
+						anAddButton visibility: BlVisibility visible ].
+					aContainer when: BlMouseLeaveEvent do: [ :anEvent | 
+						anAddButton visibility: BlVisibility hidden ].
+					aContainer ].
+			aList
+			 ]
 ]
 
 { #category : #testing }
@@ -243,6 +302,15 @@ GtEpiceaLog >> ombuFile [
 GtEpiceaLog >> ombuFile: aFileReference [
 	ombuFile := aFileReference.
 	theLog := EpLog freshFromFile: ombuFile.
+]
+
+{ #category : #private }
+GtEpiceaLog >> removeEntity: anOmbuEntry [ 
+	| entries |
+	entries := (theLog entries reject: [ :eachEntry | eachEntry xdEquals: anOmbuEntry ]).
+	ombuFile ensureDelete.
+	entries do: [ :eachEntry | 
+		self addEntryWith: eachEntry content tags: [ :tags |  ] ] 
 ]
 
 { #category : #private }
