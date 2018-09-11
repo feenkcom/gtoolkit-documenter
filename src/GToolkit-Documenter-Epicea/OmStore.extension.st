@@ -20,7 +20,12 @@ OmStore >> gtEntriesFor: aView [
 			list column 
 				title: 'Description';
 				stencil: [ :anOmEntry :anIndex |
-					BlTextElement new text: anOmEntry printString asRopedText ].
+					BlElement new 
+						layout: BlLinearLayout horizontal;
+						addChildren: (anOmEntry content accept: GtEpiceaBrickVisitor new);
+						constraintsDo: [ :c | 
+							c horizontal fitContent.
+							c vertical fitContent ] ].
 			list
 			 ]
 ]

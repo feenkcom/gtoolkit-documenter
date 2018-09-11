@@ -125,6 +125,16 @@ GtEpiceaLog >> gtInspectorGlobalEntriesIn: composite [
 				condition: [ true ]
 ]
 
+{ #category : #'as yet unclassified' }
+GtEpiceaLog >> gtTutorialEntriesIn: aView [
+	<gtView>
+	^ theLog 
+		ifNotNil: [ :aLog | 
+			(aLog gtEntriesFor: aView)
+				title: 'Tutorial' ]
+		ifNil: [ aView empty ].
+]
+
 { #category : #testing }
 GtEpiceaLog >> hasImpact [
 	hasImpact ifNil: [ self checkImpact ].
