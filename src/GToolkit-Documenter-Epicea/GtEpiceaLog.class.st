@@ -128,7 +128,7 @@ GtEpiceaLog >> gtGlobalEntriesIn: aView [
 						look: BrIconLook;
 						size: 30@30;
 						icon: GtInspectorPlusIconStencil new asElement;
-						action: [ self inform: 'click' ];
+						action: [ self addEntryWith: anOmEntry content tags: [ :tags | ] ];
 						padding: (BlInsets top: 0 left: 3 bottom: 0 right: 0);
 						visibility: BlVisibility hidden;
 						constraintsDo: [ :c | 
