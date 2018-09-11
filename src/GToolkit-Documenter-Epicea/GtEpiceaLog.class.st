@@ -101,7 +101,57 @@ GtEpiceaLog >> flush [
 	theLog store flush.
 ]
 
-{ #category : #'gt-inspector-extension' }
+{ #category : #'gt-extension' }
+GtEpiceaLog >> gtGlobalEntriesIn: aView [
+	<gtView>
+	^ aView explicit 
+		title: 'Global Entries';
+		priority: 20;
+		stencil: [ 
+			| aList aGlobalLog |
+			aGlobalLog := "EpMonitor current log" theLog store entries.
+			aList := BrColumnedList new display: aGlobalLog.
+			aList addEventHandler: GtInspectorListToSelectHandler new.
+			aList constraintsDo: [ :c | c padding: (BlInsets top: 10) ].
+			
+			aList column 
+				title: 'Icon';
+				stencil: [ :anOmEntry :anIndex | 
+					(anOmEntry content accept: EpIconVisitor new) asElement ].
+				
+			aList column 
+				title: 'Description';
+				stencil: [ :anOmEntry :anIndex |
+					| anAddButton aContainer | 
+					anAddButton := BrButton new
+						layout: BlLinearLayout new;
+						look: BrIconLook;
+						size: 30@30;
+						icon: GtInspectorPlusIconStencil new asElement;
+						action: [ self inform: 'click' ];
+						padding: (BlInsets top: 0 left: 3 bottom: 0 right: 0);
+						visibility: BlVisibility hidden;
+						constraintsDo: [ :c | 
+							c horizontal fitContent.
+							c vertical fitContent.
+							c linear vertical alignCenter ].
+					aContainer := BlElement new 
+						layout: BlLinearLayout horizontal;
+						addChildren: (anOmEntry content accept: GtEpiceaBrickVisitor new);
+						addChild: anAddButton;
+						constraintsDo: [ :c | 
+							c horizontal fitContent.
+							c vertical fitContent ].
+					aContainer when: BlMouseEnterEvent do: [ :anEvent | 
+						anAddButton visibility: BlVisibility visible ].
+					aContainer when: BlMouseLeaveEvent do: [ :anEvent | 
+						anAddButton visibility: BlVisibility hidden ].
+					aContainer ].
+			aList
+			 ]
+]
+
+{ #category : #'gt-extension' }
 GtEpiceaLog >> gtInspectorEntriesIn: composite [
 	<gtInspectorPresentationOrder: 1>
 	^ theLog ifNotNil: [ :aLog | 
@@ -114,7 +164,7 @@ GtEpiceaLog >> gtInspectorEntriesIn: composite [
 				condition: [ true ] ]
 ]
 
-{ #category : #'gt-inspector-extension' }
+{ #category : #'gt-extension' }
 GtEpiceaLog >> gtInspectorGlobalEntriesIn: composite [
 	<gtInspectorPresentationOrder: 2>
 	^ (EpMonitor current log gtInspectorEntriesIn: composite)
@@ -125,14 +175,12 @@ GtEpiceaLog >> gtInspectorGlobalEntriesIn: composite [
 				condition: [ true ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'gt-extension' }
 GtEpiceaLog >> gtTutorialEntriesIn: aView [
 	<gtView>
-	^ theLog 
-		ifNotNil: [ :aLog | 
-			(aLog gtEntriesFor: aView)
-				title: 'Tutorial' ]
-		ifNil: [ aView empty ].
+	theLog ifNil: [ ^ aView empty ].
+	^ (theLog gtEntriesFor: aView)
+		title: 'Tutorial'
 ]
 
 { #category : #testing }
