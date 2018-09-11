@@ -29,7 +29,9 @@ GtEpiceaBrickFactory >> stringFor: aString [
 
 	^ BlTextElement new 
 		text: aString asRopedText;
-		padding: (BlInsets top: 0 left: 0 bottom: 0 right: 3)
+		padding: (BlInsets top: 0 left: 0 bottom: 0 right: 3);
+		constraintsDo: [ :c | 
+			c linear vertical alignCenter ]
 ]
 
 { #category : #strings }

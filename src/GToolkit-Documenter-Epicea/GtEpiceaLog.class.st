@@ -126,8 +126,8 @@ GtEpiceaLog >> gtGlobalEntriesIn: aView [
 					anAddButton := BrButton new.
 					anAddButton
 						layout: BlLinearLayout new;
-						look: BrIconLook;
-						size: 30@30;
+						look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
+						"size: 30@30;"
 						icon: GtInspectorPlusIconStencil new asElement;
 						action: [ 
 							self addEntryWith: anOmEntry content tags: [ :tags | ].
@@ -135,19 +135,15 @@ GtEpiceaLog >> gtGlobalEntriesIn: aView [
 								action: [ anAddButton visibility: BlVisibility hidden ]).
 							anAddButton enqueueTask: (BlDelayedTaskAction new 
 								action: [ anAddButton visibility: BlVisibility visible  ]) ];
-						padding: (BlInsets top: 0 left: 3 bottom: 0 right: 0);
-						visibility: BlVisibility hidden;
-						constraintsDo: [ :c | 
-							c horizontal fitContent.
-							c vertical fitContent.
-							c linear vertical alignCenter ].
+						visibility: BlVisibility hidden.
 					aContainer := BlElement new 
 						layout: BlLinearLayout horizontal;
 						addChildren: (anOmEntry content accept: GtEpiceaBrickVisitor new);
 						addChild: anAddButton;
 						constraintsDo: [ :c | 
 							c horizontal fitContent.
-							c vertical fitContent ].
+							c vertical fitContent.
+							c linear vertical alignCenter ].
 					aContainer when: BlMouseEnterEvent do: [ :anEvent | 
 						anAddButton visibility: BlVisibility visible ].
 					aContainer when: BlMouseLeaveEvent do: [ :anEvent | 
@@ -210,7 +206,7 @@ GtEpiceaLog >> gtTutorialEntriesIn: aView [
 					anAddButton := BrButton new.
 					anAddButton
 						layout: BlLinearLayout new;
-						look: BrIconLook;
+						look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
 						icon: (BlElement new 
 							geometry: BlRectangle new;
 							layout: BlLinearLayout new;
@@ -220,12 +216,7 @@ GtEpiceaLog >> gtTutorialEntriesIn: aView [
 							self removeEntity: anOmEntry.
 							anAddButton enqueueTask: (BlTaskAction new 
 								action: [ anAddButton visibility: BlVisibility hidden ]) ];
-						padding: (BlInsets top: 0 left: 3 bottom: 0 right: 0);
-						visibility: BlVisibility hidden;
-						constraintsDo: [ :c | 
-							c horizontal fitContent.
-							c vertical fitContent.
-							c linear vertical alignCenter ].
+						visibility: BlVisibility hidden.
 					aContainer := BlElement new 
 						layout: BlLinearLayout horizontal;
 						addChildren: (anOmEntry content accept: GtEpiceaBrickVisitor new);
