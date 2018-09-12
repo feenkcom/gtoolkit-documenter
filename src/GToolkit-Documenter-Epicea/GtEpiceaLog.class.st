@@ -101,41 +101,14 @@ GtEpiceaLog >> flush [
 	theLog store flush.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'gt-extension' }
 GtEpiceaLog >> gtCodeFor: aView [
 	<gtView>
 	theLog ifNil: [ ^ aView empty ].
 	^ aView explicit 
 		title: 'Code';
 		priority: 30;
-		stencil: [
-			| theEntries aList | 
-			theEntries := theLog store entries.
-			aList := BrSimpleList new.
-			aList display: theEntries.
-			aList addEventHandler: GtInspectorListToSelectHandler new.
-			self announcer 
-				when: EpEntryAdded 
-				do: [ :anAnnouncement | 
-					aList display: theLog store entries ].
-			aList stencil: [ :eachEntry :anIndex | 
-				| aStateString anEditor aStyler |
-				aStateString := (EpEntryItem new entry: eachEntry)
-					newStateString.
-				aStyler := BrRBTextStyler new.
-				eachEntry content isEpMethodChange ifTrue: [  
-					eachEntry content behaviorAffectedName asClassIfPresent: [ :aBehavior |
-						 aStyler classOrMetaClass: aBehavior ] ].
-				anEditor := BrEditorElement new.
-				anEditor editor: BrTextEditor new.
-				anEditor editor text: aStateString asRopedText.
-				anEditor editor styler: aStyler.
-				anEditor constraintsDo: [ :c | 
-					c horizontal matchParent.
-					c vertical fitContent.
-					c padding: (BlInsets all: 10) ].
-			]
-		]
+		stencil: (GtEpiceaLogCodeStencil new epiceaLog: self)
 ]
 
 { #category : #'gt-extension' }
@@ -295,6 +268,12 @@ GtEpiceaLog >> insertSelectedItemsFromPresentation: aGLMPresentation [
 { #category : #testing }
 GtEpiceaLog >> isValid [
 	^ self ombuFile notNil and: [ self ombuFile exists ]
+]
+
+{ #category : #accessing }
+GtEpiceaLog >> log [
+	<return: #EpLog>
+	^ theLog
 ]
 
 { #category : #accessing }
