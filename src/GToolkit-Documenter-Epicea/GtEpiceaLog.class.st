@@ -101,6 +101,43 @@ GtEpiceaLog >> flush [
 	theLog store flush.
 ]
 
+{ #category : #'as yet unclassified' }
+GtEpiceaLog >> gtCodeFor: aView [
+	<gtView>
+	theLog ifNil: [ ^ aView empty ].
+	^ aView explicit 
+		title: 'Code';
+		priority: 30;
+		stencil: [
+			| theEntries aList | 
+			theEntries := theLog store entries.
+			aList := BrSimpleList new.
+			aList display: theEntries.
+			aList addEventHandler: GtInspectorListToSelectHandler new.
+			self announcer 
+				when: EpEntryAdded 
+				do: [ :anAnnouncement | 
+					aList display: theLog store entries ].
+			aList stencil: [ :eachEntry :anIndex | 
+				| aStateString anEditor aStyler |
+				aStateString := (EpEntryItem new entry: eachEntry)
+					newStateString.
+				aStyler := BrRBTextStyler new.
+				eachEntry content isEpMethodChange ifTrue: [  
+					eachEntry content behaviorAffectedName asClassIfPresent: [ :aBehavior |
+						 aStyler classOrMetaClass: aBehavior ] ].
+				anEditor := BrEditorElement new.
+				anEditor editor: BrTextEditor new.
+				anEditor editor text: aStateString asRopedText.
+				anEditor editor styler: aStyler.
+				anEditor constraintsDo: [ :c | 
+					c horizontal matchParent.
+					c vertical fitContent.
+					c padding: (BlInsets all: 10) ].
+			]
+		]
+]
+
 { #category : #'gt-extension' }
 GtEpiceaLog >> gtGlobalEntriesIn: aView [
 	<gtView>
@@ -132,9 +169,7 @@ GtEpiceaLog >> gtGlobalEntriesIn: aView [
 						action: [ 
 							self addEntryWith: anOmEntry content tags: [ :tags | ].
 							anAddButton enqueueTask: (BlTaskAction new 
-								action: [ anAddButton visibility: BlVisibility hidden ]).
-							anAddButton enqueueTask: (BlDelayedTaskAction new 
-								action: [ anAddButton visibility: BlVisibility visible  ]) ];
+								action: [ anAddButton visibility: BlVisibility hidden ]) ];
 						visibility: BlVisibility hidden.
 					aContainer := BlElement new 
 						layout: BlLinearLayout horizontal;
