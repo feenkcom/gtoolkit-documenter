@@ -131,6 +131,15 @@ GtPillarDocumenterHighlighter >> visitAnnotation: anAnnotation [
 ]
 
 { #category : #visiting }
+GtPillarDocumenterHighlighter >> visitBoldFormat: aPRBoldFormat [
+	(self targetText
+		from: aPRBoldFormat start
+		to: aPRBoldFormat stop)
+			bold;
+			foreground: Color black
+]
+
+{ #category : #visiting }
 GtPillarDocumenterHighlighter >> visitCodeblock: aPRCodeblock [
 	| aDocumentPart |
 	outsCounter incrementAt: 1.
@@ -141,6 +150,14 @@ GtPillarDocumenterHighlighter >> visitCodeblock: aPRCodeblock [
 		documentPartClass: GtPillarCodeblock;
 		find.
 	GtPillarCodeblockHighlighter highlight: aDocumentPart using: self.
+]
+
+{ #category : #visiting }
+GtPillarDocumenterHighlighter >> visitCommentedLine: aPRCommentedLine [
+	(self targetText
+		from: aPRCommentedLine start
+		to: aPRCommentedLine stop)
+			foreground: Color gray
 ]
 
 { #category : #visiting }
