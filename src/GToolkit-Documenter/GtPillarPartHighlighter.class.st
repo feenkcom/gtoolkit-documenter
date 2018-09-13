@@ -21,6 +21,12 @@ GtPillarPartHighlighter >> document [
 	^ self rootHighlighter document
 ]
 
+{ #category : #'private - accessing' }
+GtPillarPartHighlighter >> documentDirectory [
+	<return: #FileReference>
+	^ self fileReference parent
+]
+
 { #category : #accessing }
 GtPillarPartHighlighter >> fileReference [
 	"return a main document file reference"

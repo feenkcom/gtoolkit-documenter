@@ -193,6 +193,11 @@ GtPillarDocumenterHighlighter >> visitHeader: aPRHeader [
 ]
 
 { #category : #visiting }
+GtPillarDocumenterHighlighter >> visitInputFileAnnotation: aPRInputFileAnnotation [ 
+	GtPillarInputFileAnnotationHighlighter highlight: aPRInputFileAnnotation using: self.
+]
+
+{ #category : #visiting }
 GtPillarDocumenterHighlighter >> visitList: aPRList [
 	self resetListItemCounter.
 	super visitList: aPRList
