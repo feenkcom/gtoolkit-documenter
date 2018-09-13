@@ -7,15 +7,17 @@ Class {
 { #category : #'private - accessing' }
 GtPillarFigureHighlighter >> figureFileReferenceOrNil [
 	"Return a figure file reference or nil if figure reference is not file"
+
 	<return: #FileReference or: nil>
 	| aFileName |
-	(self pillarNode reference beginsWith: 'file://') ifFalse: [ ^ nil ].
+	(self pillarNode reference beginsWith: 'file://')
+		ifFalse: [ ^ nil ].
 	aFileName := self pillarNode reference
-	                copyFrom: 'file://' size + 1
-	                to: self pillarNode reference size.
-	^ GtFileUtility 
-		fileReferenceOfFileName: aFileName 
-		relativeTo: self fileReference parent
+		copyFrom: 'file://' size + 1
+		to: self pillarNode reference size.
+	^ GtFileUtility
+		fileReferenceOfFileName: aFileName
+		relativeTo: self documentDirectory
 ]
 
 { #category : #'api - actions' }

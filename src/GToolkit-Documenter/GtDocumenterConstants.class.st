@@ -89,6 +89,11 @@ GtDocumenterConstants class >> packagesParameterName [
 ]
 
 { #category : #'accessing - pillar parameter names' }
+GtDocumenterConstants class >> pathParameterName [
+	^ #path
+]
+
+{ #category : #'accessing - pillar parameter names' }
 GtDocumenterConstants class >> previewHeightParameterName [
 	^ #previewHeight
 ]
