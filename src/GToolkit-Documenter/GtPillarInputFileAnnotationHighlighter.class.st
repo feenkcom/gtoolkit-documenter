@@ -49,14 +49,10 @@ GtPillarInputFileAnnotationHighlighter >> isExistingFile [
 { #category : #'private - styling' }
 GtPillarInputFileAnnotationHighlighter >> styleExpandingView [
 	| anAttributeCreatingBlock |
-	self flag: 'fix it if we want it'.
-	true ifTrue: [ ^ self ].
 	self isExistingFile ifFalse: [ ^ self ].
 	anAttributeCreatingBlock := [ GtPillarInputFileReferenceAttribute new
 		fileReference: fileReference ].
-	self pillarNode expandedViewParameterValue
-		ifTrue: [ self styleExpandedTextExpandAttribute: anAttributeCreatingBlock ]
-		ifFalse: [ self styleCollapsedTextExpandAttribute: anAttributeCreatingBlock ]
+	self styleCollapsedTextExpandAttribute: anAttributeCreatingBlock
 ]
 
 { #category : #'private - styling' }

@@ -1,11 +1,22 @@
 Class {
 	#name : #GtPillarInputFileReferenceAttribute,
-	#superclass : #GtPillarPharoTextEditorAttribute,
+	#superclass : #BrTextAdornmentAttribute,
 	#instVars : [
 		'fileReference'
 	],
 	#category : #'GToolkit-Documenter-Brick'
 }
+
+{ #category : #accessing }
+GtPillarInputFileReferenceAttribute >> affect: aBrText in: anEditorElement [
+	^ BlElement new 
+		look: GtPillarExpandedPreviewLook;
+		constraintsDo: [ :c |
+			c textFlow pushLine.
+			c horizontal matchParent.
+			c vertical exact: 300 ];
+		addChild: (GtDocumenter editorForPillar: self fileReference)
+]
 
 { #category : #accessing }
 GtPillarInputFileReferenceAttribute >> fileReference [
@@ -15,17 +26,4 @@ GtPillarInputFileReferenceAttribute >> fileReference [
 { #category : #accessing }
 GtPillarInputFileReferenceAttribute >> fileReference: aFileReference [
 	fileReference := aFileReference
-]
-
-{ #category : #'instance creation' }
-GtPillarInputFileReferenceAttribute >> newStyler [
-	^ BrRBTextStyler new workspace: GtHighlightingBindingStrategy new
-]
-
-{ #category : #accessing }
-GtPillarInputFileReferenceAttribute >> textEditorText [
-	<return: #BlText>
-	^ self classReference isDefined 
-		ifTrue: [ self classReference realClass definition asRopedText ]
-		ifFalse: [ self classReference definition asRopedText ]
 ]
