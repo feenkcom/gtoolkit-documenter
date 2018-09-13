@@ -143,6 +143,24 @@ GtPillarDocumenterHighlighter >> visitCodeblock: aPRCodeblock [
 	GtPillarCodeblockHighlighter highlight: aDocumentPart using: self.
 ]
 
+{ #category : #visiting }
+GtPillarDocumenterHighlighter >> visitExternalLink: anPRExternalLine [
+	(self targetText
+		from: anPRExternalLine start
+		to: anPRExternalLine stop)
+			foreground: Color blue lighter;
+			attributes: { 
+				BrTextHoverAttribute new 
+					beNotOverwritableByStyler;
+					removableTextAttribute: (BrTextBackgroundAttribute paint: (Color gray alpha: 0.2)).
+				BrTextClickAttribute new 
+					beNotOverwritableByStyler;
+					action: [ :aText :aTarget :anEvent | 
+						WebBrowser openOn: anPRExternalLine url  ] 
+			 }
+			
+]
+
 { #category : #'visiting-document' }
 GtPillarDocumenterHighlighter >> visitFigure: aFigure [
 	GtPillarFigureHighlighter highlight: aFigure using: self.

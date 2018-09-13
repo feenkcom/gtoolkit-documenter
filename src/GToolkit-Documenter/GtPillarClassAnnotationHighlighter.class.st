@@ -9,7 +9,7 @@ Class {
 
 { #category : #'api - actions' }
 GtPillarClassAnnotationHighlighter >> highlight [
-	self initializeFileReference.
+	self initializeReferencedClass.
 	self stylePillarNodeText.
 	self styleReferenceParameter.
 	self styleExpandingView
