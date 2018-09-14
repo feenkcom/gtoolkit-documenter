@@ -23,8 +23,8 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 				repository: 'github://feenkcom/gtoolkit-inspector/src' ];
 			baseline: 'Pillar' with: [ spec
 				"repository: 'github://pillar-markup/pillar/src'"
-				repository: 'github://pillar-markup/pillar:dev-7/src'
-				"repository: 'github://feenkcom/pillar:dev-7/src'" ];
+				"repository: 'github://pillar-markup/pillar:dev-7/src'"
+				repository: 'github://feenkcom/pillar:dev-7/src' ];
 			baseline: 'PetitParser2Core' with: [
 				spec
 				 	repository: 'github://kursjan/petitparser2' ];
