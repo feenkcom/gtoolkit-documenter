@@ -60,8 +60,8 @@ GtPillarInputFileAnnotationHighlighter >> styleReferenceParameter [
 	"Make class name clickable and red if the class does not exist"
 	| aPathParameterNode aPathColor theAttributes |
 	self isExistingFile 
-		ifTrue: [ aPathColor := Color blue muchDarker ]
-		ifFalse: [ aPathColor := Color red ].
+		ifTrue: [ aPathColor := BrGlamorousColors linkWithErrorColor ]
+		ifFalse: [ aPathColor := BrGlamorousColors linkColor ].
 	aPathParameterNode := self pillarNode children first children
 		detect: [ :eachParameter | 
 			eachParameter key = self constants pathParameterName ] 

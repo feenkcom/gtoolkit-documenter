@@ -49,7 +49,7 @@ GtPillarFigureHighlighter >> styleTextAsDefault [
 GtPillarFigureHighlighter >> styleTextAsNotExistingFile [
 	(self targetText 
 		from: self pillarNodeStart
-		to: self pillarNodeStop) foreground: Color red.
+		to: self pillarNodeStop) foreground: BrGlamorousIcons linkWithErrorColor.
 ]
 
 { #category : #'private - styling' }
@@ -63,5 +63,5 @@ GtPillarFigureHighlighter >> styleTextAsUnknownFigure [
 GtPillarFigureHighlighter >> styleTextNotFileReference [
 	(self targetText 
 		from: self pillarNodeStart
-		to: self pillarNodeStop) foreground: Color blue.
+		to: self pillarNodeStop) foreground: BrGlamorousIcons linkColor.
 ]

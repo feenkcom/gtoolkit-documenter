@@ -165,7 +165,7 @@ GtPillarDocumenterHighlighter >> visitExternalLink: anPRExternalLine [
 	(self targetText
 		from: anPRExternalLine start
 		to: anPRExternalLine stop)
-			foreground: Color blue lighter;
+			foreground: BrGlamorousColors linkColor;
 			attributes: { 
 				BrTextHoverAttribute new 
 					beNotOverwritableByStyler;

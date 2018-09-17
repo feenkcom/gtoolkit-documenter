@@ -47,8 +47,8 @@ GtPillarMethodAnnotationHighlighter >> styleReferenceParameter [
 	"Make class name clickable and red if the class does not exist"
 	| aMethodParameterNode aClassColor theAttributes |
 	aClassColor := self isMethodDefined 
-		ifTrue: [ Color blue muchDarker ]
-		ifFalse: [ Color red ].
+		ifTrue: [ BrGlamorousIcons linkColor ]
+		ifFalse: [ BrGlamorousIcons linkWithErrorColor ].
 	aMethodParameterNode := self pillarNode children first children
 		detect: [ :eachParameter | 
 			eachParameter key = self pillarNode defaultParameterName or: [ 

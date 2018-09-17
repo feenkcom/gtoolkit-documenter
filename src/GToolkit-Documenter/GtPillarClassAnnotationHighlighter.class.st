@@ -46,8 +46,8 @@ GtPillarClassAnnotationHighlighter >> styleReferenceParameter [
 	"Make class name clickable and red if the class does not exist"
 	| aClassParameterNode aClassColor theAttributes |
 	self isClassDefined 
-		ifTrue: [ aClassColor := Color blue muchDarker ]
-		ifFalse: [ aClassColor := Color red ].
+		ifTrue: [ aClassColor := BrGlamorousColors linkColor ]
+		ifFalse: [ aClassColor := BrGlamorousColors linkWithErrorColor ].
 	aClassParameterNode := self pillarNode children first children
 		detect: [ :eachParameter | 
 			eachParameter key = self constants nameParameterName ] 
