@@ -63,5 +63,5 @@ GtPillarFigureHighlighter >> styleTextAsUnknownFigure [
 GtPillarFigureHighlighter >> styleTextNotFileReference [
 	(self targetText 
 		from: self pillarNodeStart
-		to: self pillarNodeStop) foreground: BrGlamorousIcons linkColor.
+		to: self pillarNodeStop) foreground: BrGlamorousColors linkColor.
 ]
