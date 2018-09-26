@@ -106,6 +106,17 @@ GtDocumenterExamples >> documentWithFigure [
 	^ rootDocument
 ]
 
+{ #category : #'iceberg file' }
+GtDocumenterExamples >> documentWithIcebergAnnotation [
+	<gtExample>
+	| aRootDocument |
+	aRootDocument := fileSystemExamples addPillarFileWithContent: 
+		self pillarContentWithIcebergAnnotation.
+	self assert: aRootDocument exists.
+	self assert: aRootDocument contents size > 1.
+	^ aRootDocument
+]
+
 { #category : #'class - missing one' }
 GtDocumenterExamples >> documentWithNonExistingClassAnnotation [
 	<gtExample>
@@ -151,6 +162,34 @@ GtDocumenterExamples >> figureFileReference [
 	<label: 'PNG figure file reference'>
 	^ fileSystemExamples 
 		addFileNamed: self figureFileName  withContent: self figureContent
+]
+
+{ #category : #'iceberg file' }
+GtDocumenterExamples >> icebergFileName [
+	<gtExample>
+	| aFileReference aFileName aHomeDirectoryName |
+	aFileReference := self icebergFileReference.
+	aFileName := aFileReference pillarPrintString.
+	self assert: aFileName isString.
+	aHomeDirectoryName := FileLocator home asFileReference fullName.
+	self assert: (aFileName beginsWith: aHomeDirectoryName) not.
+	self assert: (aFileName beginsWith: 'Path *') not.
+	^ aFileName
+]
+
+{ #category : #'iceberg file' }
+GtDocumenterExamples >> icebergFileReference [
+	<gtExample>
+	| aDirectory aDocument aPath |
+	aDirectory := IceRepository repositoriesLocation.
+	self assert: aDirectory exists.
+	self assert: aDirectory isDirectory.
+	aDocument := aDirectory / 'feenkcom' / 'gtoolkit-documenter' / 'doc' / 'index.pillar'.
+	self assert: aDocument exists.
+	self assert: aDocument isFile.
+	aPath := aDocument relativeTo: aDirectory.
+	self assert: aPath isRelative.
+	^ aPath
 ]
 
 { #category : #'examples - classes' }
@@ -237,6 +276,15 @@ GtDocumenterExamples >> pillarContentWithFigure [
 	<gtExample>
 	<label: 'Pillar content with Figure node'>
 	^ '+Figure caption>file://', self figureFileName, '+'
+
+]
+
+{ #category : #'iceberg file' }
+GtDocumenterExamples >> pillarContentWithIcebergAnnotation [
+	<gtExample>
+	^ '${', 
+		GtPillarIcebergFileAnnotation tag, ':', 
+		self icebergFileName, '}$'
 
 ]
 
@@ -441,6 +489,29 @@ GtDocumenterExamples >> textEditorWithExpandedMethodAnnotation [
 	^ aBrTextEditor
 ]
 
+{ #category : #'iceberg file' }
+GtDocumenterExamples >> textEditorWithIcebergAnnotation [
+	<gtExample>
+	| aPillarElement aBrTextEditor anAttributes |
+	aPillarElement := self textElementWithIcebergAnnotation.
+	aBrTextEditor := (GtDocumenterExamplesUtility editorFromTextElement: aPillarElement).
+	self assert: aBrTextEditor notNil.
+	anAttributes := aBrTextEditor text attributesAt: 1.
+	self assert: anAttributes size equals: 1.
+	self assert: anAttributes first paint equals: Color gray.
+	anAttributes := aBrTextEditor text attributesAt: aBrTextEditor text size // 2.
+	self assert: anAttributes size equals: 4.
+	self assert: anAttributes first paint equals: Color gray.
+	self assert: anAttributes second class equals: BrTextForegroundAttribute.
+	self assert: anAttributes third class equals: BrTextHoverAttribute.
+	self assert: anAttributes fourth class equals: BrTextClickAttribute.
+	anAttributes := aBrTextEditor text attributesAt: aBrTextEditor text size.
+	self assert: anAttributes size equals: 2.
+	self assert: anAttributes first paint equals: Color gray.
+	self assert: anAttributes second class equals: BrTextExpandButtonAttribute.
+	^ aBrTextEditor
+]
+
 { #category : #'class - missing one' }
 GtDocumenterExamples >> textEditorWithNonExistingClassAnnotation [
 	<gtExample>
@@ -571,6 +642,16 @@ GtDocumenterExamples >> textElementWithExpandedMethodAnnotation [
 	<gtExample>
 	| aFileReference aTextElement |
 	aFileReference := self documentWithExpandedMethodAnnotation.
+	aTextElement := GtDocumenterExamplesUtility textElementForPillarFileReference: aFileReference.
+	self assert: aTextElement notNil.
+	^ aTextElement
+]
+
+{ #category : #'iceberg file' }
+GtDocumenterExamples >> textElementWithIcebergAnnotation [
+	<gtExample>
+	| aFileReference aTextElement |
+	aFileReference := self documentWithIcebergAnnotation.
 	aTextElement := GtDocumenterExamplesUtility textElementForPillarFileReference: aFileReference.
 	self assert: aTextElement notNil.
 	^ aTextElement

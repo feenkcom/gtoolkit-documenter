@@ -220,6 +220,11 @@ GtPillarDocumenterHighlighter >> visitGtPillarExamplesAnnotation: aGtPillarExamp
 ]
 
 { #category : #visiting }
+GtPillarDocumenterHighlighter >> visitGtPillarIcebergFileAnnotation: aGtPillarIcebergFileAnnotation [
+	GtPillarIcebergFileAnnotationHighlighter highlight: aGtPillarIcebergFileAnnotation using: self.
+]
+
+{ #category : #visiting }
 GtPillarDocumenterHighlighter >> visitHeader: aPRHeader [
 	(self targetText
 		from: aPRHeader start

@@ -11,6 +11,11 @@ PRVisitor >> visitGtPillarExamplesAnnotation: aGtPillarExampleAnnotation [
 ]
 
 { #category : #'*GToolkit-Documenter' }
+PRVisitor >> visitGtPillarIcebergFileAnnotation: aGtPillarIcebergFileAnnotation [
+	self visitAnnotation: aGtPillarIcebergFileAnnotation
+]
+
+{ #category : #'*GToolkit-Documenter' }
 PRVisitor >> visitPillarClassAnnotation: aGtPillarClassAnnotation [ 
 	self visitAnnotation: aGtPillarClassAnnotation
 ]
