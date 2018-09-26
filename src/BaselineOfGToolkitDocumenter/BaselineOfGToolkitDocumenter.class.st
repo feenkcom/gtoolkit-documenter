@@ -59,21 +59,23 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 
 	spec for: #'pharo6.x' do: [ 
 		spec
-			preLoadDoIt: #updateZincHTTPComponetns:;
+			preLoadDoIt: #updateZincHTTPComponents:;
+			configuration: 'WebBrowser' with: [ 
+				spec repository: 'http://smalltalkhub.com/mc/TorstenBergmann/WebBrowser/main/' ];
 			project: 'ZincHTTPComponentsCharacterEncoding' with: [ 
 				spec
 					className: #ConfigurationOfZincHTTPComponents;
 					repository: 'http://smalltalkhub.com/mc/SvenVanCaekenberghe/ZincHTTPComponents/main/';
 					versionString: #stable;
 					loads: 'Character-Encoding' ];
+			package: 'GToolkit-Documenter' with: [ spec requires: #( 'WebBrowser' ) ];
 			package: 'GToolkit-Documenter-Exporter' with: [ spec requires: #( 
-				#ZincHTTPComponentsCharacterEncoding "
-				#Brick #Pillar #GToolkitUtility 'GToolkit-Documenter'" ) ]
+				#ZincHTTPComponentsCharacterEncoding ) ]
 	].
 ]
 
 { #category : #private }
-BaselineOfGToolkitDocumenter >> updateZincHTTPComponetns: spec [
+BaselineOfGToolkitDocumenter >> updateZincHTTPComponents: spec [
 	Gofer it
 		smalltalkhubUser: 'SvenVanCaekenberghe' project: 'ZincHTTPComponents';
 		package: 'ConfigurationOfZincHTTPComponents';
