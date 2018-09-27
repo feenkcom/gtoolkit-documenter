@@ -525,7 +525,7 @@ GtDocumenterExamples >> textEditorWithNonExistingClassAnnotation [
 	anAttributes := aBrTextEditor text attributesAt: 9.
 	self assert: anAttributes size equals: 2.
 	self assert: anAttributes first paint equals: Color gray.
-	self assert: anAttributes second paint equals: Color red.
+	self assert: anAttributes second paint equals: BrGlamorousColors linkWithErrorColor.
 	anAttributes := aBrTextEditor text attributesAt: aBrTextEditor text size.
 	self assert: anAttributes size equals: 1.
 	self assert: anAttributes first paint equals: Color gray.
@@ -541,7 +541,7 @@ GtDocumenterExamples >> textEditorWithNonExistingFigureFile [
 	self assert: aBrTextEditor notNil.
 	anAttributes := aBrTextEditor text attributesAt: 1.
 	self assert: anAttributes size equals: 1.
-	self assert: anAttributes first paint equals: Color red.
+	self assert: anAttributes first paint equals: BrGlamorousColors linkWithErrorColor.
 	^ aBrTextEditor
 ]
 
@@ -558,7 +558,7 @@ GtDocumenterExamples >> textEditorWithNonExistingMethodAnnotation [
 	anAttributes := aBrTextEditor text attributesAt: 10.
 	self assert: anAttributes size equals: 2.
 	self assert: anAttributes first paint equals: Color gray.
-	self assert: anAttributes second paint equals: Color red.
+	self assert: anAttributes second paint equals: BrGlamorousColors linkWithErrorColor.
 	anAttributes := aBrTextEditor text attributesAt: aBrTextEditor text size.
 	self assert: anAttributes size equals: 1.
 	self assert: anAttributes first paint equals: Color gray.

@@ -26,8 +26,9 @@ GtPillarFigureHighlighter >> highlight [
 	aFigureFileReference := self figureFileReferenceOrNil.
 	aFigureFileReference ifNil: [ ^ self styleTextNotFileReference ].
 	aFigureFileReference exists ifFalse: [ ^ self styleTextAsNotExistingFile ].
-	(aFigureFileReference binaryReadStreamDo: [ :aStream | 
-		ImageReadWriter gtReaderClassFromStream: aStream ]) 
+	(aFigureFileReference binaryReadStreamDo: [ :aStream | | aPositionableReadStream |
+		aPositionableReadStream := ZnPositionableReadStream on: aStream.
+		ImageReadWriter gtReaderClassFromStream: aPositionableReadStream ]) 
 			ifNil: [ ^ self styleTextAsUnknownFigure ].
 	
 	self styleTextAsDefault.

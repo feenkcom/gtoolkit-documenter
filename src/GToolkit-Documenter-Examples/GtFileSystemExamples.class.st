@@ -9,14 +9,21 @@ Class {
 }
 
 { #category : #utility }
-GtFileSystemExamples >> addFileNamed: fileNameString toDirectory: rootDirectory withContent: aString [
+GtFileSystemExamples >> addFileNamed: fileNameString toDirectory: rootDirectory withContent: aContent [
 	| rootDocument |
-	rootDocument := (rootDirectory / fileNameString) 
-		writeStreamDo: [ :aStream | 
-			aStream nextPutAll: aString ];
-		yourself.
+	aContent isString 
+		ifTrue: [ 
+			rootDocument := (rootDirectory / fileNameString) 
+				writeStreamDo: [ :aStream | 
+					aStream nextPutAll: aContent ];
+				yourself ]
+		ifFalse: [ 
+			rootDocument := (rootDirectory / fileNameString) 
+				binaryWriteStreamDo: [ :aStream | 
+					aStream nextPutAll: aContent ];
+				yourself ].
 	self assert: rootDocument exists.
-	self assert: rootDocument contents size > 1.
+	self assert: rootDocument size > 1.
 	^ rootDocument
 ]
 
