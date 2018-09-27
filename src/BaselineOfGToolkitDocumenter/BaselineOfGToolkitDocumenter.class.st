@@ -1,7 +1,7 @@
 Class {
 	#name : #BaselineOfGToolkitDocumenter,
 	#superclass : #BaselineOf,
-	#category : 'BaselineOfGToolkitDocumenter'
+	#category : #BaselineOfGToolkitDocumenter
 }
 
 { #category : #baseline }
@@ -68,9 +68,7 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 					repository: 'http://smalltalkhub.com/mc/SvenVanCaekenberghe/ZincHTTPComponents/main/';
 					versionString: #stable;
 					loads: 'Character-Encoding' ];
-			package: 'GToolkit-Documenter' with: [ spec requires: #( 'WebBrowser' ) ];
-			package: 'GToolkit-Documenter-Exporter' with: [ spec requires: #( 
-				#ZincHTTPComponentsCharacterEncoding ) ]
+			package: 'GToolkit-Documenter' with: [ spec requires: #( 'WebBrowser' 'ZincHTTPComponentsCharacterEncoding' ) ]
 	].
 ]
 
