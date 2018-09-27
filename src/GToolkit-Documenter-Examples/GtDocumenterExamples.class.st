@@ -181,7 +181,7 @@ GtDocumenterExamples >> icebergFileName [
 GtDocumenterExamples >> icebergFileReference [
 	<gtExample>
 	| aDirectory aDocument aPath |
-	aDirectory := IceRepository repositoriesLocation.
+	aDirectory := GtIcebergUtility repositoriesLocation.
 	self assert: aDirectory exists.
 	self assert: aDirectory isDirectory.
 	aDocument := aDirectory / 'feenkcom' / 'gtoolkit-documenter' / 'doc' / 'index.pillar'.
