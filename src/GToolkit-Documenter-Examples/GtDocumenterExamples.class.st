@@ -192,6 +192,40 @@ GtDocumenterExamples >> icebergFileReference [
 	^ aPath
 ]
 
+{ #category : #'pillar card preview' }
+GtDocumenterExamples >> pillarCardPreviewOfExistingFigure [
+	<gtExample>
+	| aVisitor |
+	aVisitor := self pillarCardPreviewVisitorOfExistingFigure.
+	aVisitor previewCommand execute.
+	self assert: aVisitor previewCommand result notNil.
+	self assert: (aVisitor previewCommand result isKindOf: BlElement).
+	^ aVisitor previewCommand result
+]
+
+{ #category : #'pillar card preview' }
+GtDocumenterExamples >> pillarCardPreviewVisitor [
+	<gtExample>
+	^ GtPillarCardPreviewVisitor new
+]
+
+{ #category : #'pillar card preview' }
+GtDocumenterExamples >> pillarCardPreviewVisitorOfExistingFigure [
+	<gtExample>
+	| aFileReference aVisitor aPillarNode aFigureFile |
+	aFileReference := self documentWithFigure.
+	aFigureFile := self figureFileReference.
+	self assert: aFigureFile exists.
+	aVisitor := self pillarCardPreviewVisitor.
+	aVisitor fileReference: aFileReference.
+	aPillarNode := PRPillarParserMain parse: aFileReference contents.
+	self assert: aPillarNode notNil.
+	self assert: aVisitor previewCommand isNil.
+	aPillarNode accept: aVisitor.
+	self assert: aVisitor previewCommand notNil.
+	^ aVisitor
+]
+
 { #category : #'examples - classes' }
 GtDocumenterExamples >> pillarContentWithExamplesAnnotationUsingClasses [
 	<gtExample>
