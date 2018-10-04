@@ -40,7 +40,9 @@ GtExample >> gtInspectorBlocGraphIn: composite [
 					BlElement new 
 						geometry: BlEllipse new; 
 						border: (BlBorder paint: Color black width: 1);	
-						background: (BlBackground paint: (each = self ifTrue: [Color gray] ifFalse: [Color white]));
+						background: (each = self
+							ifTrue: [ Color gray ]
+							ifFalse: [ Color white ]);
 						size: 10@10;
 						addEventHandlerOn: BlClickEvent do: [ :anEvent | presentation selection: each ] ];
 				with: (self withDeepCollect: #directDependencies) asSet.
