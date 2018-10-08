@@ -1,5 +1,5 @@
 Class {
 	#name : #GtExampleCodeSnippetAnnouncement,
 	#superclass : #GtCodeSnippetAnnouncement,
-	#category : 'GToolkit-Documenter-Announcements'
+	#category : #'GToolkit-Documenter-Announcements'
 }

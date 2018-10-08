@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'GtAssertingTrait',
 	#classTraits : 'GtAssertingTrait classTrait',
-	#category : 'GToolkit-Documenter-Examples'
+	#category : #'GToolkit-Documenter-Examples'
 }
 
 { #category : #'utility - accessing' }
@@ -15,7 +15,7 @@ GtDocumenterExamplesUtility class >> arrayOfDocumentPartsFromEditor: aBrTextEdit
 		1 to: outs size do: [ :anIndex | | aSnippet |
 			aSnippet := outs documentPartAt: anIndex.
 			aStream nextPut: aSnippet.
-			"self assert: aSnippet index equals: anIndex" ] ]
+			self assert: aSnippet index equals: anIndex ] ]
 ]
 
 { #category : #'utility - system environment' }

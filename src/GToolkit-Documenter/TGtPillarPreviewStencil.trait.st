@@ -3,7 +3,7 @@ I contain common element creation methods shared by various documenter stencils
 "
 Trait {
 	#name : #TGtPillarPreviewStencil,
-	#category : 'GToolkit-Documenter-Brick-Stencils'
+	#category : #'GToolkit-Documenter-Brick-Stencils'
 }
 
 { #category : #'instance creation' }

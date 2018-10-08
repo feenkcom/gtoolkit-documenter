@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'pillarNode'
 	],
-	#category : 'GToolkit-Documenter-Pillar - Highlighter'
+	#category : #'GToolkit-Documenter-Pillar - Highlighter'
 }
 
 { #category : #'instance creation' }

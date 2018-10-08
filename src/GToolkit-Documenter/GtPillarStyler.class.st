@@ -6,7 +6,7 @@ Class {
 		'fileReference',
 		'highlighter'
 	],
-	#category : 'GToolkit-Documenter-Pillar'
+	#category : #'GToolkit-Documenter-Pillar'
 }
 
 { #category : #accessing }

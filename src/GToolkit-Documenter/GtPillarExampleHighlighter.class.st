@@ -1,7 +1,7 @@
 Class {
 	#name : #GtPillarExampleHighlighter,
 	#superclass : #GtPillarNodeHighlighter,
-	#category : 'GToolkit-Documenter-Pillar - Highlighter'
+	#category : #'GToolkit-Documenter-Pillar - Highlighter'
 }
 
 { #category : #'api - actions' }

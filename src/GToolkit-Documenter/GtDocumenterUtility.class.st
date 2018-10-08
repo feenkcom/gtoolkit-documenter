@@ -1,7 +1,7 @@
 Class {
 	#name : #GtDocumenterUtility,
 	#superclass : #Object,
-	#category : 'GToolkit-Documenter-Utility'
+	#category : #'GToolkit-Documenter-Utility'
 }
 
 { #category : #'pillar - parameter values' }

@@ -5,7 +5,7 @@ Class {
 		'result',
 		'bindings'
 	],
-	#category : 'GToolkit-Documenter-Bindings'
+	#category : #'GToolkit-Documenter-Bindings'
 }
 
 { #category : #converting }

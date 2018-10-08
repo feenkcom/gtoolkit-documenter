@@ -1,7 +1,7 @@
 Class {
 	#name : #GtPillarLeftAlignedToolbarLook,
 	#superclass : #GtPillarToolbarLook,
-	#category : 'GToolkit-Documenter-Brick-Looks'
+	#category : #'GToolkit-Documenter-Brick-Looks'
 }
 
 { #category : #initialization }

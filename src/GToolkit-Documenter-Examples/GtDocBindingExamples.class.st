@@ -1,7 +1,7 @@
 Class {
 	#name : #GtDocBindingExamples,
 	#superclass : #Object,
-	#category : 'GToolkit-Documenter-Examples'
+	#category : #'GToolkit-Documenter-Examples'
 }
 
 { #category : #'out bindings' }

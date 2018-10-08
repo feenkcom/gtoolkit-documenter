@@ -1,6 +1,6 @@
 Trait {
 	#name : #GtDocumenterConstantsTrait,
-	#category : 'GToolkit-Documenter-Settings'
+	#category : #'GToolkit-Documenter-Settings'
 }
 
 { #category : #accessing }

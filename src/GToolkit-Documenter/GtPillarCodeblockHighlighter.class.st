@@ -1,7 +1,7 @@
 Class {
 	#name : #GtPillarCodeblockHighlighter,
 	#superclass : #GtPillarDocumentPartHighlighter,
-	#category : 'GToolkit-Documenter-Pillar - Highlighter'
+	#category : #'GToolkit-Documenter-Pillar - Highlighter'
 }
 
 { #category : #'accessing - pillar node' }

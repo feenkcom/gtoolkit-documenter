@@ -1,7 +1,7 @@
 Class {
 	#name : #GtDocumenterExamples,
 	#superclass : #GtDocAbstractExamples,
-	#category : 'GToolkit-Documenter-Examples'
+	#category : #'GToolkit-Documenter-Examples'
 }
 
 { #category : #'pillar card preview' }

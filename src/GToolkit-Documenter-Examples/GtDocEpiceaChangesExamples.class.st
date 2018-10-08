@@ -1,7 +1,7 @@
 Class {
 	#name : #GtDocEpiceaChangesExamples,
 	#superclass : #GtDocAbstractExamples,
-	#category : 'GToolkit-Documenter-Examples'
+	#category : #'GToolkit-Documenter-Examples'
 }
 
 { #category : #'class definition' }

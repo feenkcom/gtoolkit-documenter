@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'methodReference'
 	],
-	#category : 'GToolkit-Documenter-Brick'
+	#category : #'GToolkit-Documenter-Brick'
 }
 
 { #category : #initialization }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'codeSnippet'
 	],
-	#category : 'GToolkit-Documenter-Announcements'
+	#category : #'GToolkit-Documenter-Announcements'
 }
 
 { #category : #'instance creation' }

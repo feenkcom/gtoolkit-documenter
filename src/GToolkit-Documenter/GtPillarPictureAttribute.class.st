@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'image'
 	],
-	#category : 'GToolkit-Documenter-Brick'
+	#category : #'GToolkit-Documenter-Brick'
 }
 
 { #category : #accessing }

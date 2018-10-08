@@ -1,7 +1,7 @@
 Class {
 	#name : #GtPillarCodeblockResultPreviewStencilBuilder,
 	#superclass : #GtPillarBrickStencilBuilder,
-	#category : 'GToolkit-Documenter-Brick-Stencils'
+	#category : #'GToolkit-Documenter-Brick-Stencils'
 }
 
 { #category : #'api - instantiation' }

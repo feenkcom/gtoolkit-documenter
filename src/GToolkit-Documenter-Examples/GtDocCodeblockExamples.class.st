@@ -1,7 +1,7 @@
 Class {
 	#name : #GtDocCodeblockExamples,
 	#superclass : #GtDocAbstractExamples,
-	#category : 'GToolkit-Documenter-Examples'
+	#category : #'GToolkit-Documenter-Examples'
 }
 
 { #category : #'failed executable code snippet' }
@@ -222,11 +222,18 @@ GtDocCodeblockExamples >> insertScriptInTheMiddle [
 	twoCodes := GtDocumenterExamplesUtility arrayOfDocumentPartsFromEditor: editor.
 	self assert: (GtDocumenterExamplesUtility outsFromEditor: editor) size equals: 2.
 	self assert: twoCodes size equals: 2.
+	self assert: (twoCodes first pillarNode text beginsWith: '"First"').
+	self assert: (twoCodes second pillarNode text beginsWith: '"Second"').
 	editor text insertString: self insertedScript at: self insertMiddlePosition.
 	editor styleText.
 	threeCodes := GtDocumenterExamplesUtility arrayOfDocumentPartsFromEditor: editor.
 	self assert: (GtDocumenterExamplesUtility outsFromEditor: editor) size equals: 3.
 	self assert: threeCodes size equals: 3.
+	self assert: (twoCodes first pillarNode text beginsWith: '"First"').
+	self assert: (twoCodes second pillarNode text beginsWith: '"Second"').
+	self assert: (threeCodes first pillarNode text beginsWith: '"First"').
+	self assert: (threeCodes second pillarNode text beginsWith: '"Inserted"').
+	self assert: (threeCodes third pillarNode text beginsWith: '"Second"').
 	self assert: twoCodes first == threeCodes first.
 	self assert: (twoCodes second == threeCodes second) not.
 	self assert: twoCodes second == threeCodes third.

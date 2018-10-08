@@ -1,7 +1,7 @@
 Class {
 	#name : #GtDocExampleExamples,
 	#superclass : #GtDocAbstractExamples,
-	#category : 'GToolkit-Documenter-Examples'
+	#category : #'GToolkit-Documenter-Examples'
 }
 
 { #category : #'adding non-existent example class' }

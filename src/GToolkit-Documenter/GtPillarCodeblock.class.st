@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'isException'
 	],
-	#category : 'GToolkit-Documenter-Pillar'
+	#category : #'GToolkit-Documenter-Pillar'
 }
 
 { #category : #accessing }

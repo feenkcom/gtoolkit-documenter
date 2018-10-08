@@ -1,7 +1,7 @@
 Class {
 	#name : #GtExamplesStyler,
 	#superclass : #BrRBTextStyler,
-	#category : 'GToolkit-Documenter-Pillar'
+	#category : #'GToolkit-Documenter-Pillar'
 }
 
 { #category : #factory }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'referencedClass'
 	],
-	#category : 'GToolkit-Documenter-Pillar - Highlighter'
+	#category : #'GToolkit-Documenter-Pillar - Highlighter'
 }
 
 { #category : #'api - actions' }

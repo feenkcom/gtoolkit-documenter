@@ -8,7 +8,7 @@ Class {
 		'editor',
 		'documentPart'
 	],
-	#category : 'GToolkit-Documenter-Brick-Stencils'
+	#category : #'GToolkit-Documenter-Brick-Stencils'
 }
 
 { #category : #'instance creation' }

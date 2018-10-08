@@ -3,7 +3,7 @@ Class {
 	#superclass : #PRAbstractAnnotation,
 	#traits : 'GtDocumenterConstantsTrait + GtAssertingTrait',
 	#classTraits : 'GtDocumenterConstantsTrait classTrait + GtAssertingTrait classTrait',
-	#category : 'GToolkit-Documenter-Pillar - Nodes'
+	#category : #'GToolkit-Documenter-Pillar - Nodes'
 }
 
 { #category : #protected }

@@ -18,7 +18,7 @@ Class {
 		'label',
 		'iconStencilBuilder'
 	],
-	#category : 'GToolkit-Documenter-Brick-Stencils'
+	#category : #'GToolkit-Documenter-Brick-Stencils'
 }
 
 { #category : #accessing }

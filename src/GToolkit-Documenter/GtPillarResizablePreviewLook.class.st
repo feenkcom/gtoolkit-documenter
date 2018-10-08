@@ -3,7 +3,7 @@ Class {
 	#superclass : #BrLook,
 	#traits : 'GtDocumenterConstantsTrait',
 	#classTraits : 'GtDocumenterConstantsTrait classTrait',
-	#category : 'GToolkit-Documenter-Brick-Looks'
+	#category : #'GToolkit-Documenter-Brick-Looks'
 }
 
 { #category : #initialization }

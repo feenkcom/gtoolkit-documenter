@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'announcer'
 	],
-	#category : 'GToolkit-Documenter-Pillar - Nodes'
+	#category : #'GToolkit-Documenter-Pillar - Nodes'
 }
 
 { #category : #accessing }

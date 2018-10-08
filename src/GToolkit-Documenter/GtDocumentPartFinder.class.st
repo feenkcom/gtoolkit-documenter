@@ -8,7 +8,7 @@ Class {
 		'pillarNode',
 		'documentPartClass'
 	],
-	#category : 'GToolkit-Documenter-Utility'
+	#category : #'GToolkit-Documenter-Utility'
 }
 
 { #category : #accessing }
@@ -117,12 +117,7 @@ GtDocumentPartFinder >> pillarNodeAtSameIndex [
 { #category : #accessing }
 GtDocumentPartFinder >> pillarNodeIndex [
 	<return: #Integer>
-	| aCollection aResult |
-	aCollection := self pillarNode counter elements.
-	aResult := 0.
-	aCollection withIndexDo: [ :aValue :anIndex |
-		aResult := aResult + (aValue * (10 raisedTo: (aCollection size - anIndex))) ].
-	^ aResult 
+	^ self pillarNode counter
 ]
 
 { #category : #removing }

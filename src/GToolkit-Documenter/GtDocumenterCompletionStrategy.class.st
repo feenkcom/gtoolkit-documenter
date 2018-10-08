@@ -14,7 +14,7 @@ Class {
 	#classVars : [
 		'ParameterValueCompletionSelectors'
 	],
-	#category : 'GToolkit-Documenter-Completer'
+	#category : #'GToolkit-Documenter-Completer'
 }
 
 { #category : #'class initialization' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #GtDocumenterConstants,
 	#superclass : #Object,
-	#category : 'GToolkit-Documenter-Settings'
+	#category : #'GToolkit-Documenter-Settings'
 }
 
 { #category : #'accessing - pillar parameter names' }

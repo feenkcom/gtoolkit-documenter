@@ -1,7 +1,7 @@
 Class {
 	#name : #GtDocumenterEmojiExamples,
 	#superclass : #Object,
-	#category : 'GToolkit-Documenter-Examples'
+	#category : #'GToolkit-Documenter-Examples'
 }
 
 { #category : #emojis }

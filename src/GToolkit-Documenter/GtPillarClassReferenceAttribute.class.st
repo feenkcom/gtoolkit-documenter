@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'classReference'
 	],
-	#category : 'GToolkit-Documenter-Brick'
+	#category : #'GToolkit-Documenter-Brick'
 }
 
 { #category : #accessing }

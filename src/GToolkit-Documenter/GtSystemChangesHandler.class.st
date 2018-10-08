@@ -8,7 +8,7 @@ Class {
 		'announcer',
 		'isRegistered'
 	],
-	#category : 'GToolkit-Documenter-Core'
+	#category : #'GToolkit-Documenter-Core'
 }
 
 { #category : #'announcer - accessing' }

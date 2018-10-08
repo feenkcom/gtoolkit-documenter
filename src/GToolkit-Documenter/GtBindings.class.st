@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'GtAssertingTrait + GtBindingsTrait',
 	#classTraits : 'GtAssertingTrait classTrait + GtBindingsTrait classTrait',
-	#category : 'GToolkit-Documenter-Bindings'
+	#category : #'GToolkit-Documenter-Bindings'
 }
 
 { #category : #asserting }

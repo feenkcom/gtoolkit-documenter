@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'document'
 	],
-	#category : 'GToolkit-Documenter-Announcements'
+	#category : #'GToolkit-Documenter-Announcements'
 }
 
 { #category : #accessing }

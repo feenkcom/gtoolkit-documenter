@@ -1,7 +1,7 @@
 Class {
 	#name : #GtPillarPharoTextEditorAttribute,
 	#superclass : #BrTextAdornmentAttribute,
-	#category : 'GToolkit-Documenter-Brick'
+	#category : #'GToolkit-Documenter-Brick'
 }
 
 { #category : #accessing }

@@ -1,5 +1,5 @@
 Class {
 	#name : #GtPillarInlinedTextAdornmentDynamicAttribute,
 	#superclass : #BrTextAdornmentDynamicAttribute,
-	#category : 'GToolkit-Documenter-Brick'
+	#category : #'GToolkit-Documenter-Brick'
 }

@@ -10,7 +10,7 @@ Example:
 Class {
 	#name : #GtPillarPlayButtonIconStencil,
 	#superclass : #BrStencil,
-	#category : 'GToolkit-Documenter-Brick-Stencils'
+	#category : #'GToolkit-Documenter-Brick-Stencils'
 }
 
 { #category : #'api - instantiation' }

@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'rootHighlighter'
 	],
-	#category : 'GToolkit-Documenter-Pillar - Highlighter'
+	#category : #'GToolkit-Documenter-Pillar - Highlighter'
 }
 
 { #category : #'instance creation' }

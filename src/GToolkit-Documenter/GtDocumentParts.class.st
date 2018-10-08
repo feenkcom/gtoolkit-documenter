@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'collection'
 	],
-	#category : 'GToolkit-Documenter-Core'
+	#category : #'GToolkit-Documenter-Core'
 }
 
 { #category : #adding }

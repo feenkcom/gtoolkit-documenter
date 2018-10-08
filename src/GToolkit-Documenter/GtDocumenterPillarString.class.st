@@ -13,7 +13,7 @@ Class {
 	#instVars : [
 		'string'
 	],
-	#category : 'GToolkit-Documenter-Utility'
+	#category : #'GToolkit-Documenter-Utility'
 }
 
 { #category : #ui }

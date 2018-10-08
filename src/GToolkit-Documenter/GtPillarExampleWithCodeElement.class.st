@@ -5,7 +5,7 @@ Class {
 		'editorElement',
 		'arrowElement'
 	],
-	#category : 'GToolkit-Documenter-Brick'
+	#category : #'GToolkit-Documenter-Brick'
 }
 
 { #category : #initialization }

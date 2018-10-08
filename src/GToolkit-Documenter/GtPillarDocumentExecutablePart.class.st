@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'outBindings'
 	],
-	#category : 'GToolkit-Documenter-Pillar'
+	#category : #'GToolkit-Documenter-Pillar'
 }
 
 { #category : #accessing }

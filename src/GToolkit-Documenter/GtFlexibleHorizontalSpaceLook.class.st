@@ -1,7 +1,7 @@
 Class {
 	#name : #GtFlexibleHorizontalSpaceLook,
 	#superclass : #BrLook,
-	#category : 'GToolkit-Documenter-Brick-Looks'
+	#category : #'GToolkit-Documenter-Brick-Looks'
 }
 
 { #category : #initialization }

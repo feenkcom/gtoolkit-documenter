@@ -8,7 +8,7 @@ Class {
 		'systemChangesHandler',
 		'documentParts'
 	],
-	#category : 'GToolkit-Documenter-Core'
+	#category : #'GToolkit-Documenter-Core'
 }
 
 { #category : #'as yet unclassified' }

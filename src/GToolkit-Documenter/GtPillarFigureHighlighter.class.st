@@ -1,7 +1,7 @@
 Class {
 	#name : #GtPillarFigureHighlighter,
 	#superclass : #GtPillarNodeHighlighter,
-	#category : 'GToolkit-Documenter-Pillar - Highlighter'
+	#category : #'GToolkit-Documenter-Pillar - Highlighter'
 }
 
 { #category : #'private - accessing' }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'documentPart'
 	],
-	#category : 'GToolkit-Documenter-Pillar - Highlighter'
+	#category : #'GToolkit-Documenter-Pillar - Highlighter'
 }
 
 { #category : #'instance creation' }

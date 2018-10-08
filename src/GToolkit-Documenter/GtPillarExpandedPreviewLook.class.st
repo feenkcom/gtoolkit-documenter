@@ -1,7 +1,7 @@
 Class {
 	#name : #GtPillarExpandedPreviewLook,
 	#superclass : #BrLook,
-	#category : 'GToolkit-Documenter-Brick-Looks'
+	#category : #'GToolkit-Documenter-Brick-Looks'
 }
 
 { #category : #initialization }

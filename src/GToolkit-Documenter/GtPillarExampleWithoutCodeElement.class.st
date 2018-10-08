@@ -1,7 +1,7 @@
 Class {
 	#name : #GtPillarExampleWithoutCodeElement,
 	#superclass : #GtPillarExampleElement,
-	#category : 'GToolkit-Documenter-Brick'
+	#category : #'GToolkit-Documenter-Brick'
 }
 
 { #category : #initialization }

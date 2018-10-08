@@ -1,7 +1,7 @@
 Class {
 	#name : #GtDocumenter,
 	#superclass : #Object,
-	#category : 'GToolkit-Documenter-Core'
+	#category : #'GToolkit-Documenter-Core'
 }
 
 { #category : #opening }

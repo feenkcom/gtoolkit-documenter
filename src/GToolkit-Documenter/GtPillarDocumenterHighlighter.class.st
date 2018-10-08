@@ -11,7 +11,7 @@ Class {
 		'fileReference',
 		'parser'
 	],
-	#category : 'GToolkit-Documenter-Pillar - Highlighter'
+	#category : #'GToolkit-Documenter-Pillar - Highlighter'
 }
 
 { #category : #protocol }
@@ -93,7 +93,7 @@ GtPillarDocumenterHighlighter >> resetListItemCounter [
 
 { #category : #initialization }
 GtPillarDocumenterHighlighter >> resetOutCounter [
-	outsCounter := PRCascadingCounter maxLevel: 1.
+	outsCounter := 0.
 ]
 
 { #category : #accessing }
@@ -142,8 +142,8 @@ GtPillarDocumenterHighlighter >> visitBoldFormat: aPRBoldFormat [
 { #category : #visiting }
 GtPillarDocumenterHighlighter >> visitCodeblock: aPRCodeblock [
 	| aDocumentPart |
-	outsCounter incrementAt: 1.
-	aPRCodeblock counter: outsCounter copy.
+	outsCounter := outsCounter + 1.
+	aPRCodeblock counter: outsCounter.
 	aDocumentPart := GtDocumentPartFinder new
 		document: self document;
 		pillarNode: aPRCodeblock;
