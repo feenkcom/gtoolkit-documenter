@@ -19,31 +19,28 @@ GtPillarCodeblock >> executeWithPlaygroundStrategy [
 
 { #category : #actions }
 GtPillarCodeblock >> executeWithStrategy: aGtBindingStrategy [
-	| newValue aCompiler |
+	| newValue aCommand anErrorCatchingCommand |
 	self 
 		assert: [ aGtBindingStrategy notNil ] 
 		description: [ 'Binding strategy has to be defined' ].
-
 	aGtBindingStrategy bindings: outBindings.
-	aCompiler := self documentClass compiler
-		source: self sourceCode asString readStream;
-		compilationContext: (CompilationContext new
-			class: self documentClass;
-			forSyntaxHighlighting: false;
-			bindings: aGtBindingStrategy;
-			requestor: aGtBindingStrategy);
-		receiver: self document.
-	[ 
-		newValue := aCompiler evaluate.
-		outBindings value: newValue.
-		isException := false.
-		announcer announce: (GtCodeSnippetSuccessfulExecutionAnnouncement document: self document codeSnippet: self newValue: newValue).
-	] on: Error do: [ :anException | 
-		outBindings value: anException.
-		isException := true.
-		announcer announce: (GtCodeSnippetFailedExecutionAnnouncement document: self document codeSnippet: self exception: anException).
-	].
-	
+	aCommand := GtEvaluateSourceCodeCommand new.
+	aCommand requestor: self.
+	aCommand sourceCode: self sourceCode asString.
+	aCommand variableBindings: aGtBindingStrategy.
+	aCommand receiver: self document.
+	anErrorCatchingCommand := aCommand asErrorCatchingCommand.
+	anErrorCatchingCommand execute.
+	newValue := anErrorCatchingCommand result.
+	outBindings value: newValue.
+	isException := anErrorCatchingCommand isException.
+	isException 
+		ifFalse: [ 
+			announcer announce: (GtCodeSnippetSuccessfulExecutionAnnouncement 
+				document: self document codeSnippet: self newValue: newValue) ]
+		ifTrue: [  
+			announcer announce: (GtCodeSnippetFailedExecutionAnnouncement 
+				document: self document codeSnippet: self exception: newValue) ].
 ]
 
 { #category : #initialization }
