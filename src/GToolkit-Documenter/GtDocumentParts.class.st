@@ -40,7 +40,14 @@ GtDocumentParts >> documentPartAt: anInteger [
 	^ collection at: anInteger ifAbsent: [ nil ]
 ]
 
-{ #category : #'gt-inspector-extension' }
+{ #category : #'gt-extension' }
+GtDocumentParts >> gtDocumentPartsFor: aView [
+	<gtView>
+	^ (collection gtItemsFor: aView)
+		title: 'Parts' translated
+]
+
+{ #category : #'gt-extension' }
 GtDocumentParts >> gtInspectorDocumentPartsIn: composite [
 	<gtInspectorPresentationOrder: 1>
 	^ (collection gtInspectorItemsIn: composite)

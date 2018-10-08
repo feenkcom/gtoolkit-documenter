@@ -31,6 +31,12 @@ GtDocument >> globalBindings [
 	^ globalBindings
 ]
 
+{ #category : #'gt-extension' }
+GtDocument >> gtDocumentPartsFor: aView [
+	<gtView>
+	^ (self documentParts gtDocumentPartsFor: aView)
+]
+
 { #category : #initialization }
 GtDocument >> initialize [
 	super initialize.

@@ -43,6 +43,13 @@ GtPillarDocumentPart >> document: aGtDocument [
 	self subscribeToDocument: aGtDocument
 ]
 
+{ #category : #'gt-extension' }
+GtPillarDocumentPart >> gtPillarNodeTextFor: aView [
+	<gtView>
+	self pillarNode ifNil: [ ^ aView empty ].
+	^ self pillarNode gtPillarExportFor: aView
+]
+
 { #category : #accessing }
 GtPillarDocumentPart >> index [
 	<return: #Integer>
