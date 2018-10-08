@@ -441,6 +441,8 @@ GtDocCodeblockExamples >> textEditorWithTwoCodeSnippets [
 	self assert: editor notNil.
 	self assert: editor styler document notNil.
 	self assert: editor styler document documentParts size equals: 2.
+	self assert: (editor styler document documentParts documentPartAt: 1) index equals: 1.
+	self assert: (editor styler document documentParts documentPartAt: 2) index equals: 2.	
 	^ editor
 ]
 
@@ -497,5 +499,7 @@ GtDocCodeblockExamples >> textElementWithTwoCodeSnippets [
 	aTextElement := GtDocumenterExamplesUtility textElementForPillarFileReference: aFileReference.
 	aDocument := GtDocumenterExamplesUtility documentFromTextElement: aTextElement.
 	self assert: aDocument documentParts size equals: 2.
+	self assert: (aDocument documentParts documentPartAt: 1) index equals: 1.
+	self assert: (aDocument documentParts documentPartAt: 2) index equals: 2.	
 	^ aTextElement
 ]
