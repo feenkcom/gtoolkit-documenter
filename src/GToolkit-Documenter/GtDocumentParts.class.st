@@ -71,7 +71,7 @@ GtDocumentParts >> insertScript: aGtCodeSnippetResult at: anInteger [
 GtDocumentParts >> remove: aGtCodeSnippetResult [ 
 	collection remove: aGtCodeSnippetResult.
 	aGtCodeSnippetResult index to: collection size do: [ :index | 
-		(collection at: index) index: index ]
+		(collection at: index) pillarNode counter: index ]
 ]
 
 { #category : #removing }

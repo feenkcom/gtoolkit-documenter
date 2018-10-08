@@ -48,12 +48,6 @@ GtEpiceaMethodViewerExamples >> notExistingMethodDefinition [
 
 ]
 
-{ #category : #viewer }
-GtEpiceaMethodViewerExamples >> notExistingMethodViewer [
-	<gtExample>
-	^ GtEpiceaMethodViewer fromDefinition: self notExistingMethodDefinition
-]
-
 { #category : #'method definition' }
 GtEpiceaMethodViewerExamples >> selectorName [
 	<gtExample>

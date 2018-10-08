@@ -23,11 +23,7 @@ GtDocumentPartFinder >> document: anObject [
 
 { #category : #accessing }
 GtDocumentPartFinder >> documentPartAtSameIndex [
-	<return: #GtPillarDocumentPart>
-	| aDocumentPart |
-	aDocumentPart := self document documentParts documentPartAt: self pillarNodeIndex.
-	aDocumentPart pillarNode: self pillarNode.
-	^ aDocumentPart
+	^ self document documentParts documentPartAt: self pillarNodeIndex
 ]
 
 { #category : #accessing }
@@ -55,11 +51,11 @@ GtDocumentPartFinder >> find [
 	(self pillarNodeIndex = (self numberOfDocumentParts + 1))
 		ifTrue: [ ^ self newDocumentPartAtSameIndex ].
 	self hasSimilarSourceCodeAtSameIndex
-		ifTrue: [ ^ self documentPartAtSameIndex ].
+		ifTrue: [ ^ self updateDocumentPartAtSameIndex ].
 	self hasSimilarSourceCodeAtFollowingIndex
 		ifTrue: [
 			self removeScriptAtSameIndex. 
-			^ self documentPartAtSameIndex ]. 
+			^ self updateDocumentPartAtSameIndex ]. 
 	^ self newDocumentPartAtSameIndex
 ]
 
@@ -105,7 +101,7 @@ GtDocumentPartFinder >> pillarNode: anObject [
 { #category : #accessing }
 GtDocumentPartFinder >> pillarNodeAtFollowingIndex [
 	<return: #PRDocumentItem>
-	^ self document documentPartAt: self pillarNodeIndex + 1
+	^ (self document documentParts documentPartAt: self pillarNodeIndex + 1) pillarNode
 ]
 
 { #category : #accessing }
@@ -123,4 +119,13 @@ GtDocumentPartFinder >> pillarNodeIndex [
 { #category : #removing }
 GtDocumentPartFinder >> removeScriptAtSameIndex [
 	self document documentParts remove: self documentPartAtSameIndex
+]
+
+{ #category : #accessing }
+GtDocumentPartFinder >> updateDocumentPartAtSameIndex [
+	<return: #GtPillarDocumentPart>
+	| aDocumentPart |
+	aDocumentPart := self documentPartAtSameIndex.
+	aDocumentPart pillarNode: self pillarNode.
+	^ aDocumentPart
 ]
