@@ -1,7 +1,7 @@
 Class {
 	#name : #GtDocCodeblockExamples,
 	#superclass : #GtDocAbstractExamples,
-	#category : 'GToolkit-Documenter-Examples'
+	#category : #'GToolkit-Documenter-Examples'
 }
 
 { #category : #'failed executable code snippet' }

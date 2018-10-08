@@ -1,7 +1,7 @@
 Class {
 	#name : #GtPillarDocumenterHighlighterExamples,
 	#superclass : #Object,
-	#category : 'GToolkit-Documenter-Examples'
+	#category : #'GToolkit-Documenter-Examples'
 }
 
 { #category : #'highlighted text' }

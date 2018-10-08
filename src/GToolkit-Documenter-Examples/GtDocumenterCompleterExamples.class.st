@@ -1,7 +1,7 @@
 Class {
 	#name : #GtDocumenterCompleterExamples,
 	#superclass : #GtCompleterExamples,
-	#category : 'GToolkit-Documenter-Examples'
+	#category : #'GToolkit-Documenter-Examples'
 }
 
 { #category : #completion }

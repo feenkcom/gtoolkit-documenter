@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'fileSystemExamples'
 	],
-	#category : 'GToolkit-Documenter-Examples'
+	#category : #'GToolkit-Documenter-Examples'
 }
 
 { #category : #initialization }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'fileSystemExamples'
 	],
-	#category : 'GToolkit-Documenter-Examples'
+	#category : #'GToolkit-Documenter-Examples'
 }
 
 { #category : #'file system' }

@@ -1,8 +1,14 @@
 Class {
 	#name : #GtDocumenterExamples,
 	#superclass : #GtDocAbstractExamples,
-	#category : 'GToolkit-Documenter-Examples'
+	#category : #'GToolkit-Documenter-Examples'
 }
+
+{ #category : #'pillar card preview' }
+GtDocumenterExamples >> basicCard [
+	<gtExample>
+	^ BrCard new
+]
 
 { #category : #completer }
 GtDocumenterExamples >> completer [
@@ -226,6 +232,16 @@ GtDocumenterExamples >> pillarCardPreviewVisitorOfExistingFigure [
 	^ aVisitor
 ]
 
+{ #category : #'pillar card preview' }
+GtDocumenterExamples >> pillarCardPreviewWithTitleFigureAndDescription [
+	<gtExample>
+	| aCard |
+	aCard := self basicCard.
+	
+	
+	^ aCard
+]
+
 { #category : #'examples - classes' }
 GtDocumenterExamples >> pillarContentWithExamplesAnnotationUsingClasses [
 	<gtExample>
@@ -354,6 +370,22 @@ GtDocumenterExamples >> referencedMethod [
 GtDocumenterExamples >> referencedMethodTwo [
 	<gtExample>
 	^ self class >> #referencedMethodTwo
+]
+
+{ #category : #'pillar card preview' }
+GtDocumenterExamples >> smallVerticalCard [
+	<gtExample>
+	| aCard |
+	aCard := self basicCard.
+	aCard
+		size: 200@300;
+		look: BrShadowLook + BrLabelLook + BrIconLook + BrDescriptionLook;
+		background: Color white;
+		margin: (BlInsets all: 10);
+		padding: (BlInsets all: 10);
+		layout: BlLinearLayout vertical.
+	
+	^ aCard
 ]
 
 { #category : #'examples - classes' }

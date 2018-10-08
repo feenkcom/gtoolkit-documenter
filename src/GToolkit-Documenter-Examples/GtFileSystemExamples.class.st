@@ -5,7 +5,7 @@ Class {
 		'memory',
 		'rootDirectoryName'
 	],
-	#category : 'GToolkit-Documenter-Examples'
+	#category : #'GToolkit-Documenter-Examples'
 }
 
 { #category : #utility }

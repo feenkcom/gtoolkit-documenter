@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'GtAssertingTrait',
 	#classTraits : 'GtAssertingTrait classTrait',
-	#category : 'GToolkit-Documenter-Examples'
+	#category : #'GToolkit-Documenter-Examples'
 }
 
 { #category : #'utility - accessing' }
