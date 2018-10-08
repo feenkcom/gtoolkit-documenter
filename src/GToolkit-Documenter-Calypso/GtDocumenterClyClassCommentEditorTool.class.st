@@ -92,7 +92,7 @@ GtDocumenterClyClassCommentEditorTool >> defaultTitle [
 GtDocumenterClyClassCommentEditorTool >> detachFromSystem [
 
 	browser system unsubscribe: self.
-	space hasHostSpace ifTrue: [ space close ]
+	space ifNotNil: [ :aSpace | aSpace hasHostSpace ifTrue: [ space close ] ]
 ]
 
 { #category : #accessing }
