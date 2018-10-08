@@ -73,6 +73,11 @@ GtDocumenterConstants class >> heightParameterName [
 	^ #height
 ]
 
+{ #category : #'accessing - directory names' }
+GtDocumenterConstants class >> localGtDirectory [
+	^ 'gt-extra'
+]
+
 { #category : #'accessing - pillar parameter names' }
 GtDocumenterConstants class >> methodsParameterName [
 	^ #methods
