@@ -19,7 +19,7 @@ GtPillarIcebergFileAnnotationHighlighter >> initializeFileReference [
 			aFile exists ifTrue: [ fileReference := aFile. ^ self ].
 			aFile := GtFileUtility 
 					fileReferenceOfFileName: aValue 
-					relativeTo: FileLocator workingDirectory / self constants localGtDirectory.
+					relativeTo: Smalltalk imageDirectory / self constants localGtDirectory.
 			aFile exists ifTrue: [ fileReference := aFile. ^ self ] ] 
 		emptyValue: [ "do nothing" ] 
 		defaultValue: [ "do nothing" ]
