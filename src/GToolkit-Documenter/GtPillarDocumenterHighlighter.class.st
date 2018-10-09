@@ -259,7 +259,8 @@ GtPillarDocumenterHighlighter >> visitListItem: aPRListItem [
 						indexText := anItemIndex asRopedText.
 						indexText fontSize: 9.
 						indexText foreground: Color lightGray.
-						BlTextElement new text: indexText ] }
+						BlTextElement new text: indexText ] }.
+	super visitListItem: aPRListItem
 ]
 
 { #category : #visiting }
