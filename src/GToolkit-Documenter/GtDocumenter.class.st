@@ -34,12 +34,17 @@ GtDocumenter class >> editorForText: aString fileReference: aFileReference [
 	editor := BrTextEditor new.
 	editor styler: styler.
 	editor text: text.
-	editorElement := BrEditorElement new.
+	editorElement := GtDocumentEditorElement new.
 	editorElement constraintsDo: [ :c |
 		c horizontal matchParent.
 		c vertical matchParent.
 		c padding: (BlInsets all: 10) ].
 	editorElement editor: editor.
+	
+	editorElement when: GtDocumentEditorElementRemovedFromSceneEvent do: [ :ann | 
+		self halt.
+		document systemChangesHandler unsubscribeFromSystem ].
+
 	completionStrategy := GtDocumenterCompletionStrategy new.
 	completionStrategy fileReference: aFileReference.
 	completionController := GtCompletionController on: editorElement strategy: completionStrategy.

@@ -45,7 +45,7 @@ GtDocument >> initialize [
 	globalBindings 
 		at: GtDocumenterConstants resultsVariableName 
 		put: documentParts.
-	systemChangesHandler := GtSystemChangesHandler new.
+	systemChangesHandler := GtSystemChangesHandler new
 ]
 
 { #category : #accessing }

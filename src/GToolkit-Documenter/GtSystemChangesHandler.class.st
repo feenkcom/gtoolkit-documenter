@@ -44,7 +44,8 @@ GtSystemChangesHandler >> initialize [
 	super initialize.
 	announcer := Announcer new.
 	isRegistered := false.
-	self class finalizationRegistry add: self.
+	"self class finalizationRegistry add: self."
+
 ]
 
 { #category : #initialization }
