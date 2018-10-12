@@ -42,7 +42,6 @@ GtDocumenter class >> editorForText: aString fileReference: aFileReference [
 	editorElement editor: editor.
 	
 	editorElement when: GtDocumentEditorElementRemovedFromSceneEvent do: [ :ann | 
-		self halt.
 		document systemChangesHandler unsubscribeFromSystem ].
 
 	completionStrategy := GtDocumenterCompletionStrategy new.
