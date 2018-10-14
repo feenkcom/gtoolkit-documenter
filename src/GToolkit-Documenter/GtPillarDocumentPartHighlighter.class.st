@@ -37,7 +37,7 @@ GtPillarDocumentPartHighlighter >> documentPart: aGtPillarExecutableNode [
 
 { #category : #'private - styling' }
 GtPillarDocumentPartHighlighter >> expandingStyleAttributes [
-	<return: #Array of: #BrTextAttribute>
+	<return: #Array of: #BlTextAttribute>
 	^ #()
 ]
 

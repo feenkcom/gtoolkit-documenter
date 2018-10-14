@@ -11,7 +11,7 @@ GtExamplesStyler class >> editorElementOnSourceCode: aString inClass: aClass [
 	text := aString asRopedText.
 	styler := self new.
 	styler classOrMetaClass: aClass.
-	text attributes: { BrFontGenericFamilyAttribute monospace beNotOverwritableByStyler . (BrFontSizeAttribute new size: 14) beNotOverwritableByStyler}.
+	text attributes: { BlFontGenericFamilyAttribute monospace beNotOverwritableByStyler . (BlFontSizeAttribute new size: 14) beNotOverwritableByStyler}.
 	editor := BrTextEditor new.
 	editor styler: styler.
 	editor text: text.

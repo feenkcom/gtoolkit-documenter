@@ -65,8 +65,8 @@ GtDocumenterUtility class >> methodDefinitionsFromArray: aCollection [
 GtDocumenterUtility class >> newPharoEditorElementFor: aBlText [
 	| aTextEditor anEditorElement |
 	aBlText attributes: {
-		BrFontGenericFamilyAttribute monospace beNotOverwritableByStyler.
-		(BrFontSizeAttribute size: 14) beNotOverwritableByStyler }.
+		BlFontGenericFamilyAttribute monospace beNotOverwritableByStyler.
+		(BlFontSizeAttribute size: 14) beNotOverwritableByStyler }.
 	aTextEditor := BrTextEditor new.
 	aTextEditor styler: (BrRBTextStyler new workspace: GtHighlightingBindingStrategy new).
 	aTextEditor text: aBlText.
@@ -80,8 +80,8 @@ GtDocumenterUtility class >> newPharoEditorElementFor: aBlText styler: aStyler [
 	<return: #BrEditorElement>
 	| aTextEditor anEditorElement |
 	aBlText attributes: {
-		BrFontGenericFamilyAttribute monospace beNotOverwritableByStyler.
-		(BrFontSizeAttribute size: 14) beNotOverwritableByStyler }.
+		BlFontGenericFamilyAttribute monospace beNotOverwritableByStyler.
+		(BlFontSizeAttribute size: 14) beNotOverwritableByStyler }.
 	aTextEditor := BrTextEditor new.
 	aTextEditor styler: aStyler.
 	aTextEditor text: aBlText.

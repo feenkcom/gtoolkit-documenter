@@ -169,7 +169,7 @@ GtPillarDocumenterHighlighter >> visitExternalLink: anPRExternalLine [
 			attributes: { 
 				BrTextHoverAttribute new 
 					beNotOverwritableByStyler;
-					removableTextAttribute: (BrTextBackgroundAttribute paint: (Color gray alpha: 0.2)).
+					removableTextAttribute: (BlTextBackgroundAttribute paint: (Color gray alpha: 0.2)).
 				BrTextClickAttribute new 
 					beNotOverwritableByStyler;
 					action: [ :aText :aTarget :anEvent | 

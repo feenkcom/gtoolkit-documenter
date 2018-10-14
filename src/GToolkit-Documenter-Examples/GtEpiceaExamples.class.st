@@ -257,7 +257,7 @@ GtEpiceaExamples >> ropeDiff [
 			(text from: initialPosition to: text size)
 				foreground: Color red muchDarker.
 			text insertString: String cr at: text size. ].
-	text attributes: { BrFontGenericFamilyAttribute monospace }.
+	text attributes: { BlFontGenericFamilyAttribute monospace }.
 	^ text
 ]
 

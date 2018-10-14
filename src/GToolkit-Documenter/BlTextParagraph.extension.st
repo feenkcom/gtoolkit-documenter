@@ -1,7 +1,7 @@
-Extension { #name : #BrTextParagraph }
+Extension { #name : #BlTextParagraph }
 
 { #category : #'*GToolkit-Documenter' }
-BrTextParagraph >> gtInspectorBlocTextIn: composite [
+BlTextParagraph >> gtInspectorBlocTextIn: composite [
 	<gtInspectorPresentationOrder: -10>  
 	 composite bloc
 		title: 'Text (Bloc)';
@@ -28,6 +28,6 @@ BrTextParagraph >> gtInspectorBlocTextIn: composite [
 ]
 
 { #category : #'*GToolkit-Documenter' }
-BrTextParagraph >> gtTextIn: anElement [
+BlTextParagraph >> gtTextIn: anElement [
 	anElement addChild: (GtDocumenter editorForText: self text copy)
 ]

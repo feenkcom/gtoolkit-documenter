@@ -1,6 +1,6 @@
 Class {
 	#name : #GtPillarStyler,
-	#superclass : #BrTextStyler,
+	#superclass : #BlTextStyler,
 	#instVars : [
 		'document',
 		'fileReference',

@@ -60,7 +60,7 @@ GtExample >> gtInspectorBlocSourceIn: composite [
 		element: [ 
 			| text styler editor editorElement |
 			text := self method sourceCode asRopedText.
-			text attributes: { BrFontGenericFamilyAttribute monospace beNotOverwritableByStyler}.
+			text attributes: { BlFontGenericFamilyAttribute monospace beNotOverwritableByStyler}.
 			styler := GtExamplesStyler new classOrMetaClass: self methodClass.
 			editor := BrTextEditor new.
 			editor styler: styler.

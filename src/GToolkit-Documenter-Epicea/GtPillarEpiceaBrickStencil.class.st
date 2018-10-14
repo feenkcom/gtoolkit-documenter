@@ -95,7 +95,7 @@ GtPillarEpiceaBrickStencil >> diffRope [
 				foreground: Color red muchDarker.
 			aRopedText insertString: String cr at: aRopedText size. ].
 	aRopedText isEmpty ifFalse: [ 
-		aRopedText attributes: { BrFontGenericFamilyAttribute monospace } ].
+		aRopedText attributes: { BlFontGenericFamilyAttribute monospace } ].
 	^ aRopedText
 ]
 
@@ -135,7 +135,7 @@ GtPillarEpiceaBrickStencil >> finalCodeRope [
 	| aRopedText |
 	aRopedText := self epiceaLog newStateString asRopedText.
 	aRopedText isEmpty ifFalse: [ 
-		aRopedText attributes: { BrFontGenericFamilyAttribute monospace } ].
+		aRopedText attributes: { BlFontGenericFamilyAttribute monospace } ].
 	^ aRopedText
 ]
 

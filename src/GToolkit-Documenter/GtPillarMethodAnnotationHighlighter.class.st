@@ -56,14 +56,14 @@ GtPillarMethodAnnotationHighlighter >> styleReferenceParameter [
 		ifFound: [ :aParameter | aParameter ]
 		ifNone: [ self pillarNode ].
 
-	theAttributes := Array with: (BrTextForegroundAttribute new
+	theAttributes := Array with: (BlTextForegroundAttribute new
 					paint: aClassColor;	
 					beNotOverwritableByStyler).
 	self isMethodDefined ifTrue: [ 
 		theAttributes := theAttributes , {
 				BrTextHoverAttribute new 
 					beNotOverwritableByStyler;
-					removableTextAttribute: (BrTextBackgroundAttribute paint: (Color gray alpha: 0.2)).
+					removableTextAttribute: (BlTextBackgroundAttribute paint: (Color gray alpha: 0.2)).
 				BrTextClickAttribute new 
 					beNotOverwritableByStyler;
 					action: [ :aText :aTarget :anEvent | 
