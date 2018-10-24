@@ -1,12 +1,4 @@
-Class {
-	#name : #GtFileSystemExamples,
-	#superclass : #Object,
-	#instVars : [
-		'memory',
-		'rootDirectoryName'
-	],
-	#category : #'GToolkit-Documenter-Examples'
-}
+Extension { #name : #GtFileSystemExamples }
 
 { #category : #'*GToolkit-Documenter-Examples' }
 GtFileSystemExamples >> addPillarFileWithContent: aString [
