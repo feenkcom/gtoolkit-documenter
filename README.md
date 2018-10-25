@@ -64,11 +64,4 @@ Furthermore, to make the manipulation of results more efficient, we can also res
 
 ## How to load
 
-The ideal way to load the code is by loading the entire [Glamorous Toolkit code](https://github.com/feenkcom/gtoolkit). However, you can load the Documenter code in Pharo 6.1 using the following snippet (however some graphical visualisations will not work):
-
-```
-Metacello new
-   baseline: 'GToolkitDocumenter';
-   repository: 'github://feenkcom/gtoolkit-documenter/src';
-   load.
-```
+The ideal way to load the code is by loading the entire [Glamorous Toolkit project](https://github.com/feenkcom/gtoolkit).
