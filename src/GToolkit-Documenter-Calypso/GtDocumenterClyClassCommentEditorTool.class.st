@@ -68,12 +68,19 @@ GtDocumenterClyClassCommentEditorTool >> build [
 
 { #category : #building }
 GtDocumenterClyClassCommentEditorTool >> buildDocumenter [
-
-	documenter := GtDocumenter editorForText: self editingText.
-	documenter
+	| aPageElement |
+	aPageElement := GtDocumenter editorForText: self editingText.
+	aPageElement
 		addShortcut: (BlShortcut new
 			combination: (BlKeyCombination builder meta; key: Key s; build);
-			action: [ :aShortcut | self saveComment ])
+			action: [ :aShortcut | self saveComment ]).
+			
+	documenter := GtInspector new.
+	documenter constraintsDo: [ :c |
+		c horizontal matchParent.
+		c vertical matchParent ].
+
+	documenter addPageWithContent: aPageElement for: editingClass comment.
 ]
 
 { #category : #initialization }
