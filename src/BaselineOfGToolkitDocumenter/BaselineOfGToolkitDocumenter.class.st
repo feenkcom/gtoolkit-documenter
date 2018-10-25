@@ -35,7 +35,7 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 				repository: 'github://feenkcom/gtoolkit-examples/src' ];
 			baseline: 'GToolkitInspector' with: [ spec
 				repository: 'github://feenkcom/gtoolkit-inspector/src' ];
-			baseline: 'Pillar' with: [ spec
+			baseline: 'PillarCore' with: [ spec
 				"repository: 'github://pillar-markup/pillar/src'"
 				"repository: 'github://pillar-markup/pillar:dev-7/src'"
 				repository: 'github://feenkcom/pillar:dev-7/src' ];
@@ -47,13 +47,13 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 				versionString: #development;
 				repository: 'http://smalltalkhub.com/mc/Moose/DeepTraverser/main/' ];
 			package: 'GToolkit-Documenter-BrTextPetitParserCompatibility' with: [ spec requires: #( 
-				#Pillar #GToolkitUtility ) ];
+				#PillarCore #GToolkitUtility ) ];
 			package: 'Pillar2-PetitPillar' with: [ spec requires: #( 
-				#'PetitParser2Core' #'Pillar' ) ];
+				#'PetitParser2Core' #'PillarCore' ) ];
 			package: 'Pillar2-Tests-PetitPillar' with: [ spec requires: #( 
 				#'Pillar2-PetitPillar' ) ];
 			package: 'GToolkit-Documenter' with: [ spec requires: #( 
-				#Brick #Pillar #GToolkitCompleter
+				#Brick #PillarCore #GToolkitCompleter
 				#GToolkitUtility 
 				#GToolkitVariableBindings
 				#GToolkitExamples 
@@ -61,7 +61,7 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 				#'Pillar2-Tests-PetitPillar'
 				#'GToolkit-Documenter-BrTextPetitParserCompatibility' ) ];
 			package: 'GToolkit-Documenter-Exporter' with: [ spec requires: #( 
-				#Brick #Pillar #GToolkitUtility 'GToolkit-Documenter' ) ];
+				#Brick #PillarCore #GToolkitUtility 'GToolkit-Documenter' ) ];
 			package: 'GToolkit-Documenter-Exporter-Tests' with: [ spec requires: #( 
 				'GToolkit-Documenter-Exporter' ) ];
 			package: 'GToolkit-Documenter-Epicea' with: [ spec requires: #(
