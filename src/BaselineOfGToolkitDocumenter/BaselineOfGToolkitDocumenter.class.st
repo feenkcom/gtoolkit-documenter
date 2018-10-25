@@ -46,8 +46,6 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 				className: #ConfigurationOfDeepTraverser;
 				versionString: #development;
 				repository: 'http://smalltalkhub.com/mc/Moose/DeepTraverser/main/' ];
-			package: 'GToolkit-Documenter-BrTextPetitParserCompatibility' with: [ spec requires: #( 
-				#PillarCore #GToolkitUtility ) ];
 			package: 'Pillar2-PetitPillar' with: [ spec requires: #( 
 				#'PetitParser2Core' #'PillarCore' ) ];
 			package: 'Pillar2-Tests-PetitPillar' with: [ spec requires: #( 
@@ -58,8 +56,7 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 				#GToolkitVariableBindings
 				#GToolkitExamples 
 				#GToolkitInspector
-				#'Pillar2-Tests-PetitPillar'
-				#'GToolkit-Documenter-BrTextPetitParserCompatibility' ) ];
+				#'Pillar2-Tests-PetitPillar' ) ];
 			package: 'GToolkit-Documenter-Exporter' with: [ spec requires: #( 
 				#Brick #PillarCore #GToolkitUtility 'GToolkit-Documenter' ) ];
 			package: 'GToolkit-Documenter-Exporter-Tests' with: [ spec requires: #( 
