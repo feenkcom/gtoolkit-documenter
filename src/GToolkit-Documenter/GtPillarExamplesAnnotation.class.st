@@ -46,7 +46,7 @@ GtPillarExamplesAnnotation >> exampleGroup [
 	thePackages := self packagesParameterValue flatCollect: [ :eachPackageDef | 
 			(RPackageOrganizer default includesPackageNamed: eachPackageDef name) 
 				ifTrue: [ eachPackageDef realPackage gtExamplesContained ] ifFalse: [ #() ] ].
-	^ GtExampleGroup new examples: theMethods, theClasses, thePackages
+	^ GtExampleGroup withAll: theMethods, theClasses, thePackages
 ]
 
 { #category : #testing }
