@@ -119,7 +119,7 @@ GtEpiceaLog >> gtGlobalEntriesIn: aView [
 		priority: 20;
 		stencil: [ 
 			| aList aGlobalLog |
-			aGlobalLog := EpMonitor current log entries.
+			aGlobalLog := EpMonitor current log entries reversed.
 			aList := BrColumnedList new display: aGlobalLog.
 			aList addEventHandler: GtInspectorListToSelectHandler new.
 			aList constraintsDo: [ :c | c padding: (BlInsets top: 10) ].
