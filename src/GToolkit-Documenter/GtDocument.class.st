@@ -11,7 +11,7 @@ Class {
 	#category : #'GToolkit-Documenter-Core'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #adding }
 GtDocument >> addCodeSnippet: aGtPillarDocumentExecutablePart [ 
 	documentParts 
 		insertScript: aGtPillarDocumentExecutablePart 
@@ -51,4 +51,16 @@ GtDocument >> initialize [
 { #category : #accessing }
 GtDocument >> systemChangesHandler [
 	^ systemChangesHandler
+]
+
+{ #category : #subscriptions }
+GtDocument >> unsubscribeFromSystem [
+	self systemChangesHandler unsubscribeFromSystem.
+]
+
+{ #category : #subscriptions }
+GtDocument >> updateAndSubscribeToSystem [
+	self systemChangesHandler 
+		maySubscribeToSystem;
+		mayRequestDocumentUpdate
 ]

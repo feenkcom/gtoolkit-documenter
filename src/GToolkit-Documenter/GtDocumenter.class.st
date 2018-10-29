@@ -42,7 +42,9 @@ GtDocumenter class >> editorForText: aString fileReference: aFileReference [
 	editorElement editor: editor.
 	
 	editorElement when: GtDocumentEditorElementRemovedFromSceneEvent do: [ :ann | 
-		document systemChangesHandler unsubscribeFromSystem ].
+		document unsubscribeFromSystem ].
+	editorElement when: GtDocumentEditorElementAddedToSceneEvent do: [ :ann | 
+		document updateAndSubscribeToSystem ].
 
 	completionStrategy := GtDocumenterCompletionStrategy new.
 	completionStrategy fileReference: aFileReference.

@@ -77,7 +77,7 @@ GtEpiceaChanges >> sourceFileReference: aFileReference [
 GtEpiceaChanges >> subscribeToDocument: aGtDocument [ 
 	super subscribeToDocument: aGtDocument.
 	aGtDocument systemChangesHandler
-		subscribe: ClassAnnouncement, MethodAnnouncement
+		subscribe: ClassAnnouncement, MethodAnnouncement, GtDocumentUpdateRequestedAnnouncement
 		send: #handleSystemChange:
 		to: self.
 ]

@@ -48,7 +48,22 @@ GtSystemChangesHandler >> initialize [
 
 ]
 
-{ #category : #initialization }
+{ #category : #subscriptions }
+GtSystemChangesHandler >> mayRequestDocumentUpdate [
+	isRegistered ifFalse: [ ^ self ].
+	announcer numberOfSubscriptions isZero ifTrue: [ ^ self ].
+	self announcer announce: (GtDocumentUpdateRequestedAnnouncement new)
+]
+
+{ #category : #subscriptions }
+GtSystemChangesHandler >> maySubscribeToSystem [
+	isRegistered ifTrue: [ ^ self ].
+	announcer numberOfSubscriptions isZero ifTrue: [ ^ self ].
+	self ensureSystemSubscription. 
+]
+
+{ #category : #subscriptions }
 GtSystemChangesHandler >> unsubscribeFromSystem [
 	SystemAnnouncer uniqueInstance unsubscribe: self.
+	isRegistered := false.
 ]

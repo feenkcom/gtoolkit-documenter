@@ -11,8 +11,7 @@ Class {
 GtDocumentEditorElement >> onAddedToSceneGraph [
 	self space when: BlSpaceClosedEvent do: [ :ann |
 		self fireEvent: GtDocumentEditorElementRemovedFromSceneEvent new ].
-
-	
+	self fireEvent: GtDocumentEditorElementAddedToSceneEvent new.
 ]
 
 { #category : #'hooks - children' }
