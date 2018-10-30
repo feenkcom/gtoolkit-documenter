@@ -79,23 +79,30 @@ GtPillarExampleAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAnnoun
 	((aClassAnnouncement classAffected name = self methodClassName) or: [ 
 		aClassAnnouncement classAffected name = ('AnObsolete', self methodClassName) ]) 
 			ifFalse: [ ^ self ].
-	self announcer announce: (GtExampleClassUpdatedAnnouncement 
-		document: self document
-		codeSnippet: self)
+	self notifyExampleUpdated
 ]
 
 { #category : #'announcement handling' }
 GtPillarExampleAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [ 
-	self flag: 'todo'
+	self methodClassName ifNil: [ ^ self ].
+	((aClassRenamed classAffected name = self methodClassName) or: [ 
+		aClassRenamed newName = self methodClassName or: [ 
+			aClassRenamed oldName = self methodClassName ] ])
+			ifFalse: [ ^ self ].
+	self notifyExampleUpdated
 ]
 
 { #category : #'announcement handling' }
-GtPillarExampleAnnotation >> handleMethodAnnouncement: aMethodModified [ 
-	((aMethodModified classAffected name = self methodClassName) and: [ 
-		aMethodModified selector = self methodDefinition selector ]) ifFalse: [ ^ self ].
-	self announcer announce: (GtExampleClassUpdatedAnnouncement 
-		document: self document
-		codeSnippet: self)
+GtPillarExampleAnnotation >> handleDocumentUpdateRequestedAnnouncement: aGtDocumentUpdateRequestedAnnouncement [
+	self notifyExampleUpdated
+]
+
+{ #category : #'announcement handling' }
+GtPillarExampleAnnotation >> handleMethodAnnouncement: aMethodModified [
+	(aMethodModified classAffected name = self methodClassName
+		and: [ aMethodModified selector = self methodDefinition selector ])
+		ifFalse: [ ^ self ].
+	self notifyExampleUpdated
 ]
 
 { #category : #testing }
@@ -172,6 +179,15 @@ GtPillarExampleAnnotation >> methodName [
 		value: [ :aString | aString ]
 		emptyValue: [ nil ]
 		defaultValue: [ nil ]
+]
+
+{ #category : #notifying }
+GtPillarExampleAnnotation >> notifyExampleUpdated [
+	self announcer
+		announce:
+			(GtExampleClassUpdatedAnnouncement
+				document: self document
+				codeSnippet: self)
 ]
 
 { #category : #'accessing - parameter values' }

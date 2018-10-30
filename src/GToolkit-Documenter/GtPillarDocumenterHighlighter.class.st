@@ -211,6 +211,11 @@ GtPillarDocumenterHighlighter >> visitGtPillarExampleAnnotation: aGtPillarExampl
 		send: #handleClassRenamedAnnouncement:
 		to: aGtPillarExampleAnnotation
 		for: aGtPillarExampleAnnotation.
+	self document systemChangesHandler
+		subscribe: GtDocumentUpdateRequestedAnnouncement
+		send: #handleDocumentUpdateRequestedAnnouncement:
+		to: aGtPillarExampleAnnotation
+		for: aGtPillarExampleAnnotation.
 	GtPillarExampleHighlighter highlight: aGtPillarExampleAnnotation using: self.
 ]
 
