@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'hasImpact'
 	],
-	#category : 'GToolkit-Documenter-Epicea'
+	#category : #'GToolkit-Documenter-Epicea'
 }
 
 { #category : #'instance creation' }

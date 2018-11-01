@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'documentPart'
 	],
-	#category : 'GToolkit-Documenter-Epicea'
+	#category : #'GToolkit-Documenter-Epicea'
 }
 
 { #category : #'api - instantiation' }

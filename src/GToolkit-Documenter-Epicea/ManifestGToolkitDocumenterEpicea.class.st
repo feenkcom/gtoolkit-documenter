@@ -1,7 +1,7 @@
 Class {
 	#name : #ManifestGToolkitDocumenterEpicea,
 	#superclass : #PackageManifest,
-	#category : 'GToolkit-Documenter-Epicea'
+	#category : #'GToolkit-Documenter-Epicea'
 }
 
 { #category : #'code-critics' }

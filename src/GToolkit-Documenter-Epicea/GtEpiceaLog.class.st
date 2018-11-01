@@ -12,7 +12,7 @@ Class {
 	#classVars : [
 		'DebugMode'
 	],
-	#category : 'GToolkit-Documenter-Epicea'
+	#category : #'GToolkit-Documenter-Epicea'
 }
 
 { #category : #'instance creation' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #GtPillarEpiceaChangesHighlighter,
 	#superclass : #GtPillarDocumentPartHighlighter,
-	#category : 'GToolkit-Documenter-Epicea'
+	#category : #'GToolkit-Documenter-Epicea'
 }
 
 { #category : #'private - styling' }

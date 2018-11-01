@@ -1,7 +1,7 @@
 Class {
 	#name : #GtPillarEpiceaBrickStencilBuilder,
 	#superclass : #GtPillarBrickStencilBuilder,
-	#category : 'GToolkit-Documenter-Epicea'
+	#category : #'GToolkit-Documenter-Epicea'
 }
 
 { #category : #'api - instantiation' }

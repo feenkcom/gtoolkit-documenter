@@ -5,7 +5,7 @@ Class {
 		'epiceaLog',
 		'sourceFileReference'
 	],
-	#category : 'GToolkit-Documenter-Epicea'
+	#category : #'GToolkit-Documenter-Epicea'
 }
 
 { #category : #accessing }
@@ -29,6 +29,7 @@ GtEpiceaChanges >> handleEpEntryAddedAnnouncement: anEpEntryAdded [
 
 { #category : #'system changes' }
 GtEpiceaChanges >> handleSystemChange: aSystemAnnouncement [
+	self epiceaLog ifNil: [ ^ self ].
 	self epiceaLog isValid ifFalse: [ ^ self ].
 	self epiceaLog checkImpact.
 	self announce: (
