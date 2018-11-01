@@ -55,13 +55,5 @@ GtPillarExampleWithCodeElement >> newEditorElement: aGTExample [
 	"Instantiate a new editor for a given GT-Example"
 	<return: #BrEditorElement>
 	
-	| anEditor aContainer |
-	anEditor := GtExamplesStyler 
-		editorElementOnSourceCode: aGTExample sourceCode
-		inClass: aGTExample methodClass.
-	aContainer := GtDocumenterUtility newResizableElementFor: anEditor.
-	aContainer look: GtPillarExpandedPreviewLook.
-	aContainer constraintsDo: [ :c | 
-			c vertical fitContent ].
-	^ aContainer
+	^ ((GtMethodExampleCoder forExample: aGTExample) expanded: true) asElement
 ]
