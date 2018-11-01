@@ -23,6 +23,9 @@ GtPillarExampleWithCodeElement >> initializeElements [
 		description: [ 'Arrow element must not be initialized' ].
 
 	editorElement := self newEditorElement: self example.
+	editorElement when: GtPhlowObjectToSpawn do: [ :anEvent | 
+		anEvent consumed: true.
+		self updatePreviewWith: anEvent object ].
 
 	arrowElement := self newArrowElement.
 	arrowElement constraintsDo: [ :c |

@@ -203,3 +203,18 @@ GtPillarExampleElement >> showPreview: aBlockOrSymbol [
 
 	self addChild: previewContainer.
 ]
+
+{ #category : #preview }
+GtPillarExampleElement >> updatePreviewWith: anObject [
+	
+	| anElement |
+	anElement := self ensurePreviewElement: [ 
+		previewShowBlock value: anObject ].
+
+	self 
+		assert: [ anElement notNil ]
+		description: [ 'Preview element must be non-nil' ].
+
+	previewElement removeChildren.
+	previewElement addChildFirst: anElement asElement
+]
