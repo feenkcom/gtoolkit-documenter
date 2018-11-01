@@ -9,7 +9,7 @@ GtDocumenterUtility class >> booleanValueOf: aString in: aDictionary emptyValue:
 	^ self 
 		valueOf: aString
 		in: aDictionary
-		value: [ :aValue | self convertToBoolean: aValue ]
+		value: [ :aValue | (self convertToBoolean: aValue) ifNil: emptyBooleanOrBlock ]
 		emptyValue: emptyBooleanOrBlock
 		defaultValue: defaultBooleanOrBlock
 ]
