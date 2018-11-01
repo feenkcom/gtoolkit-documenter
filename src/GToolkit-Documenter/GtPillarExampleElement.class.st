@@ -208,6 +208,9 @@ GtPillarExampleElement >> showPreview: aBlockOrSymbol [
 GtPillarExampleElement >> updatePreviewWith: anObject [
 	
 	| anElement |
+	
+	previewElement hasChildren ifFalse: [ ^ self ].
+	
 	anElement := self ensurePreviewElement: [ 
 		previewShowBlock value: anObject ].
 
