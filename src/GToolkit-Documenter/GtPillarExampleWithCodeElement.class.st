@@ -56,7 +56,7 @@ GtPillarExampleWithCodeElement >> initializeListeners [
 { #category : #'instance creation' }
 GtPillarExampleWithCodeElement >> newEditorElement: aGTExample [
 	"Instantiate a new editor for a given GT-Example"
+
 	<return: #BrEditorElement>
-	
-	^ ((GtMethodExampleCoder forExample: aGTExample) expanded: true) asElement
+	^ ((GtMethodCoder forExample: aGTExample) expanded: true) asElement
 ]
