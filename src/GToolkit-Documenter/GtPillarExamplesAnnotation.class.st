@@ -30,7 +30,7 @@ GtPillarExamplesAnnotation >> classesParameterValue [
 		valueOf: self constants classesParameterName 
 		in: self parameters 
 		value: [ :aValue | 
-			self assert: aValue isArray.
+			aValue isArray ifFalse: [ #() ].
 			GtDocumenterUtility classDefinitionsFromArray: aValue ] 
 		emptyValue: [ #() ]
 		defaultValue: [ #() ]
@@ -60,7 +60,7 @@ GtPillarExamplesAnnotation >> methodsParameterValue [
 		valueOf: self constants methodsParameterName 
 		in: self parameters 
 		value: [ :aValue | 
-			self assert: aValue isArray.
+			aValue isArray ifFalse: [ #() ].
 			GtDocumenterUtility methodDefinitionsFromArray: aValue ] 
 		emptyValue: [ #() ]
 		defaultValue: [ #() ]
@@ -72,7 +72,7 @@ GtPillarExamplesAnnotation >> packagesParameterValue [
 		valueOf: self constants packagesParameterName 
 		in: self parameters 
 		value: [ :aValue | 
-			self assert: aValue isArray.
+			aValue isArray ifFalse: [ #() ].
 			GtDocumenterUtility packageDefinitionsFromArray: aValue ] 
 		emptyValue: [ #() ]
 		defaultValue: [ #() ]
