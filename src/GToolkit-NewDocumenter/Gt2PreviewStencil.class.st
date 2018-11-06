@@ -19,7 +19,7 @@ Gt2PreviewStencil >> create [
 		element 
 			look: Gt2PreviewLook;
 			constraintsDo: [ :c | 
-				c horizontal matchParent.
+				"c horizontal matchParent."
 				"c vertical exact: 300" ] ]
 ]
 

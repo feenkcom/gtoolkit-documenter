@@ -53,7 +53,7 @@ Gt2MethodAnnotation >> isMethodDefined [
 { #category : #'accessing - parameter values' }
 Gt2MethodAnnotation >> referencedMethod [
 	<return: #RGMethodDefinition or: nil>
-	^ referencedMethod ifNil: [ referencedMethod := GtDocumenterUtility 
+	^ referencedMethod ifNil: [ referencedMethod := Gt2DocumentUtility 
 		valueOf: self constants nameParameterName
 		in: self parameters 
 		value: [ :aValue | GtSystemUtility methodDefinitionFromString: aValue ] 
@@ -76,7 +76,7 @@ Gt2MethodAnnotation >> registerToSystemChanges [
 			send: #handleClassRenamedAnnouncement:
 			to: self
 			for: self gtSubscriber;
-		subscribe: GtDocumentUpdateRequestedAnnouncement
+		subscribe: Gt2DocumentUpdateRequestedAnnouncement
 			send: #handleDocumentUpdateRequestedAnnouncement:
 			to: self
 			for: self gtSubscriber.

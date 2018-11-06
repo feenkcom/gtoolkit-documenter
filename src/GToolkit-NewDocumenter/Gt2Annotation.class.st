@@ -23,7 +23,7 @@ Gt2Annotation >> expandedEmptyValue [
 
 { #category : #'accessing - parameter values' }
 Gt2Annotation >> expandedParameterValue [
-	^ GtDocumenterUtility
+	^ Gt2DocumentUtility
 		booleanValueOf: self constants expandedParameterName 
 		in: self parameters 
 		emptyValue: [ self expandedEmptyValue ] 
@@ -43,7 +43,7 @@ Gt2Annotation >> showEmptyValue [
 { #category : #'accessing - parameter values' }
 Gt2Annotation >> showParameterValue [
 	<return: #Symbol>
-	^ GtDocumenterUtility 
+	^ Gt2DocumentUtility 
 		valueOf: self constants showParameterName
 		in: self parameters
 		value: [ :aString | aString isString 
