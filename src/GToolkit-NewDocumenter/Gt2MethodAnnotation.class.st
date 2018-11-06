@@ -29,6 +29,16 @@ Gt2MethodAnnotation >> browseMethodFrom: anEvent [
 ]
 
 { #category : #'as yet unclassified' }
+Gt2MethodAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAdded [ 
+	
+]
+
+{ #category : #'as yet unclassified' }
+Gt2MethodAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [ 
+	
+]
+
+{ #category : #'announcement handling' }
 Gt2MethodAnnotation >> handleMethodAnnouncement: aMethodModified [ 
 	
 ]
@@ -56,19 +66,19 @@ Gt2MethodAnnotation >> registerToSystemChangesFor: aBlRope [
 		subscribe: MethodAdded, MethodModified, MethodRemoved
 			send: #handleMethodAnnouncement:
 			to: self
-			for: aBlRope;
+			for: self gtSubscriber;
 		subscribe: ClassAdded, ClassRemoved
 			send: #handleClassAddedOrRemovedAnnouncement:
 			to: self
-			for: aBlRope;
+			for: self gtSubscriber;
 		subscribe: ClassRenamed
 			send: #handleClassRenamedAnnouncement:
 			to: self
-			for: aBlRope;
+			for: self gtSubscriber;
 		subscribe: GtDocumentUpdateRequestedAnnouncement
 			send: #handleDocumentUpdateRequestedAnnouncement:
 			to: self
-			for: aBlRope.
+			for: self gtSubscriber.
 ]
 
 { #category : #'api - style' }

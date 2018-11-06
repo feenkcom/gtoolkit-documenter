@@ -1,23 +1,24 @@
 Class {
-	#name : #Gt2PillarStylerVisitor,
+	#name : #Gt2StylerVisitor,
 	#superclass : #PRVisitor,
 	#traits : 'TBlDebug + TGt2DocumentConstants',
 	#classTraits : 'TBlDebug classTrait + TGt2DocumentConstants classTrait',
 	#instVars : [
 		'text',
-		'document'
+		'document',
+		'subscriber'
 	],
 	#category : #'GToolkit-NewDocumenter-Styler'
 }
 
 { #category : #accessing }
-Gt2PillarStylerVisitor >> document [
+Gt2StylerVisitor >> document [
 	<return: #Gt2Document>
 	^ document
 ]
 
 { #category : #accessing }
-Gt2PillarStylerVisitor >> document: aGt2Document [
+Gt2StylerVisitor >> document: aGt2Document [
 	self 
 		assert: [ aGt2Document notNil ]
 		description: [ 'Document must be non-nil' ].
@@ -25,13 +26,23 @@ Gt2PillarStylerVisitor >> document: aGt2Document [
 ]
 
 { #category : #accessing }
-Gt2PillarStylerVisitor >> text [
+Gt2StylerVisitor >> subscriber [
+	^ subscriber
+]
+
+{ #category : #accessing }
+Gt2StylerVisitor >> subscriber: anObject [
+	subscriber := anObject
+]
+
+{ #category : #accessing }
+Gt2StylerVisitor >> text [
 	<return: #BlRope>
 	^ text
 ]
 
 { #category : #accessing }
-Gt2PillarStylerVisitor >> text: aBlRope [
+Gt2StylerVisitor >> text: aBlRope [
 	self
 		assert: [ aBlRope notNil ] 
 		description: [ 'Styled text must be non-nil' ].
@@ -39,8 +50,10 @@ Gt2PillarStylerVisitor >> text: aBlRope [
 ]
 
 { #category : #'visiting-annotations' }
-Gt2PillarStylerVisitor >> visitAnnotation: anAnnotation [
-	anAnnotation gtDocument: self document.
-	anAnnotation styleInText: self text.
+Gt2StylerVisitor >> visitAnnotation: anAnnotation [
+	anAnnotation 
+		gtDocument: self document;
+		gtSubscriber: self subscriber;
+		styleInText: self text.
 	super visitAnnotation: anAnnotation
 ]

@@ -35,6 +35,40 @@ Gt2DocumentExamples >> defaultDocument [
 ]
 
 { #category : #'method - existing one' }
+Gt2DocumentExamples >> documentDeleteAll [
+	<gtExample>
+	| aDocument |
+	aDocument := self documentWithExistingMethodAnnotation.
+	self examplesUtility 
+		deleteText: aDocument text 
+		from: 1
+		to: self contentWithExistingMethodAnnotation size.
+	aDocument editor styleText.
+	self 
+		assert: aDocument text asString 
+		equals: self emptyContent.
+	self assert: aDocument isRegisteredToSystem not.
+	^ aDocument
+]
+
+{ #category : #'method - existing one' }
+Gt2DocumentExamples >> documentDeleteMethodAnnotation [
+	<gtExample>
+	| aDocument |
+	aDocument := self documentWithExistingMethodAnnotation.
+	self examplesUtility 
+		deleteText: aDocument text 
+		from: 1
+		to: self contentWithExistingMethodAnnotation size - 1.
+	aDocument editor styleText.
+	self 
+		assert: aDocument text asString 
+		equals: ( self contentWithExistingMethodAnnotation last asString).
+	self assert: aDocument isRegisteredToSystem not.
+	^ aDocument
+]
+
+{ #category : #'method - existing one' }
 Gt2DocumentExamples >> documentWithEditedExistingMethodAnnotation [
 	<gtExample>
 	| aDocument |

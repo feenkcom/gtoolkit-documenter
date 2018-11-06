@@ -20,7 +20,7 @@ Gt2Document >> announcer [
 
 { #category : #initialization }
 Gt2Document >> defaultStyler [
-	^ Gt2PillarStyler new document: self
+	^ Gt2Styler new document: self
 ]
 
 { #category : #initialization }
