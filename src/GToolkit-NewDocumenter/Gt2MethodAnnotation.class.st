@@ -41,7 +41,12 @@ Gt2MethodAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [
 
 { #category : #'announcement handling' }
 Gt2MethodAnnotation >> handleMethodAnnouncement: aMethodModified [ 
-	
+	(self referencedMethod notNil and: [ 
+		aMethodModified classAffected = self referencedMethod methodClass  
+			and: [ aMethodModified selector = self referencedMethod selector ]])
+			ifFalse: [ ^ self ].
+	self inform: 'style text'.
+	self gtDocument editor styleText
 ]
 
 { #category : #testing }
@@ -115,7 +120,7 @@ Gt2MethodAnnotation >> styleReferenceParameterInText: aBlRope [
 	self isMethodDefined ifTrue: [ 
 		theAttributes := theAttributes , {
 				BrTextHoverAttribute new 
-					removableTextAttribute: (BlTextBackgroundAttribute paint: (Color gray alpha: 0.2)).
+					removableTextAttribute: (BlTextUnderlineAttribute new paint: aLinkColor).
 				BrTextClickAttribute new 
 					action: [ :aText :aTarget :anEvent | 
 						self browseMethodFrom: anEvent ] } ].
