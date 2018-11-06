@@ -4,6 +4,11 @@ Class {
 	#category : #'GToolkit-NewDocumenter-Model'
 }
 
+{ #category : #'pillar annotation names' }
+Gt2DocumentConstants class >> classAnnotationName [
+	^ #class2
+]
+
 { #category : #'pillar parameter names' }
 Gt2DocumentConstants class >> expandedParameterName [
 	^ #expanded

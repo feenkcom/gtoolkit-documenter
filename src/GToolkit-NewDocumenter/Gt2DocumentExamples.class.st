@@ -16,8 +16,15 @@ Gt2DocumentExamples >> constants [
 	^ Gt2DocumentConstants
 ]
 
+{ #category : #'class - existing one' }
+Gt2DocumentExamples >> contentWithExistingClass [
+	<gtExample>
+	^ '${', self constants classAnnotationName, ':', self referencedClass , '}$'
+
+]
+
 { #category : #'method - existing one' }
-Gt2DocumentExamples >> contentWithExistingMethodAnnotation [
+Gt2DocumentExamples >> contentWithExistingMethod [
 	<gtExample>
 	^ '${', self constants methodAnnotationName, ':', self referencedMethod printString, '}$'
 
@@ -51,11 +58,11 @@ Gt2DocumentExamples >> defaultDocument [
 Gt2DocumentExamples >> documentDeleteAll [
 	<gtExample>
 	| aDocument |
-	aDocument := self documentWithExistingMethodAnnotation.
+	aDocument := self documentWithExistingMethod.
 	self examplesUtility 
 		deleteText: aDocument text 
 		from: 1
-		to: self contentWithExistingMethodAnnotation size.
+		to: self contentWithExistingMethod size.
 	aDocument editor styleText.
 	self 
 		assert: aDocument text asString 
@@ -68,15 +75,15 @@ Gt2DocumentExamples >> documentDeleteAll [
 Gt2DocumentExamples >> documentDeleteMethodAnnotation [
 	<gtExample>
 	| aDocument |
-	aDocument := self documentWithExistingMethodAnnotation.
+	aDocument := self documentWithExistingMethod.
 	self examplesUtility 
 		deleteText: aDocument text 
 		from: 1
-		to: self contentWithExistingMethodAnnotation size - 1.
+		to: self contentWithExistingMethod size - 1.
 	aDocument editor styleText.
 	self 
 		assert: aDocument text asString 
-		equals: ( self contentWithExistingMethodAnnotation last asString).
+		equals: ( self contentWithExistingMethod last asString).
 	self assert: aDocument isRegisteredToSystem not.
 	^ aDocument
 ]
@@ -85,26 +92,37 @@ Gt2DocumentExamples >> documentDeleteMethodAnnotation [
 Gt2DocumentExamples >> documentWithEditedExistingMethodAnnotation [
 	<gtExample>
 	| aDocument |
-	aDocument := self documentWithExistingMethodAnnotation.
+	aDocument := self documentWithExistingMethod.
 	self examplesUtility 
 		insertText: self fooText
-		at: (self contentWithExistingMethodAnnotation size - 2)
+		at: (self contentWithExistingMethod size - 2)
 		in: aDocument text.
-	self assert: (aDocument text asString = self contentWithExistingMethodAnnotation) not.
+	self assert: (aDocument text asString = self contentWithExistingMethod) not.
 	self 
 		assert: (aDocument text asString allButLast: (2 + self fooText size)) 
-		equals: (self contentWithExistingMethodAnnotation allButLast: 2).
+		equals: (self contentWithExistingMethod allButLast: 2).
+	self assert: aDocument isRegisteredToSystem.
+	^ aDocument
+]
+
+{ #category : #'class - existing one' }
+Gt2DocumentExamples >> documentWithExistingClass [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExistingClass.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithExistingClass.
 	self assert: aDocument isRegisteredToSystem.
 	^ aDocument
 ]
 
 { #category : #'method - existing one' }
-Gt2DocumentExamples >> documentWithExistingMethodAnnotation [
+Gt2DocumentExamples >> documentWithExistingMethod [
 	<gtExample>
 	| aDocument |
-	aDocument := self defaultDocument text: self contentWithExistingMethodAnnotation.
+	aDocument := self defaultDocument text: self contentWithExistingMethod.
 	aDocument editor styleText.
-	self assert: aDocument text asString equals: self contentWithExistingMethodAnnotation.
+	self assert: aDocument text asString equals: self contentWithExistingMethod.
 	self assert: aDocument isRegisteredToSystem.
 	^ aDocument
 ]
@@ -154,7 +172,7 @@ Gt2DocumentExamples >> parseRopedTextContent [
 	<gtExample>
 	"This one does not work yet. We need to improve Petit Parser to delegate string comparision."
 	| aPRDocument |
-	aPRDocument := self pillarParser parse: self contentWithExistingMethodAnnotation asRopedText.
+	aPRDocument := self pillarParser parse: self contentWithExistingMethod asRopedText.
 	self assert: aPRDocument notNil.
 	self assert: aPRDocument isPetit2Failure not.
 	^ aPRDocument
@@ -164,7 +182,7 @@ Gt2DocumentExamples >> parseRopedTextContent [
 Gt2DocumentExamples >> parseStringContent [
 	<gtExample>
 	| aPRDocument |
-	aPRDocument := self pillarParser parse: self contentWithExistingMethodAnnotation.
+	aPRDocument := self pillarParser parse: self contentWithExistingMethod.
 	self assert: aPRDocument notNil.
 	self assert: aPRDocument isPetit2Failure not.
 	^ aPRDocument
@@ -175,6 +193,12 @@ Gt2DocumentExamples >> pillarParser [
 	<gtExample>
 	^ PRPillarParser new optimize.
 	
+]
+
+{ #category : #'class - existing one' }
+Gt2DocumentExamples >> referencedClass [
+	<gtExample>
+	^ self className
 ]
 
 { #category : #'method - existing one' }

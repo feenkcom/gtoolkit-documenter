@@ -21,8 +21,8 @@ Gt2MethodAnnotation class >> tag [
 	^ self constants methodAnnotationName
 ]
 
-{ #category : #'api - actions' }
-Gt2MethodAnnotation >> browseMethodFrom: anEvent [
+{ #category : #'private - actions' }
+Gt2MethodAnnotation >> browseReferenceFrom: anEvent [
 	self isMethodDefined ifFalse: [ ^ self inform: 'Method does not exists' ].
 	anEvent target fireEvent: (GtPhlowObjectToSpawn new 
 		object: self referencedMethod;
@@ -55,6 +55,30 @@ Gt2MethodAnnotation >> isMethodDefined [
 	^ self referencedMethod notNil and: [ self referencedMethod isDefined ]
 ]
 
+{ #category : #testing }
+Gt2MethodAnnotation >> isPreviewDefined [
+	"Return true if a preview object is defined"
+	^ self isMethodDefined
+]
+
+{ #category : #testing }
+Gt2MethodAnnotation >> isReferenceDefined [
+	"Return true if a referenced object is defined"
+	^ self isMethodDefined 
+]
+
+{ #category : #accessing }
+Gt2MethodAnnotation >> objectToPreview [
+	"Subclasses should define what object to preview"
+	^ self referencedMethod
+]
+
+{ #category : #accessing }
+Gt2MethodAnnotation >> referenceParameterName [
+	"Return an annotation parameter name that holds a referenced object"
+	^ self constants nameParameterName
+]
+
 { #category : #'accessing - parameter values' }
 Gt2MethodAnnotation >> referencedMethod [
 	<return: #RGMethodDefinition or: nil>
@@ -66,7 +90,7 @@ Gt2MethodAnnotation >> referencedMethod [
 		defaultValue: [ nil ] ]
 ]
 
-{ #category : #'api - style' }
+{ #category : #subscriptions }
 Gt2MethodAnnotation >> registerToSystemChanges [
 	self gtDocument
 		subscribe: MethodAdded, MethodModified, MethodRemoved
@@ -88,45 +112,9 @@ Gt2MethodAnnotation >> registerToSystemChanges [
 ]
 
 { #category : #'api - style' }
-Gt2MethodAnnotation >> styleExpandingViewInText: aBlRope [
-	| theAttributes |
-	self isMethodDefined ifFalse: [ ^ self ].
-	theAttributes := BrTextExpandButtonAttributeBuilder new
-		attributesCreatingBlock: [ { Gt2PreviewAttribute new
-			result: self referencedMethod;
-			showSelector: self showParameterValue } ];
-		isExpanded: self expandedParameterValue;
-		build.
-	(aBlRope from: self stop to: self stop)
-		attributes: theAttributes.
-]
-
-{ #category : #'api - style' }
 Gt2MethodAnnotation >> styleInText: aBlRope [
 	super styleInText: aBlRope.
-	self styleReferenceParameterInText: aBlRope.
-	self styleExpandingViewInText: aBlRope.
-	self registerToSystemChanges.
-]
-
-{ #category : #'api - style' }
-Gt2MethodAnnotation >> styleReferenceParameterInText: aBlRope [
-	| aLinkColor aNodeToStyle theAttributes |
-	aLinkColor := Gt2DocumentUtility linkColor: self isMethodDefined.
-	aNodeToStyle := Gt2DocumentUtility 
-		parameterNodeNamed: self constants nameParameterName forAnnotation: self.
-	theAttributes := Array with: (BlTextForegroundAttribute new
-					paint: aLinkColor).
-	self isMethodDefined ifTrue: [ 
-		theAttributes := theAttributes , {
-				BrTextHoverAttribute new 
-					removableTextAttribute: (BlTextUnderlineAttribute new paint: aLinkColor).
-				BrTextClickAttribute new 
-					action: [ :aText :aTarget :anEvent | 
-						self browseMethodFrom: anEvent ] } ].
-
-	(aBlRope  
-		from: aNodeToStyle start 
-		to: aNodeToStyle stop) 
-			attributes: theAttributes.
+	self styleLinkInText: aBlRope.
+	self styleExpandingPreviewInText: aBlRope.
+	self registerToSystemChanges
 ]
