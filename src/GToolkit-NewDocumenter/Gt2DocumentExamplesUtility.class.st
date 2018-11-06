@@ -5,3 +5,8 @@ Class {
 	#classTraits : 'TGt2DocumentConstants classTrait + TBlDebug classTrait',
 	#category : #'GToolkit-NewDocumenter-Examples'
 }
+
+{ #category : #'api - text' }
+Gt2DocumentExamplesUtility class >> insertText: anInsertingBlRope at: anIndex in: anEditedBlRope [ 
+	anEditedBlRope insertText: anInsertingBlRope at: anIndex
+]

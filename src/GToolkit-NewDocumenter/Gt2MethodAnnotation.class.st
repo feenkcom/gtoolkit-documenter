@@ -28,6 +28,11 @@ Gt2MethodAnnotation >> browseMethodFrom: anEvent [
 		sourceElement: anEvent target)
 ]
 
+{ #category : #'as yet unclassified' }
+Gt2MethodAnnotation >> handleMethodAnnouncement: aMethodModified [ 
+	
+]
+
 { #category : #testing }
 Gt2MethodAnnotation >> isMethodDefined [
 	"Return true if a method is defined in the system"

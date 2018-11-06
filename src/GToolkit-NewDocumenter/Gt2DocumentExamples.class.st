@@ -35,6 +35,23 @@ Gt2DocumentExamples >> defaultDocument [
 ]
 
 { #category : #'method - existing one' }
+Gt2DocumentExamples >> documentWithEditedExistingMethodAnnotation [
+	<gtExample>
+	| aDocument |
+	aDocument := self documentWithExistingMethodAnnotation.
+	self examplesUtility 
+		insertText: self fooText
+		at: (self contentWithExistingMethodAnnotation size - 2)
+		in: aDocument text.
+	self assert: (aDocument text asString = self contentWithExistingMethodAnnotation) not.
+	self 
+		assert: (aDocument text asString allButLast: (2 + self fooText size)) 
+		equals: (self contentWithExistingMethodAnnotation allButLast: 2).
+	self assert: aDocument isRegisteredToSystem.
+	^ aDocument
+]
+
+{ #category : #'method - existing one' }
 Gt2DocumentExamples >> documentWithExistingMethodAnnotation [
 	<gtExample>
 	| aDocument |
@@ -61,6 +78,17 @@ Gt2DocumentExamples >> emptyDocument [
 	self assert: aDocument isRegisteredToSystem not.
 	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument) not.
 	^ aDocument
+]
+
+{ #category : #accessing }
+Gt2DocumentExamples >> examplesUtility [
+	^ Gt2DocumentExamplesUtility
+]
+
+{ #category : #basic }
+Gt2DocumentExamples >> fooText [
+	<gtExample>
+	^ 'Foo' asRopedText
 ]
 
 { #category : #'pillar parser' }
