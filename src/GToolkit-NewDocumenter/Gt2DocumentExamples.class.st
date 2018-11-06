@@ -16,6 +16,13 @@ Gt2DocumentExamples >> constants [
 	^ Gt2DocumentConstants
 ]
 
+{ #category : #'method - existing one' }
+Gt2DocumentExamples >> contentWithExistingMethodAnnotation [
+	<gtExample>
+	^ '${', self constants methodAnnotationName, ':', self referencedMethod printString, '}$'
+
+]
+
 { #category : #'empty document' }
 Gt2DocumentExamples >> defaultDocument [
 	<gtExample>
@@ -24,6 +31,17 @@ Gt2DocumentExamples >> defaultDocument [
 	self assert: aDocument text asString equals: self emptyContent.
 	self assert: aDocument isRegisteredToSystem not.
 	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument) not.
+	^ aDocument
+]
+
+{ #category : #'method - existing one' }
+Gt2DocumentExamples >> documentWithExistingMethodAnnotation [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExistingMethodAnnotation.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithExistingMethodAnnotation.
+	self assert: aDocument isRegisteredToSystem.
 	^ aDocument
 ]
 
@@ -42,15 +60,35 @@ Gt2DocumentExamples >> emptyDocument [
 	self assert: aDocument text asString equals: self emptyContent.
 	self assert: aDocument isRegisteredToSystem not.
 	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument) not.
-	"self flag: 'self assert: aDocument bindings notNil'."
 	^ aDocument
 ]
 
-{ #category : #'method - existing one' }
-Gt2DocumentExamples >> pillarContentWithExistingMethodAnnotation [
+{ #category : #'pillar parser' }
+Gt2DocumentExamples >> parseRopedTextContent [
 	<gtExample>
-	^ '${method:', self referencedMethod printString, '}$'
+	"This one does not work yet. We need to improve Petit Parser to delegate string comparision."
+	| aPRDocument |
+	aPRDocument := self pillarParser parse: self contentWithExistingMethodAnnotation asRopedText.
+	self assert: aPRDocument notNil.
+	self assert: aPRDocument isPetit2Failure not.
+	^ aPRDocument
+]
 
+{ #category : #'pillar parser' }
+Gt2DocumentExamples >> parseStringContent [
+	<gtExample>
+	| aPRDocument |
+	aPRDocument := self pillarParser parse: self contentWithExistingMethodAnnotation.
+	self assert: aPRDocument notNil.
+	self assert: aPRDocument isPetit2Failure not.
+	^ aPRDocument
+]
+
+{ #category : #'pillar parser' }
+Gt2DocumentExamples >> pillarParser [
+	<gtExample>
+	^ PRPillarParser new optimize.
+	
 ]
 
 { #category : #'method - existing one' }

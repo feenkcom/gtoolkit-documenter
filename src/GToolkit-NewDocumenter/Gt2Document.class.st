@@ -20,7 +20,7 @@ Gt2Document >> announcer [
 
 { #category : #initialization }
 Gt2Document >> defaultStyler [
-	^ BrRBTextStyler new workspace: GtHighlightingBindingStrategy new
+	^ Gt2PillarStyler new document: self
 ]
 
 { #category : #initialization }
@@ -42,6 +42,15 @@ Gt2Document >> ensureSystemSubscription [
 		send: #handleSystemChangeAnnouncement:
 		to: self.
 	isRegisteredToSystem := true.
+]
+
+{ #category : #'gt-extension' }
+Gt2Document >> gtTextFor: aView [
+	<gtView>
+	self editor ifNil: [ ^ aView empty ].
+	^ aView textEditor
+		title: 'Text';
+		text: [ self text ]
 ]
 
 { #category : #'announcement handling' }
