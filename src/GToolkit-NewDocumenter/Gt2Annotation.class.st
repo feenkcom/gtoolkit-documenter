@@ -11,6 +11,48 @@ Gt2Annotation class >> isAbstract [
 	^ self name = #Gt2Annotation 
 ]
 
+{ #category : #'accessing - parameter values' }
+Gt2Annotation >> expandedDefaultValue [
+	^ false
+]
+
+{ #category : #'accessing - parameter values' }
+Gt2Annotation >> expandedEmptyValue [
+	^ false
+]
+
+{ #category : #'accessing - parameter values' }
+Gt2Annotation >> expandedParameterValue [
+	^ GtDocumenterUtility
+		booleanValueOf: self constants expandedParameterName 
+		in: self parameters 
+		emptyValue: [ self expandedEmptyValue ] 
+		defaultValue: [ self expandedDefaultValue ]
+]
+
+{ #category : #'accessing - parameter values' }
+Gt2Annotation >> showDefaultValue [
+	^ self constants showDefaultValue
+]
+
+{ #category : #'accessing - parameter values' }
+Gt2Annotation >> showEmptyValue [
+	^ self constants showDefaultValue
+]
+
+{ #category : #'accessing - parameter values' }
+Gt2Annotation >> showParameterValue [
+	<return: #Symbol>
+	^ GtDocumenterUtility 
+		valueOf: self constants showParameterName
+		in: self parameters
+		value: [ :aString | aString isString 
+			ifFalse: [ self showEmptyValue ] 
+			ifTrue: [ aString asSymbol ] ]
+		emptyValue: [ self showEmptyValue ]
+		defaultValue: [ self showDefaultValue ]
+]
+
 { #category : #'api - style' }
 Gt2Annotation >> styleInText: aBlRope [
 	"Subclasses can add another styling"

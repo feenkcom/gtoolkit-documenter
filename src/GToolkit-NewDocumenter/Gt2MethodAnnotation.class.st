@@ -11,7 +11,8 @@ Class {
 Gt2MethodAnnotation class >> possibleParameters [
 	^ {
 		self constants nameParameterName.
-		self constants expandedViewParameterName 
+		self constants expandedParameterName.
+		self constants showParameterName.
 		}
 ]
 
@@ -28,12 +29,12 @@ Gt2MethodAnnotation >> browseMethodFrom: anEvent [
 		sourceElement: anEvent target)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'announcement handling' }
 Gt2MethodAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAdded [ 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'announcement handling' }
 Gt2MethodAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [ 
 	
 ]
@@ -49,7 +50,7 @@ Gt2MethodAnnotation >> isMethodDefined [
 	^ self referencedMethod notNil and: [ self referencedMethod isDefined ]
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - parameter values' }
 Gt2MethodAnnotation >> referencedMethod [
 	<return: #RGMethodDefinition or: nil>
 	^ referencedMethod ifNil: [ referencedMethod := GtDocumenterUtility 
@@ -61,7 +62,7 @@ Gt2MethodAnnotation >> referencedMethod [
 ]
 
 { #category : #'api - style' }
-Gt2MethodAnnotation >> registerToSystemChangesFor: aBlRope [
+Gt2MethodAnnotation >> registerToSystemChanges [
 	self gtDocument
 		subscribe: MethodAdded, MethodModified, MethodRemoved
 			send: #handleMethodAnnouncement:
@@ -82,10 +83,25 @@ Gt2MethodAnnotation >> registerToSystemChangesFor: aBlRope [
 ]
 
 { #category : #'api - style' }
+Gt2MethodAnnotation >> styleExpandingViewInText: aBlRope [
+	| theAttributes |
+	self isMethodDefined ifFalse: [ ^ self ].
+	theAttributes := BrTextExpandButtonAttributeBuilder new
+		attributesCreatingBlock: [ { Gt2PreviewAttribute new
+			result: self referencedMethod;
+			showSelector: self showParameterValue } ];
+		isExpanded: self expandedParameterValue;
+		build.
+	(aBlRope from: self stop to: self stop)
+		attributes: theAttributes.
+]
+
+{ #category : #'api - style' }
 Gt2MethodAnnotation >> styleInText: aBlRope [
 	super styleInText: aBlRope.
 	self styleReferenceParameterInText: aBlRope.
-	self registerToSystemChangesFor: aBlRope.
+	self styleExpandingViewInText: aBlRope.
+	self registerToSystemChanges.
 ]
 
 { #category : #'api - style' }

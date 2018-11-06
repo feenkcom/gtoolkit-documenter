@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #'pillar parameter names' }
-Gt2DocumentConstants class >> expandedViewParameterName [
+Gt2DocumentConstants class >> expandedParameterName [
 	^ #expanded
 ]
 
@@ -27,6 +27,16 @@ Gt2DocumentConstants class >> methodAnnotationName [
 { #category : #'pillar parameter names' }
 Gt2DocumentConstants class >> nameParameterName [
 	^ #name
+]
+
+{ #category : #'pillar parameter default values' }
+Gt2DocumentConstants class >> showDefaultValue [
+	^ #gtViewsFor:
+]
+
+{ #category : #'pillar parameter names' }
+Gt2DocumentConstants class >> showParameterName [
+	^ #show
 ]
 
 { #category : #colors }

@@ -23,6 +23,19 @@ Gt2DocumentExamples >> contentWithExistingMethodAnnotation [
 
 ]
 
+{ #category : #'method - multiple' }
+Gt2DocumentExamples >> contentWithMultipleMethods [
+	<gtExample>
+	^ '${', self constants methodAnnotationName, 
+			':', self referencedMethod printString,
+			'|', self constants expandedParameterName, '}$', String cr, String cr,
+	
+		'${', self constants methodAnnotationName, 
+			':', self referencedMethod printString,
+			'|', self constants expandedParameterName,
+			'|', self constants showParameterName, '=gtSourceFor:', '}$', String cr, String cr
+]
+
 { #category : #'empty document' }
 Gt2DocumentExamples >> defaultDocument [
 	<gtExample>
@@ -92,6 +105,17 @@ Gt2DocumentExamples >> documentWithExistingMethodAnnotation [
 	aDocument := self defaultDocument text: self contentWithExistingMethodAnnotation.
 	aDocument editor styleText.
 	self assert: aDocument text asString equals: self contentWithExistingMethodAnnotation.
+	self assert: aDocument isRegisteredToSystem.
+	^ aDocument
+]
+
+{ #category : #'method - multiple' }
+Gt2DocumentExamples >> documentWithMultipleMethods [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithMultipleMethods.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithMultipleMethods.
 	self assert: aDocument isRegisteredToSystem.
 	^ aDocument
 ]
