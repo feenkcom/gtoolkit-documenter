@@ -30,6 +30,13 @@ Gt2MethodAnnotation >> browseReferenceFrom: anEvent [
 		sourceElement: anEvent target)
 ]
 
+{ #category : #'api - cache' }
+Gt2MethodAnnotation >> cacheKey [
+	^ Gt2AnnotationCacheKey new
+		name: self tag;
+		parameters: self parameters
+]
+
 { #category : #'announcement handling' }
 Gt2MethodAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAdded [ 
 	

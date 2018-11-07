@@ -1,8 +1,8 @@
 Class {
 	#name : #Gt2PreviewAttribute,
 	#superclass : #BrTextAdornmentAttribute,
-	#traits : 'TBlDebug + TGt2DocumentConstants',
-	#classTraits : 'TBlDebug classTrait + TGt2DocumentConstants classTrait',
+	#traits : 'TGt2DocumentConstants',
+	#classTraits : 'TGt2DocumentConstants classTrait',
 	#instVars : [
 		'result',
 		'showSelector',

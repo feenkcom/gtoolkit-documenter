@@ -17,6 +17,29 @@ Gt2Annotation >> browseReferenceFrom: anEvent [
 	self subclassResponsibility
 ]
 
+{ #category : #'api - cache' }
+Gt2Annotation >> cacheKey [
+	^ self subclassResponsibility
+]
+
+{ #category : #private }
+Gt2Annotation >> cachedAttributes [
+	<return: #Array of: #BlTextAttribute>
+	^ #()
+]
+
+{ #category : #'api - cache' }
+Gt2Annotation >> cachedPreview [
+	<return: #BlElement or: nil>
+	^ self gtDocument cacheAt: self cacheKey ifAbsent: [ nil ]
+]
+
+{ #category : #'api - cache' }
+Gt2Annotation >> cachedPreview: anElement [
+	self gtDocument 
+		cacheAt: self cacheKey put: anElement
+]
+
 { #category : #'accessing - parameter values' }
 Gt2Annotation >> expandedDefaultValue [
 	^ false
@@ -51,6 +74,12 @@ Gt2Annotation >> heightParameterValue [
 			ifFalse: [ self constants defaultPreviewHeight ] ]
 		emptyValue: [ self constants defaultPreviewHeight ]
 		defaultValue: [ self constants defaultPreviewHeight ]
+]
+
+{ #category : #testing }
+Gt2Annotation >> isPreviewCached [
+	"Subclasses can cache previews"
+	^ false
 ]
 
 { #category : #testing }
@@ -105,10 +134,14 @@ Gt2Annotation >> styleExpandingPreviewInText: aBlRope [
 	| theAttributes |
 	self isPreviewDefined ifFalse: [ ^ self ].
 	theAttributes := BrTextExpandButtonAttributeStencil new
-		attributesCreatingBlock: [ { Gt2ResizablePreviewAttribute new
-			result: self objectToPreview;
-			showSelector: self showParameterValue;
-			height: self heightParameterValue } ];
+		attributesCreatingBlock: [ { Gt2CachedAttribute new
+				attribute: (Gt2ResizablePreviewAttribute new
+					result: self objectToPreview;
+					showSelector: self showParameterValue;
+					height: self heightParameterValue);
+				cache: self cachedPreview;
+				onCachingDo: [ :aCachedElement :theAttribute | 
+					self cachedPreview: aCachedElement ] } ];
 		isExpanded: self expandedParameterValue;
 		create.
 	(aBlRope from: self stop to: self stop)

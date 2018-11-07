@@ -6,6 +6,7 @@ Class {
 	#instVars : [
 		'editor',
 		'announcer',
+		'cache',
 		'isSubscribedToSystem'
 	],
 	#category : #'GToolkit-NewDocumenter-Model'
@@ -34,6 +35,16 @@ Gt2Document >> asElement [
 		constraintsDo: [ :c |
 			c vertical matchParent.
 			c horizontal matchParent ]
+]
+
+{ #category : #cache }
+Gt2Document >> cacheAt: aGt2AnnotationCacheKey ifAbsent: aBlockClosure [ 
+	^ cache at: aGt2AnnotationCacheKey ifAbsent: aBlockClosure
+]
+
+{ #category : #cache }
+Gt2Document >> cacheAt: aGt2CacheKey put: aBlElement [ 
+	cache at: aGt2CacheKey put: aBlElement
 ]
 
 { #category : #initialization }
@@ -76,6 +87,7 @@ Gt2Document >> initialize [
 	super initialize.
 	announcer := Announcer new.
 	isSubscribedToSystem := false.
+	cache := Dictionary new.
 	editor := BrTextEditor new.
 	editor styler: self defaultStyler.
 	self text: self defaultText.
