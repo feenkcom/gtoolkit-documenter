@@ -456,7 +456,7 @@ GtDocumenterExamples >> textEditorWithExistingClassAnnotation [
 	self assert: anAttributes size equals: 4.
 	self assert: anAttributes first paint equals: Color gray.
 	self assert: anAttributes second class equals: BlTextForegroundAttribute.
-	self assert: anAttributes third class equals: BrTextHoverAttribute.
+	self assert: anAttributes third class equals: BrTextHoverStylableAttribute.
 	self assert: anAttributes fourth class equals: BrTextClickAttribute.
 	anAttributes := aBrTextEditor text attributesAt: aBrTextEditor text size.
 	self assert: anAttributes size equals: 2.
@@ -497,7 +497,7 @@ GtDocumenterExamples >> textEditorWithExistingMethodAnnotation [
 	self assert: anAttributes size equals: 4.
 	self assert: anAttributes first paint equals: Color gray.
 	self assert: anAttributes second class equals: BlTextForegroundAttribute.
-	self assert: anAttributes third class equals: BrTextHoverAttribute.
+	self assert: anAttributes third class equals: BrTextHoverStylableAttribute.
 	self assert: anAttributes fourth class equals: BrTextClickAttribute.
 	anAttributes := aBrTextEditor text attributesAt: aBrTextEditor text size.
 	self assert: anAttributes size equals: 2.
@@ -520,7 +520,7 @@ GtDocumenterExamples >> textEditorWithExpandedClassAnnotation [
 	self assert: anAttributes size equals: 4.
 	self assert: anAttributes first paint equals: Color gray.
 	self assert: anAttributes second class equals: BlTextForegroundAttribute.
-	self assert: anAttributes third class equals: BrTextHoverAttribute.
+	self assert: anAttributes third class equals: BrTextHoverStylableAttribute.
 	self assert: anAttributes fourth class equals: BrTextClickAttribute.
 	anAttributes := aBrTextEditor text attributesAt: aBrTextEditor text size.
 	self assert: anAttributes size equals: 3.
@@ -545,7 +545,7 @@ GtDocumenterExamples >> textEditorWithExpandedMethodAnnotation [
 	self assert: anAttributes size equals: 4.
 	self assert: anAttributes first paint equals: Color gray.
 	self assert: anAttributes second class equals: BlTextForegroundAttribute.
-	self assert: anAttributes third class equals: BrTextHoverAttribute.
+	self assert: anAttributes third class equals: BrTextHoverStylableAttribute.
 	self assert: anAttributes fourth class equals: BrTextClickAttribute.
 	anAttributes := aBrTextEditor text attributesAt: aBrTextEditor text size.
 	self assert: anAttributes size equals: 3.
@@ -569,7 +569,7 @@ GtDocumenterExamples >> textEditorWithIcebergAnnotation [
 	self assert: anAttributes size equals: 4.
 	self assert: anAttributes first paint equals: Color gray.
 	self assert: anAttributes second class equals: BlTextForegroundAttribute.
-	self assert: anAttributes third class equals: BrTextHoverAttribute.
+	self assert: anAttributes third class equals: BrTextHoverStylableAttribute.
 	self assert: anAttributes fourth class equals: BrTextClickAttribute.
 	anAttributes := aBrTextEditor text attributesAt: aBrTextEditor text size.
 	self assert: anAttributes size equals: 2.

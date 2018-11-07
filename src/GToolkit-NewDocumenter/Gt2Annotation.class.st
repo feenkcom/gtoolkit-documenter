@@ -121,10 +121,9 @@ Gt2Annotation >> styleLinkInText: aBlRope [
 					paint: aLinkColor).
 	self isReferenceDefined ifTrue: [ 
 		theAttributes := theAttributes , {
-				BrTextHoverAttribute new 
-					removableTextAttribute: (BlTextUnderlineAttribute new paint: aLinkColor).
+				BrTextHoverStylableAttribute new attribute: (BlTextUnderlineAttribute new paint: aLinkColor).
 				BrTextClickAttribute new 
-					action: [ :aText :aTarget :anEvent | 
+					action: [ :aText :aTarget :anEditorElement :anEvent | 
 						self browseReferenceFrom: anEvent ] } ].
 
 	(aBlRope  

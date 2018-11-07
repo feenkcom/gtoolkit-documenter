@@ -59,12 +59,12 @@ GtPillarClassAnnotationHighlighter >> styleReferenceParameter [
 					beNotOverwritableByStyler).
 	self isClassDefined ifTrue: [ 
 		theAttributes := theAttributes , {
-				BrTextHoverAttribute new 
+				BrTextHoverStylableAttribute new 
 					beNotOverwritableByStyler;
-					removableTextAttribute: (BlTextBackgroundAttribute paint: (Color gray alpha: 0.2)).
+					attribute: (BlTextBackgroundAttribute paint: (Color gray alpha: 0.2)).
 				BrTextClickAttribute new 
 					beNotOverwritableByStyler;
-					action: [ :aText :aTarget :anEvent | 
+					action: [ :aText :aTarget :anEditorElement :anEvent | 
 						self pillarNode browseClassFrom: anEvent ] } ].
 
 	(self targetText 
