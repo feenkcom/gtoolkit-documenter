@@ -15,14 +15,8 @@ Gt2PreviewStencil >> create [
 	<return: #BlElement>
 	| aView |
 	aView := GtPhlowView on: self result perform: self showSelector.
-	^ aView asElementDo: [ :element |
-		BlElement new
-			addChild: element;
-			layout: BlLinearLayout new;
-			look: Gt2PreviewLook + BrShadowLook;
-			constraintsDo: [ :c | 
-				c horizontal matchParent.
-				c vertical exact: 300 ] ]
+	^ aView asElementDo:
+		[ :anElement | self newContainerFor: anElement ]
 ]
 
 { #category : #initialization }
@@ -31,6 +25,17 @@ Gt2PreviewStencil >> initialize [
 
 	result := self class.
 	showSelector := self constants showDefaultValue
+]
+
+{ #category : #'instance creation' }
+Gt2PreviewStencil >> newContainerFor: anElement [
+	^ BlElement new
+		addChild: anElement;
+		layout: BlLinearLayout new;
+		look: Gt2PreviewLook + BrShadowLook;
+		constraintsDo: [ :c | 
+			c horizontal matchParent.
+			c vertical exact: 300 ]
 ]
 
 { #category : #accessing }

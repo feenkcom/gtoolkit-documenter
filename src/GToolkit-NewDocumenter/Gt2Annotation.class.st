@@ -93,7 +93,7 @@ Gt2Annotation >> styleExpandingPreviewInText: aBlRope [
 	| theAttributes |
 	self isPreviewDefined ifFalse: [ ^ self ].
 	theAttributes := BrTextExpandButtonAttributeStencil new
-		attributesCreatingBlock: [ { Gt2PreviewAttribute new
+		attributesCreatingBlock: [ { Gt2ResizablePreviewAttribute new
 			result: self objectToPreview;
 			showSelector: self showParameterValue } ];
 		isExpanded: self expandedParameterValue;

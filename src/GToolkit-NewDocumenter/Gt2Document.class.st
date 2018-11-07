@@ -26,6 +26,7 @@ Gt2Document >> asElement [
 		addChild: (BrEditorElement new
 			editor: self editor;
 			constraintsDo: [ :c |
+				c padding: (BlInsets all: 10).
 				c vertical matchParent.
 				c horizontal matchParent ]);
 		addEventHandler: (Gt2AddedToSceneEventHandler new document: self);
