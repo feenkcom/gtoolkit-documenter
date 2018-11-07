@@ -61,6 +61,12 @@ Gt2CachedAttribute >> onCachingDo: aBlock [
 	onCachingAction := aBlock
 ]
 
+{ #category : #printing }
+Gt2CachedAttribute >> printOn: aStream [
+	aStream nextPutAll: 'cached '.
+	self attribute printOn: aStream
+]
+
 { #category : #testing }
 Gt2CachedAttribute >> shouldAppend [
 	^ self attribute shouldAppend
