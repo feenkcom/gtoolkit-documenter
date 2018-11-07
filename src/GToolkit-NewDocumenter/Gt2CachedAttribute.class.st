@@ -1,8 +1,6 @@
 Class {
 	#name : #Gt2CachedAttribute,
 	#superclass : #BrTextAdornmentAttribute,
-	#traits : 'TGt2DocumentConstants',
-	#classTraits : 'TGt2DocumentConstants classTrait',
 	#instVars : [
 		'attribute',
 		'cache',
@@ -17,7 +15,7 @@ Gt2CachedAttribute >> affect: aBrText in: anEditorElement [
 			ifTrue: [ self cache removeFromParent ]
 			ifFalse: [ | anElement |
 				anElement := self attribute affect: aBrText in: anEditorElement.
-				self cache: anElement.
+				self updateCache: anElement.
 				anElement ]
 ]
 
@@ -40,7 +38,6 @@ Gt2CachedAttribute >> cache [
 { #category : #accessing }
 Gt2CachedAttribute >> cache: aBlElement [
 	cache := aBlElement.
-	onCachingAction glamourValueWithArgs: { aBlElement. self }
 ]
 
 { #category : #testing }
@@ -51,13 +48,16 @@ Gt2CachedAttribute >> hasCache [
 { #category : #initialization }
 Gt2CachedAttribute >> initialize [
 	super initialize.
-	attribute := nil.
+	attribute := Gt2PreviewAttribute new.
 	cache := nil.
 	onCachingAction := [ :aCachedElement :theAttribute | "do nothing" ].
 ]
 
 { #category : #accessing }
 Gt2CachedAttribute >> onCachingDo: aBlock [
+	self 
+		assert: [ aBlock notNil ]
+		description: [ 'On caching block must be non-nil' ].
 	onCachingAction := aBlock
 ]
 
@@ -69,4 +69,10 @@ Gt2CachedAttribute >> shouldAppend [
 { #category : #testing }
 Gt2CachedAttribute >> shouldReplace [
 	^ self attribute shouldReplace
+]
+
+{ #category : #private }
+Gt2CachedAttribute >> updateCache: aBlElement [
+	self cache: aBlElement.
+	onCachingAction glamourValueWithArgs: { aBlElement. self }
 ]

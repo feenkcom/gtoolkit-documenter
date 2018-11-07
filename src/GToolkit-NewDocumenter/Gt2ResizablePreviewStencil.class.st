@@ -23,7 +23,9 @@ Gt2ResizablePreviewStencil >> newContainerFor: aWrappedElement [
 				aResizableElement constraintsDo: [ :c | c vertical fitContent ] ]; "
 			beBottom;
 			look: BrGlamorousResizerLook;
-			constraintsDo: [ :c | c ignoredByLayout ]);
+			constraintsDo: [ :c | 
+				c ignoreByLayout.
+				c ignored horizontal weight: 0.5 ]);
 		constraintsDo: [ :c | 
 			c horizontal matchParent.
 			c vertical fitContent ]
