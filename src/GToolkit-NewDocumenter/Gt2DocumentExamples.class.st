@@ -49,7 +49,7 @@ Gt2DocumentExamples >> defaultDocument [
 	| aDocument |
 	aDocument := Gt2Document new.
 	self assert: aDocument text asString equals: self emptyContent.
-	self assert: aDocument isRegisteredToSystem not.
+	self assert: aDocument isSubscribedToSystem not.
 	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument) not.
 	^ aDocument
 ]
@@ -67,7 +67,7 @@ Gt2DocumentExamples >> documentDeleteAll [
 	self 
 		assert: aDocument text asString 
 		equals: self emptyContent.
-	self assert: aDocument isRegisteredToSystem not.
+	self assert: aDocument isSubscribedToSystem not.
 	^ aDocument
 ]
 
@@ -84,7 +84,7 @@ Gt2DocumentExamples >> documentDeleteMethodAnnotation [
 	self 
 		assert: aDocument text asString 
 		equals: ( self contentWithExistingMethod last asString).
-	self assert: aDocument isRegisteredToSystem not.
+	self assert: aDocument isSubscribedToSystem not.
 	^ aDocument
 ]
 
@@ -101,7 +101,7 @@ Gt2DocumentExamples >> documentWithEditedExistingMethodAnnotation [
 	self 
 		assert: (aDocument text asString allButLast: (2 + self fooText size)) 
 		equals: (self contentWithExistingMethod allButLast: 2).
-	self assert: aDocument isRegisteredToSystem.
+	self assert: aDocument isSubscribedToSystem.
 	^ aDocument
 ]
 
@@ -112,7 +112,7 @@ Gt2DocumentExamples >> documentWithExistingClass [
 	aDocument := self defaultDocument text: self contentWithExistingClass.
 	aDocument editor styleText.
 	self assert: aDocument text asString equals: self contentWithExistingClass.
-	self assert: aDocument isRegisteredToSystem.
+	self assert: aDocument isSubscribedToSystem.
 	^ aDocument
 ]
 
@@ -123,7 +123,7 @@ Gt2DocumentExamples >> documentWithExistingMethod [
 	aDocument := self defaultDocument text: self contentWithExistingMethod.
 	aDocument editor styleText.
 	self assert: aDocument text asString equals: self contentWithExistingMethod.
-	self assert: aDocument isRegisteredToSystem.
+	self assert: aDocument isSubscribedToSystem.
 	^ aDocument
 ]
 
@@ -134,7 +134,7 @@ Gt2DocumentExamples >> documentWithMultipleMethods [
 	aDocument := self defaultDocument text: self contentWithMultipleMethods.
 	aDocument editor styleText.
 	self assert: aDocument text asString equals: self contentWithMultipleMethods.
-	self assert: aDocument isRegisteredToSystem.
+	self assert: aDocument isSubscribedToSystem.
 	^ aDocument
 ]
 
@@ -151,7 +151,7 @@ Gt2DocumentExamples >> emptyDocument [
 	| aDocument |
 	aDocument := self defaultDocument text: self emptyContent.
 	self assert: aDocument text asString equals: self emptyContent.
-	self assert: aDocument isRegisteredToSystem not.
+	self assert: aDocument isSubscribedToSystem not.
 	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument) not.
 	^ aDocument
 ]
@@ -214,10 +214,10 @@ Gt2DocumentExamples >> registeredDocument [
 	aDocument := self defaultDocument.
 	aDocument subscribe: SystemAnnouncement do: [ :anAnnouncement | "ignore" ] for: self.
 	self assert: aDocument text asString equals: self emptyContent.
-	self assert: aDocument isRegisteredToSystem.
+	self assert: aDocument isSubscribedToSystem.
 	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument).
 	aDocument unsubscribe: self.
-	self assert: aDocument isRegisteredToSystem not.
+	self assert: aDocument isSubscribedToSystem not.
 	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument) not.
 	^ aDocument
 ]
