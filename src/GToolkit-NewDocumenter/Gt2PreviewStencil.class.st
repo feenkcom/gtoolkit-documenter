@@ -28,8 +28,9 @@ Gt2PreviewStencil >> create [
 { #category : #initialization }
 Gt2PreviewStencil >> initialize [
 	super initialize.
-	result := self.
-	showSelector := self constants showDefaultValue.
+
+	result := self class.
+	showSelector := self constants showDefaultValue
 ]
 
 { #category : #accessing }
