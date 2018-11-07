@@ -38,13 +38,13 @@ Gt2Document >> asElement [
 ]
 
 { #category : #cache }
-Gt2Document >> cacheAt: aGt2AnnotationCacheKey ifAbsent: aBlockClosure [ 
-	^ cache at: aGt2AnnotationCacheKey ifAbsent: aBlockClosure
+Gt2Document >> cacheAt: aKey ifPresent: aPresentBlock ifAbsent: anAbsentBlock [
+	^ cache at: aKey ifPresent: aPresentBlock ifAbsent: anAbsentBlock
 ]
 
 { #category : #cache }
-Gt2Document >> cacheAt: aGt2CacheKey put: aBlElement [ 
-	cache at: aGt2CacheKey put: aBlElement
+Gt2Document >> cacheAt: aKey ifPresent: aPresentBlock ifAbsentPut: anAbsentBlock [
+	^ cache at: aKey ifPresent: aPresentBlock ifAbsentPut: anAbsentBlock
 ]
 
 { #category : #initialization }

@@ -40,3 +40,10 @@ Gt2AnnotationCacheKey >> parameters [
 Gt2AnnotationCacheKey >> parameters: anObject [
 	parameters := anObject
 ]
+
+{ #category : #printing }
+Gt2AnnotationCacheKey >> printOn: aStream [
+	aStream 
+		nextPutAll: 'annotation key: ';
+		print: self name.
+]
