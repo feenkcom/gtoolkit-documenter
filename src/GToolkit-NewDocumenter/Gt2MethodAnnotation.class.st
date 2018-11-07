@@ -45,8 +45,8 @@ Gt2MethodAnnotation >> handleMethodAnnouncement: aMethodModified [
 		aMethodModified classAffected = self referencedMethod methodClass  
 			and: [ aMethodModified selector = self referencedMethod selector ]])
 			ifFalse: [ ^ self ].
-	self inform: 'style text'.
-	self gtDocument editor styleText
+	self gtDocument editor styleTextAndAfterDo: [ 
+		self gtDocument editor updateAll; invalidateAll  ]
 ]
 
 { #category : #testing }

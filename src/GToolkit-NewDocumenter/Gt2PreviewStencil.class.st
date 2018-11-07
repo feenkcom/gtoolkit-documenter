@@ -16,11 +16,13 @@ Gt2PreviewStencil >> create [
 	| aView |
 	aView := GtPhlowView on: self result perform: self showSelector.
 	^ aView asElementDo: [ :element |
-		element 
-			look: Gt2PreviewLook;
+		BlElement new
+			addChild: element;
+			layout: BlLinearLayout new;
+			look: Gt2PreviewLook + BrShadowLook;
 			constraintsDo: [ :c | 
-				"c horizontal matchParent."
-				"c vertical exact: 300" ] ]
+				c horizontal matchParent.
+				c vertical exact: 300 ] ]
 ]
 
 { #category : #initialization }
