@@ -21,6 +21,8 @@ Gt2PreviewAttribute >> affect: aBrText in: anEditorElement [
 { #category : #initialization }
 Gt2PreviewAttribute >> initialize [
 	super initialize.
+	
+	self beAppend.
 	result := self.
 	showSelector := self constants showDefaultValue.
 ]

@@ -48,9 +48,13 @@ Gt2Document >> ensureSystemSubscription [
 Gt2Document >> gtTextFor: aView [
 	<gtView>
 	self editor ifNil: [ ^ aView empty ].
-	^ aView textEditor
+	^ aView explicit
 		title: 'Text';
-		text: [ self text ]
+		stencil: [ BrEditorElement new
+				editor: self editor;
+				constraintsDo: [ :c |
+					c vertical matchParent.
+					c horizontal matchParent ] ]
 ]
 
 { #category : #'announcement handling' }
