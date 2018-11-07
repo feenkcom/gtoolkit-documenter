@@ -16,7 +16,7 @@ Gt2ResizablePreviewStencil >> newContainerFor: aWrappedElement [
 			addChild: aWrappedElement;
 			constraintsDo: [ :c | 
 				c horizontal matchParent.
-				c vertical exact: 300 ]);
+				c vertical exact: self height ]);
 		addChild: (BrResizer new
 			target: aResizableElement;
 			"addEventHandlerOn: BlDoubleClickEvent do: [ :anEvent |

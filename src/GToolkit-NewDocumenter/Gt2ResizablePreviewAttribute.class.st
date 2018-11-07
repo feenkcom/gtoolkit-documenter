@@ -9,5 +9,6 @@ Gt2ResizablePreviewAttribute >> affect: aBrText in: anEditorElement [
 	^ Gt2ResizablePreviewStencil new
 		result: self result;
 		showSelector: self showSelector;
+		height: self height;
 		asElement
 ]

@@ -1,8 +1,8 @@
 Class {
 	#name : #Gt2Annotation,
 	#superclass : #PRAbstractAnnotation,
-	#traits : 'TBlDebug + TGt2DocumentConstants',
-	#classTraits : 'TBlDebug classTrait + TGt2DocumentConstants classTrait',
+	#traits : 'TBlDebug + TGt2DocumentConstants + TGt2DocumentUtility',
+	#classTraits : 'TBlDebug classTrait + TGt2DocumentConstants classTrait + TGt2DocumentUtility classTrait',
 	#category : #'GToolkit-NewDocumenter-Model'
 }
 
@@ -29,7 +29,7 @@ Gt2Annotation >> expandedEmptyValue [
 
 { #category : #'accessing - parameter values' }
 Gt2Annotation >> expandedParameterValue [
-	^ Gt2DocumentUtility
+	^ self utility
 		booleanValueOf: self constants expandedParameterName 
 		in: self parameters 
 		emptyValue: [ self expandedEmptyValue ] 
@@ -39,6 +39,18 @@ Gt2Annotation >> expandedParameterValue [
 { #category : #'announcement handling' }
 Gt2Annotation >> handleDocumentUpdateRequestedAnnouncement: aGt2DocumentUpdateRequestedAnnouncement [
 	
+]
+
+{ #category : #'accessing - parameter values' }
+Gt2Annotation >> heightParameterValue [
+	^ self utility 
+		valueOf: self constants heightParameterName
+		in: self parameters
+		value: [ :aNumber | aNumber isNumber 
+			ifTrue: [ aNumber ]
+			ifFalse: [ self constants defaultPreviewHeight ] ]
+		emptyValue: [ self constants defaultPreviewHeight ]
+		defaultValue: [ self constants defaultPreviewHeight ]
 ]
 
 { #category : #testing }
@@ -78,7 +90,7 @@ Gt2Annotation >> showEmptyValue [
 { #category : #'accessing - parameter values' }
 Gt2Annotation >> showParameterValue [
 	<return: #Symbol>
-	^ Gt2DocumentUtility 
+	^ self utility 
 		valueOf: self constants showParameterName
 		in: self parameters
 		value: [ :aString | aString isString 
@@ -95,7 +107,8 @@ Gt2Annotation >> styleExpandingPreviewInText: aBlRope [
 	theAttributes := BrTextExpandButtonAttributeStencil new
 		attributesCreatingBlock: [ { Gt2ResizablePreviewAttribute new
 			result: self objectToPreview;
-			showSelector: self showParameterValue } ];
+			showSelector: self showParameterValue;
+			height: self heightParameterValue } ];
 		isExpanded: self expandedParameterValue;
 		create.
 	(aBlRope from: self stop to: self stop)
@@ -114,8 +127,8 @@ Gt2Annotation >> styleInText: aBlRope [
 { #category : #'private - styling' }
 Gt2Annotation >> styleLinkInText: aBlRope [
 	| aLinkColor aNodeToStyle theAttributes |
-	aLinkColor := Gt2DocumentUtility linkColor: self isReferenceDefined.
-	aNodeToStyle := Gt2DocumentUtility 
+	aLinkColor := self utility linkColor: self isReferenceDefined.
+	aNodeToStyle := self utility 
 		parameterNodeNamed: self referenceParameterName forAnnotation: self.
 	theAttributes := Array with: (BlTextForegroundAttribute new
 					paint: aLinkColor).

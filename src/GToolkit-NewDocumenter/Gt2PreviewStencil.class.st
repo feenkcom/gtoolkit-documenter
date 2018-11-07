@@ -5,7 +5,8 @@ Class {
 	#classTraits : 'TGt2DocumentConstants classTrait',
 	#instVars : [
 		'result',
-		'showSelector'
+		'showSelector',
+		'height'
 	],
 	#category : #'GToolkit-NewDocumenter-Brick - Stencils'
 }
@@ -19,12 +20,35 @@ Gt2PreviewStencil >> create [
 		[ :anElement | self newContainerFor: anElement ]
 ]
 
+{ #category : #'instance creation' }
+Gt2PreviewStencil >> defaultHeight [
+	^ self constants defaultPreviewHeight
+]
+
+{ #category : #accessing }
+Gt2PreviewStencil >> height [
+	<return: #Number or: nil>
+	^ height
+]
+
+{ #category : #accessing }
+Gt2PreviewStencil >> height: anInteger [
+	self 
+		assert: [ anInteger notNil ] 
+		description: [ 'Height value must be non-nil' ].
+	self 
+		assert: [ anInteger > 0 ] 
+		description: [ 'Height value must be a pozitive number' ].
+	height := anInteger
+]
+
 { #category : #initialization }
 Gt2PreviewStencil >> initialize [
 	super initialize.
 
 	result := self class.
-	showSelector := self constants showDefaultValue
+	showSelector := self constants showDefaultValue.
+	height := self defaultHeight.
 ]
 
 { #category : #'instance creation' }
@@ -35,7 +59,7 @@ Gt2PreviewStencil >> newContainerFor: anElement [
 		look: Gt2PreviewLook + BrShadowLook;
 		constraintsDo: [ :c | 
 			c horizontal matchParent.
-			c vertical exact: 300 ]
+			c vertical exact: self height ]
 ]
 
 { #category : #accessing }

@@ -13,6 +13,7 @@ Gt2MethodAnnotation class >> possibleParameters [
 		self constants nameParameterName.
 		self constants expandedParameterName.
 		self constants showParameterName.
+		self constants heightParameterName.
 		}
 ]
 
@@ -81,7 +82,7 @@ Gt2MethodAnnotation >> referenceParameterName [
 { #category : #'accessing - parameter values' }
 Gt2MethodAnnotation >> referencedMethod [
 	<return: #RGMethodDefinition or: nil>
-	^ referencedMethod ifNil: [ referencedMethod := Gt2DocumentUtility 
+	^ referencedMethod ifNil: [ referencedMethod := self utility 
 		valueOf: self constants nameParameterName
 		in: self parameters 
 		value: [ :aValue | GtSystemUtility methodDefinitionFromString: aValue ] 

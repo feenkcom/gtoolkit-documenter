@@ -13,6 +13,7 @@ Gt2ClassAnnotation class >> possibleParameters [
 		self constants nameParameterName.
 		self constants expandedParameterName.
 		self constants showParameterName.
+		self constants heightParameterName.
 		}
 ]
 

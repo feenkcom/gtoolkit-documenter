@@ -9,9 +9,19 @@ Gt2DocumentConstants class >> classAnnotationName [
 	^ #class2
 ]
 
+{ #category : #'pillar preview' }
+Gt2DocumentConstants class >> defaultPreviewHeight [
+	^ 300
+]
+
 { #category : #'pillar parameter names' }
 Gt2DocumentConstants class >> expandedParameterName [
 	^ #expanded
+]
+
+{ #category : #'pillar parameter names' }
+Gt2DocumentConstants class >> heightParameterName [
+	^ #height
 ]
 
 { #category : #colors }
