@@ -82,7 +82,7 @@ Gt2Annotation >> expandedDefaultValue [
 
 { #category : #'accessing - parameter values' }
 Gt2Annotation >> expandedEmptyValue [
-	^ false
+	^ true
 ]
 
 { #category : #'accessing - parameter values' }

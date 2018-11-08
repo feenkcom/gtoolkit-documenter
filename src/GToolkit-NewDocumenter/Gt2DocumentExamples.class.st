@@ -222,7 +222,7 @@ Gt2DocumentExamples >> referencedClass [
 { #category : #'example - existing one' }
 Gt2DocumentExamples >> referencedExampleMethod [
 	<gtExample>
-	^ self class >> #documentWithExistingExample
+	^ self class >> #documentWithMultipleMethods
 ]
 
 { #category : #'method - existing one' }

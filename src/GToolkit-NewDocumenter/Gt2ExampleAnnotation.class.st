@@ -74,6 +74,11 @@ Gt2ExampleAnnotation >> example [
 	^ example ifNil: [ example := self referencedExample compiledMethod gtExample ]
 ]
 
+{ #category : #'accessing - parameter values' }
+Gt2ExampleAnnotation >> expandedDefaultValue [
+	^ true
+]
+
 { #category : #testing }
 Gt2ExampleAnnotation >> isExampleDefined [
 	"Return true if an example method is defined in the system"
