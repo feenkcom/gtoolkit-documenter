@@ -33,20 +33,27 @@ Gt2MethodAnnotation >> browseReferenceFrom: anEvent [
 
 { #category : #'announcement handling' }
 Gt2MethodAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAdded [ 
-	
+	(self referencedMethod notNil and: [ 
+		aClassAdded classAffected name = self referencedMethod parentName ])
+			ifFalse: [ ^ self ].
+	self gtDocument editor styleText
 ]
 
 { #category : #'announcement handling' }
 Gt2MethodAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [ 
-	
+	(self referencedMethod notNil and: [ 
+			aClassRenamed newName = self referencedMethod parentName or: [ 
+				aClassRenamed oldName = self referencedMethod parentName ] ])
+			ifFalse: [ ^ self ].
+	self gtDocument editor styleText
 ]
 
 { #category : #'announcement handling' }
 Gt2MethodAnnotation >> handleMethodAnnouncement: aMethodModified [ 
 	(self referencedMethod notNil and: [ 
-		aMethodModified classAffected = self referencedMethod methodClass  
+		aMethodModified classAffected name = self referencedMethod parentName  
 			and: [ aMethodModified selector = self referencedMethod selector ]])
-			ifFalse: [ ^ self ].
+				ifFalse: [ ^ self ].
 	self gtDocument editor styleText
 ]
 
