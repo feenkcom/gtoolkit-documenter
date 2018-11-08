@@ -32,13 +32,21 @@ Gt2ClassAnnotation >> browseReferenceFrom: anEvent [
 ]
 
 { #category : #'announcement handling' }
-Gt2ClassAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAdded [ 
-	
+Gt2ClassAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAnnouncement [ 
+	(self referencedClass notNil and: [ 
+		(aClassAnnouncement classAffected name = self referencedClass name) or: [ 
+			aClassAnnouncement classAffected originalName = self referencedClass name ]])
+				ifFalse: [ ^ self ].
+	self gtDocument editor styleText
 ]
 
 { #category : #'announcement handling' }
 Gt2ClassAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [ 
-	
+	(self referencedClass notNil and: [ 
+			aClassRenamed newName = self referencedClass name or: [ 
+				aClassRenamed oldName = self referencedClass name ]])
+					ifFalse: [ ^ self ].
+	self gtDocument editor styleText
 ]
 
 { #category : #testing }

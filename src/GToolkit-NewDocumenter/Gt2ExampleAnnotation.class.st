@@ -80,6 +80,32 @@ Gt2ExampleAnnotation >> expandedDefaultValue [
 	^ true
 ]
 
+{ #category : #'announcement handling' }
+Gt2ExampleAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAdded [ 
+	(self referencedExample notNil and: [ 
+		aClassAdded classAffected originalName = self referencedExample parentName ])
+			ifFalse: [ ^ self ].
+	self gtDocument editor styleText
+]
+
+{ #category : #'announcement handling' }
+Gt2ExampleAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [ 
+	(self referencedExample notNil and: [ 
+			aClassRenamed newName = self referencedExample parentName or: [ 
+				aClassRenamed oldName = self referencedExample parentName ] ])
+			ifFalse: [ ^ self ].
+	self gtDocument editor styleText
+]
+
+{ #category : #'announcement handling' }
+Gt2ExampleAnnotation >> handleMethodAnnouncement: aMethodModified [ 
+	(self referencedExample notNil and: [ 
+		aMethodModified classAffected name = self referencedExample parentName  
+			and: [ aMethodModified selector = self referencedExample selector ]])
+				ifFalse: [ ^ self ].
+	self gtDocument editor styleText
+]
+
 { #category : #testing }
 Gt2ExampleAnnotation >> isExampleDefined [
 	"Return true if an example method is defined in the system"
@@ -136,6 +162,27 @@ Gt2ExampleAnnotation >> referencedExample [
 		defaultValue: [ nil ] ]
 ]
 
+{ #category : #subscriptions }
+Gt2ExampleAnnotation >> registerToSystemChanges [
+	self gtDocument
+		subscribe: MethodAdded, MethodRemoved
+			send: #handleMethodAnnouncement:
+			to: self
+			for: self gtSubscriber;
+		subscribe: ClassAdded, ClassRemoved
+			send: #handleClassAddedOrRemovedAnnouncement:
+			to: self
+			for: self gtSubscriber;
+		subscribe: ClassRenamed
+			send: #handleClassRenamedAnnouncement:
+			to: self
+			for: self gtSubscriber;
+		subscribe: Gt2DocumentUpdateRequestedAnnouncement
+			send: #handleDocumentUpdateRequestedAnnouncement:
+			to: self
+			for: self gtSubscriber.
+]
+
 { #category : #'accessing - parameter values' }
 Gt2ExampleAnnotation >> resultHeight [
 	^ self utility 
@@ -166,5 +213,5 @@ Gt2ExampleAnnotation >> styleInText: aBlRope [
 	super styleInText: aBlRope.
 	self styleLinkInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
-	"self registerToSystemChanges"
+	self registerToSystemChanges
 ]

@@ -130,7 +130,7 @@ Gt2DocumentExamples >> documentWithExistingExample [
 	aDocument := self defaultDocument text: self contentWithExistingExample.
 	aDocument editor styleText.
 	self assert: aDocument text asString equals: self contentWithExistingExample.
-	"self assert: aDocument isSubscribedToSystem."
+	self assert: aDocument isSubscribedToSystem.
 	^ aDocument
 ]
 

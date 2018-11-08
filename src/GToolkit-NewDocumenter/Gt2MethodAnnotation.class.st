@@ -34,7 +34,7 @@ Gt2MethodAnnotation >> browseReferenceFrom: anEvent [
 { #category : #'announcement handling' }
 Gt2MethodAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAdded [ 
 	(self referencedMethod notNil and: [ 
-		aClassAdded classAffected name = self referencedMethod parentName ])
+		aClassAdded classAffected originalName = self referencedMethod parentName ])
 			ifFalse: [ ^ self ].
 	self gtDocument editor styleText
 ]
@@ -101,7 +101,7 @@ Gt2MethodAnnotation >> referencedMethod [
 { #category : #subscriptions }
 Gt2MethodAnnotation >> registerToSystemChanges [
 	self gtDocument
-		subscribe: MethodAdded, MethodModified, MethodRemoved
+		subscribe: MethodAdded, MethodRemoved
 			send: #handleMethodAnnouncement:
 			to: self
 			for: self gtSubscriber;
