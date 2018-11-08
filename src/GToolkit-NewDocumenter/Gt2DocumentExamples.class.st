@@ -23,6 +23,13 @@ Gt2DocumentExamples >> contentWithExistingClass [
 
 ]
 
+{ #category : #'example - existing one' }
+Gt2DocumentExamples >> contentWithExistingExample [
+	<gtExample>
+	^ '${', self constants exampleAnnotationName, ':', self referencedExampleMethod printString, '}$'
+
+]
+
 { #category : #'method - existing one' }
 Gt2DocumentExamples >> contentWithExistingMethod [
 	<gtExample>
@@ -116,6 +123,17 @@ Gt2DocumentExamples >> documentWithExistingClass [
 	^ aDocument
 ]
 
+{ #category : #'example - existing one' }
+Gt2DocumentExamples >> documentWithExistingExample [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExistingExample.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithExistingExample.
+	"self assert: aDocument isSubscribedToSystem."
+	^ aDocument
+]
+
 { #category : #'method - existing one' }
 Gt2DocumentExamples >> documentWithExistingMethod [
 	<gtExample>
@@ -199,6 +217,12 @@ Gt2DocumentExamples >> pillarParser [
 Gt2DocumentExamples >> referencedClass [
 	<gtExample>
 	^ self className
+]
+
+{ #category : #'example - existing one' }
+Gt2DocumentExamples >> referencedExampleMethod [
+	<gtExample>
+	^ self class >> #documentWithExistingExample
 ]
 
 { #category : #'method - existing one' }

@@ -47,7 +47,7 @@ Gt2PreviewStencil >> initialize [
 	super initialize.
 
 	result := self class.
-	showSelector := self constants showDefaultValue.
+	showSelector := self constants defaultShowSelector.
 	height := self defaultHeight.
 ]
 

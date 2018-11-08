@@ -47,7 +47,7 @@ Gt2PreviewAttribute >> initialize [
 	
 	self beAppend.
 	result := self.
-	showSelector := self constants showDefaultValue.
+	showSelector := self constants defaultShowSelector.
 	height := self defaultHeight.
 ]
 

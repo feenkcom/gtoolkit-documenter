@@ -24,7 +24,7 @@ Gt2MethodAnnotation class >> tag [
 
 { #category : #'private - actions' }
 Gt2MethodAnnotation >> browseReferenceFrom: anEvent [
-	self isMethodDefined ifFalse: [ ^ self inform: 'Method does not exists' ].
+	self isMethodDefined ifFalse: [ ^ self inform: 'Method does not exist' ].
 	anEvent target fireEvent: (GtPhlowObjectToSpawn new 
 		object: self referencedMethod;
 		sourceElement: anEvent target)

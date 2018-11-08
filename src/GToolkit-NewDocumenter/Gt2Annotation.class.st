@@ -71,6 +71,11 @@ Gt2Annotation >> cachedPreview: anElement [
 ]
 
 { #category : #'accessing - parameter values' }
+Gt2Annotation >> defaultShowSelector [
+	^ self constants defaultShowSelector
+]
+
+{ #category : #'accessing - parameter values' }
 Gt2Annotation >> expandedDefaultValue [
 	^ false
 ]
@@ -130,6 +135,19 @@ Gt2Annotation >> objectToPreview [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'private - styling' }
+Gt2Annotation >> previewAttributes [
+	^ {(Gt2CachedAttribute new
+		attribute:
+			(Gt2ResizablePreviewAttribute new
+				result: self objectToPreview;
+				showSelector: self showParameterValue;
+				height: self heightParameterValue);
+		cache: self cachedPreview;
+		onCachingDo:
+				[ :aCachedElement :theAttribute | self cachedPreview: aCachedElement ])}
+]
+
 { #category : #accessing }
 Gt2Annotation >> referenceParameterName [
 	"Return an annotation parameter name that holds a referenced object"
@@ -137,13 +155,8 @@ Gt2Annotation >> referenceParameterName [
 ]
 
 { #category : #'accessing - parameter values' }
-Gt2Annotation >> showDefaultValue [
-	^ self constants showDefaultValue
-]
-
-{ #category : #'accessing - parameter values' }
 Gt2Annotation >> showEmptyValue [
-	^ self constants showDefaultValue
+	^ self constants defaultShowSelector
 ]
 
 { #category : #'accessing - parameter values' }
@@ -156,28 +169,20 @@ Gt2Annotation >> showParameterValue [
 			ifFalse: [ self showEmptyValue ] 
 			ifTrue: [ aString asSymbol ] ]
 		emptyValue: [ self showEmptyValue ]
-		defaultValue: [ self showDefaultValue ]
+		defaultValue: [ self defaultShowSelector ]
 ]
 
 { #category : #'private - styling' }
 Gt2Annotation >> styleExpandingPreviewInText: aBlRope [
 	| theAttributes |
-	self isPreviewDefined ifFalse: [ ^ self ].
+	self isPreviewDefined
+		ifFalse: [ ^ self ].
 	theAttributes := Gt2CachedTextExpandButtonAttributeStencil new
-		attributesCreatingBlock: [ { Gt2CachedAttribute new
-			attribute: (Gt2ResizablePreviewAttribute new
-				result: self objectToPreview;
-				showSelector: self showParameterValue;
-				height: self heightParameterValue);
-			cache: self cachedPreview;
-			onCachingDo: [ :aCachedElement :theAttribute | 
-				self cachedPreview: aCachedElement ] } ];
+		attributesCreatingBlock: [ self previewAttributes ];
 		isExpanded: self cachedIsExpanded;
-		onCachingDo: [ :aBoolean :theAttribute | 
-			self cachedIsExpanded: aBoolean ];
+		onCachingDo: [ :aBoolean :theAttribute | self cachedIsExpanded: aBoolean ];
 		create.
-	(aBlRope from: self stop to: self stop)
-		attributes: theAttributes.
+	(aBlRope from: self stop to: self stop) attributes: theAttributes
 ]
 
 { #category : #'api - style' }
