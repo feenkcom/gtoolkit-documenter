@@ -24,6 +24,7 @@ Gt2ClassAnnotation class >> tag [
 
 { #category : #'private - actions' }
 Gt2ClassAnnotation >> browseReferenceFrom: anEvent [
+	anEvent modifiers isShift ifTrue: [ ^ self ].
 	self isClassDefined ifFalse: [ ^ self inform: 'Class does not exist' ].
 	anEvent target fireEvent: (GtPhlowObjectToSpawn new 
 		object: self referencedClass;

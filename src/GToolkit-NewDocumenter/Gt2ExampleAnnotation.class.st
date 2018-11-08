@@ -31,6 +31,7 @@ Gt2ExampleAnnotation class >> tag [
 
 { #category : #'private - actions' }
 Gt2ExampleAnnotation >> browseReferenceFrom: anEvent [ 
+	anEvent modifiers isShift ifTrue: [ ^ self ].
 	self isExampleDefined ifFalse: [ ^ self inform: 'Example method does not exist' ].
 	anEvent target fireEvent: (GtPhlowObjectToSpawn new 
 		object: self referencedExample;
