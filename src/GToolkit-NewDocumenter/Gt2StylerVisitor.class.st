@@ -67,6 +67,14 @@ Gt2StylerVisitor >> visitCodeblock: aPRCodeblock [
 ]
 
 { #category : #'visiting-document' }
+Gt2StylerVisitor >> visitCommentedLine: aPRCommentedLine [
+	aPRCommentedLine 
+		gtDocument: self document;
+		gtSubscriber: self subscriber;
+		styleInText: self text.
+]
+
+{ #category : #'visiting-document' }
 Gt2StylerVisitor >> visitExternalLink: anPRExternalLine [
 	anPRExternalLine 
 		gtDocument: self document;

@@ -35,6 +35,12 @@ Gt2DocumentExamples >> contentWithCodeblockAndEmptyLineAfter [
 
 ]
 
+{ #category : #'commented line' }
+Gt2DocumentExamples >> contentWithCommentedLine [
+	<gtExample>
+	^ '%% a commented line'
+]
+
 { #category : #'class - existing one' }
 Gt2DocumentExamples >> contentWithExistingClass [
 	<gtExample>
@@ -142,6 +148,16 @@ Gt2DocumentExamples >> documentWithCodeblockAndEmptyLineAfter [
 	^ aDocument
 ]
 
+{ #category : #'commented line' }
+Gt2DocumentExamples >> documentWithCommentedLine [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithCommentedLine.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithCommentedLine.
+	^ aDocument
+]
+
 { #category : #'method - existing one' }
 Gt2DocumentExamples >> documentWithEditedExistingMethodAnnotation [
 	<gtExample>
@@ -199,7 +215,6 @@ Gt2DocumentExamples >> documentWithExternalLink [
 	aDocument := self defaultDocument text: self contentWithExternalLink.
 	aDocument editor styleText.
 	self assert: aDocument text asString equals: self contentWithExternalLink.
-	"self assert: aDocument isSubscribedToSystem."
 	^ aDocument
 ]
 
