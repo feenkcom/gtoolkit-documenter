@@ -103,4 +103,5 @@ PRCodeblock >> styleSmalltalkInText: aBlRope [
 			(aBlRope
 				from: (self scriptStartPositionInText: aBlRope)
 				to: self scriptStopPositionInText).
+	self styleScriptInText: aBlRope.
 ]
