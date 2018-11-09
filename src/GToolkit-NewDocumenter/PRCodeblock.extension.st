@@ -13,7 +13,8 @@ PRCodeblock >> cacheResult: aResult asException: isException [
 		ifPresent: [ :aCachedValue |
 			aCachedValue
 				result: aResult;
-				isException: isException ] 
+				isException: isException;
+				preview: nil ] 
 		ifAbsentPut: [ Gt2CodeblockCacheValue new
 			result: aResult;
 			isException: isException ]
