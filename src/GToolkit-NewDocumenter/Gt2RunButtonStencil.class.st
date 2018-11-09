@@ -23,7 +23,7 @@ Gt2RunButtonStencil >> action: aValuable [
 Gt2RunButtonStencil >> create [
 	| aButton aLook |
 	
-	aLook := BrGlamorousButtonWithIconLook.
+	aLook := BrGlamorousButtonWithIconLook "+ BrGlamorousButtonLabelLook".
 
 	aButton := BrButton new.
 	aButton look: aLook.
