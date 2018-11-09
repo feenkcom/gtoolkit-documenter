@@ -20,6 +20,25 @@ PRCodeblock >> cacheResult: aResult asException: isException [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> cachedPreview [
+	<return: #BlElement or: nil>
+	^ self gtDocument 
+		cacheAt: self cacheKey
+		ifPresent: [ :aCachedValue | aCachedValue preview ] 
+		ifAbsent: [ nil ]
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> cachedPreview: anElement [
+	self gtDocument 
+		cacheAt: self cacheKey
+		ifPresent: [ :aCachedValue | aCachedValue preview: anElement ]
+		ifAbsentPut: [ 
+			Gt2CodeblockCacheValue new 
+				preview: anElement ]
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> cachedResult [
 	^ self gtDocument 
 		cacheAt: self cacheKey 
@@ -119,11 +138,12 @@ PRCodeblock >> parameterLineLengthInText: aBlRope [
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> resultPreviewAttributes [
-	^ {
-		BrTextAdornmentDynamicAttribute new
-			beAppend;
-			stencil: (Gt2ResizablePreviewStencil new
-				result: self cachedResult)
+	^ {Gt2CachedAttribute new
+			attribute: (Gt2ResizablePreviewAttribute new
+				result: self cachedResult);
+			cache: self cachedPreview;
+			onCachingDo: [ :aCachedElement :theAttribute | 
+				self cachedPreview: aCachedElement ]
 		}
 ]
 

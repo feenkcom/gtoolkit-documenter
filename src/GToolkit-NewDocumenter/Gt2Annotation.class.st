@@ -137,7 +137,7 @@ Gt2Annotation >> objectToPreview [
 
 { #category : #'private - styling' }
 Gt2Annotation >> previewAttributes [
-	^ {(Gt2CachedAttribute new
+	^ {Gt2CachedAttribute new
 		attribute:
 			(Gt2ResizablePreviewAttribute new
 				result: self objectToPreview;
@@ -145,7 +145,7 @@ Gt2Annotation >> previewAttributes [
 				height: self heightParameterValue);
 		cache: self cachedPreview;
 		onCachingDo:
-				[ :aCachedElement :theAttribute | self cachedPreview: aCachedElement ])}
+				[ :aCachedElement :theAttribute | self cachedPreview: aCachedElement ]}
 ]
 
 { #category : #accessing }
