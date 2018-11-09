@@ -6,7 +6,8 @@ Class {
 	#instVars : [
 		'text',
 		'document',
-		'subscriber'
+		'subscriber',
+		'counter'
 	],
 	#category : #'GToolkit-NewDocumenter-Styler'
 }
@@ -23,6 +24,12 @@ Gt2StylerVisitor >> document: aGt2Document [
 		assert: [ aGt2Document notNil ]
 		description: [ 'Document must be non-nil' ].
 	document := aGt2Document
+]
+
+{ #category : #initialization }
+Gt2StylerVisitor >> initialize [
+	super initialize.
+	counter := 0.
 ]
 
 { #category : #accessing }
@@ -60,7 +67,9 @@ Gt2StylerVisitor >> visitAnnotation: anAnnotation [
 
 { #category : #'visiting-document' }
 Gt2StylerVisitor >> visitCodeblock: aPRCodeblock [
+	counter := counter + 1.
 	aPRCodeblock 
+		counter: counter;
 		gtDocument: self document;
 		gtSubscriber: self subscriber;
 		styleInText: self text.
@@ -80,4 +89,12 @@ Gt2StylerVisitor >> visitExternalLink: anPRExternalLine [
 		gtDocument: self document;
 		gtSubscriber: self subscriber;
 		styleInText: self text.
+]
+
+{ #category : #'visiting-document' }
+Gt2StylerVisitor >> visitHeader: aPRHeader [
+	(self text
+		from: aPRHeader start
+		to: aPRHeader stop)
+			fontSize: 20 - aPRHeader level
 ]

@@ -5,6 +5,7 @@ PRCodeblock >> cacheKey [
 	^ Gt2CodeblockCacheKey new
 		parameters: self parameters;
 		text: self text;
+		counter: self counter;
 		caption: self caption
 ]
 

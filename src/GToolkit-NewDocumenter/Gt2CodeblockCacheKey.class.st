@@ -4,6 +4,7 @@ Class {
 	#instVars : [
 		'text',
 		'caption',
+		'counter',
 		'parameters'
 	],
 	#category : #'GToolkit-NewDocumenter-Cache'
@@ -14,7 +15,8 @@ Gt2CodeblockCacheKey >> = anObject [
 	^ self class = anObject class and: [ 
 		(self parameters = anObject parameters) and: [ 
 			(self text = anObject text) and: [ 
-				self caption = anObject caption ] ] ]
+				self caption = anObject caption and: [ 
+					self counter = anObject counter ] ] ] ]
 ]
 
 { #category : #accessing }
@@ -27,12 +29,23 @@ Gt2CodeblockCacheKey >> caption: anObject [
 	caption := anObject
 ]
 
+{ #category : #accessing }
+Gt2CodeblockCacheKey >> counter [
+	^ counter
+]
+
+{ #category : #accessing }
+Gt2CodeblockCacheKey >> counter: anObject [
+	counter := anObject
+]
+
 { #category : #comparing }
 Gt2CodeblockCacheKey >> hash [
-	^ ((self class hash
+	^ (((self class hash
 		bitXor: self parameters hash)
 			bitXor: self text hash)
-				bitXor: self caption hash
+				bitXor: self caption hash)
+					bitXor: self counter hash
 ]
 
 { #category : #accessing }

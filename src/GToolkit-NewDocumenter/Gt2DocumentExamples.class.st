@@ -92,6 +92,21 @@ Gt2DocumentExamples >> defaultDocument [
 	^ aDocument
 ]
 
+{ #category : #demo }
+Gt2DocumentExamples >> demoDocument [
+	<gtExample>
+	^ Gt2Document new fileReference: self demoFileReference; read.
+]
+
+{ #category : #demo }
+Gt2DocumentExamples >> demoFileReference [
+	<gtExample>
+	^ GtIcebergUtility repositoriesLocation 
+			/ 'feenkcom'/ 'gtoolkit-demos' 
+			/ 'doc' / 'tutorial' 
+			/ 'smalltalks-2018-addressbook' / 'example-driven-development-2.pillar' 
+]
+
 { #category : #'method - existing one' }
 Gt2DocumentExamples >> documentDeleteAll [
 	<gtExample>
