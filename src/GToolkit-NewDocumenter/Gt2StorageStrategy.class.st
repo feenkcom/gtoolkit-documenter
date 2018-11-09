@@ -26,9 +26,11 @@ Gt2StorageStrategy >> read: aGt2Document [
 	self subclassResponsibility
 ]
 
-{ #category : #actions }
-Gt2StorageStrategy >> store [
-	self subclassResponsibility
+{ #category : #accessing }
+Gt2StorageStrategy >> rootDirectory [
+	"Return root directory to access external data, e.g., images, change files"
+	<return: #FileReference>
+	^ self subclassResponsibility 
 ]
 
 { #category : #actions }

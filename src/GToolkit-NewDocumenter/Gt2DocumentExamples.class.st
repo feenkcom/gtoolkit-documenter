@@ -41,6 +41,13 @@ Gt2DocumentExamples >> contentWithCommentedLine [
 	^ '%% a commented line'
 ]
 
+{ #category : #'changes - existing one' }
+Gt2DocumentExamples >> contentWithEpiceaChanges [
+	<gtExample>
+	^ '${', self constants changesAnnotationName, ':', self referencesChangesFile , '}$'
+
+]
+
 { #category : #'class - existing one' }
 Gt2DocumentExamples >> contentWithExistingClass [
 	<gtExample>
@@ -205,6 +212,17 @@ Gt2DocumentExamples >> documentWithEditedExistingMethodAnnotation [
 	^ aDocument
 ]
 
+{ #category : #'changes - existing one' }
+Gt2DocumentExamples >> documentWithEpiceaChanges [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument fileReference: self fileReference.
+	aDocument text: self contentWithEpiceaChanges.
+	aDocument store.
+	self assert: aDocument text asString equals: self contentWithEpiceaChanges.
+	^ aDocument
+]
+
 { #category : #'class - existing one' }
 Gt2DocumentExamples >> documentWithExistingClass [
 	<gtExample>
@@ -352,6 +370,12 @@ Gt2DocumentExamples >> referencedExampleMethod [
 Gt2DocumentExamples >> referencedMethod [
 	<gtExample>
 	^ self class >> #referencedMethod
+]
+
+{ #category : #'as yet unclassified' }
+Gt2DocumentExamples >> referencesChangesFile [
+	<gtExample>
+	^ '01-changes.ombu'
 ]
 
 { #category : #'empty document' }

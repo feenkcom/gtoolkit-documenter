@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #'pillar annotation names' }
+Gt2DocumentConstants class >> changesAnnotationName [
+	^ #changes2
+]
+
+{ #category : #'pillar annotation names' }
 Gt2DocumentConstants class >> classAnnotationName [
 	^ #class2
 ]
@@ -48,6 +53,11 @@ Gt2DocumentConstants class >> exampleAnnotationName [
 { #category : #'pillar parameter names' }
 Gt2DocumentConstants class >> expandedParameterName [
 	^ #expanded
+]
+
+{ #category : #'pillar parameter names' }
+Gt2DocumentConstants class >> fileParameterName [
+	^ #file
 ]
 
 { #category : #'pillar parameter names' }

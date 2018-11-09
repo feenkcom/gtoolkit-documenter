@@ -151,7 +151,7 @@ Gt2Annotation >> previewAttributes [
 { #category : #accessing }
 Gt2Annotation >> referenceParameterName [
 	"Return an annotation parameter name that holds a referenced object"
-	^ self subclassResponsibility
+	^ self constants fileParameterName
 ]
 
 { #category : #'accessing - parameter values' }

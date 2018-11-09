@@ -159,6 +159,13 @@ Gt2Document >> read [
 ]
 
 { #category : #accessing }
+Gt2Document >> rootDirectory [
+	"Return root directory to access external data, e.g., images, change files"
+	<return: #FileReference>
+	^ self storage rootDirectory
+]
+
+{ #category : #accessing }
 Gt2Document >> storage [
 	<return: #Gt2StorageStrategy>
 	^ storageStrategy
