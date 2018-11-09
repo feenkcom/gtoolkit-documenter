@@ -53,7 +53,7 @@ Gt2RunButtonStencil >> initialize [
 
 	self icon: BrGlamorousIcons play.
 	self label: 'Run'.
-	self action: [ self inform: 'Executed' ]
+	self action: [ :aWidget :aButtonModel | self inform: 'Executed' ]
 ]
 
 { #category : #accessing }

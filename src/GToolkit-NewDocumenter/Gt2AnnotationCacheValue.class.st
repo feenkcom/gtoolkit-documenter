@@ -5,7 +5,7 @@ Class {
 		'preview',
 		'isExpanded'
 	],
-	#category : #'GToolkit-NewDocumenter-Model'
+	#category : #'GToolkit-NewDocumenter-Cache'
 }
 
 { #category : #initialization }

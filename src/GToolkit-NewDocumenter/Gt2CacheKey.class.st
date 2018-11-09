@@ -3,5 +3,5 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'GToolkit-NewDocumenter-Model'
+	#category : #'GToolkit-NewDocumenter-Cache'
 }

@@ -1,8 +1,82 @@
 Extension { #name : #PRCodeblock }
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> cacheKey [
+	^ Gt2CodeblockCacheKey new
+		parameters: self parameters
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> cacheResult: aResult asException: isException [
+	self gtDocument 
+		cacheAt: self cacheKey 
+		ifPresent: [ :aCachedValue |
+			aCachedValue
+				result: aResult;
+				isException: isException ] 
+		ifAbsentPut: [ Gt2CodeblockCacheValue new
+			result: aResult;
+			isException: isException ]
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> cachedResult [
+	^ self gtDocument 
+		cacheAt: self cacheKey 
+		ifPresent: [ :aCachedValue | aCachedValue result ] 
+		ifAbsent: [ nil ]
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> endMarkup [
+	^ PR2PillarGrammar endMarkups at: self class
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> endMarkupSize [
-	^ (PR2PillarGrammar endMarkups at: self class) size
+	^ self endMarkup size
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> evaluateCodeblock [
+	| aStrategy aCommand anErrorCatchingCommand aResult |
+	self text isEmpty ifTrue: [ ^ self ].
+	aStrategy := GtPlaygroundBindingStrategy new.
+	aStrategy bindings: self gtDocument variableBindings.
+	aCommand := GtEvaluateSourceCodeCommand new.
+	aCommand requestor: self.
+	aCommand sourceCode: self text asString.
+	aCommand variableBindings: aStrategy.
+	aCommand receiver: self gtDocument.
+	anErrorCatchingCommand := aCommand asErrorCatchingCommand.
+	anErrorCatchingCommand execute.
+	aResult := anErrorCatchingCommand result.
+	self cacheResult: aResult asException: anErrorCatchingCommand isException.
+	anErrorCatchingCommand isException
+		ifFalse: [ 
+			self gtDocument announce: (Gt2CodeblockSuccessfulEvaluationAnnouncement new 
+				document: self gtDocument;
+				codeSnippet: self text; 
+				result: aResult) ]
+		ifTrue: [  
+			self gtDocument announce: (Gt2CodeblockFailedEvaluationAnnouncement new
+				document: self gtDocument;
+				codeSnippet: self text;
+				exception: aResult) ].
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> evaluationAction [ 
+	^ [ :aWidget :aButtonModel | 
+		"create a `once` subscription to restyle text once code snippet is executed.
+		We should not restyle text right after the `execute` statement since execution
+		could happen asynchronous"
+		(self gtDocument
+			when: Gt2CodeblockEvalutedAnnouncement
+			doOnce: [
+				self gtDocument editor styleText ]
+			for: self).
+		self evaluateCodeblock ]
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
@@ -21,17 +95,36 @@ PRCodeblock >> gtLanguageOrSmalltalk [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> hasResult [
+	^ self gtDocument 
+		cacheAt: self cacheKey 
+		ifPresent: [ :aCachedValue | true ] 
+		ifAbsent: [ false ]
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> newRunButtonAttribute [
 	^ Gt2RunButtonAttribute new
 		beAppend;
 		stencil: (Gt2RunButtonStencilBuilder new
 			label: self runButtonLabel;
-			document: self gtDocument)
+			document: self gtDocument;
+			action: self evaluationAction)
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> parameterLineLengthInText: aBlRope [
 	^ (aBlRope from: self start to: self stop) asString lines first size
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> resultPreviewAttributes [
+	^ {
+		BrTextAdornmentDynamicAttribute new
+			beAppend;
+			stencil: (Gt2ResizablePreviewStencil new
+				result: self cachedResult)
+		}
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
@@ -47,15 +140,27 @@ PRCodeblock >> scriptStartPositionInText: aBlText [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRCodeblock >> scriptStopPositionInText [
-	^ self stop - self endMarkupSize - 1
+PRCodeblock >> scriptStopPositionInText: aBlRope [
+	| aStopEndMarkup |
+	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
+	^ aStopEndMarkup - self endMarkupSize - 1
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> stopEndMarkupInText: aBlRope [
+	| aLastLine aTrimmedLine |
+	aLastLine := (aBlRope from: self start to: self stop) asString lines last.
+	aTrimmedLine := aLastLine trimRight.
+	^ self stop - aLastLine size + aTrimmedLine size
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> styleClosingBracketsInText: aBlRope [
+	| aStopEndMarkup |
+	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
 	(aBlRope
-		from: self stop - self endMarkupSize
-		to: self stop)
+		from: aStopEndMarkup - self endMarkupSize
+		to: aStopEndMarkup)
 			foreground: Gt2DocumentConstants subtleColor
 ]
 
@@ -66,6 +171,7 @@ PRCodeblock >> styleInText: aBlRope [
 	self gtIsSmalltalkLanguage ifFalse: [ ^ self styleScriptInText: aBlRope ].
 	self styleRunButtonInText: aBlRope.
 	self styleSmalltalkInText: aBlRope.
+	self hasResult ifTrue: [ self styleResultPreviewInText: aBlRope ].
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
@@ -77,8 +183,18 @@ PRCodeblock >> styleParametersInText: aBlRope [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> styleResultPreviewInText: aBlRope [
+	| aStopEndMarkup |
+	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
+	(aBlRope from: aStopEndMarkup - self endMarkupSize to: aStopEndMarkup)
+		attributes: self resultPreviewAttributes
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> styleRunButtonInText: aBlRope [
-	(aBlRope from: self stop - self endMarkupSize to: self stop)
+	| aStopEndMarkup |
+	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
+	(aBlRope from: aStopEndMarkup - self endMarkupSize to: aStopEndMarkup)
 		attribute: self newRunButtonAttribute
 ]
 
@@ -86,7 +202,7 @@ PRCodeblock >> styleRunButtonInText: aBlRope [
 PRCodeblock >> styleScriptInText: aBlText [
 	(aBlText
 		from: (self scriptStartPositionInText: aBlText)
-		to: self scriptStopPositionInText)
+		to: (self scriptStopPositionInText: aBlText))
 		monospace;
 		fontSize: 14
 ]
@@ -96,12 +212,12 @@ PRCodeblock >> styleSmalltalkInText: aBlRope [
 	| styler strategy |
 	styler := BrRBTextStyler new.
 	strategy := GtHighlightingBindingStrategy new
-		"bindings: self documentPart outBindings".
+		bindings: self gtDocument variableBindings.
 	styler workspace: strategy.
 	styler
 		style:
 			(aBlRope
 				from: (self scriptStartPositionInText: aBlRope)
-				to: self scriptStopPositionInText).
+				to: (self scriptStopPositionInText: aBlRope)).
 	self styleScriptInText: aBlRope.
 ]

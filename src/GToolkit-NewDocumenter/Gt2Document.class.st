@@ -7,7 +7,8 @@ Class {
 		'editor',
 		'announcer',
 		'cache',
-		'isSubscribedToSystem'
+		'isSubscribedToSystem',
+		'variableBindings'
 	],
 	#category : #'GToolkit-NewDocumenter-Model'
 }
@@ -87,6 +88,7 @@ Gt2Document >> initialize [
 	super initialize.
 	announcer := Announcer new.
 	isSubscribedToSystem := false.
+	variableBindings := GtPlaygroundBindings new.
 	cache := Dictionary new.
 	editor := BrTextEditor new.
 	editor styler: self defaultStyler.
@@ -167,4 +169,14 @@ Gt2Document >> updateAndSubscribeToSystem [
 	self 
 		maySubscribeToSystem;
 		mayRequestDocumentUpdate
+]
+
+{ #category : #accessing }
+Gt2Document >> variableBindings [
+	^ variableBindings
+]
+
+{ #category : #accessing }
+Gt2Document >> variableBindings: anObject [
+	variableBindings := anObject
 ]

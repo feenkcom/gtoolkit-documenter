@@ -3,15 +3,28 @@ Class {
 	#superclass : #BrTextAdornmentStencilBuilder,
 	#instVars : [
 		'label',
-		'document'
+		'document',
+		'codeRope',
+		'action'
 	],
 	#category : #'GToolkit-NewDocumenter-Brick - Stencils'
 }
 
+{ #category : #accessing }
+Gt2RunButtonStencilBuilder >> action [
+	^ action
+]
+
+{ #category : #accessing }
+Gt2RunButtonStencilBuilder >> action: anObject [
+	action := anObject
+]
+
 { #category : #'api - instantiation' }
 Gt2RunButtonStencilBuilder >> buildDefault [
 	^ Gt2RunButtonStencil new
-		label: self label
+		label: self label;
+		action: self action.
 ]
 
 { #category : #accessing }
@@ -29,6 +42,7 @@ Gt2RunButtonStencilBuilder >> initialize [
 	super initialize.
 	document := nil.
 	label := nil.
+	action := [ :aWidget :aButtonModel | self inform: 'Action!' ]
 ]
 
 { #category : #accessing }

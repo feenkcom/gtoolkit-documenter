@@ -5,7 +5,7 @@ Class {
 		'name',
 		'parameters'
 	],
-	#category : #'GToolkit-NewDocumenter-Model'
+	#category : #'GToolkit-NewDocumenter-Cache'
 }
 
 { #category : #comparing }

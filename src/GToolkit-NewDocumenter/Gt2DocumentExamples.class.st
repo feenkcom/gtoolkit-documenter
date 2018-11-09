@@ -25,6 +25,16 @@ Gt2DocumentExamples >> contentWithCodeblock [
 
 ]
 
+{ #category : #codeblock }
+Gt2DocumentExamples >> contentWithCodeblockAndEmptyLineAfter [
+	<gtExample>
+	^ '[[[label=Evaluate
+4 factorial.
+]]]
+'
+
+]
+
 { #category : #'class - existing one' }
 Gt2DocumentExamples >> contentWithExistingClass [
 	<gtExample>
@@ -111,6 +121,17 @@ Gt2DocumentExamples >> documentWithCodeblock [
 	aDocument := self defaultDocument text: self contentWithCodeblock.
 	aDocument editor styleText.
 	self assert: aDocument text asString equals: self contentWithCodeblock.
+	"self assert: aDocument isSubscribedToSystem."
+	^ aDocument
+]
+
+{ #category : #codeblock }
+Gt2DocumentExamples >> documentWithCodeblockAndEmptyLineAfter [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithCodeblockAndEmptyLineAfter.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithCodeblockAndEmptyLineAfter.
 	"self assert: aDocument isSubscribedToSystem."
 	^ aDocument
 ]
