@@ -56,6 +56,12 @@ Gt2DocumentExamples >> contentWithExistingMethod [
 
 ]
 
+{ #category : #'external link' }
+Gt2DocumentExamples >> contentWithExternalLink [
+	<gtExample>
+	^ '*Feenk>https://feenk.com*'
+]
+
 { #category : #'method - multiple' }
 Gt2DocumentExamples >> contentWithMultipleMethods [
 	<gtExample>
@@ -183,6 +189,17 @@ Gt2DocumentExamples >> documentWithExistingMethod [
 	aDocument editor styleText.
 	self assert: aDocument text asString equals: self contentWithExistingMethod.
 	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
+{ #category : #'external link' }
+Gt2DocumentExamples >> documentWithExternalLink [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExternalLink.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithExternalLink.
+	"self assert: aDocument isSubscribedToSystem."
 	^ aDocument
 ]
 
