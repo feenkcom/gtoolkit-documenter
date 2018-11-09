@@ -3,7 +3,9 @@ Extension { #name : #PRCodeblock }
 { #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> cacheKey [
 	^ Gt2CodeblockCacheKey new
-		parameters: self parameters
+		parameters: self parameters;
+		text: self text;
+		caption: self caption
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
@@ -134,9 +136,11 @@ PRCodeblock >> newRunButtonAttribute [
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> parameterStopPositionInText: aBlRope [
-	^ (aBlRope from: self start to: self stop) finder
+	| aLineBreakIndex |
+	aLineBreakIndex := (aBlRope from: self start to: self stop) finder
 			pattern: [ :aText :anIndex | 
 				(aText at: anIndex) isLineBreak ]; search.
+	^ aLineBreakIndex + self start - 1
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
@@ -153,8 +157,9 @@ PRCodeblock >> resultPreviewAttributes [
 { #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> runButtonLabel [
 	<return: #String>
-	^ self label 
-		ifEmpty: [ Gt2DocumentConstants defaultRunButtonLabel ]
+	(self label isString and: [ self label isEmpty not ])
+		ifTrue: [ self label ].
+	^ Gt2DocumentConstants defaultRunButtonLabel
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
@@ -171,8 +176,10 @@ PRCodeblock >> scriptStopPositionInText: aBlRope [
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> stopEndMarkupInText: aBlRope [
-	^ (aBlRope from: self start to: self stop) finder
+	| aFoundIndex |
+	aFoundIndex := (aBlRope from: self start to: self stop) finder
 		reversed; startAtEnd; character: self endMarkup last; search.
+	^ aFoundIndex + self start - 1
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
