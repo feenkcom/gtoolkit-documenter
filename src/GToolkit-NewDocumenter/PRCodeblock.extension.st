@@ -125,6 +125,18 @@ PRCodeblock >> hasResult [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> heightParameterValue [
+	^ Gt2DocumentUtility
+		valueOf: Gt2DocumentConstants heightParameterName
+		in: self parameters
+		value: [ :aNumber | aNumber isNumber 
+			ifTrue: [ aNumber ]
+			ifFalse: [ Gt2DocumentConstants defaultPreviewHeight ] ]
+		emptyValue: [ Gt2DocumentConstants defaultPreviewHeight ]
+		defaultValue: [ Gt2DocumentConstants defaultPreviewHeight ]
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> newRunButtonAttribute [
 	^ Gt2RunButtonAttribute new
 		beAppend;
@@ -147,7 +159,9 @@ PRCodeblock >> parameterStopPositionInText: aBlRope [
 PRCodeblock >> resultPreviewAttributes [
 	^ {Gt2CachedAttribute new
 			attribute: (Gt2ResizablePreviewAttribute new
-				result: self cachedResult);
+				result: self cachedResult;
+				showSelector: self showParameterValue;
+				height: self heightParameterValue);
 			cache: self cachedPreview;
 			onCachingDo: [ :aCachedElement :theAttribute | 
 				self cachedPreview: aCachedElement ]
@@ -172,6 +186,19 @@ PRCodeblock >> scriptStopPositionInText: aBlRope [
 	| aStopEndMarkup |
 	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
 	^ aStopEndMarkup - self endMarkupSize - 1
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> showParameterValue [
+	<return: #Symbol>
+	^ Gt2DocumentUtility 
+		valueOf: Gt2DocumentConstants showParameterName
+		in: self parameters
+		value: [ :aString | aString isString 
+			ifFalse: [ Gt2DocumentConstants defaultShowSelector ] 
+			ifTrue: [ aString asSymbol ] ]
+		emptyValue: [ Gt2DocumentConstants defaultShowSelector ]
+		defaultValue: [ Gt2DocumentConstants defaultShowSelector ]
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
