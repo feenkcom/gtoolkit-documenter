@@ -8,7 +8,8 @@ Class {
 		'announcer',
 		'cache',
 		'isSubscribedToSystem',
-		'variableBindings'
+		'variableBindings',
+		'storageStrategy'
 	],
 	#category : #'GToolkit-NewDocumenter-Model'
 }
@@ -64,13 +65,37 @@ Gt2Document >> editor [
 	^ editor
 ]
 
+{ #category : #initialization }
+Gt2Document >> fileReference: aFileReference [ 
+	self 
+		assert: [ aFileReference notNil ]
+		description: [ 'Document file reference must be non-nil' ].
+	self strategy: (Gt2StorageStrategy fileReference: aFileReference)
+]
+
 { #category : #'gt-extension' }
 Gt2Document >> gtTextFor: aView [
 	<gtView>
 	self editor ifNil: [ ^ aView empty ].
 	^ aView explicit
 		title: 'Document';
-		stencil: [ self ]
+		stencil: [ self ];
+		actionStencil: [ 
+			| button |
+			button := BrButton new.
+			button
+				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
+				action:  [
+					button fireEvent: (GtPhlowObjectToSpawn new
+						object: self parse;
+						sourceElement: button) ];
+				icon: BrGlamorousIcons tree asElement;
+				label: 'Parse using GToolkit Documenter' translated ];
+		actionStencil: [ :tab | 
+			BrButton new 
+				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
+				icon: BrGlamorousIcons accept asElement;
+				action: [ self store ] ]
 ]
 
 { #category : #'announcement handling' }
@@ -93,6 +118,7 @@ Gt2Document >> initialize [
 	editor := BrTextEditor new.
 	editor styler: self defaultStyler.
 	self text: self defaultText.
+	storageStrategy := Gt2StorageStrategy null.
 	self subscribeToEditorChanges.
 ]
 
@@ -118,6 +144,37 @@ Gt2Document >> maySubscribeToSystem [
 Gt2Document >> mayUnsubscribeFromSystem [
 	self hasDocumentSubscriptions ifTrue: [ ^ self ].
 	self unsubscribeFromSystem
+]
+
+{ #category : #actions }
+Gt2Document >> parse [
+	^ PRPillarParser new 
+		optimize; 
+		parse: self text asString
+]
+
+{ #category : #actions }
+Gt2Document >> read [
+	storageStrategy read: self
+]
+
+{ #category : #accessing }
+Gt2Document >> storage [
+	<return: #Gt2StorageStrategy>
+	^ storageStrategy
+]
+
+{ #category : #actions }
+Gt2Document >> store [
+	storageStrategy store: self
+]
+
+{ #category : #initialization }
+Gt2Document >> strategy: aGt2StorageStrategy [ 
+	self 
+		assert: [ aGt2StorageStrategy notNil ]
+		description: [ 'Storage strategy must be non-nil' ].
+	storageStrategy := aGt2StorageStrategy
 ]
 
 { #category : #subscriptions }

@@ -126,6 +126,21 @@ Gt2DocumentExamples >> documentDeleteMethodAnnotation [
 	^ aDocument
 ]
 
+{ #category : #'file reference document' }
+Gt2DocumentExamples >> documentFromFileReference [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument fileReference: self fileReference.
+	self assert: aDocument storage notNil.
+	self assert: aDocument storage file notNil.
+	self assert: aDocument storage file exists.
+	self assert: aDocument storage file contents equals: self contentWithMultipleMethods.
+	self assert: aDocument text isEmpty.
+	aDocument read.
+	self assert: aDocument text asString equals: self contentWithMultipleMethods.
+	^ aDocument
+]
+
 { #category : #codeblock }
 Gt2DocumentExamples >> documentWithCodeblock [
 	<gtExample>
@@ -252,10 +267,30 @@ Gt2DocumentExamples >> examplesUtility [
 	^ Gt2DocumentExamplesUtility
 ]
 
+{ #category : #'file reference document' }
+Gt2DocumentExamples >> fileReference [
+	<gtExample>
+	^ GtFileSystemExamples new addPillarFileWithContent: self contentWithMultipleMethods
+]
+
 { #category : #basic }
 Gt2DocumentExamples >> fooText [
 	<gtExample>
 	^ 'Foo' asRopedText
+]
+
+{ #category : #'file reference document' }
+Gt2DocumentExamples >> modifyAndStoreToFileReference [
+	<gtExample>
+	| aDocument |
+	aDocument := self documentFromFileReference.
+	aDocument editor inserter 
+		at: 0; string: '! Inserted Header', String cr, String cr; insert.
+	aDocument store.
+	self assert: (aDocument text asString endsWith: self contentWithMultipleMethods).
+	self assert: (aDocument text asString = self contentWithMultipleMethods) not.
+	self assert: aDocument storage file contents equals: aDocument text asString.
+	^ aDocument 
 ]
 
 { #category : #'pillar parser' }

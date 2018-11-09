@@ -12,7 +12,7 @@ AbstractFileReference >> gtInspectorGtDocumenterParse [
 ]
 
 { #category : #'*GToolkit-Documenter-Exporter' }
-AbstractFileReference >> parseWithGtDocumenter [
+AbstractFileReference >> parseWithGt2Documenter [
 	| encoding |
 	encoding := [ self binaryReadStreamDo: [ :in | (ZnCharacterEncoder detectEncoding: in upToEnd) identifier ] ]
 		on: ZnCharacterEncodingError
