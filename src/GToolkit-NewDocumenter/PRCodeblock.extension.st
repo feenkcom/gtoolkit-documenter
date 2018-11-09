@@ -132,8 +132,10 @@ PRCodeblock >> newRunButtonAttribute [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRCodeblock >> parameterLineLengthInText: aBlRope [
-	^ (aBlRope from: self start to: self stop) asString lines first size
+PRCodeblock >> parameterStopPositionInText: aBlRope [
+	^ (aBlRope from: self start to: self stop) finder
+			pattern: [ :aText :anIndex | 
+				(aText at: anIndex) isLineBreak ]; search.
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
@@ -156,7 +158,7 @@ PRCodeblock >> runButtonLabel [
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> scriptStartPositionInText: aBlText [
-	^ self start + (self parameterLineLengthInText: aBlText) + 1
+	^ (self parameterStopPositionInText: aBlText) + 1
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
@@ -168,10 +170,8 @@ PRCodeblock >> scriptStopPositionInText: aBlRope [
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> stopEndMarkupInText: aBlRope [
-	| aLastLine aTrimmedLine |
-	aLastLine := (aBlRope from: self start to: self stop) asString lines last.
-	aTrimmedLine := aLastLine trimRight.
-	^ self stop - aLastLine size + aTrimmedLine size
+	^ (aBlRope from: self start to: self stop) finder
+		reversed; startAtEnd; character: self endMarkup last; search.
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
@@ -196,10 +196,10 @@ PRCodeblock >> styleInText: aBlRope [
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> styleParametersInText: aBlRope [
-	| aLenghtOfTheParameterLine |
-	aLenghtOfTheParameterLine := self parameterLineLengthInText: aBlRope.
-	(aBlRope from: self start to: self start + aLenghtOfTheParameterLine)
-		foreground: Gt2DocumentConstants subtleColor
+	(aBlRope
+		from: self start
+		to: (self parameterStopPositionInText: aBlRope))
+			foreground: Gt2DocumentConstants subtleColor
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
