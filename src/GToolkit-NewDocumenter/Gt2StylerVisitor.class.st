@@ -57,3 +57,11 @@ Gt2StylerVisitor >> visitAnnotation: anAnnotation [
 		styleInText: self text.
 	super visitAnnotation: anAnnotation
 ]
+
+{ #category : #'visiting-document' }
+Gt2StylerVisitor >> visitCodeblock: aPRCodeblock [
+	aPRCodeblock 
+		gtDocument: self document;
+		gtSubscriber: self subscriber;
+		styleInText: self text.
+]

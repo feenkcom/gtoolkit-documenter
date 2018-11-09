@@ -21,3 +21,12 @@ PRDocumentItem >> gtSubscriber [
 PRDocumentItem >> gtSubscriber: anObject [
 	self propertyAt: #gtSubscriber put: anObject
 ]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRDocumentItem >> styleInText: aBlRope [ 
+	"Subclasses can add more styling"
+	(aBlRope 
+			from: self start 
+			to: self stop)
+				underlinePaint: Gt2DocumentConstants linkWithErrorColor
+]

@@ -16,6 +16,15 @@ Gt2DocumentExamples >> constants [
 	^ Gt2DocumentConstants
 ]
 
+{ #category : #codeblock }
+Gt2DocumentExamples >> contentWithCodeblock [
+	<gtExample>
+	^ '[[[label=Evaluate
+4 factorial.
+]]]'
+
+]
+
 { #category : #'class - existing one' }
 Gt2DocumentExamples >> contentWithExistingClass [
 	<gtExample>
@@ -92,6 +101,17 @@ Gt2DocumentExamples >> documentDeleteMethodAnnotation [
 		assert: aDocument text asString 
 		equals: ( self contentWithExistingMethod last asString).
 	self assert: aDocument isSubscribedToSystem not.
+	^ aDocument
+]
+
+{ #category : #codeblock }
+Gt2DocumentExamples >> documentWithCodeblock [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithCodeblock.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithCodeblock.
+	"self assert: aDocument isSubscribedToSystem."
 	^ aDocument
 ]
 

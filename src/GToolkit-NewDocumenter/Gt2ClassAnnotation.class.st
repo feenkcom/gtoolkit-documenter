@@ -82,7 +82,7 @@ Gt2ClassAnnotation >> referenceParameterName [
 Gt2ClassAnnotation >> referencedClass [
 	<return: #RGClassDefinition or: nil>
 	^ referencedClass ifNil: [ referencedClass := 
-		GtDocumenterUtility 
+		self utility 
 			valueOf: self constants nameParameterName
 			in: self parameters 
 			value: [ :aValue | GtSystemUtility classDefinitionFromString: aValue ] 
