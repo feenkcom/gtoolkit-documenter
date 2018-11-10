@@ -39,7 +39,7 @@ Gt2ChangesAnnotation >> applyButtonAttribute [
 
 { #category : #operations }
 Gt2ChangesAnnotation >> applyChanges [
-	self halt.
+	self cachedChanges applyChanges
 ]
 
 { #category : #'private - actions' }

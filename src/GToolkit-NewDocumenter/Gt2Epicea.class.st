@@ -9,7 +9,10 @@ Class {
 		'epiceaLog',
 		'events',
 		'diff',
-		'ignoreEntryAdded'
+		'applyErrorHandler'
+	],
+	#classVars : [
+		'DebugMode'
 	],
 	#category : #'GToolkit-NewDocumenter-Epicea'
 }
@@ -27,6 +30,19 @@ Gt2Epicea >> addEvent: anEpEvent [
 { #category : #accessing }
 Gt2Epicea >> announcer [
 	^ announcer
+]
+
+{ #category : #modification }
+Gt2Epicea >> applyChanges [
+	self 
+		assert: [ self log notNil ] 
+		description: [ 'Epicea log must be non-nil.' ].
+	self ombuFileExists ifFalse: [ ^ self ].
+	EpLogBrowserOperationFactory new
+		logBrowserModel: self log;
+		entries: self entries;
+		errorHandlerBlock: applyErrorHandler;
+		applyCodeChanges.
 ]
 
 { #category : #accessing }
@@ -202,17 +218,15 @@ Gt2Epicea >> handleEpEntryAddedAnnouncement: anEpEntryAdded [
 	self notifyEpiceaChanged.
 ]
 
-{ #category : #private }
-Gt2Epicea >> ignoreEntryAddedDuring: aBlock [
-	ignoreEntryAdded := true.
-	aBlock ensure: [ ignoreEntryAdded := false ].
-]
-
 { #category : #initialization }
 Gt2Epicea >> initialize [
 	super initialize.
 	announcer := Announcer new.
-	ignoreEntryAdded := true.
+	applyErrorHandler := [ :anException | | message |
+		DebugMode ifTrue: [ anException pass ].
+		message := 'Error while applying Epicea changes: ' , anException asString.
+		message traceCr.
+		self inform: message ].
 ]
 
 { #category : #accessing }
@@ -249,6 +263,12 @@ Gt2Epicea >> ombuFile: aFileReference [
 		send: #handleEpEntryAddedAnnouncement: 
 		to: self.
 	self notifyEpiceaChanged.
+]
+
+{ #category : #testing }
+Gt2Epicea >> ombuFileExists [
+	<return: #Boolean>
+	^ self ombuFile notNil and: [ self ombuFile exists ]
 ]
 
 { #category : #private }
