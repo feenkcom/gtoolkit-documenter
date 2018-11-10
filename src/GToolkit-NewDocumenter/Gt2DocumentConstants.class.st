@@ -24,6 +24,11 @@ Gt2DocumentConstants class >> classAnnotationName [
 	^ #class2
 ]
 
+{ #category : #'pillar parameter default values' }
+Gt2DocumentConstants class >> classDefinitionShowSelector [
+	^ #gtDefinitionFor:
+]
+
 { #category : #'pillar parameter names' }
 Gt2DocumentConstants class >> codeExpandedParameterName [
 	^ #codeExpanded

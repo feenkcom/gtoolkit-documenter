@@ -27,8 +27,13 @@ Gt2ClassAnnotation >> browseReferenceFrom: anEvent [
 	anEvent modifiers isShift ifTrue: [ ^ self ].
 	self isClassDefined ifFalse: [ ^ self inform: 'Class does not exist' ].
 	anEvent target fireEvent: (GtPhlowObjectToSpawn new 
-		object: self referencedClass;
+		object: self referencedClass realClass;
 		sourceElement: anEvent target)
+]
+
+{ #category : #'accessing - parameter values' }
+Gt2ClassAnnotation >> defaultShowSelector [
+	^ self constants classDefinitionShowSelector
 ]
 
 { #category : #'announcement handling' }
@@ -69,7 +74,7 @@ Gt2ClassAnnotation >> isReferenceDefined [
 { #category : #accessing }
 Gt2ClassAnnotation >> objectToPreview [
 	"Subclasses should define what object to preview"
-	^ self referencedClass
+	^ self referencedClass realClass
 ]
 
 { #category : #accessing }

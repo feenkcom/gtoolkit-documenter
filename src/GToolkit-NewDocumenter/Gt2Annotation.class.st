@@ -156,7 +156,7 @@ Gt2Annotation >> referenceParameterName [
 
 { #category : #'accessing - parameter values' }
 Gt2Annotation >> showEmptyValue [
-	^ self constants defaultShowSelector
+	^ self defaultShowSelector
 ]
 
 { #category : #'accessing - parameter values' }
