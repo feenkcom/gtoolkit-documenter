@@ -6,7 +6,8 @@ Class {
 	#instVars : [
 		'ombuFile',
 		'epiceaLog',
-		'events'
+		'events',
+		'diff'
 	],
 	#category : #'GToolkit-NewDocumenter-Epicea'
 }
@@ -19,7 +20,17 @@ Gt2Epicea >> addEvent: anEpEvent [
 		description: [ 'The parent directory of the Epicea change file must exist' ].
 	self log addEntryWith: anEpEvent tags: [ :tags | "ignore" ].
 	self log store flush.
-	events addLast: anEpEvent.
+	self privateAddEvent: anEpEvent.
+]
+
+{ #category : #accessing }
+Gt2Epicea >> diff [
+	<return: #BlRope>
+	^ diff ifNil: [ 
+			diff := Gt2EpiceaDiffStencil new
+				from: self systemState;
+				to: self tutorialState;
+				create ]
 ]
 
 { #category : #accessing }
@@ -32,6 +43,15 @@ Gt2Epicea >> entries [
 Gt2Epicea >> events [
 	<return: #OrderedeCollection of: #EpEvent>
 	^ events
+]
+
+{ #category : #'gt-extension' }
+Gt2Epicea >> gtDiffFor: aView [
+	<gtView>
+	^ aView textEditor
+		title: 'Diff';
+		priority: 3;
+		text: [ self diff ]
 ]
 
 { #category : #'gt-extension' }
@@ -158,7 +178,19 @@ Gt2Epicea >> ombuFile [
 Gt2Epicea >> ombuFile: aFileReference [
 	ombuFile := aFileReference.
 	epiceaLog := EpLog fromFile: "freshFromFile:" ombuFile.
-	events := self entries collect: #content.
+	self privateEvents: (self entries collect: #content).
+]
+
+{ #category : #private }
+Gt2Epicea >> privateAddEvent: anEpEvent [
+	events addLast: anEpEvent.
+	diff := nil.
+]
+
+{ #category : #private }
+Gt2Epicea >> privateEvents: aCollection [
+	events := aCollection.
+	diff := nil.
 ]
 
 { #category : #modification }
@@ -166,7 +198,33 @@ Gt2Epicea >> removeEvent: anEpEvent [
 	| aNewEvents |
 	aNewEvents := self events reject: [ :eachEvent | eachEvent = anEpEvent ].
 	ombuFile ensureDelete.
-	aNewEvents do: [ :eachEvent | self addEvent: eachEvent ].
+	aNewEvents do: [ :eachEvent | 
+		self log addEntryWith: eachEvent tags: [ :tags | "ignore" ] ].
 	self log store flush.
-	events := aNewEvents.
+	self privateEvents: aNewEvents.
+]
+
+{ #category : #accessing }
+Gt2Epicea >> systemState [
+	<return: #String>
+	^ String streamContents: [ :aStream | 
+		self events 
+			do: [ :eachEvent | 
+				| anOutput |
+				anOutput := eachEvent accept: (GtEpiceaCurrentStateVisitor 
+					inEnvironment: self class environment).
+				aStream nextPutAll: anOutput ]
+			separatedBy: [ aStream cr; cr ] ]
+]
+
+{ #category : #accessing }
+Gt2Epicea >> tutorialState [
+	<return: #String>
+	^ String streamContents: [ :aStream | 
+		self events 
+			do: [ :eachEvent | 
+				| anOutput |
+				anOutput := eachEvent accept: EpNewStateVisitor new.
+				aStream nextPutAll: anOutput ]
+			separatedBy: [ aStream cr; cr ] ]
 ]
