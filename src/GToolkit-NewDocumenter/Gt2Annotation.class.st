@@ -11,46 +11,46 @@ Gt2Annotation class >> isAbstract [
 	^ self name = #Gt2Annotation 
 ]
 
+{ #category : #'private - cache' }
+Gt2Annotation >> annotationCacheValueClass [
+	^ Gt2AnnotationCacheValue
+]
+
 { #category : #'private - actions' }
 Gt2Annotation >> browseReferenceFrom: anEvent [
 	"Subclasses should define actual action"
 	self subclassResponsibility
 ]
 
-{ #category : #'api - cache' }
+{ #category : #'private - cache' }
 Gt2Annotation >> cacheKey [
 	^ Gt2AnnotationCacheKey new
 		name: self tag;
 		parameters: self parameters
 ]
 
-{ #category : #private }
-Gt2Annotation >> cachedAttributes [
-	<return: #Array of: #BlTextAttribute>
-	^ #()
-]
-
-{ #category : #'api - cache' }
+{ #category : #'private - cache' }
 Gt2Annotation >> cachedIsExpanded [
 	<return: #Boolean>
-	self gtDocument 
+	self gtDocument
 		cacheAt: self cacheKey
-		ifPresent: [ :aCachedValue | ^ aCachedValue isExpanded ]
-		ifAbsentPut: [
-			Gt2AnnotationCacheValue new isExpanded: self expandedParameterValue ].
+		ifPresent: [ :aCachedValue | 
+			^ aCachedValue isExpanded ifNil: [ self expandedParameterValue ] ]
+		ifAbsentPut: [ self annotationCacheValueClass new
+				isExpanded: self expandedParameterValue ].
 	^ self expandedParameterValue
 ]
 
-{ #category : #'api - cache' }
+{ #category : #'private - cache' }
 Gt2Annotation >> cachedIsExpanded: aBoolean [
 	self gtDocument 
 		cacheAt: self cacheKey
 		ifPresent: [ :aCachedValue | aCachedValue isExpanded: aBoolean ]
 		ifAbsentPut: [ 
-			Gt2AnnotationCacheValue new isExpanded: aBoolean ]
+			self annotationCacheValueClass new isExpanded: aBoolean ]
 ]
 
-{ #category : #'api - cache' }
+{ #category : #'private - cache' }
 Gt2Annotation >> cachedPreview [
 	<return: #BlElement or: nil>
 	^ self gtDocument 
@@ -59,13 +59,13 @@ Gt2Annotation >> cachedPreview [
 		ifAbsent: [ nil ]
 ]
 
-{ #category : #'api - cache' }
+{ #category : #'private - cache' }
 Gt2Annotation >> cachedPreview: anElement [
 	self gtDocument 
 		cacheAt: self cacheKey
 		ifPresent: [ :aCachedValue | aCachedValue preview: anElement ]
 		ifAbsentPut: [ 
-			Gt2AnnotationCacheValue new 
+			self annotationCacheValueClass new 
 				preview: anElement;
 				isExpanded: true ]
 ]

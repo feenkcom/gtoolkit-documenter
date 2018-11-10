@@ -19,6 +19,11 @@ Gt2ChangesAnnotation class >> tag [
 	^ self constants changesAnnotationName
 ]
 
+{ #category : #'private - cache' }
+Gt2ChangesAnnotation >> annotationCacheValueClass [
+	^ Gt2ChangesAnnotationCacheValue
+]
+
 { #category : #'private - styling' }
 Gt2ChangesAnnotation >> applyButtonAttribute [
 	^ Gt2ButtonAttribute new
@@ -47,7 +52,23 @@ Gt2ChangesAnnotation >> browseReferenceFrom: aBlClickEvent [
 
 { #category : #'private - cache' }
 Gt2ChangesAnnotation >> cachedChanges [
-	^ self
+	<return: #Gt2Epicea or: nil>
+	self changeFileExists ifFalse: [ ^ nil ].
+	^ self gtDocument 
+		cacheAt: self cacheKey
+		ifPresent: [ :aCachedValue | 
+			aCachedValue epicea ifNil: [ 
+				| aNewEpicea |
+				aNewEpicea := self newEpicea.
+				aCachedValue epicea: aNewEpicea.
+				aNewEpicea ] ]
+		ifAbsentPut: [ 
+			| aNewEpicea |
+			aNewEpicea := self newEpicea.
+			self annotationCacheValueClass new 
+				epicea: aNewEpicea;
+				isExpanded: self expandedParameterValue.
+			aNewEpicea ].
 ]
 
 { #category : #'accessing - parameter values' }
@@ -92,6 +113,11 @@ Gt2ChangesAnnotation >> createButtonAttribute [
 						sourceElement: aButton) ]]
 ]
 
+{ #category : #'accessing - parameter values' }
+Gt2ChangesAnnotation >> expandedDefaultValue [
+	^ true
+]
+
 { #category : #testing }
 Gt2ChangesAnnotation >> isApplied [
 	^ self changeFileExists not
@@ -112,6 +138,11 @@ Gt2ChangesAnnotation >> isPreviewDefined [
 { #category : #testing }
 Gt2ChangesAnnotation >> isReferenceDefined [
 	^ self changeFileExists
+]
+
+{ #category : #'private - cache' }
+Gt2ChangesAnnotation >> newEpicea [
+	^ Gt2Epicea new ombuFile: self changeFile
 ]
 
 { #category : #accessing }
