@@ -173,7 +173,7 @@ PRCodeblock >> runButtonLabel [
 	<return: #String>
 	(self label isString and: [ self label isEmpty not ])
 		ifTrue: [ self label ].
-	^ Gt2DocumentConstants defaultRunButtonLabel
+	^ Gt2DocumentConstants runButtonLabel
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }

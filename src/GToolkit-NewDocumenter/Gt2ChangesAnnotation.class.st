@@ -23,15 +23,26 @@ Gt2ChangesAnnotation class >> tag [
 Gt2ChangesAnnotation >> applyButtonAttribute [
 	^ Gt2ButtonAttribute new
 		beAppend;
-		stencil: (Gt2ButtonStencilBuilder new
-			label: self constants applyButtonLabel;
-			look: BrGlamorousButtonWithIconLook + BrGlamorousButtonLabelLook;
-			action: [ self applyChanges ])
+		equality: self constants applyButtonLabel;
+		stencil: [
+			BrButton new
+				label: self constants applyButtonLabel;
+				icon: self constants runButtonIcon asElement;
+				look: BrGlamorousButtonWithIconLook + BrGlamorousButtonLabelLook;
+				action: [ self applyChanges ]]
 ]
 
 { #category : #operations }
 Gt2ChangesAnnotation >> applyChanges [
 	self halt.
+]
+
+{ #category : #'private - actions' }
+Gt2ChangesAnnotation >> browseReferenceFrom: aBlClickEvent [ 
+	aBlClickEvent target 
+		fireEvent: (GtPhlowObjectToSpawn new
+			object: self cachedChanges;
+			sourceElement: aBlClickEvent target)
 ]
 
 { #category : #'private - cache' }
@@ -55,33 +66,36 @@ Gt2ChangesAnnotation >> changeFile [
 
 { #category : #testing }
 Gt2ChangesAnnotation >> changeFileExists [
-	^ self changeFile ifNil: [ false ] ifNotNil: #exists
+	^ self isChangeFileDefined and: [ 
+		self changeFile exists ]
 ]
 
 { #category : #'private - styling' }
-Gt2ChangesAnnotation >> editButtonAttribute [
-	| aLabel anIcon |
-	aLabel := self changeFileExists 
-		ifTrue: [ self constants editButtonLabel ]
-		ifFalse: [ self constants createButtonLabel ].
-	anIcon := self changeFileExists 
-		ifTrue: [ self constants editButtonIcon ]
-		ifFalse: [ self constants createButtonIcon ].
+Gt2ChangesAnnotation >> createButtonAttribute [
 	^ Gt2ButtonAttribute new
 		beAppend;
-		stencil: (Gt2ButtonStencilBuilder new
-			label: aLabel;
-			icon: anIcon;
-			look: BrGlamorousButtonWithIconLook + BrGlamorousButtonLabelLook;
-			action: [ :aButton |
-				aButton fireEvent: (GtPhlowObjectToSpawn new
-					object: self cachedChanges;
-					sourceElement: aButton) ])
+		equality: self constants createButtonLabel;
+		stencil: [ 
+			BrButton new
+				label: self constants createButtonLabel ;
+				icon:  self constants createButtonIcon asElement ;
+				look: BrGlamorousButtonWithIconLook + BrGlamorousButtonLabelLook;
+				action: [ :aButton |
+					aButton fireEvent: (GtPhlowObjectToSpawn new
+						object: self cachedChanges;
+						sourceElement: aButton) ]]
 ]
 
 { #category : #testing }
 Gt2ChangesAnnotation >> isApplied [
 	^ self changeFileExists not
+]
+
+{ #category : #testing }
+Gt2ChangesAnnotation >> isChangeFileDefined [
+	self changeFile ifNil: [ ^ false ].
+	self changeFile exists ifFalse: [ ^ true ].
+	^ self changeFile isFile 
 ]
 
 { #category : #testing }
@@ -92,6 +106,11 @@ Gt2ChangesAnnotation >> isPreviewDefined [
 { #category : #testing }
 Gt2ChangesAnnotation >> isReferenceDefined [
 	^ self changeFileExists
+]
+
+{ #category : #accessing }
+Gt2ChangesAnnotation >> objectToPreview [
+	^ self cachedChanges
 ]
 
 { #category : #accessing }
@@ -108,10 +127,10 @@ Gt2ChangesAnnotation >> styleApplyButtonInText: aBlRope [
 ]
 
 { #category : #'private - styling' }
-Gt2ChangesAnnotation >> styleEditButtonInText: aBlRope [
-	self isApplied ifFalse: [ ^ self ].
+Gt2ChangesAnnotation >> styleCreateButtonInText: aBlRope [
+	self changeFileExists ifTrue: [ ^ self ].
 	(aBlRope from: self stop to: self stop) 
-		attribute: self editButtonAttribute
+		attribute: self createButtonAttribute
 ]
 
 { #category : #'api - style' }
@@ -120,6 +139,6 @@ Gt2ChangesAnnotation >> styleInText: aBlRope [
 	self styleLinkInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 	self styleApplyButtonInText: aBlRope.
-	self styleEditButtonInText: aBlRope.
+	self styleCreateButtonInText: aBlRope.
 	"self registerToSystemChanges"
 ]

@@ -49,12 +49,6 @@ Gt2DocumentConstants class >> defaultPreviewHeight [
 	^ 300
 ]
 
-{ #category : #ui }
-Gt2DocumentConstants class >> defaultRunButtonLabel [
-	"Default label used for example for button labels, [[[label=Run]]]"
-	^ 'Run'
-]
-
 { #category : #'pillar parameter default values' }
 Gt2DocumentConstants class >> defaultShowSelector [
 	^ #gtViewsFor:
@@ -123,6 +117,17 @@ Gt2DocumentConstants class >> resultHeightParameterName [
 { #category : #'pillar parameter names' }
 Gt2DocumentConstants class >> resultShowParameterName [
 	^ #resultShow
+]
+
+{ #category : #ui }
+Gt2DocumentConstants class >> runButtonIcon [
+	^ BrGlamorousIcons play
+]
+
+{ #category : #ui }
+Gt2DocumentConstants class >> runButtonLabel [
+	"Default label used for example for button labels, [[[label=Run]]]"
+	^ 'Run'
 ]
 
 { #category : #'pillar parameter names' }

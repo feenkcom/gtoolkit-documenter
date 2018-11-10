@@ -3,6 +3,9 @@ Class {
 	#superclass : #Object,
 	#traits : 'TGt2DocumentConstants + TBlDebug',
 	#classTraits : 'TGt2DocumentConstants classTrait + TBlDebug classTrait',
+	#instVars : [
+		'memorySystem'
+	],
 	#category : #'GToolkit-NewDocumenter-Examples'
 }
 
@@ -11,9 +14,139 @@ Gt2DocumentExamples class >> constants [
 	^ Gt2DocumentConstants
 ]
 
+{ #category : #'changes - existing file' }
+Gt2DocumentExamples >> changesContentWithClassDefinition [
+	<gtExample>
+	^ 'OmEntry {
+	#tags : {
+		#prior : OmNullReference [  ],
+		#self : OmReference [ ''1'' ]
+	},
+	#content : EpClassModification {
+		#oldClass : RGClassDefinition {
+			#annotations : IdentityDictionary {
+				#superclassName : ''Object'',
+				#traitCompositionSource : ''{}'',
+				#definitionSource : ''Object subclass: #MyClassOne\r\tinstanceVariableNames: \''\''\r\tclassVariableNames: \''\''\r\tpoolDictionaries: \''\''\r\tcategory: \''MyTestingPackage\''''
+			},
+			#name : #MyClassOne,
+			#methods : IdentityDictionary { },
+			#protocols : Set [ ],
+			#instanceVariables : OrderedCollection [ ],
+			#metaClass : RGMetaclassDefinition {
+				#annotations : IdentityDictionary {
+					#traitCompositionSource : ''{}'',
+					#definitionSource : ''MyClassOne class\r\tinstanceVariableNames: \''\''''
+				},
+				#name : #''MyClassOne class'',
+				#methods : IdentityDictionary { },
+				#protocols : Set [ ],
+				#instanceVariables : OrderedCollection [ ],
+				#baseClass : @6
+			},
+			#comment : RGCommentDefinition {
+				#annotations : IdentityDictionary {
+					#className : #MyClassOne,
+					#isMetaSide : false
+				},
+				#parent : @6,
+				#content : ''''
+			},
+			#classVariables : OrderedCollection [ ],
+			#category : #MyTestingPackage,
+			#package : #MyTestingPackage,
+			#sharedPools : OrderedCollection [ ]
+		},
+		#newClass : RGClassDefinition {
+			#annotations : IdentityDictionary {
+				#superclassName : ''Object'',
+				#traitCompositionSource : ''{}'',
+				#definitionSource : ''Object subclass: #MyClassOne\r\tinstanceVariableNames: \''varOne\''\r\tclassVariableNames: \''\''\r\tpoolDictionaries: \''\''\r\tcategory: \''MyTestingPackage\''''
+			},
+			#name : #MyClassOne,
+			#methods : IdentityDictionary { },
+			#protocols : Set [ ],
+			#instanceVariables : OrderedCollection [
+				RGInstanceVariableDefinition {
+					#annotations : IdentityDictionary {
+						#className : #MyClassOne,
+						#isMetaSide : false
+					},
+					#name : #varOne,
+					#parent : @20
+				}
+			],
+			#metaClass : RGMetaclassDefinition {
+				#annotations : IdentityDictionary {
+					#traitCompositionSource : ''{}'',
+					#definitionSource : ''MyClassOne class\r\tinstanceVariableNames: \''\''''
+				},
+				#name : #''MyClassOne class'',
+				#methods : IdentityDictionary { },
+				#protocols : Set [ ],
+				#instanceVariables : OrderedCollection [ ],
+				#baseClass : @20
+			},
+			#comment : RGCommentDefinition {
+				#annotations : IdentityDictionary {
+					#className : #MyClassOne,
+					#isMetaSide : false
+				},
+				#parent : @20,
+				#content : ''''
+			},
+			#classVariables : OrderedCollection [ ],
+			#category : #MyTestingPackage,
+			#package : #MyTestingPackage,
+			#sharedPools : OrderedCollection [ ]
+		}
+	}
+}
+
+'
+]
+
+{ #category : #'changes - existing file' }
+Gt2DocumentExamples >> changesDirectory [
+	<gtExample>
+	| epiceaDir |
+	epiceaDir := (memorySystem rootDirectory / self changesDirectoryName).
+	epiceaDir ensureCreateDirectory.
+	self assert: epiceaDir exists.
+	^ epiceaDir
+]
+
+{ #category : #'changes - existing file' }
+Gt2DocumentExamples >> changesDirectoryName [
+	<gtExample>
+	^ 'changes'
+]
+
+{ #category : #'changes - existing file' }
+Gt2DocumentExamples >> changesFileNameWithClassDefinition [
+	<gtExample>
+	^ 'class-definition.ombu'
+]
+
+{ #category : #'changes - existing file' }
+Gt2DocumentExamples >> changesFileReferenceWithClassDefinition [
+	<gtExample>
+	^ memorySystem 
+			addFileNamed: self changesFileNameWithClassDefinition
+			toDirectory: self changesDirectory 
+			withContent: self changesContentWithClassDefinition.
+]
+
 { #category : #accessing }
 Gt2DocumentExamples >> constants [
 	^ Gt2DocumentConstants
+]
+
+{ #category : #'changes - existing file' }
+Gt2DocumentExamples >> contentWithClassDefinitionChanges [
+	<gtExample>
+	^ '${', self constants changesAnnotationName, ':', 
+			self changesDirectoryName, '/', self changesFileNameWithClassDefinition , '}$'
 ]
 
 { #category : #codeblock }
@@ -41,7 +174,7 @@ Gt2DocumentExamples >> contentWithCommentedLine [
 	^ '%% a commented line'
 ]
 
-{ #category : #'changes - existing one' }
+{ #category : #'changes - not existing file' }
 Gt2DocumentExamples >> contentWithEpiceaChanges [
 	<gtExample>
 	^ '${', self constants changesAnnotationName, ':', self referencesChangesFile , '}$'
@@ -163,6 +296,19 @@ Gt2DocumentExamples >> documentFromFileReference [
 	^ aDocument
 ]
 
+{ #category : #'changes - existing file' }
+Gt2DocumentExamples >> documentWithClassDefinitionChanges [
+	<gtExample>
+	| aDocument aChangesFile |
+	aChangesFile := self changesFileReferenceWithClassDefinition.
+	aDocument := self defaultDocument fileReference: self fileReference.
+	aDocument text: self contentWithClassDefinitionChanges.
+	aDocument store.
+	self assert: aDocument text asString equals: self contentWithClassDefinitionChanges.
+	self assert: aChangesFile exists.
+	^ aDocument
+]
+
 { #category : #codeblock }
 Gt2DocumentExamples >> documentWithCodeblock [
 	<gtExample>
@@ -212,7 +358,7 @@ Gt2DocumentExamples >> documentWithEditedExistingMethodAnnotation [
 	^ aDocument
 ]
 
-{ #category : #'changes - existing one' }
+{ #category : #'changes - not existing file' }
 Gt2DocumentExamples >> documentWithEpiceaChanges [
 	<gtExample>
 	| aDocument |
@@ -303,13 +449,22 @@ Gt2DocumentExamples >> examplesUtility [
 { #category : #'file reference document' }
 Gt2DocumentExamples >> fileReference [
 	<gtExample>
-	^ GtFileSystemExamples new addPillarFileWithContent: self contentWithMultipleMethods
+	^ memorySystem addPillarFileWithContent: self contentWithMultipleMethods
 ]
 
 { #category : #basic }
 Gt2DocumentExamples >> fooText [
 	<gtExample>
 	^ 'Foo' asRopedText
+]
+
+{ #category : #initialization }
+Gt2DocumentExamples >> initialize [
+	"We do define a globaly unique repository name because 
+	${class:OmStoreFactory} uses full file name as an unique key."
+	super initialize.
+	memorySystem := GtFileSystemExamples new 
+		rootDirectoryName: UUID new asString.
 ]
 
 { #category : #'file reference document' }
@@ -372,7 +527,7 @@ Gt2DocumentExamples >> referencedMethod [
 	^ self class >> #referencedMethod
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'changes - not existing file' }
 Gt2DocumentExamples >> referencesChangesFile [
 	<gtExample>
 	^ '01-changes.ombu'
