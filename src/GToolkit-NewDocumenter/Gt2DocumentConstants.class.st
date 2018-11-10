@@ -4,6 +4,11 @@ Class {
 	#category : #'GToolkit-NewDocumenter-Model'
 }
 
+{ #category : #ui }
+Gt2DocumentConstants class >> applyButtonLabel [
+	^ 'Apply'
+]
+
 { #category : #'pillar annotation names' }
 Gt2DocumentConstants class >> changesAnnotationName [
 	^ #changes2
@@ -29,6 +34,16 @@ Gt2DocumentConstants class >> codeShowParameterName [
 	^ #codeShow
 ]
 
+{ #category : #ui }
+Gt2DocumentConstants class >> createButtonIcon [
+	^ BrGlamorousIcons edit
+]
+
+{ #category : #ui }
+Gt2DocumentConstants class >> createButtonLabel [
+	^ 'Create'
+]
+
 { #category : #'pillar parameter default values' }
 Gt2DocumentConstants class >> defaultPreviewHeight [
 	^ 300
@@ -43,6 +58,16 @@ Gt2DocumentConstants class >> defaultRunButtonLabel [
 { #category : #'pillar parameter default values' }
 Gt2DocumentConstants class >> defaultShowSelector [
 	^ #gtViewsFor:
+]
+
+{ #category : #ui }
+Gt2DocumentConstants class >> editButtonIcon [
+	^ BrGlamorousIcons edit
+]
+
+{ #category : #ui }
+Gt2DocumentConstants class >> editButtonLabel [
+	^ 'Edit'
 ]
 
 { #category : #'pillar annotation names' }

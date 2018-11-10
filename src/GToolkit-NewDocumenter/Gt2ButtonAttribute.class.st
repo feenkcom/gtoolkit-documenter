@@ -1,5 +1,5 @@
 Class {
-	#name : #Gt2RunButtonAttribute,
+	#name : #Gt2ButtonAttribute,
 	#superclass : #BrTextAdornmentDynamicAttribute,
 	#category : #'GToolkit-NewDocumenter-Text - Attributes'
 }
