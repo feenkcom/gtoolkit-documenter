@@ -12,6 +12,7 @@ Gt2ResizablePreviewStencil >> newContainerFor: aWrappedElement [
 	^ aContainer
 		layout: BlLinearLayout vertical;
 		look: Gt2PreviewLook + BrShadowLook;
+		margin: (BlInsets top: 5 left: 20 bottom: 5 right: 20);
 		addChild: (aResizableElement 
 			addChild: aWrappedElement;
 			constraintsDo: [ :c | 

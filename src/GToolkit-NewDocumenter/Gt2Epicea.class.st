@@ -1,8 +1,8 @@
 Class {
 	#name : #Gt2Epicea,
 	#superclass : #Object,
-	#traits : 'TBlDebug + TGt2DocumentConstants',
-	#classTraits : 'TBlDebug classTrait + TGt2DocumentConstants classTrait',
+	#traits : 'TBlDebug + TGt2DocumentConstants + GtAnnouncerTrait',
+	#classTraits : 'TBlDebug classTrait + TGt2DocumentConstants classTrait + GtAnnouncerTrait classTrait',
 	#instVars : [
 		'ombuFile',
 		'epiceaLog',
@@ -21,6 +21,14 @@ Gt2Epicea >> addEvent: anEpEvent [
 	self log addEntryWith: anEpEvent tags: [ :tags | "ignore" ].
 	self log store flush.
 	self privateAddEvent: anEpEvent.
+]
+
+{ #category : #accessing }
+Gt2Epicea >> announcer [
+	self 
+		assert: [ self log notNil ]
+		description: [ 'Epicea must be initialized first. Then you can use the announcer' ].
+	^ self log announcer
 ]
 
 { #category : #accessing }
@@ -51,7 +59,11 @@ Gt2Epicea >> gtDiffFor: aView [
 	^ aView textEditor
 		title: 'Diff';
 		priority: 2;
-		text: [ self diff ]
+		text: [ :anEditor | 
+			self 
+				when: Gt2EpiceaUpdatedAnnouncement 
+				do: [ anEditor text: self diff asRopedText ].		
+			self diff ]
 ]
 
 { #category : #'gt-extension' }
@@ -65,9 +77,9 @@ Gt2Epicea >> gtEventsFor: aView [
 			aList := BrColumnedList new display: self events.
 			aList addEventHandler: GtInspectorListToSelectHandler new.
 			aList constraintsDo: [ :c | c padding: (BlInsets top: 10) ].
-			"self announcer 
-				when: EpEntryAdded 
-				do: [ :anAnnouncement | aList display: theLog store entries ]."
+			self announcer 
+				when: Gt2EpiceaUpdatedAnnouncement 
+				do: [ :anAnnouncement | aList display: self events ].
 			
 			aList column 
 				title: 'Icon';
@@ -157,20 +169,49 @@ Gt2Epicea >> gtGlobalEntriesIn: aView [
 ]
 
 { #category : #'gt-extension' }
+Gt2Epicea >> gtPreviewFor: aView [
+	<gtView>
+	^ aView textEditor
+		title: 'Document Preview';
+		priority: 10;
+		text: [ :anEditor | 
+			self 
+				when: Gt2EpiceaUpdatedAnnouncement 
+				do: [ anEditor text: self diff asRopedText ].
+			self tutorialState asRopedText 
+				monospace; 
+				foreground: self constants matchLineColor ]
+]
+
+{ #category : #'gt-extension' }
 Gt2Epicea >> gtTutorialFor: aView [
 	<gtView>
 	^ aView textEditor
 		title: 'Tutorial';
 		priority: 1;
-		text: [ self tutorialState asRopedText 
-			monospace; 
-			foreground: self constants matchLineColor ]
+		text: [ :anEditor | 
+			self 
+				when: Gt2EpiceaUpdatedAnnouncement 
+				do: [ anEditor text: self diff asRopedText ].
+			self tutorialState asRopedText 
+				monospace; 
+				foreground: self constants matchLineColor ]
+]
+
+{ #category : #'announcement handling' }
+Gt2Epicea >> handleEpEntryAddedAnnouncement: anEpEntryAdded [ 
+	self announce: (Gt2EpiceaUpdatedAnnouncement new)
 ]
 
 { #category : #accessing }
 Gt2Epicea >> log [
 	<return: #EpLog>
 	^ epiceaLog
+]
+
+{ #category : #notifying }
+Gt2Epicea >> notifyEpiceaChanged [
+	self announce: Gt2EpiceaUpdatedAnnouncement
 ]
 
 { #category : #accessing }
@@ -188,20 +229,28 @@ Gt2Epicea >> ombuFile [
 { #category : #accessing }
 Gt2Epicea >> ombuFile: aFileReference [
 	ombuFile := aFileReference.
+	self log ifNotNil: [ self unsubscribe: self ].
 	epiceaLog := EpLog fromFile: "freshFromFile:" ombuFile.
 	self privateEvents: (self entries collect: #content).
+	self 
+		subscribe: EpEntryAdded 
+		send: #handleEpEntryAddedAnnouncement: 
+		to: self 
+		for: self.
 ]
 
 { #category : #private }
 Gt2Epicea >> privateAddEvent: anEpEvent [
 	events addLast: anEpEvent.
 	diff := nil.
+	self notifyEpiceaChanged
 ]
 
 { #category : #private }
 Gt2Epicea >> privateEvents: aCollection [
 	events := aCollection.
 	diff := nil.
+	self notifyEpiceaChanged.
 ]
 
 { #category : #modification }
@@ -223,9 +272,14 @@ Gt2Epicea >> systemState [
 			do: [ :eachEvent | 
 				| anOutput |
 				anOutput := eachEvent accept: (GtEpiceaCurrentStateVisitor 
-					inEnvironment: self class environment).
+					inEnvironment: self theEnvironment).
 				aStream nextPutAll: anOutput ]
 			separatedBy: [ aStream cr; cr ] ]
+]
+
+{ #category : #accessing }
+Gt2Epicea >> theEnvironment [
+	^ self class environment
 ]
 
 { #category : #accessing }
