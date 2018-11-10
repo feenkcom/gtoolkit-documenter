@@ -57,9 +57,15 @@ Gt2ChangesAnnotation >> changeFile [
 		valueOf: self constants fileParameterName
 		in: self parameters
 		value: [ :aString | aString isString 
-			ifTrue: [ GtFileUtility 
-				fileReferenceOfFileName: aString
-				relativeTo: self sourceDirectory  ] ]
+			ifTrue: [ 
+				| aFileNameWithExtension |
+				aFileNameWithExtension := (aString endsWith: self constants changesFileExtension)
+					ifTrue: [ aString ]
+					ifFalse: [ aString, self constants changesFileExtension ].
+				GtFileUtility 
+					fileReferenceOfFileName: aFileNameWithExtension
+					relativeTo: self sourceDirectory ]
+			ifFalse: [ nil ] ]
 		emptyValue: [ nil ]
 		defaultValue: [ nil ]
 ]

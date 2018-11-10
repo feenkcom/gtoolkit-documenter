@@ -14,6 +14,11 @@ Gt2DocumentConstants class >> changesAnnotationName [
 	^ #changes2
 ]
 
+{ #category : #files }
+Gt2DocumentConstants class >> changesFileExtension [
+	^ '.ombu'
+]
+
 { #category : #'pillar annotation names' }
 Gt2DocumentConstants class >> classAnnotationName [
 	^ #class2
