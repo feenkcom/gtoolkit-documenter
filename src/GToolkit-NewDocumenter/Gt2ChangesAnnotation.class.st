@@ -27,7 +27,7 @@ Gt2ChangesAnnotation >> applyButtonAttribute [
 		stencil: [
 			BrButton new
 				label: self constants applyButtonLabel;
-				icon: self constants runButtonIcon asElement;
+				icon: self constants applyButtonIcon asElement;
 				look: BrGlamorousButtonWithIconLook + BrGlamorousButtonLabelLook;
 				action: [ self applyChanges ]]
 ]

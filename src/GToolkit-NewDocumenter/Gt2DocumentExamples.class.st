@@ -14,6 +14,16 @@ Gt2DocumentExamples class >> constants [
 	^ Gt2DocumentConstants
 ]
 
+{ #category : #'epicea support' }
+Gt2DocumentExamples >> addEpiceaEvent [
+	<gtExample>
+	| anEpicea |
+	anEpicea := self epicea.
+	anEpicea addEvent: self ombuEntry content.
+	self assert: anEpicea numberOfEvents equals: 2.
+	^ anEpicea
+]
+
 { #category : #'changes - existing file' }
 Gt2DocumentExamples >> changesContentWithClassDefinition [
 	<gtExample>
@@ -441,6 +451,18 @@ Gt2DocumentExamples >> emptyDocument [
 	^ aDocument
 ]
 
+{ #category : #'epicea support' }
+Gt2DocumentExamples >> epicea [
+	<gtExample>
+	| aChangesFile anEpicea |
+	aChangesFile := self changesFileReferenceWithClassDefinition.
+	anEpicea := Gt2Epicea new ombuFile: aChangesFile.
+	self assert: anEpicea ombuFile equals: aChangesFile.
+	self assert: anEpicea log notNil.
+	self assert: anEpicea numberOfEvents equals: 1.
+	^ anEpicea
+]
+
 { #category : #accessing }
 Gt2DocumentExamples >> examplesUtility [
 	^ Gt2DocumentExamplesUtility
@@ -479,6 +501,15 @@ Gt2DocumentExamples >> modifyAndStoreToFileReference [
 	self assert: (aDocument text asString = self contentWithMultipleMethods) not.
 	self assert: aDocument storage file contents equals: aDocument text asString.
 	^ aDocument 
+]
+
+{ #category : #'epicea support' }
+Gt2DocumentExamples >> ombuEntry [
+	<gtExample>
+	| anEpLog |
+	anEpLog := EpLog fromFile: self changesFileReferenceWithClassDefinition.
+	self assert: anEpLog entriesCount equals: 1.
+	^ anEpLog entries first
 ]
 
 { #category : #'pillar parser' }
@@ -546,4 +577,14 @@ Gt2DocumentExamples >> registeredDocument [
 	self assert: aDocument isSubscribedToSystem not.
 	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument) not.
 	^ aDocument
+]
+
+{ #category : #'epicea support' }
+Gt2DocumentExamples >> removeEpiceaEvent [
+	<gtExample>
+	| anEpicea |
+	anEpicea := self epicea.
+	anEpicea removeEvent: anEpicea events first.
+	self assert: anEpicea numberOfEvents equals: 0.
+	^ anEpicea
 ]

@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #ui }
+Gt2DocumentConstants class >> applyButtonIcon [
+	^ BrGlamorousIcons accept
+]
+
+{ #category : #ui }
 Gt2DocumentConstants class >> applyButtonLabel [
 	^ 'Apply'
 ]
