@@ -49,12 +49,14 @@ Gt2Epicea >> applyChanges [
 
 { #category : #private }
 Gt2Epicea >> computeImpact [
+	"Return true if impact changed"
+	<return: #Boolean>
 	| anOldImpactState |
 	anOldImpactState := hasImpact.
 	hasImpact := self events anySatisfy: [ :eachEvent | 
 			eachEvent accept: (EpHasImpactVisitor inEnvironment: self theEnvironment) ].
 	hasImpact = anOldImpactState ifFalse: [ diff := nil ].
-	^ hasImpact
+	^ hasImpact = anOldImpactState
 ]
 
 { #category : #accessing }
@@ -359,9 +361,11 @@ Gt2Epicea >> tutorialStateRope [
 
 { #category : #modification }
 Gt2Epicea >> updateImpact [
-	| anOldImpactState |
-	anOldImpactState := self hasImpact.
-	self computeImpact.
-	self hasImpact = anOldImpactState ifTrue: [ ^ self ].
-	self notifyEpiceaChangedWithImpactState: self hasImpact.
+	"Return true if impact changed"
+	<return: #Boolean>
+	| anImpactChanged |
+	anImpactChanged := self computeImpact.
+	anImpactChanged ifTrue: [ 
+		self notifyEpiceaChangedWithImpactState: self hasImpact ].
+	^ anImpactChanged
 ]

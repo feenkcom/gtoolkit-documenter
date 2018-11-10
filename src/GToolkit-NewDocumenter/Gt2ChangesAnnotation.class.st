@@ -121,7 +121,8 @@ Gt2ChangesAnnotation >> handleSystemChange: anAnnoucement [
 	| aChanges |
 	aChanges := self cachedChanges.
 	aChanges ombuFileExists ifFalse: [ ^ self ].
-	aChanges updateImpact.
+	aChanges updateImpact ifTrue: [ 
+		self gtDocument editor styleText ].
 ]
 
 { #category : #testing }
