@@ -49,6 +49,11 @@ GtEpiceaCurrentStateVisitor >> stringForExistingBehavior: aClassOrTrait [
 ]
 
 { #category : #visitor }
+GtEpiceaCurrentStateVisitor >> visitBehaviorChange: aChange [
+	^ self stringForBehavior: aChange behaviorAffected
+]
+
+{ #category : #visitor }
 GtEpiceaCurrentStateVisitor >> visitMethodChange: aChange [
 	"Addition and Modification come here"
 	self 

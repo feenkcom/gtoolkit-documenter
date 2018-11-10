@@ -43,6 +43,7 @@ Gt2Epicea >> applyChanges [
 		entries: self entries;
 		errorHandlerBlock: applyErrorHandler;
 		applyCodeChanges.
+	self notifyEpiceaChanged.
 ]
 
 { #category : #accessing }
