@@ -4,10 +4,12 @@ Class {
 	#traits : 'TBlDebug + TGt2DocumentConstants + GtAnnouncerTrait',
 	#classTraits : 'TBlDebug classTrait + TGt2DocumentConstants classTrait + GtAnnouncerTrait classTrait',
 	#instVars : [
+		'announcer',
 		'ombuFile',
 		'epiceaLog',
 		'events',
-		'diff'
+		'diff',
+		'ignoreEntryAdded'
 	],
 	#category : #'GToolkit-NewDocumenter-Epicea'
 }
@@ -20,15 +22,11 @@ Gt2Epicea >> addEvent: anEpEvent [
 		description: [ 'The parent directory of the Epicea change file must exist' ].
 	self log addEntryWith: anEpEvent tags: [ :tags | "ignore" ].
 	self log store flush.
-	self privateAddEvent: anEpEvent.
 ]
 
 { #category : #accessing }
 Gt2Epicea >> announcer [
-	self 
-		assert: [ self log notNil ]
-		description: [ 'Epicea must be initialized first. Then you can use the announcer' ].
-	^ self log announcer
+	^ announcer
 ]
 
 { #category : #accessing }
@@ -199,8 +197,22 @@ Gt2Epicea >> gtTutorialFor: aView [
 ]
 
 { #category : #'announcement handling' }
-Gt2Epicea >> handleEpEntryAddedAnnouncement: anEpEntryAdded [ 
-	self announce: (Gt2EpiceaUpdatedAnnouncement new)
+Gt2Epicea >> handleEpEntryAddedAnnouncement: anEpEntryAdded [
+	self privateAddEvent: anEpEntryAdded entry content.
+	self notifyEpiceaChanged.
+]
+
+{ #category : #private }
+Gt2Epicea >> ignoreEntryAddedDuring: aBlock [
+	ignoreEntryAdded := true.
+	aBlock ensure: [ ignoreEntryAdded := false ].
+]
+
+{ #category : #initialization }
+Gt2Epicea >> initialize [
+	super initialize.
+	announcer := Announcer new.
+	ignoreEntryAdded := true.
 ]
 
 { #category : #accessing }
@@ -229,28 +241,26 @@ Gt2Epicea >> ombuFile [
 { #category : #accessing }
 Gt2Epicea >> ombuFile: aFileReference [
 	ombuFile := aFileReference.
-	self log ifNotNil: [ self unsubscribe: self ].
+	self log ifNotNil: [ self log announcer unsubscribe: self ].
 	epiceaLog := EpLog fromFile: "freshFromFile:" ombuFile.
 	self privateEvents: (self entries collect: #content).
-	self 
+	self log announcer
 		subscribe: EpEntryAdded 
 		send: #handleEpEntryAddedAnnouncement: 
-		to: self 
-		for: self.
+		to: self.
+	self notifyEpiceaChanged.
 ]
 
 { #category : #private }
 Gt2Epicea >> privateAddEvent: anEpEvent [
 	events addLast: anEpEvent.
 	diff := nil.
-	self notifyEpiceaChanged
 ]
 
 { #category : #private }
 Gt2Epicea >> privateEvents: aCollection [
 	events := aCollection.
 	diff := nil.
-	self notifyEpiceaChanged.
 ]
 
 { #category : #modification }
@@ -262,6 +272,7 @@ Gt2Epicea >> removeEvent: anEpEvent [
 		self log addEntryWith: eachEvent tags: [ :tags | "ignore" ] ].
 	self log store flush.
 	self privateEvents: aNewEvents.
+	self notifyEpiceaChanged.
 ]
 
 { #category : #accessing }

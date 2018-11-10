@@ -17,10 +17,15 @@ Gt2DocumentExamples class >> constants [
 { #category : #'epicea support' }
 Gt2DocumentExamples >> addEpiceaEvent [
 	<gtExample>
-	| anEpicea |
+	| anEpicea anAnnouncements |
 	anEpicea := self epicea.
+	anAnnouncements := OrderedCollection new.
+	anEpicea 
+		subscribe: Gt2EpiceaUpdatedAnnouncement 
+		do: [ :anAnnouncement | anAnnouncements addLast: anAnnouncement ].
 	anEpicea addEvent: self ombuEntry content.
 	self assert: anEpicea numberOfEvents equals: 2.
+	self assert: anAnnouncements size equals: 1.
 	^ anEpicea
 ]
 
@@ -454,12 +459,18 @@ Gt2DocumentExamples >> emptyDocument [
 { #category : #'epicea support' }
 Gt2DocumentExamples >> epicea [
 	<gtExample>
-	| aChangesFile anEpicea |
+	| aChangesFile anEpicea anAnnouncements |
 	aChangesFile := self changesFileReferenceWithClassDefinition.
-	anEpicea := Gt2Epicea new ombuFile: aChangesFile.
+	anAnnouncements := OrderedCollection new.
+	anEpicea := Gt2Epicea new.
+	anEpicea 
+		subscribe: Gt2EpiceaUpdatedAnnouncement 
+		do: [ :anAnnouncement | anAnnouncements addLast: anAnnouncement ].
+	anEpicea ombuFile: aChangesFile.
 	self assert: anEpicea ombuFile equals: aChangesFile.
 	self assert: anEpicea log notNil.
 	self assert: anEpicea numberOfEvents equals: 1.
+	self assert: anAnnouncements size equals: 1.
 	^ anEpicea
 ]
 
@@ -582,9 +593,14 @@ Gt2DocumentExamples >> registeredDocument [
 { #category : #'epicea support' }
 Gt2DocumentExamples >> removeEpiceaEvent [
 	<gtExample>
-	| anEpicea |
+	| anEpicea anAnnouncements |
 	anEpicea := self epicea.
+	anAnnouncements := OrderedCollection new.
+	anEpicea 
+		subscribe: Gt2EpiceaUpdatedAnnouncement 
+		do: [ :anAnnouncement | anAnnouncements addLast: anAnnouncement ].
 	anEpicea removeEvent: anEpicea events first.
 	self assert: anEpicea numberOfEvents equals: 0.
+	self assert: anAnnouncements size equals: 1.
 	^ anEpicea
 ]
