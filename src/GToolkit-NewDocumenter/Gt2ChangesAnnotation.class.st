@@ -53,22 +53,20 @@ Gt2ChangesAnnotation >> browseReferenceFrom: aBlClickEvent [
 { #category : #'private - cache' }
 Gt2ChangesAnnotation >> cachedChanges [
 	<return: #Gt2Epicea or: nil>
-	self changeFileExists ifFalse: [ ^ nil ].
-	^ self gtDocument 
+	| aNewEpicea |
+	self gtDocument 
 		cacheAt: self cacheKey
 		ifPresent: [ :aCachedValue | 
-			aCachedValue epicea ifNil: [ 
-				| aNewEpicea |
+			aNewEpicea := aCachedValue epicea.
+			aNewEpicea ifNil: [ 
 				aNewEpicea := self newEpicea.
-				aCachedValue epicea: aNewEpicea.
-				aNewEpicea ] ]
+				aCachedValue epicea: aNewEpicea ] ]
 		ifAbsentPut: [ 
-			| aNewEpicea |
 			aNewEpicea := self newEpicea.
 			self annotationCacheValueClass new 
 				epicea: aNewEpicea;
-				isExpanded: self expandedParameterValue.
-			aNewEpicea ].
+				isExpanded: self expandedParameterValue ].
+	^ aNewEpicea
 ]
 
 { #category : #'accessing - parameter values' }
@@ -118,9 +116,17 @@ Gt2ChangesAnnotation >> expandedDefaultValue [
 	^ true
 ]
 
+{ #category : #'announcement handling' }
+Gt2ChangesAnnotation >> handleSystemChange: anAnnoucement [
+	| aChanges |
+	aChanges := self cachedChanges.
+	aChanges ombuFileExists ifFalse: [ ^ self ].
+	aChanges updateImpact.
+]
+
 { #category : #testing }
 Gt2ChangesAnnotation >> isApplied [
-	^ self changeFileExists not
+	^ self cachedChanges hasImpact not
 ]
 
 { #category : #testing }
@@ -150,6 +156,15 @@ Gt2ChangesAnnotation >> objectToPreview [
 	^ self cachedChanges
 ]
 
+{ #category : #subscriptions }
+Gt2ChangesAnnotation >> registerToSystemChanges [
+	self gtDocument
+		subscribe: ClassAnnouncement, MethodAnnouncement, Gt2DocumentUpdateRequestedAnnouncement
+		send: #handleSystemChange:
+		to: self.
+	
+]
+
 { #category : #accessing }
 Gt2ChangesAnnotation >> sourceDirectory [
 	<return: #FileReference>
@@ -177,5 +192,5 @@ Gt2ChangesAnnotation >> styleInText: aBlRope [
 	self styleExpandingPreviewInText: aBlRope.
 	self styleApplyButtonInText: aBlRope.
 	self styleCreateButtonInText: aBlRope.
-	"self registerToSystemChanges"
+	self registerToSystemChanges
 ]

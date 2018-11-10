@@ -9,7 +9,8 @@ Class {
 		'epiceaLog',
 		'events',
 		'diff',
-		'applyErrorHandler'
+		'applyErrorHandler',
+		'hasImpact'
 	],
 	#classVars : [
 		'DebugMode'
@@ -44,6 +45,16 @@ Gt2Epicea >> applyChanges [
 		errorHandlerBlock: applyErrorHandler;
 		applyCodeChanges.
 	self notifyEpiceaChanged.
+]
+
+{ #category : #private }
+Gt2Epicea >> computeImpact [
+	| anOldImpactState |
+	anOldImpactState := hasImpact.
+	hasImpact := self events anySatisfy: [ :eachEvent | 
+			eachEvent accept: (EpHasImpactVisitor inEnvironment: self theEnvironment) ].
+	hasImpact = anOldImpactState ifFalse: [ diff := nil ].
+	^ hasImpact
 ]
 
 { #category : #accessing }
@@ -207,10 +218,8 @@ Gt2Epicea >> gtTutorialFor: aView [
 		text: [ :anEditor | 
 			self 
 				when: Gt2EpiceaUpdatedAnnouncement 
-				do: [ anEditor text: self diff asRopedText ].
-			self tutorialState asRopedText 
-				monospace; 
-				foreground: self constants matchLineColor ]
+				do: [ anEditor text: self tutorialStateRope ].
+			self tutorialStateRope ]
 ]
 
 { #category : #'announcement handling' }
@@ -219,10 +228,18 @@ Gt2Epicea >> handleEpEntryAddedAnnouncement: anEpEntryAdded [
 	self notifyEpiceaChanged.
 ]
 
+{ #category : #accessing }
+Gt2Epicea >> hasImpact [
+	"Return true, if changes have impact to the current system state"
+	<return: #Boolean>
+	^ hasImpact
+]
+
 { #category : #initialization }
 Gt2Epicea >> initialize [
 	super initialize.
 	announcer := Announcer new.
+	hasImpact := false.
 	applyErrorHandler := [ :anException | | message |
 		DebugMode ifTrue: [ anException pass ].
 		message := 'Error while applying Epicea changes: ' , anException asString.
@@ -238,7 +255,13 @@ Gt2Epicea >> log [
 
 { #category : #notifying }
 Gt2Epicea >> notifyEpiceaChanged [
-	self announce: Gt2EpiceaUpdatedAnnouncement
+	self computeImpact.
+	self notifyEpiceaChangedWithImpactState: self hasImpact
+]
+
+{ #category : #notifying }
+Gt2Epicea >> notifyEpiceaChangedWithImpactState: aBoolean [
+	self announce: (Gt2EpiceaUpdatedAnnouncement new hasImpact: aBoolean)
 ]
 
 { #category : #accessing }
@@ -324,4 +347,21 @@ Gt2Epicea >> tutorialState [
 				anOutput := eachEvent accept: EpNewStateVisitor new.
 				aStream nextPutAll: anOutput ]
 			separatedBy: [ aStream cr; cr ] ]
+]
+
+{ #category : #accessing }
+Gt2Epicea >> tutorialStateRope [
+	<return: #BlRope>
+	^ self tutorialState asRopedText
+			monospace; 
+			foreground: self constants matchLineColor
+]
+
+{ #category : #modification }
+Gt2Epicea >> updateImpact [
+	| anOldImpactState |
+	anOldImpactState := self hasImpact.
+	self computeImpact.
+	self hasImpact = anOldImpactState ifTrue: [ ^ self ].
+	self notifyEpiceaChangedWithImpactState: self hasImpact.
 ]
