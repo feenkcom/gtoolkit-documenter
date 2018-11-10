@@ -1,6 +1,8 @@
 Class {
 	#name : #Gt2EpiceaDiffStencil,
 	#superclass : #BrStencil,
+	#traits : 'TGt2DocumentConstants',
+	#classTraits : 'TGt2DocumentConstants classTrait',
 	#instVars : [
 		'from',
 		'to'
@@ -19,24 +21,27 @@ Gt2EpiceaDiffStencil >> create [
 	aBuilder
 		patchSequenceDoIfMatch: [ :string | | initialPosition |
 			initialPosition := aRopedText size max: 1.
-			aRopedText insertString: '  ' at: aRopedText size.
+			"(aRopedText from: aRopedText size to: aRopedText size)
+				attribute: (Gt2EpiceaDiffAttribute new beMatch)."
 			aRopedText insertString: string at: aRopedText size.
 			(aRopedText from: initialPosition to: aRopedText size)
-				foreground: Color black.
+				foreground: self constants matchLineColor.
 			aRopedText insertString: String cr at: aRopedText size. ]
 		ifInsert: [ :string | | initialPosition |
 			initialPosition := aRopedText size max: 1.
-			aRopedText insertString: '+ ' at: aRopedText size.
+			"(aRopedText from: aRopedText size to: aRopedText size)
+				attribute: (Gt2EpiceaDiffAttribute new beInsert)."
 			aRopedText insertString: string at: aRopedText size.
 			(aRopedText from: initialPosition to: aRopedText size)
-				foreground: Color green muchDarker.
+				foreground: self constants insertLineColor.
 			aRopedText insertString: String cr at: aRopedText size. ]
 		ifRemove: [ :string | | initialPosition |
 			initialPosition := aRopedText size max: 1.
-			aRopedText insertString: '- ' at: aRopedText size.
+			"(aRopedText from: aRopedText size to: aRopedText size)
+				attribute: (Gt2EpiceaDiffAttribute new beRemove)."
 			aRopedText insertString: string at: aRopedText size.
 			(aRopedText from: initialPosition to: aRopedText size)
-				foreground: Color red muchDarker.
+				foreground: self constants removeLineColor.
 			aRopedText insertString: String cr at: aRopedText size. ].
 	aRopedText isEmpty ifFalse: [ 
 		aRopedText attributes: { BlFontGenericFamilyAttribute monospace } ].

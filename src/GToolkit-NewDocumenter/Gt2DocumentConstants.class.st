@@ -99,6 +99,16 @@ Gt2DocumentConstants class >> heightParameterName [
 	^ #height
 ]
 
+{ #category : #'changes diff' }
+Gt2DocumentConstants class >> insertLineColor [
+	^ Color green muchDarker
+]
+
+{ #category : #'changes diff' }
+Gt2DocumentConstants class >> insertLineIdentificator [
+	^ '+ '
+]
+
 { #category : #colors }
 Gt2DocumentConstants class >> linkColor [
 	^ BrGlamorousColors linkColor
@@ -109,6 +119,16 @@ Gt2DocumentConstants class >> linkWithErrorColor [
 	^ BrGlamorousColors linkWithErrorColor
 ]
 
+{ #category : #'changes diff' }
+Gt2DocumentConstants class >> matchLineColor [
+	^ Color black
+]
+
+{ #category : #'changes diff' }
+Gt2DocumentConstants class >> matchLineIdentificator [
+	^ '  '
+]
+
 { #category : #'pillar annotation names' }
 Gt2DocumentConstants class >> methodAnnotationName [
 	^ #method2
@@ -117,6 +137,16 @@ Gt2DocumentConstants class >> methodAnnotationName [
 { #category : #'pillar parameter names' }
 Gt2DocumentConstants class >> nameParameterName [
 	^ #name
+]
+
+{ #category : #'changes diff' }
+Gt2DocumentConstants class >> removeLineColor [
+	^ Color red muchDarker
+]
+
+{ #category : #'changes diff' }
+Gt2DocumentConstants class >> removeLineIdentificator [
+	^ '- '
 ]
 
 { #category : #'pillar parameter names' }
