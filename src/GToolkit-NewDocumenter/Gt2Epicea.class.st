@@ -50,7 +50,7 @@ Gt2Epicea >> gtDiffFor: aView [
 	<gtView>
 	^ aView textEditor
 		title: 'Diff';
-		priority: 3;
+		priority: 2;
 		text: [ self diff ]
 ]
 
@@ -58,8 +58,8 @@ Gt2Epicea >> gtDiffFor: aView [
 Gt2Epicea >> gtEventsFor: aView [
 	<gtView>
 	^ aView explicit 
-		title: 'Tutorial';
-		priority: 0;
+		title: 'Tutorial Changes';
+		priority: 3;
 		stencil: [ 
 			| aList |
 			aList := BrColumnedList new display: self events.
@@ -154,6 +154,17 @@ Gt2Epicea >> gtGlobalEntriesIn: aView [
 					aContainer ].
 			aList
 			 ]
+]
+
+{ #category : #'gt-extension' }
+Gt2Epicea >> gtTutorialFor: aView [
+	<gtView>
+	^ aView textEditor
+		title: 'Tutorial';
+		priority: 1;
+		text: [ self tutorialState asRopedText 
+			monospace; 
+			foreground: self constants matchLineColor ]
 ]
 
 { #category : #accessing }
