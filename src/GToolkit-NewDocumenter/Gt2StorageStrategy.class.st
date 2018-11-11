@@ -28,12 +28,23 @@ Gt2StorageStrategy >> read: aGt2Document [
 
 { #category : #accessing }
 Gt2StorageStrategy >> rootDirectory [
-	"Return root directory to access external data, e.g., images, change files"
-	<return: #FileReference>
-	^ self subclassResponsibility 
+	self 
+		assert: [ self file notNil ]
+		description: [ 'File reference must be non-nil' ].
+	^ self file parent
 ]
 
 { #category : #actions }
 Gt2StorageStrategy >> store: aGt2Document [ 
-	self subclassResponsibility
+	| aNewContent aBackupFile |
+	self 
+		assert: [ self file notNil ]
+		description: [ 'File reference must be non-nil to store a document to a file' ].
+	
+	aNewContent := aGt2Document text asString.
+	aBackupFile := (self file parent / (self file basename, '.backup')) asFileReference ensureDelete.
+	self file 
+		copyTo: aBackupFile;
+		ensureDelete; 
+		writeStreamDo: [ :s | s nextPutAll: aNewContent ] 
 ]
