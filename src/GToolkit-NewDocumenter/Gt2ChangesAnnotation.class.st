@@ -44,6 +44,7 @@ Gt2ChangesAnnotation >> applyChanges [
 
 { #category : #'private - actions' }
 Gt2ChangesAnnotation >> browseReferenceFrom: aBlClickEvent [ 
+	aBlClickEvent modifiers isShift ifTrue: [ ^ self ].
 	aBlClickEvent target 
 		fireEvent: (GtPhlowObjectToSpawn new
 			object: self cachedChanges;

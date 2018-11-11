@@ -223,6 +223,13 @@ Gt2DocumentExamples >> contentWithExternalLink [
 	^ '*Feenk>https://feenk.com*'
 ]
 
+{ #category : #'input file' }
+Gt2DocumentExamples >> contentWithInputFile [
+	<gtExample>
+	^ '${', self constants inputFileAnnotationName, ':', memorySystem pillarFileName, '}$'
+
+]
+
 { #category : #'method - multiple' }
 Gt2DocumentExamples >> contentWithMultipleMethods [
 	<gtExample>
@@ -427,6 +434,16 @@ Gt2DocumentExamples >> documentWithExternalLink [
 	^ aDocument
 ]
 
+{ #category : #'input file' }
+Gt2DocumentExamples >> documentWithInputFile [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument fileReference: self fileReferenceWithInputFile.
+	aDocument read.
+	self assert: aDocument text asString equals: self contentWithInputFile.
+	^ aDocument
+]
+
 { #category : #'method - multiple' }
 Gt2DocumentExamples >> documentWithMultipleMethods [
 	<gtExample>
@@ -483,6 +500,12 @@ Gt2DocumentExamples >> examplesUtility [
 Gt2DocumentExamples >> fileReference [
 	<gtExample>
 	^ memorySystem addPillarFileWithContent: self contentWithMultipleMethods
+]
+
+{ #category : #'input file' }
+Gt2DocumentExamples >> fileReferenceWithInputFile [
+	<gtExample>
+	^ memorySystem addPillarFileWithContent: self contentWithInputFile
 ]
 
 { #category : #basic }

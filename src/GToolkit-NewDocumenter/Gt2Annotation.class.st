@@ -11,87 +11,15 @@ Gt2Annotation class >> isAbstract [
 	^ self name = #Gt2Annotation 
 ]
 
-{ #category : #'private - cache' }
-Gt2Annotation >> annotationCacheValueClass [
-	^ Gt2AnnotationCacheValue
-]
-
 { #category : #'private - actions' }
 Gt2Annotation >> browseReferenceFrom: anEvent [
 	"Subclasses should define actual action"
 	self subclassResponsibility
 ]
 
-{ #category : #'private - cache' }
-Gt2Annotation >> cacheKey [
-	^ Gt2AnnotationCacheKey new
-		name: self tag;
-		parameters: self parameters
-]
-
-{ #category : #'private - cache' }
-Gt2Annotation >> cachedIsExpanded [
-	<return: #Boolean>
-	self gtDocument
-		cacheAt: self cacheKey
-		ifPresent: [ :aCachedValue | 
-			^ aCachedValue isExpanded ifNil: [ self expandedParameterValue ] ]
-		ifAbsentPut: [ self annotationCacheValueClass new
-				isExpanded: self expandedParameterValue ].
-	^ self expandedParameterValue
-]
-
-{ #category : #'private - cache' }
-Gt2Annotation >> cachedIsExpanded: aBoolean [
-	self gtDocument 
-		cacheAt: self cacheKey
-		ifPresent: [ :aCachedValue | aCachedValue isExpanded: aBoolean ]
-		ifAbsentPut: [ 
-			self annotationCacheValueClass new isExpanded: aBoolean ]
-]
-
-{ #category : #'private - cache' }
-Gt2Annotation >> cachedPreview [
-	<return: #BlElement or: nil>
-	^ self gtDocument 
-		cacheAt: self cacheKey
-		ifPresent: [ :aCachedValue | aCachedValue preview ] 
-		ifAbsent: [ nil ]
-]
-
-{ #category : #'private - cache' }
-Gt2Annotation >> cachedPreview: anElement [
-	self gtDocument 
-		cacheAt: self cacheKey
-		ifPresent: [ :aCachedValue | aCachedValue preview: anElement ]
-		ifAbsentPut: [ 
-			self annotationCacheValueClass new 
-				preview: anElement;
-				isExpanded: true ]
-]
-
 { #category : #'accessing - parameter values' }
 Gt2Annotation >> defaultShowSelector [
 	^ self constants defaultShowSelector
-]
-
-{ #category : #'accessing - parameter values' }
-Gt2Annotation >> expandedDefaultValue [
-	^ false
-]
-
-{ #category : #'accessing - parameter values' }
-Gt2Annotation >> expandedEmptyValue [
-	^ true
-]
-
-{ #category : #'accessing - parameter values' }
-Gt2Annotation >> expandedParameterValue [
-	^ self utility
-		booleanValueOf: self constants expandedParameterName 
-		in: self parameters 
-		emptyValue: [ self expandedEmptyValue ] 
-		defaultValue: [ self expandedDefaultValue ]
 ]
 
 { #category : #'announcement handling' }
@@ -109,12 +37,6 @@ Gt2Annotation >> heightParameterValue [
 			ifFalse: [ self constants defaultPreviewHeight ] ]
 		emptyValue: [ self constants defaultPreviewHeight ]
 		defaultValue: [ self constants defaultPreviewHeight ]
-]
-
-{ #category : #testing }
-Gt2Annotation >> isPreviewCached [
-	"Subclasses can cache previews"
-	^ false
 ]
 
 { #category : #testing }
@@ -174,15 +96,7 @@ Gt2Annotation >> showParameterValue [
 
 { #category : #'private - styling' }
 Gt2Annotation >> styleExpandingPreviewInText: aBlRope [
-	| theAttributes |
-	self isPreviewDefined
-		ifFalse: [ ^ self ].
-	theAttributes := Gt2CachedTextExpandButtonAttributeStencil new
-		attributesCreatingBlock: [ self previewAttributes ];
-		isExpanded: self cachedIsExpanded;
-		onCachingDo: [ :aBoolean :theAttribute | self cachedIsExpanded: aBoolean ];
-		create.
-	(aBlRope from: self stop to: self stop) attributes: theAttributes
+	self utility styleExpandingPreviewInText: aBlRope forNode: self
 ]
 
 { #category : #'api - style' }
@@ -196,21 +110,5 @@ Gt2Annotation >> styleInText: aBlRope [
 
 { #category : #'private - styling' }
 Gt2Annotation >> styleLinkInText: aBlRope [
-	| aLinkColor aNodeToStyle theAttributes |
-	aLinkColor := self utility linkColor: self isReferenceDefined.
-	aNodeToStyle := self utility 
-		parameterNodeNamed: self referenceParameterName forAnnotation: self.
-	theAttributes := Array with: (BlTextForegroundAttribute new
-					paint: aLinkColor).
-	self isReferenceDefined ifTrue: [ 
-		theAttributes := theAttributes , {
-				BrTextHoverStylableAttribute new attribute: (BlTextUnderlineAttribute new paint: aLinkColor).
-				BrTextClickAttribute new 
-					action: [ :aText :aTarget :anEditorElement :anEvent | 
-						self browseReferenceFrom: anEvent ] } ].
-
-	(aBlRope  
-		from: aNodeToStyle start 
-		to: aNodeToStyle stop) 
-			attributes: theAttributes.
+	self utility styleLinkInText: aBlRope forNode: self
 ]

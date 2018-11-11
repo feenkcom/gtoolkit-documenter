@@ -6,6 +6,13 @@ Class {
 	#category : #'GToolkit-NewDocumenter-Utility'
 }
 
+{ #category : #cache }
+Gt2DocumentUtility class >> annotationCacheKeyForNode: aNode [
+	^ Gt2AnnotationCacheKey new
+		name: aNode tag;
+		parameters: aNode parameters
+]
+
 { #category : #'pillar - parameter values' }
 Gt2DocumentUtility class >> booleanValueOf: aString in: aDictionary emptyValue: emptyBooleanOrBlock defaultValue: defaultBooleanOrBlock [
 	^ self 
@@ -28,7 +35,7 @@ Gt2DocumentUtility class >> convertToBoolean: aStringOrBoolean [
 	^ nil
 ]
 
-{ #category : #'api - text style' }
+{ #category : #'text styling' }
 Gt2DocumentUtility class >> linkColor: aBoolean [
 	"aBoolean = true means that a link is valid.
 	aBoolean = false means that a link is invalid."
@@ -37,7 +44,7 @@ Gt2DocumentUtility class >> linkColor: aBoolean [
 		ifFalse: [ self constants linkWithErrorColor ].
 ]
 
-{ #category : #'api - text style' }
+{ #category : #'text styling' }
 Gt2DocumentUtility class >> parameterNodeNamed: aParameterName forAnnotation: anAnnotation [
 	"Return annotation's parameter AST node if exists.
 	Return the given annotation otherwise"
@@ -48,6 +55,40 @@ Gt2DocumentUtility class >> parameterNodeNamed: aParameterName forAnnotation: an
 				eachParameter value isNil ] ] 
 		ifFound: [ :aParameter | aParameter ]
 		ifNone: [ anAnnotation ].
+]
+
+{ #category : #'text styling' }
+Gt2DocumentUtility class >> styleExpandingPreviewInText: aBlRope forNode: aNode [
+	| theAttributes |
+	aNode isPreviewDefined ifFalse: [ ^ self ].
+	theAttributes := Gt2CachedTextExpandButtonAttributeStencil new
+		attributesCreatingBlock: [ aNode previewAttributes ];
+		isExpanded: aNode cachedIsExpanded;
+		onCachingDo: [ :aBoolean :theAttribute | aNode cachedIsExpanded: aBoolean ];
+		create.
+	(aBlRope from: aNode stop to: aNode stop) attributes: theAttributes
+]
+
+{ #category : #'text styling' }
+Gt2DocumentUtility class >> styleLinkInText: aBlRope forNode: aNode [
+	| aLinkColor aNodeToStyle theAttributes |
+	aLinkColor := self linkColor: aNode isReferenceDefined.
+	aNodeToStyle := self 
+		parameterNodeNamed: aNode referenceParameterName 
+		forAnnotation: aNode.
+	theAttributes := Array with: (BlTextForegroundAttribute new paint: aLinkColor).
+	aNode isReferenceDefined ifTrue: [ 
+		theAttributes := theAttributes , {
+				BrTextHoverStylableAttribute new 
+					attribute: (BlTextUnderlineAttribute new paint: aLinkColor).
+				BrTextClickAttribute new 
+					action: [ :aText :aTarget :anEditorElement :anEvent | 
+						aNode browseReferenceFrom: anEvent ] } ].
+
+	(aBlRope  
+		from: aNodeToStyle start 
+		to: aNodeToStyle stop) 
+			attributes: theAttributes.
 ]
 
 { #category : #'pillar - parameter values' }

@@ -99,6 +99,11 @@ Gt2DocumentConstants class >> heightParameterName [
 	^ #height
 ]
 
+{ #category : #'pillar annotation names' }
+Gt2DocumentConstants class >> inputFileAnnotationName [
+	^ PRInputFileAnnotation tag
+]
+
 { #category : #'changes diff' }
 Gt2DocumentConstants class >> insertLineColor [
 	^ Color green muchDarker
@@ -137,6 +142,11 @@ Gt2DocumentConstants class >> methodAnnotationName [
 { #category : #'pillar parameter names' }
 Gt2DocumentConstants class >> nameParameterName [
 	^ #name
+]
+
+{ #category : #'pillar parameter names' }
+Gt2DocumentConstants class >> pathParameterName [
+	^ #path
 ]
 
 { #category : #'changes diff' }
