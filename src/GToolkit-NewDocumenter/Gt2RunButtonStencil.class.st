@@ -26,6 +26,7 @@ Gt2RunButtonStencil >> create [
 		look: self look;
 		icon: self icon;
 		label: self label;
+		beSmall;
 		action: self action.
 ]
 

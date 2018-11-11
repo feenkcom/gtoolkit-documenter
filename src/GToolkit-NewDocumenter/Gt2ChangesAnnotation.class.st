@@ -33,6 +33,7 @@ Gt2ChangesAnnotation >> applyButtonAttribute [
 			BrButton new
 				label: self constants applyButtonLabel;
 				icon: self constants applyButtonIcon asElement;
+				beSmall;
 				look: BrGlamorousButtonWithIconLook + BrGlamorousButtonLabelLook;
 				action: [ self applyChanges ]]
 ]
@@ -104,7 +105,8 @@ Gt2ChangesAnnotation >> createButtonAttribute [
 		stencil: [ 
 			BrButton new
 				label: self constants createButtonLabel ;
-				icon:  self constants createButtonIcon asElement ;
+				icon:  self constants createButtonIcon asElement;
+				beSmall;
 				look: BrGlamorousButtonWithIconLook + BrGlamorousButtonLabelLook;
 				action: [ :aButton |
 					aButton fireEvent: (GtPhlowObjectToSpawn new
