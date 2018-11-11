@@ -100,6 +100,11 @@ Gt2DocumentConstants class >> heightParameterName [
 ]
 
 { #category : #'pillar annotation names' }
+Gt2DocumentConstants class >> icebergFileAnnotationName [
+	^ #icebergFile
+]
+
+{ #category : #'pillar annotation names' }
 Gt2DocumentConstants class >> inputFileAnnotationName [
 	^ PRInputFileAnnotation tag
 ]
@@ -122,6 +127,11 @@ Gt2DocumentConstants class >> linkColor [
 { #category : #colors }
 Gt2DocumentConstants class >> linkWithErrorColor [
 	^ BrGlamorousColors linkWithErrorColor
+]
+
+{ #category : #files }
+Gt2DocumentConstants class >> localGtDirectory [
+	^ 'gt-extra'
 ]
 
 { #category : #'changes diff' }

@@ -254,6 +254,13 @@ Gt2DocumentExamples >> contentWithExternalLink [
 	^ '*Feenk>https://feenk.com*'
 ]
 
+{ #category : #'iceberg file' }
+Gt2DocumentExamples >> contentWithIcebergFile [
+	<gtExample>
+	^ '${', self constants icebergFileAnnotationName, ':', self icebergFileName, '}$'
+
+]
+
 { #category : #'input file' }
 Gt2DocumentExamples >> contentWithInputFile [
 	<gtExample>
@@ -494,6 +501,15 @@ Gt2DocumentExamples >> documentWithExternalLink [
 	^ aDocument
 ]
 
+{ #category : #'iceberg file' }
+Gt2DocumentExamples >> documentWithIcebergFile [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithIcebergFile.
+	self assert: aDocument text asString equals: self contentWithIcebergFile.
+	^ aDocument
+]
+
 { #category : #'input file' }
 Gt2DocumentExamples >> documentWithInputFile [
 	<gtExample>
@@ -572,6 +588,12 @@ Gt2DocumentExamples >> fileReferenceWithInputFile [
 Gt2DocumentExamples >> fooText [
 	<gtExample>
 	^ 'Foo' asRopedText
+]
+
+{ #category : #'iceberg file' }
+Gt2DocumentExamples >> icebergFileName [
+	<gtExample>
+	^ 'feenkcom/gtoolkit-documenter/doc/index.pillar'
 ]
 
 { #category : #initialization }

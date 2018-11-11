@@ -29,10 +29,12 @@ PRInputFileAnnotation >> fileReference [
 						ifFalse: [ nil ]
 						ifTrue: [ 
 							aFile := aValue asFileReference.
-							aFile exists ifTrue: [ aFile ].
-							aFile := GtFileUtility 
-									fileReferenceOfFileName: aValue 
-									relativeTo: self gtDocument rootDirectory.
+							aFile := aFile exists 
+								ifTrue: [ aFile ]
+								ifFalse: [ 
+									aFile := GtFileUtility 
+											fileReferenceOfFileName: aValue 
+											relativeTo: self gtDocument rootDirectory ].
 							aFile exists ifTrue: [ aFile ] ifFalse: [ nil ] ] ]
 				emptyValue: [ nil ] 
 				defaultValue: [ nil ] ]

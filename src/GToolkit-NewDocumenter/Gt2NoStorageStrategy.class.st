@@ -21,3 +21,8 @@ Gt2NoStorageStrategy class >> resetUniqueInstance [
 Gt2NoStorageStrategy class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
+
+{ #category : #accessing }
+Gt2NoStorageStrategy >> rootDirectory [
+	^ Smalltalk imageDirectory
+]
