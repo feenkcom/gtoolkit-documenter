@@ -7,10 +7,10 @@ Class {
 		'example',
 		'codeExpanded',
 		'codeHeight',
-		'codeShow',
 		'resultShowSelector',
 		'resultHeight',
-		'exampleWithResult'
+		'exampleWithResult',
+		'noCode'
 	],
 	#category : #'GToolkit-NewDocumenter-Brick - Stencils'
 }
@@ -41,16 +41,6 @@ Gt2ExamplePreviewStencil >> codeHeight: anObject [
 	codeHeight := anObject
 ]
 
-{ #category : #accessing }
-Gt2ExamplePreviewStencil >> codeShow [
-	^ codeShow
-]
-
-{ #category : #accessing }
-Gt2ExamplePreviewStencil >> codeShow: anObject [
-	codeShow := anObject
-]
-
 { #category : #'api - instantiation' }
 Gt2ExamplePreviewStencil >> create [
 	<return: #BlElement>
@@ -63,7 +53,7 @@ Gt2ExamplePreviewStencil >> create [
 			c margin: (BlInsets top: 0 left: 20 bottom: 0 right: 20).
 			c horizontal matchParent.
 			c vertical fitContent ].
-	self codeShow ifTrue: [ aContainer addChild: self codeElement ].
+	self noCode ifFalse: [ aContainer addChild: self codeElement ].
 	aContainer addChild: self resultElement.
 	^ aContainer
 ]
@@ -88,7 +78,7 @@ Gt2ExamplePreviewStencil >> initialize [
 	super initialize.
 	codeExpanded := true.
 	codeHeight := self constants defaultPreviewHeight.
-	codeShow := true.
+	noCode := true.
 	example := (Gt2DocumentExamples >> #documentWithExistingExample) gtExample.
 	exampleWithResult := nil.
 	resultHeight := self constants defaultPreviewHeight.
@@ -120,6 +110,16 @@ Gt2ExamplePreviewStencil >> newContainerFor: aWrappedElement height: aHeightNumb
 		constraintsDo: [ :c | 
 			c horizontal matchParent.
 			c vertical fitContent ]
+]
+
+{ #category : #accessing }
+Gt2ExamplePreviewStencil >> noCode [
+	^ noCode
+]
+
+{ #category : #accessing }
+Gt2ExamplePreviewStencil >> noCode: anObject [
+	noCode := anObject
 ]
 
 { #category : #accessing }

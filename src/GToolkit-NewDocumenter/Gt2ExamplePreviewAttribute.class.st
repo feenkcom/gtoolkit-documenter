@@ -7,9 +7,9 @@ Class {
 		'example',
 		'codeExpanded',
 		'codeHeight',
-		'codeShow',
 		'resultShowSelector',
-		'resultHeight'
+		'resultHeight',
+		'noCode'
 	],
 	#category : #'GToolkit-NewDocumenter-Text - Attributes'
 }
@@ -20,7 +20,7 @@ Gt2ExamplePreviewAttribute >> affect: aBrText in: anEditorElement [
 			example: self example;
 			codeExpanded: self codeExpanded;
 			codeHeight: self codeHeight;
-			codeShow: self codeShow;
+			noCode: self noCode;
 			resultShowSelector: self resultShowSelector;
 			resultHeight: self resultHeight;
 			asElement
@@ -47,16 +47,6 @@ Gt2ExamplePreviewAttribute >> codeHeight: anObject [
 ]
 
 { #category : #accessing }
-Gt2ExamplePreviewAttribute >> codeShow [
-	^ codeShow
-]
-
-{ #category : #accessing }
-Gt2ExamplePreviewAttribute >> codeShow: anObject [
-	codeShow := anObject
-]
-
-{ #category : #accessing }
 Gt2ExamplePreviewAttribute >> example [
 	^ example
 ]
@@ -71,10 +61,20 @@ Gt2ExamplePreviewAttribute >> initialize [
 	super initialize.
 	codeExpanded := true.
 	codeHeight := self constants defaultPreviewHeight.
-	codeShow := true.
+	noCode := true.
 	example := (Gt2DocumentExamples >> #documentWithExistingExample) gtExample.
 	resultHeight := self constants defaultPreviewHeight.
 	resultShowSelector := self constants defaultShowSelector.
+]
+
+{ #category : #accessing }
+Gt2ExamplePreviewAttribute >> noCode [
+	^ noCode
+]
+
+{ #category : #accessing }
+Gt2ExamplePreviewAttribute >> noCode: anObject [
+	noCode := anObject
 ]
 
 { #category : #accessing }

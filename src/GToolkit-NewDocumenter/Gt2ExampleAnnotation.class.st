@@ -16,7 +16,7 @@ Gt2ExampleAnnotation class >> possibleParameters [
 		"source code"
 		self constants codeHeightParameterName.
 		self constants codeExpandedParameterName.
-		self constants codeShowParameterName.
+		self constants noCodeParameterName.
 		"result"
 		self constants resultHeightParameterName.
 		self constants resultExpandedParameterName.
@@ -58,16 +58,6 @@ Gt2ExampleAnnotation >> codeHeight [
 			ifFalse: [ self constants defaultPreviewHeight ] ]
 		emptyValue: [ self constants defaultPreviewHeight ]
 		defaultValue: [ self constants defaultPreviewHeight ]
-]
-
-{ #category : #'accessing - parameter values' }
-Gt2ExampleAnnotation >> codeShow [
-	<return: #Boolean>
-	^ self utility 
-		booleanValueOf: self constants codeShowParameterName 
-		in: self parameters 
-		emptyValue: [ true ] 
-		defaultValue: [ true ]
 ]
 
 { #category : #'accessing - parameter values' }
@@ -122,6 +112,16 @@ Gt2ExampleAnnotation >> isReferenceDefined [
 	^ self isExampleDefined
 ]
 
+{ #category : #'accessing - parameter values' }
+Gt2ExampleAnnotation >> noCode [
+	<return: #Boolean>
+	^ self utility 
+		booleanValueOf: self constants noCodeParameterName 
+		in: self parameters 
+		emptyValue: [ true ] 
+		defaultValue: [ false ]
+]
+
 { #category : #accessing }
 Gt2ExampleAnnotation >> objectToPreview [
 	^ self referencedExample compiledMethod gtExample
@@ -135,7 +135,7 @@ Gt2ExampleAnnotation >> previewAttributes [
 				example: self example;
 				codeExpanded: self codeExpanded;
 				codeHeight: self codeHeight;
-				codeShow: self codeShow;
+				noCode: self noCode;
 				resultShowSelector: self resultShowSelector;
 				resultHeight: self resultHeight);
 		cache: self cachedPreview;

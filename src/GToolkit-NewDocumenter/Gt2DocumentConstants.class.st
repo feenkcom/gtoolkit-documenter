@@ -44,11 +44,6 @@ Gt2DocumentConstants class >> codeHeightParameterName [
 	^ #codeHeight
 ]
 
-{ #category : #'pillar parameter names' }
-Gt2DocumentConstants class >> codeShowParameterName [
-	^ #codeShow
-]
-
 { #category : #ui }
 Gt2DocumentConstants class >> createButtonIcon [
 	^ BrGlamorousIcons edit
@@ -147,6 +142,11 @@ Gt2DocumentConstants class >> methodAnnotationName [
 { #category : #'pillar parameter names' }
 Gt2DocumentConstants class >> nameParameterName [
 	^ #name
+]
+
+{ #category : #'pillar parameter names' }
+Gt2DocumentConstants class >> noCodeParameterName [
+	^ #noCode
 ]
 
 { #category : #'pillar parameter names' }
