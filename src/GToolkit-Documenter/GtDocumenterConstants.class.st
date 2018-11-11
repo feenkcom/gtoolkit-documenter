@@ -55,12 +55,12 @@ GtDocumenterConstants class >> exactPreviewHeight [
 
 { #category : #'accessing - pillar annotation tags' }
 GtDocumenterConstants class >> exampleTag [
-	^ 'example'
+	^ 'example2'
 ]
 
 { #category : #'accessing - pillar annotation tags' }
 GtDocumenterConstants class >> examplesTag [
-	^ 'examples'
+	^ 'examples2'
 ]
 
 { #category : #'accessing - pillar parameter names' }

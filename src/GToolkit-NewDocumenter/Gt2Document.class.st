@@ -1,8 +1,8 @@
 Class {
 	#name : #Gt2Document,
 	#superclass : #Object,
-	#traits : 'TBlDebug + GtAnnouncerTrait',
-	#classTraits : 'TBlDebug classTrait + GtAnnouncerTrait classTrait',
+	#traits : 'TBlDebug + GtAnnouncerTrait + TGt2DocumentConstants',
+	#classTraits : 'TBlDebug classTrait + GtAnnouncerTrait classTrait + TGt2DocumentConstants classTrait',
 	#instVars : [
 		'editor',
 		'announcer',
@@ -14,6 +14,11 @@ Class {
 	#category : #'GToolkit-NewDocumenter-Model'
 }
 
+{ #category : #'instance creation' }
+Gt2Document class >> forClass: aClass [
+	^ self new classComment: aClass; read
+]
+
 { #category : #announcer }
 Gt2Document >> announcer [
 	<return: #Announcer>
@@ -24,7 +29,8 @@ Gt2Document >> announcer [
 { #category : #converting }
 Gt2Document >> asElement [
 	<return: #BlElement>
-	^ Gt2SceneInformingElement new
+	| anElement |
+	anElement := Gt2SceneInformingElement new
 		layout: BlLinearLayout new;
 		addChild: (BrEditorElement new
 			editor: self editor;
@@ -36,7 +42,9 @@ Gt2Document >> asElement [
 		addEventHandler: (Gt2RemovedFromSceneEventHandler new document: self);
 		constraintsDo: [ :c |
 			c vertical matchParent.
-			c horizontal matchParent ]
+			c horizontal matchParent ].
+	anElement userData at: self constants documentUserDataKey put: self.
+	^ anElement
 ]
 
 { #category : #cache }
@@ -47,6 +55,14 @@ Gt2Document >> cacheAt: aKey ifPresent: aPresentBlock ifAbsent: anAbsentBlock [
 { #category : #cache }
 Gt2Document >> cacheAt: aKey ifPresent: aPresentBlock ifAbsentPut: anAbsentBlock [
 	^ cache at: aKey ifPresent: aPresentBlock ifAbsentPut: anAbsentBlock
+]
+
+{ #category : #initialization }
+Gt2Document >> classComment: aClass [ 
+	self 
+		assert: [ aClass notNil ]
+		description: [ 'Class to document must be non-nil' ].
+	self strategy: (Gt2StorageStrategy classComment: aClass)
 ]
 
 { #category : #initialization }

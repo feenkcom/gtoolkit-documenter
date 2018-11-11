@@ -7,6 +7,16 @@ Class {
 }
 
 { #category : #factory }
+Gt2StorageStrategy class >> classComment [
+	^ Gt2ClassCommentStrategy new
+]
+
+{ #category : #factory }
+Gt2StorageStrategy class >> classComment: aClass [
+	^ self classComment classToComment: aClass
+]
+
+{ #category : #factory }
 Gt2StorageStrategy class >> fileReference [
 	^ Gt2FileReferenceStorageStrategy new
 ]
@@ -28,23 +38,11 @@ Gt2StorageStrategy >> read: aGt2Document [
 
 { #category : #accessing }
 Gt2StorageStrategy >> rootDirectory [
-	self 
-		assert: [ self file notNil ]
-		description: [ 'File reference must be non-nil' ].
-	^ self file parent
+	<return: #FileReference>
+	^ self subclassResponsibility
 ]
 
 { #category : #actions }
 Gt2StorageStrategy >> store: aGt2Document [ 
-	| aNewContent aBackupFile |
-	self 
-		assert: [ self file notNil ]
-		description: [ 'File reference must be non-nil to store a document to a file' ].
-	
-	aNewContent := aGt2Document text asString.
-	aBackupFile := (self file parent / (self file basename, '.backup')) asFileReference ensureDelete.
-	self file 
-		copyTo: aBackupFile;
-		ensureDelete; 
-		writeStreamDo: [ :s | s nextPutAll: aNewContent ] 
+	self subclassResponsibility
 ]

@@ -70,6 +70,11 @@ Gt2DocumentConstants class >> defaultShowSelector [
 ]
 
 { #category : #ui }
+Gt2DocumentConstants class >> documentUserDataKey [
+	^ #gtDocument
+]
+
+{ #category : #ui }
 Gt2DocumentConstants class >> editButtonIcon [
 	^ BrGlamorousIcons edit
 ]

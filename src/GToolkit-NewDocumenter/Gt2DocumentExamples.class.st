@@ -1,3 +1,28 @@
+"
+Please comment me using the following template inspired by Class Responsibility Collaborator (CRC) design:
+
+For the Class part:  State a one line summary. For example, ""I represent a paragraph of text"".
+
+For the Responsibility part: Three sentences about my main responsibilities - what I do, what I know.
+
+For the Collaborators Part: State my main collaborators and one line about how I interact with them. 
+
+Public API and Key Messages
+
+- message one   
+- message two 
+- (for bonus points) how to create instances.
+
+   One simple example is simply gorgeous.
+ 
+Internal Representation and Key Implementation Points.
+
+    Instance Variables
+	memorySystem:		<Object>
+
+
+    Implementation Points
+"
 Class {
 	#name : #Gt2DocumentExamples,
 	#superclass : #Object,
@@ -150,6 +175,12 @@ Gt2DocumentExamples >> changesFileReferenceWithClassDefinition [
 			addFileNamed: self changesFileNameWithClassDefinition
 			toDirectory: self changesDirectory 
 			withContent: self changesContentWithClassDefinition.
+]
+
+{ #category : #'file reference document' }
+Gt2DocumentExamples >> classToDocument [
+	<gtExample>
+	^ self class
 ]
 
 { #category : #accessing }
@@ -315,6 +346,20 @@ Gt2DocumentExamples >> documentDeleteMethodAnnotation [
 		assert: aDocument text asString 
 		equals: ( self contentWithExistingMethod last asString).
 	self assert: aDocument isSubscribedToSystem not.
+	^ aDocument
+]
+
+{ #category : #'file reference document' }
+Gt2DocumentExamples >> documentFromClassComment [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument classComment: self classToDocument.
+	self assert: aDocument storage notNil.
+	self assert: aDocument storage comment notNil.
+	self assert: aDocument storage comment equals: self classToDocument comment.
+	self assert: aDocument text isEmpty.
+	aDocument read.
+	self assert: aDocument text asString equals: self classToDocument comment.
 	^ aDocument
 ]
 
@@ -536,6 +581,23 @@ Gt2DocumentExamples >> initialize [
 	super initialize.
 	memorySystem := GtFileSystemExamples new 
 		rootDirectoryName: UUID new asString.
+]
+
+{ #category : #'file reference document' }
+Gt2DocumentExamples >> modifyAndStoreToClassComment [
+	<gtExample>
+	| aDocument aPreviousComment |
+	aPreviousComment := self classToDocument comment.
+	aDocument := self documentFromClassComment.
+	aDocument editor inserter 
+		at: 0; string: '! Inserted Header', String cr, String cr; insert.
+	aDocument store.
+	self assert: aDocument text asString equals: self classToDocument comment.
+	self assert: (aDocument text asString = aPreviousComment) not.
+	aDocument text: aPreviousComment; store.
+	self assert: aDocument text asString equals: aPreviousComment.
+	self assert: self classToDocument comment equals: aPreviousComment.
+	^ aDocument 
 ]
 
 { #category : #'file reference document' }
