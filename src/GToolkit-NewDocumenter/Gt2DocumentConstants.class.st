@@ -16,7 +16,7 @@ Gt2DocumentConstants class >> applyButtonLabel [
 
 { #category : #'pillar annotation names' }
 Gt2DocumentConstants class >> changesAnnotationName [
-	^ #changes2
+	^ #changes
 ]
 
 { #category : #files }
@@ -26,7 +26,7 @@ Gt2DocumentConstants class >> changesFileExtension [
 
 { #category : #'pillar annotation names' }
 Gt2DocumentConstants class >> classAnnotationName [
-	^ #class2
+	^ #class
 ]
 
 { #category : #'pillar parameter default values' }
@@ -81,7 +81,7 @@ Gt2DocumentConstants class >> editButtonLabel [
 
 { #category : #'pillar annotation names' }
 Gt2DocumentConstants class >> exampleAnnotationName [
-	^ #example2
+	^ #example
 ]
 
 { #category : #'pillar parameter names' }
@@ -136,7 +136,7 @@ Gt2DocumentConstants class >> matchLineIdentificator [
 
 { #category : #'pillar annotation names' }
 Gt2DocumentConstants class >> methodAnnotationName [
-	^ #method2
+	^ #method
 ]
 
 { #category : #'pillar parameter names' }

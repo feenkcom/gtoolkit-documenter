@@ -4,6 +4,16 @@ Class {
 	#category : #'GToolkit-Documenter-Settings'
 }
 
+{ #category : #'accessing - pillar annotation tags' }
+GtDocumenterConstants class >> changesTag [
+	^ 'changes2'
+]
+
+{ #category : #'accessing - pillar annotation tags' }
+GtDocumenterConstants class >> classTag [
+	^ 'class2'
+]
+
 { #category : #'accessing - pillar parameter names' }
 GtDocumenterConstants class >> classesParameterName [
 	^ #classes
@@ -73,9 +83,19 @@ GtDocumenterConstants class >> heightParameterName [
 	^ #height
 ]
 
+{ #category : #'accessing - pillar annotation tags' }
+GtDocumenterConstants class >> icebergFileTag [
+	^ 'icebergFile2'
+]
+
 { #category : #'accessing - directory names' }
 GtDocumenterConstants class >> localGtDirectory [
 	^ 'gt-extra'
+]
+
+{ #category : #'accessing - pillar annotation tags' }
+GtDocumenterConstants class >> methodTag [
+	^ 'method2'
 ]
 
 { #category : #'accessing - pillar parameter names' }

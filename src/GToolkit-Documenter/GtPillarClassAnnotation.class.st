@@ -16,7 +16,7 @@ GtPillarClassAnnotation class >> possibleParameters [
 
 { #category : #protected }
 GtPillarClassAnnotation class >> tag [
-	^ #class
+	^ self constants classTag
 ]
 
 { #category : #visitor }

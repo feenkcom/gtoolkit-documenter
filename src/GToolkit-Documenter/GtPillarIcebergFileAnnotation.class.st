@@ -15,7 +15,7 @@ GtPillarIcebergFileAnnotation class >> possibleParameters [
 
 { #category : #protected }
 GtPillarIcebergFileAnnotation class >> tag [
-	^ #icebergFile
+	^ self constants icebergFileTag
 ]
 
 { #category : #visitor }

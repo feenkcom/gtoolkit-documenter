@@ -13,7 +13,7 @@ GtPillarEpiceaChangesAnnotation class >> possibleParameters [
 
 { #category : #protected }
 GtPillarEpiceaChangesAnnotation class >> tag [
-	^ #changes
+	^ self constants changesTag
 ]
 
 { #category : #visitor }

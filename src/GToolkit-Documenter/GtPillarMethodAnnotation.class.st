@@ -16,7 +16,7 @@ GtPillarMethodAnnotation class >> possibleParameters [
 
 { #category : #protected }
 GtPillarMethodAnnotation class >> tag [
-	^ #method
+	^ self constants methodTag
 ]
 
 { #category : #visitor }
