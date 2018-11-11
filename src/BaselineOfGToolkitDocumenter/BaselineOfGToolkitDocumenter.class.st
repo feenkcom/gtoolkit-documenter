@@ -69,7 +69,16 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 				 'Brick' 'GToolkitUtility' 'GToolkit-Documenter' 'GToolkit-Documenter-Exporter' ) ];
 			package: 'GToolkit-Documenter-Examples' with: [ spec requires: #( 
 				'GToolkitExamples' 'GToolkit-Documenter' 'GToolkit-Documenter-Exporter'
-				'GToolkit-Documenter-Epicea' ) ]
+				'GToolkit-Documenter-Epicea' ) ];
+			package: 'GToolkit-NewDocumenter' with: [ spec requires: #( 
+				#Brick 
+				#PillarCore 
+				#GToolkitCoder
+				#GToolkitCompleter
+				#GToolkitUtility 
+				#GToolkitVariableBindings
+				#GToolkitExamples 
+				#GToolkitInspector ) ]
 	].
 
 	spec for: #'pharo6.x' do: [ 
@@ -79,6 +88,8 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 			configuration: 'WebBrowser' with: [ spec 
 				repository: 'http://smalltalkhub.com/mc/TorstenBergmann/WebBrowser/main/' ];
 			package: 'GToolkit-Documenter' with: [ spec 
-				requires: #( 'WebBrowser' 'GToolkitPharo6Compatibility' ) ]
+				requires: #( 'WebBrowser' 'GToolkitPharo6Compatibility' ) ];
+			package: 'GToolkit-NewDocumenter' with: [ spec 
+			 	requires: #( 'WebBrowser' 'GToolkitPharo6Compatibility' ) ]
 	].
 ]
