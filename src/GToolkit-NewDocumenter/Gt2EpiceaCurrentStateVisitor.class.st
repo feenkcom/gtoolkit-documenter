@@ -54,6 +54,15 @@ Gt2EpiceaCurrentStateVisitor >> visitBehaviorChange: aChange [
 ]
 
 { #category : #visitor }
+Gt2EpiceaCurrentStateVisitor >> visitBehaviorCommentChange: aEpBehaviorCommentChange [
+	self
+		behaviorNamed: aEpBehaviorCommentChange behaviorAffectedName
+		ifPresent: [ :aClass | ^ aClass comment asString ].
+
+	^ ''
+]
+
+{ #category : #visitor }
 Gt2EpiceaCurrentStateVisitor >> visitMethodChange: aChange [
 	"Addition and Modification come here"
 	self 

@@ -64,10 +64,15 @@ Gt2Epicea >> computeImpact [
 Gt2Epicea >> diff [
 	<return: #BlRope>
 	^ diff ifNil: [ 
-			diff := Gt2EpiceaDiffStencil new
-				from: self systemState;
-				to: self tutorialState;
-				create ]
+			diff := self hasImpact 
+				ifTrue: [ 
+					Gt2EpiceaDiffStencil new
+						from: self systemState;
+						to: self tutorialState;
+						create ]
+				ifFalse: [ '"No changes comparing to current system state"' asRopedText 
+						monospace;
+						foreground: self constants subtleColor ] ]
 ]
 
 { #category : #accessing }
@@ -85,6 +90,7 @@ Gt2Epicea >> events [
 { #category : #'gt-extension' }
 Gt2Epicea >> gtDiffFor: aView [
 	<gtView>
+	<gtViewChanges>
 	^ aView textEditor
 		title: 'Diff';
 		priority: 2;
@@ -99,7 +105,7 @@ Gt2Epicea >> gtDiffFor: aView [
 Gt2Epicea >> gtEventsFor: aView [
 	<gtView>
 	^ aView explicit 
-		title: 'Tutorial Changes';
+		title: 'Change List';
 		priority: 3;
 		stencil: [ 
 			| aList |
@@ -199,24 +205,26 @@ Gt2Epicea >> gtGlobalEntriesIn: aView [
 
 { #category : #'gt-extension' }
 Gt2Epicea >> gtPreviewFor: aView [
-	<gtView>
-	^ aView textEditor
+	^ aView explicit
 		title: 'Document Preview';
-		priority: 10;
-		text: [ :anEditor | 
-			self 
-				when: Gt2EpiceaUpdatedAnnouncement 
-				do: [ anEditor text: self diff asRopedText ].
-			self tutorialState asRopedText 
-				monospace; 
-				foreground: self constants matchLineColor ]
+		priority: 50;
+		stencil: [  
+			| aExportsViews aCompositeView |
+			aExportsViews := GtPhlowViewsCollector new
+				pragmaName: #gtViewChanges;
+				fromObject: self;
+				collect.
+			aCompositeView := GtPhlowView composite views: aExportsViews.
+			aCompositeView asElementDo: [ :anElement | anElement traceCr ]
+		 ]
 ]
 
 { #category : #'gt-extension' }
 Gt2Epicea >> gtTutorialFor: aView [
 	<gtView>
+	<gtViewChanges>
 	^ aView textEditor
-		title: 'Tutorial';
+		title: 'Code';
 		priority: 1;
 		text: [ :anEditor | 
 			self 

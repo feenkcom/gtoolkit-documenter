@@ -113,6 +113,11 @@ Gt2ChangesAnnotation >> createButtonAttribute [
 ]
 
 { #category : #'accessing - parameter values' }
+Gt2ChangesAnnotation >> defaultShowSelector [
+	^ self constants changesDefinitionShowSelector
+]
+
+{ #category : #'accessing - parameter values' }
 Gt2ChangesAnnotation >> expandedDefaultValue [
 	^ true
 ]

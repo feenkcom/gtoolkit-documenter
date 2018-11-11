@@ -19,6 +19,11 @@ Gt2DocumentConstants class >> changesAnnotationName [
 	^ #changes
 ]
 
+{ #category : #'pillar parameter default values' }
+Gt2DocumentConstants class >> changesDefinitionShowSelector [
+	^ #gtPreviewFor:
+]
+
 { #category : #files }
 Gt2DocumentConstants class >> changesFileExtension [
 	^ '.ombu'
