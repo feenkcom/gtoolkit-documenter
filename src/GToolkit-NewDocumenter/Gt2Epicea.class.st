@@ -215,7 +215,7 @@ Gt2Epicea >> gtPreviewFor: aView [
 				fromObject: self;
 				collect.
 			aCompositeView := GtPhlowView composite views: aExportsViews.
-			aCompositeView asElementDo: [ :anElement | anElement traceCr ]
+			aCompositeView asElementDo: [ :anElement | anElement ]
 		 ]
 ]
 
