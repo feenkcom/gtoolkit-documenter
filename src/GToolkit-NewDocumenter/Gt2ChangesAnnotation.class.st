@@ -120,7 +120,7 @@ Gt2ChangesAnnotation >> expandedDefaultValue [
 Gt2ChangesAnnotation >> handleEpiceaUpdate: aGt2EpiceaUpdatedAnnouncement [
 	'annotation: ' trace.
 	aGt2EpiceaUpdatedAnnouncement traceCr.
-	aGt2EpiceaUpdatedAnnouncement impactChanged ifFalse: [ ^ self ].
+	aGt2EpiceaUpdatedAnnouncement impactChangedOrNumberOfEventsChanged ifFalse: [ ^ self ].
 	self gtDocument editor styleText
 ]
 

@@ -10,7 +10,8 @@ Class {
 		'events',
 		'diff',
 		'applyErrorHandler',
-		'hasImpact'
+		'hasImpact',
+		'previousNumberOfEvents'
 	],
 	#classVars : [
 		'DebugMode'
@@ -248,6 +249,7 @@ Gt2Epicea >> initialize [
 	super initialize.
 	announcer := Announcer new.
 	hasImpact := false.
+	previousNumberOfEvents := 0.
 	applyErrorHandler := [ :anException | | message |
 		DebugMode ifTrue: [ anException pass ].
 		message := 'Error while applying Epicea changes: ' , anException asString.
@@ -274,7 +276,9 @@ Gt2Epicea >> notifyEpiceaChangedWithImpactState: anImpactStateBoolean impactChan
 	anAnnouncement := (Gt2EpiceaUpdatedAnnouncement new 
 		hasImpact: anImpactStateBoolean;
 		impactChanged: anImpactChangeBoolean;
-		numberOfEvents: self numberOfEvents).
+		numberOfEvents: self numberOfEvents;
+		previousNumberOfEvents: previousNumberOfEvents).
+	previousNumberOfEvents := self numberOfEvents.
 	anAnnouncement traceCr.
 	self announce: anAnnouncement.
 ]
