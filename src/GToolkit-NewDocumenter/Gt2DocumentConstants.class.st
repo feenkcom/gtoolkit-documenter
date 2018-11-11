@@ -154,6 +154,21 @@ Gt2DocumentConstants class >> pathParameterName [
 	^ #path
 ]
 
+{ #category : #'pillar parameter names' }
+Gt2DocumentConstants class >> previewExpandedParameterName [
+	^ #previewExpanded
+]
+
+{ #category : #'pillar parameter names' }
+Gt2DocumentConstants class >> previewHeightParameterName [
+	^ #previewHeight
+]
+
+{ #category : #'pillar parameter names' }
+Gt2DocumentConstants class >> previewShowParameterName [
+	^ #previewShow
+]
+
 { #category : #'changes diff' }
 Gt2DocumentConstants class >> removeLineColor [
 	^ Color red muchDarker
@@ -162,21 +177,6 @@ Gt2DocumentConstants class >> removeLineColor [
 { #category : #'changes diff' }
 Gt2DocumentConstants class >> removeLineIdentificator [
 	^ '- '
-]
-
-{ #category : #'pillar parameter names' }
-Gt2DocumentConstants class >> resultExpandedParameterName [
-	^ #resultExpanded
-]
-
-{ #category : #'pillar parameter names' }
-Gt2DocumentConstants class >> resultHeightParameterName [
-	^ #resultHeight
-]
-
-{ #category : #'pillar parameter names' }
-Gt2DocumentConstants class >> resultShowParameterName [
-	^ #resultShow
 ]
 
 { #category : #ui }

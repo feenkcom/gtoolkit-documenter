@@ -7,10 +7,10 @@ Class {
 		'example',
 		'codeExpanded',
 		'codeHeight',
-		'resultShowSelector',
-		'resultHeight',
 		'exampleWithResult',
-		'noCode'
+		'noCode',
+		'previewHeight',
+		'previewShowSelector'
 	],
 	#category : #'GToolkit-NewDocumenter-Brick - Stencils'
 }
@@ -81,8 +81,8 @@ Gt2ExamplePreviewStencil >> initialize [
 	noCode := true.
 	example := (Gt2DocumentExamples >> #documentWithExistingExample) gtExample.
 	exampleWithResult := nil.
-	resultHeight := self constants defaultPreviewHeight.
-	resultShowSelector := self constants defaultShowSelector.
+	previewHeight := self constants defaultPreviewHeight.
+	previewShowSelector := self constants defaultShowSelector.
 ]
 
 { #category : #'instance creation' }
@@ -123,6 +123,26 @@ Gt2ExamplePreviewStencil >> noCode: anObject [
 ]
 
 { #category : #accessing }
+Gt2ExamplePreviewStencil >> previewHeight [
+	^ previewHeight
+]
+
+{ #category : #accessing }
+Gt2ExamplePreviewStencil >> previewHeight: anObject [
+	previewHeight := anObject
+]
+
+{ #category : #accessing }
+Gt2ExamplePreviewStencil >> previewShowSelector [
+	^ previewShowSelector
+]
+
+{ #category : #accessing }
+Gt2ExamplePreviewStencil >> previewShowSelector: anObject [
+	previewShowSelector := anObject
+]
+
+{ #category : #accessing }
 Gt2ExamplePreviewStencil >> result [
 	^ self exampleWithResult returnValueOrExampleException
 ]
@@ -131,27 +151,7 @@ Gt2ExamplePreviewStencil >> result [
 Gt2ExamplePreviewStencil >> resultElement [
 	<return: #BlElement>
 	| aView |
-	aView := GtPhlowView on: self result perform: self resultShowSelector.
+	aView := GtPhlowView on: self result perform: self previewShowSelector.
 	^ aView asElementDo:
-		[ :anElement | self newContainerFor: anElement height: self resultHeight ]
-]
-
-{ #category : #accessing }
-Gt2ExamplePreviewStencil >> resultHeight [
-	^ resultHeight
-]
-
-{ #category : #accessing }
-Gt2ExamplePreviewStencil >> resultHeight: anObject [
-	resultHeight := anObject
-]
-
-{ #category : #accessing }
-Gt2ExamplePreviewStencil >> resultShowSelector [
-	^ resultShowSelector
-]
-
-{ #category : #accessing }
-Gt2ExamplePreviewStencil >> resultShowSelector: anObject [
-	resultShowSelector := anObject
+		[ :anElement | self newContainerFor: anElement height: self previewHeight ]
 ]

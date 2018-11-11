@@ -18,9 +18,9 @@ Gt2ExampleAnnotation class >> possibleParameters [
 		self constants codeExpandedParameterName.
 		self constants noCodeParameterName.
 		"result"
-		self constants resultHeightParameterName.
-		self constants resultExpandedParameterName.
-		self constants resultShowParameterName.
+		self constants previewHeightParameterName.
+		self constants previewExpandedParameterName.
+		self constants previewShowParameterName.
 		}
 ]
 
@@ -136,11 +136,36 @@ Gt2ExampleAnnotation >> previewAttributes [
 				codeExpanded: self codeExpanded;
 				codeHeight: self codeHeight;
 				noCode: self noCode;
-				resultShowSelector: self resultShowSelector;
-				resultHeight: self resultHeight);
+				previewShowSelector: self previewShowSelector;
+				previewHeight: self previewHeight);
 		cache: self cachedPreview;
 		onCachingDo: [ :aCachedElement :theAttribute | 
 			self cachedPreview: aCachedElement ] }
+]
+
+{ #category : #'accessing - parameter values' }
+Gt2ExampleAnnotation >> previewHeight [
+	^ self utility 
+		valueOf: self constants previewHeightParameterName
+		in: self parameters
+		value: [ :aNumber | aNumber isNumber 
+			ifTrue: [ aNumber ]
+			ifFalse: [ self constants defaultPreviewHeight ] ]
+		emptyValue: [ self constants defaultPreviewHeight ]
+		defaultValue: [ self constants defaultPreviewHeight ]
+]
+
+{ #category : #'accessing - parameter values' }
+Gt2ExampleAnnotation >> previewShowSelector [
+	<return: #Symbol>
+	^ self utility 
+		valueOf: self constants previewShowParameterName
+		in: self parameters
+		value: [ :aString | aString isString 
+			ifFalse: [ self showEmptyValue ] 
+			ifTrue: [ aString asSymbol ] ]
+		emptyValue: [ self showEmptyValue ]
+		defaultValue: [ self defaultShowSelector ]
 ]
 
 { #category : #accessing }
@@ -181,31 +206,6 @@ Gt2ExampleAnnotation >> registerToSystemChanges [
 			send: #handleDocumentUpdateRequestedAnnouncement:
 			to: self
 			for: self gtSubscriber.
-]
-
-{ #category : #'accessing - parameter values' }
-Gt2ExampleAnnotation >> resultHeight [
-	^ self utility 
-		valueOf: self constants resultHeightParameterName
-		in: self parameters
-		value: [ :aNumber | aNumber isNumber 
-			ifTrue: [ aNumber ]
-			ifFalse: [ self constants defaultPreviewHeight ] ]
-		emptyValue: [ self constants defaultPreviewHeight ]
-		defaultValue: [ self constants defaultPreviewHeight ]
-]
-
-{ #category : #'accessing - parameter values' }
-Gt2ExampleAnnotation >> resultShowSelector [
-	<return: #Symbol>
-	^ self utility 
-		valueOf: self constants resultShowParameterName
-		in: self parameters
-		value: [ :aString | aString isString 
-			ifFalse: [ self showEmptyValue ] 
-			ifTrue: [ aString asSymbol ] ]
-		emptyValue: [ self showEmptyValue ]
-		defaultValue: [ self defaultShowSelector ]
 ]
 
 { #category : #'api - style' }
