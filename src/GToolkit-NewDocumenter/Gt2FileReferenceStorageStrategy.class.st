@@ -14,7 +14,7 @@ Gt2FileReferenceStorageStrategy >> file [
 
 { #category : #accessing }
 Gt2FileReferenceStorageStrategy >> file: aFileReference [
-	file := aFileReference
+	file := aFileReference asFileReference
 ]
 
 { #category : #actions }

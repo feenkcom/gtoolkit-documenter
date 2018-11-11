@@ -19,6 +19,11 @@ Gt2Document class >> forClass: aClass [
 	^ self new classComment: aClass; read
 ]
 
+{ #category : #'instance creation' }
+Gt2Document class >> forFile: aFileReference [
+	^ self new fileReference: aFileReference; read
+]
+
 { #category : #announcer }
 Gt2Document >> announcer [
 	<return: #Announcer>
