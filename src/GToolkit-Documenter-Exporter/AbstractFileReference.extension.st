@@ -12,16 +12,6 @@ AbstractFileReference >> gtInspectorGtDocumenterParse [
 ]
 
 { #category : #'*GToolkit-Documenter-Exporter' }
-AbstractFileReference >> parseWithGt2Documenter [
-	| encoding |
-	encoding := [ self binaryReadStreamDo: [ :in | (ZnCharacterEncoder detectEncoding: in upToEnd) identifier ] ]
-		on: ZnCharacterEncodingError
-		do: [ nil ].
-	^ self binaryReadStreamDo: [ :in | 
-		PRPillarParser new optimize parse: (ZnCharacterReadStream on: in encoding: encoding) upToEnd ]
-]
-
-{ #category : #'*GToolkit-Documenter-Exporter' }
 AbstractFileReference >> showParsedDocumentIn: aGLMCompositePresentation [ 
 	aGLMCompositePresentation selection: self parseWithGtDocumenter 
 ]
