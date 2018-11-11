@@ -135,7 +135,7 @@ Gt2Epicea >> gtEventsFor: aView [
 						visibility: BlVisibility hidden.
 					aContainer := BlElement new 
 						layout: BlLinearLayout horizontal;
-						addChildren: (anEpEvent accept: GtEpiceaBrickVisitor new);
+						addChildren: (anEpEvent accept: Gt2EpiceaBrickVisitor new);
 						addChild: aRemoveButton;
 						constraintsDo: [ :c | 
 							c horizontal fitContent.
@@ -182,7 +182,7 @@ Gt2Epicea >> gtGlobalEntriesIn: aView [
 						visibility: BlVisibility hidden.
 					aContainer := BlElement new 
 						layout: BlLinearLayout horizontal;
-						addChildren: (anOmEntry content accept: GtEpiceaBrickVisitor new);
+						addChildren: (anOmEntry content accept: Gt2EpiceaBrickVisitor new);
 						addChild: anAddButton;
 						constraintsDo: [ :c | 
 							c horizontal fitContent.
@@ -344,7 +344,7 @@ Gt2Epicea >> systemState [
 		self events 
 			do: [ :eachEvent | 
 				| anOutput |
-				anOutput := eachEvent accept: (GtEpiceaCurrentStateVisitor 
+				anOutput := eachEvent accept: (Gt2EpiceaCurrentStateVisitor 
 					inEnvironment: self theEnvironment).
 				aStream nextPutAll: anOutput ]
 			separatedBy: [ aStream cr; cr ] ]

@@ -20,7 +20,7 @@ PRInputFileAnnotation >> fileReference [
 	^ self 
 		propertyAt: #fileReference 
 		ifAbsentPut: [ 
-			GtDocumenterUtility 
+			Gt2DocumentUtility 
 				valueOf: Gt2DocumentConstants pathParameterName
 				in: self parameters 
 				value: [ :aValue | 

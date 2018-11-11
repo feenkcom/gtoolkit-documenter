@@ -18,7 +18,7 @@ EpEvent >> gtSystemFor: aView [
 		title: 'Diff';
 		priority: 2;
 		text: [ Gt2EpiceaDiffStencil new
-				from: (self accept: (GtEpiceaCurrentStateVisitor 
+				from: (self accept: (Gt2EpiceaCurrentStateVisitor 
 					inEnvironment: self class environment));
 				to: (self accept: EpNewStateVisitor new);
 				create ]
