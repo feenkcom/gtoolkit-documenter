@@ -7,7 +7,8 @@ Class {
 		'text',
 		'document',
 		'subscriber',
-		'counter'
+		'codeblockCounter',
+		'annotationCounter'
 	],
 	#category : #'GToolkit-NewDocumenter-Styler'
 }
@@ -29,7 +30,8 @@ Gt2StylerVisitor >> document: aGt2Document [
 { #category : #initialization }
 Gt2StylerVisitor >> initialize [
 	super initialize.
-	counter := 0.
+	codeblockCounter := 0.
+	annotationCounter := 0.
 ]
 
 { #category : #accessing }
@@ -58,7 +60,9 @@ Gt2StylerVisitor >> text: aBlRope [
 
 { #category : #'visiting-annotations' }
 Gt2StylerVisitor >> visitAnnotation: anAnnotation [
+	annotationCounter := annotationCounter + 1.
 	anAnnotation 
+		counter: annotationCounter;
 		gtDocument: self document;
 		gtSubscriber: self subscriber;
 		styleInText: self text.
@@ -67,9 +71,9 @@ Gt2StylerVisitor >> visitAnnotation: anAnnotation [
 
 { #category : #'visiting-document' }
 Gt2StylerVisitor >> visitCodeblock: aPRCodeblock [
-	counter := counter + 1.
+	codeblockCounter := codeblockCounter + 1.
 	aPRCodeblock 
-		counter: counter;
+		counter: codeblockCounter;
 		gtDocument: self document;
 		gtSubscriber: self subscriber;
 		styleInText: self text.

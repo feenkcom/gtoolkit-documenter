@@ -4,7 +4,6 @@ Class {
 	#instVars : [
 		'text',
 		'caption',
-		'counter',
 		'parameters'
 	],
 	#category : #'GToolkit-NewDocumenter-Cache'
@@ -27,16 +26,6 @@ Gt2CodeblockCacheKey >> caption [
 { #category : #accessing }
 Gt2CodeblockCacheKey >> caption: anObject [
 	caption := anObject
-]
-
-{ #category : #accessing }
-Gt2CodeblockCacheKey >> counter [
-	^ counter
-]
-
-{ #category : #accessing }
-Gt2CodeblockCacheKey >> counter: anObject [
-	counter := anObject
 ]
 
 { #category : #comparing }
