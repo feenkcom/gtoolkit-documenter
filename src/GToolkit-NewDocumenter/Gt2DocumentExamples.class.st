@@ -261,7 +261,22 @@ Gt2DocumentExamples >> demoDocument [
 ]
 
 { #category : #demo }
+Gt2DocumentExamples >> demoDocument2 [
+	<gtExample>
+	^ Gt2Document new fileReference: self demoFileReference2; read.
+]
+
+{ #category : #demo }
 Gt2DocumentExamples >> demoFileReference [
+	<gtExample>
+	^ GtIcebergUtility repositoriesLocation 
+			/ 'feenkcom'/ 'gtoolkit-demos' 
+			/ 'doc' / 'tutorial' 
+			/ 'smalltalks-2018-addressbook' / 'example-driven-development.pillar' 
+]
+
+{ #category : #demo }
+Gt2DocumentExamples >> demoFileReference2 [
 	<gtExample>
 	^ GtIcebergUtility repositoriesLocation 
 			/ 'feenkcom'/ 'gtoolkit-demos' 
