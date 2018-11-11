@@ -279,7 +279,6 @@ Gt2Epicea >> notifyEpiceaChangedWithImpactState: anImpactStateBoolean impactChan
 		numberOfEvents: self numberOfEvents;
 		previousNumberOfEvents: previousNumberOfEvents).
 	previousNumberOfEvents := self numberOfEvents.
-	anAnnouncement traceCr.
 	self announce: anAnnouncement.
 ]
 
