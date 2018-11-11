@@ -117,12 +117,24 @@ Gt2ChangesAnnotation >> expandedDefaultValue [
 ]
 
 { #category : #'announcement handling' }
+Gt2ChangesAnnotation >> handleEpiceaUpdate: aGt2EpiceaUpdatedAnnouncement [
+	'annotation: ' trace.
+	aGt2EpiceaUpdatedAnnouncement traceCr.
+	aGt2EpiceaUpdatedAnnouncement impactChanged ifFalse: [ ^ self ].
+	self gtDocument editor styleText
+]
+
+{ #category : #'announcement handling' }
 Gt2ChangesAnnotation >> handleSystemChange: anAnnoucement [
 	| aChanges |
 	aChanges := self cachedChanges.
-	aChanges ombuFileExists ifFalse: [ ^ self ].
-	aChanges updateImpact ifTrue: [ 
-		self gtDocument editor styleText ].
+	aChanges hasChanges ifFalse: [ ^ self ].
+	aChanges updateImpact
+]
+
+{ #category : #testing }
+Gt2ChangesAnnotation >> hasChanges [
+	^ self cachedChanges hasChanges
 ]
 
 { #category : #testing }
@@ -139,12 +151,12 @@ Gt2ChangesAnnotation >> isChangeFileDefined [
 
 { #category : #testing }
 Gt2ChangesAnnotation >> isPreviewDefined [
-	^ self changeFileExists
+	^ self hasChanges
 ]
 
 { #category : #testing }
 Gt2ChangesAnnotation >> isReferenceDefined [
-	^ self changeFileExists
+	^ self hasChanges
 ]
 
 { #category : #'private - cache' }
@@ -162,8 +174,14 @@ Gt2ChangesAnnotation >> registerToSystemChanges [
 	self gtDocument
 		subscribe: ClassAnnouncement, MethodAnnouncement, Gt2DocumentUpdateRequestedAnnouncement
 		send: #handleSystemChange:
-		to: self.
-	
+		to: self
+		for: self gtSubscriber.
+	self cachedChanges unsubscribe: self gtSubscriber.
+	self cachedChanges 
+		subscribe: Gt2EpiceaUpdatedAnnouncement
+		send: #handleEpiceaUpdate: 
+		to: self 
+		for: self gtSubscriber
 ]
 
 { #category : #accessing }
@@ -181,7 +199,7 @@ Gt2ChangesAnnotation >> styleApplyButtonInText: aBlRope [
 
 { #category : #'private - styling' }
 Gt2ChangesAnnotation >> styleCreateButtonInText: aBlRope [
-	self changeFileExists ifTrue: [ ^ self ].
+	self hasChanges ifTrue: [ ^ self ].
 	(aBlRope from: self stop to: self stop) 
 		attribute: self createButtonAttribute
 ]

@@ -38,7 +38,7 @@ Gt2Epicea >> applyChanges [
 	self 
 		assert: [ self log notNil ] 
 		description: [ 'Epicea log must be non-nil.' ].
-	self ombuFileExists ifFalse: [ ^ self ].
+	self hasChanges ifFalse: [ ^ self ].
 	EpLogBrowserOperationFactory new
 		logBrowserModel: self log;
 		entries: self entries;
@@ -56,7 +56,7 @@ Gt2Epicea >> computeImpact [
 	hasImpact := self events anySatisfy: [ :eachEvent | 
 			eachEvent accept: (EpHasImpactVisitor inEnvironment: self theEnvironment) ].
 	hasImpact = anOldImpactState ifFalse: [ diff := nil ].
-	^ hasImpact = anOldImpactState
+	^ hasImpact ~= anOldImpactState
 ]
 
 { #category : #accessing }
@@ -230,6 +230,12 @@ Gt2Epicea >> handleEpEntryAddedAnnouncement: anEpEntryAdded [
 	self notifyEpiceaChanged.
 ]
 
+{ #category : #testing }
+Gt2Epicea >> hasChanges [
+	<return: #Boolean>
+	^ self numberOfEvents isZero not
+]
+
 { #category : #accessing }
 Gt2Epicea >> hasImpact [
 	"Return true, if changes have impact to the current system state"
@@ -257,13 +263,20 @@ Gt2Epicea >> log [
 
 { #category : #notifying }
 Gt2Epicea >> notifyEpiceaChanged [
-	self computeImpact.
-	self notifyEpiceaChangedWithImpactState: self hasImpact
+	| anImpactChanged |
+	anImpactChanged := self computeImpact.
+	self notifyEpiceaChangedWithImpactState: self hasImpact impactChanged: anImpactChanged.
 ]
 
 { #category : #notifying }
-Gt2Epicea >> notifyEpiceaChangedWithImpactState: aBoolean [
-	self announce: (Gt2EpiceaUpdatedAnnouncement new hasImpact: aBoolean)
+Gt2Epicea >> notifyEpiceaChangedWithImpactState: anImpactStateBoolean impactChanged: anImpactChangeBoolean [
+	| anAnnouncement |
+	anAnnouncement := (Gt2EpiceaUpdatedAnnouncement new 
+		hasImpact: anImpactStateBoolean;
+		impactChanged: anImpactChangeBoolean;
+		numberOfEvents: self numberOfEvents).
+	anAnnouncement traceCr.
+	self announce: anAnnouncement.
 ]
 
 { #category : #accessing }
@@ -366,6 +379,6 @@ Gt2Epicea >> updateImpact [
 	| anImpactChanged |
 	anImpactChanged := self computeImpact.
 	anImpactChanged ifTrue: [ 
-		self notifyEpiceaChangedWithImpactState: self hasImpact ].
+		self notifyEpiceaChangedWithImpactState: self hasImpact impactChanged: anImpactChanged ].
 	^ anImpactChanged
 ]
