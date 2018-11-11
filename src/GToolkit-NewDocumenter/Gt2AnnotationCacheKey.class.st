@@ -10,14 +10,14 @@ Class {
 
 { #category : #comparing }
 Gt2AnnotationCacheKey >> = anObject [
-	^ self class = anObject class and: [ 
+	^ super = anObject and: [ 
 		self name = anObject name and: [ 
 			self parameters = anObject parameters ] ]
 ]
 
 { #category : #comparing }
 Gt2AnnotationCacheKey >> hash [
-	^ (self class hash bitXor: self name hash)
+	^ (super hash bitXor: self name hash)
 		bitXor: self parameters hash
 ]
 

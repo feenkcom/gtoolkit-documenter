@@ -9,6 +9,12 @@ Class {
 	#category : #'GToolkit-NewDocumenter-Cache'
 }
 
+{ #category : #comparing }
+Gt2CacheKey >> = anObject [
+	^ self class = anObject class and: [ 
+		self counter = anObject counter ]
+]
+
 { #category : #accessing }
 Gt2CacheKey >> counter [
 	^ counter
@@ -17,4 +23,9 @@ Gt2CacheKey >> counter [
 { #category : #accessing }
 Gt2CacheKey >> counter: anObject [
 	counter := anObject
+]
+
+{ #category : #comparing }
+Gt2CacheKey >> hash [
+	^ self class hash bitXor: self counter hash
 ]

@@ -11,11 +11,10 @@ Class {
 
 { #category : #comparing }
 Gt2CodeblockCacheKey >> = anObject [
-	^ self class = anObject class and: [ 
+	^ super = anObject and: [ 
 		(self parameters = anObject parameters) and: [ 
 			(self text = anObject text) and: [ 
-				self caption = anObject caption and: [ 
-					self counter = anObject counter ] ] ] ]
+				self caption = anObject caption ] ] ]
 ]
 
 { #category : #accessing }
@@ -30,11 +29,10 @@ Gt2CodeblockCacheKey >> caption: anObject [
 
 { #category : #comparing }
 Gt2CodeblockCacheKey >> hash [
-	^ (((self class hash
+	^ ((super hash
 		bitXor: self parameters hash)
 			bitXor: self text hash)
-				bitXor: self caption hash)
-					bitXor: self counter hash
+				bitXor: self caption hash
 ]
 
 { #category : #accessing }
