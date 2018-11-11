@@ -13,6 +13,6 @@ Gt2PreviewLook >> initializeLook [
 			c padding: (BlInsets all: 0).
 			c margin: (BlInsets all: 10) ];
 		background: Color white;
-		outskirts: BlOutskirts outside;
-		border: (BlBorder paint: Color veryLightGray width: 1)
+		outskirts: BlOutskirts outside";
+		border: (BlBorder paint: Color veryLightGray width: 1)"
 ]
