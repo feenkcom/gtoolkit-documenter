@@ -11,7 +11,9 @@ Class {
 
 { #category : #accessing }
 Gt2EpiceaDiffAttribute >> affect: aBrText in: anEditorElement [
-	^ BrLabel new text: self text; look: BrGlamorousLabelLook new + BrLayoutLook linearHorizontal fitContent
+	^ BrLabel new
+		text: self text;
+		look: BrGlamorousLabelLook new
 ]
 
 { #category : #initialization }

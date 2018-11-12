@@ -379,7 +379,7 @@ GtDocumenterExamples >> smallVerticalCard [
 	aCard := self basicCard.
 	aCard
 		size: 200@300;
-		look: BrShadowLook + BrLabelLook + BrIconLook + BrDescriptionLook;
+		look: BrShadowLook + BrTextLabelLook + BrIconLook + BrDescriptionLook;
 		background: Color white;
 		margin: (BlInsets all: 10);
 		padding: (BlInsets all: 10);
