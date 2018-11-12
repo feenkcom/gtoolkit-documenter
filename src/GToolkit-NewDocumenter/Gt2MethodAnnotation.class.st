@@ -31,6 +31,11 @@ Gt2MethodAnnotation >> browseReferenceFrom: anEvent [
 		sourceElement: anEvent target)
 ]
 
+{ #category : #'accessing - parameter values' }
+Gt2MethodAnnotation >> defaultShowSelector [
+	^ self constants methodDefinitionShowSelector
+]
+
 { #category : #'announcement handling' }
 Gt2MethodAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAdded [ 
 	(self referencedMethod notNil and: [ 

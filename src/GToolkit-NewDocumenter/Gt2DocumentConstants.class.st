@@ -149,6 +149,11 @@ Gt2DocumentConstants class >> methodAnnotationName [
 	^ #method
 ]
 
+{ #category : #'pillar parameter default values' }
+Gt2DocumentConstants class >> methodDefinitionShowSelector [
+	^ #gtSourceFor:
+]
+
 { #category : #'pillar parameter names' }
 Gt2DocumentConstants class >> nameParameterName [
 	^ #name
