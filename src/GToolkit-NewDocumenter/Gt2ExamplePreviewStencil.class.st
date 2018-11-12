@@ -15,12 +15,6 @@ Class {
 	#category : #'GToolkit-NewDocumenter-Brick - Stencils'
 }
 
-{ #category : #private }
-Gt2ExamplePreviewStencil >> codeElement [
-	<return: #BlElement>
-	^ ((GtMethodCoder forExample: self example) expanded: self codeExpanded) asElement
-]
-
 { #category : #accessing }
 Gt2ExamplePreviewStencil >> codeExpanded [
 	^ codeExpanded
@@ -45,7 +39,7 @@ Gt2ExamplePreviewStencil >> codeHeight: anObject [
 Gt2ExamplePreviewStencil >> create [
 	<return: #BlElement>
 
-	| aContainer |
+	| aContainer aPreviewContainerElement |
 	aContainer := BlElement new
 		layout: BlLinearLayout vertical;
 		constraintsDo: [ :c | 
@@ -53,8 +47,15 @@ Gt2ExamplePreviewStencil >> create [
 			c margin: (BlInsets top: 0 left: 20 bottom: 0 right: 20).
 			c horizontal matchParent.
 			c vertical fitContent ].
-	self noCode ifFalse: [ aContainer addChild: self codeElement ].
-	aContainer addChild: self resultElement.
+	aPreviewContainerElement := self newPreviewContainerElement.
+	self noCode ifFalse: [ 
+		| aCodeElement |
+		aCodeElement := self newCodeElement.
+		aCodeElement when: GtPhlowObjectToSpawn do: [ :anEvent | 
+			anEvent consumed: true.
+			self updatePreviewElement: aPreviewContainerElement with: anEvent object ].
+		aContainer addChild: aCodeElement ].
+	aContainer addChild: aPreviewContainerElement.
 	^ aContainer
 ]
 
@@ -85,6 +86,12 @@ Gt2ExamplePreviewStencil >> initialize [
 	previewShowSelector := self constants defaultShowSelector.
 ]
 
+{ #category : #private }
+Gt2ExamplePreviewStencil >> newCodeElement [
+	<return: #BlElement>
+	^ ((GtMethodCoder forExample: self example) expanded: self codeExpanded) asElement
+]
+
 { #category : #'instance creation' }
 Gt2ExamplePreviewStencil >> newContainerFor: aWrappedElement height: aHeightNumber [
 	| aContainer aResizableElement |
@@ -110,6 +117,22 @@ Gt2ExamplePreviewStencil >> newContainerFor: aWrappedElement height: aHeightNumb
 		constraintsDo: [ :c | 
 			c horizontal matchParent.
 			c vertical fitContent ]
+]
+
+{ #category : #private }
+Gt2ExamplePreviewStencil >> newPreviewContainerElement [
+	<return: #BlElement>
+	| aNewPreviewElement |
+	aNewPreviewElement := self newPreviewElementFor: self result.
+	^ self newContainerFor: aNewPreviewElement height: self previewHeight.
+]
+
+{ #category : #private }
+Gt2ExamplePreviewStencil >> newPreviewElementFor: anObject [
+	<return: #BlElement>
+	| aView |
+	aView := GtPhlowView on: anObject perform: self previewShowSelector.
+	^ aView asElementDo: [ :anElement | anElement ]
 ]
 
 { #category : #accessing }
@@ -148,10 +171,9 @@ Gt2ExamplePreviewStencil >> result [
 ]
 
 { #category : #private }
-Gt2ExamplePreviewStencil >> resultElement [
-	<return: #BlElement>
-	| aView |
-	aView := GtPhlowView on: self result perform: self previewShowSelector.
-	^ aView asElementDo:
-		[ :anElement | self newContainerFor: anElement height: self previewHeight ]
+Gt2ExamplePreviewStencil >> updatePreviewElement: aPreviewElement with: anObject [
+	| aNewPreview |
+	aNewPreview := self newPreviewElementFor: anObject.
+	aPreviewElement removeChildren.
+	aPreviewElement addChild: aNewPreview.
 ]
