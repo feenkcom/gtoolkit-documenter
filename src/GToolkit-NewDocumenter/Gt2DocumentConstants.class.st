@@ -200,6 +200,16 @@ Gt2DocumentConstants class >> runButtonLabel [
 	^ 'Run'
 ]
 
+{ #category : #ui }
+Gt2DocumentConstants class >> saveButtonIcon [
+	^ self applyButtonIcon
+]
+
+{ #category : #ui }
+Gt2DocumentConstants class >> saveButtonLabel [
+	^ 'Save'
+]
+
 { #category : #'pillar parameter names' }
 Gt2DocumentConstants class >> showParameterName [
 	^ #show
