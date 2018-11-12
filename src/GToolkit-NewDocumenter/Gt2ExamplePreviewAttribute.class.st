@@ -8,6 +8,7 @@ Class {
 		'codeExpanded',
 		'codeHeight',
 		'noCode',
+		'previewExpanded',
 		'previewHeight',
 		'previewShowSelector'
 	],
@@ -21,6 +22,7 @@ Gt2ExamplePreviewAttribute >> affect: aBrText in: anEditorElement [
 			codeExpanded: self codeExpanded;
 			codeHeight: self codeHeight;
 			noCode: self noCode;
+			previewExpanded: self previewExpanded;
 			previewShowSelector: self previewShowSelector;
 			previewHeight: self previewHeight;
 			asElement
@@ -63,8 +65,10 @@ Gt2ExamplePreviewAttribute >> initialize [
 	codeHeight := self constants defaultPreviewHeight.
 	noCode := true.
 	example := (Gt2DocumentExamples >> #documentWithExistingExample) gtExample.
+	previewExpanded := self constants defaultPreviewExpanded.
 	previewHeight := self constants defaultPreviewHeight.
 	previewShowSelector := self constants defaultShowSelector.
+	
 ]
 
 { #category : #accessing }
@@ -75,6 +79,16 @@ Gt2ExamplePreviewAttribute >> noCode [
 { #category : #accessing }
 Gt2ExamplePreviewAttribute >> noCode: anObject [
 	noCode := anObject
+]
+
+{ #category : #accessing }
+Gt2ExamplePreviewAttribute >> previewExpanded [
+	^ previewExpanded
+]
+
+{ #category : #accessing }
+Gt2ExamplePreviewAttribute >> previewExpanded: anObject [
+	previewExpanded := anObject
 ]
 
 { #category : #accessing }

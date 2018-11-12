@@ -39,7 +39,7 @@ Gt2DocumentExamples class >> constants [
 	^ Gt2DocumentConstants
 ]
 
-{ #category : #'epicea support' }
+{ #category : #'changes - epicea support' }
 Gt2DocumentExamples >> addEpiceaEvent [
 	<gtExample>
 	| anEpicea anAnnouncements |
@@ -225,6 +225,30 @@ Gt2DocumentExamples >> contentWithEpiceaChanges [
 	<gtExample>
 	^ '${', self constants changesAnnotationName, ':', self referencesChangesFile , '}$'
 
+]
+
+{ #category : #'example - existing one' }
+Gt2DocumentExamples >> contentWithExampleHiddenPreview [
+	<gtExample>
+	^ '${', self constants exampleAnnotationName, ':', 
+		self referencedMethod printString,
+		'|', self constants previewShowParameterName, '=', #gtBytecodeFor:, 
+		'|', self constants previewExpandedParameterName, '=', false asString,
+		'|', self constants previewHeightParameterName, '=', 100 asString,
+		'|', self constants codeExpandedParameterName, '=', true asString, 
+		'|', self constants codeHeightParameterName, '=', 50 asString, '}$'
+]
+
+{ #category : #'example - existing one' }
+Gt2DocumentExamples >> contentWithExampleParameters [
+	<gtExample>
+	^ '${', self constants exampleAnnotationName, ':', 
+		self referencedMethod printString,
+		'|', self constants previewShowParameterName, '=', #gtBytecodeFor:, 
+		'|', self constants previewExpandedParameterName, '=', true asString,
+		'|', self constants previewHeightParameterName, '=', 100 asString,
+		'|', self constants codeExpandedParameterName, '=', false asString, 
+		'|', self constants codeHeightParameterName, '=', 50 asString, '}$'
 ]
 
 { #category : #'class - existing one' }
@@ -465,6 +489,28 @@ Gt2DocumentExamples >> documentWithEpiceaChanges [
 	^ aDocument
 ]
 
+{ #category : #'example - existing one' }
+Gt2DocumentExamples >> documentWithExampleHiddenPreview [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExampleHiddenPreview.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithExampleHiddenPreview.
+	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
+{ #category : #'example - existing one' }
+Gt2DocumentExamples >> documentWithExampleParameters [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExampleParameters.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithExampleParameters.
+	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
 { #category : #'class - existing one' }
 Gt2DocumentExamples >> documentWithExistingClass [
 	<gtExample>
@@ -572,7 +618,7 @@ Gt2DocumentExamples >> emptyDocument [
 	^ aDocument
 ]
 
-{ #category : #'epicea support' }
+{ #category : #'changes - epicea support' }
 Gt2DocumentExamples >> epicea [
 	<gtExample>
 	| aChangesFile anEpicea anAnnouncements |
@@ -659,7 +705,7 @@ Gt2DocumentExamples >> modifyAndStoreToFileReference [
 	^ aDocument 
 ]
 
-{ #category : #'epicea support' }
+{ #category : #'changes - epicea support' }
 Gt2DocumentExamples >> ombuEntry [
 	<gtExample>
 	| anEpLog |
@@ -735,7 +781,7 @@ Gt2DocumentExamples >> registeredDocument [
 	^ aDocument
 ]
 
-{ #category : #'epicea support' }
+{ #category : #'changes - epicea support' }
 Gt2DocumentExamples >> removeEpiceaEvent [
 	<gtExample>
 	| anEpicea anAnnouncements |

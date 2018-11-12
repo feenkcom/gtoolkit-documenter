@@ -136,11 +136,22 @@ Gt2ExampleAnnotation >> previewAttributes [
 				codeExpanded: self codeExpanded;
 				codeHeight: self codeHeight;
 				noCode: self noCode;
+				previewExpanded: self previewExpanded;
 				previewShowSelector: self previewShowSelector;
 				previewHeight: self previewHeight);
 		cache: self cachedPreview;
 		onCachingDo: [ :aCachedElement :theAttribute | 
 			self cachedPreview: aCachedElement ] }
+]
+
+{ #category : #'accessing - parameter values' }
+Gt2ExampleAnnotation >> previewExpanded [
+	<return: #Boolean>
+	^ self utility 
+		booleanValueOf: self constants previewExpandedParameterName 
+		in: self parameters 
+		emptyValue: [ true ] 
+		defaultValue: [ false ]
 ]
 
 { #category : #'accessing - parameter values' }

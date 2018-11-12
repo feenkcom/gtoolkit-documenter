@@ -60,6 +60,17 @@ Gt2DocumentConstants class >> createButtonLabel [
 ]
 
 { #category : #'pillar parameter default values' }
+Gt2DocumentConstants class >> defaultCodeHeight [
+	"Zero means use a default Coder value"
+	^ 0
+]
+
+{ #category : #'pillar parameter default values' }
+Gt2DocumentConstants class >> defaultPreviewExpanded [
+	^ false
+]
+
+{ #category : #'pillar parameter default values' }
 Gt2DocumentConstants class >> defaultPreviewHeight [
 	^ 300
 ]
