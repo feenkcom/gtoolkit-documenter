@@ -102,6 +102,23 @@ Gt2ExamplePreviewStencil >> isPreviewExpected [
 ]
 
 { #category : #'instance creation' }
+Gt2ExamplePreviewStencil >> newArrowElement [
+	"Instantiate and return a new element playing a role of an arrow
+	used to show / hide a preview"
+	<return: #BlElement>
+
+	^ BlElement new
+		size: 16@24;
+		geometry: (BlPolygon vertices: { 0@0 . 24@0 . 12@16 } );
+		margin: (BlInsets top: 0 right: 0 bottom: 0 left: 0);
+		background: Color veryVeryLightGray;
+		constraintsDo: [ :c |
+			"Let's put arrow in the middle of its cell"
+			c linear horizontal alignCenter.
+			c linear vertical alignCenter ].
+]
+
+{ #category : #'instance creation' }
 Gt2ExamplePreviewStencil >> newCodeElement [
 	<return: #BlElement>
 	^ ((GtMethodCoder forExample: self example) expanded: self codeExpanded) asElement
@@ -190,6 +207,14 @@ Gt2ExamplePreviewStencil >> updatePreviewElement: aPreviewContainerElement in: a
 		c vertical matchParent ].
 	aPreviewContainerElement removeChildNamed: #preview.
 	aPreviewContainerElement addChild: aNewPreview at: 1 as: #preview.
+
+	self noCode 
+		ifFalse: [ 
+			aWholeContainer 
+				childNamed: #arrow 
+				ifFound: [ :aChild | "do nothing" ] 
+				ifNone: [ aWholeContainer addChild: self newArrowElement at: 2 as: #arrow ] ].
+
 	aPreviewContainerElement hasParent ifFalse: [ 
 		aWholeContainer addChild: aPreviewContainerElement ].
 	
