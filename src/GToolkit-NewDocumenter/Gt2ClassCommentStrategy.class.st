@@ -41,6 +41,12 @@ Gt2ClassCommentStrategy >> read: aGt2Document [
 	aGt2Document text: self comment
 ]
 
+{ #category : #accessing }
+Gt2ClassCommentStrategy >> rootDirectory [
+	<return: #FileReference>
+	^ FileSystem workingDirectory
+]
+
 { #category : #actions }
 Gt2ClassCommentStrategy >> store: aGt2Document [ 
 	| aNewContent aBackupFile |

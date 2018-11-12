@@ -95,11 +95,6 @@ Gt2DocumentConstants class >> expandedParameterName [
 ]
 
 { #category : #'pillar parameter names' }
-Gt2DocumentConstants class >> fileParameterName [
-	^ #file
-]
-
-{ #category : #'pillar parameter names' }
 Gt2DocumentConstants class >> heightParameterName [
 	^ #height
 ]

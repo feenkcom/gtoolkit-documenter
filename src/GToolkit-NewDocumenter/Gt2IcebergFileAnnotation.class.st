@@ -76,6 +76,12 @@ Gt2IcebergFileAnnotation >> objectToPreview [
 	^ self fileReference
 ]
 
+{ #category : #accessing }
+Gt2IcebergFileAnnotation >> referenceParameterName [
+	"Return an annotation parameter name that holds a referenced object"
+	^ self constants pathParameterName
+]
+
 { #category : #'api - style' }
 Gt2IcebergFileAnnotation >> styleInText: aBlRope [
 	super styleInText: aBlRope.

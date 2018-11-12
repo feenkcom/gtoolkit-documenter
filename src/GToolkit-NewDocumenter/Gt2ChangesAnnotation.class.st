@@ -7,7 +7,7 @@ Class {
 { #category : #accessing }
 Gt2ChangesAnnotation class >> possibleParameters [
 	^ {
-		self constants fileParameterName.
+		self constants pathParameterName.
 		self constants expandedParameterName.
 		self constants showParameterName.
 		self constants heightParameterName.
@@ -72,7 +72,7 @@ Gt2ChangesAnnotation >> cachedChanges [
 Gt2ChangesAnnotation >> changeFile [
 	<return: #FileReference or: nil>
 	^ self utility 
-		valueOf: self constants fileParameterName
+		valueOf: self constants pathParameterName
 		in: self parameters
 		value: [ :aString | aString isString 
 			ifTrue: [ 

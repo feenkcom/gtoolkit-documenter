@@ -34,21 +34,23 @@ Gt2Document >> announcer [
 { #category : #converting }
 Gt2Document >> asElement [
 	<return: #BlElement>
-	| anElement |
-	anElement := Gt2SceneInformingElement new
-		layout: BlLinearLayout new;
-		addChild: (BrEditorElement new
+	| anElement anEditorElement |
+	anEditorElement := BrEditorElement new
 			editor: self editor;
 			constraintsDo: [ :c |
 				c padding: (BlInsets all: 10).
 				c vertical matchParent.
-				c horizontal matchParent ]);
+				c horizontal matchParent ].
+	anElement := Gt2SceneInformingElement new
+		layout: BlLinearLayout new;
+		addChild: anEditorElement;
 		addEventHandler: (Gt2AddedToSceneEventHandler new document: self);
 		addEventHandler: (Gt2RemovedFromSceneEventHandler new document: self);
 		constraintsDo: [ :c |
 			c vertical matchParent.
 			c horizontal matchParent ].
 	anElement userData at: self constants documentUserDataKey put: self.
+	self installCompleterForEditorElement: anEditorElement.
 	^ anElement
 ]
 
@@ -149,6 +151,16 @@ Gt2Document >> initialize [
 	self text: self defaultText.
 	storageStrategy := Gt2StorageStrategy null.
 	self subscribeToEditorChanges.
+]
+
+{ #category : #private }
+Gt2Document >> installCompleterForEditorElement: anEditorElement [
+	| aCompletionStrategy aCompletionController |
+	aCompletionStrategy := Gt2DocumentCompletionStrategy new.
+	aCompletionStrategy fileReference: self rootDirectory.
+	aCompletionController := GtCompletionController on: anEditorElement strategy: aCompletionStrategy.
+	aCompletionController install.
+
 ]
 
 { #category : #testing }
