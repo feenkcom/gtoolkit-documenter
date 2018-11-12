@@ -6,13 +6,6 @@ Class {
 	#category : #'GToolkit-NewDocumenter-Utility'
 }
 
-{ #category : #cache }
-Gt2DocumentUtility class >> annotationCacheKeyForNode: aNode [
-	^ Gt2AnnotationCacheKey new
-		name: aNode tag;
-		parameters: aNode parameters
-]
-
 { #category : #'pillar - parameter values' }
 Gt2DocumentUtility class >> booleanValueOf: aString in: aDictionary emptyValue: emptyBooleanOrBlock defaultValue: defaultBooleanOrBlock [
 	^ self 

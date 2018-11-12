@@ -48,7 +48,10 @@ Gt2CodeblockCacheKey >> parameters: anObject [
 { #category : #printing }
 Gt2CodeblockCacheKey >> printOn: aStream [
 	aStream 
-		nextPutAll: 'codeblock key'
+		nextPutAll: 'codeblock key';
+		nextPutAll: ' (';
+		print: self counter;
+		nextPut: $)
 ]
 
 { #category : #accessing }

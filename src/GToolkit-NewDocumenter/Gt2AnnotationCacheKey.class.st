@@ -45,5 +45,8 @@ Gt2AnnotationCacheKey >> parameters: anObject [
 Gt2AnnotationCacheKey >> printOn: aStream [
 	aStream 
 		nextPutAll: 'annotation key: ';
-		print: self name.
+		print: self name;
+		nextPutAll: ' (';
+		print: self counter;
+		nextPut: $)
 ]

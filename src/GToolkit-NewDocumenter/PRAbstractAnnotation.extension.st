@@ -9,7 +9,8 @@ PRAbstractAnnotation >> annotationCacheValueClass [
 PRAbstractAnnotation >> cacheKey [
 	^ Gt2AnnotationCacheKey new
 		name: self tag;
-		parameters: self parameters
+		parameters: self parameters;
+		counter: self counter
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }

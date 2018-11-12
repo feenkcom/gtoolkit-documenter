@@ -53,6 +53,14 @@ Gt2Document >> asElement [
 ]
 
 { #category : #cache }
+Gt2Document >> cache [
+	"It is not recommended to use this method outside of this object.
+	You should use #cachAt:... relevant methods."
+	<return: #Dictionary>
+	^ cache
+]
+
+{ #category : #cache }
 Gt2Document >> cacheAt: aKey ifPresent: aPresentBlock ifAbsent: anAbsentBlock [
 	^ cache at: aKey ifPresent: aPresentBlock ifAbsent: anAbsentBlock
 ]

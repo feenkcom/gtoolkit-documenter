@@ -281,6 +281,13 @@ Gt2DocumentExamples >> contentWithMultipleMethods [
 			'|', self constants showParameterName, '=gtSourceFor:', '}$', String cr, String cr
 ]
 
+{ #category : #'example - two same in one document' }
+Gt2DocumentExamples >> contentWithTwoExistingExamples [
+	<gtExample>
+	^ self contentWithExistingExample, String cr, String cr, 
+		self contentWithExistingExample, String cr, String cr
+]
+
 { #category : #'empty document' }
 Gt2DocumentExamples >> defaultDocument [
 	<gtExample>
@@ -528,6 +535,22 @@ Gt2DocumentExamples >> documentWithMultipleMethods [
 	aDocument editor styleText.
 	self assert: aDocument text asString equals: self contentWithMultipleMethods.
 	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
+{ #category : #'example - two same in one document' }
+Gt2DocumentExamples >> documentWithTwoExistingExamples [
+	<gtExample>
+	| aDocument aCache |
+	aDocument := self defaultDocument text: self contentWithTwoExistingExamples.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithTwoExistingExamples.
+	self assert: aDocument isSubscribedToSystem.
+	aCache := aDocument cache keys asOrderedCollection.
+	self assert: aCache size equals: 2.
+	self assert: aCache first counter > 0.
+	self assert: aCache second counter > 0.
+	self assert: aCache first counter ~= aCache second counter.
 	^ aDocument
 ]
 
