@@ -6,7 +6,7 @@ Class >> gtDocumentFor: aView [
 	^ aView explicit
 		title: 'Comment';
 		priority: -1;
-		stencil: [ Gt2Document forClass: self ];
+		stencil: [ (Gt2Document forClass: self) asElementWithoutSaveAction ];
 		actionStencil: [ :tab | 
 			BrButton new 
 				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;

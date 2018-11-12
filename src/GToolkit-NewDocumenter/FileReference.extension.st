@@ -7,7 +7,7 @@ FileReference >> gtDocumentFor: aView [
 	^ aView explicit
 		title: 'Document';
 		priority: 9;
-		stencil: [ Gt2Document forFile: self ];
+		stencil: [ (Gt2Document forFile: self) asElementWithoutSaveAction ];
 		actionStencil: [ 
 			| button |
 			button := BrButton new.

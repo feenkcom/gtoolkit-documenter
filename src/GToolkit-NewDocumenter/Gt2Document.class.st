@@ -34,26 +34,31 @@ Gt2Document >> announcer [
 { #category : #converting }
 Gt2Document >> asElement [
 	<return: #BlElement>
-	| anElement anEditorElement aSaveButton |
+	^ self asElementWithoutSaveAction
+		addChild: (BrButton new
+			look: BrGlamorousButtonWithIconLook + BrGlamorousButtonLabelLook;
+			icon: self constants saveButtonIcon asElement;
+			label: self constants saveButtonLabel;
+			action: [ self store ];
+			constraintsDo: [ :c | 
+				c ignoreByLayout.
+				c ignored horizontal alignRight.
+				c ignored vertical alignTop ])
+]
+
+{ #category : #converting }
+Gt2Document >> asElementWithoutSaveAction [
+	<return: #BlElement>
+	| anElement anEditorElement |
 	anEditorElement := BrEditorElement new
 			editor: self editor;
 			constraintsDo: [ :c |
 				c padding: (BlInsets all: 10).
 				c vertical matchParent.
 				c horizontal matchParent ].
-	aSaveButton := BrButton new
-		look: BrGlamorousButtonWithIconLook + BrGlamorousButtonLabelLook;
-		icon: self constants saveButtonIcon asElement;
-		label: self constants saveButtonLabel;
-		action: [ self store ];
-		constraintsDo: [ :c | 
-			c ignoreByLayout.
-			c ignored horizontal alignRight.
-			c ignored vertical alignTop ].
 	anElement := Gt2SceneInformingElement new
 		layout: BlLinearLayout new;
 		addChild: anEditorElement;
-		addChild: aSaveButton;
 		addEventHandler: (Gt2AddedToSceneEventHandler new document: self);
 		addEventHandler: (Gt2RemovedFromSceneEventHandler new document: self);
 		constraintsDo: [ :c |
@@ -120,7 +125,7 @@ Gt2Document >> gtTextFor: aView [
 	self editor ifNil: [ ^ aView empty ].
 	^ aView explicit
 		title: 'Document';
-		stencil: [ self ];
+		stencil: [ self asElementWithoutSaveAction ];
 		actionStencil: [ 
 			| button |
 			button := BrButton new.
