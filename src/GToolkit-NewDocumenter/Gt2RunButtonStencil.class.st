@@ -4,7 +4,6 @@ Class {
 	#instVars : [
 		'action',
 		'label',
-		'look',
 		'iconStencilBuilder'
 	],
 	#category : #'GToolkit-NewDocumenter-Brick - Stencils'
@@ -22,12 +21,22 @@ Gt2RunButtonStencil >> action: aValuable [
 
 { #category : #'api - instantiation' }
 Gt2RunButtonStencil >> create [
+	| aLook |
+	aLook := BrGlamorousButtonWithIconLook.
+	self hasLabel ifTrue: [ 
+		aLook := aLook + BrGlamorousButtonLabelLook ].
+
 	^ BrButton new
-		look: self look;
+		look: aLook;
+		beSmall;
 		icon: self icon;
 		label: self label;
-		beSmall;
 		action: self action.
+]
+
+{ #category : #testing }
+Gt2RunButtonStencil >> hasLabel [
+	^ self label notNil and: [ self label notEmpty ]
 ]
 
 { #category : #accessing }
@@ -48,7 +57,6 @@ Gt2RunButtonStencil >> initialize [
 
 	self icon: BrGlamorousIcons play.
 	self label: 'Run'.
-	self look: BrGlamorousButtonWithIconLook "+ BrGlamorousButtonLabelLook".
 	self action: [ :aWidget :aButtonModel | self inform: 'Executed' ]
 ]
 
@@ -60,14 +68,4 @@ Gt2RunButtonStencil >> label [
 { #category : #accessing }
 Gt2RunButtonStencil >> label: aStringOrText [
 	label := aStringOrText
-]
-
-{ #category : #accessing }
-Gt2RunButtonStencil >> look [
-	^ look
-]
-
-{ #category : #accessing }
-Gt2RunButtonStencil >> look: anObject [
-	look := anObject
 ]

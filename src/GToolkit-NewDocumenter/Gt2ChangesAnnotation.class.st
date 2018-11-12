@@ -29,13 +29,10 @@ Gt2ChangesAnnotation >> applyButtonAttribute [
 	^ Gt2ButtonAttribute new
 		beAppend;
 		equality: self constants applyButtonLabel;
-		stencil: [
-			BrButton new
-				label: self constants applyButtonLabel;
-				icon: self constants applyButtonIcon asElement;
-				beSmall;
-				look: BrGlamorousButtonWithIconLook + BrGlamorousButtonLabelLook;
-				action: [ self applyChanges ]]
+		stencil: (Gt2ButtonStencilBuilder new
+			label: self constants applyButtonLabel;
+			icon: self constants applyButtonIcon;
+			action: [ self applyChanges ])
 ]
 
 { #category : #operations }
@@ -102,16 +99,13 @@ Gt2ChangesAnnotation >> createButtonAttribute [
 	^ Gt2ButtonAttribute new
 		beAppend;
 		equality: self constants createButtonLabel;
-		stencil: [ 
-			BrButton new
-				label: self constants createButtonLabel ;
-				icon:  self constants createButtonIcon asElement;
-				beSmall;
-				look: BrGlamorousButtonWithIconLook + BrGlamorousButtonLabelLook;
-				action: [ :aButton |
+		stencil: (Gt2ButtonStencilBuilder new
+			label: self constants createButtonLabel;
+			icon: self constants createButtonIcon;
+			action: [ :aButton |
 					aButton fireEvent: (GtPhlowObjectToSpawn new
 						object: self cachedChanges;
-						sourceElement: aButton) ]]
+						sourceElement: aButton) ])
 ]
 
 { #category : #'accessing - parameter values' }
