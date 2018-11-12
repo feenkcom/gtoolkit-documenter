@@ -174,6 +174,9 @@ Gt2ExamplePreviewStencil >> result [
 Gt2ExamplePreviewStencil >> updatePreviewElement: aPreviewElement with: anObject [
 	| aNewPreview |
 	aNewPreview := self newPreviewElementFor: anObject.
+	aNewPreview constraintsDo: [ :c | 
+		c horizontal matchParent.
+		c vertical exact: aPreviewElement height ].
 	aPreviewElement removeChildren.
 	aPreviewElement addChild: aNewPreview.
 ]
