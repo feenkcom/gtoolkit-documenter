@@ -78,7 +78,7 @@ Gt2ExamplePreviewStencil >> initialize [
 	super initialize.
 	codeExpanded := true.
 	codeHeight := self constants defaultPreviewHeight.
-	noCode := true.
+	noCode := false.
 	example := (Gt2DocumentExamples >> #documentWithExistingExample) gtExample.
 	exampleWithResult := nil.
 	previewHeight := self constants defaultPreviewHeight.
