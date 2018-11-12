@@ -36,14 +36,14 @@ Gt2Document >> asElement [
 	<return: #BlElement>
 	^ self asElementWithoutSaveAction
 		addChild: (BrButton new
-			look: BrGlamorousButtonWithIconLook + BrGlamorousButtonLabelLook;
+			look: BrGlamorousButtonWithIconLook;
 			icon: self constants saveButtonIcon asElement;
 			label: self constants saveButtonLabel;
 			action: [ self store ];
 			constraintsDo: [ :c | 
 				c ignoreByLayout.
-				c ignored horizontal alignRight.
-				c ignored vertical alignTop ])
+				c ignored horizontal alignLeft.
+				c ignored vertical alignBottom ])
 ]
 
 { #category : #converting }
