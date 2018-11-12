@@ -108,7 +108,7 @@ Gt2ExamplePreviewStencil >> newArrowElement [
 	<return: #BlElement>
 
 	^ BlElement new
-		size: 16@24;
+		size: 24@16;
 		geometry: (BlPolygon vertices: { 0@0 . 24@0 . 12@16 } );
 		margin: (BlInsets top: 0 right: 0 bottom: 0 left: 0);
 		background: Color veryVeryLightGray;
