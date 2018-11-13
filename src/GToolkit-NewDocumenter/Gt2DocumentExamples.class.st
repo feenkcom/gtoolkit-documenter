@@ -312,6 +312,12 @@ Gt2DocumentExamples >> contentWithTwoExistingExamples [
 		self contentWithExistingExample, String cr, String cr
 ]
 
+{ #category : #markups }
+Gt2DocumentExamples >> contentsWithMarkups [
+	<gtExample>
+	^ '""bold"" ''''italic'''' ==monospace== --strikethrought-- @@subscript@@ ^^superscript^^ __underline__ {{{raw}}}'
+]
+
 { #category : #'empty document' }
 Gt2DocumentExamples >> defaultDocument [
 	<gtExample>
@@ -570,6 +576,16 @@ Gt2DocumentExamples >> documentWithInputFile [
 	aDocument := self defaultDocument fileReference: self fileReferenceWithInputFile.
 	aDocument read.
 	self assert: aDocument text asString equals: self contentWithInputFile.
+	^ aDocument
+]
+
+{ #category : #markups }
+Gt2DocumentExamples >> documentWithMarkups [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentsWithMarkups.
+	self assert: aDocument text asString equals: self contentsWithMarkups.
+	self assert: aDocument isSubscribedToSystem not.
 	^ aDocument
 ]
 
