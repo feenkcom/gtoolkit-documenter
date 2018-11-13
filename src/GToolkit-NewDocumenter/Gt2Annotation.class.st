@@ -110,5 +110,5 @@ Gt2Annotation >> styleInText: aBlRope [
 
 { #category : #'private - styling' }
 Gt2Annotation >> styleLinkInText: aBlRope [
-	self utility styleLinkInText: aBlRope forNode: self
+	self utility styleLinkInText: aBlRope forAnnotationNode: self
 ]

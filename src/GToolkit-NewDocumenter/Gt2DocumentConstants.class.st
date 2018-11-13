@@ -105,6 +105,11 @@ Gt2DocumentConstants class >> expandedParameterName [
 	^ #expanded
 ]
 
+{ #category : #'pillar parameter default values' }
+Gt2DocumentConstants class >> figureShowSelector [
+	^ #gtPngFor:
+]
+
 { #category : #'pillar parameter names' }
 Gt2DocumentConstants class >> heightParameterName [
 	^ #height

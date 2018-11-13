@@ -63,12 +63,23 @@ Gt2DocumentUtility class >> styleExpandingPreviewInText: aBlRope forNode: aNode 
 ]
 
 { #category : #'text styling' }
-Gt2DocumentUtility class >> styleLinkInText: aBlRope forNode: aNode [
-	| aLinkColor aNodeToStyle theAttributes |
-	aLinkColor := self linkColor: aNode isReferenceDefined.
+Gt2DocumentUtility class >> styleLinkInText: aBlRope forAnnotationNode: aNode [
+	| aNodeToStyle |
 	aNodeToStyle := self 
 		parameterNodeNamed: aNode referenceParameterName 
 		forAnnotation: aNode.
+	self styleLinkInText: aBlRope forNode: aNode withLinkAt: aNodeToStyle
+]
+
+{ #category : #'text styling' }
+Gt2DocumentUtility class >> styleLinkInText: aBlRope forNode: aNode [
+	self styleLinkInText: aBlRope forNode: aNode withLinkAt: aNode
+]
+
+{ #category : #'text styling' }
+Gt2DocumentUtility class >> styleLinkInText: aBlRope forNode: aNode withLinkAt: aLinkNode [
+	| aLinkColor theAttributes |
+	aLinkColor := self linkColor: aNode isReferenceDefined.
 	theAttributes := Array with: (BlTextForegroundAttribute new paint: aLinkColor).
 	aNode isReferenceDefined ifTrue: [ 
 		theAttributes := theAttributes , {
@@ -79,8 +90,8 @@ Gt2DocumentUtility class >> styleLinkInText: aBlRope forNode: aNode [
 						aNode browseReferenceFrom: anEvent ] } ].
 
 	(aBlRope  
-		from: aNodeToStyle start 
-		to: (aNodeToStyle start max: aNodeToStyle stop))
+		from: aLinkNode start 
+		to: (aLinkNode start max: aLinkNode stop))
 			attributes: theAttributes.
 ]
 

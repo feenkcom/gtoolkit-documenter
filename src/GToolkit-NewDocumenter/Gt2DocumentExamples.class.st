@@ -279,6 +279,13 @@ Gt2DocumentExamples >> contentWithExternalLink [
 	^ '*Feenk>https://feenk.com*'
 ]
 
+{ #category : #figure }
+Gt2DocumentExamples >> contentWithFigure [
+	<gtExample>
+	^ '+Figure caption>file://', self figureFileName, '+'
+
+]
+
 { #category : #'iceberg file' }
 Gt2DocumentExamples >> contentWithIcebergFile [
 	<gtExample>
@@ -621,6 +628,18 @@ Gt2DocumentExamples >> documentWithExternalLink [
 	^ aDocument
 ]
 
+{ #category : #figure }
+Gt2DocumentExamples >> documentWithFigure [
+	<gtExample>
+	| aDocument aFigureFile |
+	aFigureFile := self figureFileReference.
+	self assert: aFigureFile exists.
+	aDocument := self defaultDocument fileReference: self fileReferenceWithFigure.
+	aDocument read.
+	self assert: aDocument text asString equals: self contentWithFigure.
+	^ aDocument
+]
+
 { #category : #'iceberg file' }
 Gt2DocumentExamples >> documentWithIcebergFile [
 	<gtExample>
@@ -704,6 +723,16 @@ Gt2DocumentExamples >> documentWithMultipleMethods [
 	^ aDocument
 ]
 
+{ #category : #figure }
+Gt2DocumentExamples >> documentWithNotExistingFigure [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument fileReference: self fileReferenceWithFigure.
+	aDocument read.
+	self assert: aDocument text asString equals: self contentWithFigure.
+	^ aDocument
+]
+
 { #category : #'example - two same in one document' }
 Gt2DocumentExamples >> documentWithTwoExistingExamples [
 	<gtExample>
@@ -761,10 +790,35 @@ Gt2DocumentExamples >> examplesUtility [
 	^ Gt2DocumentExamplesUtility
 ]
 
+{ #category : #figure }
+Gt2DocumentExamples >> figureContent [
+	<gtExample>
+	^ PolymorphSystemSettings pharoLogoContents base64Decoded asByteArray
+]
+
+{ #category : #figure }
+Gt2DocumentExamples >> figureFileName [
+	<gtExample>
+	^ 'figure.png'
+
+]
+
+{ #category : #figure }
+Gt2DocumentExamples >> figureFileReference [
+	<gtExample>
+	^ memorySystem addFileNamed: self figureFileName  withContent: self figureContent
+]
+
 { #category : #'file reference document' }
 Gt2DocumentExamples >> fileReference [
 	<gtExample>
 	^ memorySystem addPillarFileWithContent: self contentWithMultipleMethods
+]
+
+{ #category : #figure }
+Gt2DocumentExamples >> fileReferenceWithFigure [
+	<gtExample>
+	^ memorySystem addPillarFileWithContent: self contentWithFigure
 ]
 
 { #category : #'input file' }
