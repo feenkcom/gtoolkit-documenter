@@ -8,7 +8,8 @@ Class {
 		'document',
 		'subscriber',
 		'codeblockCounter',
-		'annotationCounter'
+		'annotationCounter',
+		'listCounter'
 	],
 	#category : #'GToolkit-NewDocumenter-Styler'
 }
@@ -32,6 +33,7 @@ Gt2StylerVisitor >> initialize [
 	super initialize.
 	codeblockCounter := 0.
 	annotationCounter := 0.
+	listCounter := 0.
 ]
 
 { #category : #accessing }
@@ -117,6 +119,35 @@ Gt2StylerVisitor >> visitItalicFormat: aPRItalicFormat [
 		from: aPRItalicFormat start
 		to: aPRItalicFormat stop)
 			italic
+]
+
+{ #category : #'visiting-document' }
+Gt2StylerVisitor >> visitList: aPRList [
+	| aPreviousListCounter |
+	aPreviousListCounter := listCounter.
+	listCounter := 0.
+	super visitList: aPRList.
+	listCounter := aPreviousListCounter.
+]
+
+{ #category : #'visiting-document' }
+Gt2StylerVisitor >> visitListItem: aPRListItem [
+	| anItemIndex |
+	listCounter := listCounter + 1.
+	anItemIndex := listCounter asString.
+	(self text
+		from: aPRListItem start
+		to: aPRListItem start)
+			attributes: {
+				BrTextAdornmentDynamicAttribute new 
+					beAppend; 
+					stencil: [
+						| indexText |
+						indexText := anItemIndex asRopedText.
+						indexText fontSize: 9.
+						indexText foreground: self constants subtleColor.
+						BlTextElement new text: indexText ] }.
+	super visitListItem: aPRListItem
 ]
 
 { #category : #'visiting-document' }

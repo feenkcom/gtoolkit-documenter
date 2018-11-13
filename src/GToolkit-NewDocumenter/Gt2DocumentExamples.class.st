@@ -292,6 +292,12 @@ Gt2DocumentExamples >> contentWithInputFile [
 
 ]
 
+{ #category : #markups }
+Gt2DocumentExamples >> contentWithMarkups [
+	<gtExample>
+	^ '""bold"" ''''italic'''' ==monospace== --strikethrought-- @@subscript@@ ^^superscript^^ __underline__ {{{raw}}}'
+]
+
 { #category : #'method - multiple' }
 Gt2DocumentExamples >> contentWithMultipleMethods [
 	<gtExample>
@@ -305,6 +311,14 @@ Gt2DocumentExamples >> contentWithMultipleMethods [
 			'|', self constants showParameterName, '=gtSourceFor:', '}$', String cr, String cr
 ]
 
+{ #category : #markups }
+Gt2DocumentExamples >> contentWithOrderedList [
+	<gtExample>
+	^ '# one
+# two
+# three'
+]
+
 { #category : #'example - two same in one document' }
 Gt2DocumentExamples >> contentWithTwoExistingExamples [
 	<gtExample>
@@ -313,9 +327,11 @@ Gt2DocumentExamples >> contentWithTwoExistingExamples [
 ]
 
 { #category : #markups }
-Gt2DocumentExamples >> contentsWithMarkups [
+Gt2DocumentExamples >> contentWithUnorderedList [
 	<gtExample>
-	^ '""bold"" ''''italic'''' ==monospace== --strikethrought-- @@subscript@@ ^^superscript^^ __underline__ {{{raw}}}'
+	^ '- one
+- two
+- three'
 ]
 
 { #category : #'empty document' }
@@ -583,8 +599,8 @@ Gt2DocumentExamples >> documentWithInputFile [
 Gt2DocumentExamples >> documentWithMarkups [
 	<gtExample>
 	| aDocument |
-	aDocument := self defaultDocument text: self contentsWithMarkups.
-	self assert: aDocument text asString equals: self contentsWithMarkups.
+	aDocument := self defaultDocument text: self contentWithMarkups.
+	self assert: aDocument text asString equals: self contentWithMarkups.
 	self assert: aDocument isSubscribedToSystem not.
 	^ aDocument
 ]
@@ -597,6 +613,16 @@ Gt2DocumentExamples >> documentWithMultipleMethods [
 	aDocument editor styleText.
 	self assert: aDocument text asString equals: self contentWithMultipleMethods.
 	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
+{ #category : #markups }
+Gt2DocumentExamples >> documentWithOrderedList [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithOrderedList.
+	self assert: aDocument text asString equals: self contentWithOrderedList.
+	self assert: aDocument isSubscribedToSystem not.
 	^ aDocument
 ]
 
@@ -613,6 +639,16 @@ Gt2DocumentExamples >> documentWithTwoExistingExamples [
 	self assert: aCache first counter > 0.
 	self assert: aCache second counter > 0.
 	self assert: aCache first counter ~= aCache second counter.
+	^ aDocument
+]
+
+{ #category : #markups }
+Gt2DocumentExamples >> documentWithUnorderedList [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithUnorderedList.
+	self assert: aDocument text asString equals: self contentWithUnorderedList.
+	self assert: aDocument isSubscribedToSystem not.
 	^ aDocument
 ]
 
