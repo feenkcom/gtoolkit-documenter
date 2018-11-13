@@ -28,6 +28,22 @@ Gt2DocumentUtility class >> convertToBoolean: aStringOrBoolean [
 	^ nil
 ]
 
+{ #category : #'pillar - parameter values' }
+Gt2DocumentUtility class >> icebergFileReferenceFrom: aString [
+	<return: #FileReference>
+	| aFile |
+	aFile := aString asFileReference.
+	aFile := aFile exists ifTrue: [ ^ aFile ].
+	aFile := GtFileUtility
+		fileReferenceOfFileName: aString
+		relativeTo: GtIcebergUtility repositoriesLocation.
+	aFile := aFile exists ifTrue: [ ^ aFile ].
+	aFile := GtFileUtility
+		fileReferenceOfFileName: aString
+		relativeTo: self constants localGtDirectory.
+	^ aFile
+]
+
 { #category : #'text styling' }
 Gt2DocumentUtility class >> linkColor: aBoolean [
 	"aBoolean = true means that a link is valid.

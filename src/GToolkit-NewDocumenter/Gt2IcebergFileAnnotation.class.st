@@ -42,20 +42,7 @@ Gt2IcebergFileAnnotation >> fileReference [
 					aValue isString 
 						ifFalse: [ nil ]
 						ifTrue: [ 
-							aFile := aValue asFileReference.
-							aFile := aFile exists 
-								ifTrue: [ aFile ]
-								ifFalse: [ 
-									aFile := GtFileUtility 
-										fileReferenceOfFileName: aValue 
-										relativeTo: GtIcebergUtility repositoriesLocation ].
-							aFile := aFile exists
-								ifTrue: [ aFile ]
-								ifFalse: [
-									aFile := GtFileUtility 
-										fileReferenceOfFileName: aValue 
-										relativeTo: Smalltalk imageDirectory 
-											/ self constants localGtDirectory ].
+							aFile := self utility icebergFileReferenceFrom: aValue.
 							aFile exists ifTrue: [ aFile ] ifFalse: [ nil ] ] ]
 		emptyValue: [ "do nothing" ] 
 		defaultValue: [ "do nothing" ]

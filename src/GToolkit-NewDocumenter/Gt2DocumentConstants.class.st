@@ -157,6 +157,12 @@ Gt2DocumentConstants class >> linkWithErrorColor [
 
 { #category : #files }
 Gt2DocumentConstants class >> localGtDirectory [
+	<return: #FileReference>
+	^ Smalltalk imageDirectory / self localGtDirectoryName
+]
+
+{ #category : #files }
+Gt2DocumentConstants class >> localGtDirectoryName [
 	^ 'gt-extra'
 ]
 
