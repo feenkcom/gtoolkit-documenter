@@ -80,7 +80,7 @@ Gt2DocumentUtility class >> styleLinkInText: aBlRope forNode: aNode [
 
 	(aBlRope  
 		from: aNodeToStyle start 
-		to: aNodeToStyle stop) 
+		to: (aNodeToStyle start max: aNodeToStyle stop))
 			attributes: theAttributes.
 ]
 

@@ -309,6 +309,12 @@ Gt2DocumentExamples >> contentWithInvalidParameter2 [
 		'||' , '}$'
 ]
 
+{ #category : #'example - existing one' }
+Gt2DocumentExamples >> contentWithInvalidParameter3 [
+	<gtExample>
+	^ '${', self constants exampleAnnotationName, ':', '}$'
+]
+
 { #category : #markups }
 Gt2DocumentExamples >> contentWithLists [
 	<gtExample>
@@ -652,6 +658,17 @@ Gt2DocumentExamples >> documentWithInvalidParameter2 [
 	aDocument := self defaultDocument text: self contentWithInvalidParameter2.
 	aDocument editor styleText.
 	self assert: aDocument text asString equals: self contentWithInvalidParameter2.
+	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
+{ #category : #'example - existing one' }
+Gt2DocumentExamples >> documentWithInvalidParameter3 [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithInvalidParameter3.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithInvalidParameter3.
 	self assert: aDocument isSubscribedToSystem.
 	^ aDocument
 ]
