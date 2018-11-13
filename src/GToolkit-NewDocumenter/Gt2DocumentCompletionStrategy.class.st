@@ -46,7 +46,7 @@ Gt2DocumentCompletionStrategy class >> initialize [
 		at: Gt2IcebergFileAnnotation
 			put:
 			(Dictionary new
-				at: self constants pathParameterName put: #filenamesStartingWith:;
+				at: self constants pathParameterName put: #icebergFilenamesStartingWith:;
 				yourself);
 		at: PRInputFileAnnotation
 			put:
@@ -266,8 +266,13 @@ Gt2DocumentCompletionStrategy >> fileRegex [
 
 { #category : #private }
 Gt2DocumentCompletionStrategy >> filenamesStartingWith: aString [
+	^ self filenamesStartingWith: aString in: self directoryReference
+]
+
+{ #category : #private }
+Gt2DocumentCompletionStrategy >> filenamesStartingWith: aString in: aFileReference [ 
 	| fileReference segments currentDirectory filenamePart names |
-	currentDirectory := self directoryReference.
+	currentDirectory := aFileReference.
 	fileReference := aString asFileReference.
 	segments := fileReference pathSegments.
 	1 to: segments size - 1 do: [ :i | currentDirectory := currentDirectory / (segments at: i) ].
@@ -309,6 +314,17 @@ Gt2DocumentCompletionStrategy >> hasCompletionEntryFor: aString [
 { #category : #testing }
 Gt2DocumentCompletionStrategy >> hasCompletionsAt: anInteger in: aText [
 	^ true
+]
+
+{ #category : #private }
+Gt2DocumentCompletionStrategy >> icebergFilenamesStartingWith: aString [
+	| inIcebergRepositories inLocalGtDirectory anExtraCompletionActions |
+	inIcebergRepositories := self filenamesStartingWith: aString in: self constants icebergRepositoriesLocation.
+	inLocalGtDirectory := self filenamesStartingWith: aString in: self constants localGtDirectory.
+	anExtraCompletionActions := inLocalGtDirectory select: [ :eachCompletionAction | 
+		(inIcebergRepositories includes: eachCompletionAction) not ].
+	inIcebergRepositories addAll: anExtraCompletionActions.
+	^ inIcebergRepositories
 ]
 
 { #category : #initialization }

@@ -412,7 +412,7 @@ Gt2DocumentExamples >> demoDocument2 [
 { #category : #demo }
 Gt2DocumentExamples >> demoFileReference [
 	<gtExample>
-	^ GtIcebergUtility repositoriesLocation 
+	^ self constants icebergRepositoriesLocation
 			/ 'feenkcom'/ 'gtoolkit-demos' 
 			/ 'doc' / 'tutorial' 
 			/ 'smalltalks-2018-addressbook' / 'example-driven-development.pillar' 
@@ -421,7 +421,7 @@ Gt2DocumentExamples >> demoFileReference [
 { #category : #demo }
 Gt2DocumentExamples >> demoFileReference2 [
 	<gtExample>
-	^ GtIcebergUtility repositoriesLocation 
+	^ self constants icebergRepositoriesLocation 
 			/ 'feenkcom'/ 'gtoolkit-demos' 
 			/ 'doc' / 'tutorial' 
 			/ 'smalltalks-2018-addressbook' / 'example-driven-development-2.pillar' 

@@ -36,7 +36,7 @@ Gt2DocumentUtility class >> icebergFileReferenceFrom: aString [
 	aFile := aFile exists ifTrue: [ ^ aFile ].
 	aFile := GtFileUtility
 		fileReferenceOfFileName: aString
-		relativeTo: GtIcebergUtility repositoriesLocation.
+		relativeTo: self constants icebergRepositoriesLocation.
 	aFile := aFile exists ifTrue: [ ^ aFile ].
 	aFile := GtFileUtility
 		fileReferenceOfFileName: aString

@@ -130,6 +130,12 @@ Gt2DocumentConstants class >> icebergFileAnnotationName [
 	^ #icebergFile
 ]
 
+{ #category : #files }
+Gt2DocumentConstants class >> icebergRepositoriesLocation [
+	<return: #FileReference>
+	^ GtIcebergUtility repositoriesLocation
+]
+
 { #category : #'pillar annotation names' }
 Gt2DocumentConstants class >> inputFileAnnotationName [
 	^ PRInputFileAnnotation tag
