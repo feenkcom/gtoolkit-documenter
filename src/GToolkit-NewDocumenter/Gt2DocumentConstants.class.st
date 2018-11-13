@@ -240,3 +240,8 @@ Gt2DocumentConstants class >> showParameterName [
 Gt2DocumentConstants class >> subtleColor [
 	^ Color gray
 ]
+
+{ #category : #text }
+Gt2DocumentConstants class >> superscriptFontSize [
+	^ 9
+]

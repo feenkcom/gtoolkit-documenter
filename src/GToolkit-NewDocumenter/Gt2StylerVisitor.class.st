@@ -11,7 +11,8 @@ Class {
 		'annotationCounter',
 		'listItemStyler',
 		'currentList',
-		'colorStyler'
+		'colorStyler',
+		'symbolStyler'
 	],
 	#category : #'GToolkit-NewDocumenter-Styler'
 }
@@ -51,6 +52,11 @@ Gt2StylerVisitor >> subscriber [
 { #category : #accessing }
 Gt2StylerVisitor >> subscriber: anObject [
 	subscriber := anObject
+]
+
+{ #category : #accessing }
+Gt2StylerVisitor >> symbolStyler [
+	^ symbolStyler ifNil: [ symbolStyler := Gt2SymbolStyler new ].
 ]
 
 { #category : #accessing }
@@ -221,7 +227,7 @@ Gt2StylerVisitor >> visitSuperscriptFormat: aPRSuperscriptFormat [
 		from: aPRSuperscriptFormat start
 		to: aPRSuperscriptFormat stop)
 			foreground: self constants subtleColor;
-			fontSize: 9.
+			fontSize: self constants superscriptFontSize.
 	super visitSuperscriptFormat: aPRSuperscriptFormat
 ]
 
@@ -247,7 +253,7 @@ Gt2StylerVisitor >> visitUnderlineFormat: aPRUnderlineFormat [
 Gt2StylerVisitor >> visitUnorderedList: aPRUnorderedList [
 	| aPreviousListStyler |
 	aPreviousListStyler := listItemStyler.
-	listItemStyler := self colorStyler changeColor.
+	listItemStyler := self symbolStyler changeSymbol.
 	super visitUnorderedList: aPRUnorderedList.
 	listItemStyler := aPreviousListStyler.
 ]
