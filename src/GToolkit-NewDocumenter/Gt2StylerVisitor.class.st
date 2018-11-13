@@ -145,7 +145,8 @@ Gt2StylerVisitor >> visitHeader: aPRHeader [
 	(self text
 		from: aPRHeader start
 		to: aPRHeader stop)
-			fontSize: 20 - aPRHeader level.
+			fontSize: self constants headerFontSize - (aPRHeader level * self constants headerLevelStep)";
+			paragraphMargin: (BlInsets top: 15 left: 20 bottom: 15 right: 20)".
 	super visitHeader: aPRHeader
 ]
 
@@ -156,6 +157,13 @@ Gt2StylerVisitor >> visitItalicFormat: aPRItalicFormat [
 		to: aPRItalicFormat stop)
 			italic.
 	super visitItalicFormat: aPRItalicFormat
+]
+
+{ #category : #'visiting-document' }
+Gt2StylerVisitor >> visitList: aPRList [
+	"(self text from: aPRList start to: aPRList stop)
+		paragraphMargin: (BlInsets top: 15 left: 20 bottom: 15 right: 20)."
+	super visitList: aPRList.
 ]
 
 { #category : #'visiting-document' }
@@ -217,7 +225,9 @@ Gt2StylerVisitor >> visitSubscriptFormat: aPRSubscriptFormat [
 	(self text
 		from: aPRSubscriptFormat start
 		to: aPRSubscriptFormat stop)
-			foreground: self constants subtleColor.
+			foreground: self constants subtleColor";
+			fontSize: self constants superscriptFontSize;
+			wordPadding: (BlInsets all: 30)".
 	super visitSubscriptFormat: aPRSubscriptFormat
 ]
 

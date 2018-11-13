@@ -42,5 +42,9 @@ Gt2SymbolStyler >> style: aBlRope at: aPRListItem [
 						indexText := aSymbol asRopedText.
 						indexText fontSize: self constants superscriptFontSize.
 						indexText foreground: self constants subtleColor.
-						BlTextElement new text: indexText ] }.
+						BlTextElement new 
+							text: indexText; 
+							clipChildren: false;
+							looseMesurement; 
+							ascentBaseline ] }.
 ]

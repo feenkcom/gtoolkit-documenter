@@ -110,6 +110,16 @@ Gt2DocumentConstants class >> figureShowSelector [
 	^ #gtPngFor:
 ]
 
+{ #category : #text }
+Gt2DocumentConstants class >> headerFontSize [
+	^ 27
+]
+
+{ #category : #text }
+Gt2DocumentConstants class >> headerLevelStep [
+	^ 2
+]
+
 { #category : #'pillar parameter names' }
 Gt2DocumentConstants class >> heightParameterName [
 	^ #height

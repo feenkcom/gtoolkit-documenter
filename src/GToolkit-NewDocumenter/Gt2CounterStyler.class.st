@@ -27,7 +27,11 @@ Gt2CounterStyler >> style: aBlRope at: aPRListItem [
 					stencil: [
 						| indexText |
 						indexText := anItemIndex asRopedText.
-						indexText fontSize: 9.
+						indexText fontSize: self constants superscriptFontSize.
 						indexText foreground: self constants subtleColor.
-						BlTextElement new text: indexText ] }.
+						BlTextElement new 
+							text: indexText; 
+							clipChildren: false;
+							looseMesurement; 
+							ascentBaseline ] }.
 ]
