@@ -161,6 +161,16 @@ Gt2StylerVisitor >> visitOrderedList: aPROrderedList [
 	listItemStyler := aPreviousListStyler.
 ]
 
+{ #category : #'visiting-parameters' }
+Gt2StylerVisitor >> visitParameter: aPRParameter [
+	aPRParameter isValid ifFalse: [ 
+		(self text
+			from: aPRParameter start 
+			to: aPRParameter stop)
+				foreground: self constants linkWithErrorColor ].
+	super visitParameter: aPRParameter
+]
+
 { #category : #'visiting-document' }
 Gt2StylerVisitor >> visitRaw: aPRRaw [
 	aPRRaw start ifNil: [ ^ self ].

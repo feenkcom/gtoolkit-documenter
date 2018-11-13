@@ -244,6 +244,7 @@ Gt2DocumentExamples >> contentWithExampleParameters [
 	<gtExample>
 	^ '${', self constants exampleAnnotationName, ':', 
 		self referencedMethod printString,
+		'|', 'incorrectOne=true',
 		'|', self constants previewShowParameterName, '=', #gtBytecodeFor:, 
 		'|', self constants previewExpandedParameterName, '=', true asString,
 		'|', self constants previewHeightParameterName, '=', 100 asString,
