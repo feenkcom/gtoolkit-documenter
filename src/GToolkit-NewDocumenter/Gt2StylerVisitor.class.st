@@ -83,7 +83,8 @@ Gt2StylerVisitor >> visitBoldFormat: aPRBoldFormat [
 	(self text
 		from: aPRBoldFormat start
 		to: aPRBoldFormat stop)
-			bold
+			bold.
+	super visitBoldFormat: aPRBoldFormat
 ]
 
 { #category : #'visiting-document' }
@@ -94,6 +95,7 @@ Gt2StylerVisitor >> visitCodeblock: aPRCodeblock [
 		gtDocument: self document;
 		gtSubscriber: self subscriber;
 		styleInText: self text.
+	super visitCodeblock: aPRCodeblock
 ]
 
 { #category : #'visiting-document' }
@@ -102,6 +104,7 @@ Gt2StylerVisitor >> visitCommentedLine: aPRCommentedLine [
 		gtDocument: self document;
 		gtSubscriber: self subscriber;
 		styleInText: self text.
+	super visitCommentedLine: aPRCommentedLine
 ]
 
 { #category : #'visiting-document' }
@@ -119,6 +122,7 @@ Gt2StylerVisitor >> visitExternalLink: anPRExternalLine [
 		gtDocument: self document;
 		gtSubscriber: self subscriber;
 		styleInText: self text.
+	super visitExternalLink: anPRExternalLine
 ]
 
 { #category : #'visiting-document' }
@@ -126,7 +130,8 @@ Gt2StylerVisitor >> visitHeader: aPRHeader [
 	(self text
 		from: aPRHeader start
 		to: aPRHeader stop)
-			fontSize: 20 - aPRHeader level
+			fontSize: 20 - aPRHeader level.
+	super visitHeader: aPRHeader
 ]
 
 { #category : #'visiting-document' }
@@ -134,7 +139,8 @@ Gt2StylerVisitor >> visitItalicFormat: aPRItalicFormat [
 	(self text
 		from: aPRItalicFormat start
 		to: aPRItalicFormat stop)
-			italic
+			italic.
+	super visitItalicFormat: aPRItalicFormat
 ]
 
 { #category : #'visiting-document' }
@@ -148,8 +154,8 @@ Gt2StylerVisitor >> visitMonospaceFormat: aPRMonospaceFormat [
 	(self text
 		from: aPRMonospaceFormat start
 		to: aPRMonospaceFormat stop)
-			monospace";
-			foreground: Color darkGray"
+			monospace.
+	super visitMonospaceFormat: aPRMonospaceFormat
 ]
 
 { #category : #'visiting-document' }
@@ -178,7 +184,8 @@ Gt2StylerVisitor >> visitRaw: aPRRaw [
 	(self text
 		from: aPRRaw start
 		to: aPRRaw stop)
-			monospace
+			monospace.
+	super visitRaw: aPRRaw
 ]
 
 { #category : #'visiting-document' }
@@ -186,7 +193,8 @@ Gt2StylerVisitor >> visitStrikethroughFormat: aPRStrikethroughFormat [
 	(self text
 		from: aPRStrikethroughFormat start
 		to: aPRStrikethroughFormat stop)
-			foreground: self constants subtleColor
+			foreground: self constants subtleColor.
+	super visitStrikethroughFormat: aPRStrikethroughFormat
 ]
 
 { #category : #'visiting-document' }
@@ -194,7 +202,8 @@ Gt2StylerVisitor >> visitSubscriptFormat: aPRSubscriptFormat [
 	(self text
 		from: aPRSubscriptFormat start
 		to: aPRSubscriptFormat stop)
-			foreground: self constants subtleColor
+			foreground: self constants subtleColor.
+	super visitSubscriptFormat: aPRSubscriptFormat
 ]
 
 { #category : #'visiting-document' }
@@ -203,7 +212,8 @@ Gt2StylerVisitor >> visitSuperscriptFormat: aPRSuperscriptFormat [
 		from: aPRSuperscriptFormat start
 		to: aPRSuperscriptFormat stop)
 			foreground: self constants subtleColor;
-			fontSize: 9
+			fontSize: 9.
+	super visitSuperscriptFormat: aPRSuperscriptFormat
 ]
 
 { #category : #'visiting-document' }
@@ -211,7 +221,8 @@ Gt2StylerVisitor >> visitUndefinedAnnotation: anAnnotation [
 	(self text
 		from: anAnnotation start 
 		to: anAnnotation stop)
-			foreground: Color red
+			foreground: Color red.
+	super visitUndefinedAnnotation: anAnnotation
 ]
 
 { #category : #'visiting-document' }
@@ -219,7 +230,8 @@ Gt2StylerVisitor >> visitUnderlineFormat: aPRUnderlineFormat [
 	(self text
 		from: aPRUnderlineFormat start
 		to: aPRUnderlineFormat stop)
-			underline
+			underline.
+	super visitUnderlineFormat: aPRUnderlineFormat
 ]
 
 { #category : #'visiting-document' }
