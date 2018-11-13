@@ -9,10 +9,17 @@ Class {
 		'subscriber',
 		'codeblockCounter',
 		'annotationCounter',
-		'listCounter'
+		'listItemStyler',
+		'currentList',
+		'colorStyler'
 	],
 	#category : #'GToolkit-NewDocumenter-Styler'
 }
+
+{ #category : #accessing }
+Gt2StylerVisitor >> colorStyler [
+	^ colorStyler ifNil: [ colorStyler := Gt2ColorStyler new ].
+]
 
 { #category : #accessing }
 Gt2StylerVisitor >> document [
@@ -33,7 +40,7 @@ Gt2StylerVisitor >> initialize [
 	super initialize.
 	codeblockCounter := 0.
 	annotationCounter := 0.
-	listCounter := 0.
+	listItemStyler := Gt2NullListItemStyler uniqueInstance.
 ]
 
 { #category : #accessing }
@@ -98,6 +105,15 @@ Gt2StylerVisitor >> visitCommentedLine: aPRCommentedLine [
 ]
 
 { #category : #'visiting-document' }
+Gt2StylerVisitor >> visitDefinitionList: aPRDefinitionList [
+	| aPreviousListStyler |
+	aPreviousListStyler := listItemStyler.
+	listItemStyler := self colorStyler changeColor.
+	super visitDefinitionList: aPRDefinitionList.
+	listItemStyler := aPreviousListStyler.
+]
+
+{ #category : #'visiting-document' }
 Gt2StylerVisitor >> visitExternalLink: anPRExternalLine [
 	anPRExternalLine 
 		gtDocument: self document;
@@ -122,31 +138,8 @@ Gt2StylerVisitor >> visitItalicFormat: aPRItalicFormat [
 ]
 
 { #category : #'visiting-document' }
-Gt2StylerVisitor >> visitList: aPRList [
-	| aPreviousListCounter |
-	aPreviousListCounter := listCounter.
-	listCounter := 0.
-	super visitList: aPRList.
-	listCounter := aPreviousListCounter.
-]
-
-{ #category : #'visiting-document' }
 Gt2StylerVisitor >> visitListItem: aPRListItem [
-	| anItemIndex |
-	listCounter := listCounter + 1.
-	anItemIndex := listCounter asString.
-	(self text
-		from: aPRListItem start
-		to: aPRListItem start)
-			attributes: {
-				BrTextAdornmentDynamicAttribute new 
-					beAppend; 
-					stencil: [
-						| indexText |
-						indexText := anItemIndex asRopedText.
-						indexText fontSize: 9.
-						indexText foreground: self constants subtleColor.
-						BlTextElement new text: indexText ] }.
+	listItemStyler style: self text at: aPRListItem.
 	super visitListItem: aPRListItem
 ]
 
@@ -157,6 +150,15 @@ Gt2StylerVisitor >> visitMonospaceFormat: aPRMonospaceFormat [
 		to: aPRMonospaceFormat stop)
 			monospace";
 			foreground: Color darkGray"
+]
+
+{ #category : #'visiting-document' }
+Gt2StylerVisitor >> visitOrderedList: aPROrderedList [
+	| aPreviousListStyler |
+	aPreviousListStyler := listItemStyler.
+	listItemStyler := Gt2CounterStyler new.
+	super visitOrderedList: aPROrderedList.
+	listItemStyler := aPreviousListStyler.
 ]
 
 { #category : #'visiting-document' }
@@ -208,4 +210,13 @@ Gt2StylerVisitor >> visitUnderlineFormat: aPRUnderlineFormat [
 		from: aPRUnderlineFormat start
 		to: aPRUnderlineFormat stop)
 			underline
+]
+
+{ #category : #'visiting-document' }
+Gt2StylerVisitor >> visitUnorderedList: aPRUnorderedList [
+	| aPreviousListStyler |
+	aPreviousListStyler := listItemStyler.
+	listItemStyler := self colorStyler changeColor.
+	super visitUnorderedList: aPRUnorderedList.
+	listItemStyler := aPreviousListStyler.
 ]
