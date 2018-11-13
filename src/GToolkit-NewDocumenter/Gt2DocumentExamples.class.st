@@ -293,6 +293,22 @@ Gt2DocumentExamples >> contentWithInputFile [
 
 ]
 
+{ #category : #'example - existing one' }
+Gt2DocumentExamples >> contentWithInvalidParameter [
+	<gtExample>
+	^ '${', self constants exampleAnnotationName, ':', 
+		self referencedMethod printString,
+		'|hi|', '=true', '}$'
+]
+
+{ #category : #'example - existing one' }
+Gt2DocumentExamples >> contentWithInvalidParameter2 [
+	<gtExample>
+	^ '${', self constants exampleAnnotationName, ':', 
+		self referencedMethod printString,
+		'||' , '}$'
+]
+
 { #category : #markups }
 Gt2DocumentExamples >> contentWithLists [
 	<gtExample>
@@ -615,6 +631,28 @@ Gt2DocumentExamples >> documentWithInputFile [
 	aDocument := self defaultDocument fileReference: self fileReferenceWithInputFile.
 	aDocument read.
 	self assert: aDocument text asString equals: self contentWithInputFile.
+	^ aDocument
+]
+
+{ #category : #'example - existing one' }
+Gt2DocumentExamples >> documentWithInvalidParameter [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithInvalidParameter.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithInvalidParameter.
+	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
+{ #category : #'example - existing one' }
+Gt2DocumentExamples >> documentWithInvalidParameter2 [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithInvalidParameter2.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithInvalidParameter2.
+	self assert: aDocument isSubscribedToSystem.
 	^ aDocument
 ]
 

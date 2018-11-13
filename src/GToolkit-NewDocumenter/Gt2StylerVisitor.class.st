@@ -172,7 +172,7 @@ Gt2StylerVisitor >> visitParameter: aPRParameter [
 	aPRParameter isValid ifFalse: [ 
 		(self text
 			from: aPRParameter start 
-			to: aPRParameter stop)
+			to: (aPRParameter start max: aPRParameter stop))
 				foreground: self constants linkWithErrorColor ].
 	super visitParameter: aPRParameter
 ]
