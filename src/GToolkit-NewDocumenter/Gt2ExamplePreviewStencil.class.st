@@ -200,7 +200,7 @@ Gt2ExamplePreviewStencil >> result [
 
 { #category : #private }
 Gt2ExamplePreviewStencil >> updatePreviewElement: aPreviewContainerElement in: aWholeContainer with: anObject [
-	| aNewPreview |
+	| aNewPreview anArrowElement |
 	aNewPreview := self newPreviewElementFor: anObject.
 	aNewPreview constraintsDo: [ :c | 
 		c horizontal matchParent.
@@ -208,12 +208,20 @@ Gt2ExamplePreviewStencil >> updatePreviewElement: aPreviewContainerElement in: a
 	aPreviewContainerElement removeChildNamed: #preview.
 	aPreviewContainerElement addChild: aNewPreview at: 1 as: #preview.
 
-	self noCode 
-		ifFalse: [ 
-			aWholeContainer 
-				childNamed: #arrow 
-				ifFound: [ :aChild | "do nothing" ] 
-				ifNone: [ aWholeContainer addChild: self newArrowElement at: 2 as: #arrow ] ].
+	self noCode ifFalse: [ 
+		aWholeContainer removeChildNamed: #arrow.
+		anArrowElement := self newArrowElement.
+		anArrowElement 
+			addEventHandlerOn: BlMouseEnterEvent do: [ :anEvent | anArrowElement background: Color random ]; 
+			addEventHandlerOn: BlClickEvent
+			do: [ :anEvent | 
+				self inform: 'click'.
+				aPreviewContainerElement 
+					childNamed: #preview 
+					ifFound: [ :aPreviewElement | 
+						aPreviewContainerElement removeChildNamed: #preview ] 
+					ifNone: [ aPreviewContainerElement addChild: aNewPreview at: 1 as: #preview ] ].
+		aWholeContainer addChild: self newArrowElement at: 2 as: #arrow ].
 
 	aPreviewContainerElement hasParent ifFalse: [ 
 		aWholeContainer addChild: aPreviewContainerElement ].
