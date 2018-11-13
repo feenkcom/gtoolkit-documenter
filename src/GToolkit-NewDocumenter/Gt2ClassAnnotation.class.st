@@ -42,7 +42,7 @@ Gt2ClassAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAnnouncement 
 		(aClassAnnouncement classAffected name = self referencedClass name) or: [ 
 			aClassAnnouncement classAffected originalName = self referencedClass name ]])
 				ifFalse: [ ^ self ].
-	self gtDocument editor styleText
+	self gtDocument styleTextRequest
 ]
 
 { #category : #'announcement handling' }
@@ -51,7 +51,7 @@ Gt2ClassAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [
 			aClassRenamed newName = self referencedClass name or: [ 
 				aClassRenamed oldName = self referencedClass name ]])
 					ifFalse: [ ^ self ].
-	self gtDocument editor styleText
+	self gtDocument styleTextRequest
 ]
 
 { #category : #testing }

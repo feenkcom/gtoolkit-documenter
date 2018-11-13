@@ -41,7 +41,7 @@ Gt2MethodAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAdded [
 	(self referencedMethod notNil and: [ 
 		aClassAdded classAffected originalName = self referencedMethod parentName ])
 			ifFalse: [ ^ self ].
-	self gtDocument editor styleText
+	self gtDocument styleTextRequest
 ]
 
 { #category : #'announcement handling' }
@@ -50,7 +50,7 @@ Gt2MethodAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [
 			aClassRenamed newName = self referencedMethod parentName or: [ 
 				aClassRenamed oldName = self referencedMethod parentName ] ])
 			ifFalse: [ ^ self ].
-	self gtDocument editor styleText
+	self gtDocument styleTextRequest
 ]
 
 { #category : #'announcement handling' }
@@ -59,7 +59,7 @@ Gt2MethodAnnotation >> handleMethodAnnouncement: aMethodModified [
 		aMethodModified classAffected name = self referencedMethod parentName  
 			and: [ aMethodModified selector = self referencedMethod selector ]])
 				ifFalse: [ ^ self ].
-	self gtDocument editor styleText
+	self gtDocument styleTextRequest
 ]
 
 { #category : #testing }

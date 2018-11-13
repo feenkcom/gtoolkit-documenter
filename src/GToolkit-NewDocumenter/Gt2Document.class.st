@@ -240,6 +240,11 @@ Gt2Document >> strategy: aGt2StorageStrategy [
 	storageStrategy := aGt2StorageStrategy
 ]
 
+{ #category : #actions }
+Gt2Document >> styleTextRequest [
+	self editor styleText.
+]
+
 { #category : #subscriptions }
 Gt2Document >> subscribeToEditorChanges [
 ]

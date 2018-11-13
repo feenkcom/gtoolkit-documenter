@@ -121,7 +121,7 @@ Gt2ChangesAnnotation >> expandedDefaultValue [
 { #category : #'announcement handling' }
 Gt2ChangesAnnotation >> handleEpiceaUpdate: aGt2EpiceaUpdatedAnnouncement [
 	aGt2EpiceaUpdatedAnnouncement impactChangedOrNumberOfEventsChanged ifFalse: [ ^ self ].
-	self gtDocument editor styleText
+	self gtDocument styleTextRequest
 ]
 
 { #category : #'announcement handling' }

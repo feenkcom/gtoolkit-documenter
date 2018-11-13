@@ -97,7 +97,7 @@ PRCodeblock >> evaluationAction [
 		(self gtDocument
 			when: Gt2CodeblockEvalutedAnnouncement
 			doOnce: [
-				self gtDocument editor styleText ]
+				self gtDocument styleTextRequest ]
 			for: self).
 		self evaluateCodeblock ]
 ]

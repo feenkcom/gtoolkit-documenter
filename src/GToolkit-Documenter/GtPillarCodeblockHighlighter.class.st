@@ -50,7 +50,7 @@ GtPillarCodeblockHighlighter >> newExecuteCodeButtonForText: aBrText inEditor: a
 		(self documentPart
 			when: GtCodeSnippetExecutionAnnouncement
 			doOnce: [
-				aTextElement editor styleText ]
+				aTextElement styleTextRequest ]
 			for: anAction).
 		self documentPart executeWithPlaygroundStrategy ].
 
