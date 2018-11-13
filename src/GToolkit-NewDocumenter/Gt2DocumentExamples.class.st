@@ -54,6 +54,21 @@ Gt2DocumentExamples >> addEpiceaEvent [
 	^ anEpicea
 ]
 
+{ #category : #figure }
+Gt2DocumentExamples >> brokenFigureContent [
+	<gtExample>
+	| aByteArray |
+	aByteArray := self figureContent.
+	aByteArray at: 1 put: 3.
+	^ aByteArray
+]
+
+{ #category : #figure }
+Gt2DocumentExamples >> brokenFigureFileReference [
+	<gtExample>
+	^ memorySystem addFileNamed: self figureFileName  withContent: self brokenFigureContent
+]
+
 { #category : #'changes - existing file' }
 Gt2DocumentExamples >> changesContentWithClassDefinition [
 	<gtExample>
@@ -487,6 +502,19 @@ Gt2DocumentExamples >> documentFromFileReference [
 	self assert: aDocument text isEmpty.
 	aDocument read.
 	self assert: aDocument text asString equals: self contentWithMultipleMethods.
+	^ aDocument
+]
+
+{ #category : #figure }
+Gt2DocumentExamples >> documentWithBrokenFigure [
+	<gtExample>
+	| aDocument aFigureFile |
+	aFigureFile := self brokenFigureFileReference.
+	self assert: aFigureFile exists.
+	aDocument := self defaultDocument fileReference: self fileReferenceWithFigure.
+	aDocument read.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithFigure.
 	^ aDocument
 ]
 
