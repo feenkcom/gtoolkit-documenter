@@ -872,6 +872,7 @@ Gt2DocumentExamples >> emptyDocument [
 	| aDocument |
 	aDocument := self defaultDocument text: self emptyContent.
 	self assert: aDocument text asString equals: self emptyContent.
+   self assert: false.
 	self assert: aDocument isSubscribedToSystem not.
 	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument) not.
 	^ aDocument

@@ -45,7 +45,7 @@ Gt2ExamplesAnnotation >> browseReferenceFrom: anEvent [
 Gt2ExamplesAnnotation >> browseResultsFrom: aWidget [
 	| aResult |
 	self hasExample ifFalse: [ ^ self inform: 'There is no defined example' ].
-	aResult := self cachedExampleGroup numberOfFailingExamples isZero 
+	aResult := self cachedExampleGroup numberOfFailures isZero 
 		ifTrue: [ self cachedExampleGroup ]
 		ifFalse: [ GtExampleGroup withAll: (self cachedExampleGroup select: [ :each | each isFailure ]) ].
 	aWidget fireEvent: (GtPhlowObjectToSpawn new 
@@ -93,6 +93,11 @@ Gt2ExamplesAnnotation >> exampleGroup [
 ]
 
 { #category : #testing }
+Gt2ExamplesAnnotation >> hasErrors [
+	^ self hasExample and: [ self cachedExampleGroup numberOfErrors isZero not ]
+]
+
+{ #category : #testing }
 Gt2ExamplesAnnotation >> hasExample [
 	| aGroup |
 	aGroup := self cachedExampleGroup.
@@ -100,8 +105,13 @@ Gt2ExamplesAnnotation >> hasExample [
 ]
 
 { #category : #testing }
-Gt2ExamplesAnnotation >> hasFailingExample [
-	^ self hasExample and: [ self cachedExampleGroup numberOfFailingExamples isZero not ]
+Gt2ExamplesAnnotation >> hasFailures [
+	^ self hasExample and: [ self cachedExampleGroup numberOfFailures isZero not ]
+]
+
+{ #category : #testing }
+Gt2ExamplesAnnotation >> hasFailuresOrErrors [
+	^ self hasExample and: [ self cachedExampleGroup numberOfFailuresAndErrors isZero not ]
 ]
 
 { #category : #'private - styling' }
@@ -118,8 +128,10 @@ Gt2ExamplesAnnotation >> infoButtonAttribute [
 { #category : #'private - styling' }
 Gt2ExamplesAnnotation >> infoButtonLabel [
 	<return: #BlRope>
-	^ self cachedExampleGroup numberOfFailingExamples asString,
-		' failures'
+	| anAmount |
+	anAmount := self cachedExampleGroup numberOfFailuresAndErrors.
+	^ anAmount asString,
+		(' issue' asPluralBasedOn: anAmount)
 ]
 
 { #category : #testing }
@@ -207,9 +219,10 @@ Gt2ExamplesAnnotation >> runButtonAttribute [
 { #category : #'private - styling' }
 Gt2ExamplesAnnotation >> runButtonLabel [
 	<return: #BlRope>
+	| anAmount |
+	anAmount := self cachedExampleGroup numberOfExamples.
 	^ self constants runButtonLabel, ' ',
-		self cachedExampleGroup numberOfExamples asString,
-		' examples'
+		anAmount asString, (' example' asPluralBasedOn: anAmount)
 ]
 
 { #category : #'private - actions' }
@@ -235,7 +248,7 @@ Gt2ExamplesAnnotation >> styleInText: aBlRope [
 
 { #category : #'private - styling' }
 Gt2ExamplesAnnotation >> styleInfoButtonInText: aBlRope [
-	self hasFailingExample ifFalse: [ ^ self ].
+	self hasFailuresOrErrors ifFalse: [ ^ self ].
 	(aBlRope from: self stop to: self stop) 
 		attribute: self infoButtonAttribute
 ]
