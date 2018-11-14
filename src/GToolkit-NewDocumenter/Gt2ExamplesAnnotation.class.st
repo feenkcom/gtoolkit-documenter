@@ -36,6 +36,18 @@ Gt2ExamplesAnnotation >> browseReferenceFrom: anEvent [
 		sourceElement: anEvent target)
 ]
 
+{ #category : #'private - actions' }
+Gt2ExamplesAnnotation >> browseResultsFrom: aWidget [
+	| aResult |
+	self hasExample ifFalse: [ ^ self inform: 'There is no defined example' ].
+	aResult := self exampleGroup numberOfFailingExamples isZero 
+		ifTrue: [ self exampleGroup ]
+		ifFalse: [ GtExampleGroup withAll: (self exampleGroup select: [ :each | each isFailure ]) ].
+	aWidget fireEvent: (GtPhlowObjectToSpawn new 
+		object: aResult;
+		sourceElement: aWidget)
+]
+
 { #category : #'accessing - parameter values' }
 Gt2ExamplesAnnotation >> defaultShowSelector [
 	^ self constants defaultExamplesShowSelector
@@ -59,6 +71,24 @@ Gt2ExamplesAnnotation >> exampleGroup [
 { #category : #testing }
 Gt2ExamplesAnnotation >> hasExample [
 	^ self exampleGroup examples notEmpty
+]
+
+{ #category : #'private - styling' }
+Gt2ExamplesAnnotation >> infoButtonAttribute [
+	^ Gt2ButtonAttribute new
+		beAppend;
+		equality: self constants infoButtonLabel;
+		stencil: (Gt2ButtonStencilBuilder new
+			label: self infoButtonLabel;
+			action: [ self runExamples ])
+]
+
+{ #category : #'private - styling' }
+Gt2ExamplesAnnotation >> infoButtonLabel [
+	<return: #BlRope>
+	^ self constants runButtonLabel, ' ',
+		self exampleGroup numberOfFailingExamples asString,
+		' failures'
 ]
 
 { #category : #testing }
@@ -124,14 +154,23 @@ Gt2ExamplesAnnotation >> runButtonAttribute [
 		beAppend;
 		equality: self constants runButtonLabel;
 		stencil: (Gt2ButtonStencilBuilder new
-			label: self constants runButtonLabel;
+			label: self runButtonLabel;
 			icon: self constants runButtonIcon;
 			action: [ self runExamples ])
 ]
 
-{ #category : #actions }
+{ #category : #'private - styling' }
+Gt2ExamplesAnnotation >> runButtonLabel [
+	<return: #BlRope>
+	^ self constants runButtonLabel, ' ',
+		self exampleGroup numberOfExamples asString,
+		' examples'
+]
+
+{ #category : #'private - actions' }
 Gt2ExamplesAnnotation >> runExamples [
-	self exampleGroup runAll
+	self exampleGroup runAll.
+	self gtDocument styleTextRequest
 ]
 
 { #category : #'api - style' }
@@ -140,6 +179,14 @@ Gt2ExamplesAnnotation >> styleInText: aBlRope [
 	self styleLinkInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 	self styleRunButtonInText: aBlRope.
+	self styleInfoButtonInText: aBlRope.
+]
+
+{ #category : #'private - styling' }
+Gt2ExamplesAnnotation >> styleInfoButtonInText: aBlRope [
+	self hasExample ifFalse: [ ^ self ].
+	(aBlRope from: self stop to: self stop) 
+		attribute: self infoButtonAttribute
 ]
 
 { #category : #'private - styling' }

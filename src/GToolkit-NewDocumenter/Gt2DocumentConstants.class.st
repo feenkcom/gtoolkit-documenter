@@ -156,6 +156,11 @@ Gt2DocumentConstants class >> icebergRepositoriesLocation [
 	^ GtIcebergUtility repositoriesLocation
 ]
 
+{ #category : #ui }
+Gt2DocumentConstants class >> infoButtonLabel [
+	^ 'Info'
+]
+
 { #category : #'pillar annotation names' }
 Gt2DocumentConstants class >> inputFileAnnotationName [
 	^ PRInputFileAnnotation tag
