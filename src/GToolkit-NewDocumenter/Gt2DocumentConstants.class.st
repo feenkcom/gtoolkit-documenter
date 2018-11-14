@@ -161,11 +161,6 @@ Gt2DocumentConstants class >> infoButtonIcon [
 	^ BrGlamorousIcons inspect
 ]
 
-{ #category : #ui }
-Gt2DocumentConstants class >> infoButtonLabel [
-	^ 'Info'
-]
-
 { #category : #'pillar annotation names' }
 Gt2DocumentConstants class >> inputFileAnnotationName [
 	^ PRInputFileAnnotation tag
@@ -179,6 +174,11 @@ Gt2DocumentConstants class >> insertLineColor [
 { #category : #'changes diff' }
 Gt2DocumentConstants class >> insertLineIdentificator [
 	^ '+ '
+]
+
+{ #category : #ui }
+Gt2DocumentConstants class >> issuesButtonLabel [
+	^ 'Issues'
 ]
 
 { #category : #colors }
@@ -296,6 +296,11 @@ Gt2DocumentConstants class >> showParameterName [
 { #category : #colors }
 Gt2DocumentConstants class >> subtleColor [
 	^ Color gray
+]
+
+{ #category : #ui }
+Gt2DocumentConstants class >> successButtonLabel [
+	^ 'Success'
 ]
 
 { #category : #text }
