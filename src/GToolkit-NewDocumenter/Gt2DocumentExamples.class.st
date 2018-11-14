@@ -441,6 +441,15 @@ Gt2DocumentExamples >> contentWithNotExistingExamples [
 
 ]
 
+{ #category : #examples }
+Gt2DocumentExamples >> contentWithNotExistingPackageExamples [
+	<gtExample>
+	^ '${', self constants examplesAnnotationName, ':', 
+		self constants packagesParameterName , '=#(''', 
+			self referencedNotExistingPackageName, ''')' , '}$'
+
+]
+
 { #category : #'example - two same in one document' }
 Gt2DocumentExamples >> contentWithTwoExistingExamples [
 	<gtExample>
@@ -863,6 +872,17 @@ Gt2DocumentExamples >> documentWithNotExistingFigure [
 	^ aDocument
 ]
 
+{ #category : #examples }
+Gt2DocumentExamples >> documentWithNotExistingPackageExamples [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithNotExistingPackageExamples.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithNotExistingPackageExamples.
+	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
 { #category : #'example - two same in one document' }
 Gt2DocumentExamples >> documentWithTwoExistingExamples [
 	<gtExample>
@@ -961,7 +981,7 @@ Gt2DocumentExamples >> fileReferenceWithInputFile [
 { #category : #basic }
 Gt2DocumentExamples >> fooString [
 	<gtExample>
-	^ 'Foo'
+	^ 'Exemplifing'
 ]
 
 { #category : #basic }
@@ -1075,6 +1095,12 @@ Gt2DocumentExamples >> referencedMethod [
 Gt2DocumentExamples >> referencedNotExistingClass [
 	<gtExample>
 	^ self className, self fooString
+]
+
+{ #category : #examples }
+Gt2DocumentExamples >> referencedNotExistingPackageName [
+	<gtExample>
+	^ self fooString, self class package name
 ]
 
 { #category : #changes }

@@ -36,7 +36,7 @@ Gt2RunButtonStencil >> create [
 
 { #category : #testing }
 Gt2RunButtonStencil >> hasLabel [
-	^ self label notNil and: [ self label notEmpty ]
+	^ self label notNil and: [ self label isEmpty not ]
 ]
 
 { #category : #accessing }

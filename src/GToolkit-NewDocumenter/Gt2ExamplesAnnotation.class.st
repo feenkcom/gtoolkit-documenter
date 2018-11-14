@@ -95,25 +95,44 @@ Gt2ExamplesAnnotation >> exampleGroup [
 
 { #category : #'announcement handling' }
 Gt2ExamplesAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAnnouncement [ 
-	(self isAffectedByChangeClass: aClassAnnouncement classAffected originalName)
+	((self isAffectedByClassChange: aClassAnnouncement classAffected originalName)
+		or: [ self isAffectedByPackageChange: aClassAnnouncement packageAffected name ])
 				ifFalse: [ ^ self ].
 	self rebuildExampleGroup
 ]
 
 { #category : #'announcement handling' }
 Gt2ExamplesAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [
-	((self isAffectedByChangeClass: aClassRenamed newName)
-		or: [ self isAffectedByChangeClass: aClassRenamed oldName ])
+	((self isAffectedByClassChange: aClassRenamed newName)
+		or: [ (self isAffectedByClassChange: aClassRenamed oldName) or: [ 
+				 self isAffectedByPackageChange: aClassRenamed packageAffected name ] ])
 		ifFalse: [ ^ self ].
 	self rebuildExampleGroup
 ]
 
 { #category : #'announcement handling' }
+Gt2ExamplesAnnotation >> handleClassRepackagedAnnouncement: aClassRepackaged [
+	((self isAffectedByPackageChange: aClassRepackaged newPackage name)
+		or: [ self isAffectedByPackageChange: aClassRepackaged oldPackage name ])
+			ifFalse: [ ^ self ].
+	self rebuildExampleGroup
+]
+
+{ #category : #'announcement handling' }
 Gt2ExamplesAnnotation >> handleMethodAnnouncement: aMethodModified [
-	(self 
-		isAffectedByChangeMethod: aMethodModified selector 
-		of: aMethodModified classAffected originalName)
+	((self 
+		isAffectedByMethodChange: aMethodModified selector 
+		of: aMethodModified classAffected originalName) or: [ 
+			 self isAffectedByPackageChange: aMethodModified methodPackage name ])
 				ifFalse: [ ^ self ].
+	self rebuildExampleGroup
+]
+
+{ #category : #'announcement handling' }
+Gt2ExamplesAnnotation >> handlePackageRenamedAnnouncement: aRPackageRenamed [
+	((self isAffectedByPackageChange: aRPackageRenamed newName) or: [ 
+		self isAffectedByPackageChange: aRPackageRenamed oldName ])
+			ifFalse: [ ^ self ].
 	self rebuildExampleGroup
 ]
 
@@ -170,7 +189,7 @@ Gt2ExamplesAnnotation >> infoButtonLabel [
 ]
 
 { #category : #testing }
-Gt2ExamplesAnnotation >> isAffectedByChangeClass: aClassName [
+Gt2ExamplesAnnotation >> isAffectedByClassChange: aClassName [
 	^ (self referencedClasses anySatisfy: [ :eachClass | 
 			eachClass name = aClassName ]) or: [ 
 			self referencedMethods anySatisfy: [ :eachMethod | 
@@ -178,10 +197,16 @@ Gt2ExamplesAnnotation >> isAffectedByChangeClass: aClassName [
 ]
 
 { #category : #testing }
-Gt2ExamplesAnnotation >> isAffectedByChangeMethod: aSelector of: aClassName [
+Gt2ExamplesAnnotation >> isAffectedByMethodChange: aSelector of: aClassName [
 	^ (self referencedMethods anySatisfy: [ :eachMethod | 
 				eachMethod parentName = aClassName and: [ eachMethod selector = aSelector ] ])
-			or: [ self isAffectedByChangeClass: aClassName ]
+			or: [ self isAffectedByClassChange: aClassName ]
+]
+
+{ #category : #testing }
+Gt2ExamplesAnnotation >> isAffectedByPackageChange: aPackageName [
+	^ (self referencedPackages anySatisfy: [ :eachPackage | 
+			eachPackage name = aPackageName ])
 ]
 
 { #category : #testing }
@@ -280,6 +305,14 @@ Gt2ExamplesAnnotation >> registerToSystemChanges [
 			for: self gtSubscriber;
 		subscribe: ClassRenamed
 			send: #handleClassRenamedAnnouncement:
+			to: self
+			for: self gtSubscriber;
+		subscribe: ClassRepackaged
+			send: #handleClassRepackagedAnnouncement:
+			to: self
+			for: self gtSubscriber;
+		subscribe: RPackageRenamed
+			send: #handlePackageRenamedAnnouncement:
 			to: self
 			for: self gtSubscriber;
 		subscribe: Gt2DocumentUpdateRequestedAnnouncement
