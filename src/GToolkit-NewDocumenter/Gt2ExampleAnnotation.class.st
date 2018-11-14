@@ -29,6 +29,11 @@ Gt2ExampleAnnotation class >> tag [
 	^ self constants exampleAnnotationName
 ]
 
+{ #category : #visitor }
+Gt2ExampleAnnotation >> accept: aVisitor [
+	^ aVisitor visitGt2ExampleAnnotation: self
+]
+
 { #category : #'private - actions' }
 Gt2ExampleAnnotation >> browseReferenceFrom: anEvent [ 
 	anEvent modifiers isShift ifTrue: [ ^ self ].
@@ -58,6 +63,12 @@ Gt2ExampleAnnotation >> codeHeight [
 			ifFalse: [ self constants defaultPreviewHeight ] ]
 		emptyValue: [ self constants defaultPreviewHeight ]
 		defaultValue: [ self constants defaultPreviewHeight ]
+]
+
+{ #category : #compatibility }
+Gt2ExampleAnnotation >> doNotDisplaySourceCodeParameterValue [
+	<compatibility>
+	^ self noCode
 ]
 
 { #category : #'accessing - parameter values' }
@@ -96,10 +107,28 @@ Gt2ExampleAnnotation >> handleMethodAnnouncement: aMethodModified [
 	self gtDocument styleTextRequest
 ]
 
+{ #category : #compatibility }
+Gt2ExampleAnnotation >> hasCaption [
+	<compatibility>
+	^ false
+]
+
+{ #category : #compatibility }
+Gt2ExampleAnnotation >> hasLabel [
+	<compatibility>
+	^ false
+]
+
 { #category : #testing }
 Gt2ExampleAnnotation >> isExampleDefined [
 	"Return true if an example method is defined in the system"
 	^ self referencedExample notNil and: [ self referencedExample isDefined ]
+]
+
+{ #category : #compatibility }
+Gt2ExampleAnnotation >> isMethodDefined [
+	<compatibility>
+	^ self isExampleDefined
 ]
 
 { #category : #testing }
@@ -110,6 +139,18 @@ Gt2ExampleAnnotation >> isPreviewDefined [
 { #category : #testing }
 Gt2ExampleAnnotation >> isReferenceDefined [
 	^ self isExampleDefined
+]
+
+{ #category : #compatibility }
+Gt2ExampleAnnotation >> methodDefinition [
+	<compatibility>
+	^ self referencedExample
+]
+
+{ #category : #compatibility }
+Gt2ExampleAnnotation >> methodName [
+	<compatibility>
+	^ self referencedExample fullName
 ]
 
 { #category : #'accessing - parameter values' }
