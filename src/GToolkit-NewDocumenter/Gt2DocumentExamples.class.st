@@ -39,7 +39,7 @@ Gt2DocumentExamples class >> constants [
 	^ Gt2DocumentConstants
 ]
 
-{ #category : #'changes - epicea support' }
+{ #category : #changes }
 Gt2DocumentExamples >> addEpiceaEvent [
 	<gtExample>
 	| anEpicea anAnnouncements |
@@ -52,6 +52,24 @@ Gt2DocumentExamples >> addEpiceaEvent [
 	self assert: anEpicea numberOfEvents equals: 2.
 	self assert: anAnnouncements size equals: 1.
 	^ anEpicea
+]
+
+{ #category : #'document updates' }
+Gt2DocumentExamples >> addingAndRemovingClass [
+	<gtExample>
+	| aDocument aClassName anElement |
+	aDocument := self documentWithNotExistingClass.
+	aClassName := self referencedNotExistingClass asSymbol.
+	anElement := aDocument asElement.
+	self assert: anElement notNil.
+	aDocument editor styleText.
+	self class environment at: aClassName ifAbsent: [ 
+		DmAbDomainObject subclass: aClassName
+			instanceVariableNames: ''
+			classVariableNames: ''
+			package: 'GToolkitDocumenterDummyPackage'. ].
+	self class environment removeClassNamed: aClassName.
+	^ aDocument
 ]
 
 { #category : #figure }
@@ -69,7 +87,7 @@ Gt2DocumentExamples >> brokenFigureFileReference [
 	^ memorySystem addFileNamed: self figureFileName  withContent: self brokenFigureContent
 ]
 
-{ #category : #'changes - existing file' }
+{ #category : #changes }
 Gt2DocumentExamples >> changesContentWithClassDefinition [
 	<gtExample>
 	^ 'OmEntry {
@@ -161,7 +179,7 @@ Gt2DocumentExamples >> changesContentWithClassDefinition [
 '
 ]
 
-{ #category : #'changes - existing file' }
+{ #category : #changes }
 Gt2DocumentExamples >> changesDirectory [
 	<gtExample>
 	| epiceaDir |
@@ -171,19 +189,19 @@ Gt2DocumentExamples >> changesDirectory [
 	^ epiceaDir
 ]
 
-{ #category : #'changes - existing file' }
+{ #category : #changes }
 Gt2DocumentExamples >> changesDirectoryName [
 	<gtExample>
 	^ 'changes'
 ]
 
-{ #category : #'changes - existing file' }
+{ #category : #changes }
 Gt2DocumentExamples >> changesFileNameWithClassDefinition [
 	<gtExample>
 	^ 'class-definition.ombu'
 ]
 
-{ #category : #'changes - existing file' }
+{ #category : #changes }
 Gt2DocumentExamples >> changesFileReferenceWithClassDefinition [
 	<gtExample>
 	^ memorySystem 
@@ -203,7 +221,7 @@ Gt2DocumentExamples >> constants [
 	^ Gt2DocumentConstants
 ]
 
-{ #category : #'changes - existing file' }
+{ #category : #changes }
 Gt2DocumentExamples >> contentWithClassDefinitionChanges [
 	<gtExample>
 	^ '${', self constants changesAnnotationName, ':', 
@@ -235,7 +253,7 @@ Gt2DocumentExamples >> contentWithCommentedLine [
 	^ '%% a commented line'
 ]
 
-{ #category : #'changes - not existing file' }
+{ #category : #changes }
 Gt2DocumentExamples >> contentWithEpiceaChanges [
 	<gtExample>
 	^ '${', self constants changesAnnotationName, ':', self referencesChangesFile , '}$'
@@ -267,7 +285,7 @@ Gt2DocumentExamples >> contentWithExampleParameters [
 		'|', self constants codeHeightParameterName, '=', 50 asString, '}$'
 ]
 
-{ #category : #'class - existing one' }
+{ #category : #class }
 Gt2DocumentExamples >> contentWithExistingClass [
 	<gtExample>
 	^ '${', self constants classAnnotationName, ':', self referencedClass , '}$'
@@ -394,6 +412,13 @@ Gt2DocumentExamples >> contentWithMultipleMethods [
 			'|', self constants showParameterName, '=gtSourceFor:', '}$', String cr, String cr
 ]
 
+{ #category : #class }
+Gt2DocumentExamples >> contentWithNotExistingClass [
+	<gtExample>
+	^ '${', self constants classAnnotationName, ':', self referencedNotExistingClass , '}$'
+
+]
+
 { #category : #'example - two same in one document' }
 Gt2DocumentExamples >> contentWithTwoExistingExamples [
 	<gtExample>
@@ -422,6 +447,23 @@ Gt2DocumentExamples >> demoDocument [
 Gt2DocumentExamples >> demoDocument2 [
 	<gtExample>
 	^ Gt2Document new fileReference: self demoFileReference2; read.
+]
+
+{ #category : #'document updates' }
+Gt2DocumentExamples >> demoDocumentUpdateError [
+	<gtExample>
+	| aDocument |
+	aDocument := Gt2Document new fileReference: self demoFileReference; read.
+	2 timesRepeat: [ 
+		DmAbDomainObject subclass: #DmAbAddress
+			instanceVariableNames: 'city country telephone'
+			classVariableNames: ''
+			package: 'AddressBook'.
+		4 milliSeconds wait.
+		self class environment removeClassNamed: #DmAbAddress.
+		4 milliSeconds wait.
+	 ].
+	^ aDocument
 ]
 
 { #category : #demo }
@@ -518,7 +560,7 @@ Gt2DocumentExamples >> documentWithBrokenFigure [
 	^ aDocument
 ]
 
-{ #category : #'changes - existing file' }
+{ #category : #changes }
 Gt2DocumentExamples >> documentWithClassDefinitionChanges [
 	<gtExample>
 	| aDocument aChangesFile |
@@ -580,7 +622,7 @@ Gt2DocumentExamples >> documentWithEditedExistingMethodAnnotation [
 	^ aDocument
 ]
 
-{ #category : #'changes - not existing file' }
+{ #category : #changes }
 Gt2DocumentExamples >> documentWithEpiceaChanges [
 	<gtExample>
 	| aDocument |
@@ -613,7 +655,7 @@ Gt2DocumentExamples >> documentWithExampleParameters [
 	^ aDocument
 ]
 
-{ #category : #'class - existing one' }
+{ #category : #class }
 Gt2DocumentExamples >> documentWithExistingClass [
 	<gtExample>
 	| aDocument |
@@ -751,6 +793,22 @@ Gt2DocumentExamples >> documentWithMultipleMethods [
 	^ aDocument
 ]
 
+{ #category : #class }
+Gt2DocumentExamples >> documentWithNotExistingClass [
+	<gtExample>
+	| aClassName aDocument aClass |
+	aClassName := self referencedNotExistingClass.
+	aClass := self class environment at: aClassName ifAbsent: [ nil ].
+	self assert: aClass isNil.
+	aDocument := self defaultDocument text: self contentWithNotExistingClass.
+	aDocument editor styleText.
+	self
+		assert: aDocument text asString
+		equals: self contentWithNotExistingClass.
+	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
 { #category : #figure }
 Gt2DocumentExamples >> documentWithNotExistingFigure [
 	<gtExample>
@@ -795,7 +853,7 @@ Gt2DocumentExamples >> emptyDocument [
 	^ aDocument
 ]
 
-{ #category : #'changes - epicea support' }
+{ #category : #changes }
 Gt2DocumentExamples >> epicea [
 	<gtExample>
 	| aChangesFile anEpicea anAnnouncements |
@@ -856,9 +914,15 @@ Gt2DocumentExamples >> fileReferenceWithInputFile [
 ]
 
 { #category : #basic }
+Gt2DocumentExamples >> fooString [
+	<gtExample>
+	^ 'Foo'
+]
+
+{ #category : #basic }
 Gt2DocumentExamples >> fooText [
 	<gtExample>
-	^ 'Foo' asRopedText
+	^ self fooString asRopedText
 ]
 
 { #category : #'iceberg file' }
@@ -907,7 +971,7 @@ Gt2DocumentExamples >> modifyAndStoreToFileReference [
 	^ aDocument 
 ]
 
-{ #category : #'changes - epicea support' }
+{ #category : #changes }
 Gt2DocumentExamples >> ombuEntry [
 	<gtExample>
 	| anEpLog |
@@ -944,7 +1008,7 @@ Gt2DocumentExamples >> pillarParser [
 	
 ]
 
-{ #category : #'class - existing one' }
+{ #category : #class }
 Gt2DocumentExamples >> referencedClass [
 	<gtExample>
 	^ self className
@@ -962,7 +1026,13 @@ Gt2DocumentExamples >> referencedMethod [
 	^ self class >> #referencedMethod
 ]
 
-{ #category : #'changes - not existing file' }
+{ #category : #class }
+Gt2DocumentExamples >> referencedNotExistingClass [
+	<gtExample>
+	^ self className, self fooString
+]
+
+{ #category : #changes }
 Gt2DocumentExamples >> referencesChangesFile [
 	<gtExample>
 	^ '01-changes.ombu'
@@ -983,7 +1053,7 @@ Gt2DocumentExamples >> registeredDocument [
 	^ aDocument
 ]
 
-{ #category : #'changes - epicea support' }
+{ #category : #changes }
 Gt2DocumentExamples >> removeEpiceaEvent [
 	<gtExample>
 	| anEpicea anAnnouncements |
