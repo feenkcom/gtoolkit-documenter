@@ -43,7 +43,7 @@ GtPillarExampleAnnotationHtmlWriter >> writeExampleToFile: aFileReference [
 
 	aView := GtPhlowView sequentialExplicit 
 		on: anExampleReturnValue 
-		perform: self node showParameterValue.
+		perform: self node previewShowSelector.
 	aView asElementDo: [ :anElement | aContainer addChild: anElement ].
 	
 	aContainer forceLayout.

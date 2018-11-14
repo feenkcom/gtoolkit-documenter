@@ -201,6 +201,11 @@ GtPillarExampleAnnotation >> previewHeightParameterValue [
 ]
 
 { #category : #'accessing - parameter values' }
+GtPillarExampleAnnotation >> previewShowSelector [
+	^ self showParameterValue
+]
+
+{ #category : #'accessing - parameter values' }
 GtPillarExampleAnnotation >> showParameterValue [
 	<return: #Symbol>
 	^ GtDocumenterUtility 
