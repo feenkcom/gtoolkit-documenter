@@ -64,7 +64,7 @@ Gt2DocumentExamples >> addingAndRemovingClass [
 	self assert: anElement notNil.
 	aDocument editor styleText.
 	self class environment at: aClassName ifAbsent: [ 
-		DmAbDomainObject subclass: aClassName
+		Object subclass: aClassName
 			instanceVariableNames: ''
 			classVariableNames: ''
 			package: 'GToolkitDocumenterDummyPackage'. ].
@@ -468,12 +468,12 @@ Gt2DocumentExamples >> demoDocumentUpdateError [
 	| aDocument |
 	aDocument := Gt2Document new fileReference: self demoFileReference; read.
 	2 timesRepeat: [ 
-		DmAbDomainObject subclass: #DmAbAddress
+		Object subclass: #DmAbAddressFoo
 			instanceVariableNames: 'city country telephone'
 			classVariableNames: ''
-			package: 'AddressBook'.
+			package: 'AddressBookFoo'.
 		4 milliSeconds wait.
-		self class environment removeClassNamed: #DmAbAddress.
+		self class environment removeClassNamed: #DmAbAddressFoo.
 		4 milliSeconds wait.
 	 ].
 	^ aDocument

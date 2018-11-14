@@ -51,7 +51,7 @@ GtPillarExamplesAnnotation >> exampleGroup [
 
 { #category : #testing }
 GtPillarExamplesAnnotation >> hasExamples [
-	^ self exampleGroup size isZero not
+	^ self cachedExampleGroup size isZero not
 ]
 
 { #category : #'accessing - parameter values' }

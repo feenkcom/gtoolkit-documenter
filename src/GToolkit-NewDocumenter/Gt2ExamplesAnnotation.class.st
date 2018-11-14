@@ -27,12 +27,17 @@ Gt2ExamplesAnnotation class >> tag [
 	^ self constants examplesAnnotationName
 ]
 
+{ #category : #'private - cache' }
+Gt2ExamplesAnnotation >> annotationCacheValueClass [
+	^ Gt2ExamplesAnnotationCacheValue
+]
+
 { #category : #'private - actions' }
 Gt2ExamplesAnnotation >> browseReferenceFrom: anEvent [
 	anEvent modifiers isShift ifTrue: [ ^ self ].
 	self hasExample ifFalse: [ ^ self inform: 'There is no defined example' ].
 	anEvent target fireEvent: (GtPhlowObjectToSpawn new 
-		object: self exampleGroup;
+		object: self cachedExampleGroup;
 		sourceElement: anEvent target)
 ]
 
@@ -40,12 +45,31 @@ Gt2ExamplesAnnotation >> browseReferenceFrom: anEvent [
 Gt2ExamplesAnnotation >> browseResultsFrom: aWidget [
 	| aResult |
 	self hasExample ifFalse: [ ^ self inform: 'There is no defined example' ].
-	aResult := self exampleGroup numberOfFailingExamples isZero 
-		ifTrue: [ self exampleGroup ]
-		ifFalse: [ GtExampleGroup withAll: (self exampleGroup select: [ :each | each isFailure ]) ].
+	aResult := self cachedExampleGroup numberOfFailingExamples isZero 
+		ifTrue: [ self cachedExampleGroup ]
+		ifFalse: [ GtExampleGroup withAll: (self cachedExampleGroup select: [ :each | each isFailure ]) ].
 	aWidget fireEvent: (GtPhlowObjectToSpawn new 
 		object: aResult;
 		sourceElement: aWidget)
+]
+
+{ #category : #'private - cache' }
+Gt2ExamplesAnnotation >> cachedExampleGroup [
+	<return: #GtExampleGroup or: nil>
+	| aNewExampleGroup |
+	self gtDocument 
+		cacheAt: self cacheKey
+		ifPresent: [ :aCachedValue | 
+			aNewExampleGroup := aCachedValue exampleGroup.
+			aNewExampleGroup ifNil: [ 
+				aNewExampleGroup := self newExampleGroup.
+				aCachedValue epicea: aNewExampleGroup ] ]
+		ifAbsentPut: [ 
+			aNewExampleGroup := self newExampleGroup.
+			self annotationCacheValueClass new 
+				exampleGroup: aNewExampleGroup;
+				isExpanded: self expandedParameterValue ].
+	^ aNewExampleGroup
 ]
 
 { #category : #'accessing - parameter values' }
@@ -53,7 +77,7 @@ Gt2ExamplesAnnotation >> defaultShowSelector [
 	^ self constants defaultExamplesShowSelector
 ]
 
-{ #category : #accessing }
+{ #category : #'private - cache' }
 Gt2ExamplesAnnotation >> exampleGroup [
 	<return: #GtExampleGroup>
 	| theMethods theClasses thePackages |
@@ -70,7 +94,14 @@ Gt2ExamplesAnnotation >> exampleGroup [
 
 { #category : #testing }
 Gt2ExamplesAnnotation >> hasExample [
-	^ self exampleGroup examples notEmpty
+	| aGroup |
+	aGroup := self cachedExampleGroup.
+	^ aGroup notNil and: [ aGroup examples notEmpty ]
+]
+
+{ #category : #testing }
+Gt2ExamplesAnnotation >> hasFailingExample [
+	^ self hasExample and: [ self cachedExampleGroup numberOfFailingExamples isZero not ]
 ]
 
 { #category : #'private - styling' }
@@ -80,14 +111,14 @@ Gt2ExamplesAnnotation >> infoButtonAttribute [
 		equality: self constants infoButtonLabel;
 		stencil: (Gt2ButtonStencilBuilder new
 			label: self infoButtonLabel;
-			action: [ self runExamples ])
+			icon: self constants infoButtonIcon;
+			action: [ :aWidget | self browseResultsFrom: aWidget ])
 ]
 
 { #category : #'private - styling' }
 Gt2ExamplesAnnotation >> infoButtonLabel [
 	<return: #BlRope>
-	^ self constants runButtonLabel, ' ',
-		self exampleGroup numberOfFailingExamples asString,
+	^ self cachedExampleGroup numberOfFailingExamples asString,
 		' failures'
 ]
 
@@ -101,9 +132,23 @@ Gt2ExamplesAnnotation >> isReferenceDefined [
 	^ self hasExample
 ]
 
+{ #category : #'private - cache' }
+Gt2ExamplesAnnotation >> newExampleGroup [
+	<return: #GtExampleGroup>
+	| theMethods theClasses thePackages |
+	theMethods := self referencedMethods flatCollect: [ :eachMethodDef | 
+			eachMethodDef isDefined ifTrue: [ eachMethodDef compiledMethod gtExamples ] ifFalse: [ #() ] ].
+	theClasses := self referencedClasses flatCollect: [ :eachClassDef | 
+			eachClassDef isDefined ifTrue: [ eachClassDef realClass gtExamples ] ifFalse: [ #() ] ].
+	thePackages := self referencedPackages flatCollect: [ :eachPackageDef | 
+			(RPackageOrganizer default includesPackageNamed: eachPackageDef name) 
+				ifTrue: [ eachPackageDef realPackage gtExamplesContained ] ifFalse: [ #() ] ].
+	^ GtExampleGroup withAll: theMethods, theClasses, thePackages
+]
+
 { #category : #accessing }
 Gt2ExamplesAnnotation >> objectToPreview [
-	^ self exampleGroup
+	^ self cachedExampleGroup
 ]
 
 { #category : #'accessing - parameter values' }
@@ -163,13 +208,19 @@ Gt2ExamplesAnnotation >> runButtonAttribute [
 Gt2ExamplesAnnotation >> runButtonLabel [
 	<return: #BlRope>
 	^ self constants runButtonLabel, ' ',
-		self exampleGroup numberOfExamples asString,
+		self cachedExampleGroup numberOfExamples asString,
 		' examples'
 ]
 
 { #category : #'private - actions' }
 Gt2ExamplesAnnotation >> runExamples [
-	self exampleGroup runAll.
+	self cachedExampleGroup runAll.
+	self gtDocument 
+		cacheAt: self cacheKey
+		ifPresent: [ :aCachedValue | 
+			"hack, preview should update itself"
+			aCachedValue preview: nil ]
+		ifAbsent: [ "ignore" ].
 	self gtDocument styleTextRequest
 ]
 
@@ -184,7 +235,7 @@ Gt2ExamplesAnnotation >> styleInText: aBlRope [
 
 { #category : #'private - styling' }
 Gt2ExamplesAnnotation >> styleInfoButtonInText: aBlRope [
-	self hasExample ifFalse: [ ^ self ].
+	self hasFailingExample ifFalse: [ ^ self ].
 	(aBlRope from: self stop to: self stop) 
 		attribute: self infoButtonAttribute
 ]

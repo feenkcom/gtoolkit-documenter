@@ -157,6 +157,11 @@ Gt2DocumentConstants class >> icebergRepositoriesLocation [
 ]
 
 { #category : #ui }
+Gt2DocumentConstants class >> infoButtonIcon [
+	^ BrGlamorousIcons inspect
+]
+
+{ #category : #ui }
 Gt2DocumentConstants class >> infoButtonLabel [
 	^ 'Info'
 ]
