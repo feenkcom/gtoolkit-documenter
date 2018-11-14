@@ -22,6 +22,11 @@ Gt2MethodAnnotation class >> tag [
 	^ self constants methodAnnotationName
 ]
 
+{ #category : #visitor }
+Gt2MethodAnnotation >> accept: aVisitor [
+	^ aVisitor visitGt2MethodAnnotation: self
+]
+
 { #category : #'private - actions' }
 Gt2MethodAnnotation >> browseReferenceFrom: anEvent [
 	anEvent modifiers isShift ifTrue: [ ^ self ].

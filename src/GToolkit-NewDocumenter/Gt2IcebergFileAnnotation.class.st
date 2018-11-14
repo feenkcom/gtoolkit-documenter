@@ -21,6 +21,11 @@ Gt2IcebergFileAnnotation class >> tag [
 	^ self constants icebergFileAnnotationName 
 ]
 
+{ #category : #visitor }
+Gt2IcebergFileAnnotation >> accept: aVisitor [
+	^ aVisitor visitGt2IcebergFileAnnotation: self
+]
+
 { #category : #'private - actions' }
 Gt2IcebergFileAnnotation >> browseReferenceFrom: aBlClickEvent [ 
 	aBlClickEvent modifiers isShift ifTrue: [ ^ self ].
