@@ -38,7 +38,7 @@ Gt2MethodAnnotation >> browseReferenceFrom: anEvent [
 
 { #category : #'accessing - parameter values' }
 Gt2MethodAnnotation >> defaultShowSelector [
-	^ self constants methodDefinitionShowSelector
+	^ self constants defaultMethodShowSelector
 ]
 
 { #category : #'announcement handling' }

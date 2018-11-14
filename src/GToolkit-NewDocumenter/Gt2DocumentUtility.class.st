@@ -17,6 +17,20 @@ Gt2DocumentUtility class >> booleanValueOf: aString in: aDictionary emptyValue: 
 ]
 
 { #category : #'pillar - parameter values' }
+Gt2DocumentUtility class >> classDefinitionsFromArray: aCollection [ 
+	<return: #Array of: #RGClassDefinition>
+	self 
+		assert: [ aCollection notNil ]
+		description: [ 'Class definitions has to be a collection' ].
+	^ Array streamContents: [ :aStream |
+			aCollection do: [ :eachClassName | 
+				| aClassDef |
+				aClassDef := GtSystemUtility classDefinitionFromString: eachClassName asString.
+				aStream nextPut: aClassDef.
+		] ].
+]
+
+{ #category : #'pillar - parameter values' }
 Gt2DocumentUtility class >> convertToBoolean: aStringOrBoolean [ 
 	<return: #Boolean or: nil>
 	| aValue |
@@ -51,6 +65,41 @@ Gt2DocumentUtility class >> linkColor: aBoolean [
 	^ aBoolean 
 		ifTrue: [ self constants linkColor ]
 		ifFalse: [ self constants linkWithErrorColor ].
+]
+
+{ #category : #'pillar - parameter values' }
+Gt2DocumentUtility class >> methodDefinitionsFromArray: aCollection [ 
+	<return: #Array of: #RGMethodDefinition>
+	| aStep anIndex |
+	self 
+		assert: [ aCollection notNil ]
+		description: [ 'Method definitions has to be a collection' ].
+	aStep := 3.
+	anIndex := 1.
+	^ Array streamContents: [ :aStream |
+		[ anIndex + aStep - 1 <= aCollection size ] whileTrue: [ 
+			| aClass aSplitter aSelector aMethodDef |
+			aClass := aCollection at: anIndex.
+			aSplitter := aCollection at: anIndex + 1.
+			aSelector := aCollection at: anIndex + 2.
+			aMethodDef := GtSystemUtility methodDefinitionFromString: aClass asString, aSplitter asString, '#', aSelector asString.
+			aStream nextPut: aMethodDef.
+			anIndex := anIndex + aStep.
+		] ].
+]
+
+{ #category : #'pillar - parameter values' }
+Gt2DocumentUtility class >> packageDefinitionsFromArray: aCollection [ 
+	<return: #Array of: #RGPackage>
+	self 
+		assert: [ aCollection notNil ]
+		description: [ 'Package definitions has to be a collection' ].
+	^ Array streamContents: [ :aStream |
+			aCollection do: [ :eachPackageName | 
+				| aClassDef |
+				aClassDef := GtSystemUtility packageDefinitionFromString: eachPackageName asString.
+				aStream nextPut: aClassDef.
+		] ].
 ]
 
 { #category : #'text styling' }

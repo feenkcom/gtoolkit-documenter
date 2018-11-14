@@ -19,11 +19,6 @@ Gt2DocumentConstants class >> changesAnnotationName [
 	^ #changes
 ]
 
-{ #category : #'pillar parameter default values' }
-Gt2DocumentConstants class >> changesDefinitionShowSelector [
-	^ #gtPreviewFor:
-]
-
 { #category : #files }
 Gt2DocumentConstants class >> changesFileExtension [
 	^ '.ombu'
@@ -32,11 +27,6 @@ Gt2DocumentConstants class >> changesFileExtension [
 { #category : #'pillar annotation names' }
 Gt2DocumentConstants class >> classAnnotationName [
 	^ #class
-]
-
-{ #category : #'pillar parameter default values' }
-Gt2DocumentConstants class >> classDefinitionShowSelector [
-	^ #gtDefinitionFor:
 ]
 
 { #category : #'pillar parameter names' }
@@ -65,9 +55,34 @@ Gt2DocumentConstants class >> createButtonLabel [
 ]
 
 { #category : #'pillar parameter default values' }
+Gt2DocumentConstants class >> defaultChangesShowSelector [
+	^ #gtPreviewFor:
+]
+
+{ #category : #'pillar parameter default values' }
+Gt2DocumentConstants class >> defaultClassShowSelector [
+	^ #gtDefinitionFor:
+]
+
+{ #category : #'pillar parameter default values' }
 Gt2DocumentConstants class >> defaultCodeHeight [
 	"Zero means use a default Coder value"
 	^ 0
+]
+
+{ #category : #'pillar parameter default values' }
+Gt2DocumentConstants class >> defaultExamplesShowSelector [
+	^ #gtExamplesFor:
+]
+
+{ #category : #'pillar parameter default values' }
+Gt2DocumentConstants class >> defaultFigureShowSelector [
+	^ #gtFigureFor:
+]
+
+{ #category : #'pillar parameter default values' }
+Gt2DocumentConstants class >> defaultMethodShowSelector [
+	^ #gtSourceFor:
 ]
 
 { #category : #'pillar parameter default values' }
@@ -113,11 +128,6 @@ Gt2DocumentConstants class >> examplesAnnotationName [
 { #category : #'pillar parameter names' }
 Gt2DocumentConstants class >> expandedParameterName [
 	^ #expanded
-]
-
-{ #category : #'pillar parameter default values' }
-Gt2DocumentConstants class >> figureShowSelector [
-	^ #gtFigureFor:
 ]
 
 { #category : #text }
@@ -195,11 +205,6 @@ Gt2DocumentConstants class >> matchLineIdentificator [
 { #category : #'pillar annotation names' }
 Gt2DocumentConstants class >> methodAnnotationName [
 	^ #method
-]
-
-{ #category : #'pillar parameter default values' }
-Gt2DocumentConstants class >> methodDefinitionShowSelector [
-	^ #gtSourceFor:
 ]
 
 { #category : #'pillar parameter names' }

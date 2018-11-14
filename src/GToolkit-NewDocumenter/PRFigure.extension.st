@@ -108,7 +108,7 @@ PRFigure >> previewAttributes [
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRFigure >> showParameterValue [
-	^ Gt2DocumentConstants figureShowSelector
+	^ Gt2DocumentConstants defaultFigureShowSelector
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }

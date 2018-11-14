@@ -38,7 +38,7 @@ Gt2ClassAnnotation >> browseReferenceFrom: anEvent [
 
 { #category : #'accessing - parameter values' }
 Gt2ClassAnnotation >> defaultShowSelector [
-	^ self constants classDefinitionShowSelector
+	^ self constants defaultClassShowSelector
 ]
 
 { #category : #'announcement handling' }

@@ -285,6 +285,19 @@ Gt2DocumentExamples >> contentWithExampleParameters [
 		'|', self constants codeHeightParameterName, '=', 50 asString, '}$'
 ]
 
+{ #category : #examples }
+Gt2DocumentExamples >> contentWithExamples [
+	<gtExample>
+	^ '${', self constants examplesAnnotationName, ':', 
+		self constants classesParameterName , '=#(', 
+			Gt2DocumentExamples name, ' ', BrBasicExamples name, ')',
+		'|', self constants methodsParameterName , '=#(', 
+			(BrExamplesShowroom>>#glamorousLargeButton) printString, ')',
+		'|', self constants packagesParameterName, '=#(', 
+			GtPhlowExamples package name asString, ')', '}$'
+
+]
+
 { #category : #class }
 Gt2DocumentExamples >> contentWithExistingClass [
 	<gtExample>
@@ -652,6 +665,17 @@ Gt2DocumentExamples >> documentWithExampleParameters [
 	aDocument editor styleText.
 	self assert: aDocument text asString equals: self contentWithExampleParameters.
 	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
+{ #category : #examples }
+Gt2DocumentExamples >> documentWithExamples [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExamples.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithExamples.
+	"self assert: aDocument isSubscribedToSystem."
 	^ aDocument
 ]
 
