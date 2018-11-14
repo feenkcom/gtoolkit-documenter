@@ -102,7 +102,7 @@ Gt2DocumentConstants class >> editButtonLabel [
 
 { #category : #'pillar annotation names' }
 Gt2DocumentConstants class >> exampleAnnotationName [
-	^ #exampleFoo
+	^ #example
 ]
 
 { #category : #'pillar annotation names' }
