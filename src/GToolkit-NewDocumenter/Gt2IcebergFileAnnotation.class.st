@@ -39,7 +39,7 @@ Gt2IcebergFileAnnotation >> browseReferenceFrom: aBlClickEvent [
 { #category : #'accessing - parameter values' }
 Gt2IcebergFileAnnotation >> fileReference [
 	<return: #FileReference or: nil>
-	^ GtDocumenterUtility 
+	^ self utility 
 		valueOf: self constants pathParameterName
 		in: self parameters
 		value: [ :aValue | 
