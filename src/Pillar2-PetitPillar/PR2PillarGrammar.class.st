@@ -311,7 +311,11 @@ PR2PillarGrammar >> annotationMarkupSeparator [
 
 { #category : #'grammar - Annotation' }
 PR2PillarGrammar >> annotationParameters [
-	^ (annotationMarkupSeparator , parametersUntilEndAnnotation) ==> [ :array | array second ]
+	^	epsilonToken , 	
+		annotationMarkupSeparator ,
+		epsilonToken , 
+		parametersUntilEndAnnotation, 
+		epsilonToken
 ]
 
 { #category : #'grammar - Annotation' }

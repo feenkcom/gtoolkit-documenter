@@ -45,9 +45,10 @@ Gt2ExamplesAnnotation >> browseReferenceFrom: anEvent [
 Gt2ExamplesAnnotation >> browseResultsFrom: aWidget [
 	| aResult |
 	self hasExample ifFalse: [ ^ self inform: 'There is no defined example' ].
-	aResult := self cachedExampleGroup numberOfFailures isZero 
+	aResult := self cachedExampleGroup numberOfFailuresAndErrors isZero 
 		ifTrue: [ self cachedExampleGroup ]
-		ifFalse: [ GtExampleGroup withAll: (self cachedExampleGroup select: [ :each | each isFailure ]) ].
+		ifFalse: [ GtExampleGroup withAll: (self cachedExampleGroup 
+			select: [ :each | each isFailure or: [ each isError ] ]) ].
 	aWidget fireEvent: (GtPhlowObjectToSpawn new 
 		object: aResult;
 		sourceElement: aWidget)
@@ -63,7 +64,7 @@ Gt2ExamplesAnnotation >> cachedExampleGroup [
 			aNewExampleGroup := aCachedValue exampleGroup.
 			aNewExampleGroup ifNil: [ 
 				aNewExampleGroup := self newExampleGroup.
-				aCachedValue epicea: aNewExampleGroup ] ]
+				aCachedValue exampleGroup: aNewExampleGroup ] ]
 		ifAbsentPut: [ 
 			aNewExampleGroup := self newExampleGroup.
 			self annotationCacheValueClass new 
@@ -92,6 +93,30 @@ Gt2ExamplesAnnotation >> exampleGroup [
 	^ exampleGroup := GtExampleGroup withAll: theMethods, theClasses, thePackages
 ]
 
+{ #category : #'announcement handling' }
+Gt2ExamplesAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAnnouncement [ 
+	(self isAffectedByChangeClass: aClassAnnouncement classAffected originalName)
+				ifFalse: [ ^ self ].
+	self rebuildExampleGroup
+]
+
+{ #category : #'announcement handling' }
+Gt2ExamplesAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [
+	((self isAffectedByChangeClass: aClassRenamed newName)
+		or: [ self isAffectedByChangeClass: aClassRenamed oldName ])
+		ifFalse: [ ^ self ].
+	self rebuildExampleGroup
+]
+
+{ #category : #'announcement handling' }
+Gt2ExamplesAnnotation >> handleMethodAnnouncement: aMethodModified [
+	(self 
+		isAffectedByChangeMethod: aMethodModified selector 
+		of: aMethodModified classAffected originalName)
+				ifFalse: [ ^ self ].
+	self rebuildExampleGroup
+]
+
 { #category : #testing }
 Gt2ExamplesAnnotation >> hasErrors [
 	^ self hasExample and: [ self cachedExampleGroup numberOfErrors isZero not ]
@@ -114,6 +139,16 @@ Gt2ExamplesAnnotation >> hasFailuresOrErrors [
 	^ self hasExample and: [ self cachedExampleGroup numberOfFailuresAndErrors isZero not ]
 ]
 
+{ #category : #'private - actions' }
+Gt2ExamplesAnnotation >> infoAttribute [
+	^ Gt2ButtonAttribute new
+		beAppend;
+		equality: self constants infoButtonLabel;
+		stencil: (Gt2ButtonStencilBuilder new
+			label: self infoButtonLabel;
+			action: [ :aWidget | self browseResultsFrom: aWidget ])
+]
+
 { #category : #'private - styling' }
 Gt2ExamplesAnnotation >> infoButtonAttribute [
 	^ Gt2ButtonAttribute new
@@ -132,6 +167,21 @@ Gt2ExamplesAnnotation >> infoButtonLabel [
 	anAmount := self cachedExampleGroup numberOfFailuresAndErrors.
 	^ anAmount asString,
 		(' issue' asPluralBasedOn: anAmount)
+]
+
+{ #category : #testing }
+Gt2ExamplesAnnotation >> isAffectedByChangeClass: aClassName [
+	^ (self referencedClasses anySatisfy: [ :eachClass | 
+			eachClass name = aClassName ]) or: [ 
+			self referencedMethods anySatisfy: [ :eachMethod | 
+				eachMethod parentName = aClassName ] ]
+]
+
+{ #category : #testing }
+Gt2ExamplesAnnotation >> isAffectedByChangeMethod: aSelector of: aClassName [
+	^ (self referencedMethods anySatisfy: [ :eachMethod | 
+				eachMethod parentName = aClassName and: [ eachMethod selector = aSelector ] ])
+			or: [ self isAffectedByChangeClass: aClassName ]
 ]
 
 { #category : #testing }
@@ -161,6 +211,18 @@ Gt2ExamplesAnnotation >> newExampleGroup [
 { #category : #accessing }
 Gt2ExamplesAnnotation >> objectToPreview [
 	^ self cachedExampleGroup
+]
+
+{ #category : #'private - actions' }
+Gt2ExamplesAnnotation >> rebuildExampleGroup [
+	self gtDocument 
+		cacheAt: self cacheKey
+		ifPresent: [ :aCachedValue | 
+			"hack, preview should update itself"
+			aCachedValue preview: nil.
+			aCachedValue exampleGroup: nil ]
+		ifAbsent: [ "ignore" ].
+	self gtDocument styleTextRequest
 ]
 
 { #category : #'accessing - parameter values' }
@@ -205,6 +267,27 @@ Gt2ExamplesAnnotation >> referencedPackages [
 				defaultValue: [ #() ] ]
 ]
 
+{ #category : #subscriptions }
+Gt2ExamplesAnnotation >> registerToSystemChanges [
+	self gtDocument
+		subscribe: MethodAdded, MethodModified, MethodRemoved
+			send: #handleMethodAnnouncement:
+			to: self
+			for: self gtSubscriber;
+		subscribe: ClassAdded, ClassRemoved
+			send: #handleClassAddedOrRemovedAnnouncement:
+			to: self
+			for: self gtSubscriber;
+		subscribe: ClassRenamed
+			send: #handleClassRenamedAnnouncement:
+			to: self
+			for: self gtSubscriber;
+		subscribe: Gt2DocumentUpdateRequestedAnnouncement
+			send: #handleDocumentUpdateRequestedAnnouncement:
+			to: self
+			for: self gtSubscriber.
+]
+
 { #category : #'private - styling' }
 Gt2ExamplesAnnotation >> runButtonAttribute [
 	^ Gt2ButtonAttribute new
@@ -244,6 +327,7 @@ Gt2ExamplesAnnotation >> styleInText: aBlRope [
 	self styleExpandingPreviewInText: aBlRope.
 	self styleRunButtonInText: aBlRope.
 	self styleInfoButtonInText: aBlRope.
+	self registerToSystemChanges.
 ]
 
 { #category : #'private - styling' }
@@ -251,6 +335,12 @@ Gt2ExamplesAnnotation >> styleInfoButtonInText: aBlRope [
 	self hasFailuresOrErrors ifFalse: [ ^ self ].
 	(aBlRope from: self stop to: self stop) 
 		attribute: self infoButtonAttribute
+]
+
+{ #category : #'private - styling' }
+Gt2ExamplesAnnotation >> styleLinkInText: aBlRope [
+	self hasChildren ifFalse: [ ^ self ].
+	self utility styleLinkInText: aBlRope forNode: self withLinkAt: self children first
 ]
 
 { #category : #'private - styling' }

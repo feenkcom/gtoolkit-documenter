@@ -432,6 +432,15 @@ Gt2DocumentExamples >> contentWithNotExistingClass [
 
 ]
 
+{ #category : #examples }
+Gt2DocumentExamples >> contentWithNotExistingExamples [
+	<gtExample>
+	^ '${', self constants examplesAnnotationName, ':', 
+		self constants classesParameterName , '=#(', 
+			self referencedNotExistingClass, ')' , '}$'
+
+]
+
 { #category : #'example - two same in one document' }
 Gt2DocumentExamples >> contentWithTwoExistingExamples [
 	<gtExample>
@@ -675,7 +684,7 @@ Gt2DocumentExamples >> documentWithExamples [
 	aDocument := self defaultDocument text: self contentWithExamples.
 	aDocument editor styleText.
 	self assert: aDocument text asString equals: self contentWithExamples.
-	"self assert: aDocument isSubscribedToSystem."
+	self assert: aDocument isSubscribedToSystem.
 	^ aDocument
 ]
 
@@ -829,6 +838,17 @@ Gt2DocumentExamples >> documentWithNotExistingClass [
 	self
 		assert: aDocument text asString
 		equals: self contentWithNotExistingClass.
+	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
+{ #category : #examples }
+Gt2DocumentExamples >> documentWithNotExistingExamples [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithNotExistingExamples.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithNotExistingExamples.
 	self assert: aDocument isSubscribedToSystem.
 	^ aDocument
 ]
