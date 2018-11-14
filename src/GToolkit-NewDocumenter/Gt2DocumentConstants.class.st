@@ -40,6 +40,11 @@ Gt2DocumentConstants class >> classDefinitionShowSelector [
 ]
 
 { #category : #'pillar parameter names' }
+Gt2DocumentConstants class >> classesParameterName [
+	^ #classes
+]
+
+{ #category : #'pillar parameter names' }
 Gt2DocumentConstants class >> codeExpandedParameterName [
 	^ #codeExpanded
 ]
@@ -97,7 +102,12 @@ Gt2DocumentConstants class >> editButtonLabel [
 
 { #category : #'pillar annotation names' }
 Gt2DocumentConstants class >> exampleAnnotationName [
-	^ #example
+	^ #exampleFoo
+]
+
+{ #category : #'pillar annotation names' }
+Gt2DocumentConstants class >> examplesAnnotationName [
+	^ #examples
 ]
 
 { #category : #'pillar parameter names' }
@@ -193,6 +203,11 @@ Gt2DocumentConstants class >> methodDefinitionShowSelector [
 ]
 
 { #category : #'pillar parameter names' }
+Gt2DocumentConstants class >> methodsParameterName [
+	^ #methods
+]
+
+{ #category : #'pillar parameter names' }
 Gt2DocumentConstants class >> nameParameterName [
 	^ #name
 ]
@@ -200,6 +215,11 @@ Gt2DocumentConstants class >> nameParameterName [
 { #category : #'pillar parameter names' }
 Gt2DocumentConstants class >> noCodeParameterName [
 	^ #noCode
+]
+
+{ #category : #'pillar parameter names' }
+Gt2DocumentConstants class >> packagesParameterName [
+	^ #packages
 ]
 
 { #category : #'pillar parameter names' }
