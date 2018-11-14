@@ -9,7 +9,8 @@ Class {
 		'cache',
 		'isSubscribedToSystem',
 		'variableBindings',
-		'storageStrategy'
+		'storageStrategy',
+		'styleTextProcess'
 	],
 	#category : #'GToolkit-NewDocumenter-Model'
 }
@@ -111,6 +112,11 @@ Gt2Document >> editor [
 	^ editor
 ]
 
+{ #category : #private }
+Gt2Document >> ensureStyleTextProcess [
+	styleTextProcess start
+]
+
 { #category : #initialization }
 Gt2Document >> fileReference: aFileReference [ 
 	self 
@@ -157,6 +163,7 @@ Gt2Document >> hasDocumentSubscriptions [
 { #category : #initialization }
 Gt2Document >> initialize [
 	super initialize.
+	styleTextProcess := Gt2StyleTextProcess new document: self.
 	announcer := Announcer new.
 	isSubscribedToSystem := false.
 	variableBindings := GtPlaygroundBindings new.
@@ -242,7 +249,8 @@ Gt2Document >> strategy: aGt2StorageStrategy [
 
 { #category : #actions }
 Gt2Document >> styleTextRequest [
-	self editor styleText.
+	styleTextProcess request.
+	"self editor styleText."
 ]
 
 { #category : #subscriptions }
