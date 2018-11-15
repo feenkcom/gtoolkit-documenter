@@ -169,6 +169,11 @@ Gt2ChangesAnnotation >> objectToPreview [
 	^ self cachedChanges
 ]
 
+{ #category : #accessing }
+Gt2ChangesAnnotation >> referenceParameterName [
+	^ self constants pathParameterName
+]
+
 { #category : #subscriptions }
 Gt2ChangesAnnotation >> registerToSystemChanges [
 	self gtDocument
