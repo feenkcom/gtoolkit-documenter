@@ -117,7 +117,7 @@ Gt2DocumentConstants class >> editButtonLabel [
 
 { #category : #ui }
 Gt2DocumentConstants class >> editingModeIcon [
-	^ BrGlamorousIcons redcircle
+	^ BrGlamorousIcons edit 
 ]
 
 { #category : #colors }
@@ -279,7 +279,7 @@ Gt2DocumentConstants class >> previewShowParameterName [
 
 { #category : #ui }
 Gt2DocumentConstants class >> readingModeIcon [
-	^ BrGlamorousIcons graycircle
+	^ BrGlamorousIcons edit
 ]
 
 { #category : #'changes diff' }

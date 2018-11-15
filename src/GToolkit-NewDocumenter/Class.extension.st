@@ -3,15 +3,7 @@ Extension { #name : #Class }
 { #category : #'*GToolkit-NewDocumenter' }
 Class >> gtDocumentFor: aView [
 	<gtView>
-	^ aView explicit
+	^ ((Gt2Document forClass: self) gtTextFor: aView)
 		title: 'Comment';
-		priority: -1;
-		stencil: [ (Gt2Document forClass: self) asElementWithoutSaveAction ];
-		actionStencil: [ :tab | 
-			BrButton new 
-				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
-				icon: BrGlamorousIcons accept asElement;
-				action: [ 
-					(tab viewContentElement userData 
-						at: Gt2DocumentConstants documentUserDataKey) store ] ]
+		priority: -1
 ]

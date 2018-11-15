@@ -36,15 +36,31 @@ Gt2Document >> announcer [
 Gt2Document >> asElement [
 	<return: #BlElement>
 	^ self asElementWithoutSaveAction
-		addChild: (BrButton new
-			look: BrGlamorousButtonWithIconLook;
-			icon: self constants saveButtonIcon asElement;
-			label: self constants saveButtonLabel;
-			action: [ self store ];
+		addChild: (BlElement new 
+			layout: BlLinearLayout horizontal;
 			constraintsDo: [ :c | 
 				c ignoreByLayout.
+				c vertical fitContent.
+				c horizontal fitContent.
 				c ignored horizontal alignLeft.
-				c ignored vertical alignBottom ])
+				c ignored vertical alignBottom ];
+			addChild: (BrButton new
+				look: BrGlamorousButtonWithIconLook;
+				icon: self constants saveButtonIcon asElement;
+				label: self constants saveButtonLabel;
+				action: [ self store ]);
+			addChild: (BlElement new 
+					viewModel: (BrToggleModel new
+						icon: (self isReadingMode 
+							ifTrue: [ self constants readingModeIcon asElement ]
+							ifFalse: [ self constants editingModeIcon asElement ] ) );
+					look: (BrMaterialToggleIconifiedLook new 
+						when: BrToggleActivatedEvent do: [ :anEvent | 
+							anEvent currentTarget widget viewModel icon: self constants editingModeIcon asElement.
+							self editingMode ];
+						when: BrToggleDeactivatedEvent do: [ :anEvent | 
+							anEvent currentTarget widget viewModel icon: self constants readingModeIcon asElement.
+							self readingMode ]) + BrGlamorousButtonWithIconLook - BrShadowLook))
 ]
 
 { #category : #converting }
@@ -143,7 +159,7 @@ Gt2Document >> gtTextFor: aView [
 			| button |
 			button := BrButton new.
 			button
-				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
+				look: BrGlamorousButtonWithIconLook;
 				action:  [
 					button fireEvent: (GtPhlowObjectToSpawn new
 						object: self parse;
@@ -152,7 +168,7 @@ Gt2Document >> gtTextFor: aView [
 				label: 'Parse using GToolkit Documenter' translated ];
 		actionStencil: [ :tab | 
 			BrButton new 
-				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
+				look: BrGlamorousButtonWithIconLook;
 				icon: BrGlamorousIcons accept asElement;
 				action: [ self store ] ];
 		actionStencil: [ :tab | 
@@ -167,7 +183,7 @@ Gt2Document >> gtTextFor: aView [
 						self editingMode ];
 					when: BrToggleDeactivatedEvent do: [ :anEvent | 
 						anEvent currentTarget widget viewModel icon: self constants readingModeIcon asElement.
-						self readingMode ]) ]
+						self readingMode ]) + BrGlamorousButtonWithIconLook - BrShadowLook ]
 ]
 
 { #category : #'announcement handling' }
