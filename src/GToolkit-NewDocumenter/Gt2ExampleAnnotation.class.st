@@ -270,6 +270,12 @@ Gt2ExampleAnnotation >> styleTextEditingMode: aBlRope [
 
 { #category : #'api - style' }
 Gt2ExampleAnnotation >> styleTextReadingMode: aBlRope [ 
-	"Subclasses can add text styling for Documenter reading mode"
-		self styleTextEditingMode: aBlRope.
+	self isPreviewDefined ifFalse: [ ^ self styleTextEditingMode: aBlRope ].
+	super styleTextReadingMode: aBlRope.
+	self utility 
+		hideMarkupsInText: aBlRope 
+		start: self start 
+		stop: self stop -  1.
+	self utility stylePreviewInText: aBlRope forNode: self.
+	self registerToSystemChanges
 ]

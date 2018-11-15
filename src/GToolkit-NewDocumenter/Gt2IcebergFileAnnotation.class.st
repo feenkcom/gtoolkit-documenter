@@ -1,8 +1,8 @@
 Class {
 	#name : #Gt2IcebergFileAnnotation,
 	#superclass : #Gt2Annotation,
-	#traits : 'TBlDebug + TGt2DocumentConstants + TGt2DocumentUtility',
-	#classTraits : 'TBlDebug classTrait + TGt2DocumentConstants classTrait + TGt2DocumentUtility classTrait',
+	#traits : 'TStylingModesWorkInProgress',
+	#classTraits : 'TStylingModesWorkInProgress classTrait',
 	#category : #'GToolkit-NewDocumenter-Model'
 }
 

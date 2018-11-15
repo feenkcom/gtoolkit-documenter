@@ -29,11 +29,7 @@ PRDocumentItem >> gtSubscriber: anObject [
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRDocumentItem >> styleText: aBlRope [ 
-	"Subclasses can add more styling"
-	(aBlRope 
-			from: self start 
-			to: self stop)
-				underlinePaint: Gt2DocumentConstants linkWithErrorColor
+	"I will be replaced by styleTextEditingMode: and styleTextReadingMode:"
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }

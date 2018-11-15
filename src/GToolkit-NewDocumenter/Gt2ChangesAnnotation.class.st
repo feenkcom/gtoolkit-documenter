@@ -1,6 +1,8 @@
 Class {
 	#name : #Gt2ChangesAnnotation,
 	#superclass : #Gt2Annotation,
+	#traits : 'TStylingModesWorkInProgress',
+	#classTraits : 'TStylingModesWorkInProgress classTrait',
 	#category : #'GToolkit-NewDocumenter-Model'
 }
 

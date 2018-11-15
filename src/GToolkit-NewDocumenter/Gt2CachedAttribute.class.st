@@ -30,6 +30,18 @@ Gt2CachedAttribute >> attribute: anObject [
 ]
 
 { #category : #accessing }
+Gt2CachedAttribute >> beAppend [
+	super beAppend.
+	self attribute beAppend.
+]
+
+{ #category : #accessing }
+Gt2CachedAttribute >> beReplace [
+	super beReplace.
+	self attribute beReplace.
+]
+
+{ #category : #accessing }
 Gt2CachedAttribute >> cache [
 	<return: #BlElement or: nil>
 	^ cache

@@ -1,6 +1,8 @@
 Class {
 	#name : #Gt2ExamplesAnnotation,
 	#superclass : #Gt2Annotation,
+	#traits : 'TStylingModesWorkInProgress',
+	#classTraits : 'TStylingModesWorkInProgress classTrait',
 	#instVars : [
 		'referencedClasses',
 		'referencedMethods',

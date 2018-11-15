@@ -189,6 +189,12 @@ Gt2DocumentUtility class >> styleLinkInText: aBlRope forNode: aNode withLinkAt: 
 ]
 
 { #category : #'text styling' }
+Gt2DocumentUtility class >> stylePreviewInText: aBlRope forNode: aNode [
+	aNode isPreviewDefined ifFalse: [ ^ self ].
+	(aBlRope from: aNode stop to: aNode stop) attributes: aNode previewAttributesForReadingMode
+]
+
+{ #category : #'text styling' }
 Gt2DocumentUtility class >> sublteMarkupsInText: aBlRope start: aStartIndex stop: aStopIndex [
 	(aBlRope 
 		from: aStartIndex
