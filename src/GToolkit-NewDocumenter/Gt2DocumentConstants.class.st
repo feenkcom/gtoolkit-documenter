@@ -115,6 +115,11 @@ Gt2DocumentConstants class >> editButtonLabel [
 	^ 'Edit'
 ]
 
+{ #category : #ui }
+Gt2DocumentConstants class >> editingModeIcon [
+	^ BrGlamorousIcons redcircle
+]
+
 { #category : #colors }
 Gt2DocumentConstants class >> errorColor [
 	^ BrGlamorousColors errorBorderColor
@@ -270,6 +275,11 @@ Gt2DocumentConstants class >> previewHeightParameterName [
 { #category : #'pillar parameter names' }
 Gt2DocumentConstants class >> previewShowParameterName [
 	^ #previewShow
+]
+
+{ #category : #ui }
+Gt2DocumentConstants class >> readingModeIcon [
+	^ BrGlamorousIcons graycircle
 ]
 
 { #category : #'changes diff' }

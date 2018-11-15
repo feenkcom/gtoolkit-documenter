@@ -105,10 +105,7 @@ Gt2Annotation >> styleLinkInText: aBlRope [
 ]
 
 { #category : #'api - style' }
-Gt2Annotation >> styleText: aBlRope [
+Gt2Annotation >> styleTextEditingMode: aBlRope [
 	"Subclasses can add more styling"
-	(aBlRope 
-			from: self start 
-			to: self stop)
-				foreground: self constants subtleColor.
+	self utility sublteMarkupsInText: aBlRope start: self start stop: self stop
 ]

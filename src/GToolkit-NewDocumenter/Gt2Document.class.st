@@ -108,7 +108,9 @@ Gt2Document >> defaultText [
 
 { #category : #initialization }
 Gt2Document >> editingMode [
-	^ self editor styler beEditingMode
+	self editor styler mode isEditing ifTrue: [ ^ self ].
+	self editor styler beEditingMode.
+	self styleTextRequest.
 ]
 
 { #category : #accessing }
@@ -152,7 +154,20 @@ Gt2Document >> gtTextFor: aView [
 			BrButton new 
 				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
 				icon: BrGlamorousIcons accept asElement;
-				action: [ self store ] ]
+				action: [ self store ] ];
+		actionStencil: [ :tab | 
+			BlElement new 
+				viewModel: (BrToggleModel new
+					icon: (self isReadingMode 
+						ifTrue: [ self constants readingModeIcon asElement ]
+						ifFalse: [ self constants editingModeIcon asElement ] ) );
+				look: (BrMaterialToggleIconifiedLook new 
+					when: BrToggleActivatedEvent do: [ :anEvent | 
+						anEvent currentTarget widget viewModel icon: self constants editingModeIcon asElement.
+						self editingMode ];
+					when: BrToggleDeactivatedEvent do: [ :anEvent | 
+						anEvent currentTarget widget viewModel icon: self constants readingModeIcon asElement.
+						self readingMode ]) ]
 ]
 
 { #category : #'announcement handling' }
@@ -188,6 +203,11 @@ Gt2Document >> installCompleterForEditorElement: anEditorElement [
 	aCompletionController := GtCompletionController on: anEditorElement strategy: aCompletionStrategy.
 	aCompletionController install.
 
+]
+
+{ #category : #testing }
+Gt2Document >> isReadingMode [
+	^ self editor styler mode isReading
 ]
 
 { #category : #testing }
@@ -235,7 +255,9 @@ Gt2Document >> read [
 
 { #category : #initialization }
 Gt2Document >> readingMode [
-	^ self editor styler beReadingMode
+	self editor styler mode isReading ifTrue: [ ^ self ].
+	self editor styler beReadingMode.
+	self styleTextRequest
 ]
 
 { #category : #accessing }

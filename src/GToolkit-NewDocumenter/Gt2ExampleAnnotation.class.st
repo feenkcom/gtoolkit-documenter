@@ -261,9 +261,15 @@ Gt2ExampleAnnotation >> registerToSystemChanges [
 ]
 
 { #category : #'api - style' }
-Gt2ExampleAnnotation >> styleText: aBlRope [
-	super styleText: aBlRope.
+Gt2ExampleAnnotation >> styleTextEditingMode: aBlRope [
+	super styleTextEditingMode: aBlRope.
 	self styleLinkInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 	self registerToSystemChanges
+]
+
+{ #category : #'api - style' }
+Gt2ExampleAnnotation >> styleTextReadingMode: aBlRope [ 
+	"Subclasses can add text styling for Documenter reading mode"
+		self styleTextEditingMode: aBlRope.
 ]

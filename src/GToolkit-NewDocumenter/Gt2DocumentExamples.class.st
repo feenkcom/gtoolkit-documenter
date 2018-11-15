@@ -757,7 +757,7 @@ Gt2DocumentExamples >> documentWithExamples [
 	<gtExample>
 	| aDocument |
 	aDocument := self defaultDocument text: self contentWithExamples.
-	aDocument editor styleText.
+	aDocument privateStyleText.
 	self assert: aDocument text asString equals: self contentWithExamples.
 	self assert: aDocument isSubscribedToSystem.
 	^ aDocument
@@ -779,7 +779,7 @@ Gt2DocumentExamples >> documentWithExistingExample [
 	<gtExample>
 	| aDocument |
 	aDocument := self defaultDocument text: self contentWithExistingExample.
-	aDocument editor styleText.
+	aDocument privateStyleText.
 	self assert: aDocument text asString equals: self contentWithExistingExample.
 	self assert: aDocument isSubscribedToSystem.
 	^ aDocument

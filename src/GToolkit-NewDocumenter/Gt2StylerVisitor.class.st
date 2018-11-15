@@ -99,11 +99,7 @@ Gt2StylerVisitor >> text: aBlRope [
 { #category : #'visiting-annotations' }
 Gt2StylerVisitor >> visitAnnotation: anAnnotation [
 	annotationCounter := annotationCounter + 1.
-	anAnnotation 
-		counter: annotationCounter;
-		gtDocument: self document;
-		gtSubscriber: self subscriber;
-		styleText: self text.
+	anAnnotation counter: annotationCounter.
 	super visitAnnotation: anAnnotation
 ]
 

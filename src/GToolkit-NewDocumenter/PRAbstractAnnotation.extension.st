@@ -74,10 +74,8 @@ PRAbstractAnnotation >> expandedParameterValue [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRAbstractAnnotation >> styleText: aBlRope [ 
+PRAbstractAnnotation >> styleTextEditingMode: aBlRope [
 	"Subclasses can add more styling"
-	(aBlRope 
-			from: self start 
-			to: self stop)
-				foreground: Gt2DocumentConstants subtleColor
+	super styleTextEditingMode: aBlRope.
+	self utility sublteMarkupsInText: aBlRope start: self start stop: self stop.
 ]

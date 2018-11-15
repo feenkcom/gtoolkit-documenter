@@ -16,6 +16,16 @@ Gt2StylerStrategy class >> readingMode [
 	^ Gt2ReadingModeStrategy uniqueInstance
 ]
 
+{ #category : #testing }
+Gt2StylerStrategy >> isEditing [
+	^ false
+]
+
+{ #category : #testing }
+Gt2StylerStrategy >> isReading [
+	^ false
+]
+
 { #category : #dispatch }
 Gt2StylerStrategy >> styleText: aBlRope withNode: aPRDocumentItem [
 	self subclassResponsibility

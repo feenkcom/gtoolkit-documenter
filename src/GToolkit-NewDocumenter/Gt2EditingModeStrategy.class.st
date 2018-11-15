@@ -22,6 +22,11 @@ Gt2EditingModeStrategy class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
+{ #category : #testing }
+Gt2EditingModeStrategy >> isEditing [
+	^ true
+]
+
 { #category : #dispatch }
 Gt2EditingModeStrategy >> styleText: aBlRope withNode: aPRDocumentItem [
 	aPRDocumentItem styleTextEditingMode: aBlRope

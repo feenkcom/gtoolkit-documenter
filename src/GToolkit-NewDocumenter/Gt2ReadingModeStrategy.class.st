@@ -22,6 +22,11 @@ Gt2ReadingModeStrategy class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
+{ #category : #testing }
+Gt2ReadingModeStrategy >> isReading [
+	^ true
+]
+
 { #category : #dispatch }
 Gt2ReadingModeStrategy >> styleText: aBlRope withNode: aPRDocumentItem [
 	aPRDocumentItem styleTextReadingMode: aBlRope
