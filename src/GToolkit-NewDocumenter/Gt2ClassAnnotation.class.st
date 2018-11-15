@@ -126,3 +126,28 @@ Gt2ClassAnnotation >> styleText: aBlRope [
 	self styleExpandingPreviewInText: aBlRope.
 	self registerToSystemChanges
 ]
+
+{ #category : #'api - style' }
+Gt2ClassAnnotation >> styleTextEditingMode: aBlRope [
+	super styleTextEditingMode: aBlRope.
+	self styleLinkInText: aBlRope.
+	self styleExpandingPreviewInText: aBlRope.
+	self registerToSystemChanges
+]
+
+{ #category : #'api - style' }
+Gt2ClassAnnotation >> styleTextReadingMode: aBlRope [
+	| aMarkup |
+	super styleTextReadingMode: aBlRope.
+	self styleLinkInText: aBlRope.
+	aMarkup := (self utility startMarkupFor: PRAbstractAnnotation) size.
+	self utility 
+		hideMarkupsInText: aBlRope 
+		start: self start 
+		stop: self start + aMarkup + self tag size.
+	self utility 
+		hideMarkupsInText: aBlRope 
+		start: self stop - aMarkup + 1
+		stop: self stop.
+	self registerToSystemChanges
+]
