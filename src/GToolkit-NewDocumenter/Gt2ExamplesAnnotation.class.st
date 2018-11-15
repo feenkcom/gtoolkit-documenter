@@ -172,6 +172,11 @@ Gt2ExamplesAnnotation >> hasFailuresOrErrors [
 ]
 
 { #category : #testing }
+Gt2ExamplesAnnotation >> hasResults [
+	^ self hasExample and: [ self cachedExampleGroup numberOfResults isZero not ]
+]
+
+{ #category : #testing }
 Gt2ExamplesAnnotation >> hasSuccesses [
 	^ self hasExample and: [ self cachedExampleGroup numberOfSuccesses isZero not ]
 ]
@@ -330,6 +335,18 @@ Gt2ExamplesAnnotation >> registerToSystemChanges [
 ]
 
 { #category : #'private - styling' }
+Gt2ExamplesAnnotation >> resultsLabelAttribute [
+	| aGroup |
+	aGroup := self cachedExampleGroup.
+	^ Gt2ExamplesStatusLabelAttribute new
+		beAppend;
+		total: aGroup numberOfExamples;
+		results: aGroup numberOfResults;
+		successes: aGroup numberOfSuccesses;
+		issues: aGroup numberOfFailuresAndErrors
+]
+
+{ #category : #'private - styling' }
 Gt2ExamplesAnnotation >> runButtonAttribute [
 	^ Gt2ButtonAttribute new
 		beAppend;
@@ -367,8 +384,9 @@ Gt2ExamplesAnnotation >> styleInText: aBlRope [
 	self styleLinkInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 	self styleRunButtonInText: aBlRope.
-	self styleSuccessButtonInText: aBlRope.
-	self styleIssueButtonInText: aBlRope.
+	"self styleSuccessButtonInText: aBlRope.
+	self styleIssueButtonInText: aBlRope."
+	self styleResultsInText: aBlRope.
 	self registerToSystemChanges.
 ]
 
@@ -383,6 +401,13 @@ Gt2ExamplesAnnotation >> styleIssueButtonInText: aBlRope [
 Gt2ExamplesAnnotation >> styleLinkInText: aBlRope [
 	self hasChildren ifFalse: [ ^ self ].
 	self utility styleLinkInText: aBlRope forNode: self withLinkAt: self children first
+]
+
+{ #category : #'private - styling' }
+Gt2ExamplesAnnotation >> styleResultsInText: aBlRope [
+	self hasResults ifFalse: [ ^ self ].
+	(aBlRope from: self stop to: self stop) 
+		attribute: self resultsLabelAttribute
 ]
 
 { #category : #'private - styling' }

@@ -72,7 +72,7 @@ Gt2DocumentConstants class >> defaultCodeHeight [
 
 { #category : #'pillar parameter default values' }
 Gt2DocumentConstants class >> defaultExamplesShowSelector [
-	^ #gtExamplesFor:
+	^ #gtExpandableExamplesFor: "#gtExamplesFor:"
 ]
 
 { #category : #'pillar parameter default values' }
@@ -113,6 +113,11 @@ Gt2DocumentConstants class >> editButtonIcon [
 { #category : #ui }
 Gt2DocumentConstants class >> editButtonLabel [
 	^ 'Edit'
+]
+
+{ #category : #colors }
+Gt2DocumentConstants class >> errorColor [
+	^ BrGlamorousColors errorBorderColor
 ]
 
 { #category : #'pillar annotation names' }
@@ -181,6 +186,11 @@ Gt2DocumentConstants class >> issuesButtonLabel [
 	^ 'Issues'
 ]
 
+{ #category : #text }
+Gt2DocumentConstants class >> labelFontSize [
+	^ 12
+]
+
 { #category : #colors }
 Gt2DocumentConstants class >> linkColor [
 	^ BrGlamorousColors linkColor
@@ -232,6 +242,11 @@ Gt2DocumentConstants class >> noCodeParameterName [
 	^ #noCode
 ]
 
+{ #category : #colors }
+Gt2DocumentConstants class >> notAvailableColor [
+	^ BrGlamorousColors lightBorderColor
+]
+
 { #category : #'pillar parameter names' }
 Gt2DocumentConstants class >> packagesParameterName [
 	^ #packages
@@ -268,6 +283,11 @@ Gt2DocumentConstants class >> removeLineIdentificator [
 ]
 
 { #category : #ui }
+Gt2DocumentConstants class >> resultsLabel [
+	^ 'Results'
+]
+
+{ #category : #ui }
 Gt2DocumentConstants class >> runButtonIcon [
 	^ BrGlamorousIcons play
 ]
@@ -301,6 +321,11 @@ Gt2DocumentConstants class >> subtleColor [
 { #category : #ui }
 Gt2DocumentConstants class >> successButtonLabel [
 	^ 'Success'
+]
+
+{ #category : #colors }
+Gt2DocumentConstants class >> successColor [
+	^ BrGlamorousColors successBorderColor
 ]
 
 { #category : #text }
