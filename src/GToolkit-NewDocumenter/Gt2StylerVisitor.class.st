@@ -1,8 +1,8 @@
 Class {
 	#name : #Gt2StylerVisitor,
 	#superclass : #PRVisitor,
-	#traits : 'TBlDebug + TGt2DocumentConstants',
-	#classTraits : 'TBlDebug classTrait + TGt2DocumentConstants classTrait',
+	#traits : 'TBlDebug + TGt2DocumentConstants + TGt2DocumentUtility',
+	#classTraits : 'TBlDebug classTrait + TGt2DocumentConstants classTrait + TGt2DocumentUtility classTrait',
 	#instVars : [
 		'text',
 		'document',
@@ -34,6 +34,21 @@ Gt2StylerVisitor >> document: aGt2Document [
 		assert: [ aGt2Document notNil ]
 		description: [ 'Document must be non-nil' ].
 	document := aGt2Document
+]
+
+{ #category : #'private - styling' }
+Gt2StylerVisitor >> hideSimetricMarkupsFor: aPRFormat [
+	| aMarkup |
+	aMarkup := self utility startMarkupFor: aPRFormat.
+
+	(self text 
+		from: aPRFormat start
+		to: aPRFormat start + aMarkup size - 1)
+			attribute: Gt2HideAttribute uniqueInstance.
+	(self text 
+		from: aPRFormat stop - aMarkup size + 1
+		to: aPRFormat stop)
+			attribute: Gt2HideAttribute uniqueInstance.
 ]
 
 { #category : #initialization }
@@ -90,6 +105,7 @@ Gt2StylerVisitor >> visitBoldFormat: aPRBoldFormat [
 		from: aPRBoldFormat start
 		to: aPRBoldFormat stop)
 			bold.
+	self hideSimetricMarkupsFor: aPRBoldFormat.
 	super visitBoldFormat: aPRBoldFormat
 ]
 
@@ -156,6 +172,7 @@ Gt2StylerVisitor >> visitItalicFormat: aPRItalicFormat [
 		from: aPRItalicFormat start
 		to: aPRItalicFormat stop)
 			italic.
+	self hideSimetricMarkupsFor: aPRItalicFormat.
 	super visitItalicFormat: aPRItalicFormat
 ]
 
@@ -178,6 +195,7 @@ Gt2StylerVisitor >> visitMonospaceFormat: aPRMonospaceFormat [
 		from: aPRMonospaceFormat start
 		to: aPRMonospaceFormat stop)
 			monospace.
+	self hideSimetricMarkupsFor: aPRMonospaceFormat.
 	super visitMonospaceFormat: aPRMonospaceFormat
 ]
 
@@ -217,6 +235,7 @@ Gt2StylerVisitor >> visitStrikethroughFormat: aPRStrikethroughFormat [
 		from: aPRStrikethroughFormat start
 		to: aPRStrikethroughFormat stop)
 			foreground: self constants subtleColor.
+	self hideSimetricMarkupsFor: aPRStrikethroughFormat.
 	super visitStrikethroughFormat: aPRStrikethroughFormat
 ]
 
@@ -228,6 +247,7 @@ Gt2StylerVisitor >> visitSubscriptFormat: aPRSubscriptFormat [
 			foreground: self constants subtleColor";
 			fontSize: self constants superscriptFontSize;
 			wordPadding: (BlInsets all: 30)".
+	self hideSimetricMarkupsFor: aPRSubscriptFormat.
 	super visitSubscriptFormat: aPRSubscriptFormat
 ]
 
@@ -238,6 +258,7 @@ Gt2StylerVisitor >> visitSuperscriptFormat: aPRSuperscriptFormat [
 		to: aPRSuperscriptFormat stop)
 			foreground: self constants subtleColor;
 			fontSize: self constants superscriptFontSize.
+	self hideSimetricMarkupsFor: aPRSuperscriptFormat.
 	super visitSuperscriptFormat: aPRSuperscriptFormat
 ]
 
@@ -256,6 +277,7 @@ Gt2StylerVisitor >> visitUnderlineFormat: aPRUnderlineFormat [
 		from: aPRUnderlineFormat start
 		to: aPRUnderlineFormat stop)
 			underline.
+	self hideSimetricMarkupsFor: aPRUnderlineFormat.
 	super visitUnderlineFormat: aPRUnderlineFormat
 ]
 

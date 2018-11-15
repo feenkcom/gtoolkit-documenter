@@ -221,6 +221,12 @@ Gt2DocumentExamples >> constants [
 	^ Gt2DocumentConstants
 ]
 
+{ #category : #'non technical people' }
+Gt2DocumentExamples >> contentBoldForNonTechnicalPeople [
+	<gtExample>
+	^ '""bold""    '
+]
+
 { #category : #changes }
 Gt2DocumentExamples >> contentWithClassDefinitionChanges [
 	<gtExample>
@@ -1137,4 +1143,14 @@ Gt2DocumentExamples >> removeEpiceaEvent [
 	self assert: anEpicea numberOfEvents equals: 0.
 	self assert: anAnnouncements size equals: 1.
 	^ anEpicea
+]
+
+{ #category : #'non technical people' }
+Gt2DocumentExamples >> ropeHiddenBoldMarkupForNonTechnicalPeople [
+	<gtExample>
+	| aRope |
+	aRope := self contentBoldForNonTechnicalPeople asRopedText.
+	(aRope from: 1 to: 2) attribute: Gt2HideAttribute new.
+	(aRope from: 7 to: 8) attribute: Gt2HideAttribute new.
+	^ aRope
 ]

@@ -42,6 +42,11 @@ Gt2DocumentUtility class >> convertToBoolean: aStringOrBoolean [
 	^ nil
 ]
 
+{ #category : #'text markups' }
+Gt2DocumentUtility class >> endMarkupFor: aNode [
+	^ PRPillarGrammar endMarkups at: aNode class
+]
+
 { #category : #'pillar - parameter values' }
 Gt2DocumentUtility class >> icebergFileReferenceFrom: aString [
 	<return: #FileReference>
@@ -113,6 +118,11 @@ Gt2DocumentUtility class >> parameterNodeNamed: aParameterName forAnnotation: an
 				eachParameter value isNil ] ] 
 		ifFound: [ :aParameter | aParameter ]
 		ifNone: [ anAnnotation ].
+]
+
+{ #category : #'text markups' }
+Gt2DocumentUtility class >> startMarkupFor: aNode [
+	^ PRPillarGrammar markups at: aNode class
 ]
 
 { #category : #'text styling' }
