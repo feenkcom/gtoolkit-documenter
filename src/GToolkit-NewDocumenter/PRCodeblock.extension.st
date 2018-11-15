@@ -220,16 +220,6 @@ PRCodeblock >> styleClosingBracketsInText: aBlRope [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRCodeblock >> styleInText: aBlRope [ 
-	self styleParametersInText: aBlRope.
-	self styleClosingBracketsInText: aBlRope.
-	self gtIsSmalltalkLanguage ifFalse: [ ^ self styleScriptInText: aBlRope ].
-	self styleRunButtonInText: aBlRope.
-	self styleSmalltalkInText: aBlRope.
-	self hasResult ifTrue: [ self styleResultPreviewInText: aBlRope ].
-]
-
-{ #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> styleParametersInText: aBlRope [
 	(aBlRope
 		from: self start
@@ -275,4 +265,14 @@ PRCodeblock >> styleSmalltalkInText: aBlRope [
 				from: (self scriptStartPositionInText: aBlRope)
 				to: (self scriptStopPositionInText: aBlRope)).
 	self styleScriptInText: aBlRope.
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> styleText: aBlRope [ 
+	self styleParametersInText: aBlRope.
+	self styleClosingBracketsInText: aBlRope.
+	self gtIsSmalltalkLanguage ifFalse: [ ^ self styleScriptInText: aBlRope ].
+	self styleRunButtonInText: aBlRope.
+	self styleSmalltalkInText: aBlRope.
+	self hasResult ifTrue: [ self styleResultPreviewInText: aBlRope ].
 ]

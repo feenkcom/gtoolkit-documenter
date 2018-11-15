@@ -210,8 +210,8 @@ Gt2ChangesAnnotation >> styleCreateButtonInText: aBlRope [
 ]
 
 { #category : #'api - style' }
-Gt2ChangesAnnotation >> styleInText: aBlRope [
-	super styleInText: aBlRope.
+Gt2ChangesAnnotation >> styleText: aBlRope [
+	super styleText: aBlRope.
 	self styleLinkInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 	self styleApplyButtonInText: aBlRope.

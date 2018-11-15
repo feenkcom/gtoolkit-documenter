@@ -75,8 +75,8 @@ Gt2IcebergFileAnnotation >> referenceParameterName [
 ]
 
 { #category : #'api - style' }
-Gt2IcebergFileAnnotation >> styleInText: aBlRope [
-	super styleInText: aBlRope.
+Gt2IcebergFileAnnotation >> styleText: aBlRope [
+	super styleText: aBlRope.
 	self styleLinkInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 ]

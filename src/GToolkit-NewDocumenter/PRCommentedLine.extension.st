@@ -1,7 +1,7 @@
 Extension { #name : #PRCommentedLine }
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRCommentedLine >> styleInText: aBlRope [
+PRCommentedLine >> styleText: aBlRope [
 	(aBlRope
 		from: self start
 		to: self stop)

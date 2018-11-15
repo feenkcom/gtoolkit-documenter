@@ -106,6 +106,11 @@ Gt2Document >> defaultText [
 	^ ''
 ]
 
+{ #category : #initialization }
+Gt2Document >> editingMode [
+	^ self editor styler beEditingMode
+]
+
 { #category : #accessing }
 Gt2Document >> editor [
 	<return: #BrTextEditor>
@@ -216,9 +221,21 @@ Gt2Document >> parse [
 		parse: self text asString
 ]
 
+{ #category : #private }
+Gt2Document >> privateStyleText [
+	"This method is used only for examples.
+	Do not use it in other places."
+	self editor styleText
+]
+
 { #category : #actions }
 Gt2Document >> read [
 	storageStrategy read: self
+]
+
+{ #category : #initialization }
+Gt2Document >> readingMode [
+	^ self editor styler beReadingMode
 ]
 
 { #category : #accessing }

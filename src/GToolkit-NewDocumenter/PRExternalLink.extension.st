@@ -1,7 +1,7 @@
 Extension { #name : #PRExternalLink }
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRExternalLink >> styleInText: aBlRope [
+PRExternalLink >> styleText: aBlRope [
 	(aBlRope
 		from: self start
 		to: self stop)

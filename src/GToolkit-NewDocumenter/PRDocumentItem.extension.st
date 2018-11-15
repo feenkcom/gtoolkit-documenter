@@ -1,6 +1,11 @@
 Extension { #name : #PRDocumentItem }
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRDocumentItem >> constants [
+	^ Gt2DocumentConstants
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRDocumentItem >> gtDocument [
 	<return: #Gt2Document>
 	^ self propertyAt: #gtDocument
@@ -23,10 +28,35 @@ PRDocumentItem >> gtSubscriber: anObject [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRDocumentItem >> styleInText: aBlRope [ 
+PRDocumentItem >> styleText: aBlRope [ 
 	"Subclasses can add more styling"
 	(aBlRope 
 			from: self start 
 			to: self stop)
 				underlinePaint: Gt2DocumentConstants linkWithErrorColor
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRDocumentItem >> styleText: aBlRope inMode: aGt2StylerStrategy [
+	aGt2StylerStrategy styleText: aBlRope withNode: self
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRDocumentItem >> styleTextEditingMode: aBlRope [
+	"Subclasses can add text styling for Documenter editing mode"
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRDocumentItem >> styleTextReadingMode: aBlRope [ 
+	"Subclasses can add text styling for Documenter reading mode"
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRDocumentItem >> styleTextReadingModeMode: aBlRope [
+	self styleText: aBlRope
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRDocumentItem >> utility [
+	^ Gt2DocumentUtility
 ]

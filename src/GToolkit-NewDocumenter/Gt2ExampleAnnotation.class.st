@@ -261,8 +261,8 @@ Gt2ExampleAnnotation >> registerToSystemChanges [
 ]
 
 { #category : #'api - style' }
-Gt2ExampleAnnotation >> styleInText: aBlRope [
-	super styleInText: aBlRope.
+Gt2ExampleAnnotation >> styleText: aBlRope [
+	super styleText: aBlRope.
 	self styleLinkInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 	self registerToSystemChanges

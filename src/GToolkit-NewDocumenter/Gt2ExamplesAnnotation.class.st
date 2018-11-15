@@ -378,18 +378,6 @@ Gt2ExamplesAnnotation >> runExamples [
 	self gtDocument styleTextRequest
 ]
 
-{ #category : #'api - style' }
-Gt2ExamplesAnnotation >> styleInText: aBlRope [
-	super styleInText: aBlRope.
-	self styleLinkInText: aBlRope.
-	self styleExpandingPreviewInText: aBlRope.
-	self styleRunButtonInText: aBlRope.
-	"self styleSuccessButtonInText: aBlRope.
-	self styleIssueButtonInText: aBlRope."
-	self styleResultsInText: aBlRope.
-	self registerToSystemChanges.
-]
-
 { #category : #'private - styling' }
 Gt2ExamplesAnnotation >> styleIssueButtonInText: aBlRope [
 	self hasFailuresOrErrors ifFalse: [ ^ self ].
@@ -422,6 +410,18 @@ Gt2ExamplesAnnotation >> styleSuccessButtonInText: aBlRope [
 	self hasSuccesses ifFalse: [ ^ self ].
 	(aBlRope from: self stop to: self stop) 
 		attribute: self successButtonAttribute
+]
+
+{ #category : #'api - style' }
+Gt2ExamplesAnnotation >> styleText: aBlRope [
+	super styleText: aBlRope.
+	self styleLinkInText: aBlRope.
+	self styleExpandingPreviewInText: aBlRope.
+	self styleRunButtonInText: aBlRope.
+	"self styleSuccessButtonInText: aBlRope.
+	self styleIssueButtonInText: aBlRope."
+	self styleResultsInText: aBlRope.
+	self registerToSystemChanges.
 ]
 
 { #category : #'private - styling' }

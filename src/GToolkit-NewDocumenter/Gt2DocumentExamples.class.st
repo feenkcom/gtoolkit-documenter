@@ -338,6 +338,42 @@ Gt2DocumentExamples >> contentWithFigure [
 
 ]
 
+{ #category : #markups }
+Gt2DocumentExamples >> contentWithHeaders [
+	<gtExample>
+	^ '! Header One
+!! Header Two
+!!! Header Three
+!!!! Header Four
+!!!!! Header Five
+!!!!!! Header Six
+!!!!!!! Header Seven'
+]
+
+{ #category : #markups }
+Gt2DocumentExamples >> contentWithHeadersInEditingMode [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithHeaders.
+	aDocument editingMode.
+	aDocument privateStyleText.
+	self assert: aDocument text asString equals: self contentWithHeaders.
+	self assert: aDocument isSubscribedToSystem not.
+	^ aDocument
+]
+
+{ #category : #markups }
+Gt2DocumentExamples >> contentWithHeadersInReadingMode [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithHeaders.
+	aDocument readingMode.
+	aDocument privateStyleText.
+	self assert: aDocument text asString equals: self contentWithHeaders.
+	self assert: aDocument isSubscribedToSystem not.
+	^ aDocument
+]
+
 { #category : #'iceberg file' }
 Gt2DocumentExamples >> contentWithIcebergFile [
 	<gtExample>
@@ -581,6 +617,30 @@ Gt2DocumentExamples >> documentFromFileReference [
 	self assert: aDocument text isEmpty.
 	aDocument read.
 	self assert: aDocument text asString equals: self contentWithMultipleMethods.
+	^ aDocument
+]
+
+{ #category : #markups }
+Gt2DocumentExamples >> documentInEditingModeWithMarkups [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument
+		editingMode;
+	 	text: self contentWithMarkups.
+	self assert: aDocument text asString equals: self contentWithMarkups.
+	self assert: aDocument isSubscribedToSystem not.
+	^ aDocument
+]
+
+{ #category : #markups }
+Gt2DocumentExamples >> documentInReadingModeWithMarkups [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument
+		readingMode;
+	 	text: self contentWithMarkups.
+	self assert: aDocument text asString equals: self contentWithMarkups.
+	self assert: aDocument isSubscribedToSystem not.
 	^ aDocument
 ]
 
@@ -1148,9 +1208,22 @@ Gt2DocumentExamples >> removeEpiceaEvent [
 { #category : #'non technical people' }
 Gt2DocumentExamples >> ropeHiddenBoldMarkupForNonTechnicalPeople [
 	<gtExample>
-	| aRope |
-	aRope := self contentBoldForNonTechnicalPeople asRopedText.
-	(aRope from: 1 to: 2) attribute: Gt2HideAttribute new.
-	(aRope from: 7 to: 8) attribute: Gt2HideAttribute new.
+	| aRope anElement aSwitchAttribute |
+	anElement := BrButton new 
+				look: BrGlamorousButtonWithLabelLook;
+				beSmall;
+				label: 'Display Markups'.
+	aSwitchAttribute := BrTextHoverAttribute new
+		enterAction: [ :aText :aTextElement :anEditorElement :anEvent |
+			anElement 
+				removeFromParent;
+				relocate: aTextElement position + (aTextElement width @ aTextElement height).
+			anEditorElement addChild: anElement ];
+		leaveAction: [ :aText :aTextElement :anEditorElement :anEvent |
+			anElement removeFromParent ].
+	aRope := self contentBoldForNonTechnicalPeople asRopedText bold.
+	(aRope from: 1 to: 2) attribute: Gt2HideAttribute uniqueInstance.
+	(aRope from: 7 to: 8) attribute: Gt2HideAttribute uniqueInstance.
+	(aRope from: 3 to: 6) attribute: aSwitchAttribute.
 	^ aRope
 ]

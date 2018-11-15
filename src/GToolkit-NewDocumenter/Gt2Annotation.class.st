@@ -99,16 +99,16 @@ Gt2Annotation >> styleExpandingPreviewInText: aBlRope [
 	self utility styleExpandingPreviewInText: aBlRope forNode: self
 ]
 
+{ #category : #'private - styling' }
+Gt2Annotation >> styleLinkInText: aBlRope [
+	self utility styleLinkInText: aBlRope forAnnotationNode: self
+]
+
 { #category : #'api - style' }
-Gt2Annotation >> styleInText: aBlRope [
+Gt2Annotation >> styleText: aBlRope [
 	"Subclasses can add more styling"
 	(aBlRope 
 			from: self start 
 			to: self stop)
 				foreground: self constants subtleColor.
-]
-
-{ #category : #'private - styling' }
-Gt2Annotation >> styleLinkInText: aBlRope [
-	self utility styleLinkInText: aBlRope forAnnotationNode: self
 ]

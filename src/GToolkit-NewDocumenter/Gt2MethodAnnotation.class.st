@@ -130,8 +130,8 @@ Gt2MethodAnnotation >> registerToSystemChanges [
 ]
 
 { #category : #'api - style' }
-Gt2MethodAnnotation >> styleInText: aBlRope [
-	super styleInText: aBlRope.
+Gt2MethodAnnotation >> styleText: aBlRope [
+	super styleText: aBlRope.
 	self styleLinkInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 	self registerToSystemChanges

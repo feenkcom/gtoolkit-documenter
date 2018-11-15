@@ -12,7 +12,8 @@ Class {
 		'listItemStyler',
 		'currentList',
 		'colorStyler',
-		'symbolStyler'
+		'symbolStyler',
+		'mode'
 	],
 	#category : #'GToolkit-NewDocumenter-Styler'
 }
@@ -36,27 +37,34 @@ Gt2StylerVisitor >> document: aGt2Document [
 	document := aGt2Document
 ]
 
-{ #category : #'private - styling' }
-Gt2StylerVisitor >> hideSimetricMarkupsFor: aPRFormat [
-	| aMarkup |
-	aMarkup := self utility startMarkupFor: aPRFormat.
-
-	(self text 
-		from: aPRFormat start
-		to: aPRFormat start + aMarkup size - 1)
-			attribute: Gt2HideAttribute uniqueInstance.
-	(self text 
-		from: aPRFormat stop - aMarkup size + 1
-		to: aPRFormat stop)
-			attribute: Gt2HideAttribute uniqueInstance.
-]
-
 { #category : #initialization }
 Gt2StylerVisitor >> initialize [
 	super initialize.
 	codeblockCounter := 0.
 	annotationCounter := 0.
 	listItemStyler := Gt2NullListItemStyler uniqueInstance.
+]
+
+{ #category : #accessing }
+Gt2StylerVisitor >> mode [
+	<return: #Gt2StylerStrategy>
+	^ mode
+]
+
+{ #category : #accessing }
+Gt2StylerVisitor >> mode: aGt2StylerStrategy [
+	self 
+		assert: [ aGt2StylerStrategy notNil ] 
+		description: [ 'Styling strategy must be non-nil' ].
+	mode := aGt2StylerStrategy
+]
+
+{ #category : #'private - styling' }
+Gt2StylerVisitor >> styleNode: aPRDocumentItem [
+	aPRDocumentItem
+		gtDocument: self document;
+		gtSubscriber: self subscriber;
+		styleText: self text inMode: self mode
 ]
 
 { #category : #accessing }
@@ -95,18 +103,8 @@ Gt2StylerVisitor >> visitAnnotation: anAnnotation [
 		counter: annotationCounter;
 		gtDocument: self document;
 		gtSubscriber: self subscriber;
-		styleInText: self text.
+		styleText: self text.
 	super visitAnnotation: anAnnotation
-]
-
-{ #category : #'visiting-document' }
-Gt2StylerVisitor >> visitBoldFormat: aPRBoldFormat [
-	(self text
-		from: aPRBoldFormat start
-		to: aPRBoldFormat stop)
-			bold.
-	self hideSimetricMarkupsFor: aPRBoldFormat.
-	super visitBoldFormat: aPRBoldFormat
 ]
 
 { #category : #'visiting-document' }
@@ -116,7 +114,7 @@ Gt2StylerVisitor >> visitCodeblock: aPRCodeblock [
 		counter: codeblockCounter;
 		gtDocument: self document;
 		gtSubscriber: self subscriber;
-		styleInText: self text.
+		styleText: self text.
 	super visitCodeblock: aPRCodeblock
 ]
 
@@ -125,7 +123,7 @@ Gt2StylerVisitor >> visitCommentedLine: aPRCommentedLine [
 	aPRCommentedLine 
 		gtDocument: self document;
 		gtSubscriber: self subscriber;
-		styleInText: self text.
+		styleText: self text.
 	super visitCommentedLine: aPRCommentedLine
 ]
 
@@ -139,11 +137,23 @@ Gt2StylerVisitor >> visitDefinitionList: aPRDefinitionList [
 ]
 
 { #category : #'visiting-document' }
+Gt2StylerVisitor >> visitDocumentGroup: aPRDocumentGroup [
+	self styleNode: aPRDocumentGroup.
+	super visitDocumentGroup: aPRDocumentGroup.
+]
+
+{ #category : #'visiting-document' }
+Gt2StylerVisitor >> visitDocumentItem: aPRDocumentItem [
+	self styleNode: aPRDocumentItem.
+	super visitDocumentItem: aPRDocumentItem.
+]
+
+{ #category : #'visiting-document' }
 Gt2StylerVisitor >> visitExternalLink: anPRExternalLine [
 	anPRExternalLine 
 		gtDocument: self document;
 		gtSubscriber: self subscriber;
-		styleInText: self text.
+		styleText: self text.
 	super visitExternalLink: anPRExternalLine
 ]
 
@@ -152,28 +162,8 @@ Gt2StylerVisitor >> visitFigure: aPRFigure [
 	aPRFigure 
 		gtDocument: self document;
 		gtSubscriber: self subscriber;
-		styleInText: self text.
+		styleText: self text.
 	super visitFigure: aPRFigure
-]
-
-{ #category : #'visiting-document' }
-Gt2StylerVisitor >> visitHeader: aPRHeader [
-	(self text
-		from: aPRHeader start
-		to: aPRHeader stop)
-			fontSize: self constants headerFontSize - (aPRHeader level * self constants headerLevelStep)";
-			paragraphMargin: (BlInsets top: 15 left: 20 bottom: 15 right: 20)".
-	super visitHeader: aPRHeader
-]
-
-{ #category : #'visiting-document' }
-Gt2StylerVisitor >> visitItalicFormat: aPRItalicFormat [
-	(self text
-		from: aPRItalicFormat start
-		to: aPRItalicFormat stop)
-			italic.
-	self hideSimetricMarkupsFor: aPRItalicFormat.
-	super visitItalicFormat: aPRItalicFormat
 ]
 
 { #category : #'visiting-document' }
@@ -187,16 +177,6 @@ Gt2StylerVisitor >> visitList: aPRList [
 Gt2StylerVisitor >> visitListItem: aPRListItem [
 	listItemStyler style: self text at: aPRListItem.
 	super visitListItem: aPRListItem
-]
-
-{ #category : #'visiting-document' }
-Gt2StylerVisitor >> visitMonospaceFormat: aPRMonospaceFormat [
-	(self text
-		from: aPRMonospaceFormat start
-		to: aPRMonospaceFormat stop)
-			monospace.
-	self hideSimetricMarkupsFor: aPRMonospaceFormat.
-	super visitMonospaceFormat: aPRMonospaceFormat
 ]
 
 { #category : #'visiting-document' }
@@ -230,55 +210,12 @@ Gt2StylerVisitor >> visitRaw: aPRRaw [
 ]
 
 { #category : #'visiting-document' }
-Gt2StylerVisitor >> visitStrikethroughFormat: aPRStrikethroughFormat [
-	(self text
-		from: aPRStrikethroughFormat start
-		to: aPRStrikethroughFormat stop)
-			foreground: self constants subtleColor.
-	self hideSimetricMarkupsFor: aPRStrikethroughFormat.
-	super visitStrikethroughFormat: aPRStrikethroughFormat
-]
-
-{ #category : #'visiting-document' }
-Gt2StylerVisitor >> visitSubscriptFormat: aPRSubscriptFormat [
-	(self text
-		from: aPRSubscriptFormat start
-		to: aPRSubscriptFormat stop)
-			foreground: self constants subtleColor";
-			fontSize: self constants superscriptFontSize;
-			wordPadding: (BlInsets all: 30)".
-	self hideSimetricMarkupsFor: aPRSubscriptFormat.
-	super visitSubscriptFormat: aPRSubscriptFormat
-]
-
-{ #category : #'visiting-document' }
-Gt2StylerVisitor >> visitSuperscriptFormat: aPRSuperscriptFormat [
-	(self text
-		from: aPRSuperscriptFormat start
-		to: aPRSuperscriptFormat stop)
-			foreground: self constants subtleColor;
-			fontSize: self constants superscriptFontSize.
-	self hideSimetricMarkupsFor: aPRSuperscriptFormat.
-	super visitSuperscriptFormat: aPRSuperscriptFormat
-]
-
-{ #category : #'visiting-document' }
 Gt2StylerVisitor >> visitUndefinedAnnotation: anAnnotation [
 	(self text
 		from: anAnnotation start 
 		to: anAnnotation stop)
 			foreground: Color red.
 	super visitUndefinedAnnotation: anAnnotation
-]
-
-{ #category : #'visiting-document' }
-Gt2StylerVisitor >> visitUnderlineFormat: aPRUnderlineFormat [
-	(self text
-		from: aPRUnderlineFormat start
-		to: aPRUnderlineFormat stop)
-			underline.
-	self hideSimetricMarkupsFor: aPRUnderlineFormat.
-	super visitUnderlineFormat: aPRUnderlineFormat
 ]
 
 { #category : #'visiting-document' }

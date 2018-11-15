@@ -74,7 +74,7 @@ PRAbstractAnnotation >> expandedParameterValue [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRAbstractAnnotation >> styleInText: aBlRope [ 
+PRAbstractAnnotation >> styleText: aBlRope [ 
 	"Subclasses can add more styling"
 	(aBlRope 
 			from: self start 

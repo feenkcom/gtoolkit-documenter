@@ -112,7 +112,7 @@ PRFigure >> showParameterValue [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRFigure >> styleInText: aBlRope [
+PRFigure >> styleText: aBlRope [
 	Gt2DocumentUtility styleLinkInText: aBlRope forNode: self.
 	Gt2DocumentUtility styleExpandingPreviewInText: aBlRope forNode: self
 ]

@@ -1,7 +1,7 @@
 Extension { #name : #PRUndefinedAnnotation }
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRUndefinedAnnotation >> styleInText: aBlRope [ 
+PRUndefinedAnnotation >> styleText: aBlRope [ 
 	(aBlRope 
 			from: self start 
 			to: self stop)
