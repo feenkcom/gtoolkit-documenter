@@ -5,14 +5,9 @@ PRFormat >> hideMarkupsInText: aBlRope [
 	| aMarkup |
 	aMarkup := self utility startMarkupFor: self.
 
-	(aBlRope 
-		from: self start
-		to: self start + aMarkup size - 1)
-			attribute: Gt2HideAttribute uniqueInstance.
-	(aBlRope 
-		from: self stop - aMarkup size + 1
-		to: self stop)
-			attribute: Gt2HideAttribute uniqueInstance.
+	self utility hideMarkupsInText: aBlRope start: self start stop: self start + aMarkup size - 1.
+	self utility hideMarkupsInText: aBlRope start: self stop - aMarkup size + 1 stop: self stop.
+
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }

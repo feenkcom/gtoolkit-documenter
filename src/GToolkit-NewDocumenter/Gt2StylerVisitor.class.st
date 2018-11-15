@@ -149,15 +149,6 @@ Gt2StylerVisitor >> visitDocumentItem: aPRDocumentItem [
 ]
 
 { #category : #'visiting-document' }
-Gt2StylerVisitor >> visitExternalLink: anPRExternalLine [
-	anPRExternalLine 
-		gtDocument: self document;
-		gtSubscriber: self subscriber;
-		styleText: self text.
-	super visitExternalLink: anPRExternalLine
-]
-
-{ #category : #'visiting-document' }
 Gt2StylerVisitor >> visitFigure: aPRFigure [
 	aPRFigure 
 		gtDocument: self document;

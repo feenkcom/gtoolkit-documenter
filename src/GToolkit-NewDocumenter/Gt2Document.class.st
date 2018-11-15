@@ -98,7 +98,7 @@ Gt2Document >> classComment: aClass [
 
 { #category : #initialization }
 Gt2Document >> defaultStyler [
-	^ Gt2Styler new document: self
+	^ Gt2Styler new document: self; beReadingMode
 ]
 
 { #category : #initialization }

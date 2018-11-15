@@ -328,7 +328,7 @@ Gt2DocumentExamples >> contentWithExistingMethod [
 { #category : #'external link' }
 Gt2DocumentExamples >> contentWithExternalLink [
 	<gtExample>
-	^ '*Feenk>https://feenk.com*'
+	^ '*Feenk>https://feenk.com*', String cr, '*https://feenk.com*'
 ]
 
 { #category : #figure }
@@ -802,6 +802,28 @@ Gt2DocumentExamples >> documentWithExternalLink [
 	| aDocument |
 	aDocument := self defaultDocument text: self contentWithExternalLink.
 	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithExternalLink.
+	^ aDocument
+]
+
+{ #category : #'external link' }
+Gt2DocumentExamples >> documentWithExternalLinkInEditingMode [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExternalLink.
+	aDocument editingMode.
+	aDocument privateStyleText.
+	self assert: aDocument text asString equals: self contentWithExternalLink.
+	^ aDocument
+]
+
+{ #category : #'external link' }
+Gt2DocumentExamples >> documentWithExternalLinkInReadingMode [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExternalLink.
+	aDocument readingMode.
+	aDocument privateStyleText.
 	self assert: aDocument text asString equals: self contentWithExternalLink.
 	^ aDocument
 ]

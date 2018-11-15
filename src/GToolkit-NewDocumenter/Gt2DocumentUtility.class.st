@@ -47,6 +47,14 @@ Gt2DocumentUtility class >> endMarkupFor: aNode [
 	^ PRPillarGrammar endMarkups at: aNode class
 ]
 
+{ #category : #'text styling' }
+Gt2DocumentUtility class >> hideMarkupsInText: aBlRope start: aStartIndex stop: aStopIndex [
+	(aBlRope 
+		from: aStartIndex
+		to: aStopIndex)
+			attribute: Gt2HideAttribute uniqueInstance.
+]
+
 { #category : #'pillar - parameter values' }
 Gt2DocumentUtility class >> icebergFileReferenceFrom: aString [
 	<return: #FileReference>
@@ -120,9 +128,14 @@ Gt2DocumentUtility class >> parameterNodeNamed: aParameterName forAnnotation: an
 		ifNone: [ anAnnotation ].
 ]
 
+{ #category : #'text styling' }
+Gt2DocumentUtility class >> shouldOpenReference: anEvent [
+	^ anEvent modifiers isShift not
+]
+
 { #category : #'text markups' }
 Gt2DocumentUtility class >> startMarkupFor: aNode [
-	^ PRPillarGrammar markups at: aNode class
+	^ PRPillarGrammar markups at: (aNode isClass ifTrue: [ aNode ] ifFalse: [ aNode class ])
 ]
 
 { #category : #'text styling' }
@@ -152,7 +165,7 @@ Gt2DocumentUtility class >> styleLinkInText: aBlRope forNode: aNode [
 ]
 
 { #category : #'text styling' }
-Gt2DocumentUtility class >> styleLinkInText: aBlRope forNode: aNode withLinkAt: aLinkNode [
+Gt2DocumentUtility class >> styleLinkInText: aBlRope forNode: aNode start: aStartIndex stop: aStopIndex [
 	| aLinkColor theAttributes |
 	aLinkColor := self linkColor: aNode isReferenceDefined.
 	theAttributes := Array with: (BlTextForegroundAttribute new paint: aLinkColor).
@@ -165,9 +178,22 @@ Gt2DocumentUtility class >> styleLinkInText: aBlRope forNode: aNode withLinkAt: 
 						aNode browseReferenceFrom: anEvent ] } ].
 
 	(aBlRope  
-		from: aLinkNode start 
-		to: (aLinkNode start max: aLinkNode stop))
+		from: aStartIndex 
+		to: (aStartIndex max: aStopIndex))
 			attributes: theAttributes.
+]
+
+{ #category : #'text styling' }
+Gt2DocumentUtility class >> styleLinkInText: aBlRope forNode: aNode withLinkAt: aLinkNode [
+	self styleLinkInText: aBlRope forNode: aNode start: aLinkNode start stop: aLinkNode stop
+]
+
+{ #category : #'text styling' }
+Gt2DocumentUtility class >> sublteMarkupsInText: aBlRope start: aStartIndex stop: aStopIndex [
+	(aBlRope 
+		from: aStartIndex
+		to: aStopIndex)
+			foreground: self constants subtleColor
 ]
 
 { #category : #'pillar - parameter values' }
