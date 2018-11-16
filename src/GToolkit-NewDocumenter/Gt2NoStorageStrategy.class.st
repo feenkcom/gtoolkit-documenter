@@ -22,7 +22,17 @@ Gt2NoStorageStrategy class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
+{ #category : #actions }
+Gt2NoStorageStrategy >> read: aGt2Document [ 
+	"ignore"
+]
+
 { #category : #accessing }
 Gt2NoStorageStrategy >> rootDirectory [
 	^ Smalltalk imageDirectory
+]
+
+{ #category : #actions }
+Gt2NoStorageStrategy >> store: aGt2Document [ 
+	"ignore"
 ]
