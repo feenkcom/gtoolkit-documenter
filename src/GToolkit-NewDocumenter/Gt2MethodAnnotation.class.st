@@ -131,7 +131,7 @@ Gt2MethodAnnotation >> registerToSystemChanges [
 			for: self gtSubscriber.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'api - style' }
 Gt2MethodAnnotation >> styleTextEditingMode: aBlRope [
 	super styleTextEditingMode: aBlRope.
 	self styleLinkInText: aBlRope.

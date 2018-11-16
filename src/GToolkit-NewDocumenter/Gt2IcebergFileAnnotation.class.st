@@ -74,7 +74,7 @@ Gt2IcebergFileAnnotation >> referenceParameterName [
 	^ self constants pathParameterName
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'api - style' }
 Gt2IcebergFileAnnotation >> styleTextEditingMode: aBlRope [
 	super styleTextEditingMode: aBlRope.
 	self styleLinkInText: aBlRope.

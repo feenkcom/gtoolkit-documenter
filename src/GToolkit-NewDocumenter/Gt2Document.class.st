@@ -235,6 +235,7 @@ Gt2Document >> isSubscribedToSystem [
 Gt2Document >> mayRequestDocumentUpdate [
 	self isSubscribedToSystem ifFalse: [ ^ self ].
 	self hasDocumentSubscriptions ifFalse: [ ^ self ].
+	self styleTextRequest.
 	self announcer announce: (Gt2DocumentUpdateRequestedAnnouncement new document: self)
 ]
 

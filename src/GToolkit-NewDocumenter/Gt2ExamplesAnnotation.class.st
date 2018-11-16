@@ -414,7 +414,7 @@ Gt2ExamplesAnnotation >> styleSuccessButtonInText: aBlRope [
 		attribute: self successButtonAttribute
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'api - style' }
 Gt2ExamplesAnnotation >> styleTextEditingMode: aBlRope [
 	super styleTextEditingMode: aBlRope.
 	self styleLinkInText: aBlRope.
