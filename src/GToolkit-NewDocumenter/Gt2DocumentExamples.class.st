@@ -259,6 +259,15 @@ Gt2DocumentExamples >> contentWithCommentedLine [
 	^ '%% a commented line'
 ]
 
+{ #category : #codeblock }
+Gt2DocumentExamples >> contentWithEmptyCodeblock [
+	<gtExample>
+	^ '[[[label=Evaluate
+   
+]]]'
+
+]
+
 { #category : #changes }
 Gt2DocumentExamples >> contentWithEpiceaChanges [
 	<gtExample>
@@ -677,7 +686,7 @@ Gt2DocumentExamples >> documentWithCodeblock [
 	aDocument := self defaultDocument text: self contentWithCodeblock.
 	aDocument editor styleText.
 	self assert: aDocument text asString equals: self contentWithCodeblock.
-	"self assert: aDocument isSubscribedToSystem."
+	self assert: aDocument isSubscribedToSystem.
 	^ aDocument
 ]
 
@@ -716,6 +725,17 @@ Gt2DocumentExamples >> documentWithEditedExistingMethodAnnotation [
 		assert: (aDocument text asString allButLast: (2 + self fooText size)) 
 		equals: (self contentWithExistingMethod allButLast: 2).
 	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
+{ #category : #codeblock }
+Gt2DocumentExamples >> documentWithEmptyCodeblock [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithEmptyCodeblock.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithEmptyCodeblock.
+	self assert: aDocument isSubscribedToSystem not.
 	^ aDocument
 ]
 
