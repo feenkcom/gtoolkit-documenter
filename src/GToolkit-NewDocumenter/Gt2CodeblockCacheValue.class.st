@@ -4,16 +4,24 @@ Class {
 	#instVars : [
 		'result',
 		'isException',
-		'preview'
+		'preview',
+		'symbols',
+		'hasResult'
 	],
 	#category : #'GToolkit-NewDocumenter-Cache'
 }
+
+{ #category : #accessing }
+Gt2CodeblockCacheValue >> hasResult [
+	^ hasResult
+]
 
 { #category : #initialization }
 Gt2CodeblockCacheValue >> initialize [
 	super initialize.
 	isException := false.
 	result := nil.
+	hasResult := false.
 ]
 
 { #category : #accessing }
@@ -43,5 +51,17 @@ Gt2CodeblockCacheValue >> result [
 
 { #category : #accessing }
 Gt2CodeblockCacheValue >> result: anObject [
-	result := anObject
+	result := anObject.
+	hasResult := true.
+]
+
+{ #category : #'as yet unclassified' }
+Gt2CodeblockCacheValue >> symbols [ 
+	<return: #Gt2CodeblockSymbols or: nil>
+	^ symbols
+]
+
+{ #category : #accessing }
+Gt2CodeblockCacheValue >> symbols: aGt2CodeblockSymbols [ 
+	symbols := aGt2CodeblockSymbols
 ]

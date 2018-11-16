@@ -238,7 +238,7 @@ Gt2DocumentExamples >> contentWithClassDefinitionChanges [
 Gt2DocumentExamples >> contentWithCodeblock [
 	<gtExample>
 	^ '[[[label=Evaluate
-4 factorial.
+aBook := DmAbAddressBook new.
 ]]]'
 
 ]

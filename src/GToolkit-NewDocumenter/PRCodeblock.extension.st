@@ -51,6 +51,25 @@ PRCodeblock >> cachedResult [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> cachedSymbols [
+	<return: #Gt2CodeblockSymbols or: nil>
+	^ self gtDocument 
+		cacheAt: self cacheKey
+		ifPresent: [ :aCachedValue | aCachedValue symbols ]
+		ifAbsent: [ nil ]
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> cachedSymbols: aGt2CodeblockSymbols [
+	self gtDocument 
+		cacheAt: self cacheKey
+		ifPresent: [ :aCachedValue | aCachedValue symbols: aGt2CodeblockSymbols ]
+		ifAbsentPut: [ 
+			Gt2CodeblockCacheValue new 
+				symbols: aGt2CodeblockSymbols ]
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> endMarkup [
 	^ PR2PillarGrammar endMarkups at: self class
 ]
@@ -118,11 +137,48 @@ PRCodeblock >> gtLanguageOrSmalltalk [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> handleClassAddedOrRemovedAnnouncement: aClassAdded [ 
+	| aSymbols |
+	aSymbols := self cachedSymbols.
+	(aSymbols notNil and: [ 
+		(aSymbols includesVariable: aClassAdded classAffected originalName) ])
+				ifFalse: [ ^ self ].
+	self gtDocument styleTextRequest
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> handleClassRenamedAnnouncement: aClassRenamed [ 
+	| aSymbols |
+	aSymbols := self cachedSymbols.
+	(aSymbols notNil and: [ 
+		(aSymbols includesVariable: aClassRenamed newName) or: [ 
+			aSymbols includesVariable: aClassRenamed oldName ]])
+				ifFalse: [ ^ self ].
+	self gtDocument styleTextRequest
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> handleMethodAnnouncement: aMethodModified [ 
+	| aSymbols |
+	aSymbols := self cachedSymbols.
+	(aSymbols notNil and: [ 
+		(aSymbols includesVariable: aMethodModified classAffected name) or: [ 
+			aSymbols includesMessage: aMethodModified selector ]])
+				ifFalse: [ ^ self ].
+	self gtDocument styleTextRequest
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> hasResult [
 	^ self gtDocument 
 		cacheAt: self cacheKey 
-		ifPresent: [ :aCachedValue | true ] 
+		ifPresent: [ :aCachedValue | aCachedValue hasResult ] 
 		ifAbsent: [ false ]
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> hasSourceCode [
+	^ self text trimBoth isNotEmpty
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
@@ -153,6 +209,37 @@ PRCodeblock >> parameterStopPositionInText: aBlRope [
 			pattern: [ :aText :anIndex | 
 				(aText at: anIndex) isLineBreak ]; search.
 	^ aLineBreakIndex + self start - 1
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> parsePharoCode [
+	| anAst aVisitor |
+	anAst := GtPharoParser 
+		parse: self text asString 
+		startingAt: GtPharoParser startingStateForMethodSequence
+		onError: [ :anException | nil ].
+	anAst ifNil: [ ^ self ].
+	aVisitor := Gt2CodeblockPharoVisitor new.
+	anAst acceptVisitor: aVisitor.
+	self cachedSymbols: aVisitor symbols.
+	self registerToSystemChanges.
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> registerToSystemChanges [
+	self gtDocument
+		subscribe: MethodAdded, MethodRemoved
+			send: #handleMethodAnnouncement:
+			to: self
+			for: self gtSubscriber;
+		subscribe: ClassAdded, ClassRemoved
+			send: #handleClassAddedOrRemovedAnnouncement:
+			to: self
+			for: self gtSubscriber;
+		subscribe: ClassRenamed
+			send: #handleClassRenamedAnnouncement:
+			to: self
+			for: self gtSubscriber
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
@@ -272,9 +359,11 @@ PRCodeblock >> styleTextEditingMode: aBlRope [
 	super styleTextEditingMode: aBlRope.
 	self styleParametersInText: aBlRope.
 	self styleClosingBracketsInText: aBlRope.
+	self hasSourceCode ifFalse: [ ^ self ].
 	self gtIsSmalltalkLanguage ifFalse: [ ^ self styleScriptInText: aBlRope ].
 	self styleRunButtonInText: aBlRope.
 	self styleSmalltalkInText: aBlRope.
+	self parsePharoCode.
 	self hasResult ifTrue: [ self styleResultPreviewInText: aBlRope ].
 ]
 
