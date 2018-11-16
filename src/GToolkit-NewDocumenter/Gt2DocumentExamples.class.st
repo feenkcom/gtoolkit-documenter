@@ -975,8 +975,9 @@ Gt2DocumentExamples >> documentWithNotExistingPackageExamples [
 Gt2DocumentExamples >> documentWithTwoExistingExamples [
 	<gtExample>
 	| aDocument aCache |
-	aDocument := self defaultDocument text: self contentWithTwoExistingExamples.
-	aDocument editor styleText.
+	aDocument := self defaultDocument.
+	aDocument editingMode; text: self contentWithTwoExistingExamples.
+	aDocument privateStyleText.
 	self assert: aDocument text asString equals: self contentWithTwoExistingExamples.
 	self assert: aDocument isSubscribedToSystem.
 	aCache := aDocument cache keys asOrderedCollection.
@@ -1000,7 +1001,6 @@ Gt2DocumentExamples >> emptyDocument [
 	| aDocument |
 	aDocument := self defaultDocument text: self emptyContent.
 	self assert: aDocument text asString equals: self emptyContent.
-   self assert: false.
 	self assert: aDocument isSubscribedToSystem not.
 	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument) not.
 	^ aDocument

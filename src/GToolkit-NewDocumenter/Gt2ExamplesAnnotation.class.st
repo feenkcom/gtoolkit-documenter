@@ -414,9 +414,9 @@ Gt2ExamplesAnnotation >> styleSuccessButtonInText: aBlRope [
 		attribute: self successButtonAttribute
 ]
 
-{ #category : #'api - style' }
-Gt2ExamplesAnnotation >> styleText: aBlRope [
-	super styleText: aBlRope.
+{ #category : #'as yet unclassified' }
+Gt2ExamplesAnnotation >> styleTextEditingMode: aBlRope [
+	super styleTextEditingMode: aBlRope.
 	self styleLinkInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 	self styleRunButtonInText: aBlRope.

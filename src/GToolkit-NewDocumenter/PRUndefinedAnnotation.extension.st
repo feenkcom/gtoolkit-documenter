@@ -1,9 +1,15 @@
 Extension { #name : #PRUndefinedAnnotation }
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRUndefinedAnnotation >> styleText: aBlRope [ 
+PRUndefinedAnnotation >> styleTextEditingMode: aBlRope [
+	super styleTextEditingMode: aBlRope.
 	(aBlRope 
 			from: self start 
 			to: self stop)
-				foreground: Gt2DocumentConstants linkWithErrorColor
+				foreground: self constants linkWithErrorColor
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRUndefinedAnnotation >> styleTextReadingMode: aBlRope [
+	self styleTextEditingMode: aBlRope
 ]

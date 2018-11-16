@@ -112,7 +112,13 @@ PRFigure >> showParameterValue [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRFigure >> styleText: aBlRope [
-	Gt2DocumentUtility styleLinkInText: aBlRope forNode: self.
-	Gt2DocumentUtility styleExpandingPreviewInText: aBlRope forNode: self
+PRFigure >> styleTextEditingMode: aBlRope [
+	super styleTextEditingMode: aBlRope.
+	self utility styleLinkInText: aBlRope forNode: self.
+	self utility styleExpandingPreviewInText: aBlRope forNode: self
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRFigure >> styleTextReadingMode: aBlRope [
+	self styleTextEditingMode: aBlRope
 ]

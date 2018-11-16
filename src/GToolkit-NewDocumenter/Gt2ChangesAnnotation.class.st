@@ -211,9 +211,9 @@ Gt2ChangesAnnotation >> styleCreateButtonInText: aBlRope [
 		attribute: self createButtonAttribute
 ]
 
-{ #category : #'api - style' }
-Gt2ChangesAnnotation >> styleText: aBlRope [
-	super styleText: aBlRope.
+{ #category : #'as yet unclassified' }
+Gt2ChangesAnnotation >> styleTextEditingMode: aBlRope [
+	super styleTextEditingMode: aBlRope.
 	self styleLinkInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 	self styleApplyButtonInText: aBlRope.

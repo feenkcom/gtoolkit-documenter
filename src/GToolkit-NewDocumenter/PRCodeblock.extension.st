@@ -268,11 +268,17 @@ PRCodeblock >> styleSmalltalkInText: aBlRope [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRCodeblock >> styleText: aBlRope [ 
+PRCodeblock >> styleTextEditingMode: aBlRope [ 
+	super styleTextEditingMode: aBlRope.
 	self styleParametersInText: aBlRope.
 	self styleClosingBracketsInText: aBlRope.
 	self gtIsSmalltalkLanguage ifFalse: [ ^ self styleScriptInText: aBlRope ].
 	self styleRunButtonInText: aBlRope.
 	self styleSmalltalkInText: aBlRope.
 	self hasResult ifTrue: [ self styleResultPreviewInText: aBlRope ].
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> styleTextReadingMode: aBlRope [
+	self styleTextEditingMode: aBlRope
 ]

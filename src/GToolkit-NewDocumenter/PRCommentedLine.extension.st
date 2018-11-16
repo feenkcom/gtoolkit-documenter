@@ -1,9 +1,15 @@
 Extension { #name : #PRCommentedLine }
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRCommentedLine >> styleText: aBlRope [
+PRCommentedLine >> styleTextEditingMode: aBlRope [
+	super styleTextEditingMode: aBlRope.
 	(aBlRope
 		from: self start
 		to: self stop)
-			foreground: Gt2DocumentConstants subtleColor
+			foreground: self constants subtleColor
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCommentedLine >> styleTextReadingMode: aBlRope [
+	self styleTextEditingMode: aBlRope
 ]

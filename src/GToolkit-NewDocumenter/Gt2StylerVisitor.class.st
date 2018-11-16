@@ -106,20 +106,13 @@ Gt2StylerVisitor >> visitAnnotation: anAnnotation [
 { #category : #'visiting-document' }
 Gt2StylerVisitor >> visitCodeblock: aPRCodeblock [
 	codeblockCounter := codeblockCounter + 1.
-	aPRCodeblock 
-		counter: codeblockCounter;
-		gtDocument: self document;
-		gtSubscriber: self subscriber;
-		styleText: self text.
+	aPRCodeblock counter: codeblockCounter.
 	super visitCodeblock: aPRCodeblock
 ]
 
 { #category : #'visiting-document' }
 Gt2StylerVisitor >> visitCommentedLine: aPRCommentedLine [
-	aPRCommentedLine 
-		gtDocument: self document;
-		gtSubscriber: self subscriber;
-		styleText: self text.
+	self styleNode: aPRCommentedLine.
 	super visitCommentedLine: aPRCommentedLine
 ]
 
@@ -142,15 +135,6 @@ Gt2StylerVisitor >> visitDocumentGroup: aPRDocumentGroup [
 Gt2StylerVisitor >> visitDocumentItem: aPRDocumentItem [
 	self styleNode: aPRDocumentItem.
 	super visitDocumentItem: aPRDocumentItem.
-]
-
-{ #category : #'visiting-document' }
-Gt2StylerVisitor >> visitFigure: aPRFigure [
-	aPRFigure 
-		gtDocument: self document;
-		gtSubscriber: self subscriber;
-		styleText: self text.
-	super visitFigure: aPRFigure
 ]
 
 { #category : #'visiting-document' }

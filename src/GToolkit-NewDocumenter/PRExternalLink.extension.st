@@ -18,22 +18,6 @@ PRExternalLink >> startMarkup [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRExternalLink >> styleText: aBlRope [
-	(aBlRope
-		from: self start
-		to: self stop)
-			foreground: Gt2DocumentConstants linkColor;
-			attributes: { 
-				BrTextHoverStylableAttribute new 
-					attribute: (BlTextUnderlineAttribute new paint: Gt2DocumentConstants linkColor).
-				BrTextClickAttribute new 
-					action: [ :aText :aTarget :anEditorElement :anEvent | 
-						anEvent modifiers isShift ifFalse: [
-							WebBrowser openOn: self url ] ]
-			 }
-]
-
-{ #category : #'*GToolkit-NewDocumenter' }
 PRExternalLink >> styleTextEditingMode: aBlRope [
 	self utility styleLinkInText: aBlRope forNode: self start: self start + 1 stop: self stop - 1.
 	self utility

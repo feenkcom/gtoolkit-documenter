@@ -48,11 +48,6 @@ PRDocumentItem >> styleTextReadingMode: aBlRope [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRDocumentItem >> styleTextReadingModeMode: aBlRope [
-	self styleText: aBlRope
-]
-
-{ #category : #'*GToolkit-NewDocumenter' }
 PRDocumentItem >> utility [
 	^ Gt2DocumentUtility
 ]

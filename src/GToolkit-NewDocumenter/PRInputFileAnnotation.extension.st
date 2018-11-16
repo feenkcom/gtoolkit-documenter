@@ -110,9 +110,14 @@ PRInputFileAnnotation >> styleExpandingPreviewInText: aBlRope [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRInputFileAnnotation >> styleText: aBlRope [
-	super styleText: aBlRope.
-	Gt2DocumentUtility styleLinkInText: aBlRope forAnnotationNode: self.
+PRInputFileAnnotation >> styleTextEditingMode: aBlRope [
+	super styleTextEditingMode: aBlRope.
+	self utility styleLinkInText: aBlRope forAnnotationNode: self.
 	self styleExpandingPreviewInText: aBlRope.
 	
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRInputFileAnnotation >> styleTextReadingMode: aBlRope [
+	self styleTextEditingMode: aBlRope
 ]
