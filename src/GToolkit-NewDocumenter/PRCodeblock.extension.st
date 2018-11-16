@@ -172,7 +172,7 @@ PRCodeblock >> resultPreviewAttributes [
 PRCodeblock >> runButtonLabel [
 	<return: #String>
 	(self label isString and: [ self label isEmpty not ])
-		ifTrue: [ self label ].
+		ifTrue: [ ^ self label ].
 	^ Gt2DocumentConstants runButtonLabel
 ]
 
