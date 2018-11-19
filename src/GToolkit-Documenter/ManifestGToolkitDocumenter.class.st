@@ -7,6 +7,11 @@ Class {
 	#category : #'GToolkit-Documenter-Manifest'
 }
 
+{ #category : #deprecation }
+ManifestGToolkitDocumenter class >> isDeprecated [
+	^ true
+]
+
 { #category : #'code-critics' }
 ManifestGToolkitDocumenter class >> ruleRBBadMessageRuleV1FalsePositive [
 	^ #(#(#(#RGMethodDefinition #(#GtPillarInspectorStencil #create #false)) #'2018-08-10T09:01:38.326112-04:00') )
