@@ -55,6 +55,19 @@ Gt2DocumentUtility class >> hideMarkupsInText: aBlRope start: aStartIndex stop: 
 			attribute: Gt2HideAttribute uniqueInstance.
 ]
 
+{ #category : #'text styling' }
+Gt2DocumentUtility class >> horizontalLineAttribute [
+	^ BrTextAdornmentDynamicAttribute new
+		beReplace;
+		equality: 'long';
+		stencil: [ BlElement new
+			background: self constants subtleColor;
+			constraintsDo: [ :c |
+				c margin: (BlInsets top: 10 bottom: 10).
+				c vertical exact: self constants horizontalLineHeight.
+				c horizontal matchParent ] ]
+]
+
 { #category : #'pillar - parameter values' }
 Gt2DocumentUtility class >> icebergFileReferenceFrom: aString [
 	<return: #FileReference>
