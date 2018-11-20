@@ -155,6 +155,11 @@ Gt2DocumentConstants class >> heightParameterName [
 	^ #height
 ]
 
+{ #category : #ui }
+Gt2DocumentConstants class >> horizontalLineHeight [
+	^ 1
+]
+
 { #category : #'pillar annotation names' }
 Gt2DocumentConstants class >> icebergFileAnnotationName [
 	^ #icebergFile
