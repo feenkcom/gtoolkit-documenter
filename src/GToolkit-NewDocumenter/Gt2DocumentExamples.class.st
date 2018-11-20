@@ -253,6 +253,15 @@ Gt2DocumentExamples >> contentWithCodeblockAndEmptyLineAfter [
 
 ]
 
+{ #category : #codeblock }
+Gt2DocumentExamples >> contentWithCodeblockOnException [
+	<gtExample>
+	^ '[[[
+1/0
+]]]'
+
+]
+
 { #category : #'commented line' }
 Gt2DocumentExamples >> contentWithCommentedLine [
 	<gtExample>
@@ -534,12 +543,6 @@ Gt2DocumentExamples >> demoDocument [
 	^ Gt2Document new fileReference: self demoFileReference; read.
 ]
 
-{ #category : #demo }
-Gt2DocumentExamples >> demoDocument2 [
-	<gtExample>
-	^ Gt2Document new fileReference: self demoFileReference2; read.
-]
-
 { #category : #'document updates' }
 Gt2DocumentExamples >> demoDocumentUpdateError [
 	<gtExample>
@@ -564,15 +567,6 @@ Gt2DocumentExamples >> demoFileReference [
 			/ 'feenkcom'/ 'gtoolkit-demos' 
 			/ 'doc' / 'tutorial' 
 			/ 'smalltalks-2018-addressbook' / 'example-driven-development.pillar' 
-]
-
-{ #category : #demo }
-Gt2DocumentExamples >> demoFileReference2 [
-	<gtExample>
-	^ self constants icebergRepositoriesLocation 
-			/ 'feenkcom'/ 'gtoolkit-demos' 
-			/ 'doc' / 'tutorial' 
-			/ 'smalltalks-2018-addressbook' / 'example-driven-development-2.pillar' 
 ]
 
 { #category : #'method - existing one' }
@@ -706,6 +700,18 @@ Gt2DocumentExamples >> documentWithCodeblockAndEmptyLineAfter [
 	aDocument := self defaultDocument text: self contentWithCodeblockAndEmptyLineAfter.
 	aDocument privateStyleText.
 	self assert: aDocument text asString equals: self contentWithCodeblockAndEmptyLineAfter.
+	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
+{ #category : #codeblock }
+Gt2DocumentExamples >> documentWithCodeblockOnException [
+	<gtExample>
+	<noText>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithCodeblockOnException.
+	aDocument privateStyleText.
+	self assert: aDocument text asString equals: self contentWithCodeblockOnException.
 	self assert: aDocument isSubscribedToSystem.
 	^ aDocument
 ]
