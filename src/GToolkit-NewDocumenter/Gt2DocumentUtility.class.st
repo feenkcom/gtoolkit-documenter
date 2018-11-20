@@ -59,7 +59,6 @@ Gt2DocumentUtility class >> hideMarkupsInText: aBlRope start: aStartIndex stop: 
 Gt2DocumentUtility class >> horizontalLineAttribute [
 	^ BrTextAdornmentDynamicAttribute new
 		beReplace;
-		equality: 'long';
 		stencil: [ BlElement new
 			background: self constants subtleColor;
 			constraintsDo: [ :c |
