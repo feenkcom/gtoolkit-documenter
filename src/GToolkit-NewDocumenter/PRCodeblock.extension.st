@@ -89,7 +89,7 @@ PRCodeblock >> evaluateCodeblock [
 	aCommand requestor: self.
 	aCommand sourceCode: self text asString.
 	aCommand variableBindings: aStrategy.
-	aCommand receiver: self gtDocument.
+	aCommand receiver: self gtDocument evaluationReceiver.
 	anErrorCatchingCommand := aCommand asErrorCatchingCommand.
 	anErrorCatchingCommand execute.
 	aResult := anErrorCatchingCommand result.

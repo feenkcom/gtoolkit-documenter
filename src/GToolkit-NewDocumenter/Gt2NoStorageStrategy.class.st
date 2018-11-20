@@ -22,6 +22,13 @@ Gt2NoStorageStrategy class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
+{ #category : #accessing }
+Gt2NoStorageStrategy >> evaluationReceiver [
+	"Return an object that is used as a receiver (self) in a codeblock (code snippet) evalution"
+	<return: #Object>
+	^ nil
+]
+
 { #category : #actions }
 Gt2NoStorageStrategy >> read: aGt2Document [ 
 	"ignore"

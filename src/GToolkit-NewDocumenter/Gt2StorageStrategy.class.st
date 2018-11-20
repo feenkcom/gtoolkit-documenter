@@ -31,6 +31,13 @@ Gt2StorageStrategy class >> null [
 	^ Gt2NoStorageStrategy uniqueInstance
 ]
 
+{ #category : #accessing }
+Gt2StorageStrategy >> evaluationReceiver [
+	"Return an object that is used as a receiver (self) in a codeblock (code snippet) evalution"
+	<return: #Object>
+	^ self subclassResponsibility
+]
+
 { #category : #actions }
 Gt2StorageStrategy >> read: aGt2Document [ 
 	self subclassResponsibility

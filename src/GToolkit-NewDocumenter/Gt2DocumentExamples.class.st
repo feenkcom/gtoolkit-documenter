@@ -501,6 +501,15 @@ Gt2DocumentExamples >> contentWithNotExistingPackageExamples [
 
 ]
 
+{ #category : #codeblock }
+Gt2DocumentExamples >> contentWithSelfCodeblock [
+	<gtExample>
+	^ '[[[
+self
+]]]'
+
+]
+
 { #category : #'example - two same in one document' }
 Gt2DocumentExamples >> contentWithTwoExistingExamples [
 	<gtExample>
@@ -684,7 +693,7 @@ Gt2DocumentExamples >> documentWithCodeblock [
 	<gtExample>
 	| aDocument |
 	aDocument := self defaultDocument text: self contentWithCodeblock.
-	aDocument editor styleText.
+	aDocument privateStyleText.
 	self assert: aDocument text asString equals: self contentWithCodeblock.
 	self assert: aDocument isSubscribedToSystem.
 	^ aDocument
@@ -695,9 +704,9 @@ Gt2DocumentExamples >> documentWithCodeblockAndEmptyLineAfter [
 	<gtExample>
 	| aDocument |
 	aDocument := self defaultDocument text: self contentWithCodeblockAndEmptyLineAfter.
-	aDocument editor styleText.
+	aDocument privateStyleText.
 	self assert: aDocument text asString equals: self contentWithCodeblockAndEmptyLineAfter.
-	"self assert: aDocument isSubscribedToSystem."
+	self assert: aDocument isSubscribedToSystem.
 	^ aDocument
 ]
 
@@ -988,6 +997,41 @@ Gt2DocumentExamples >> documentWithNotExistingPackageExamples [
 	aDocument editor styleText.
 	self assert: aDocument text asString equals: self contentWithNotExistingPackageExamples.
 	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
+{ #category : #codeblock }
+Gt2DocumentExamples >> documentWithSelfCodeblock [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithSelfCodeblock.
+	aDocument privateStyleText.
+	self assert: aDocument text asString equals: self contentWithSelfCodeblock.
+	self assert: aDocument isSubscribedToSystem.
+	self assert: aDocument evaluationReceiver isNil.
+	^ aDocument
+]
+
+{ #category : #codeblock }
+Gt2DocumentExamples >> documentWithSelfCodeblockOnClass [
+	<gtExample>
+	| aDocument |
+	aDocument := self documentWithSelfCodeblock.
+	aDocument classComment: self class.  
+	aDocument privateStyleText.
+	self assert: aDocument evaluationReceiver equals: self class.
+	^ aDocument
+]
+
+{ #category : #codeblock }
+Gt2DocumentExamples >> documentWithSelfCodeblockOnFileReference [
+	<gtExample>
+	| aDocument aFileReference |
+	aFileReference := self fileReferenceWithInputFile.
+	aDocument := self documentWithSelfCodeblock.
+	aDocument fileReference: aFileReference.  
+	aDocument privateStyleText.
+	self assert: aDocument evaluationReceiver equals: aFileReference.
 	^ aDocument
 ]
 

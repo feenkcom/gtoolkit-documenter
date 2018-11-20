@@ -30,6 +30,15 @@ Gt2ClassCommentStrategy >> comment [
 			ifFalse: [ '' ] ]
 ]
 
+{ #category : #accessing }
+Gt2ClassCommentStrategy >> evaluationReceiver [
+	"Return an object that is used as a receiver (self) in a codeblock (code snippet) evalution"
+	<return: #Object>
+	^ self classToComment isDefined 
+		ifTrue: [ self classToComment realClass ]
+		ifFalse: [ self classToComment ]
+]
+
 { #category : #actions }
 Gt2ClassCommentStrategy >> read: aGt2Document [ 
 	self 
