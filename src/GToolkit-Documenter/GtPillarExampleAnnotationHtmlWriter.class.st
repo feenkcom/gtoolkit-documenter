@@ -41,7 +41,7 @@ GtPillarExampleAnnotationHtmlWriter >> writeExampleToFile: aFileReference [
 	"recommended size"
 	aContainer size: 500@300.
 
-	aView := GtPhlowView sequentialExplicit 
+	aView := GtPhlowView explicit 
 		on: anExampleReturnValue 
 		perform: self node previewShowSelector.
 	aView asElementDo: [ :anElement | aContainer addChild: anElement ].
