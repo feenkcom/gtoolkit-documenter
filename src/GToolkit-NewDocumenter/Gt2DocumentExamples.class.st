@@ -1231,6 +1231,12 @@ Gt2DocumentExamples >> pillarParser [
 	
 ]
 
+{ #category : #accessing }
+Gt2DocumentExamples >> reader [
+	<gtExample>
+	^ XdReaderWriterExamples new reader
+]
+
 { #category : #class }
 Gt2DocumentExamples >> referencedClass [
 	<gtExample>
@@ -1318,4 +1324,46 @@ Gt2DocumentExamples >> ropeHiddenBoldMarkupForNonTechnicalPeople [
 	(aRope from: 7 to: 8) attribute: Gt2HideAttribute uniqueInstance.
 	(aRope from: 3 to: 6) attribute: aSwitchAttribute.
 	^ aRope
+]
+
+{ #category : #writing }
+Gt2DocumentExamples >> writeDemoDocument [
+	<gtExample>
+	
+	| aWriter aXdFile |
+	aWriter := self writer.
+	aXdFile := aWriter
+		streamingStrategy: XdStreamingStrategy bytes;
+		pillar: self demoDocument;
+		write.
+	self assert: aXdFile notNil.
+	self assert: aXdFile manifest notNil.
+	self assert: aXdFile manifest documents size equals: 1.
+	self
+		assert: aXdFile manifest documents first type
+		equals: XdPillarType.
+	self
+		assert: aXdFile manifest documents first components size
+		equals: 1.
+	self
+		assert: aXdFile manifest documents first components first link
+		equals: '1'.
+	self assert: aXdFile manifest attachments size equals: 1.
+	self assert: aXdFile manifest attachments first id equals: '1'.
+	self
+		assert: aXdFile manifest attachments first fileName
+		equals: self demoFileReference entry name.
+	self
+		assert: aXdFile manifest attachments first fileSize
+		equals: self demoFileReference size.
+	self assert: aXdFile streamingStrategy notNil.
+	self assert: aXdFile exists.
+	self assert: aXdFile streamingStrategy zip members size equals: 2.
+	^ aXdFile
+]
+
+{ #category : #accessing }
+Gt2DocumentExamples >> writer [
+	<gtExample>
+	^ XdReaderWriterExamples new writer
 ]
