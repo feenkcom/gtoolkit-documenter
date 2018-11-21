@@ -38,12 +38,7 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 			baseline: 'GToolkitInspector' with: [ spec
 				repository: 'github://feenkcom/gtoolkit-inspector/src' ];
 			baseline: 'PillarExporter' with: [ spec
-				"repository: 'github://pillar-markup/pillar/src'"
-				"repository: 'github://pillar-markup/pillar:dev-7/src'"
 				repository: 'github://feenkcom/pillar:feenk/src' ];
-			baseline: 'PetitParser2Core' with: [
-				spec
-				 	repository: 'github://kursjan/petitparser2' ];
 			project: 'DeepTraverser' with: [ spec
 				className: #ConfigurationOfDeepTraverser;
 				versionString: #development;
