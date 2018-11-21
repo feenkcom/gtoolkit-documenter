@@ -71,7 +71,7 @@ PRCodeblock >> cachedSymbols: aGt2CodeblockSymbols [
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> endMarkup [
-	^ PR2PillarGrammar endMarkups at: self class
+	^ PRPillarGrammar endMarkups at: self class
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
