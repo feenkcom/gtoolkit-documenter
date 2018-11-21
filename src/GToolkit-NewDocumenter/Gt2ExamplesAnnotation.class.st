@@ -218,7 +218,6 @@ Gt2ExamplesAnnotation >> isReferenceDefined [
 Gt2ExamplesAnnotation >> issuesButtonAttribute [
 	^ Gt2ButtonAttribute new
 		beAppend;
-		equality: self constants issuesButtonLabel;
 		stencil: (Gt2ButtonStencilBuilder new
 			label: self issuesButtonLabel;
 			icon: self constants infoButtonIcon;
@@ -352,7 +351,6 @@ Gt2ExamplesAnnotation >> resultsLabelAttribute [
 Gt2ExamplesAnnotation >> runButtonAttribute [
 	^ Gt2ButtonAttribute new
 		beAppend;
-		equality: self constants runButtonLabel;
 		stencil: (Gt2ButtonStencilBuilder new
 			label: self runButtonLabel;
 			icon: self constants runButtonIcon;
@@ -430,7 +428,6 @@ Gt2ExamplesAnnotation >> styleTextEditingMode: aBlRope [
 Gt2ExamplesAnnotation >> successButtonAttribute [
 	^ Gt2ButtonAttribute new
 		beAppend;
-		equality: self constants successButtonLabel;
 		stencil: (Gt2ButtonStencilBuilder new
 			label: self successButtonLabel;
 			icon: self constants infoButtonIcon;

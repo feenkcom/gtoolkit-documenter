@@ -30,7 +30,6 @@ Gt2ChangesAnnotation >> annotationCacheValueClass [
 Gt2ChangesAnnotation >> applyButtonAttribute [
 	^ Gt2ButtonAttribute new
 		beAppend;
-		equality: self constants applyButtonLabel;
 		stencil: (Gt2ButtonStencilBuilder new
 			label: self constants applyButtonLabel;
 			icon: self constants applyButtonIcon;
@@ -100,7 +99,6 @@ Gt2ChangesAnnotation >> changeFileExists [
 Gt2ChangesAnnotation >> createButtonAttribute [
 	^ Gt2ButtonAttribute new
 		beAppend;
-		equality: self constants createButtonLabel;
 		stencil: (Gt2ButtonStencilBuilder new
 			label: self constants createButtonLabel;
 			icon: self constants createButtonIcon;

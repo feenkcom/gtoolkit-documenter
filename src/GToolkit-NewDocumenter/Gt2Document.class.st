@@ -140,6 +140,13 @@ Gt2Document >> ensureStyleTextProcess [
 	styleTextProcess start
 ]
 
+{ #category : #accessing }
+Gt2Document >> evaluationReceiver [
+	"Return an object that is used as a receiver (self) in a codeblock (code snippet) evalution"
+	<return: #Object>
+	^ self storage evaluationReceiver
+]
+
 { #category : #initialization }
 Gt2Document >> fileReference: aFileReference [ 
 	self 

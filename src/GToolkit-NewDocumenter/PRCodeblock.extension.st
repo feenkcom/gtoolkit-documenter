@@ -89,7 +89,7 @@ PRCodeblock >> evaluateCodeblock [
 	aCommand requestor: self.
 	aCommand sourceCode: self text asString.
 	aCommand variableBindings: aStrategy.
-	aCommand receiver: self gtDocument.
+	aCommand receiver: self gtDocument evaluationReceiver.
 	anErrorCatchingCommand := aCommand asErrorCatchingCommand.
 	anErrorCatchingCommand execute.
 	aResult := anErrorCatchingCommand result.
@@ -297,6 +297,16 @@ PRCodeblock >> stopEndMarkupInText: aBlRope [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> styleBottomLineInText: aBlRope [
+	| aStopEndMarkup |
+	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
+	(aBlRope
+		from: aStopEndMarkup - self endMarkupSize
+		to: aStopEndMarkup)
+			attribute: self utility horizontalLineAttribute
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> styleClosingBracketsInText: aBlRope [
 	| aStopEndMarkup |
 	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
@@ -328,6 +338,23 @@ PRCodeblock >> styleRunButtonInText: aBlRope [
 	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
 	(aBlRope from: aStopEndMarkup - self endMarkupSize to: aStopEndMarkup)
 		attribute: self newRunButtonAttribute
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> styleRunButtonWithHorizontalLineInText: aBlRope [
+	| aStopEndMarkup aStartEndMarkup aLineStop |
+	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
+	aStartEndMarkup := aStopEndMarkup - self endMarkupSize.
+	(aBlRope from: aStartEndMarkup to: aStartEndMarkup + 1)
+		attribute: self newRunButtonAttribute beReplace.
+	aLineStop := self hasResult
+		ifTrue: [ aStopEndMarkup - 1 ]
+		ifFalse: [ aStopEndMarkup ].
+	(aBlRope from: aStartEndMarkup + 2 to: aLineStop)
+		attribute: self utility horizontalLineAttribute.
+	self hasResult ifFalse: [ ^ self ].
+	(aBlRope from: aStopEndMarkup to: aStopEndMarkup)
+		attributes: (self resultPreviewAttributes do: #beReplace).
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
@@ -369,5 +396,21 @@ PRCodeblock >> styleTextEditingMode: aBlRope [
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> styleTextReadingMode: aBlRope [
-	self styleTextEditingMode: aBlRope
+	super styleTextReadingMode: aBlRope.
+	self styleTopLineInText: aBlRope.
+	self hasSourceCode ifFalse: [ ^ self styleBottomLineInText: aBlRope ].
+	self gtIsSmalltalkLanguage ifFalse: [ 
+		self styleBottomLineInText: aBlRope.
+		^ self styleScriptInText: aBlRope ].
+	self styleRunButtonWithHorizontalLineInText: aBlRope.
+	self styleSmalltalkInText: aBlRope.
+	self parsePharoCode.
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> styleTopLineInText: aBlRope [
+	(aBlRope
+		from: self start
+		to: (self parameterStopPositionInText: aBlRope))
+			attribute: self utility horizontalLineAttribute
 ]
