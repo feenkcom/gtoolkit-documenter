@@ -60,7 +60,7 @@ Gt2DocumentUtility class >> horizontalLineAttribute [
 	^ BrTextAdornmentDynamicAttribute new
 		beReplace;
 		stencil: [ BlElement new
-			background: self constants subtleColor;
+			background: BlBackground transparent;
 			constraintsDo: [ :c |
 				c margin: (BlInsets top: 10 bottom: 10).
 				c vertical exact: self constants horizontalLineHeight.
