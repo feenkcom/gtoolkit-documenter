@@ -1381,7 +1381,43 @@ Gt2DocumentExamples >> ropeHiddenBoldMarkupForNonTechnicalPeople [
 ]
 
 { #category : #writing }
-Gt2DocumentExamples >> writeDemoDocument [
+Gt2DocumentExamples >> writeDocumentWithImages [
+	<gtExample>
+	
+	| aWriter aXdFile |
+	aWriter := self writer.
+	aXdFile := aWriter
+		streamingStrategy: XdStreamingStrategy bytes;
+		pillar: self documentWithFigure;
+		write.
+	self assert: aXdFile notNil.
+	self assert: aXdFile manifest notNil.
+	self assert: aXdFile manifest documents size equals: 1.
+	self
+		assert: aXdFile manifest documents first type
+		equals: XdPillarType.
+	self
+		assert: aXdFile manifest documents first components size
+		equals: 1.
+	self
+		assert: aXdFile manifest documents first components first link
+		equals: '1'.
+	self assert: aXdFile manifest attachments size equals: 1.
+	self assert: aXdFile manifest attachments first id equals: '1'.
+	self
+		assert: aXdFile manifest attachments first fileName
+		equals: self demoFileReference entry name.
+	self
+		assert: aXdFile manifest attachments first fileSize
+		equals: self demoFileReference size.
+	self assert: aXdFile streamingStrategy notNil.
+	self assert: aXdFile exists.
+	self assert: aXdFile streamingStrategy zip members size equals: 2.
+	^ aXdFile
+]
+
+{ #category : #writing }
+Gt2DocumentExamples >> writePlainDocument [
 	<gtExample>
 	
 	| aWriter aXdFile |
