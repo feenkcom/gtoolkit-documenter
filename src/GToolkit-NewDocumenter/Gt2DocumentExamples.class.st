@@ -1326,6 +1326,22 @@ Gt2DocumentExamples >> resourcerWithFigure [
 ]
 
 { #category : #resourcer }
+Gt2DocumentExamples >> resourcerWithIcebergFile [
+	<gtExample>
+	| aDocument aCollectionOfFigures anIcebergFile |
+	aDocument := self documentWithIcebergFile.
+	aCollectionOfFigures := aDocument resourcer includeIcebergFiles; compute.
+	self assert: aCollectionOfFigures isCollection.
+	self assert: aCollectionOfFigures size equals: 1.
+	anIcebergFile := aCollectionOfFigures first.
+	self assert: anIcebergFile name equals: self icebergFileName.
+	self assert: anIcebergFile document equals: aDocument.
+	self assert: anIcebergFile resource notNil.
+	self assert: anIcebergFile resource exists.
+	^ anIcebergFile
+]
+
+{ #category : #resourcer }
 Gt2DocumentExamples >> resourcerWithInputFile [
 	<gtExample>
 	| aDocument aCollectionOfFigures anInputFile |

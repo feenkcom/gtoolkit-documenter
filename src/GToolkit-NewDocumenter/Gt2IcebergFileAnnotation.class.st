@@ -49,8 +49,8 @@ Gt2IcebergFileAnnotation >> fileReference [
 						ifTrue: [ 
 							aFile := self utility icebergFileReferenceFrom: aValue.
 							aFile exists ifTrue: [ aFile ] ifFalse: [ nil ] ] ]
-		emptyValue: [ "do nothing" ] 
-		defaultValue: [ "do nothing" ]
+		emptyValue: [ nil ] 
+		defaultValue: [ nil ]
 ]
 
 { #category : #testing }
@@ -66,6 +66,20 @@ Gt2IcebergFileAnnotation >> isReferenceDefined [
 { #category : #accessing }
 Gt2IcebergFileAnnotation >> objectToPreview [
 	^ self fileReference
+]
+
+{ #category : #'accessing - parameter values' }
+Gt2IcebergFileAnnotation >> path [
+	<return: #String or: nil>
+	^ self utility 
+		valueOf: self constants pathParameterName
+		in: self parameters
+		value: [ :aValue | 
+					aValue isString 
+						ifFalse: [ nil ]
+						ifTrue: [ aValue ] ]
+		emptyValue: [ nil ] 
+		defaultValue: [ nil ]
 ]
 
 { #category : #accessing }

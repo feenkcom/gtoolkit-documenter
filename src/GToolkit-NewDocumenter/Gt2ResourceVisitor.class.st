@@ -7,7 +7,8 @@ Class {
 		'resources',
 		'document',
 		'includeFigures',
-		'includeInputFiles'
+		'includeInputFiles',
+		'includeIcebergFiles'
 	],
 	#category : #'GToolkit-NewDocumenter-Resourcer'
 }
@@ -43,6 +44,11 @@ Gt2ResourceVisitor >> includeFigures [
 ]
 
 { #category : #initialization }
+Gt2ResourceVisitor >> includeIcebergFiles [
+	includeIcebergFiles := true
+]
+
+{ #category : #initialization }
 Gt2ResourceVisitor >> includeInputFiles [
 	includeInputFiles := true
 ]
@@ -53,6 +59,7 @@ Gt2ResourceVisitor >> initialize [
 	resources := OrderedCollection new.
 	includeFigures := false.
 	includeInputFiles := false.
+	includeIcebergFiles := false.
 ]
 
 { #category : #accessing }
@@ -74,6 +81,21 @@ Gt2ResourceVisitor >> visitFigure: aPRFigure [
 			name: aPRFigure reference.
 	self addResource: aFigure.
 	super visitFigure: aPRFigure.
+]
+
+{ #category : #'visiting-annotations' }
+Gt2ResourceVisitor >> visitGt2IcebergFileAnnotation: aGt2IcebergFileAnnotation [
+	| aFileReferenceOrNil aInputFile |
+	includeIcebergFiles ifFalse: [ ^ super visitGt2IcebergFileAnnotation: aGt2IcebergFileAnnotation ].
+	aGt2IcebergFileAnnotation gtDocument: self document.
+	aFileReferenceOrNil := aGt2IcebergFileAnnotation fileReference.
+	aFileReferenceOrNil ifNil: [ ^ super visitGt2IcebergFileAnnotation: aGt2IcebergFileAnnotation ].
+	aInputFile := Gt2IcebergFile new 
+			document: self document;
+			resource: (Gt2Document forFile: aFileReferenceOrNil);
+			name: aGt2IcebergFileAnnotation path.
+	self addResource: aInputFile.
+	super visitGt2IcebergFileAnnotation: aGt2IcebergFileAnnotation
 ]
 
 { #category : #'visiting-annotations' }
