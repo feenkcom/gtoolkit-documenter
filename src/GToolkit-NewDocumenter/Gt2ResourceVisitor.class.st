@@ -18,8 +18,7 @@ Class {
 { #category : #'private - adding' }
 Gt2ResourceVisitor >> addDocumentResource: aGt2DocumentResource [
 	self addResource: aGt2DocumentResource.
-	(visitedDocumentResources includes: aGt2DocumentResource) ifTrue: [ ^ self ].
-	visitedDocumentResources add: aGt2DocumentResource.
+	(self addToVisitedDocumentResources: aGt2DocumentResource) ifTrue: [ ^ self ].
 	maxDepth = 0 ifTrue: [ ^ self ].
 	self computeResources: aGt2DocumentResource
 ]
@@ -61,6 +60,16 @@ Gt2ResourceVisitor >> addResource: aFileReference named: aString asResource: aRe
 			resource: aFileReference;
 			name: aString.
 	self addResource: aResource.
+]
+
+{ #category : #'private - adding' }
+Gt2ResourceVisitor >> addToVisitedDocumentResources: aGt2DocumentResource [
+	"Return true if the resource was already visited"
+	<return: #Boolean>
+	(visitedDocumentResources includes: aGt2DocumentResource) ifTrue: [ ^ true ].
+	visitedDocumentResources add: aGt2DocumentResource.
+	^ false
+
 ]
 
 { #category : #initialization }
@@ -114,7 +123,8 @@ Gt2ResourceVisitor >> documentResource: aGt2NodeResource [
 	self 
 		assert: [ aGt2NodeResource isNotNil ] 
 		description: [ 'Document resource must be non-nil' ].
-	documentResource := aGt2NodeResource
+	documentResource := aGt2NodeResource.
+	self addToVisitedDocumentResources: aGt2NodeResource
 ]
 
 { #category : #building }
@@ -149,7 +159,6 @@ Gt2ResourceVisitor >> includeInputFiles [
 { #category : #initialization }
 Gt2ResourceVisitor >> initialize [
 	super initialize.
-	resources := OrderedCollection new.
 	includeFigures := false.
 	includeInputFiles := false.
 	includeIcebergFiles := false.

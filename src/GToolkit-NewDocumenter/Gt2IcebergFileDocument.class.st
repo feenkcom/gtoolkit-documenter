@@ -1,5 +1,5 @@
 Class {
 	#name : #Gt2IcebergFileDocument,
-	#superclass : #Gt2InputFileDocument,
+	#superclass : #Gt2NodeResource,
 	#category : #'GToolkit-NewDocumenter-Resourcer'
 }

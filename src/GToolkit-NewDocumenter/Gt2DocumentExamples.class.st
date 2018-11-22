@@ -1355,7 +1355,6 @@ Gt2DocumentExamples >> removeEpiceaEvent [
 { #category : #resourcer }
 Gt2DocumentExamples >> resourcerWithAllDepthInfiniteRecursion [
 	<gtExample>
-	<noTest>
 	| aDocument aCollectionOfFigures anInputFile |
 	aDocument := self documentWithSelfReferencedInputFile.
 	aCollectionOfFigures := aDocument resourcer includeAll; allDepth; compute.
@@ -1363,9 +1362,9 @@ Gt2DocumentExamples >> resourcerWithAllDepthInfiniteRecursion [
 	self assert: aCollectionOfFigures size equals: 1.
 	anInputFile := aCollectionOfFigures first.
 	self assert: anInputFile name equals: memorySystem pillarFileName.
-	self assert: anInputFile document equals: aDocument.
-	self assert: anInputFile resource notNil.
-	self assert: anInputFile resource exists.
+	self assert: anInputFile source equals: aDocument.
+	self assert: anInputFile document notNil.
+	self assert: anInputFile document exists.
 	^ anInputFile
 ]
 
@@ -1420,7 +1419,7 @@ Gt2DocumentExamples >> resourcerWithInputFile [
 { #category : #resourcer }
 Gt2DocumentExamples >> resourcerWithInputFileToFigure [
 	<gtExample>
-	| aDocument aCollectionOfResources anInputFile |
+	| aDocument aCollectionOfResources anInputFile anFigureFile |
 	aDocument := self documentWithInputFileToFigure.
 	aCollectionOfResources := aDocument resourcer includeAll; allDepth; compute.
 	self assert: aCollectionOfResources isCollection.
@@ -1430,7 +1429,12 @@ Gt2DocumentExamples >> resourcerWithInputFileToFigure [
 	self assert: anInputFile source equals: aDocument.
 	self assert: anInputFile document notNil.
 	self assert: anInputFile document exists.
-	^ anInputFile
+	anFigureFile := aCollectionOfResources second.
+	self assert: anFigureFile name equals: self figureFileName.
+	self assert: anFigureFile source equals: anInputFile document.
+	self assert: anFigureFile resource notNil.
+	self assert: anFigureFile resource exists.
+	^ aCollectionOfResources
 ]
 
 { #category : #'non technical people' }
