@@ -10,7 +10,8 @@ Class {
 		'isSubscribedToSystem',
 		'variableBindings',
 		'storageStrategy',
-		'styleTextProcess'
+		'styleTextProcess',
+		'referencedFiles'
 	],
 	#category : #'GToolkit-NewDocumenter-Model'
 }
@@ -23,6 +24,14 @@ Gt2Document class >> forClass: aClass [
 { #category : #'instance creation' }
 Gt2Document class >> forFile: aFileReference [
 	^ self new fileReference: aFileReference; read
+]
+
+{ #category : #adding }
+Gt2Document >> addAllImages: aCollection referencedIn: aRootDirectory [ 
+	"Add collection of image files"
+	| files |
+	files := self fileReferencesFrom: aCollection referencedIn: aRootDirectory.
+	self referencedFiles addAll: files
 ]
 
 { #category : #announcer }
@@ -112,6 +121,16 @@ Gt2Document >> classComment: aClass [
 	self strategy: (Gt2StorageStrategy classComment: aClass)
 ]
 
+{ #category : #'as yet unclassified' }
+Gt2Document >> collectResources [
+	| document |
+	
+	document := self parseSilently.
+	self
+		addAllImages: (PRImageDependencies new start: document)
+		referencedIn: self storage rootDirectory.
+]
+
 { #category : #initialization }
 Gt2Document >> defaultStyler [
 	^ Gt2Styler new document: self; beReadingMode
@@ -153,6 +172,18 @@ Gt2Document >> fileReference: aFileReference [
 		assert: [ aFileReference notNil ]
 		description: [ 'Document file reference must be non-nil' ].
 	self strategy: (Gt2StorageStrategy fileReference: aFileReference)
+]
+
+{ #category : #private }
+Gt2Document >> fileReferencesFrom: aCollectionOfStringsOrPaths referencedIn: aRootDirectory [
+	<return: #Set of: #FileReference>
+	^ aCollectionOfStringsOrPaths 
+		collect: [ :eachStringOrPath | | fileReference |
+			eachStringOrPath isString 
+				ifTrue: [ fileReference := aRootDirectory resolveString: eachStringOrPath ]
+				ifFalse: [ fileReference := aRootDirectory resolve: eachStringOrPath ].
+			fileReference exists ifFalse: nil ifTrue: [ fileReference ] ]
+		thenSelect: #notNil
 ]
 
 { #category : #'gt-extension' }
@@ -216,6 +247,7 @@ Gt2Document >> initialize [
 	self text: self defaultText.
 	storageStrategy := Gt2StorageStrategy null.
 	self subscribeToEditorChanges.
+	referencedFiles := Set new.
 ]
 
 { #category : #private }
@@ -265,6 +297,16 @@ Gt2Document >> parse [
 		parse: self text asString
 ]
 
+{ #category : #actions }
+Gt2Document >> parseSilently [
+	| aPRDocument |
+	PRValidation beSilentDuring: [ 
+		aPRDocument := PRPillarParser new 
+		optimize; 
+		parse: self text asString ].
+	 ^ aPRDocument
+]
+
 { #category : #private }
 Gt2Document >> privateStyleText [
 	"This method is used only for examples.
@@ -282,6 +324,16 @@ Gt2Document >> readingMode [
 	self editor styler mode isReading ifTrue: [ ^ self ].
 	self editor styler beReadingMode.
 	self styleTextRequest
+]
+
+{ #category : #accessing }
+Gt2Document >> referencedFiles [
+	^ referencedFiles
+]
+
+{ #category : #accessing }
+Gt2Document >> referencedFiles: anObject [
+	referencedFiles := anObject
 ]
 
 { #category : #accessing }
