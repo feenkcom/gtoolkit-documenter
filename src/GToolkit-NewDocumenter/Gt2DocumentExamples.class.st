@@ -352,7 +352,7 @@ Gt2DocumentExamples >> contentWithExternalLink [
 { #category : #figure }
 Gt2DocumentExamples >> contentWithFigure [
 	<gtExample>
-	^ '+Figure caption>file://', self figureFileName, '+'
+	^ '+Figure caption>', self figureFileUri, '+'
 
 ]
 
@@ -1118,6 +1118,12 @@ Gt2DocumentExamples >> figureFileReference [
 	^ memorySystem addFileNamed: self figureFileName  withContent: self figureContent
 ]
 
+{ #category : #figure }
+Gt2DocumentExamples >> figureFileUri [
+	<gtExample>
+	^ 'file://', self figureFileName
+]
+
 { #category : #'file reference document' }
 Gt2DocumentExamples >> fileReference [
 	<gtExample>
@@ -1301,6 +1307,38 @@ Gt2DocumentExamples >> removeEpiceaEvent [
 	self assert: anEpicea numberOfEvents equals: 0.
 	self assert: anAnnouncements size equals: 1.
 	^ anEpicea
+]
+
+{ #category : #resourcer }
+Gt2DocumentExamples >> resourcerWithFigure [
+	<gtExample>
+	| aDocument aCollectionOfFigures aFigure |
+	aDocument := self documentWithFigure.
+	aCollectionOfFigures := aDocument resourcer includeFigures; compute.
+	self assert: aCollectionOfFigures isCollection.
+	self assert: aCollectionOfFigures size equals: 1.
+	aFigure := aCollectionOfFigures first.
+	self assert: aFigure name equals: self figureFileUri.
+	self assert: aFigure document equals: aDocument.
+	self assert: aFigure resource notNil.
+	self assert: aFigure resource exists.
+	^ aFigure
+]
+
+{ #category : #resourcer }
+Gt2DocumentExamples >> resourcerWithInputFile [
+	<gtExample>
+	| aDocument aCollectionOfFigures anInputFile |
+	aDocument := self documentWithInputFile.
+	aCollectionOfFigures := aDocument resourcer includeInputFiles; compute.
+	self assert: aCollectionOfFigures isCollection.
+	self assert: aCollectionOfFigures size equals: 1.
+	anInputFile := aCollectionOfFigures first.
+	self assert: anInputFile name equals: memorySystem pillarFileName.
+	self assert: anInputFile document equals: aDocument.
+	self assert: anInputFile resource notNil.
+	self assert: anInputFile resource exists.
+	^ anInputFile
 ]
 
 { #category : #'non technical people' }

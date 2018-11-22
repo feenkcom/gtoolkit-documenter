@@ -166,6 +166,12 @@ Gt2Document >> evaluationReceiver [
 	^ self storage evaluationReceiver
 ]
 
+{ #category : #testing }
+Gt2Document >> exists [
+	<return: #Boolean>
+	^ self storage exists
+]
+
 { #category : #initialization }
 Gt2Document >> fileReference: aFileReference [ 
 	self 
@@ -334,6 +340,11 @@ Gt2Document >> referencedFiles [
 { #category : #accessing }
 Gt2Document >> referencedFiles: anObject [
 	referencedFiles := anObject
+]
+
+{ #category : #utility }
+Gt2Document >> resourcer [
+	^ Gt2ResourceVisitor new document: self
 ]
 
 { #category : #accessing }

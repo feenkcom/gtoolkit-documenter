@@ -29,6 +29,12 @@ Gt2NoStorageStrategy >> evaluationReceiver [
 	^ nil
 ]
 
+{ #category : #testing }
+Gt2NoStorageStrategy >> exists [
+	<return: #Boolean>
+	^ false
+]
+
 { #category : #actions }
 Gt2NoStorageStrategy >> read: aGt2Document [ 
 	"ignore"
