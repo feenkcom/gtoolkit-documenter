@@ -74,6 +74,5 @@ Gt2StyleTextProcess >> start [
 
 { #category : #private }
 Gt2StyleTextProcess >> styleText [
-	#styleText traceCr.
 	self document editor styleText
 ]
