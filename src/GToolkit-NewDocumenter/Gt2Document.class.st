@@ -298,9 +298,11 @@ Gt2Document >> mayUnsubscribeFromSystem [
 
 { #category : #actions }
 Gt2Document >> parse [
-	^ PRPillarParser new 
-		optimize; 
-		parse: self text asString
+	<return: #PRDocument>
+	^ PRValidation beSilentDuring: [ 
+		PRPillarParser new 
+			optimize; 
+			parse: self text asString ].
 ]
 
 { #category : #actions }
