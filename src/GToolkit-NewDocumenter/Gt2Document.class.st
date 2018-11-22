@@ -284,6 +284,11 @@ Gt2Document >> readingMode [
 	self styleTextRequest
 ]
 
+{ #category : #utility }
+Gt2Document >> resourcer [
+	^ Gt2Resourcer new document: self
+]
+
 { #category : #accessing }
 Gt2Document >> rootDirectory [
 	"Return root directory to access external data, e.g., images, change files"

@@ -1303,6 +1303,22 @@ Gt2DocumentExamples >> removeEpiceaEvent [
 	^ anEpicea
 ]
 
+{ #category : #resourcer }
+Gt2DocumentExamples >> resourcerWithFigure [
+	<gtExample>
+	| aDocument aCollectionOfFigures aFigure |
+	aDocument := self documentWithFigure.
+	aCollectionOfFigures := aDocument resourcer figures; resources.
+	self assert: aCollectionOfFigures isCollection.
+	self assert: aCollectionOfFigures size equals: 1.
+	aFigure := aCollectionOfFigures first.
+	self assert: aFigure name equals: self figureFileName.
+	self assert: aFigure document equals: aDocument.
+	self assert: aFigure resource notNil.
+	self assert: aFigure resource exists.
+	^ aFigure
+]
+
 { #category : #'non technical people' }
 Gt2DocumentExamples >> ropeHiddenBoldMarkupForNonTechnicalPeople [
 	<gtExample>
