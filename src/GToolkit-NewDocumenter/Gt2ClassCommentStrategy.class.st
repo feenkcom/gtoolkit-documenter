@@ -45,6 +45,13 @@ Gt2ClassCommentStrategy >> exists [
 	^ self classToComment isDefined
 ]
 
+{ #category : #accessing }
+Gt2ClassCommentStrategy >> name [
+	"Return a string representing the stored document"
+	<return: #String>
+	^ self classToComment name
+]
+
 { #category : #actions }
 Gt2ClassCommentStrategy >> read: aGt2Document [ 
 	self 

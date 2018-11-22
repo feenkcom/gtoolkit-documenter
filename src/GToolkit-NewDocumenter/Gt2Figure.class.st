@@ -1,6 +1,6 @@
 Class {
 	#name : #Gt2Figure,
-	#superclass : #Gt2Resource,
+	#superclass : #Gt2LeaveResource,
 	#category : #'GToolkit-NewDocumenter-Resourcer'
 }
 

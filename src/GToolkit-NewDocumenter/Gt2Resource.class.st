@@ -1,28 +1,29 @@
 Class {
 	#name : #Gt2Resource,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
-		'document',
-		'name',
-		'resource'
+		'source',
+		'name'
 	],
 	#category : #'GToolkit-NewDocumenter-Resourcer'
 }
 
-{ #category : #accessing }
-Gt2Resource >> document [
-	<return: #Gt2Document>
-	^ document
+{ #category : #comparing }
+Gt2Resource >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ name = anObject name
 ]
 
-{ #category : #accessing }
-Gt2Resource >> document: aGtDocument [
-	self 
-		assert: [ aGtDocument isNotNil ] 
-		description: [ 'Document must be non-nil' ].
-	document := aGtDocument
+{ #category : #comparing }
+Gt2Resource >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ name hash
 ]
 
 { #category : #accessing }
@@ -38,25 +39,16 @@ Gt2Resource >> name: aString [
 	name := aString
 ]
 
-{ #category : #printing }
-Gt2Resource >> printOn: aStream [
-	super printOn: aStream.
-	self name ifNil: [ ^ self ].
-	aStream 
-		nextPut: $(;
-		print: self name;
-		nextPut: $)
+{ #category : #accessing }
+Gt2Resource >> source [
+	<return: #Gt2Document>
+	^ source
 ]
 
 { #category : #accessing }
-Gt2Resource >> resource [
-	^ resource
-]
-
-{ #category : #accessing }
-Gt2Resource >> resource: anObject [
+Gt2Resource >> source: aGtDocument [
 	self 
-		assert: [ anObject notNil ]
-		description: [ 'Resource must be non-nil' ].
-	resource := anObject
+		assert: [ aGtDocument isNotNil ] 
+		description: [ 'Document must be non-nil' ].
+	source := aGtDocument
 ]

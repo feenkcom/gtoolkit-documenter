@@ -296,6 +296,12 @@ Gt2Document >> mayUnsubscribeFromSystem [
 	self unsubscribeFromSystem
 ]
 
+{ #category : #accessing }
+Gt2Document >> name [
+	<return: #String>
+	^ self storage name
+]
+
 { #category : #actions }
 Gt2Document >> parse [
 	<return: #PRDocument>

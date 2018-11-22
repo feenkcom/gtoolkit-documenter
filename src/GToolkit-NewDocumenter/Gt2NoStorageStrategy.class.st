@@ -35,6 +35,13 @@ Gt2NoStorageStrategy >> exists [
 	^ false
 ]
 
+{ #category : #accessing }
+Gt2NoStorageStrategy >> name [
+	"Return a string representing the stored document"
+	<return: #String>
+	^ ''
+]
+
 { #category : #actions }
 Gt2NoStorageStrategy >> read: aGt2Document [ 
 	"ignore"

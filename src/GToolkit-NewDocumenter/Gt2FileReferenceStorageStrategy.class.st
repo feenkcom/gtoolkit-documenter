@@ -30,6 +30,13 @@ Gt2FileReferenceStorageStrategy >> file: aFileReference [
 	file := aFileReference asFileReference
 ]
 
+{ #category : #accessing }
+Gt2FileReferenceStorageStrategy >> name [
+	"Return a string representing the stored document"
+	<return: #String>
+	^ self file basename
+]
+
 { #category : #actions }
 Gt2FileReferenceStorageStrategy >> read: aGt2Document [ 
 	self 

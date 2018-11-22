@@ -72,6 +72,24 @@ Gt2DocumentExamples >> addingAndRemovingClass [
 	^ aDocument
 ]
 
+{ #category : #'input file' }
+Gt2DocumentExamples >> anotherFileName [
+	<gtExample>
+	^ 'another.pillar'
+]
+
+{ #category : #'input file' }
+Gt2DocumentExamples >> anotherFileReferenceWithFigure [
+	<gtExample>
+	| aFigure |
+	aFigure := self figureFileReference.
+	self assert: aFigure exists.
+	^ memorySystem 
+		addFileNamed: self anotherFileName 
+		toDirectory: memorySystem rootDirectory 
+		withContent: self contentWithFigure
+]
+
 { #category : #figure }
 Gt2DocumentExamples >> brokenFigureContent [
 	<gtExample>
@@ -400,9 +418,9 @@ Gt2DocumentExamples >> contentWithIcebergFile [
 ]
 
 { #category : #'input file' }
-Gt2DocumentExamples >> contentWithInputFile [
+Gt2DocumentExamples >> contentWithInputFileToFigure [
 	<gtExample>
-	^ '${', self constants inputFileAnnotationName, ':', memorySystem pillarFileName, '}$'
+	^ '${', self constants inputFileAnnotationName, ':', self anotherFileName , '}$'
 
 ]
 
@@ -516,6 +534,13 @@ Gt2DocumentExamples >> contentWithSelfCodeblock [
 	^ '[[[
 self
 ]]]'
+
+]
+
+{ #category : #'input file' }
+Gt2DocumentExamples >> contentWithSelfReferencedInputFile [
+	<gtExample>
+	^ '${', self constants inputFileAnnotationName, ':', memorySystem pillarFileName, '}$'
 
 ]
 
@@ -885,12 +910,14 @@ Gt2DocumentExamples >> documentWithIcebergFile [
 ]
 
 { #category : #'input file' }
-Gt2DocumentExamples >> documentWithInputFile [
+Gt2DocumentExamples >> documentWithInputFileToFigure [
 	<gtExample>
-	| aDocument |
-	aDocument := self defaultDocument fileReference: self fileReferenceWithInputFile.
+	| anAnotherFileReference aDocument |
+	anAnotherFileReference := self anotherFileReferenceWithFigure.
+	self assert: anAnotherFileReference exists.
+	aDocument := self defaultDocument fileReference: self fileReferenceWithInputFileToFigure.
 	aDocument read.
-	self assert: aDocument text asString equals: self contentWithInputFile.
+	self assert: aDocument text asString equals: self contentWithInputFileToFigure.
 	^ aDocument
 ]
 
@@ -1033,11 +1060,21 @@ Gt2DocumentExamples >> documentWithSelfCodeblockOnClass [
 Gt2DocumentExamples >> documentWithSelfCodeblockOnFileReference [
 	<gtExample>
 	| aDocument aFileReference |
-	aFileReference := self fileReferenceWithInputFile.
+	aFileReference := self fileReferenceWithSelfReferencedInputFile.
 	aDocument := self documentWithSelfCodeblock.
 	aDocument fileReference: aFileReference.  
 	aDocument privateStyleText.
 	self assert: aDocument evaluationReceiver equals: aFileReference.
+	^ aDocument
+]
+
+{ #category : #'input file' }
+Gt2DocumentExamples >> documentWithSelfReferencedInputFile [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument fileReference: self fileReferenceWithSelfReferencedInputFile.
+	aDocument read.
+	self assert: aDocument text asString equals: self contentWithSelfReferencedInputFile.
 	^ aDocument
 ]
 
@@ -1137,9 +1174,15 @@ Gt2DocumentExamples >> fileReferenceWithFigure [
 ]
 
 { #category : #'input file' }
-Gt2DocumentExamples >> fileReferenceWithInputFile [
+Gt2DocumentExamples >> fileReferenceWithInputFileToFigure [
 	<gtExample>
-	^ memorySystem addPillarFileWithContent: self contentWithInputFile
+	^ memorySystem addPillarFileWithContent: self contentWithInputFileToFigure
+]
+
+{ #category : #'input file' }
+Gt2DocumentExamples >> fileReferenceWithSelfReferencedInputFile [
+	<gtExample>
+	^ memorySystem addPillarFileWithContent: self contentWithSelfReferencedInputFile
 ]
 
 { #category : #basic }
@@ -1310,6 +1353,23 @@ Gt2DocumentExamples >> removeEpiceaEvent [
 ]
 
 { #category : #resourcer }
+Gt2DocumentExamples >> resourcerWithAllDepthInfiniteRecursion [
+	<gtExample>
+	<noTest>
+	| aDocument aCollectionOfFigures anInputFile |
+	aDocument := self documentWithSelfReferencedInputFile.
+	aCollectionOfFigures := aDocument resourcer includeAll; allDepth; compute.
+	self assert: aCollectionOfFigures isCollection.
+	self assert: aCollectionOfFigures size equals: 1.
+	anInputFile := aCollectionOfFigures first.
+	self assert: anInputFile name equals: memorySystem pillarFileName.
+	self assert: anInputFile document equals: aDocument.
+	self assert: anInputFile resource notNil.
+	self assert: anInputFile resource exists.
+	^ anInputFile
+]
+
+{ #category : #resourcer }
 Gt2DocumentExamples >> resourcerWithFigure [
 	<gtExample>
 	| aDocument aCollectionOfFigures aFigure |
@@ -1318,8 +1378,8 @@ Gt2DocumentExamples >> resourcerWithFigure [
 	self assert: aCollectionOfFigures isCollection.
 	self assert: aCollectionOfFigures size equals: 1.
 	aFigure := aCollectionOfFigures first.
-	self assert: aFigure name equals: self figureFileUri.
-	self assert: aFigure document equals: aDocument.
+	self assert: aFigure name equals: self figureFileName.
+	self assert: aFigure source equals: aDocument.
 	self assert: aFigure resource notNil.
 	self assert: aFigure resource exists.
 	^ aFigure
@@ -1328,32 +1388,48 @@ Gt2DocumentExamples >> resourcerWithFigure [
 { #category : #resourcer }
 Gt2DocumentExamples >> resourcerWithIcebergFile [
 	<gtExample>
-	| aDocument aCollectionOfFigures anIcebergFile |
+	| aDocument aCollectionOfIcebergFiles anIcebergFile |
 	aDocument := self documentWithIcebergFile.
-	aCollectionOfFigures := aDocument resourcer includeIcebergFiles; compute.
-	self assert: aCollectionOfFigures isCollection.
-	self assert: aCollectionOfFigures size equals: 1.
-	anIcebergFile := aCollectionOfFigures first.
+	aCollectionOfIcebergFiles := aDocument resourcer includeIcebergFiles; compute.
+	self assert: aCollectionOfIcebergFiles isCollection.
+	self assert: aCollectionOfIcebergFiles size equals: 1.
+	anIcebergFile := aCollectionOfIcebergFiles first.
 	self assert: anIcebergFile name equals: self icebergFileName.
-	self assert: anIcebergFile document equals: aDocument.
-	self assert: anIcebergFile resource notNil.
-	self assert: anIcebergFile resource exists.
+	self assert: anIcebergFile source equals: aDocument.
+	self assert: anIcebergFile document notNil.
+	self assert: anIcebergFile document exists.
 	^ anIcebergFile
 ]
 
 { #category : #resourcer }
 Gt2DocumentExamples >> resourcerWithInputFile [
 	<gtExample>
-	| aDocument aCollectionOfFigures anInputFile |
-	aDocument := self documentWithInputFile.
-	aCollectionOfFigures := aDocument resourcer includeInputFiles; compute.
-	self assert: aCollectionOfFigures isCollection.
-	self assert: aCollectionOfFigures size equals: 1.
-	anInputFile := aCollectionOfFigures first.
+	| aDocument aCollectionOfInputFiles anInputFile |
+	aDocument := self documentWithSelfReferencedInputFile.
+	aCollectionOfInputFiles := aDocument resourcer includeInputFiles; compute.
+	self assert: aCollectionOfInputFiles isCollection.
+	self assert: aCollectionOfInputFiles size equals: 1.
+	anInputFile := aCollectionOfInputFiles first.
 	self assert: anInputFile name equals: memorySystem pillarFileName.
-	self assert: anInputFile document equals: aDocument.
-	self assert: anInputFile resource notNil.
-	self assert: anInputFile resource exists.
+	self assert: anInputFile source equals: aDocument.
+	self assert: anInputFile document notNil.
+	self assert: anInputFile document exists.
+	^ anInputFile
+]
+
+{ #category : #resourcer }
+Gt2DocumentExamples >> resourcerWithInputFileToFigure [
+	<gtExample>
+	| aDocument aCollectionOfResources anInputFile |
+	aDocument := self documentWithInputFileToFigure.
+	aCollectionOfResources := aDocument resourcer includeAll; allDepth; compute.
+	self assert: aCollectionOfResources isCollection.
+	self assert: aCollectionOfResources size equals: 2.
+	anInputFile := aCollectionOfResources first.
+	self assert: anInputFile name equals: self anotherFileName.
+	self assert: anInputFile source equals: aDocument.
+	self assert: anInputFile document notNil.
+	self assert: anInputFile document exists.
 	^ anInputFile
 ]
 

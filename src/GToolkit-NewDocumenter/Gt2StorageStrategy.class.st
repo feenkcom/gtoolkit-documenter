@@ -44,6 +44,12 @@ Gt2StorageStrategy >> exists [
 	^ self subclassResponsibility
 ]
 
+{ #category : #accessing }
+Gt2StorageStrategy >> name [
+	"Return a string representing the stored document"
+	<return: #String>
+]
+
 { #category : #actions }
 Gt2StorageStrategy >> read: aGt2Document [ 
 	self subclassResponsibility
