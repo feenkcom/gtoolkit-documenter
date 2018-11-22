@@ -38,6 +38,12 @@ Gt2StorageStrategy >> evaluationReceiver [
 	^ self subclassResponsibility
 ]
 
+{ #category : #testing }
+Gt2StorageStrategy >> exists [
+	<return: #Boolean>
+	^ self subclassResponsibility
+]
+
 { #category : #actions }
 Gt2StorageStrategy >> read: aGt2Document [ 
 	self subclassResponsibility

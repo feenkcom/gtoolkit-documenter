@@ -39,6 +39,12 @@ Gt2ClassCommentStrategy >> evaluationReceiver [
 		ifFalse: [ self classToComment ]
 ]
 
+{ #category : #testing }
+Gt2ClassCommentStrategy >> exists [
+	<return: #Boolean>
+	^ self classToComment isDefined
+]
+
 { #category : #actions }
 Gt2ClassCommentStrategy >> read: aGt2Document [ 
 	self 

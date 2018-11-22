@@ -147,6 +147,12 @@ Gt2Document >> evaluationReceiver [
 	^ self storage evaluationReceiver
 ]
 
+{ #category : #testing }
+Gt2Document >> exists [
+	<return: #Boolean>
+	^ self storage exists
+]
+
 { #category : #initialization }
 Gt2Document >> fileReference: aFileReference [ 
 	self 
@@ -286,7 +292,7 @@ Gt2Document >> readingMode [
 
 { #category : #utility }
 Gt2Document >> resourcer [
-	^ Gt2Resourcer new document: self
+	^ Gt2ResourceVisitor new document: self
 ]
 
 { #category : #accessing }

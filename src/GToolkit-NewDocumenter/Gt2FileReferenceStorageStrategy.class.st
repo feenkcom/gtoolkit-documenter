@@ -14,6 +14,12 @@ Gt2FileReferenceStorageStrategy >> evaluationReceiver [
 	^ self file
 ]
 
+{ #category : #testing }
+Gt2FileReferenceStorageStrategy >> exists [
+	<return: #Boolean>
+	^ self file exists
+]
+
 { #category : #accessing }
 Gt2FileReferenceStorageStrategy >> file [
 	^ file
