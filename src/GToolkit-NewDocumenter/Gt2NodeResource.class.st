@@ -55,6 +55,11 @@ Gt2NodeResource >> initialize [
 	resources := OrderedCollection new.
 ]
 
+{ #category : #testing }
+Gt2NodeResource >> isDocument [
+	^ true
+]
+
 { #category : #accessing }
 Gt2NodeResource >> resources [
 	^ resources

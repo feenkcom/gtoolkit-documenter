@@ -24,6 +24,21 @@ Gt2Resource >> hash [
 	^ name hash
 ]
 
+{ #category : #testing }
+Gt2Resource >> isDocument [
+	^ false
+]
+
+{ #category : #testing }
+Gt2Resource >> isFigure [
+	^ false
+]
+
+{ #category : #testing }
+Gt2Resource >> isFile [
+	^ false
+]
+
 { #category : #accessing }
 Gt2Resource >> name [
 	^ name
