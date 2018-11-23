@@ -125,7 +125,7 @@ Gt2Document >> classComment: aClass [
 Gt2Document >> collectResources [
 	| document |
 	
-	document := self parseSilently.
+	document := self parse.
 	self
 		addAllImages: (PRImageDependencies new start: document)
 		referencedIn: self storage rootDirectory.
@@ -309,16 +309,6 @@ Gt2Document >> parse [
 		PRPillarParser new 
 			optimize; 
 			parse: self text asString ].
-]
-
-{ #category : #actions }
-Gt2Document >> parseSilently [
-	| aPRDocument |
-	PRValidation beSilentDuring: [ 
-		aPRDocument := PRPillarParser new 
-		optimize; 
-		parse: self text asString ].
-	 ^ aPRDocument
 ]
 
 { #category : #private }
