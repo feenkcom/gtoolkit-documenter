@@ -24,3 +24,8 @@ Gt2LeaveResource >> resource: anObject [
 		description: [ 'Resource must be non-nil' ].
 	resource := anObject
 ]
+
+{ #category : #accessing }
+Gt2LeaveResource >> resources [
+	^ #()
+]

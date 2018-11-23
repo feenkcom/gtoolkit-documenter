@@ -10,3 +10,8 @@ Gt2Figure >> gtFigureFor: aView [
 	self resource ifNil: [ ^ aView empty ].
 	^ self resource gtFigureFor: aView
 ]
+
+{ #category : #testing }
+Gt2Figure >> isFigure [
+	^ true
+]

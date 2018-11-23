@@ -221,14 +221,21 @@ Gt2Document >> gtResourcesFor: aView [
 	^ aView mondrian
 		title: 'Resources';
 		painting: [ :aMondrian | 
-			| aResource anAllResources |
-			aResource := self resourcer includeDocuments; get.
-			anAllResources := aResource withAllResources.
-			aMondrian nodes with: anAllResources.
+			| aResource |
+			aResource := self resourcer includeAll; allDepth; get.
+			aMondrian nodes 
+				stencil: [ :eachResource | 
+					| aRope |
+					aRope := eachResource name asRopedText.
+					eachResource isFigure ifTrue: [ aRope foreground: Color green muchDarker ].
+					eachResource isDocument ifTrue: [ aRope foreground: BrGlamorousColors linkColor ].
+					BlTextElement new text: aRope ];
+				with: aResource withAllResources.
 			aMondrian edges 
-				shape: [ :eachResouce | BlLineElement new border: (BlBorder paint: Color blue width: 1) ];
-				connectTo: [ :eachResource | eachResource resources ].
-			aMondrian layout tree ]
+				fromRightCenter;
+				toLeftCenter;
+				connectToAll: #resources.
+			aMondrian layout horizontalTree ]
 ]
 
 { #category : #'gt-extension' }
