@@ -10,8 +10,7 @@ Class {
 		'isSubscribedToSystem',
 		'variableBindings',
 		'storageStrategy',
-		'styleTextProcess',
-		'referencedFiles'
+		'styleTextProcess'
 	],
 	#classVars : [
 		'PillarParser'
