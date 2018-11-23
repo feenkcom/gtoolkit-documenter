@@ -40,7 +40,6 @@ Gt2Styler >> document: aGt2Document [
 { #category : #initialization }
 Gt2Styler >> initialize [
 	super initialize.
-	parser := PRPillarParser new optimize.
 	editorEventHandler := Gt2StylerEventHandler new subscriber: self.
 	mode := Gt2StylerStrategy editingMode.
 ]
@@ -59,13 +58,27 @@ Gt2Styler >> mode: aGt2StylerStrategy [
 	mode := aGt2StylerStrategy
 ]
 
+{ #category : #accessing }
+Gt2Styler >> parser [
+	<return: #PRPillarParser>
+	^ parser ifNil: [ parser := Gt2Document pillarParser ]
+]
+
+{ #category : #accessing }
+Gt2Styler >> parser: aPRPillarParser [
+	self 
+		assert: [ aPRPillarParser notNil ]
+		description: [ 'Pillar parser for styling text must be non-nil' ].
+	parser := aPRPillarParser
+]
+
 { #category : #private }
 Gt2Styler >> privateStyle: aText [
 	<return: #BlRope>
 	| aPRDocument |
 	self document unsubscribe: self.
 	PRValidation beSilentDuring: [ 
-		aPRDocument := parser parse: aText asString ].
+		aPRDocument := self parser parse: aText asString ].
 	self
 		assert: [ aPRDocument notNil ] 
 		description: [ 'Parsing text should return a Pillar document' ].

@@ -13,8 +13,16 @@ Class {
 		'styleTextProcess',
 		'referencedFiles'
 	],
+	#classVars : [
+		'PillarParser'
+	],
 	#category : #'GToolkit-NewDocumenter-Model'
 }
+
+{ #category : #cleanup }
+Gt2Document class >> cleanUp [
+	self resetPillarParser
+]
 
 { #category : #'instance creation' }
 Gt2Document class >> forClass: aClass [
@@ -24,6 +32,18 @@ Gt2Document class >> forClass: aClass [
 { #category : #'instance creation' }
 Gt2Document class >> forFile: aFileReference [
 	^ self new fileReference: aFileReference; read
+]
+
+{ #category : #cleanup }
+Gt2Document class >> pillarParser [
+	<return: #PRPillarParser>
+	^ PillarParser ifNil: [ 
+		PillarParser := PRPillarParser new optimize ]
+]
+
+{ #category : #cleanup }
+Gt2Document class >> resetPillarParser [
+	PillarParser := nil
 ]
 
 { #category : #adding }
@@ -133,7 +153,10 @@ Gt2Document >> collectResources [
 
 { #category : #initialization }
 Gt2Document >> defaultStyler [
-	^ Gt2Styler new document: self; beReadingMode
+	^ Gt2Styler new 
+		document: self; 
+		parser: self pillarParser;
+		beReadingMode
 ]
 
 { #category : #initialization }
@@ -323,9 +346,13 @@ Gt2Document >> parse [
 	"Message #isPetit2Failure helps to distinguish between a parsed document or a parser error"
 	<return: #PRDocument or: #PP2Failure>
 	^ PRValidation beSilentDuring: [ 
-		PRPillarParser new 
-			optimize; 
-			parse: self text asString ].
+		self pillarParser parse: self text asString ].
+]
+
+{ #category : #utility }
+Gt2Document >> pillarParser [
+	<return: #PRPillarParser>
+	^ self class pillarParser
 ]
 
 { #category : #private }
