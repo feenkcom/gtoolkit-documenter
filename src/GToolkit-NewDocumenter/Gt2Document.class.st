@@ -203,55 +203,27 @@ Gt2Document >> gtResourcesFor: aView [
 		title: 'Resources';
 		painting: [ :aMondrian | 
 			| aResource |
-			aResource := self resourcer includeAll; allDepth; get.
+			aResource := self resourcer includeDocuments; allDepth; get.
 			aMondrian nodes 
 				stencil: [ :eachResource | 
 					| anElement |
-					eachResource isFigure ifTrue: [ 
-						anElement := BrCard new
-							size: 150@200;
-							look: (BrShadowLook new shadow: (BlDropShadowEffect 
-										color: (Color green muchDarker "alpha: 0.3") width: 4 offset: 0@1))
-								+ BrLabelLook + BrIconLook 
-								+ BrGlamorousWithVerticalResizerLook + BrGlamorousWithHorizontalResizerLook;
-							background: Color white;
-							margin: (BlInsets all: 10);
-							padding: (BlInsets all: 10);
-							title: (eachResource name asRopedText bold; foreground: Color green muchDarker);
-							picture: (GtFileUtility imageElementFromFileReference: eachResource resource);
-							action: [ :aBrCard | aBrCard			 
-								 fireEvent: (GtPhlowObjectToSpawn new
-									object: eachResource resource;
-									sourceElement: aBrCard) ].
-						 ].
 					eachResource isDocument ifTrue: [ 
 						anElement := BrCard new
-							size: 150@200;
+							size: 200@100;
 							look: BrShadowLook + BrLabelLook + BrDescriptionLook 
 								+ BrGlamorousWithVerticalResizerLook + BrGlamorousWithHorizontalResizerLook;
 							margin: (BlInsets all: 10);
 							padding: (BlInsets all: 10);
 							background: Color white;
 							title: (eachResource document name asRopedText bold);
-							description: (eachResource document text asString asRopedText foreground: Color gray);
+							description: ((eachResource document text asString 
+									first: (100 min: eachResource document text size))
+								asRopedText foreground: Color gray);
 							action: [ :aBrCard | aBrCard			 
 								 fireEvent: (GtPhlowObjectToSpawn new
 									object: eachResource;
 									sourceElement: aBrCard) ].
-						 ].
-					eachResource isFile ifTrue: [ 
-						anElement := BrCard new
-							look: BrShadowLook + BrLabelLook 
-								+ BrGlamorousWithVerticalResizerLook + BrGlamorousWithHorizontalResizerLook
-								+ BrLayoutLook fitContent;
-							margin: (BlInsets all: 10);
-							padding: (BlInsets all: 10);
-							background: Color white;
-							title: (eachResource resource basename asRopedText bold)
-						 ].
-					anElement ifNil: [ BlTextElement new 
-						text: eachResource name asString asRopedText;
-						look: BrLayoutLook fitContent ] ];
+						 ]];
 				with: aResource withAllResources.
 			aMondrian edges 
 				fromRightCenter;
