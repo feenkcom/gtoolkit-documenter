@@ -10,8 +10,7 @@ Class {
 		'isSubscribedToSystem',
 		'variableBindings',
 		'storageStrategy',
-		'styleTextProcess',
-		'referencedFiles'
+		'styleTextProcess'
 	],
 	#category : #'GToolkit-NewDocumenter-Model'
 }
@@ -24,14 +23,6 @@ Gt2Document class >> forClass: aClass [
 { #category : #'instance creation' }
 Gt2Document class >> forFile: aFileReference [
 	^ self new fileReference: aFileReference; read
-]
-
-{ #category : #adding }
-Gt2Document >> addAllImages: aCollection referencedIn: aRootDirectory [ 
-	"Add collection of image files"
-	| files |
-	files := self fileReferencesFrom: aCollection referencedIn: aRootDirectory.
-	self referencedFiles addAll: files
 ]
 
 { #category : #announcer }
@@ -119,16 +110,6 @@ Gt2Document >> classComment: aClass [
 		assert: [ aClass notNil ]
 		description: [ 'Class to document must be non-nil' ].
 	self strategy: (Gt2StorageStrategy classComment: aClass)
-]
-
-{ #category : #'as yet unclassified' }
-Gt2Document >> collectResources [
-	| document |
-	
-	document := self parse.
-	self
-		addAllImages: (PRImageDependencies new start: document)
-		referencedIn: self storage rootDirectory.
 ]
 
 { #category : #initialization }
@@ -269,7 +250,6 @@ Gt2Document >> initialize [
 	self text: self defaultText.
 	storageStrategy := Gt2StorageStrategy null.
 	self subscribeToEditorChanges.
-	referencedFiles := Set new.
 ]
 
 { #category : #private }
@@ -345,16 +325,6 @@ Gt2Document >> readingMode [
 	self editor styler mode isReading ifTrue: [ ^ self ].
 	self editor styler beReadingMode.
 	self styleTextRequest
-]
-
-{ #category : #accessing }
-Gt2Document >> referencedFiles [
-	^ referencedFiles
-]
-
-{ #category : #accessing }
-Gt2Document >> referencedFiles: anObject [
-	referencedFiles := anObject
 ]
 
 { #category : #utility }

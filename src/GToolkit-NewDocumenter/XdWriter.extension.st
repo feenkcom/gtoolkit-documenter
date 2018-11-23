@@ -5,7 +5,7 @@ XdWriter >> pillar: aPillarDocument [
 	| aPillarDocumentContent resources |
 	aPillarDocumentContent := aPillarDocument text asString.
 	
-	resources := aPillarDocument collectResources.
+	resources := aPillarDocument resourcer includeFigures; allDepth; compute.
 	
 	self
 		documentType: XdPillarType;
