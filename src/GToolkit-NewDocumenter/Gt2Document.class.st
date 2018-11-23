@@ -240,22 +240,15 @@ Gt2Document >> gtTextFor: aView [
 	^ aView explicit
 		title: 'Document';
 		stencil: [ self asElementWithoutSaveAction ];
-		actionStencil: [ 
-			| button |
-			button := BrButton new.
-			button
-				look: BrGlamorousButtonWithIconLook;
-				action:  [
-					button fireEvent: (GtPhlowObjectToSpawn new
+		action: [ :aPhlowAction |
+			aPhlowAction button
+				action: [ :aWidget | 
+					aWidget fireEvent: (GtPhlowObjectToSpawn new
 						object: self parse;
-						sourceElement: button) ];
-				icon: BrGlamorousIcons tree asElement;
-				label: 'Parse using GToolkit Documenter' translated ];
-		actionStencil: [ :tab | 
-			BrButton new 
-				look: BrGlamorousButtonWithIconLook;
-				icon: BrGlamorousIcons accept asElement;
-				action: [ self store ] ];
+						sourceElement: aWidget) ];
+				icon: BrGlamorousIcons tree;
+				help: 'Parse using GToolkit Documenter' ];
+		actionButtonIcon: BrGlamorousIcons accept action: [ self store ];
 		actionStencil: [ :tab | 
 			BlElement new 
 				viewModel: (BrToggleModel new
