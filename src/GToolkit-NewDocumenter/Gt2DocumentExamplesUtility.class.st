@@ -1,3 +1,6 @@
+"
+I am used by ${class:Gt2DocumentExamples}$.
+"
 Class {
 	#name : #Gt2DocumentExamplesUtility,
 	#superclass : #Object,

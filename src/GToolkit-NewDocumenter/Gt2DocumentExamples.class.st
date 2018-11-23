@@ -1,27 +1,7 @@
 "
-Please comment me using the following template inspired by Class Responsibility Collaborator (CRC) design:
+I exemplify Documenter project. The main class is ${class:Gt2Document}$.
 
-For the Class part:  State a one line summary. For example, ""I represent a paragraph of text"".
-
-For the Responsibility part: Three sentences about my main responsibilities - what I do, what I know.
-
-For the Collaborators Part: State my main collaborators and one line about how I interact with them. 
-
-Public API and Key Messages
-
-- message one   
-- message two 
-- (for bonus points) how to create instances.
-
-   One simple example is simply gorgeous.
- 
-Internal Representation and Key Implementation Points.
-
-    Instance Variables
-	memorySystem:		<Object>
-
-
-    Implementation Points
+I use ${class:Gt2DocumentExamplesUtility}$ to simplify examples.
 "
 Class {
 	#name : #Gt2DocumentExamples,
@@ -694,6 +674,12 @@ Gt2DocumentExamples >> documentWithBrokenFigure [
 	^ aDocument
 ]
 
+{ #category : #resourcer }
+Gt2DocumentExamples >> documentWithClassComment [
+	<gtExample>
+	^ Gt2Document forClass: self class
+]
+
 { #category : #changes }
 Gt2DocumentExamples >> documentWithClassDefinitionChanges [
 	<gtExample>
@@ -1359,13 +1345,50 @@ Gt2DocumentExamples >> resourcerWithAllDepthInfiniteRecursion [
 	aDocument := self documentWithSelfReferencedInputFile.
 	aCollectionOfFigures := aDocument resourcer includeAll; allDepth; compute.
 	self assert: aCollectionOfFigures isCollection.
-	self assert: aCollectionOfFigures size equals: 1.
-	anInputFile := aCollectionOfFigures first.
-	self assert: anInputFile name equals: memorySystem pillarFileName.
-	self assert: anInputFile source equals: aDocument.
-	self assert: anInputFile document notNil.
-	self assert: anInputFile document exists.
-	^ anInputFile
+	self assert: aCollectionOfFigures size equals: 0.
+	^ aDocument
+]
+
+{ #category : #resourcer }
+Gt2DocumentExamples >> resourcerWithClasses [
+	<gtExample>
+	| aDocument aClassResource aClass |
+	aDocument := self documentWithClassComment.
+	aClassResource := aDocument resourcer includeClasses; get.
+	self assert: aClassResource notNil.
+	self assert: aClassResource resources size equals: 2.
+	aClass := aClassResource resources first.
+	self assert: aClass name equals: Gt2Document name.
+	self assert: aClass source equals: aDocument.
+	self assert: aClass resources notNil.
+	self assert: aClass resources isEmpty.
+	aClass := aClassResource resources second.
+	self assert: aClass name equals: Gt2DocumentExamplesUtility name.
+	self assert: aClass source equals: aDocument.
+	self assert: aClass resources notNil.
+	self assert: aClass resources isEmpty.
+	^ aClassResource
+]
+
+{ #category : #resourcer }
+Gt2DocumentExamples >> resourcerWithClassesMaxDepth [
+	<gtExample>
+	| aDocument aClassResource aClass |
+	aDocument := self documentWithClassComment.
+	aClassResource := aDocument resourcer includeClasses; allDepth; get.
+	self assert: aClassResource notNil.
+	self assert: aClassResource resources size equals: 2.
+	aClass := aClassResource resources first.
+	self assert: aClass name equals: Gt2Document name.
+	self assert: aClass source equals: aDocument.
+	self assert: aClass resources notNil.
+	self assert: aClass resources isEmpty.
+	aClass := aClassResource resources second.
+	self assert: aClass name equals: Gt2DocumentExamplesUtility name.
+	self assert: aClass source equals: aDocument.
+	self assert: aClass resources notNil.
+	self assert: aClass resources isEmpty.
+	^ aClassResource
 ]
 
 { #category : #resourcer }
@@ -1407,13 +1430,8 @@ Gt2DocumentExamples >> resourcerWithInputFile [
 	aDocument := self documentWithSelfReferencedInputFile.
 	aCollectionOfInputFiles := aDocument resourcer includeInputFiles; compute.
 	self assert: aCollectionOfInputFiles isCollection.
-	self assert: aCollectionOfInputFiles size equals: 1.
-	anInputFile := aCollectionOfInputFiles first.
-	self assert: anInputFile name equals: memorySystem pillarFileName.
-	self assert: anInputFile source equals: aDocument.
-	self assert: anInputFile document notNil.
-	self assert: anInputFile document exists.
-	^ anInputFile
+	self assert: aCollectionOfInputFiles size equals: 0.
+	^ aDocument
 ]
 
 { #category : #resourcer }

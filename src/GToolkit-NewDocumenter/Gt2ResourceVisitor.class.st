@@ -10,15 +10,16 @@ Class {
 		'includeIcebergFiles',
 		'maxDepth',
 		'documentResource',
-		'visitedDocumentResources'
+		'visitedDocumentResources',
+		'includeClasses'
 	],
 	#category : #'GToolkit-NewDocumenter-Resourcer'
 }
 
 { #category : #'private - adding' }
 Gt2ResourceVisitor >> addDocumentResource: aGt2DocumentResource [
-	self addResource: aGt2DocumentResource.
 	(self addToVisitedDocumentResources: aGt2DocumentResource) ifTrue: [ ^ self ].
+	self addResource: aGt2DocumentResource.
 	maxDepth = 0 ifTrue: [ ^ self ].
 	self computeResources: aGt2DocumentResource
 ]
@@ -87,12 +88,13 @@ Gt2ResourceVisitor >> compute [
 Gt2ResourceVisitor >> computeResources: aGt2NodeReference [
 	| aVisitor |
 	aVisitor := self class new.
+	aVisitor visitedDocumentResources: visitedDocumentResources.
 	aVisitor documentResource: aGt2NodeReference.
 	includeFigures ifTrue: [ aVisitor includeFigures ].
 	includeInputFiles ifTrue: [ aVisitor includeInputFiles ].
 	includeIcebergFiles ifTrue: [ aVisitor includeIcebergFiles ].
+	includeClasses ifTrue: [ aVisitor includeClasses ].
 	aVisitor maxDepth: maxDepth - 1.
-	aVisitor visitedDocumentResources: visitedDocumentResources.
 	aVisitor get
 ]
 
@@ -142,6 +144,11 @@ Gt2ResourceVisitor >> includeAll [
 ]
 
 { #category : #initialization }
+Gt2ResourceVisitor >> includeClasses [
+	includeClasses := true
+]
+
+{ #category : #initialization }
 Gt2ResourceVisitor >> includeFigures [
 	includeFigures := true
 ]
@@ -162,6 +169,7 @@ Gt2ResourceVisitor >> initialize [
 	includeFigures := false.
 	includeInputFiles := false.
 	includeIcebergFiles := false.
+	includeClasses := false.
 	maxDepth := 0.
 	visitedDocumentResources := OrderedCollection new.
 ]
@@ -202,6 +210,23 @@ Gt2ResourceVisitor >> visitFigure: aPRFigure [
 			name: aFileName.
 	self addResource: aFigure.
 	super visitFigure: aPRFigure.
+]
+
+{ #category : #'visiting-annotations' }
+Gt2ResourceVisitor >> visitGt2ClassAnnotation: aGt2ClassAnnotation [
+	| aRGClassDefinitionOrNil aResource |
+	includeClasses ifFalse: [ ^ super visitGt2ClassAnnotation: aGt2ClassAnnotation ].
+	aGt2ClassAnnotation gtDocument: self document.
+	aRGClassDefinitionOrNil := aGt2ClassAnnotation referencedClass.
+	aRGClassDefinitionOrNil ifNil: [ ^ super visitGt2ClassAnnotation: aGt2ClassAnnotation ].
+	aRGClassDefinitionOrNil isDefined 
+		ifFalse: [ ^ super visitGt2ClassAnnotation: aGt2ClassAnnotation ].
+	aResource := Gt2ClassResource new 
+			source: self document;
+			document: (Gt2Document forClass: aRGClassDefinitionOrNil realClass);
+			name: aRGClassDefinitionOrNil name.
+	self addDocumentResource: aResource.
+	super visitGt2ClassAnnotation: aGt2ClassAnnotation
 ]
 
 { #category : #'visiting-annotations' }

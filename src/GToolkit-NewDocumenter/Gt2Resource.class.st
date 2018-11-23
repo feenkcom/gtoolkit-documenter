@@ -37,6 +37,16 @@ Gt2Resource >> name: aString [
 	name := aString
 ]
 
+{ #category : #printing }
+Gt2Resource >> printOn: aStream [
+	super printOn: aStream.
+	self name ifNil: [ ^ self ].
+	aStream 
+		nextPut: $(;
+		print: self name;
+		nextPut: $)
+]
+
 { #category : #accessing }
 Gt2Resource >> source [
 	<return: #Gt2Document>
