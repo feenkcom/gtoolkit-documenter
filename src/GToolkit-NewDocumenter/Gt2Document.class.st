@@ -235,7 +235,8 @@ Gt2Document >> gtResourcesFor: aView [
 				fromRightCenter;
 				toLeftCenter;
 				connectToAll: #resources.
-			aMondrian layout horizontalTree ]
+			aMondrian layout custom: (GtGradHorizontalDominanceCenteredTreeLayout new 
+				levelDistance: 50; nodeDistance: 10) ]
 ]
 
 { #category : #'gt-extension' }
