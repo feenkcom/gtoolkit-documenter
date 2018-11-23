@@ -139,13 +139,20 @@ Gt2ResourceVisitor >> get [
 Gt2ResourceVisitor >> includeAll [
 	self 
 		includeFigures;
-		includeIcebergFiles;
-		includeInputFiles.
+		includeDocuments.
 ]
 
 { #category : #initialization }
 Gt2ResourceVisitor >> includeClasses [
 	includeClasses := true
+]
+
+{ #category : #initialization }
+Gt2ResourceVisitor >> includeDocuments [
+	self 
+		includeIcebergFiles;
+		includeInputFiles;
+		includeClasses.
 ]
 
 { #category : #initialization }

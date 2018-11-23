@@ -20,7 +20,7 @@ GtPillarCodeblockHighlighter >> closingBracketsStartingPosition [
 
 { #category : #'accessing - pillar node' }
 GtPillarCodeblockHighlighter >> endMarkupSize [
-	^ (PR2PillarGrammar endMarkups at: PRCodeblock) size
+	^ (PRPillarGrammar endMarkups at: PRCodeblock) size
 ]
 
 { #category : #'api - actions' }
