@@ -206,18 +206,57 @@ Gt2Document >> gtResourcesFor: aView [
 			aResource := self resourcer includeAll; allDepth; get.
 			aMondrian nodes 
 				stencil: [ :eachResource | 
-					| aRope |
-					aRope := eachResource name asRopedText.
-					eachResource isFigure ifTrue: [ aRope foreground: Color green muchDarker ].
-					eachResource isDocument ifTrue: [ aRope foreground: BrGlamorousColors linkColor ].
-					BlTextElement new text: aRope ];
+					| anElement |
+					eachResource isFigure ifTrue: [ 
+						anElement := BrCard new
+							size: 150@200;
+							look: BrShadowLook + BrLabelLook + BrIconLook 
+								+ BrGlamorousWithVerticalResizerLook + BrGlamorousWithHorizontalResizerLook;
+							background: Color white;
+							margin: (BlInsets all: 10);
+							padding: (BlInsets all: 10);
+							title: (eachResource name asRopedText bold);
+							picture: (GtFileUtility imageElementFromFileReference: eachResource resource);
+							action: [ :aBrCard | aBrCard			 
+								 fireEvent: (GtPhlowObjectToSpawn new
+									object: eachResource resource;
+									sourceElement: aBrCard) ].
+						 ].
+					eachResource isDocument ifTrue: [ 
+						anElement := BrCard new
+							size: 150@200;
+							look: BrShadowLook + BrLabelLook + BrDescriptionLook 
+								+ BrGlamorousWithVerticalResizerLook + BrGlamorousWithHorizontalResizerLook;
+							margin: (BlInsets all: 10);
+							padding: (BlInsets all: 10);
+							background: Color white;
+							title: (eachResource document name asRopedText bold);
+							description: eachResource document text;
+							action: [ :aBrCard | aBrCard			 
+								 fireEvent: (GtPhlowObjectToSpawn new
+									object: eachResource;
+									sourceElement: aBrCard) ].
+						 ].
+					eachResource isFile ifTrue: [ 
+						anElement := BrCard new
+							look: BrShadowLook + BrLabelLook 
+								+ BrGlamorousWithVerticalResizerLook + BrGlamorousWithHorizontalResizerLook
+								+ BrLayoutLook fitContent;
+							margin: (BlInsets all: 10);
+							padding: (BlInsets all: 10);
+							background: Color white;
+							title: (eachResource resource basename asRopedText bold)
+						 ].
+					anElement ifNil: [ BlTextElement new 
+						text: eachResource name asString asRopedText;
+						look: BrLayoutLook fitContent ] ];
 				with: aResource withAllResources.
 			aMondrian edges 
 				fromRightCenter;
 				toLeftCenter;
 				connectToAll: #resources.
 			aMondrian layout custom: (GtGradHorizontalDominanceCenteredTreeLayout new 
-				levelDistance: 50; nodeDistance: 10) ]
+				levelDistance: 50; nodeDistance: 10) ] 
 ]
 
 { #category : #'gt-extension' }
