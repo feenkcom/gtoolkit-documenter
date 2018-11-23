@@ -240,28 +240,16 @@ Gt2Document >> gtTextFor: aView [
 	^ aView explicit
 		title: 'Document';
 		stencil: [ self asElementWithoutSaveAction ];
-		action: [ :aPhlowAction |
-			aPhlowAction button
-				action: [ :aWidget | 
-					aWidget fireEvent: (GtPhlowObjectToSpawn new
-						object: self parse;
-						sourceElement: aWidget) ];
-				icon: BrGlamorousIcons tree;
-				help: 'Parse using GToolkit Documenter' ];
-		actionButtonIcon: BrGlamorousIcons accept action: [ self store ];
-		actionStencil: [ :tab | 
-			BlElement new 
-				viewModel: (BrToggleModel new
-					icon: (self isReadingMode 
-						ifTrue: [ self constants readingModeIcon asElement ]
-						ifFalse: [ self constants editingModeIcon asElement ] ) );
-				look: (BrMaterialToggleIconifiedLook new 
-					when: BrToggleActivatedEvent do: [ :anEvent | 
-						anEvent currentTarget widget viewModel icon: self constants editingModeIcon asElement.
-						self editingMode ];
-					when: BrToggleDeactivatedEvent do: [ :anEvent | 
-						anEvent currentTarget widget viewModel icon: self constants readingModeIcon asElement.
-						self readingMode ]) + BrGlamorousButtonWithIconLook - BrShadowLook ]
+		actionButtonIcon: BrGlamorousIcons tree 
+			action: [ :aWidget | 
+				aWidget fireEvent: (GtPhlowObjectToSpawn new
+					object: self parse;
+					sourceElement: aWidget) ];
+		actionButtonIcon: self constants applyButtonIcon 
+			action: [ self store ];
+		actionToggleIcon: self constants editButtonIcon 
+			activated: [ self editingMode ] 
+			deactivated: [ self readingMode ]
 ]
 
 { #category : #'announcement handling' }
