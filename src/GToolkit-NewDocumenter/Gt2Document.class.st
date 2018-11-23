@@ -12,6 +12,9 @@ Class {
 		'storageStrategy',
 		'styleTextProcess'
 	],
+	#classVars : [
+		'PillarParser'
+	],
 	#category : #'GToolkit-NewDocumenter-Model'
 }
 
