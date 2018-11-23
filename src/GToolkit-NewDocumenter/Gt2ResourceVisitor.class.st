@@ -10,16 +10,16 @@ Class {
 		'includeIcebergFiles',
 		'maxDepth',
 		'documentResource',
-		'visitedDocumentResources'
+		'visitedDocumentResources',
+		'includeClasses'
 	],
 	#category : #'GToolkit-NewDocumenter-Resourcer'
 }
 
 { #category : #'private - adding' }
 Gt2ResourceVisitor >> addDocumentResource: aGt2DocumentResource [
+	(self addToVisitedDocumentResources: aGt2DocumentResource) ifTrue: [ ^ self ].
 	self addResource: aGt2DocumentResource.
-	(visitedDocumentResources includes: aGt2DocumentResource) ifTrue: [ ^ self ].
-	visitedDocumentResources add: aGt2DocumentResource.
 	maxDepth = 0 ifTrue: [ ^ self ].
 	self computeResources: aGt2DocumentResource
 ]
@@ -63,6 +63,16 @@ Gt2ResourceVisitor >> addResource: aFileReference named: aString asResource: aRe
 	self addResource: aResource.
 ]
 
+{ #category : #'private - adding' }
+Gt2ResourceVisitor >> addToVisitedDocumentResources: aGt2DocumentResource [
+	"Return true if the resource was already visited"
+	<return: #Boolean>
+	(visitedDocumentResources includes: aGt2DocumentResource) ifTrue: [ ^ true ].
+	visitedDocumentResources add: aGt2DocumentResource.
+	^ false
+
+]
+
 { #category : #initialization }
 Gt2ResourceVisitor >> allDepth [
 	self maxDepth: self meaningfulMaxDepth.
@@ -78,12 +88,13 @@ Gt2ResourceVisitor >> compute [
 Gt2ResourceVisitor >> computeResources: aGt2NodeReference [
 	| aVisitor |
 	aVisitor := self class new.
+	aVisitor visitedDocumentResources: visitedDocumentResources.
 	aVisitor documentResource: aGt2NodeReference.
 	includeFigures ifTrue: [ aVisitor includeFigures ].
 	includeInputFiles ifTrue: [ aVisitor includeInputFiles ].
 	includeIcebergFiles ifTrue: [ aVisitor includeIcebergFiles ].
+	includeClasses ifTrue: [ aVisitor includeClasses ].
 	aVisitor maxDepth: maxDepth - 1.
-	aVisitor visitedDocumentResources: visitedDocumentResources.
 	aVisitor get
 ]
 
@@ -114,7 +125,8 @@ Gt2ResourceVisitor >> documentResource: aGt2NodeResource [
 	self 
 		assert: [ aGt2NodeResource isNotNil ] 
 		description: [ 'Document resource must be non-nil' ].
-	documentResource := aGt2NodeResource
+	documentResource := aGt2NodeResource.
+	self addToVisitedDocumentResources: aGt2NodeResource
 ]
 
 { #category : #building }
@@ -127,8 +139,20 @@ Gt2ResourceVisitor >> get [
 Gt2ResourceVisitor >> includeAll [
 	self 
 		includeFigures;
+		includeDocuments.
+]
+
+{ #category : #initialization }
+Gt2ResourceVisitor >> includeClasses [
+	includeClasses := true
+]
+
+{ #category : #initialization }
+Gt2ResourceVisitor >> includeDocuments [
+	self 
 		includeIcebergFiles;
-		includeInputFiles.
+		includeInputFiles;
+		includeClasses.
 ]
 
 { #category : #initialization }
@@ -149,10 +173,10 @@ Gt2ResourceVisitor >> includeInputFiles [
 { #category : #initialization }
 Gt2ResourceVisitor >> initialize [
 	super initialize.
-	resources := OrderedCollection new.
 	includeFigures := false.
 	includeInputFiles := false.
 	includeIcebergFiles := false.
+	includeClasses := false.
 	maxDepth := 0.
 	visitedDocumentResources := OrderedCollection new.
 ]
@@ -193,6 +217,23 @@ Gt2ResourceVisitor >> visitFigure: aPRFigure [
 			name: aFileName.
 	self addResource: aFigure.
 	super visitFigure: aPRFigure.
+]
+
+{ #category : #'visiting-annotations' }
+Gt2ResourceVisitor >> visitGt2ClassAnnotation: aGt2ClassAnnotation [
+	| aRGClassDefinitionOrNil aResource |
+	includeClasses ifFalse: [ ^ super visitGt2ClassAnnotation: aGt2ClassAnnotation ].
+	aGt2ClassAnnotation gtDocument: self document.
+	aRGClassDefinitionOrNil := aGt2ClassAnnotation referencedClass.
+	aRGClassDefinitionOrNil ifNil: [ ^ super visitGt2ClassAnnotation: aGt2ClassAnnotation ].
+	aRGClassDefinitionOrNil isDefined 
+		ifFalse: [ ^ super visitGt2ClassAnnotation: aGt2ClassAnnotation ].
+	aResource := Gt2ClassResource new 
+			source: self document;
+			document: (Gt2Document forClass: aRGClassDefinitionOrNil realClass);
+			name: aRGClassDefinitionOrNil name.
+	self addDocumentResource: aResource.
+	super visitGt2ClassAnnotation: aGt2ClassAnnotation
 ]
 
 { #category : #'visiting-annotations' }

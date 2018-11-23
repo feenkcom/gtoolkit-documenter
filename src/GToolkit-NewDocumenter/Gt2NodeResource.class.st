@@ -59,3 +59,8 @@ Gt2NodeResource >> initialize [
 Gt2NodeResource >> resources [
 	^ resources
 ]
+
+{ #category : #accessing }
+Gt2NodeResource >> withAllResources [
+	^ Array with: self withAll: self allResources
+]

@@ -12,16 +12,6 @@ Gt2LeaveResource >> allResources [
 	^ #()
 ]
 
-{ #category : #printing }
-Gt2LeaveResource >> printOn: aStream [
-	super printOn: aStream.
-	self name ifNil: [ ^ self ].
-	aStream 
-		nextPut: $(;
-		print: self name;
-		nextPut: $)
-]
-
 { #category : #accessing }
 Gt2LeaveResource >> resource [
 	^ resource

@@ -12,10 +12,8 @@ Class {
 Gt2Resource >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
-	self == anObject
-		ifTrue: [ ^ true ].
-	self class = anObject class
-		ifFalse: [ ^ false ].
+	self == anObject ifTrue: [ ^ true ].
+	(anObject isKindOf: Gt2Resource) ifFalse: [ ^ false ].
 	^ name = anObject name
 ]
 
@@ -37,6 +35,16 @@ Gt2Resource >> name: aString [
 		assert: [ aString notNil ]
 		description: [ 'Resource name must be non-nil' ].
 	name := aString
+]
+
+{ #category : #printing }
+Gt2Resource >> printOn: aStream [
+	super printOn: aStream.
+	self name ifNil: [ ^ self ].
+	aStream 
+		nextPut: $(;
+		print: self name;
+		nextPut: $)
 ]
 
 { #category : #accessing }

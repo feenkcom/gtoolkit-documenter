@@ -193,6 +193,22 @@ Gt2Document >> fileReferencesFrom: aCollectionOfStringsOrPaths referencedIn: aRo
 ]
 
 { #category : #'gt-extension' }
+Gt2Document >> gtResourcesFor: aView [
+	<gtView>
+	^ aView mondrian
+		title: 'Resources';
+		painting: [ :aMondrian | 
+			| aResource anAllResources |
+			aResource := self resourcer includeDocuments; get.
+			anAllResources := aResource withAllResources.
+			aMondrian nodes with: anAllResources.
+			aMondrian edges 
+				shape: [ :eachResouce | BlLineElement new border: (BlBorder paint: Color blue width: 1) ];
+				connectTo: [ :eachResource | eachResource resources ].
+			aMondrian layout tree ]
+]
+
+{ #category : #'gt-extension' }
 Gt2Document >> gtTextFor: aView [
 	<gtView>
 	self editor ifNil: [ ^ aView empty ].
@@ -304,7 +320,8 @@ Gt2Document >> name [
 
 { #category : #actions }
 Gt2Document >> parse [
-	<return: #PRDocument>
+	"Message #isPetit2Failure helps to distinguish between a parsed document or a parser error"
+	<return: #PRDocument or: #PP2Failure>
 	^ PRValidation beSilentDuring: [ 
 		PRPillarParser new 
 			optimize; 
