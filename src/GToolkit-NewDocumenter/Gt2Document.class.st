@@ -210,12 +210,14 @@ Gt2Document >> gtResourcesFor: aView [
 					eachResource isFigure ifTrue: [ 
 						anElement := BrCard new
 							size: 150@200;
-							look: BrShadowLook + BrLabelLook + BrIconLook 
+							look: (BrShadowLook new shadow: (BlDropShadowEffect 
+										color: (Color green muchDarker "alpha: 0.3") width: 4 offset: 0@1))
+								+ BrLabelLook + BrIconLook 
 								+ BrGlamorousWithVerticalResizerLook + BrGlamorousWithHorizontalResizerLook;
 							background: Color white;
 							margin: (BlInsets all: 10);
 							padding: (BlInsets all: 10);
-							title: (eachResource name asRopedText bold);
+							title: (eachResource name asRopedText bold; foreground: Color green muchDarker);
 							picture: (GtFileUtility imageElementFromFileReference: eachResource resource);
 							action: [ :aBrCard | aBrCard			 
 								 fireEvent: (GtPhlowObjectToSpawn new
@@ -231,7 +233,7 @@ Gt2Document >> gtResourcesFor: aView [
 							padding: (BlInsets all: 10);
 							background: Color white;
 							title: (eachResource document name asRopedText bold);
-							description: eachResource document text;
+							description: (eachResource document text asString asRopedText foreground: Color gray);
 							action: [ :aBrCard | aBrCard			 
 								 fireEvent: (GtPhlowObjectToSpawn new
 									object: eachResource;
