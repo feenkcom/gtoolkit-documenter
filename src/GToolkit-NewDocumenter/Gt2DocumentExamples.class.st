@@ -1481,7 +1481,7 @@ Gt2DocumentExamples >> ropeHiddenBoldMarkupForNonTechnicalPeople [
 { #category : #writing }
 Gt2DocumentExamples >> writeDocumentWithImages [
 	<gtExample>
-	
+	<noTest>
 	| aWriter aXdFile |
 	aWriter := self writer.
 	aXdFile := aWriter
