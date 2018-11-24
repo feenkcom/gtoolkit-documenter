@@ -78,7 +78,7 @@ GtPillarInputFileAnnotationHighlighter >> styleReferenceParameter [
 					attribute: (BlTextBackgroundAttribute paint: (Color gray alpha: 0.2)).
 				BrTextClickAttribute new 
 					beNotOverwritableByStyler;
-					action: [ :aText :aTarget :anEditorElement :anEvent | 
+					action: [ :aText :aTarget :aTextEditor :anEvent | 
 						self browseFileFrom: anEvent ] } ].
 
 	(self targetText 

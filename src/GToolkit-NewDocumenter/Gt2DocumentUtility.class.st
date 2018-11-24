@@ -186,7 +186,7 @@ Gt2DocumentUtility class >> styleLinkInText: aBlRope forNode: aNode start: aStar
 				BrTextHoverStylableAttribute new 
 					attribute: (BlTextUnderlineAttribute new paint: aLinkColor).
 				BrTextClickAttribute new 
-					action: [ :aText :aTarget :anEditorElement :anEvent | 
+					action: [ :aText :aTarget :aTextEditor :anEvent | 
 						aNode browseReferenceFrom: anEvent ] } ].
 
 	(aBlRope  
