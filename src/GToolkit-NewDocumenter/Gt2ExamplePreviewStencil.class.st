@@ -202,9 +202,6 @@ Gt2ExamplePreviewStencil >> result [
 Gt2ExamplePreviewStencil >> updatePreviewElement: aPreviewContainerElement in: aWholeContainer with: anObject [
 	| aNewPreview anArrowElement |
 	aNewPreview := self newPreviewElementFor: anObject.
-	aNewPreview constraintsDo: [ :c | 
-		c horizontal matchParent.
-		c vertical matchParent ].
 	aPreviewContainerElement removeChildNamed: #preview.
 	aPreviewContainerElement addChild: aNewPreview at: 1 as: #preview.
 

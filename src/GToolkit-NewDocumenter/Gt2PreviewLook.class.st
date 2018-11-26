@@ -10,7 +10,6 @@ Gt2PreviewLook >> initializeLook [
 	self widget 
 		constraintsDo: [ :c |
 			c textFlow pushLine.
-			c padding: (BlInsets all: 0).
-			c margin: (BlInsets all: 10) ];
+			c margin: (BlInsets top: 5 left: 20 bottom: 5 right: 20) ];
 		background: Color white
 ]
