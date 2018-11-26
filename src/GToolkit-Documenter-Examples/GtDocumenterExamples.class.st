@@ -7,7 +7,7 @@ Class {
 { #category : #'pillar card preview' }
 GtDocumenterExamples >> basicCard [
 	<gtExample>
-	^ BrCard new
+	^ BrSummary new
 ]
 
 { #category : #completer }
