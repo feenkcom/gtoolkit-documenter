@@ -1125,7 +1125,7 @@ Gt2DocumentExamples >> examplesUtility [
 { #category : #figure }
 Gt2DocumentExamples >> figureContent [
 	<gtExample>
-	^ PolymorphSystemSettings pharoLogoContents base64Decoded asByteArray
+	^ (GtIcebergUtility repositoriesLocation / 'feenkcom' / 'gtoolkit-inspector' / 'doc' / 'gt.png') binaryReadStream contents.
 ]
 
 { #category : #figure }
