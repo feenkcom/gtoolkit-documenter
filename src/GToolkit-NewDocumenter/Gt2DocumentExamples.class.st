@@ -393,7 +393,8 @@ Gt2DocumentExamples >> contentWithHeadersInReadingMode [
 { #category : #'iceberg file' }
 Gt2DocumentExamples >> contentWithIcebergFile [
 	<gtExample>
-	^ '${', self constants icebergFileAnnotationName, ':', self icebergFileName, '}$'
+	^ '${', self constants icebergFileAnnotationName, ':', 
+			self constants pathParameterName, '=', self icebergFileName, '}$'
 
 ]
 

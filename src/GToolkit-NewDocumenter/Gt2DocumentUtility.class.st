@@ -92,6 +92,13 @@ Gt2DocumentUtility class >> linkColor: aBoolean [
 		ifFalse: [ self constants linkWithErrorColor ].
 ]
 
+{ #category : #'text styling' }
+Gt2DocumentUtility class >> linkNodeForAnnotation: aNode [
+	^ self
+		parameterValueNodeNamed: aNode referenceParameterName
+		forAnnotation: aNode
+]
+
 { #category : #'pillar - parameter values' }
 Gt2DocumentUtility class >> methodDefinitionsFromArray: aCollection [ 
 	<return: #Array of: #RGMethodDefinition>
@@ -128,7 +135,7 @@ Gt2DocumentUtility class >> packageDefinitionsFromArray: aCollection [
 ]
 
 { #category : #'text styling' }
-Gt2DocumentUtility class >> parameterNodeNamed: aParameterName forAnnotation: anAnnotation [
+Gt2DocumentUtility class >> parameterValueNodeNamed: aParameterName forAnnotation: anAnnotation [
 	"Return annotation's parameter AST node if exists.
 	Return the given annotation otherwise"
 	<return: #PRParameter or: #PRAbstractAnnotation>
@@ -136,7 +143,7 @@ Gt2DocumentUtility class >> parameterNodeNamed: aParameterName forAnnotation: an
 		detect: [ :eachParameter | 
 			eachParameter key = aParameterName or: [ 
 				eachParameter value isNil ] ] 
-		ifFound: [ :aParameter | aParameter ]
+		ifFound: [ :aParameter | aParameter valueNode ]
 		ifNone: [ anAnnotation ].
 ]
 
@@ -165,9 +172,7 @@ Gt2DocumentUtility class >> styleExpandingPreviewInText: aBlRope forNode: aNode 
 { #category : #'text styling' }
 Gt2DocumentUtility class >> styleLinkInText: aBlRope forAnnotationNode: aNode [
 	| aNodeToStyle |
-	aNodeToStyle := self 
-		parameterNodeNamed: aNode referenceParameterName 
-		forAnnotation: aNode.
+	aNodeToStyle := self linkNodeForAnnotation: aNode.
 	self styleLinkInText: aBlRope forNode: aNode withLinkAt: aNodeToStyle
 ]
 

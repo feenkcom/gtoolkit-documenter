@@ -94,3 +94,16 @@ Gt2IcebergFileAnnotation >> styleTextEditingMode: aBlRope [
 	self styleLinkInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 ]
+
+{ #category : #'api - style' }
+Gt2IcebergFileAnnotation >> styleTextReadingMode: aBlRope [
+	| aLinkNode |
+	aLinkNode := self utility linkNodeForAnnotation: self.
+	aLinkNode == self ifTrue: [ ^ self styleTextEditingMode: aBlRope ].
+	(aBlRope from: self start to: aLinkNode start - 1)
+		attribute: Gt2HideAttribute uniqueInstance.
+	self utility styleLinkInText: aBlRope forNode: self withLinkAt: aLinkNode.
+	(aBlRope from: aLinkNode stop + 1 to: self stop)
+		attribute: Gt2HideAttribute uniqueInstance.
+	super styleTextReadingMode: aBlRope.
+]

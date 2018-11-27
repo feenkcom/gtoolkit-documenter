@@ -208,7 +208,7 @@ Gt2Document >> gtResourcesFor: aView [
 				stencil: [ :eachResource | 
 					| anElement |
 					eachResource isDocument ifTrue: [ 
-						anElement := BrSummary new
+						anElement := BrCard new
 							size: 200@100;
 							look: BrShadowLook + BrLabelLook + BrDescriptionLook 
 								+ BrGlamorousWithVerticalResizerLook + BrGlamorousWithHorizontalResizerLook;
