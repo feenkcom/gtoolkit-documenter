@@ -146,7 +146,7 @@ Gt2StylerVisitor >> visitList: aPRList [
 
 { #category : #'visiting-document' }
 Gt2StylerVisitor >> visitListItem: aPRListItem [
-	listItemStyler style: self text at: aPRListItem.
+	aPRListItem gtListItemStyler: listItemStyler.
 	super visitListItem: aPRListItem
 ]
 

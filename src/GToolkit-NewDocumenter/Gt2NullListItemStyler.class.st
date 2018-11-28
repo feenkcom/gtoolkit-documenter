@@ -23,5 +23,5 @@ Gt2NullListItemStyler class >> uniqueInstance [
 ]
 
 { #category : #accessing }
-Gt2NullListItemStyler >> style: aBlRope at: aPRListItem [ 
+Gt2NullListItemStyler >> styleTextWithMarkup: aBlRope forNode: aPRListItem [ 
 ]

@@ -7,17 +7,37 @@ Class {
 	#category : #'GToolkit-NewDocumenter-Styler'
 }
 
+{ #category : #accessing }
+Gt2CounterStyler >> cursorLeftInText: aBlRope forNode: aPRListItem [
+	(aBlRope
+		from: aPRListItem start
+		to: aPRListItem start)
+			clearAttributes: [ :eachAttribute | 
+				eachAttribute class = BrTextAdornmentDynamicAttribute ].
+	self styleIndexWithoutMarkupInText: aBlRope forNode: aPRListItem.
+	
+]
+
+{ #category : #accessing }
+Gt2CounterStyler >> cursorNearbyInText: aBlRope forNode: aPRListItem [
+	(aBlRope
+		from: aPRListItem start
+		to: aPRListItem start)
+			clearAttributes: [ :eachAttribute | 
+				eachAttribute class = BrTextAdornmentDynamicAttribute ].
+	self styleIndexWithMarkupInText: aBlRope forNode: aPRListItem.
+]
+
 { #category : #initialization }
 Gt2CounterStyler >> initialize [
 	super initialize.
 	counter := 0.
 ]
 
-{ #category : #accessing }
-Gt2CounterStyler >> style: aBlRope at: aPRListItem [ 
+{ #category : #private }
+Gt2CounterStyler >> styleIndexWithMarkupInText: aBlRope forNode: aPRListItem [
 	| anItemIndex |
-	counter := counter + 1.
-	anItemIndex := counter asString.
+	anItemIndex := aPRListItem gtListItemIndex asString asRopedText.
 	(aBlRope
 		from: aPRListItem start
 		to: aPRListItem start)
@@ -34,4 +54,40 @@ Gt2CounterStyler >> style: aBlRope at: aPRListItem [
 							clipChildren: false;
 							looseMesurement; 
 							ascentBaseline ] }.
+]
+
+{ #category : #private }
+Gt2CounterStyler >> styleIndexWithoutMarkupInText: aBlRope forNode: aPRListItem [
+	| anItemIndexText |
+	anItemIndexText := (aPRListItem gtListItemIndex asString, '.') asRopedText.
+	(aBlRope
+		from: aPRListItem start
+		to: aPRListItem start)
+			attributes: {
+				BrTextAdornmentDynamicAttribute new 
+					beReplace;
+					stencil: [
+						BlTextElement new 
+							text: anItemIndexText;
+							looseMesurement; 
+							ascentBaseline ] }.
+]
+
+{ #category : #accessing }
+Gt2CounterStyler >> styleTextWithMarkup: aBlRope forNode: aPRListItem [ 
+	counter := counter + 1.
+	aPRListItem gtListItemIndex: counter.
+	self styleIndexWithMarkupInText: aBlRope forNode: aPRListItem
+]
+
+{ #category : #accessing }
+Gt2CounterStyler >> styleTextWithoutMarkup: aBlRope forNode: aPRListItem [
+	counter := counter + 1.
+	aPRListItem gtListItemIndex: counter.
+	self styleIndexWithoutMarkupInText: aBlRope forNode: aPRListItem.
+	self utility 
+		styleCursorAttributeInText: aBlRope 
+		from: aPRListItem start 
+		to: aPRListItem start + 1
+		forNode: aPRListItem
 ]

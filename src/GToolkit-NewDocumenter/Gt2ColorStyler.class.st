@@ -28,7 +28,7 @@ Gt2ColorStyler >> initialize [
 ]
 
 { #category : #actions }
-Gt2ColorStyler >> style: aBlRope at: aPRListItem [ 
+Gt2ColorStyler >> styleTextWithMarkup: aBlRope forNode: aPRListItem [ 
 	| aColor |
 	aColor := self currentColor.
 	(aBlRope

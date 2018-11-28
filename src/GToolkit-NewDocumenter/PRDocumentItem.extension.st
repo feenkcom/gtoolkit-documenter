@@ -27,6 +27,17 @@ PRDocumentItem >> gtDocument: aGt2Document [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRDocumentItem >> gtListItemStyler [
+	<return: #Gt2ListItemStyler>
+	^ self propertyAt: #gtListItemStyler
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRDocumentItem >> gtListItemStyler: aGt2ListItemStyler [
+	self propertyAt: #gtListItemStyler put: aGt2ListItemStyler
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRDocumentItem >> gtSubscriber [
 	<return: #Object>
 	^ self propertyAt: #gtSubscriber

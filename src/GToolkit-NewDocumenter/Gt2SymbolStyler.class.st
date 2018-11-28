@@ -28,7 +28,7 @@ Gt2SymbolStyler >> initialize [
 ]
 
 { #category : #actions }
-Gt2SymbolStyler >> style: aBlRope at: aPRListItem [ 
+Gt2SymbolStyler >> styleTextWithMarkup: aBlRope forNode: aPRListItem [ 
 	| aSymbol |
 	aSymbol := self currentSymbol.
 	(aBlRope
