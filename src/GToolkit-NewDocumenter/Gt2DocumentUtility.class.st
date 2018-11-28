@@ -50,12 +50,31 @@ Gt2DocumentUtility class >> cursorNeabyInText: aBlRope forNode: aNode [
 
 { #category : #'text styling - nearby cursor' }
 Gt2DocumentUtility class >> cursorNearbyStartDistanceInText: aBlRope forNode: aNode [
-	^ (aNode start - self constants cursorNearbyDistance) max: 1
+	| aPosition aSeparatorPosition |
+	aPosition := (aNode start - self constants cursorNearbyDistance) max: 1.
+	aSeparatorPosition := aBlRope finder 
+		reversed; 
+		startAtPosition: aPosition; 
+		pattern: [ :eachBlRope :eachIndex | 
+			(eachBlRope at: eachIndex) isSeparator ];
+		search.
+	^ aSeparatorPosition isZero 
+		ifTrue: [ aPosition ]
+		ifFalse: [ aSeparatorPosition ]
 ]
 
 { #category : #'text styling - nearby cursor' }
 Gt2DocumentUtility class >> cursorNearbyStopDistanceInText: aBlRope forNode: aNode [
-	^ (aNode stop + self constants cursorNearbyDistance) min: aBlRope size
+	| aPosition aSeparatorPosition |
+	aPosition := (aNode stop + self constants cursorNearbyDistance) min: aBlRope size.
+	aSeparatorPosition := aBlRope finder 
+		startAtPosition: aPosition; 
+		pattern: [ :eachBlRope :eachIndex | 
+			(eachBlRope at: eachIndex) isSeparator ];
+		search.
+	^ aSeparatorPosition isZero 
+		ifTrue: [ aPosition ]
+		ifFalse: [ aSeparatorPosition - 1 ]
 ]
 
 { #category : #'text markups' }
