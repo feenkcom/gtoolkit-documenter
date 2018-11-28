@@ -10,6 +10,16 @@ PRInputFileAnnotation >> browseReferenceFrom: anEvent [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRInputFileAnnotation >> cursorLeftInText: aBlRope [
+	self utility hideAllButLinkInText: aBlRope forAnnotation: self
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRInputFileAnnotation >> cursorNearbyInText: aBlRope [
+	self utility cursorNeabyInText: aBlRope forNode: self
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRInputFileAnnotation >> defaultShowSelector [
 	^ Gt2DocumentConstants defaultShowSelector
 ]
@@ -119,5 +129,8 @@ PRInputFileAnnotation >> styleTextWithMarkup: aBlRope [
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRInputFileAnnotation >> styleTextWithoutMarkup: aBlRope [
-	self styleTextWithMarkup: aBlRope
+	self styleTextWithMarkup: aBlRope.
+	super styleTextWithoutMarkup: aBlRope.
+	(self utility hideAllButLinkInText: aBlRope forAnnotation: self) ifFalse: [ ^ self ].
+	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]
