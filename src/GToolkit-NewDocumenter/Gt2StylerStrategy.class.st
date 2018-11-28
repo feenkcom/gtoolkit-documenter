@@ -8,12 +8,12 @@ Class {
 
 { #category : #'instance creation' }
 Gt2StylerStrategy class >> editingMode [
-	^ Gt2EditingModeStrategy uniqueInstance
+	^ Gt2StyleWithMarkupStrategy uniqueInstance
 ]
 
 { #category : #'instance creation' }
 Gt2StylerStrategy class >> readingMode [
-	^ Gt2ReadingModeStrategy uniqueInstance
+	^ Gt2StyleWithoutMarkupStrategy uniqueInstance
 ]
 
 { #category : #testing }

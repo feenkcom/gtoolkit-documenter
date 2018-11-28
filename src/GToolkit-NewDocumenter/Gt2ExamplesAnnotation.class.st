@@ -413,8 +413,8 @@ Gt2ExamplesAnnotation >> styleSuccessButtonInText: aBlRope [
 ]
 
 { #category : #'api - style' }
-Gt2ExamplesAnnotation >> styleTextEditingMode: aBlRope [
-	super styleTextEditingMode: aBlRope.
+Gt2ExamplesAnnotation >> styleTextWithMarkup: aBlRope [
+	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 	self styleRunButtonInText: aBlRope.
@@ -422,6 +422,11 @@ Gt2ExamplesAnnotation >> styleTextEditingMode: aBlRope [
 	self styleIssueButtonInText: aBlRope."
 	self styleResultsInText: aBlRope.
 	self registerToSystemChanges.
+]
+
+{ #category : #'api - style' }
+Gt2ExamplesAnnotation >> styleTextWithoutMarkup: aBlRope [
+	self styleTextWithMarkup: aBlRope
 ]
 
 { #category : #'private - styling' }

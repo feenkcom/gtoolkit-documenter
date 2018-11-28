@@ -18,26 +18,6 @@ PRExternalLink >> startMarkup [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRExternalLink >> styleTextEditingMode: aBlRope [
-	self utility styleLinkInText: aBlRope forNode: self start: self start + 1 stop: self stop - 1.
-	self utility
-		sublteMarkupsInText: aBlRope 
-		start: self start 
-		stop: self start + self startMarkup size - 1.
-	self utility
-		sublteMarkupsInText: aBlRope 
-		start: self stop - self startMarkup size + 1
-		stop: self stop
-]
-
-{ #category : #'*GToolkit-NewDocumenter' }
-PRExternalLink >> styleTextReadingMode: aBlRope [
-	self hasChildren 
-		ifTrue: [ self styleTextReadingModeWithCaption: aBlRope ]
-		ifFalse: [ self styleTextReadingModeWithoutCaption: aBlRope ]
-]
-
-{ #category : #'*GToolkit-NewDocumenter' }
 PRExternalLink >> styleTextReadingModeWithCaption: aBlRope [
 	| aStartIndex aStopIndex |
 	aStartIndex := self startMarkup size + self start.
@@ -77,4 +57,24 @@ PRExternalLink >> styleTextReadingModeWithoutCaption: aBlRope [
 		hideMarkupsInText: aBlRope
 		start: aStopIndex + 1
 		stop: self stop
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRExternalLink >> styleTextWithMarkup: aBlRope [
+	self utility styleLinkInText: aBlRope forNode: self start: self start + 1 stop: self stop - 1.
+	self utility
+		sublteMarkupsInText: aBlRope 
+		start: self start 
+		stop: self start + self startMarkup size - 1.
+	self utility
+		sublteMarkupsInText: aBlRope 
+		start: self stop - self startMarkup size + 1
+		stop: self stop
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRExternalLink >> styleTextWithoutMarkup: aBlRope [
+	self hasChildren 
+		ifTrue: [ self styleTextReadingModeWithCaption: aBlRope ]
+		ifFalse: [ self styleTextReadingModeWithoutCaption: aBlRope ]
 ]

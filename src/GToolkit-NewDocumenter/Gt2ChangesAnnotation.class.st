@@ -210,11 +210,16 @@ Gt2ChangesAnnotation >> styleCreateButtonInText: aBlRope [
 ]
 
 { #category : #'api - style' }
-Gt2ChangesAnnotation >> styleTextEditingMode: aBlRope [
-	super styleTextEditingMode: aBlRope.
+Gt2ChangesAnnotation >> styleTextWithMarkup: aBlRope [
+	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 	self styleApplyButtonInText: aBlRope.
 	self styleCreateButtonInText: aBlRope.
 	self registerToSystemChanges
+]
+
+{ #category : #'api - style' }
+Gt2ChangesAnnotation >> styleTextWithoutMarkup: aBlRope [
+	self styleTextWithMarkup: aBlRope
 ]

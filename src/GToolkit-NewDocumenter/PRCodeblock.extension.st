@@ -382,8 +382,8 @@ PRCodeblock >> styleSmalltalkInText: aBlRope [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRCodeblock >> styleTextEditingMode: aBlRope [ 
-	super styleTextEditingMode: aBlRope.
+PRCodeblock >> styleTextWithMarkup: aBlRope [ 
+	super styleTextWithMarkup: aBlRope.
 	self styleParametersInText: aBlRope.
 	self styleClosingBracketsInText: aBlRope.
 	self hasSourceCode ifFalse: [ ^ self ].
@@ -395,8 +395,8 @@ PRCodeblock >> styleTextEditingMode: aBlRope [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRCodeblock >> styleTextReadingMode: aBlRope [
-	super styleTextReadingMode: aBlRope.
+PRCodeblock >> styleTextWithoutMarkup: aBlRope [
+	super styleTextWithoutMarkup: aBlRope.
 	self styleTopLineInText: aBlRope.
 	self hasSourceCode ifFalse: [ ^ self styleBottomLineInText: aBlRope ].
 	self gtIsSmalltalkLanguage ifFalse: [ 

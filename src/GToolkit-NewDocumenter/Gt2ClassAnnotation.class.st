@@ -118,17 +118,17 @@ Gt2ClassAnnotation >> registerToSystemChanges [
 ]
 
 { #category : #'api - style' }
-Gt2ClassAnnotation >> styleTextEditingMode: aBlRope [
-	super styleTextEditingMode: aBlRope.
+Gt2ClassAnnotation >> styleTextWithMarkup: aBlRope [
+	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 	self registerToSystemChanges
 ]
 
 { #category : #'api - style' }
-Gt2ClassAnnotation >> styleTextReadingMode: aBlRope [
+Gt2ClassAnnotation >> styleTextWithoutMarkup: aBlRope [
 	| aMarkup |
-	super styleTextReadingMode: aBlRope.
+	super styleTextWithoutMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
 	aMarkup := (self utility startMarkupFor: PRAbstractAnnotation) size.
 	self utility 

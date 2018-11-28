@@ -261,17 +261,17 @@ Gt2ExampleAnnotation >> registerToSystemChanges [
 ]
 
 { #category : #'api - style' }
-Gt2ExampleAnnotation >> styleTextEditingMode: aBlRope [
-	super styleTextEditingMode: aBlRope.
+Gt2ExampleAnnotation >> styleTextWithMarkup: aBlRope [
+	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 	self registerToSystemChanges
 ]
 
 { #category : #'api - style' }
-Gt2ExampleAnnotation >> styleTextReadingMode: aBlRope [ 
-	self isPreviewDefined ifFalse: [ ^ self styleTextEditingMode: aBlRope ].
-	super styleTextReadingMode: aBlRope.
+Gt2ExampleAnnotation >> styleTextWithoutMarkup: aBlRope [ 
+	self isPreviewDefined ifFalse: [ ^ self styleTextWithMarkup: aBlRope ].
+	super styleTextWithoutMarkup: aBlRope.
 	self utility 
 		hideMarkupsInText: aBlRope 
 		start: self start 

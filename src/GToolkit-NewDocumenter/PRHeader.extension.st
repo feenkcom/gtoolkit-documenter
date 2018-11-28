@@ -12,18 +12,18 @@ PRHeader >> hideMarkupsInText: aBlRope [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRHeader >> styleTextEditingMode: aBlRope [
+PRHeader >> styleTextWithMarkup: aBlRope [
 	(aBlRope
 		from: self start
 		to: self stop)
 			fontSize: self constants headerFontSize - (self level * self constants headerLevelStep)";
 			paragraphMargin: (BlInsets top: 15 left: 20 bottom: 15 right: 20)".
-	super styleTextEditingMode: aBlRope
+	super styleTextWithMarkup: aBlRope
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRHeader >> styleTextReadingMode: aBlRope [
-	self styleTextEditingMode: aBlRope.
+PRHeader >> styleTextWithoutMarkup: aBlRope [
+	self styleTextWithMarkup: aBlRope.
 	self hideMarkupsInText: aBlRope.
-	super styleTextEditingMode: aBlRope
+	super styleTextWithMarkup: aBlRope
 ]

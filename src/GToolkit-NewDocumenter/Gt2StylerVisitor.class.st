@@ -64,7 +64,7 @@ Gt2StylerVisitor >> styleNode: aPRDocumentItem [
 	aPRDocumentItem
 		gtDocument: self document;
 		gtSubscriber: self subscriber;
-		styleText: self text inMode: self mode
+		styleText: self text using: self mode
 ]
 
 { #category : #accessing }

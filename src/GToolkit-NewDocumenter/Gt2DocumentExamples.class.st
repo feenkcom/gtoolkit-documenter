@@ -532,6 +532,21 @@ Gt2DocumentExamples >> contentWithTwoExistingExamples [
 		self contentWithExistingExample, String cr, String cr
 ]
 
+{ #category : #variable }
+Gt2DocumentExamples >> contentWithVariable [
+	<gtExample>
+	^ '${variable:name=aVariableOne|value=43|previewShow=}$
+
+${variable:name=aVariableOne|expression=Smalltalk os|previewShow=}$
+	
+[[[refresh=always
+	aVariableOne
+	
+	aView := Mondrian new.
+]]]
+'
+]
+
 { #category : #'empty document' }
 Gt2DocumentExamples >> defaultDocument [
 	<gtExample>

@@ -132,9 +132,14 @@ Gt2MethodAnnotation >> registerToSystemChanges [
 ]
 
 { #category : #'api - style' }
-Gt2MethodAnnotation >> styleTextEditingMode: aBlRope [
-	super styleTextEditingMode: aBlRope.
+Gt2MethodAnnotation >> styleTextWithMarkup: aBlRope [
+	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 	self registerToSystemChanges
+]
+
+{ #category : #'api - style' }
+Gt2MethodAnnotation >> styleTextWithoutMarkup: aBlRope [
+	self styleTextWithMarkup: aBlRope
 ]

@@ -1,5 +1,5 @@
 Class {
-	#name : #Gt2EditingModeStrategy,
+	#name : #Gt2StyleWithoutMarkupStrategy,
 	#superclass : #Gt2StylerStrategy,
 	#classInstVars : [
 		'uniqueInstance'
@@ -8,26 +8,26 @@ Class {
 }
 
 { #category : #cleanup }
-Gt2EditingModeStrategy class >> cleanUp [
+Gt2StyleWithoutMarkupStrategy class >> cleanUp [
 	self resetUniqueInstance
 ]
 
 { #category : #cleanup }
-Gt2EditingModeStrategy class >> resetUniqueInstance [
+Gt2StyleWithoutMarkupStrategy class >> resetUniqueInstance [
 	uniqueInstance := nil
 ]
 
 { #category : #accessing }
-Gt2EditingModeStrategy class >> uniqueInstance [
+Gt2StyleWithoutMarkupStrategy class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
 { #category : #testing }
-Gt2EditingModeStrategy >> isEditing [
+Gt2StyleWithoutMarkupStrategy >> isReading [
 	^ true
 ]
 
 { #category : #dispatch }
-Gt2EditingModeStrategy >> styleText: aBlRope withNode: aPRDocumentItem [
-	aPRDocumentItem styleTextEditingMode: aBlRope
+Gt2StyleWithoutMarkupStrategy >> styleText: aBlRope withNode: aPRDocumentItem [
+	aPRDocumentItem styleTextWithoutMarkup: aBlRope
 ]

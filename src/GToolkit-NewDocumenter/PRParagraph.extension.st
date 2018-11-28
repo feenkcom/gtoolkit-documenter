@@ -1,8 +1,8 @@
 Extension { #name : #PRParagraph }
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRParagraph >> styleTextReadingMode: aBlRope [
-	super styleTextReadingMode: aBlRope.
+PRParagraph >> styleTextWithoutMarkup: aBlRope [
+	super styleTextWithoutMarkup: aBlRope.
 	(aBlRope from: self start to: self stop) attribute: (BrTextCursorAttribute new
 		enterAction: [ :aTextEditor |
 			self accept: (Gt2CursorNearByVisitor new text: aTextEditor text).

@@ -1,8 +1,8 @@
 Extension { #name : #PRUndefinedAnnotation }
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRUndefinedAnnotation >> styleTextEditingMode: aBlRope [
-	super styleTextEditingMode: aBlRope.
+PRUndefinedAnnotation >> styleTextWithMarkup: aBlRope [
+	super styleTextWithMarkup: aBlRope.
 	(aBlRope 
 			from: self start 
 			to: self stop)
@@ -10,6 +10,6 @@ PRUndefinedAnnotation >> styleTextEditingMode: aBlRope [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRUndefinedAnnotation >> styleTextReadingMode: aBlRope [
-	self styleTextEditingMode: aBlRope
+PRUndefinedAnnotation >> styleTextWithoutMarkup: aBlRope [
+	self styleTextWithMarkup: aBlRope
 ]

@@ -39,21 +39,21 @@ PRDocumentItem >> gtSubscriber: anObject [
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRDocumentItem >> styleText: aBlRope [ 
-	"I will be replaced by styleTextEditingMode: and styleTextReadingMode:"
+	"I will be replaced by styleTextWithMarkup: and styleTextWithoutMarkup:"
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRDocumentItem >> styleText: aBlRope inMode: aGt2StylerStrategy [
+PRDocumentItem >> styleText: aBlRope using: aGt2StylerStrategy [
 	aGt2StylerStrategy styleText: aBlRope withNode: self
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRDocumentItem >> styleTextEditingMode: aBlRope [
+PRDocumentItem >> styleTextWithMarkup: aBlRope [
 	"Subclasses can add text styling for Documenter editing mode"
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRDocumentItem >> styleTextReadingMode: aBlRope [ 
+PRDocumentItem >> styleTextWithoutMarkup: aBlRope [ 
 	"Subclasses can add text styling for Documenter reading mode"
 ]
 

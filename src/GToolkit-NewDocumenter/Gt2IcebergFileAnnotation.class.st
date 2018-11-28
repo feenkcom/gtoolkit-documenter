@@ -106,21 +106,21 @@ Gt2IcebergFileAnnotation >> referenceParameterName [
 ]
 
 { #category : #'api - style' }
-Gt2IcebergFileAnnotation >> styleTextEditingMode: aBlRope [
-	super styleTextEditingMode: aBlRope.
+Gt2IcebergFileAnnotation >> styleTextWithMarkup: aBlRope [
+	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 ]
 
 { #category : #'api - style' }
-Gt2IcebergFileAnnotation >> styleTextReadingMode: aBlRope [
+Gt2IcebergFileAnnotation >> styleTextWithoutMarkup: aBlRope [
 	| aLinkNode |
-	self styleTextEditingMode: aBlRope.
+	self styleTextWithMarkup: aBlRope.
 	aLinkNode := self utility linkNodeForAnnotation: self.
 	aLinkNode == self ifTrue: [ ^ self ].
 	(aBlRope from: self start to: aLinkNode start - 1)
 		attribute: Gt2HideAttribute uniqueInstance.
 	(aBlRope from: aLinkNode stop + 1 to: self stop)
 		attribute: Gt2HideAttribute uniqueInstance.
-	super styleTextReadingMode: aBlRope.
+	super styleTextWithoutMarkup: aBlRope.
 ]

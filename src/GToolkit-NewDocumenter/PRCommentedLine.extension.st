@@ -1,8 +1,8 @@
 Extension { #name : #PRCommentedLine }
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRCommentedLine >> styleTextEditingMode: aBlRope [
-	super styleTextEditingMode: aBlRope.
+PRCommentedLine >> styleTextWithMarkup: aBlRope [
+	super styleTextWithMarkup: aBlRope.
 	(aBlRope
 		from: self start
 		to: self stop)
@@ -10,6 +10,6 @@ PRCommentedLine >> styleTextEditingMode: aBlRope [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRCommentedLine >> styleTextReadingMode: aBlRope [
-	self styleTextEditingMode: aBlRope
+PRCommentedLine >> styleTextWithoutMarkup: aBlRope [
+	self styleTextWithMarkup: aBlRope
 ]

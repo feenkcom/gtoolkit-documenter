@@ -4,6 +4,6 @@ Trait {
 }
 
 { #category : #'api - style' }
-TStylingModesWorkInProgress >> styleTextReadingMode: aBlRope [
-	self styleTextEditingMode: aBlRope
+TStylingModesWorkInProgress >> styleTextWithoutMarkup: aBlRope [
+	self styleTextWithMarkup: aBlRope
 ]

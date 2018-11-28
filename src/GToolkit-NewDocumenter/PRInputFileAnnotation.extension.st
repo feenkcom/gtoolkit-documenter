@@ -110,14 +110,14 @@ PRInputFileAnnotation >> styleExpandingPreviewInText: aBlRope [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRInputFileAnnotation >> styleTextEditingMode: aBlRope [
-	super styleTextEditingMode: aBlRope.
+PRInputFileAnnotation >> styleTextWithMarkup: aBlRope [
+	super styleTextWithMarkup: aBlRope.
 	self utility styleLinkInText: aBlRope forAnnotationNode: self.
 	self styleExpandingPreviewInText: aBlRope.
 	
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRInputFileAnnotation >> styleTextReadingMode: aBlRope [
-	self styleTextEditingMode: aBlRope
+PRInputFileAnnotation >> styleTextWithoutMarkup: aBlRope [
+	self styleTextWithMarkup: aBlRope
 ]

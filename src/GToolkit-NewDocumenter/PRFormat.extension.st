@@ -16,16 +16,16 @@ PRFormat >> styleSubText: aBlRope [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRFormat >> styleTextEditingMode: aBlRope [
+PRFormat >> styleTextWithMarkup: aBlRope [
 	self styleSubText: (aBlRope
 		from: self start
 		to: self stop).
-	super styleTextEditingMode: aBlRope
+	super styleTextWithMarkup: aBlRope
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRFormat >> styleTextReadingMode: aBlRope [
-	self styleTextEditingMode: aBlRope.
+PRFormat >> styleTextWithoutMarkup: aBlRope [
+	self styleTextWithMarkup: aBlRope.
 	self hideMarkupsInText: aBlRope.
-	super styleTextEditingMode: aBlRope
+	super styleTextWithMarkup: aBlRope
 ]
