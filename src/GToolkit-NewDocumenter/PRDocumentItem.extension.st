@@ -11,7 +11,7 @@ PRDocumentItem >> cursorLeftInText: aBlRopedText [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRDocumentItem >> cursorNearByInText: aBlRope [
+PRDocumentItem >> cursorNearbyInText: aBlRope [
 	"Subclasses can update it"
 ]
 

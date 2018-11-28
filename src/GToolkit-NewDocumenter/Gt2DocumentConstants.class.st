@@ -54,6 +54,11 @@ Gt2DocumentConstants class >> createButtonLabel [
 	^ 'Create'
 ]
 
+{ #category : #text }
+Gt2DocumentConstants class >> cursorNearbyDistance [
+	^ 5
+]
+
 { #category : #'pillar parameter default values' }
 Gt2DocumentConstants class >> defaultChangesShowSelector [
 	^ #gtPreviewFor:

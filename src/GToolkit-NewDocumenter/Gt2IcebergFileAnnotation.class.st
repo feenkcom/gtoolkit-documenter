@@ -41,14 +41,12 @@ Gt2IcebergFileAnnotation >> cursorLeftInText: aBlRope [
 	| aLinkNode |
 	aLinkNode := self utility linkNodeForAnnotation: self.
 	aLinkNode == self ifTrue: [ ^ self ].
-	(aBlRope from: self start to: aLinkNode start - 1)
-		attribute: Gt2HideAttribute uniqueInstance.
-	(aBlRope from: aLinkNode stop + 1 to: self stop)
-		attribute: Gt2HideAttribute uniqueInstance.
+	self utility hideMarkupsInText: aBlRope forAnnotation: self exceptOfChild: aLinkNode.
+	
 ]
 
 { #category : #'api - style' }
-Gt2IcebergFileAnnotation >> cursorNearByInText: aBlRope [
+Gt2IcebergFileAnnotation >> cursorNearbyInText: aBlRope [
 	(aBlRope from: self start to: self stop)
 		clearAttributes: [ :eachAttribute | eachAttribute = Gt2HideAttribute uniqueInstance ]
 ]
@@ -118,9 +116,7 @@ Gt2IcebergFileAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	aLinkNode := self utility linkNodeForAnnotation: self.
 	aLinkNode == self ifTrue: [ ^ self ].
-	(aBlRope from: self start to: aLinkNode start - 1)
-		attribute: Gt2HideAttribute uniqueInstance.
-	(aBlRope from: aLinkNode stop + 1 to: self stop)
-		attribute: Gt2HideAttribute uniqueInstance.
+	self utility hideMarkupsInText: aBlRope forAnnotation: self exceptOfChild: aLinkNode.
+	self utility styleCursorAttributeInText: aBlRope forNode: self.
 	super styleTextWithoutMarkup: aBlRope.
 ]

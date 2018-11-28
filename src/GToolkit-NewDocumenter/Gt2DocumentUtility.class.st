@@ -42,12 +42,30 @@ Gt2DocumentUtility class >> convertToBoolean: aStringOrBoolean [
 	^ nil
 ]
 
+{ #category : #'text styling - nearby cursor' }
+Gt2DocumentUtility class >> cursorNearbyStartDistanceInText: aBlRope forNode: aNode [
+	^ (aNode start - self constants cursorNearbyDistance) max: 1
+]
+
+{ #category : #'text styling - nearby cursor' }
+Gt2DocumentUtility class >> cursorNearbyStopDistanceInText: aBlRope forNode: aNode [
+	^ (aNode stop + self constants cursorNearbyDistance) min: aBlRope size
+]
+
 { #category : #'text markups' }
 Gt2DocumentUtility class >> endMarkupFor: aNode [
 	^ PRPillarGrammar endMarkups at: aNode class
 ]
 
-{ #category : #'text styling' }
+{ #category : #'text styling - hide attribute' }
+Gt2DocumentUtility class >> hideMarkupsInText: aBlRope forAnnotation: aNode exceptOfChild: aChildNode [
+	(aBlRope from: aNode start to: aChildNode start - 1)
+		attribute: Gt2HideAttribute uniqueInstance.
+	(aBlRope from: aChildNode stop + 1 to: aNode stop)
+		attribute: Gt2HideAttribute uniqueInstance.
+]
+
+{ #category : #'text styling - hide attribute' }
 Gt2DocumentUtility class >> hideMarkupsInText: aBlRope start: aStartIndex stop: aStopIndex [
 	(aBlRope 
 		from: aStartIndex
@@ -155,6 +173,26 @@ Gt2DocumentUtility class >> shouldOpenReference: anEvent [
 { #category : #'text markups' }
 Gt2DocumentUtility class >> startMarkupFor: aNode [
 	^ PRPillarGrammar markups at: (aNode isClass ifTrue: [ aNode ] ifFalse: [ aNode class ])
+]
+
+{ #category : #'text styling - nearby cursor' }
+Gt2DocumentUtility class >> styleCursorAttributeInText: aBlRope forNode: aNode [
+	self 
+		styleCursorAttributeInText: aBlRope 
+		from: (self cursorNearbyStartDistanceInText: aBlRope forNode: aNode) 
+		to: (self cursorNearbyStopDistanceInText: aBlRope forNode: aNode)  
+		forNode: aNode
+]
+
+{ #category : #'text styling - nearby cursor' }
+Gt2DocumentUtility class >> styleCursorAttributeInText: aBlRope from: aStartIndex to: aStopIndex forNode: aNode [
+	(aBlRope from: aStartIndex to: aStopIndex) attribute: (BrTextCursorAttribute new
+		enterAction: [ :aTextEditor |
+			aNode accept: (Gt2CursorNearbyVisitor new text: aTextEditor text).
+			aTextEditor invalidate: aStartIndex to: aStopIndex; update: aStartIndex to: aStopIndex ];
+		leaveAction: [ :aTextEditor |
+			aNode accept: (Gt2CursorLeftVisitor new text: aTextEditor text).
+			aTextEditor invalidate: aStartIndex to: aStopIndex; update: aStartIndex to: aStopIndex ])
 ]
 
 { #category : #'text styling' }
