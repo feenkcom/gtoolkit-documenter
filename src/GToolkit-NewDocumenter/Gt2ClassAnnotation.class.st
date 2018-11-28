@@ -36,6 +36,11 @@ Gt2ClassAnnotation >> browseReferenceFrom: anEvent [
 		sourceElement: anEvent target)
 ]
 
+{ #category : #'api - style' }
+Gt2ClassAnnotation >> cursorLeftInText: aBlRope [
+	self utility hideAllButLinkInText: aBlRope forAnnotation: self
+]
+
 { #category : #'accessing - parameter values' }
 Gt2ClassAnnotation >> defaultShowSelector [
 	^ self constants defaultClassShowSelector
@@ -127,17 +132,10 @@ Gt2ClassAnnotation >> styleTextWithMarkup: aBlRope [
 
 { #category : #'api - style' }
 Gt2ClassAnnotation >> styleTextWithoutMarkup: aBlRope [
-	| aMarkup |
+	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
-	aMarkup := (self utility startMarkupFor: PRAbstractAnnotation) size.
-	self utility 
-		hideMarkupsInText: aBlRope 
-		start: self start 
-		stop: self start + aMarkup + self tag size.
-	self utility 
-		hideMarkupsInText: aBlRope 
-		start: self stop - aMarkup + 1
-		stop: self stop.
-	self registerToSystemChanges
+	self registerToSystemChanges.
+	(self utility hideAllButLinkInText: aBlRope forAnnotation: self) ifFalse: [ ^ self ].
+	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]

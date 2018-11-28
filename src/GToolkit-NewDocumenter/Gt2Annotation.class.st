@@ -17,6 +17,11 @@ Gt2Annotation >> browseReferenceFrom: anEvent [
 	self subclassResponsibility
 ]
 
+{ #category : #'api - style' }
+Gt2Annotation >> cursorNearbyInText: aBlRope [
+	self utility cursorNeabyInText: aBlRope forNode: self
+]
+
 { #category : #'accessing - parameter values' }
 Gt2Annotation >> defaultShowSelector [
 	^ self constants defaultShowSelector

@@ -43,6 +43,12 @@ Gt2DocumentUtility class >> convertToBoolean: aStringOrBoolean [
 ]
 
 { #category : #'text styling - nearby cursor' }
+Gt2DocumentUtility class >> cursorNeabyInText: aBlRope forNode: aNode [
+	(aBlRope from: aNode start to: aNode stop)
+		clearAttributes: [ :eachAttribute | eachAttribute = Gt2HideAttribute uniqueInstance ]
+]
+
+{ #category : #'text styling - nearby cursor' }
 Gt2DocumentUtility class >> cursorNearbyStartDistanceInText: aBlRope forNode: aNode [
 	^ (aNode start - self constants cursorNearbyDistance) max: 1
 ]
@@ -55,6 +61,17 @@ Gt2DocumentUtility class >> cursorNearbyStopDistanceInText: aBlRope forNode: aNo
 { #category : #'text markups' }
 Gt2DocumentUtility class >> endMarkupFor: aNode [
 	^ PRPillarGrammar endMarkups at: aNode class
+]
+
+{ #category : #'text styling - hide attribute' }
+Gt2DocumentUtility class >> hideAllButLinkInText: aBlRope forAnnotation: aNode [
+	"Return true if hiding action happens"
+	<return: #Boolean>
+	| aLinkNode |
+	aLinkNode := self linkNodeForAnnotation: aNode.
+	aLinkNode == aNode ifTrue: [ ^ false ].
+	self hideMarkupsInText: aBlRope forAnnotation: aNode exceptOfChild: aLinkNode.
+	^ true
 ]
 
 { #category : #'text styling - hide attribute' }
@@ -188,10 +205,10 @@ Gt2DocumentUtility class >> styleCursorAttributeInText: aBlRope forNode: aNode [
 Gt2DocumentUtility class >> styleCursorAttributeInText: aBlRope from: aStartIndex to: aStopIndex forNode: aNode [
 	(aBlRope from: aStartIndex to: aStopIndex) attribute: (BrTextCursorAttribute new
 		enterAction: [ :aTextEditor |
-			aNode accept: (Gt2CursorNearbyVisitor new text: aTextEditor text).
+			aNode cursorNearbyInText: aTextEditor text.
 			aTextEditor invalidate: aStartIndex to: aStopIndex; update: aStartIndex to: aStopIndex ];
 		leaveAction: [ :aTextEditor |
-			aNode accept: (Gt2CursorLeftVisitor new text: aTextEditor text).
+			aNode cursorLeftInText: aTextEditor text.
 			aTextEditor invalidate: aStartIndex to: aStopIndex; update: aStartIndex to: aStopIndex ])
 ]
 
@@ -204,7 +221,7 @@ Gt2DocumentUtility class >> styleExpandingPreviewInText: aBlRope forNode: aNode 
 		isExpanded: aNode cachedIsExpanded;
 		onCachingDo: [ :aBoolean :theAttribute | aNode cachedIsExpanded: aBoolean ];
 		create.
-	(aBlRope from: aNode stop to: aNode stop) attributes: theAttributes
+	(aBlRope from: aNode start to: aNode stop) attributes: theAttributes
 ]
 
 { #category : #'text styling' }
