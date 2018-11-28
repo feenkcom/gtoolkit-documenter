@@ -69,6 +69,7 @@ Gt2CounterStyler >> styleIndexWithoutMarkupInText: aBlRope forNode: aPRListItem 
 					stencil: [
 						BlTextElement new 
 							text: anItemIndexText;
+							margin: (BlInsets top: 3 bottom: 0);
 							looseMesurement; 
 							ascentBaseline ] }.
 ]
