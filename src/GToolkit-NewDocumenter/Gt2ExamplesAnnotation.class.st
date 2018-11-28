@@ -35,38 +35,12 @@ Gt2ExamplesAnnotation >> annotationCacheValueClass [
 ]
 
 { #category : #'private - actions' }
-Gt2ExamplesAnnotation >> browseIssuesFrom: aWidget [
-	| aResult |
-	self hasFailuresOrErrors ifFalse: [ ^ self inform: 'There are not issues' ].
-	aResult := self cachedExampleGroup numberOfFailuresAndErrors isZero 
-		ifTrue: [ self cachedExampleGroup ]
-		ifFalse: [ GtExampleGroup withAll: (self cachedExampleGroup 
-			select: [ :each | each isFailure or: [ each isError ] ]) ].
-	aWidget fireEvent: (GtPhlowObjectToSpawn new 
-		object: aResult;
-		sourceElement: aWidget)
-]
-
-{ #category : #'private - actions' }
 Gt2ExamplesAnnotation >> browseReferenceFrom: anEvent [
 	anEvent modifiers isShift ifTrue: [ ^ self ].
 	self hasExample ifFalse: [ ^ self inform: 'There is no defined example' ].
 	anEvent target fireEvent: (GtPhlowObjectToSpawn new 
 		object: self cachedExampleGroup;
 		sourceElement: anEvent target)
-]
-
-{ #category : #'private - actions' }
-Gt2ExamplesAnnotation >> browseSuccessesFrom: aWidget [
-	| aResult |
-	self hasSuccesses ifFalse: [ ^ self inform: 'There are no issues' ].
-	aResult := self cachedExampleGroup numberOfSuccesses isZero 
-		ifTrue: [ self cachedExampleGroup ]
-		ifFalse: [ GtExampleGroup withAll: (self cachedExampleGroup 
-			select: [ :each | each isSuccess ]) ].
-	aWidget fireEvent: (GtPhlowObjectToSpawn new 
-		object: aResult;
-		sourceElement: aWidget)
 ]
 
 { #category : #'private - cache' }
@@ -212,16 +186,6 @@ Gt2ExamplesAnnotation >> isPreviewDefined [
 { #category : #testing }
 Gt2ExamplesAnnotation >> isReferenceDefined [
 	^ self hasExample
-]
-
-{ #category : #'private - styling' }
-Gt2ExamplesAnnotation >> issuesButtonAttribute [
-	^ Gt2ButtonAttribute new
-		beAppend;
-		stencil: (Gt2ButtonStencilBuilder new
-			label: self issuesButtonLabel;
-			icon: self constants infoButtonIcon;
-			action: [ :aWidget | self browseIssuesFrom: aWidget ])
 ]
 
 { #category : #'private - styling' }
@@ -379,13 +343,6 @@ Gt2ExamplesAnnotation >> runExamples [
 ]
 
 { #category : #'private - styling' }
-Gt2ExamplesAnnotation >> styleIssueButtonInText: aBlRope [
-	self hasFailuresOrErrors ifFalse: [ ^ self ].
-	(aBlRope from: self stop to: self stop) 
-		attribute: self issuesButtonAttribute
-]
-
-{ #category : #'private - styling' }
 Gt2ExamplesAnnotation >> styleLinkInText: aBlRope [
 	self hasChildren ifFalse: [ ^ self ].
 	self utility styleLinkInText: aBlRope forNode: self withLinkAt: self children first
@@ -405,21 +362,12 @@ Gt2ExamplesAnnotation >> styleRunButtonInText: aBlRope [
 		attribute: self runButtonAttribute
 ]
 
-{ #category : #'private - styling' }
-Gt2ExamplesAnnotation >> styleSuccessButtonInText: aBlRope [
-	self hasSuccesses ifFalse: [ ^ self ].
-	(aBlRope from: self stop to: self stop) 
-		attribute: self successButtonAttribute
-]
-
 { #category : #'api - style' }
 Gt2ExamplesAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 	self styleRunButtonInText: aBlRope.
-	"self styleSuccessButtonInText: aBlRope.
-	self styleIssueButtonInText: aBlRope."
 	self styleResultsInText: aBlRope.
 	self registerToSystemChanges.
 ]
@@ -427,16 +375,6 @@ Gt2ExamplesAnnotation >> styleTextWithMarkup: aBlRope [
 { #category : #'api - style' }
 Gt2ExamplesAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope
-]
-
-{ #category : #'private - styling' }
-Gt2ExamplesAnnotation >> successButtonAttribute [
-	^ Gt2ButtonAttribute new
-		beAppend;
-		stencil: (Gt2ButtonStencilBuilder new
-			label: self successButtonLabel;
-			icon: self constants infoButtonIcon;
-			action: [ :aWidget | self browseSuccessesFrom: aWidget ])
 ]
 
 { #category : #'private - styling' }
