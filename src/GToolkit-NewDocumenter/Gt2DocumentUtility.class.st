@@ -286,7 +286,7 @@ Gt2DocumentUtility class >> stylePreviewInText: aBlRope forNode: aNode [
 ]
 
 { #category : #'text styling' }
-Gt2DocumentUtility class >> sublteMarkupsInText: aBlRope start: aStartIndex stop: aStopIndex [
+Gt2DocumentUtility class >> subtleMarkupsInText: aBlRope start: aStartIndex stop: aStopIndex [
 	(aBlRope 
 		from: aStartIndex
 		to: aStopIndex)

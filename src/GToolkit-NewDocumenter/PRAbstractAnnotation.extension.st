@@ -77,5 +77,5 @@ PRAbstractAnnotation >> expandedParameterValue [
 PRAbstractAnnotation >> styleTextWithMarkup: aBlRope [
 	"Subclasses can add more styling"
 	super styleTextWithMarkup: aBlRope.
-	self utility sublteMarkupsInText: aBlRope start: self start stop: self stop.
+	self utility subtleMarkupsInText: aBlRope start: self start stop: self stop.
 ]

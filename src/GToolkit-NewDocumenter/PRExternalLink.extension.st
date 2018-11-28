@@ -63,11 +63,11 @@ PRExternalLink >> styleTextReadingModeWithoutCaption: aBlRope [
 PRExternalLink >> styleTextWithMarkup: aBlRope [
 	self utility styleLinkInText: aBlRope forNode: self start: self start + 1 stop: self stop - 1.
 	self utility
-		sublteMarkupsInText: aBlRope 
+		subtleMarkupsInText: aBlRope 
 		start: self start 
 		stop: self start + self startMarkup size - 1.
 	self utility
-		sublteMarkupsInText: aBlRope 
+		subtleMarkupsInText: aBlRope 
 		start: self stop - self startMarkup size + 1
 		stop: self stop
 ]
