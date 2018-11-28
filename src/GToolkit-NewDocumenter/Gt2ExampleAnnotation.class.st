@@ -65,6 +65,13 @@ Gt2ExampleAnnotation >> codeHeight [
 		defaultValue: [ self constants defaultPreviewHeight ]
 ]
 
+{ #category : #'api - style' }
+Gt2ExampleAnnotation >> cursorLeftInText: aBlRope [
+	self isExampleDefined 
+		ifTrue: [ self utility hideMarkupsInText: aBlRope start: self start stop: self stop ]
+		ifFalse: [ (self utility hideAllButLinkInText: aBlRope forAnnotation: self) ifFalse: [ ^ self ] ].
+]
+
 { #category : #compatibility }
 Gt2ExampleAnnotation >> doNotDisplaySourceCodeParameterValue [
 	<compatibility>
@@ -270,12 +277,13 @@ Gt2ExampleAnnotation >> styleTextWithMarkup: aBlRope [
 
 { #category : #'api - style' }
 Gt2ExampleAnnotation >> styleTextWithoutMarkup: aBlRope [ 
-	self isPreviewDefined ifFalse: [ ^ self styleTextWithMarkup: aBlRope ].
 	super styleTextWithoutMarkup: aBlRope.
-	self utility 
-		hideMarkupsInText: aBlRope 
-		start: self start 
-		stop: self stop -  1.
+	self utility sublteMarkupsInText: aBlRope start: self start stop: self stop.
+	self styleLinkInText: aBlRope.
+	self registerToSystemChanges.
+	self isExampleDefined 
+		ifTrue: [ self utility hideMarkupsInText: aBlRope start: self start stop: self stop ]
+		ifFalse: [ (self utility hideAllButLinkInText: aBlRope forAnnotation: self) ifFalse: [ ^ self ] ].
 	self utility stylePreviewInText: aBlRope forNode: self.
-	self registerToSystemChanges
+	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]
