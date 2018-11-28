@@ -38,6 +38,11 @@ Gt2MethodAnnotation >> browseReferenceFrom: anEvent [
 		sourceElement: anEvent target)
 ]
 
+{ #category : #'api - style' }
+Gt2MethodAnnotation >> cursorLeftInText: aBlRope [
+	self utility hideAllButLinkInText: aBlRope forAnnotation: self
+]
+
 { #category : #'accessing - parameter values' }
 Gt2MethodAnnotation >> defaultShowSelector [
 	^ self constants defaultMethodShowSelector
@@ -141,5 +146,8 @@ Gt2MethodAnnotation >> styleTextWithMarkup: aBlRope [
 
 { #category : #'api - style' }
 Gt2MethodAnnotation >> styleTextWithoutMarkup: aBlRope [
-	self styleTextWithMarkup: aBlRope
+	self styleTextWithMarkup: aBlRope.
+	super styleTextWithoutMarkup: aBlRope.
+	(self utility hideAllButLinkInText: aBlRope forAnnotation: self) ifFalse: [ ^ self ].
+	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]
