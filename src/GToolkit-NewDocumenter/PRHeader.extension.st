@@ -1,6 +1,16 @@
 Extension { #name : #PRHeader }
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRHeader >> cursorLeftInText: aBlRope [
+	self hideMarkupsInText: aBlRope.
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRHeader >> cursorNearbyInText: aBlRope [
+	self utility cursorNeabyInText: aBlRope forNode: self
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRHeader >> hideMarkupsInText: aBlRope [
 	| aMarkup |
 	self level isNumber ifFalse: [ ^ self ].
@@ -24,6 +34,7 @@ PRHeader >> styleTextWithMarkup: aBlRope [
 { #category : #'*GToolkit-NewDocumenter' }
 PRHeader >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
+	super styleTextWithMarkup: aBlRope.
 	self hideMarkupsInText: aBlRope.
-	super styleTextWithMarkup: aBlRope
+	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]

@@ -354,7 +354,7 @@ Gt2DocumentExamples >> contentWithFigure [
 
 ]
 
-{ #category : #'formats and lists' }
+{ #category : #'formats, header, and lists' }
 Gt2DocumentExamples >> contentWithHeaders [
 	<gtExample>
 	^ '! Header One
@@ -364,30 +364,6 @@ Gt2DocumentExamples >> contentWithHeaders [
 !!!!! Header Five
 !!!!!! Header Six
 !!!!!!! Header Seven'
-]
-
-{ #category : #'formats and lists' }
-Gt2DocumentExamples >> contentWithHeadersInEditingMode [
-	<gtExample>
-	| aDocument |
-	aDocument := self defaultDocument text: self contentWithHeaders.
-	aDocument editingMode.
-	aDocument privateStyleText.
-	self assert: aDocument text asString equals: self contentWithHeaders.
-	self assert: aDocument isSubscribedToSystem not.
-	^ aDocument
-]
-
-{ #category : #'formats and lists' }
-Gt2DocumentExamples >> contentWithHeadersInReadingMode [
-	<gtExample>
-	| aDocument |
-	aDocument := self defaultDocument text: self contentWithHeaders.
-	aDocument readingMode.
-	aDocument privateStyleText.
-	self assert: aDocument text asString equals: self contentWithHeaders.
-	self assert: aDocument isSubscribedToSystem not.
-	^ aDocument
 ]
 
 { #category : #'iceberg file' }
@@ -427,7 +403,7 @@ Gt2DocumentExamples >> contentWithInvalidParameter3 [
 	^ '${', self constants exampleAnnotationName, ':', '}$'
 ]
 
-{ #category : #'formats and lists' }
+{ #category : #'formats, header, and lists' }
 Gt2DocumentExamples >> contentWithLists [
 	<gtExample>
 	^ '
@@ -465,7 +441,7 @@ Another definition list:
 '
 ]
 
-{ #category : #'formats and lists' }
+{ #category : #'formats, header, and lists' }
 Gt2DocumentExamples >> contentWithMarkups [
 	<gtExample>
 	^ '""bold"" ''''italic'''' ==monospace== --strikethrought-- @@subscript@@ ^^superscript^^ __underline__ {{{raw}}}'
@@ -653,7 +629,7 @@ Gt2DocumentExamples >> documentFromFileReference [
 	^ aDocument
 ]
 
-{ #category : #'formats and lists' }
+{ #category : #'formats, header, and lists' }
 Gt2DocumentExamples >> documentInEditingModeWithMarkups [
 	<gtExample>
 	| aDocument |
@@ -665,7 +641,7 @@ Gt2DocumentExamples >> documentInEditingModeWithMarkups [
 	^ aDocument
 ]
 
-{ #category : #'formats and lists' }
+{ #category : #'formats, header, and lists' }
 Gt2DocumentExamples >> documentInReadingModeWithMarkups [
 	<gtExample>
 	| aDocument |
@@ -902,6 +878,30 @@ Gt2DocumentExamples >> documentWithFigure [
 	^ aDocument
 ]
 
+{ #category : #'formats, header, and lists' }
+Gt2DocumentExamples >> documentWithHeadersInEditingMode [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithHeaders.
+	aDocument editingMode.
+	aDocument privateStyleText.
+	self assert: aDocument text asString equals: self contentWithHeaders.
+	self assert: aDocument isSubscribedToSystem not.
+	^ aDocument
+]
+
+{ #category : #'formats, header, and lists' }
+Gt2DocumentExamples >> documentWithHeadersInReadingMode [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithHeaders.
+	aDocument readingMode.
+	aDocument privateStyleText.
+	self assert: aDocument text asString equals: self contentWithHeaders.
+	self assert: aDocument isSubscribedToSystem not.
+	^ aDocument
+]
+
 { #category : #'iceberg file' }
 Gt2DocumentExamples >> documentWithIcebergFile [
 	<gtExample>
@@ -956,7 +956,7 @@ Gt2DocumentExamples >> documentWithInvalidParameter3 [
 	^ aDocument
 ]
 
-{ #category : #'formats and lists' }
+{ #category : #'formats, header, and lists' }
 Gt2DocumentExamples >> documentWithLists [
 	<gtExample>
 	| aDocument |
@@ -966,7 +966,7 @@ Gt2DocumentExamples >> documentWithLists [
 	^ aDocument
 ]
 
-{ #category : #'formats and lists' }
+{ #category : #'formats, header, and lists' }
 Gt2DocumentExamples >> documentWithMarkups [
 	<gtExample>
 	| aDocument |
