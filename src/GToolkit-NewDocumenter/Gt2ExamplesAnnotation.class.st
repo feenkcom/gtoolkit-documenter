@@ -62,6 +62,13 @@ Gt2ExamplesAnnotation >> cachedExampleGroup [
 	^ aNewExampleGroup
 ]
 
+{ #category : #'api - style' }
+Gt2ExamplesAnnotation >> cursorLeftInText: aBlRope [
+	self hasChildren ifFalse: [ ^ self ].
+	self utility hideMarkupsInText: aBlRope forAnnotation: self exceptOfChild: self children first.
+	
+]
+
 { #category : #'accessing - parameter values' }
 Gt2ExamplesAnnotation >> defaultShowSelector [
 	^ self constants defaultExamplesShowSelector
@@ -351,14 +358,14 @@ Gt2ExamplesAnnotation >> styleLinkInText: aBlRope [
 { #category : #'private - styling' }
 Gt2ExamplesAnnotation >> styleResultsInText: aBlRope [
 	self hasResults ifFalse: [ ^ self ].
-	(aBlRope from: self stop to: self stop) 
+	(aBlRope from: self start to: self stop) 
 		attribute: self resultsLabelAttribute
 ]
 
 { #category : #'private - styling' }
 Gt2ExamplesAnnotation >> styleRunButtonInText: aBlRope [
 	self hasExample ifFalse: [ ^ self ].
-	(aBlRope from: self stop to: self stop) 
+	(aBlRope from: self start to: self stop) 
 		attribute: self runButtonAttribute
 ]
 
@@ -374,7 +381,11 @@ Gt2ExamplesAnnotation >> styleTextWithMarkup: aBlRope [
 
 { #category : #'api - style' }
 Gt2ExamplesAnnotation >> styleTextWithoutMarkup: aBlRope [
-	self styleTextWithMarkup: aBlRope
+	self styleTextWithMarkup: aBlRope.
+	super styleTextWithoutMarkup: aBlRope.
+	self hasChildren ifFalse: [ ^ self ].
+	self utility hideMarkupsInText: aBlRope forAnnotation: self exceptOfChild: self children first.
+	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]
 
 { #category : #'private - styling' }
