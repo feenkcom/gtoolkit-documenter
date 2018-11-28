@@ -1,6 +1,16 @@
 Extension { #name : #PRFormat }
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRFormat >> cursorLeftInText: aBlRope [
+	self hideMarkupsInText: aBlRope.
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRFormat >> cursorNearbyInText: aBlRope [
+	self utility cursorNeabyInText: aBlRope forNode: self
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRFormat >> hideMarkupsInText: aBlRope [
 	| aMarkup |
 	aMarkup := self utility startMarkupFor: self.
@@ -26,6 +36,7 @@ PRFormat >> styleTextWithMarkup: aBlRope [
 { #category : #'*GToolkit-NewDocumenter' }
 PRFormat >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
+	super styleTextWithMarkup: aBlRope.
 	self hideMarkupsInText: aBlRope.
-	super styleTextWithMarkup: aBlRope
+	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]

@@ -354,7 +354,7 @@ Gt2DocumentExamples >> contentWithFigure [
 
 ]
 
-{ #category : #markups }
+{ #category : #'formats and lists' }
 Gt2DocumentExamples >> contentWithHeaders [
 	<gtExample>
 	^ '! Header One
@@ -366,7 +366,7 @@ Gt2DocumentExamples >> contentWithHeaders [
 !!!!!!! Header Seven'
 ]
 
-{ #category : #markups }
+{ #category : #'formats and lists' }
 Gt2DocumentExamples >> contentWithHeadersInEditingMode [
 	<gtExample>
 	| aDocument |
@@ -378,7 +378,7 @@ Gt2DocumentExamples >> contentWithHeadersInEditingMode [
 	^ aDocument
 ]
 
-{ #category : #markups }
+{ #category : #'formats and lists' }
 Gt2DocumentExamples >> contentWithHeadersInReadingMode [
 	<gtExample>
 	| aDocument |
@@ -427,7 +427,7 @@ Gt2DocumentExamples >> contentWithInvalidParameter3 [
 	^ '${', self constants exampleAnnotationName, ':', '}$'
 ]
 
-{ #category : #markups }
+{ #category : #'formats and lists' }
 Gt2DocumentExamples >> contentWithLists [
 	<gtExample>
 	^ '
@@ -465,7 +465,7 @@ Another definition list:
 '
 ]
 
-{ #category : #markups }
+{ #category : #'formats and lists' }
 Gt2DocumentExamples >> contentWithMarkups [
 	<gtExample>
 	^ '""bold"" ''''italic'''' ==monospace== --strikethrought-- @@subscript@@ ^^superscript^^ __underline__ {{{raw}}}'
@@ -653,7 +653,7 @@ Gt2DocumentExamples >> documentFromFileReference [
 	^ aDocument
 ]
 
-{ #category : #markups }
+{ #category : #'formats and lists' }
 Gt2DocumentExamples >> documentInEditingModeWithMarkups [
 	<gtExample>
 	| aDocument |
@@ -665,7 +665,7 @@ Gt2DocumentExamples >> documentInEditingModeWithMarkups [
 	^ aDocument
 ]
 
-{ #category : #markups }
+{ #category : #'formats and lists' }
 Gt2DocumentExamples >> documentInReadingModeWithMarkups [
 	<gtExample>
 	| aDocument |
@@ -956,7 +956,7 @@ Gt2DocumentExamples >> documentWithInvalidParameter3 [
 	^ aDocument
 ]
 
-{ #category : #markups }
+{ #category : #'formats and lists' }
 Gt2DocumentExamples >> documentWithLists [
 	<gtExample>
 	| aDocument |
@@ -966,7 +966,7 @@ Gt2DocumentExamples >> documentWithLists [
 	^ aDocument
 ]
 
-{ #category : #markups }
+{ #category : #'formats and lists' }
 Gt2DocumentExamples >> documentWithMarkups [
 	<gtExample>
 	| aDocument |
