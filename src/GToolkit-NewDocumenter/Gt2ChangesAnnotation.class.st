@@ -108,6 +108,11 @@ Gt2ChangesAnnotation >> createButtonAttribute [
 						sourceElement: aButton) ])
 ]
 
+{ #category : #'api - style' }
+Gt2ChangesAnnotation >> cursorLeftInText: aBlRope [
+	self utility hideAllButLinkInText: aBlRope forAnnotation: self
+]
+
 { #category : #'accessing - parameter values' }
 Gt2ChangesAnnotation >> defaultShowSelector [
 	^ self constants defaultChangesShowSelector
@@ -198,14 +203,14 @@ Gt2ChangesAnnotation >> sourceDirectory [
 { #category : #'private - styling' }
 Gt2ChangesAnnotation >> styleApplyButtonInText: aBlRope [
 	self isApplied ifTrue: [ ^ self ].
-	(aBlRope from: self stop to: self stop) 
+	(aBlRope from: self start to: self stop) 
 		attribute: self applyButtonAttribute
 ]
 
 { #category : #'private - styling' }
 Gt2ChangesAnnotation >> styleCreateButtonInText: aBlRope [
 	self hasChanges ifTrue: [ ^ self ].
-	(aBlRope from: self stop to: self stop) 
+	(aBlRope from: self start to: self stop) 
 		attribute: self createButtonAttribute
 ]
 
@@ -221,5 +226,8 @@ Gt2ChangesAnnotation >> styleTextWithMarkup: aBlRope [
 
 { #category : #'api - style' }
 Gt2ChangesAnnotation >> styleTextWithoutMarkup: aBlRope [
-	self styleTextWithMarkup: aBlRope
+	self styleTextWithMarkup: aBlRope.
+	super styleTextWithoutMarkup: aBlRope.
+	(self utility hideAllButLinkInText: aBlRope forAnnotation: self) ifFalse: [ ^ self ].
+	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]
