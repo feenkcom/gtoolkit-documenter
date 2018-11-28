@@ -42,6 +42,7 @@ Gt2Document class >> pillarParser [
 
 { #category : #cleanup }
 Gt2Document class >> resetPillarParser [
+	<script>
 	PillarParser := nil
 ]
 

@@ -36,6 +36,23 @@ Gt2IcebergFileAnnotation >> browseReferenceFrom: aBlClickEvent [
 			sourceElement: aBlClickEvent target)
 ]
 
+{ #category : #'api - style' }
+Gt2IcebergFileAnnotation >> cursorLeftInText: aBlRope [
+	| aLinkNode |
+	aLinkNode := self utility linkNodeForAnnotation: self.
+	aLinkNode == self ifTrue: [ ^ self ].
+	(aBlRope from: self start to: aLinkNode start - 1)
+		attribute: Gt2HideAttribute uniqueInstance.
+	(aBlRope from: aLinkNode stop + 1 to: self stop)
+		attribute: Gt2HideAttribute uniqueInstance.
+]
+
+{ #category : #'api - style' }
+Gt2IcebergFileAnnotation >> cursorNearByInText: aBlRope [
+	(aBlRope from: self start to: self stop)
+		clearAttributes: [ :eachAttribute | eachAttribute = Gt2HideAttribute uniqueInstance ]
+]
+
 { #category : #'accessing - parameter values' }
 Gt2IcebergFileAnnotation >> fileReference [
 	<return: #FileReference or: nil>
@@ -98,11 +115,11 @@ Gt2IcebergFileAnnotation >> styleTextEditingMode: aBlRope [
 { #category : #'api - style' }
 Gt2IcebergFileAnnotation >> styleTextReadingMode: aBlRope [
 	| aLinkNode |
+	self styleTextEditingMode: aBlRope.
 	aLinkNode := self utility linkNodeForAnnotation: self.
-	aLinkNode == self ifTrue: [ ^ self styleTextEditingMode: aBlRope ].
+	aLinkNode == self ifTrue: [ ^ self ].
 	(aBlRope from: self start to: aLinkNode start - 1)
 		attribute: Gt2HideAttribute uniqueInstance.
-	self utility styleLinkInText: aBlRope forNode: self withLinkAt: aLinkNode.
 	(aBlRope from: aLinkNode stop + 1 to: self stop)
 		attribute: Gt2HideAttribute uniqueInstance.
 	super styleTextReadingMode: aBlRope.
