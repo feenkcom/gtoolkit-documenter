@@ -1234,6 +1234,7 @@ Gt2DocumentExamples >> modifyAndStoreToClassComment [
 { #category : #'file reference document' }
 Gt2DocumentExamples >> modifyAndStoreToFileReference [
 	<gtExample>
+	<noTest>
 	| aDocument |
 	aDocument := self documentFromFileReference.
 	aDocument editor inserter 
