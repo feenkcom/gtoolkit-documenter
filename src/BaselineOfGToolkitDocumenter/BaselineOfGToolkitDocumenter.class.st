@@ -69,17 +69,5 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 				#GToolkitVariableBindings
 				#GToolkitExamples 
 				#GToolkitInspector ) ]
-	].
-
-	spec for: #'pharo6.x' do: [ 
-		spec
-			baseline: 'GToolkitPharo6Compatibility' with: [ spec 
-				repository: 'github://feenkcom/gtoolkit/src' ];
-			configuration: 'WebBrowser' with: [ spec 
-				repository: 'http://smalltalkhub.com/mc/TorstenBergmann/WebBrowser/main/' ];
-			package: 'GToolkit-Documenter' with: [ spec 
-				requires: #( 'WebBrowser' 'GToolkitPharo6Compatibility' ) ];
-			package: 'GToolkit-NewDocumenter' with: [ spec 
-			 	requires: #( 'WebBrowser' 'GToolkitPharo6Compatibility' ) ]
-	].
+	]
 ]
