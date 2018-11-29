@@ -75,11 +75,6 @@ Gt2Annotation >> previewAttributes [
 				[ :aCachedElement :theAttribute | self cachedPreview: aCachedElement ]}
 ]
 
-{ #category : #'private - styling' }
-Gt2Annotation >> previewAttributesForReadingMode [
-	^ self previewAttributes do: [ :each | each beReplace ]
-]
-
 { #category : #accessing }
 Gt2Annotation >> referenceParameterName [
 	"Return an annotation parameter name that holds a referenced object"

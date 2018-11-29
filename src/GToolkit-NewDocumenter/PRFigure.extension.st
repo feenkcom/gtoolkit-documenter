@@ -57,6 +57,21 @@ PRFigure >> cachedPreview: anElement [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRFigure >> cursorLeftInText: aBlRope [
+	self isReferenceDefined
+		ifTrue: [ self utility hideMarkupsInText: aBlRope start: self start stop: self stop ]
+		ifFalse: [ 
+			self hasChildren 
+				ifTrue: [ self styleTextWithoutMarkupWithCaption: aBlRope ]
+				ifFalse: [ self styleTextWithoutMarkupWithoutCaption: aBlRope ] ].
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRFigure >> cursorNearbyInText: aBlRope [
+	self utility cursorNeabyInText: aBlRope forNode: self
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRFigure >> expandedParameterValue [
 	^ true
 ]
@@ -112,6 +127,11 @@ PRFigure >> showParameterValue [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRFigure >> startMarkup [
+	^ self utility startMarkupFor: self class
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRFigure >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self utility styleLinkInText: aBlRope forNode: self.
@@ -120,5 +140,47 @@ PRFigure >> styleTextWithMarkup: aBlRope [
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRFigure >> styleTextWithoutMarkup: aBlRope [
-	self styleTextWithMarkup: aBlRope
+	super styleTextWithoutMarkup: aBlRope.
+	self utility subtleMarkupsInText: aBlRope start: self start stop: self stop.
+	self utility styleLinkInText: aBlRope forNode: self.
+	self isReferenceDefined
+		ifTrue: [ self utility hideMarkupsInText: aBlRope start: self start stop: self stop ]
+		ifFalse: [ 
+			self hasChildren 
+				ifTrue: [ self styleTextWithoutMarkupWithCaption: aBlRope ]
+				ifFalse: [ self styleTextWithoutMarkupWithoutCaption: aBlRope ] ].
+	self utility stylePreviewInText: aBlRope forNode: self.
+	self utility styleCursorAttributeInText: aBlRope forNode: self
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRFigure >> styleTextWithoutMarkupWithCaption: aBlRope [
+	| aStartIndex aStopIndex |
+	aStartIndex := self startMarkup size + self start.
+	aStopIndex := self children first stop.
+	self utility 
+		hideMarkupsInText: aBlRope 
+		start: self start
+		stop: aStartIndex - 1.
+	self utility 
+		hideMarkupsInText: aBlRope 
+		start: aStopIndex + 1
+		stop: self stop.
+		
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRFigure >> styleTextWithoutMarkupWithoutCaption: aBlRope [
+	| aStartIndex aStopIndex aMarkup |
+	aMarkup := self startMarkup.
+	aStartIndex := self start + aMarkup size.
+	aStopIndex := self stop - aMarkup size.
+	self utility
+		hideMarkupsInText: aBlRope
+		start: self start
+		stop: aStartIndex - 1.
+	self utility
+		hideMarkupsInText: aBlRope
+		start: aStopIndex + 1
+		stop: self stop
 ]
