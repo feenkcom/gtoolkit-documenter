@@ -23,8 +23,6 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 	<baseline>
 	spec for: #common do: [ 
 		spec
-			baseline: 'Brick' with: [ spec
-				repository: 'github://pharo-graphics/Brick/src' ];
 			baseline: 'GToolkitCompleter' with: [ spec
 				repository: 'github://feenkcom/gtoolkit-completer/src' ];
 			baseline: 'GToolkitCoder' with: [ spec
@@ -44,7 +42,7 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 			baseline: 'DeepTraverser' with: [ spec
 				repository: 'github://feenkcom/DeepTraverser/src' ];
 			package: 'GToolkit-Documenter' with: [ spec requires: #( 
-				#Brick #PillarExporter 
+				#PillarExporter 
 				#GToolkitCoder
 				#GToolkitCompleter
 				#GToolkitUtility 
@@ -52,16 +50,15 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 				#GToolkitExamples 
 				#GToolkitInspector ) ];
 			package: 'GToolkit-Documenter-Exporter' with: [ spec requires: #( 
-				#Brick #PillarExporter #GToolkitUtility 'GToolkit-Documenter' ) ];
+				#PillarExporter #GToolkitUtility 'GToolkit-Documenter' ) ];
 			package: 'GToolkit-Documenter-Exporter-Tests' with: [ spec requires: #( 
 				'GToolkit-Documenter-Exporter' ) ];
 			package: 'GToolkit-Documenter-Epicea' with: [ spec requires: #(
-				 'Brick' 'GToolkitUtility' 'GToolkit-Documenter' 'GToolkit-Documenter-Exporter' ) ];
+				 'GToolkitUtility' 'GToolkit-Documenter' 'GToolkit-Documenter-Exporter' ) ];
 			package: 'GToolkit-Documenter-Examples' with: [ spec requires: #( 
 				'GToolkitExamples' 'GToolkit-Documenter' 'GToolkit-Documenter-Exporter'
 				'GToolkit-Documenter-Epicea' ) ];
 			package: 'GToolkit-NewDocumenter' with: [ spec requires: #( 
-				#Brick 
 				#PillarExporter 
 				#GToolkitCoder
 				#GToolkitCompleter
