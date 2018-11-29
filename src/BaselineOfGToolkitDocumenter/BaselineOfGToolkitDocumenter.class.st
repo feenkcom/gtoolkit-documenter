@@ -41,10 +41,8 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 				repository: 'github://feenkcom/gtoolkit-inspector/src' ];
 			baseline: 'PillarExporter' with: [ spec
 				repository: 'github://feenkcom/pillar:feenk/src' ];
-			project: 'DeepTraverser' with: [ spec
-				className: #ConfigurationOfDeepTraverser;
-				versionString: #development;
-				repository: 'http://smalltalkhub.com/mc/Moose/DeepTraverser/main/' ];
+			baseline: 'DeepTraverser' with: [ spec
+				repository: 'github://feenkcom/DeepTraverser/src' ];
 			package: 'GToolkit-Documenter' with: [ spec requires: #( 
 				#Brick #PillarExporter 
 				#GToolkitCoder
