@@ -634,7 +634,7 @@ Gt2DocumentExamples >> documentInEditingModeWithMarkups [
 	<gtExample>
 	| aDocument |
 	aDocument := self defaultDocument
-		editingMode;
+		displayMarkup;
 	 	text: self contentWithMarkups.
 	self assert: aDocument text asString equals: self contentWithMarkups.
 	self assert: aDocument isSubscribedToSystem not.
@@ -646,7 +646,7 @@ Gt2DocumentExamples >> documentInReadingModeWithMarkups [
 	<gtExample>
 	| aDocument |
 	aDocument := self defaultDocument
-		readingMode;
+		hideMarkup;
 	 	text: self contentWithMarkups.
 	self assert: aDocument text asString equals: self contentWithMarkups.
 	self assert: aDocument isSubscribedToSystem not.
@@ -849,7 +849,7 @@ Gt2DocumentExamples >> documentWithExternalLinkInEditingMode [
 	<gtExample>
 	| aDocument |
 	aDocument := self defaultDocument text: self contentWithExternalLink.
-	aDocument editingMode.
+	aDocument displayMarkup.
 	aDocument privateStyleText.
 	self assert: aDocument text asString equals: self contentWithExternalLink.
 	^ aDocument
@@ -860,7 +860,7 @@ Gt2DocumentExamples >> documentWithExternalLinkInReadingMode [
 	<gtExample>
 	| aDocument |
 	aDocument := self defaultDocument text: self contentWithExternalLink.
-	aDocument readingMode.
+	aDocument hideMarkup.
 	aDocument privateStyleText.
 	self assert: aDocument text asString equals: self contentWithExternalLink.
 	^ aDocument
@@ -883,7 +883,7 @@ Gt2DocumentExamples >> documentWithHeadersInEditingMode [
 	<gtExample>
 	| aDocument |
 	aDocument := self defaultDocument text: self contentWithHeaders.
-	aDocument editingMode.
+	aDocument displayMarkup.
 	aDocument privateStyleText.
 	self assert: aDocument text asString equals: self contentWithHeaders.
 	self assert: aDocument isSubscribedToSystem not.
@@ -895,7 +895,7 @@ Gt2DocumentExamples >> documentWithHeadersInReadingMode [
 	<gtExample>
 	| aDocument |
 	aDocument := self defaultDocument text: self contentWithHeaders.
-	aDocument readingMode.
+	aDocument hideMarkup.
 	aDocument privateStyleText.
 	self assert: aDocument text asString equals: self contentWithHeaders.
 	self assert: aDocument isSubscribedToSystem not.
@@ -1085,7 +1085,7 @@ Gt2DocumentExamples >> documentWithTwoExistingExamples [
 	<gtExample>
 	| aDocument aCache |
 	aDocument := self defaultDocument.
-	aDocument editingMode; text: self contentWithTwoExistingExamples.
+	aDocument displayMarkup; text: self contentWithTwoExistingExamples.
 	aDocument privateStyleText.
 	self assert: aDocument text asString equals: self contentWithTwoExistingExamples.
 	self assert: aDocument isSubscribedToSystem.

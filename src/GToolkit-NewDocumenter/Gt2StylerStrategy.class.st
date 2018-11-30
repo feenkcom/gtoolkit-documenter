@@ -7,12 +7,12 @@ Class {
 }
 
 { #category : #'instance creation' }
-Gt2StylerStrategy class >> editingMode [
+Gt2StylerStrategy class >> displayMarkup [
 	^ Gt2StyleWithMarkupStrategy uniqueInstance
 ]
 
 { #category : #'instance creation' }
-Gt2StylerStrategy class >> readingMode [
+Gt2StylerStrategy class >> hideMarkup [
 	^ Gt2StyleWithoutMarkupStrategy uniqueInstance
 ]
 

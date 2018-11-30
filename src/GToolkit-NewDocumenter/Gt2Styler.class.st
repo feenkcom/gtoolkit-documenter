@@ -11,13 +11,8 @@ Class {
 }
 
 { #category : #initialization }
-Gt2Styler >> beEditingMode [
-	self mode: Gt2StylerStrategy editingMode
-]
-
-{ #category : #initialization }
-Gt2Styler >> beReadingMode [
-	self mode: Gt2StylerStrategy readingMode
+Gt2Styler >> displayMarkup [
+	self mode: Gt2StylerStrategy displayMarkup
 ]
 
 { #category : #accessing }
@@ -38,10 +33,15 @@ Gt2Styler >> document: aGt2Document [
 ]
 
 { #category : #initialization }
+Gt2Styler >> hideMarkup [
+	self mode: Gt2StylerStrategy hideMarkup
+]
+
+{ #category : #initialization }
 Gt2Styler >> initialize [
 	super initialize.
 	editorEventHandler := Gt2StylerEventHandler new subscriber: self.
-	mode := Gt2StylerStrategy editingMode.
+	mode := Gt2StylerStrategy displayMarkup.
 ]
 
 { #category : #accessing }

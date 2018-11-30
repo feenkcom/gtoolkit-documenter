@@ -78,10 +78,10 @@ Gt2Document >> asElement [
 					look: (BrMaterialToggleIconifiedLook new 
 						when: BrToggleActivatedEvent do: [ :anEvent | 
 							anEvent currentTarget widget viewModel icon: self constants editingModeIcon asElement.
-							self editingMode ];
+							self displayMarkup ];
 						when: BrToggleDeactivatedEvent do: [ :anEvent | 
 							anEvent currentTarget widget viewModel icon: self constants readingModeIcon asElement.
-							self readingMode ]) + BrGlamorousButtonWithIconLook - BrShadowLook))
+							self hideMarkup ]) + BrGlamorousButtonWithIconLook - BrShadowLook))
 ]
 
 { #category : #converting }
@@ -138,7 +138,7 @@ Gt2Document >> defaultStyler [
 	^ Gt2Styler new 
 		document: self; 
 		parser: self pillarParser;
-		beReadingMode
+		hideMarkup
 ]
 
 { #category : #initialization }
@@ -147,9 +147,9 @@ Gt2Document >> defaultText [
 ]
 
 { #category : #initialization }
-Gt2Document >> editingMode [
+Gt2Document >> displayMarkup [
 	self editor styler mode isEditing ifTrue: [ ^ self ].
-	self editor styler beEditingMode.
+	self editor styler displayMarkup.
 	self styleTextRequest.
 ]
 
@@ -249,8 +249,8 @@ Gt2Document >> gtTextFor: aView [
 		actionButtonIcon: self constants applyButtonIcon 
 			action: [ self store ];
 		actionToggleIcon: self constants editButtonIcon 
-			activated: [ self editingMode ] 
-			deactivated: [ self readingMode ]
+			activated: [ self displayMarkup ] 
+			deactivated: [ self hideMarkup ]
 ]
 
 { #category : #'announcement handling' }
@@ -261,6 +261,13 @@ Gt2Document >> handleSystemChangeAnnouncement: aSystemAnnouncement [
 { #category : #testing }
 Gt2Document >> hasDocumentSubscriptions [
 	^ announcer numberOfSubscriptions isZero not
+]
+
+{ #category : #initialization }
+Gt2Document >> hideMarkup [
+	self editor styler mode isReading ifTrue: [ ^ self ].
+	self editor styler hideMarkup.
+	self styleTextRequest
 ]
 
 { #category : #initialization }
@@ -348,13 +355,6 @@ Gt2Document >> privateStyleText [
 { #category : #actions }
 Gt2Document >> read [
 	storageStrategy read: self
-]
-
-{ #category : #initialization }
-Gt2Document >> readingMode [
-	self editor styler mode isReading ifTrue: [ ^ self ].
-	self editor styler beReadingMode.
-	self styleTextRequest
 ]
 
 { #category : #utility }
