@@ -49,11 +49,6 @@ PRDocumentItem >> gtSubscriber: anObject [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRDocumentItem >> styleText: aBlRope [ 
-	"I will be replaced by styleTextWithMarkup: and styleTextWithoutMarkup:"
-]
-
-{ #category : #'*GToolkit-NewDocumenter' }
 PRDocumentItem >> styleText: aBlRope using: aGt2StylerStrategy [
 	aGt2StylerStrategy styleText: aBlRope withNode: self
 ]

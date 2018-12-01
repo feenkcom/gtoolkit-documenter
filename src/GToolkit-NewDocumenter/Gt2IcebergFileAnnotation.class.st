@@ -1,8 +1,6 @@
 Class {
 	#name : #Gt2IcebergFileAnnotation,
 	#superclass : #Gt2Annotation,
-	#traits : 'TStylingModesWorkInProgress',
-	#classTraits : 'TStylingModesWorkInProgress classTrait',
 	#category : #'GToolkit-NewDocumenter-Model'
 }
 
