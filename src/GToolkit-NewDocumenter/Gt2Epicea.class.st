@@ -214,7 +214,7 @@ Gt2Epicea >> gtPreviewFor: aView [
 				pragmaName: #gtViewChanges;
 				fromObject: self;
 				collect.
-			aCompositeView := GtPhlowView composite views: aExportsViews.
+			aCompositeView := GtPhlowView empty composite views: aExportsViews.
 			aCompositeView asElementDo: [ :anElement | anElement ]
 		 ]
 ]

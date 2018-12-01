@@ -15,7 +15,7 @@ Class {
 Gt2PreviewStencil >> create [
 	<return: #BlElement>
 	| aView |
-	aView := GtPhlowView on: self result perform: self showSelector.
+	aView := GtPhlowView empty on: self result perform: self showSelector.
 	^ aView asElementDo:
 		[ :anElement | self newContainerFor: anElement ]
 ]

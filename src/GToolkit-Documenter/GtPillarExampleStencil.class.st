@@ -134,7 +134,7 @@ GtPillarExampleStencil >> newPreviewElementFromShowParameter [
 		showBlock: [ :returnValue | 
 			| view |
 			self flag: 'Maybe use GtPillarInspectorStencil instead of this code?'.
-			view := GtPhlowView explicit on: returnValue perform: self documentPart showParameterValue.
+			view := GtPhlowView empty on: returnValue perform: self documentPart showParameterValue.
 			view asElementDo: [ :element |
 				element constraintsDo: [ :c | 
 					c vertical matchParent.

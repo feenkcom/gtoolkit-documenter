@@ -149,7 +149,7 @@ Gt2ExamplePreviewStencil >> newContainerWithHeight: aHeightNumber [
 Gt2ExamplePreviewStencil >> newPreviewElementFor: anObject [
 	<return: #BlElement>
 	| aView |
-	aView := GtPhlowView on: anObject perform: self previewShowSelector.
+	aView := GtPhlowView empty on: anObject perform: self previewShowSelector.
 	^ aView asElementDo: [ :anElement | anElement ]
 ]
 
