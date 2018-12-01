@@ -95,10 +95,8 @@ Gt2DocumentUtility class >> hideAllButLinkInText: aBlRope forAnnotation: aNode [
 
 { #category : #'text styling - hide attribute' }
 Gt2DocumentUtility class >> hideMarkupsInText: aBlRope forAnnotation: aNode exceptOfChild: aChildNode [
-	(aBlRope from: aNode start to: aChildNode start - 1)
-		attribute: Gt2HideAttribute uniqueInstance.
-	(aBlRope from: aChildNode stop + 1 to: aNode stop)
-		attribute: Gt2HideAttribute uniqueInstance.
+	self hideMarkupsInText: aBlRope start: aNode start stop: aChildNode start - 1.
+	self hideMarkupsInText: aBlRope start: aChildNode stop + 1 stop: aNode stop
 ]
 
 { #category : #'text styling - hide attribute' }
@@ -153,6 +151,36 @@ Gt2DocumentUtility class >> linkNodeForAnnotation: aNode [
 		forAnnotation: aNode
 ]
 
+{ #category : #'text styling - hide attribute' }
+Gt2DocumentUtility class >> mayHideAllButLinkInText: aBlRope forAnnotation: aNode [
+	"Return true if hiding action happens"
+	<return: #Boolean>
+	| aLinkNode |
+	(self shouldHideMarkupsInText: aBlRope forNode: aNode) ifFalse: [ ^ false ].
+	aLinkNode := self linkNodeForAnnotation: aNode.
+	aLinkNode == aNode ifTrue: [ ^ false ].
+	self hideMarkupsInText: aBlRope forAnnotation: aNode exceptOfChild: aLinkNode.
+	^ true
+]
+
+{ #category : #'text styling - hide attribute' }
+Gt2DocumentUtility class >> mayHideMarkupsInText: aBlRope forAnnotation: aNode exceptOfChild: aChildNode [
+	"Return true if hiding action happens"
+	<return: #Boolean>
+	(self shouldHideMarkupsInText: aBlRope forNode: aNode) ifFalse: [ ^ false ].
+	self hideMarkupsInText: aBlRope forAnnotation: aNode exceptOfChild: aChildNode.
+	^ true
+]
+
+{ #category : #'text styling - hide attribute' }
+Gt2DocumentUtility class >> mayHideMarkupsInText: aBlRope start: aStartIndex stop: aStopIndex forNode: aNode [
+	"Return true if hiding action happens"
+	<return: #Boolean>
+	(self shouldHideMarkupsInText: aBlRope forNode: aNode) ifFalse: [ ^ false ].
+	self hideMarkupsInText: aBlRope start: aStartIndex stop: aStopIndex.
+	^ true
+]
+
 { #category : #'pillar - parameter values' }
 Gt2DocumentUtility class >> methodDefinitionsFromArray: aCollection [ 
 	<return: #Array of: #RGMethodDefinition>
@@ -199,6 +227,19 @@ Gt2DocumentUtility class >> parameterValueNodeNamed: aParameterName forAnnotatio
 				eachParameter value isNil ] ] 
 		ifFound: [ :aParameter | aParameter valueNode ]
 		ifNone: [ anAnnotation ].
+]
+
+{ #category : #'text styling - hide attribute' }
+Gt2DocumentUtility class >> shouldHideMarkupsInText: aBlRope forNode: aNode [
+	"Return true if hiding action should happen"
+	<return: #Boolean>
+	| aStartPosition aStopPosition |
+	aStartPosition := self cursorNearbyStartDistanceInText: aBlRope forNode: aNode.
+	aStopPosition := self cursorNearbyStopDistanceInText: aBlRope forNode: aNode.
+	^ aNode gtDocument editor cursors
+		detect: [ :eachCursor | aStartPosition <= eachCursor position and: [ eachCursor position <= aStopPosition ] ]
+		ifFound: [ :aCursor | false ]
+		ifNone: [ true ]
 ]
 
 { #category : #'text styling' }

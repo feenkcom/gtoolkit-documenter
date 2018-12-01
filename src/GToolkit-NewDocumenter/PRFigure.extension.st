@@ -144,7 +144,7 @@ PRFigure >> styleTextWithoutMarkup: aBlRope [
 	self utility subtleMarkupsInText: aBlRope start: self start stop: self stop.
 	self utility styleLinkInText: aBlRope forNode: self.
 	self isReferenceDefined
-		ifTrue: [ self utility hideMarkupsInText: aBlRope start: self start stop: self stop ]
+		ifTrue: [ self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self ]
 		ifFalse: [ 
 			self hasChildren 
 				ifTrue: [ self styleTextWithoutMarkupWithCaption: aBlRope ]
@@ -159,14 +159,15 @@ PRFigure >> styleTextWithoutMarkupWithCaption: aBlRope [
 	aStartIndex := self startMarkup size + self start.
 	aStopIndex := self children first stop.
 	self utility 
-		hideMarkupsInText: aBlRope 
+		mayHideMarkupsInText: aBlRope 
 		start: self start
-		stop: aStartIndex - 1.
+		stop: aStartIndex - 1
+		forNode: self.
 	self utility 
-		hideMarkupsInText: aBlRope 
+		mayHideMarkupsInText: aBlRope 
 		start: aStopIndex + 1
-		stop: self stop.
-		
+		stop: self stop
+		forNode: self.		
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
@@ -176,11 +177,13 @@ PRFigure >> styleTextWithoutMarkupWithoutCaption: aBlRope [
 	aStartIndex := self start + aMarkup size.
 	aStopIndex := self stop - aMarkup size.
 	self utility
-		hideMarkupsInText: aBlRope
+		mayHideMarkupsInText: aBlRope
 		start: self start
-		stop: aStartIndex - 1.
+		stop: aStartIndex - 1
+		forNode: self.
 	self utility
-		hideMarkupsInText: aBlRope
+		mayHideMarkupsInText: aBlRope
 		start: aStopIndex + 1
 		stop: self stop
+		forNode: self
 ]

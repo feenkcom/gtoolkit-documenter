@@ -384,7 +384,7 @@ Gt2ExamplesAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
 	self hasChildren ifFalse: [ ^ self ].
-	self utility hideMarkupsInText: aBlRope forAnnotation: self exceptOfChild: self children first.
+	self utility mayHideMarkupsInText: aBlRope forAnnotation: self exceptOfChild: self children first.
 	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]
 

@@ -16,9 +16,10 @@ PRHeader >> hideMarkupsInText: aBlRope [
 	self level isNumber ifFalse: [ ^ self ].
 	aMarkup := self utility startMarkupFor: self.
 	self utility 
-		hideMarkupsInText: aBlRope 
+		mayHideMarkupsInText: aBlRope 
 		start: self start 
 		stop: self start + (aMarkup size * self level) - 1
+		forNode: self.
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }

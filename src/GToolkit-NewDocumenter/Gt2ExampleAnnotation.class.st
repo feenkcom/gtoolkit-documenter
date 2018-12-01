@@ -69,7 +69,7 @@ Gt2ExampleAnnotation >> codeHeight [
 Gt2ExampleAnnotation >> cursorLeftInText: aBlRope [
 	self isExampleDefined 
 		ifTrue: [ self utility hideMarkupsInText: aBlRope start: self start stop: self stop ]
-		ifFalse: [ (self utility hideAllButLinkInText: aBlRope forAnnotation: self) ifFalse: [ ^ self ] ].
+		ifFalse: [ self utility hideAllButLinkInText: aBlRope forAnnotation: self ].
 ]
 
 { #category : #compatibility }
@@ -282,8 +282,8 @@ Gt2ExampleAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleLinkInText: aBlRope.
 	self registerToSystemChanges.
 	self isExampleDefined 
-		ifTrue: [ self utility hideMarkupsInText: aBlRope start: self start stop: self stop ]
-		ifFalse: [ (self utility hideAllButLinkInText: aBlRope forAnnotation: self) ifFalse: [ ^ self ] ].
+		ifTrue: [ self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self ]
+		ifFalse: [ (self utility mayHideAllButLinkInText: aBlRope forAnnotation: self) ifFalse: [ ^ self ] ].
 	self utility stylePreviewInText: aBlRope forNode: self.
 	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]

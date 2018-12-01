@@ -15,8 +15,8 @@ PRFormat >> hideMarkupsInText: aBlRope [
 	| aMarkup |
 	aMarkup := self utility startMarkupFor: self.
 
-	self utility hideMarkupsInText: aBlRope start: self start stop: self start + aMarkup size - 1.
-	self utility hideMarkupsInText: aBlRope start: self stop - aMarkup size + 1 stop: self stop.
+	self utility mayHideMarkupsInText: aBlRope start: self start stop: self start + aMarkup size - 1 forNode: self.
+	self utility mayHideMarkupsInText: aBlRope start: self stop - aMarkup size + 1 stop: self stop forNode: self.
 
 ]
 

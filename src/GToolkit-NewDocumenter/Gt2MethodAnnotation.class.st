@@ -148,6 +148,6 @@ Gt2MethodAnnotation >> styleTextWithMarkup: aBlRope [
 Gt2MethodAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
-	(self utility hideAllButLinkInText: aBlRope forAnnotation: self) ifFalse: [ ^ self ].
+	(self utility mayHideAllButLinkInText: aBlRope forAnnotation: self) ifFalse: [ ^ self ].
 	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]
