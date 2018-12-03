@@ -1141,7 +1141,7 @@ Gt2DocumentExamples >> examplesUtility [
 { #category : #figure }
 Gt2DocumentExamples >> figureContent [
 	<gtExample>
-	^ (GtIcebergUtility repositoriesLocation / 'feenkcom' / 'gtoolkit-inspector' / 'doc' / 'gt.png') binaryReadStream contents.
+	(GtIcebergUtility repositoriesLocation / 'feenkcom' / 'gtoolkit-inspector' / 'doc' / 'gt.png') binaryReadStreamDo: [ :stream | ^ stream contents ].
 ]
 
 { #category : #figure }
@@ -1443,7 +1443,7 @@ Gt2DocumentExamples >> resourcerWithIcebergFile [
 { #category : #resourcer }
 Gt2DocumentExamples >> resourcerWithInputFile [
 	<gtExample>
-	| aDocument aCollectionOfInputFiles anInputFile |
+	| aDocument aCollectionOfInputFiles |
 	aDocument := self documentWithSelfReferencedInputFile.
 	aCollectionOfInputFiles := aDocument resourcer includeInputFiles; compute.
 	self assert: aCollectionOfInputFiles isCollection.
@@ -1496,6 +1496,42 @@ Gt2DocumentExamples >> ropeHiddenBoldMarkupForNonTechnicalPeople [
 ]
 
 { #category : #writing }
+Gt2DocumentExamples >> writeDocumentWithIcebergFile [
+	<gtExample>
+	
+	| aWriter aXdFile |
+	aWriter := self writer.
+	aXdFile := aWriter
+		streamingStrategy: XdStreamingStrategy bytes;
+		document: self documentWithIcebergFile;
+		write.
+	self assert: aXdFile notNil.
+	self assert: aXdFile manifest notNil.
+	self assert: aXdFile manifest documents size equals: 1.
+	self
+		assert: aXdFile manifest documents first type
+		equals: XdPillarType.
+	self
+		assert: aXdFile manifest documents first components size
+		equals: 1.
+	self
+		assert: aXdFile manifest documents first components first link
+		equals: '1'.
+	self assert: aXdFile manifest attachments size equals: 1.
+	self assert: aXdFile manifest attachments first id equals: '1'.
+	self
+		assert: aXdFile manifest attachments first fileName
+		equals: self demoFileReference entry name.
+	self
+		assert: aXdFile manifest attachments first fileSize
+		equals: self demoFileReference size.
+	self assert: aXdFile streamingStrategy notNil.
+	self assert: aXdFile exists.
+	self assert: aXdFile streamingStrategy zip members size equals: 2.
+	^ aXdFile
+]
+
+{ #category : #writing }
 Gt2DocumentExamples >> writeDocumentWithImages [
 	<gtExample>
 	<noTest>
@@ -1541,7 +1577,7 @@ Gt2DocumentExamples >> writePlainDocument [
 	aWriter := self writer.
 	aXdFile := aWriter
 		streamingStrategy: XdStreamingStrategy bytes;
-		pillar: self demoDocument;
+		document: self demoDocument;
 		write.
 	self assert: aXdFile notNil.
 	self assert: aXdFile manifest notNil.
