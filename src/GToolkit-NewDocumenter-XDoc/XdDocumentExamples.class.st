@@ -22,7 +22,6 @@ XdDocumentExamples >> reader [
 { #category : #writing }
 XdDocumentExamples >> writeDocumentWithImages [
 	<gtExample>
-	<noTest>
 
 	| aWriter aXdFile |
 	aWriter := self writer.
