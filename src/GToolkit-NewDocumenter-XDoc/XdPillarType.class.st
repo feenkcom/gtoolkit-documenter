@@ -1,7 +1,7 @@
 Class {
 	#name : #XdPillarType,
 	#superclass : #XdType,
-	#category : #'GToolkit-NewDocumenter'
+	#category : #'GToolkit-NewDocumenter-XDoc'
 }
 
 { #category : #accessing }
