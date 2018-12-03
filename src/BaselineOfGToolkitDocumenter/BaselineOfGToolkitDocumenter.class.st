@@ -69,7 +69,7 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 				#GToolkitExamples 
 				#GToolkitInspector ) ];
 			package: 'GToolkit-NewDocumenter-XDoc' with: [ spec requires: #( 
-				#GToolkit-NewDocumenter 
+				'GToolkit-NewDocumenter'
 				#GToolkitUtility 
 				#XdocCore ) ]
 	]
