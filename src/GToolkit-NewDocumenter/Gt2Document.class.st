@@ -1,8 +1,8 @@
 Class {
 	#name : #Gt2Document,
 	#superclass : #Object,
-	#traits : 'TBlDebug + GtAnnouncerTrait + TGt2DocumentConstants',
-	#classTraits : 'TBlDebug classTrait + GtAnnouncerTrait classTrait + TGt2DocumentConstants classTrait',
+	#traits : 'TBlDebug + TGtAnnouncer + TGt2DocumentConstants',
+	#classTraits : 'TBlDebug classTrait + TGtAnnouncer classTrait + TGt2DocumentConstants classTrait',
 	#instVars : [
 		'editor',
 		'announcer',
