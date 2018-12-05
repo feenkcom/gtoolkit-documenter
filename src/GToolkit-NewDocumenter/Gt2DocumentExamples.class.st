@@ -350,9 +350,14 @@ Gt2DocumentExamples >> contentWithExternalLink [
 { #category : #figure }
 Gt2DocumentExamples >> contentWithFigure [
 	<gtExample>
-	^ '! Glamorous Toolkit
+	"^ '! Glamorous Toolkit
 	The Glamorous Toolkit (GT) is the moldable integrated development environment.
-	+Glamorous Toolkit>', self figureFileUri, '+'
+	+Glamorous Toolkit>
+	', self figureFileUri, '+'"
+    ^ '! Glamorous Toolkit
+    The Glamorous Toolkit (GT) is the moldable integrated development environment.
+
+    +Glamorous Toolkit>', self figureFileUri, '+'
 
 ]
 
