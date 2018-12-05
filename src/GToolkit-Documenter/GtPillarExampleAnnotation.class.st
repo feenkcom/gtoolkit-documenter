@@ -1,8 +1,8 @@
 Class {
 	#name : #GtPillarExampleAnnotation,
 	#superclass : #PRAbstractAnnotation,
-	#traits : 'GtDocumenterConstantsTrait + GtAssertingTrait + GtAnnouncerTrait + GtPillarNodeWithDocumentTrait',
-	#classTraits : 'GtDocumenterConstantsTrait classTrait + GtAssertingTrait classTrait + GtAnnouncerTrait classTrait + GtPillarNodeWithDocumentTrait classTrait',
+	#traits : 'GtDocumenterConstantsTrait + GtAssertingTrait + TGtAnnouncer + GtPillarNodeWithDocumentTrait',
+	#classTraits : 'GtDocumenterConstantsTrait classTrait + GtAssertingTrait classTrait + TGtAnnouncer classTrait + GtPillarNodeWithDocumentTrait classTrait',
 	#instVars : [
 		'announcer'
 	],

@@ -1,8 +1,8 @@
 Class {
 	#name : #GtEpiceaLog,
 	#superclass : #Object,
-	#traits : 'GtAssertingTrait + GtAnnouncerTrait',
-	#classTraits : 'GtAssertingTrait classTrait + GtAnnouncerTrait classTrait',
+	#traits : 'GtAssertingTrait + TGtAnnouncer',
+	#classTraits : 'GtAssertingTrait classTrait + TGtAnnouncer classTrait',
 	#instVars : [
 		'ombuFile',
 		'errorHandler',
