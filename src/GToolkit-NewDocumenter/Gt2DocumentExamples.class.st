@@ -350,7 +350,14 @@ Gt2DocumentExamples >> contentWithExternalLink [
 { #category : #figure }
 Gt2DocumentExamples >> contentWithFigure [
 	<gtExample>
-	^ '+Figure caption>', self figureFileUri, '+'
+	"^ '! Glamorous Toolkit
+	The Glamorous Toolkit (GT) is the moldable integrated development environment.
+	+Glamorous Toolkit>
+	', self figureFileUri, '+'"
+    ^ '! Glamorous Toolkit
+    The Glamorous Toolkit (GT) is the moldable integrated development environment.
+
+    +Glamorous Toolkit>', self figureFileUri, '+'
 
 ]
 
@@ -1147,7 +1154,7 @@ Gt2DocumentExamples >> figureContent [
 { #category : #figure }
 Gt2DocumentExamples >> figureFileName [
 	<gtExample>
-	^ 'figure.png'
+	^ 'gt-logo.png'
 
 ]
 
