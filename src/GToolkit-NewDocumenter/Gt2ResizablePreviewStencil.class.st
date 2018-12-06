@@ -7,7 +7,7 @@ Class {
 { #category : #'instance creation' }
 Gt2ResizablePreviewStencil >> newContainerFor: aWrappedElement [
 	| aResult |
-	aResult := aWrappedElement asVerticallyResizableCardDo: [ :anElement | 
+	aResult := aWrappedElement asVerticallyResizableDo: [ :anElement | 
 		anElement 
 			constraintsDo: [ :c | 
 				c horizontal matchParent.

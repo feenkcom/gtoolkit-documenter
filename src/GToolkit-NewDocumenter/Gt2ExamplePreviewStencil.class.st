@@ -130,7 +130,7 @@ Gt2ExamplePreviewStencil >> newContainerWithHeight: aHeightNumber [
 	aContainer := BlElement new.
 	^ aContainer
 		layout: BlLinearLayout vertical;
-		look: Gt2PreviewLook + BrShadowLook;
+		look: Gt2PreviewLook;
 		addChild: (BrResizer new
 			target: aContainer;
 			"addEventHandlerOn: BlDoubleClickEvent do: [ :anEvent |

@@ -56,7 +56,7 @@ Gt2PreviewStencil >> newContainerFor: anElement [
 	^ BlElement new
 		addChild: anElement;
 		layout: BlLinearLayout new;
-		look: Gt2PreviewLook + BrShadowLook;
+		look: Gt2PreviewLook;
 		constraintsDo: [ :c | 
 			c horizontal matchParent.
 			c vertical exact: self height ]

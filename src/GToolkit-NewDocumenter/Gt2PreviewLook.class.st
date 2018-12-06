@@ -5,6 +5,13 @@ Class {
 }
 
 { #category : #initialization }
+Gt2PreviewLook >> initialize [
+	super initialize.
+
+	self add: BrShadowLook new
+]
+
+{ #category : #initialization }
 Gt2PreviewLook >> initializeLook [
 	super initializeLook.
 	self widget 
