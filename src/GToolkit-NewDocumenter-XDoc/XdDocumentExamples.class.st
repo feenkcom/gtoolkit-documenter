@@ -58,6 +58,42 @@ XdDocumentExamples >> writeDocumentWithImages [
 ]
 
 { #category : #writing }
+XdDocumentExamples >> writeEmptyDocument [
+	<gtExample>
+	
+	| aWriter aXdFile |
+	aWriter := self writer.
+	aXdFile := aWriter
+		streamingStrategy: XdStreamingStrategy bytes;
+		document: documentExamples emptyDocument;
+		write.
+	self assert: aXdFile notNil.
+	self assert: aXdFile manifest notNil.
+	self assert: aXdFile manifest documents size equals: 1.
+	self
+		assert: aXdFile manifest documents first type
+		equals: XdPillarType.
+	self
+		assert: aXdFile manifest documents first components size
+		equals: 2.
+	self
+		assert: aXdFile manifest documents first components first link
+		equals: '1'.
+	self assert: aXdFile manifest attachments size equals: 2.
+	self assert: aXdFile manifest attachments first id equals: '1'.
+	self
+		assert: aXdFile manifest attachments second fileName
+		equals: 'index.html'.
+	self
+		assert: aXdFile manifest attachments first fileSize
+		equals: 0.
+	self assert: aXdFile streamingStrategy notNil.
+	self assert: aXdFile exists.
+	self assert: aXdFile streamingStrategy zip members size equals: 0.
+	^ aXdFile
+]
+
+{ #category : #writing }
 XdDocumentExamples >> writePlainDocument [
 	<gtExample>
 	

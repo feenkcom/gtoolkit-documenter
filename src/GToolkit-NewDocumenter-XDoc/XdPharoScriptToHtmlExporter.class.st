@@ -12,11 +12,11 @@ XdPharoScriptToHtmlExporter class >> matchesDocumentType: aXdDocumentTypeClass [
 ]
 
 { #category : #actions }
-XdPharoScriptToHtmlExporter >> export [
+XdPharoScriptToHtmlExporter >> export: aStream [
 	"TODO Return a stream"
-	self outputFile ensureDelete writeStreamDo: [ :writeStream | | html |
+	"self outputFile ensureDelete writeStreamDo: [ :writeStream | | html |
 		html := ZnHtmlOutputStream on: writeStream.
-		self writeHtmlToStream: html ].
+		self writeHtmlToStream: html ]."
 ]
 
 { #category : #private }

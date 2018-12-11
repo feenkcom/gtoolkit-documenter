@@ -2,12 +2,10 @@ Extension { #name : #XdWriter }
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
 XdWriter >> document: aDocument [
-	| aDocumentContent resources aDocumentBuilder indexContent|
-	aDocumentContent := aDocument editor text asString.
+	| aDocumentContent resources indexContent|
 	
-	aDocumentBuilder := XdPillarToHtmlExporter new.
-	aDocumentBuilder sourceFile: aDocument storage file.
-	indexContent := aDocumentBuilder export.
+	aDocumentContent := aDocument text asString.
+	indexContent := XdPillarToHtmlExporter new export: aDocumentContent.
 
 	self
 		documentType: XdPillarType;
