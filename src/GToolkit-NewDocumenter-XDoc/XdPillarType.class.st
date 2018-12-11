@@ -15,5 +15,5 @@ XdPillarType class >> matchesMimeType: aZnMimeType [
 XdPillarType class >> typeString [
 	"Return a unique string that represents the type"
 	<return: #String>
-	^ 'pharo-script'
+	^ 'pillar'
 ]

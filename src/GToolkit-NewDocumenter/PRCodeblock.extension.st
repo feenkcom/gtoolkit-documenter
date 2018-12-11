@@ -70,6 +70,27 @@ PRCodeblock >> cachedSymbols: aGt2CodeblockSymbols [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> cursorLeftInText: aBlRope [
+	| aStopEndMarkup |
+	self utility 
+		mayHideMarkupsInText: aBlRope 
+		start: self start 
+		stop: (self parameterStopPositionInText: aBlRope) 
+		forNode: self.
+	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
+	self utility 
+		mayHideMarkupsInText: aBlRope 
+		start: aStopEndMarkup - self endMarkupSize 
+		stop: aStopEndMarkup 
+		forNode: self
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRCodeblock >> cursorNearbyInText: aBlRope [
+	self utility cursorNeabyInText: aBlRope forNode: self
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> endMarkup [
 	^ PRPillarGrammar endMarkups at: self class
 ]
@@ -297,16 +318,6 @@ PRCodeblock >> stopEndMarkupInText: aBlRope [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRCodeblock >> styleBottomLineInText: aBlRope [
-	| aStopEndMarkup |
-	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
-	(aBlRope
-		from: aStopEndMarkup - self endMarkupSize
-		to: aStopEndMarkup)
-			attribute: self utility horizontalLineAttribute
-]
-
-{ #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> styleClosingBracketsInText: aBlRope [
 	| aStopEndMarkup |
 	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
@@ -338,23 +349,6 @@ PRCodeblock >> styleRunButtonInText: aBlRope [
 	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
 	(aBlRope from: aStopEndMarkup - self endMarkupSize to: aStopEndMarkup)
 		attribute: self newRunButtonAttribute
-]
-
-{ #category : #'*GToolkit-NewDocumenter' }
-PRCodeblock >> styleRunButtonWithHorizontalLineInText: aBlRope [
-	| aStopEndMarkup aStartEndMarkup aLineStop |
-	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
-	aStartEndMarkup := aStopEndMarkup - self endMarkupSize.
-	(aBlRope from: aStartEndMarkup to: aStartEndMarkup + 1)
-		attribute: self newRunButtonAttribute beReplace.
-	aLineStop := self hasResult
-		ifTrue: [ aStopEndMarkup - 1 ]
-		ifFalse: [ aStopEndMarkup ].
-	(aBlRope from: aStartEndMarkup + 2 to: aLineStop)
-		attribute: self utility horizontalLineAttribute.
-	self hasResult ifFalse: [ ^ self ].
-	(aBlRope from: aStopEndMarkup to: aStopEndMarkup)
-		attributes: (self resultPreviewAttributes do: #beReplace).
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
@@ -396,21 +390,19 @@ PRCodeblock >> styleTextWithMarkup: aBlRope [
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> styleTextWithoutMarkup: aBlRope [
+	| aStopEndMarkup |
+	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
-	self styleTopLineInText: aBlRope.
-	self hasSourceCode ifFalse: [ ^ self styleBottomLineInText: aBlRope ].
-	self gtIsSmalltalkLanguage ifFalse: [ 
-		self styleBottomLineInText: aBlRope.
-		^ self styleScriptInText: aBlRope ].
-	self styleRunButtonWithHorizontalLineInText: aBlRope.
-	self styleSmalltalkInText: aBlRope.
-	self parsePharoCode.
-]
-
-{ #category : #'*GToolkit-NewDocumenter' }
-PRCodeblock >> styleTopLineInText: aBlRope [
-	(aBlRope
-		from: self start
-		to: (self parameterStopPositionInText: aBlRope))
-			attribute: self utility horizontalLineAttribute
+	self utility 
+		mayHideMarkupsInText: aBlRope 
+		start: self start 
+		stop: (self parameterStopPositionInText: aBlRope) 
+		forNode: self.
+	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
+	self utility 
+		mayHideMarkupsInText: aBlRope 
+		start: aStopEndMarkup - self endMarkupSize 
+		stop: aStopEndMarkup 
+		forNode: self.
+	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]

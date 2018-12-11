@@ -12,17 +12,9 @@ XdPillarToHtmlExporter class >> matchesDocumentType: aXdDocumentTypeClass [
 ]
 
 { #category : #actions }
-XdPillarToHtmlExporter >> export [
-	| encoding document writer |
-	encoding := [ self sourceFile binaryReadStreamDo: [ :aStream | 
-			(ZnCharacterEncoder detectEncoding: aStream upToEnd) identifier ] ]
-		on: ZnCharacterEncodingError
-		do: [ nil ].
-	self sourceFile binaryReadStreamDo: [ :aStream | | parser |
-		parser := PRPillarParser new.
-		parser sourceFile: self sourceFile.
-		document := parser parse: (ZnCharacterReadStream on: aStream encoding: encoding) upToEnd ].
+XdPillarToHtmlExporter >> export: aStream [
+	| document |
 	
-	writer := PRHTMLWriter new.
-	^ writer write: document.
+	document := PRPillarParser new parse: aStream.
+	^ PRHTMLWriter new write: document.
 ]

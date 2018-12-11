@@ -12,10 +12,10 @@ XdImageToHtmlExporter class >> matchesDocumentType: aXdDocumentTypeClass [
 ]
 
 { #category : #actions }
-XdImageToHtmlExporter >> export [
+XdImageToHtmlExporter >> export: aStream [
 	"TODO Return a stream"
-	self outputFile ensureDelete writeStreamDo: [ :writeStream |
-		self writeHtmlToStream: writeStream ].
+	"self outputFile ensureDelete writeStreamDo: [ :writeStream |
+		self writeHtmlToStream: writeStream ]."
 ]
 
 { #category : #private }
