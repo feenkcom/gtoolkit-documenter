@@ -33,7 +33,7 @@ GtExamplesStyler class >> editorElementOnSourceCode: aString inClass: aClass [
 GtExamplesStyler >> extraStyle: aText ast: ast [
 	| selfSendsExamples |
 
-	selfSendsExamples := ast allChildren select: [ :each | 
+	selfSendsExamples := ast allChildren asSet asArray select: [ :each | 
 		each isMessage and: [ 
 			each isSelfSend and: [ 
 				each isUnary and: [ 
