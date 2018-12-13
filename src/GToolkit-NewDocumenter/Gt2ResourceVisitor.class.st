@@ -11,7 +11,8 @@ Class {
 		'maxDepth',
 		'documentResource',
 		'visitedDocumentResources',
-		'includeClasses'
+		'includeClasses',
+		'includeExampleAnnotations'
 	],
 	#category : #'GToolkit-NewDocumenter-Resourcer'
 }
