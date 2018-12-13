@@ -21,56 +21,42 @@ Class {
 { #category : #baseline }
 BaselineOfGToolkitDocumenter >> baseline: spec [
 	<baseline>
-	spec for: #common do: [ 
-		spec
-			baseline: 'GToolkitCompleter' with: [ spec
-				repository: 'github://feenkcom/gtoolkit-completer/src' ];
-			baseline: 'GToolkitCoder' with: [ spec
-				repository: 'github://feenkcom/gtoolkit-coder/src' ];
-			baseline: 'GToolkitUtility' with: [ spec 
-				repository: 'github://feenkcom/gtoolkit-utility/src' ];
-			baseline: 'GToolkitVariableBindings' with: [ spec 
-				repository: 'github://feenkcom/gtoolkit-playground/src' ];
-			baseline: 'GToolkitVisualizerPhlow' with: [ 
+	spec for: #'common' do: [
+		spec 
+			baseline: 'GToolkitCompleter' with: [
+				spec repository: 'github://feenkcom/gtoolkit-completer/src' ];
+			baseline: 'GToolkitCoder' with: [
+				spec repository: 'github://feenkcom/gtoolkit-coder/src' ];
+			baseline: 'GToolkitUtility' with: [
+				spec repository: 'github://feenkcom/gtoolkit-utility/src' ];
+			baseline: 'GToolkitVariableBindings' with: [
+				spec repository: 'github://feenkcom/gtoolkit-playground/src' ];
+			baseline: 'GToolkitVisualizerPhlow' with: [
 				spec repository: 'github://feenkcom/gtoolkit-visualizer/src' ];
-			baseline: 'GToolkitExamples' with: [ spec 
-				repository: 'github://feenkcom/gtoolkit-examples/src' ];
-			baseline: 'GToolkitInspector' with: [ spec
-				repository: 'github://feenkcom/gtoolkit-inspector/src' ];
-			baseline: 'PillarExporter' with: [ spec
-				repository: 'github://feenkcom/pillar:feenk/src' ];
-			baseline: 'DeepTraverser' with: [ spec
-				repository: 'github://feenkcom/DeepTraverser/src' ];
-			baseline: 'XdocCore' with: [ spec 
-				repository: 'github://feenkcom/xdoc/src' ];
-			package: 'GToolkit-Documenter' with: [ spec requires: #( 
-				#PillarExporter 
-				#GToolkitCoder
-				#GToolkitCompleter
-				#GToolkitUtility 
-				#GToolkitVariableBindings
-				#GToolkitExamples 
-				#GToolkitInspector ) ];
-			package: 'GToolkit-Documenter-Exporter' with: [ spec requires: #( 
-				#PillarExporter #GToolkitUtility 'GToolkit-Documenter' ) ];
-			package: 'GToolkit-Documenter-Exporter-Tests' with: [ spec requires: #( 
-				'GToolkit-Documenter-Exporter' ) ];
-			package: 'GToolkit-Documenter-Epicea' with: [ spec requires: #(
-				 'GToolkitUtility' 'GToolkit-Documenter' 'GToolkit-Documenter-Exporter' ) ];
-			package: 'GToolkit-Documenter-Examples' with: [ spec requires: #( 
-				'GToolkitExamples' 'GToolkit-Documenter' 'GToolkit-Documenter-Exporter'
-				'GToolkit-Documenter-Epicea' ) ];
-			package: 'GToolkit-NewDocumenter' with: [ spec requires: #( 
-				#PillarExporter 
-				#GToolkitCoder
-				#GToolkitCompleter
-				#GToolkitUtility 
-				#GToolkitVariableBindings
-				#GToolkitExamples 
-				#GToolkitInspector ) ];
-			package: 'GToolkit-NewDocumenter-XDoc' with: [ spec requires: #( 
-				'GToolkit-NewDocumenter'
-				#GToolkitUtility 
-				#XdocCore ) ]
-	]
+			baseline: 'GToolkitExamples' with: [
+				spec repository: 'github://feenkcom/gtoolkit-examples/src' ];
+			baseline: 'GToolkitInspector' with: [
+				spec repository: 'github://feenkcom/gtoolkit-inspector/src' ];
+			baseline: 'PillarExporter' with: [
+				spec repository: 'github://feenkcom/pillar:feenk/src' ];
+			baseline: 'DeepTraverser' with: [
+				spec repository: 'github://feenkcom/DeepTraverser/src' ];
+			baseline: 'XdocCore' with: [
+				spec repository: 'github://feenkcom/xdoc/src' ].
+		spec 
+			package: 'GToolkit-Documenter' with: [
+				spec requires: #(#PillarExporter #GToolkitCoder #GToolkitCompleter #GToolkitUtility #GToolkitVariableBindings #GToolkitExamples #GToolkitInspector ). ];
+			package: 'GToolkit-Documenter-Exporter' with: [
+				spec requires: #(#PillarExporter #GToolkitUtility 'GToolkit-Documenter' ). ];
+			package: 'GToolkit-Documenter-Exporter-Tests' with: [
+				spec requires: #('GToolkit-Documenter-Exporter' ). ];
+			package: 'GToolkit-Documenter-Epicea' with: [
+				spec requires: #('GToolkitUtility' 'GToolkit-Documenter' 'GToolkit-Documenter-Exporter' ). ];
+			package: 'GToolkit-Documenter-Examples' with: [
+				spec requires: #('GToolkitExamples' 'GToolkit-Documenter' 'GToolkit-Documenter-Exporter' 'GToolkit-Documenter-Epicea' ). ];
+			package: 'GToolkit-NewDocumenter' with: [
+				spec requires: #(#PillarExporter #GToolkitCoder #GToolkitCompleter #GToolkitUtility #GToolkitVariableBindings #GToolkitExamples #GToolkitInspector ). ];
+			package: 'GToolkit-NewDocumenter-XDoc' with: [
+				spec requires: #('GToolkit-NewDocumenter' #GToolkitUtility #XdocCore ). ]. ].
+
 ]
