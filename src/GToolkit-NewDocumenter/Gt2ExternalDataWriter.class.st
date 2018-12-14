@@ -11,6 +11,17 @@ Class {
 	#category : #'GToolkit-NewDocumenter-Utility'
 }
 
+{ #category : #initialization }
+Gt2ExternalDataWriter class >> initialCounterValue [
+	^ 999
+]
+
+{ #category : #enumerating }
+Gt2ExternalDataWriter >> allFiles [
+	<return: #Array of: #FileReference>
+	^ self rootDirectory allFiles
+]
+
 { #category : #accessing }
 Gt2ExternalDataWriter >> exampleResultReferenceFor: aGt2ExampleAnnotation [ 
 	<return: #String>
@@ -42,20 +53,31 @@ Gt2ExternalDataWriter >> exportExampleResultOf: aGt2ExampleAnnotation to: aRelat
 
 	aFileReference ensureDelete.
 	aFileReference parent ensureCreateDirectory.
-	self halt.
-	BlSvgExporter new element: aContainer; fileName: aFileReference; export.
+	
+	BlPngExporter new element: aContainer; fileName: aFileReference; export.
+]
+
+{ #category : #initialization }
+Gt2ExternalDataWriter >> initialCounterValue [
+	^ self class initialCounterValue
 ]
 
 { #category : #initialization }
 Gt2ExternalDataWriter >> initialize [
 	super initialize.
 	associatedNames := Dictionary new.
-	counter := 999.
-	memoryStore := FileSystem memory.
+	counter := self initialCounterValue.
+	memoryStore := FileSystem memory
 ]
 
 { #category : #private }
 Gt2ExternalDataWriter >> nextNumber [
 	counter := counter + 1.
 	^ counter
+]
+
+{ #category : #accessing }
+Gt2ExternalDataWriter >> rootDirectory [
+	<return: #FileReference>
+	^ memoryStore root
 ]

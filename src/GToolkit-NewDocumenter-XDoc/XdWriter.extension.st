@@ -34,11 +34,24 @@ XdWriter >> documentHtml: aDocument [
 		documentType: XdHtmlType;
 		attachment: self constants htmlIndexFile text: anHtmlContent.
 		
+	"Existing images"
 	aResources := aDocument resourcer includeFigures; compute.
 	aResources do: [ :eachResource | 
 		eachResource resource binaryReadStreamDo: [ :stream | 
 			self 
-				attachment: (GtFileUtility fileNameOf: eachResource resource relativeTo: aDocument  rootDirectory ) 
+				attachment: (GtFileUtility 
+					fileNameOf: eachResource resource 
+					relativeTo: aDocument rootDirectory) 
 				stream: stream 
 				size: eachResource resource size ]].
+	
+	"Crated images"
+	aDataWriter allFiles do: [ :eachFile | 
+		eachFile binaryReadStreamDo: [ :aStream | 
+			self 
+				attachment: (GtFileUtility 
+					fileNameOf: eachFile 
+					relativeTo: aDataWriter rootDirectory)
+				stream: aStream
+				size: eachFile size ] ]
 ]

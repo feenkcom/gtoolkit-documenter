@@ -1,6 +1,8 @@
 Class {
 	#name : #XdDocumentExamples,
 	#superclass : #Object,
+	#traits : 'TGt2DocumentConstants',
+	#classTraits : 'TGt2DocumentConstants classTrait',
 	#instVars : [
 		'documentExamples'
 	],
@@ -61,7 +63,7 @@ XdDocumentExamples >> writeDocumentWithExamples [
 
 { #category : #example }
 XdDocumentExamples >> writeDocumentWithExistingExample [
-	<gtExample> <noTest>
+	<gtExample>
 	
 	| aWriter aXdFile aDocument |
 	aDocument := documentExamples documentWithExistingExample.
@@ -116,7 +118,9 @@ XdDocumentExamples >> writeDocumentWithExistingExample [
 	self assert: aXdFile manifest attachments third id equals: '3'.
 	self
 		assert: aXdFile manifest attachments third fileName
-		equals: 'gt-figures/file.svg'.
+		equals: self constants exportedResultsDirectoryName, '/', 
+			(Gt2ExternalDataWriter initialCounterValue + 1) asString, '.', 
+			self constants exportedResultsExtension.
 	self assert: aXdFile manifest attachments third fileSize isZero not.
 
 	self assert: aXdFile streamingStrategy notNil.
