@@ -1,19 +1,19 @@
 Class {
-	#name : #XdImageType,
+	#name : #XdDocumenterType,
 	#superclass : #XdType,
-	#category : #'GToolkit-NewDocumenter-XDoc'
+	#category : #'GToolkit-NewDocumenter-XDoc-Model'
 }
 
 { #category : #testing }
-XdImageType class >> matchesMimeType: aZnMimeType [
+XdDocumenterType class >> matchesMimeType: aZnMimeType [
 	"Return true if the document type is equivalent to the Zinc MIME type"
 	<return: #Boolean>
-	^ aZnMimeType matches: (ZnMimeType main: 'image' sub: '*')
+	^ aZnMimeType matches: GtFilePillarMimeTypeResolver mimeType
 ]
 
 { #category : #accessing }
-XdImageType class >> typeString [
+XdDocumenterType class >> typeString [
 	"Return a unique string that represents the type"
 	<return: #String>
-	^ 'image'
+	^ 'documenter'
 ]

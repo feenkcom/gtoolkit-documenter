@@ -8,6 +8,13 @@ Class {
 }
 
 { #category : #accessing }
+Gt2FileReferenceStorageStrategy >> basename [
+	"Return a string representing the document filename"
+	<return: #String>
+	^ self name
+]
+
+{ #category : #accessing }
 Gt2FileReferenceStorageStrategy >> evaluationReceiver [
 	"Return an object that is used as a receiver (self) in a codeblock (code snippet) evalution"
 	<return: #Object>

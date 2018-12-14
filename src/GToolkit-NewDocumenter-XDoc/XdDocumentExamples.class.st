@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'documentExamples'
 	],
-	#category : #'GToolkit-NewDocumenter-XDoc'
+	#category : #'GToolkit-NewDocumenter-XDoc-Examples'
 }
 
 { #category : #initialization }
@@ -114,7 +114,7 @@ XdDocumentExamples >> writeDocumentWithImages [
 	self assert: aXdFile manifest documents size equals: 1.
 	self
 		assert: aXdFile manifest documents first type
-		equals: XdPillarType.
+		equals: XdDocumenterType.
 	self
 		assert: aXdFile manifest documents first components size
 		equals: 3.
@@ -152,7 +152,7 @@ XdDocumentExamples >> writeEmptyDocument [
 	self assert: aXdFile manifest documents size equals: 1.
 	self
 		assert: aXdFile manifest documents first type
-		equals: XdPillarType.
+		equals: XdDocumenterType.
 	self
 		assert: aXdFile manifest documents first components size
 		equals: 2.
@@ -188,7 +188,7 @@ XdDocumentExamples >> writePlainDocument [
 	self assert: aXdFile manifest documents size equals: 1.
 	self
 		assert: aXdFile manifest documents first type
-		equals: XdPillarType.
+		equals: XdDocumenterType.
 	self
 		assert: aXdFile manifest documents first components size
 		equals: 2.

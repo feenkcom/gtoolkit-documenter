@@ -107,6 +107,12 @@ Gt2Document >> asElementWithoutSaveAction [
 	^ anElement
 ]
 
+{ #category : #accessing }
+Gt2Document >> basename [
+	<return: #String>
+	^ self storage basename
+]
+
 { #category : #cache }
 Gt2Document >> cache [
 	"It is not recommended to use this method outside of this object.
@@ -202,6 +208,7 @@ Gt2Document >> gtResourcesFor: aView [
 	<gtView>
 	^ aView mondrian
 		title: 'Resources';
+		priority: 10;
 		painting: [ :aMondrian | 
 			| aResource |
 			aResource := self resourcer includeDocuments; allDepth; get.
@@ -240,6 +247,7 @@ Gt2Document >> gtTextFor: aView [
 	self editor ifNil: [ ^ aView empty ].
 	^ aView explicit
 		title: 'Document';
+		priority: 1;
 		stencil: [ self asElementWithoutSaveAction ];
 		actionButtonIcon: BrGlamorousIcons tree 
 			action: [ :aWidget | 
@@ -391,7 +399,6 @@ Gt2Document >> strategy: aGt2StorageStrategy [
 { #category : #actions }
 Gt2Document >> styleTextRequest [
 	styleTextProcess request.
-	"self editor styleText."
 ]
 
 { #category : #subscriptions }

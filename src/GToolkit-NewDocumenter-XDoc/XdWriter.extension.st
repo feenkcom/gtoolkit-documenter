@@ -8,8 +8,8 @@ XdWriter >> document: aDocument [
 	indexContent := XdPillarToHtmlExporter new export: aDocumentContent.
 
 	self
-		documentType: XdPillarType;
-		attachment: aDocument name text: aDocumentContent;
+		documentType: XdDocumenterType;
+		attachment: aDocument basename text: aDocumentContent;
 		attachment: 'index.html' text: indexContent.
 		
 	resources := aDocument resourcer includeFigures; allDepth; compute.

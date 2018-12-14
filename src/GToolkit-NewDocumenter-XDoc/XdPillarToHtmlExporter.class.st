@@ -8,7 +8,7 @@ Class {
 XdPillarToHtmlExporter class >> matchesDocumentType: aXdDocumentTypeClass [ 
 	"Return true if an exporter class supports a giver document type"
 	<return: #Boolean>
-	^ aXdDocumentTypeClass = XdPillarType
+	^ aXdDocumentTypeClass = XdDocumenterType
 ]
 
 { #category : #actions }

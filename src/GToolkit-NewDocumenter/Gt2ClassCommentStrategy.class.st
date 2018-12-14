@@ -8,6 +8,13 @@ Class {
 }
 
 { #category : #accessing }
+Gt2ClassCommentStrategy >> basename [
+	"Return a string representing the document filename"
+	<return: #String>
+	^ self name, '.', GtFileUtilityConstants pillarExtension
+]
+
+{ #category : #accessing }
 Gt2ClassCommentStrategy >> classToComment [
 	^ classRingDefinition
 ]
