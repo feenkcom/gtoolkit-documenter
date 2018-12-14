@@ -4,21 +4,95 @@ Class {
 	#traits : 'TGt2DocumentConstants',
 	#classTraits : 'TGt2DocumentConstants classTrait',
 	#instVars : [
-		'documentExamples'
+		'documentExamples',
+		'xdocExamples'
 	],
 	#category : #'GToolkit-NewDocumenter-XDoc-Examples'
 }
+
+{ #category : #accessing }
+XdDocumentExamples >> inMemoryWriter [
+	<gtExample>
+	^ xdocExamples inMemoryWriter
+]
 
 { #category : #initialization }
 XdDocumentExamples >> initialize [
 	super initialize.
 	documentExamples := Gt2DocumentExamples new.
+	xdocExamples := XdReaderWriterExamples new.
 ]
 
 { #category : #options }
 XdDocumentExamples >> reader [
 	<gtExample>
-	^ XdReaderWriterExamples new reader
+	^ xdocExamples reader
+]
+
+{ #category : #example }
+XdDocumentExamples >> writeDocumentWithClassDefinitionChanges [
+	<gtExample>
+	<noTest>
+	| aXdFile aDocument |
+	aDocument := documentExamples documentWithClassDefinitionChanges.
+	aXdFile := self inMemoryWriter
+		document: aDocument;
+		documentHtml: aDocument;
+		write.
+	self assert: aXdFile notNil.
+	self assert: aXdFile manifest notNil.
+	"Pillar raw file (Documenter type)"
+	self assert: aXdFile manifest documents size equals: 2.
+	self
+		assert: aXdFile manifest documents first type
+		equals: XdDocumenterType.
+	self
+		assert: aXdFile manifest documents first components size
+		equals: 1.
+	self
+		assert: aXdFile manifest documents first components first link
+		equals: '1'.
+	"HTML export"
+	self
+		assert: aXdFile manifest documents second type
+		equals: XdHtmlType.
+	self
+		assert: aXdFile manifest documents second components size
+		equals: 2.
+	self
+		assert: aXdFile manifest documents second components first link
+		equals: '2'.
+	self
+		assert: aXdFile manifest documents second components second link
+		equals: '3'.
+	"Pillar source file"
+	self assert: aXdFile manifest attachments size equals: 3.
+	self assert: aXdFile manifest attachments first id equals: '1'.
+	self
+		assert: aXdFile manifest attachments first fileName
+		equals: aDocument basename.
+	self
+		assert: aXdFile manifest attachments first fileSize
+		equals: aDocument text size.
+	"HTML file"
+	self assert: aXdFile manifest attachments second id equals: '2'.
+	self
+		assert: aXdFile manifest attachments second fileName
+		equals: 'index.html'.
+	self assert: aXdFile manifest attachments first fileSize isZero not.
+	"Example SVG file"
+	self assert: aXdFile manifest attachments third id equals: '3'.
+	self
+		assert: aXdFile manifest attachments third fileName
+		equals: self constants exportedResultsDirectoryName, '/', 
+			(Gt2ExternalDataWriter initialCounterValue + 1) asString, '.', 
+			self constants exportedResultsExtension.
+	self assert: aXdFile manifest attachments third fileSize isZero not.
+
+	self assert: aXdFile streamingStrategy notNil.
+	self assert: aXdFile exists.
+	self assert: aXdFile streamingStrategy zip members size equals: 4.
+	^ aXdFile
 ]
 
 { #category : #examples }
@@ -65,11 +139,9 @@ XdDocumentExamples >> writeDocumentWithExamples [
 XdDocumentExamples >> writeDocumentWithExistingExample [
 	<gtExample>
 	
-	| aWriter aXdFile aDocument |
+	| aXdFile aDocument |
 	aDocument := documentExamples documentWithExistingExample.
-	aWriter := self writer.
-	aXdFile := aWriter
-		streamingStrategy: XdStreamingStrategy bytes;
+	aXdFile := self inMemoryWriter
 		document: aDocument;
 		documentHtml: aDocument;
 		write.
@@ -246,5 +318,5 @@ XdDocumentExamples >> writePlainDocument [
 { #category : #accessing }
 XdDocumentExamples >> writer [
 	<gtExample>
-	^ XdReaderWriterExamples new writer
+	^ xdocExamples writer
 ]
