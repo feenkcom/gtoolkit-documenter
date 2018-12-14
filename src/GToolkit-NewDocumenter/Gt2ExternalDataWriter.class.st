@@ -47,14 +47,14 @@ Gt2ExternalDataWriter >> exportExampleResultOf: aGt2ExampleAnnotation to: aRelat
 			aView := GtPhlowView empty 
 				on: anExampleReturnValue 
 				perform: aGt2ExampleAnnotation previewShowSelector.
-			aView asElementDo: [ :anElement | aContainer addChild: anElement ] ].
+			aView asElementDo: [ :anElement | aContainer addChild: anElement ].
 	
-	aContainer forceLayout.
+			aContainer forceLayout.
 
-	aFileReference ensureDelete.
-	aFileReference parent ensureCreateDirectory.
-	
-	BlPngExporter new element: aContainer; fileName: aFileReference; export.
+			aFileReference ensureDelete.
+			aFileReference parent ensureCreateDirectory.
+			
+			BlPngExporter new element: aContainer; fileName: aFileReference; export ].
 ]
 
 { #category : #initialization }
