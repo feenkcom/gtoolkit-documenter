@@ -344,7 +344,7 @@ Gt2Document >> parse [
 	"Message #isPetit2Failure helps to distinguish between a parsed document or a parser error"
 	<return: #PRDocument or: #PP2Failure>
 	^ PRValidation beSilentDuring: [ 
-		self pillarParser parse: self text asString ].
+		self pillarParser parse: self string ].
 ]
 
 { #category : #utility }
@@ -394,6 +394,12 @@ Gt2Document >> strategy: aGt2StorageStrategy [
 		assert: [ aGt2StorageStrategy notNil ]
 		description: [ 'Storage strategy must be non-nil' ].
 	storageStrategy := aGt2StorageStrategy
+]
+
+{ #category : #accessing }
+Gt2Document >> string [
+	<return: #String>
+	^ self text asString
 ]
 
 { #category : #actions }

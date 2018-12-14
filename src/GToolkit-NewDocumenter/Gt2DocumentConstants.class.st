@@ -145,6 +145,24 @@ Gt2DocumentConstants class >> expandedParameterName [
 	^ #expanded
 ]
 
+{ #category : #files }
+Gt2DocumentConstants class >> exportedResultsDirectoryName [
+	<return: #String>
+	^ 'gt-figures'
+]
+
+{ #category : #files }
+Gt2DocumentConstants class >> exportedResultsDirectoryPath [
+	<return: #RelativePath>
+	^ Path * self exportedResultsDirectoryName
+]
+
+{ #category : #files }
+Gt2DocumentConstants class >> exportedResultsExtension [
+	<return: #String>
+	^ 'svg'
+]
+
 { #category : #text }
 Gt2DocumentConstants class >> headerFontSize [
 	^ 27
