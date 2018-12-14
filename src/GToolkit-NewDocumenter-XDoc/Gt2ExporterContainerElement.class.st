@@ -1,7 +1,7 @@
 Class {
 	#name : #Gt2ExporterContainerElement,
 	#superclass : #BlElement,
-	#category : #'GToolkit-NewDocumenter-Utility'
+	#category : #'GToolkit-NewDocumenter-XDoc-Brick'
 }
 
 { #category : #layout }

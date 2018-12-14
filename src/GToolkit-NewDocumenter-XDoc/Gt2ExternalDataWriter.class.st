@@ -8,7 +8,7 @@ Class {
 		'counter',
 		'memoryStore'
 	],
-	#category : #'GToolkit-NewDocumenter-Utility'
+	#category : #'GToolkit-NewDocumenter-XDoc-Utility'
 }
 
 { #category : #initialization }
