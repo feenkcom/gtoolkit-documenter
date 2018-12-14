@@ -32,7 +32,7 @@ PRHTMLWriter >> visitGt2ExampleAnnotation: aGt2ExampleAnnotation [
 									aGt2ExampleAnnotation hasLabel
 										ifTrue: [ 
 											self createAnchorWith: aGt2ExampleAnnotation label.
-											"self writer writeCounterForScript: aGt2ExampleAnnotation" ].
+											self writeCounterForScript: aGt2ExampleAnnotation ].
 									aGt2ExampleAnnotation hasCaption
 										ifTrue: [ self visitAll: aGt2ExampleAnnotation caption children ] ] ].
 	canvas newLine
