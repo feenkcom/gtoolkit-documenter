@@ -8,7 +8,7 @@ XdWriter >> document: aDocument [
 		documentType: XdDocumenterType;
 		attachment: aDocument basename text: aDocument string.
 		
-	aResources := aDocument resourcer includeFigures; compute.
+	aResources := aDocument resourcer includeFigures; includeChanges; compute.
 	aResources do: [ :eachResource | 
 		eachResource resource binaryReadStreamDo: [ :stream | 
 			self 
@@ -27,7 +27,9 @@ XdWriter >> documentHtml: aDocument [
 		description: [ 'Documenter text cannot be parsed' ].
 	aDataWriter := Gt2ExternalDataWriter new.
 	aHtmlWriter := PRHTMLWriter new.
-	aHtmlWriter configuration gtDataWriter: aDataWriter.
+	aHtmlWriter configuration 
+		gtDataWriter: aDataWriter;
+		gtDocument: aDocument.
 	anHtmlContent :=  aHtmlWriter write: aPRDocument.
 
 	self

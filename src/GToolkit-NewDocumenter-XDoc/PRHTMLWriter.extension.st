@@ -43,6 +43,22 @@ PRHTMLWriter >> gtWriteExampleResult: aGt2ExampleAnnotation [
 ]
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
+PRHTMLWriter >> visitGt2ChangesAnnotation: aGt2ChangesAnnotation [
+	| aContent |
+	aGt2ChangesAnnotation gtDocument: self configuration gtDocument.
+	aContent := aGt2ChangesAnnotation cachedChanges tutorialStateRope asString.
+	canvas tag
+		name: 'figure';
+		parameterAt: 'class' put: 'changes';
+		with: [ 
+					canvas tag
+						name: 'pre';
+						with: [ canvas lines: aContent ].
+				].
+	canvas newLine
+]
+
+{ #category : #'*GToolkit-NewDocumenter-XDoc' }
 PRHTMLWriter >> visitGt2ClassAnnotation: aGt2ClassAnnotation [ 
 	canvas tag 
 		name: 'code';

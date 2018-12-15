@@ -29,10 +29,9 @@ XdDocumentExamples >> reader [
 	^ xdocExamples reader
 ]
 
-{ #category : #example }
+{ #category : #changes }
 XdDocumentExamples >> writeDocumentWithClassDefinitionChanges [
 	<gtExample>
-	<noTest>
 	| aXdFile aDocument |
 	aDocument := documentExamples documentWithClassDefinitionChanges.
 	aXdFile := self inMemoryWriter
@@ -48,22 +47,22 @@ XdDocumentExamples >> writeDocumentWithClassDefinitionChanges [
 		equals: XdDocumenterType.
 	self
 		assert: aXdFile manifest documents first components size
-		equals: 1.
+		equals: 2.
 	self
 		assert: aXdFile manifest documents first components first link
 		equals: '1'.
+	self
+		assert: aXdFile manifest documents first components second link
+		equals: '2'.
 	"HTML export"
 	self
 		assert: aXdFile manifest documents second type
 		equals: XdHtmlType.
 	self
 		assert: aXdFile manifest documents second components size
-		equals: 2.
+		equals: 1.
 	self
 		assert: aXdFile manifest documents second components first link
-		equals: '2'.
-	self
-		assert: aXdFile manifest documents second components second link
 		equals: '3'.
 	"Pillar source file"
 	self assert: aXdFile manifest attachments size equals: 3.
@@ -74,22 +73,21 @@ XdDocumentExamples >> writeDocumentWithClassDefinitionChanges [
 	self
 		assert: aXdFile manifest attachments first fileSize
 		equals: aDocument text size.
-	"HTML file"
+	"Changes file"
 	self assert: aXdFile manifest attachments second id equals: '2'.
 	self
 		assert: aXdFile manifest attachments second fileName
-		equals: 'index.html'.
-	self assert: aXdFile manifest attachments first fileSize isZero not.
-	"Example SVG file"
+		equals: documentExamples changesDirectoryName, '/', documentExamples changesFileNameWithClassDefinition.
+	self
+		assert: aXdFile manifest attachments second fileSize
+		equals: documentExamples changesFileReferenceWithClassDefinition size.
+	"HTML file"
 	self assert: aXdFile manifest attachments third id equals: '3'.
 	self
 		assert: aXdFile manifest attachments third fileName
-		equals: self constants exportedResultsDirectoryName, '/', 
-			(Gt2ExternalDataWriter initialCounterValue + 1) asString, '.', 
-			self constants exportedResultsExtension.
+		equals: 'index.html'.
 	self assert: aXdFile manifest attachments third fileSize isZero not.
 
-	self assert: aXdFile streamingStrategy notNil.
 	self assert: aXdFile exists.
 	self assert: aXdFile streamingStrategy zip members size equals: 4.
 	^ aXdFile

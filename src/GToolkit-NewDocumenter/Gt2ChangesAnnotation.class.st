@@ -19,6 +19,11 @@ Gt2ChangesAnnotation class >> tag [
 	^ self constants changesAnnotationName
 ]
 
+{ #category : #visitor }
+Gt2ChangesAnnotation >> accept: aVisitor [
+	^ aVisitor visitGt2ChangesAnnotation: self
+]
+
 { #category : #'private - cache' }
 Gt2ChangesAnnotation >> annotationCacheValueClass [
 	^ Gt2ChangesAnnotationCacheValue

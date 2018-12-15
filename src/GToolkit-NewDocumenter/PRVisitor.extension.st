@@ -1,6 +1,11 @@
 Extension { #name : #PRVisitor }
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRVisitor >> visitGt2ChangesAnnotation: aGt2ChangesAnnotation [
+	self visitAnnotation: aGt2ChangesAnnotation
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRVisitor >> visitGt2ClassAnnotation: aGt2ClassAnnotation [ 
 	self visitAnnotation: aGt2ClassAnnotation
 ]
