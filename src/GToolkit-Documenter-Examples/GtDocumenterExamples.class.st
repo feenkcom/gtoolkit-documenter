@@ -115,12 +115,14 @@ GtDocumenterExamples >> documentWithFigure [
 { #category : #'iceberg file' }
 GtDocumenterExamples >> documentWithIcebergAnnotation [
 	<gtExample>
+	<noTest>
 	| aRootDocument |
 	aRootDocument := fileSystemExamples addPillarFileWithContent: 
 		self pillarContentWithIcebergAnnotation.
 	self assert: aRootDocument exists.
 	self assert: aRootDocument contents size > 1.
 	^ aRootDocument
+	
 ]
 
 { #category : #'class - missing one' }
@@ -186,6 +188,7 @@ GtDocumenterExamples >> icebergFileName [
 { #category : #'iceberg file' }
 GtDocumenterExamples >> icebergFileReference [
 	<gtExample>
+	<noTest>
 	| aDirectory aDocument aPath |
 	aDirectory := GtIcebergUtility repositoriesLocation.
 	self assert: aDirectory exists.
@@ -332,6 +335,7 @@ GtDocumenterExamples >> pillarContentWithFigure [
 { #category : #'iceberg file' }
 GtDocumenterExamples >> pillarContentWithIcebergAnnotation [
 	<gtExample>
+	<noTest>
 	^ '${', 
 		GtPillarIcebergFileAnnotation tag, ':', 
 		self icebergFileName, '}$'
@@ -562,6 +566,7 @@ GtDocumenterExamples >> textEditorWithExpandedMethodAnnotation [
 { #category : #'iceberg file' }
 GtDocumenterExamples >> textEditorWithIcebergAnnotation [
 	<gtExample>
+	<noTest>
 	| aPillarElement aBrTextEditor anAttributes |
 	aPillarElement := self textElementWithIcebergAnnotation.
 	aBrTextEditor := (GtDocumenterExamplesUtility editorFromTextElement: aPillarElement).
@@ -722,6 +727,7 @@ GtDocumenterExamples >> textElementWithExpandedMethodAnnotation [
 { #category : #'iceberg file' }
 GtDocumenterExamples >> textElementWithIcebergAnnotation [
 	<gtExample>
+	<noTest>
 	| aFileReference aTextElement |
 	aFileReference := self documentWithIcebergAnnotation.
 	aTextElement := GtDocumenterExamplesUtility textElementForPillarFileReference: aFileReference.
