@@ -273,33 +273,54 @@ XdDocumentExamples >> writeDocumentWithImages [
 XdDocumentExamples >> writeEmptyDocument [
 	<gtExample>
 	
-	| aWriter aXdFile |
-	aWriter := self writer.
-	aXdFile := aWriter
-		streamingStrategy: XdStreamingStrategy bytes;
-		document: documentExamples emptyDocument;
+	| aDocument aXdFile |
+	aDocument := documentExamples emptyDocument.
+	aXdFile := self inMemoryWriter
+		document: aDocument;
+		documentHtml: aDocument;
 		write.
 	self assert: aXdFile notNil.
 	self assert: aXdFile manifest notNil.
-	self assert: aXdFile manifest documents size equals: 1.
+	self assert: aXdFile manifest documents size equals: 2.
+	"Document source files"
 	self
 		assert: aXdFile manifest documents first type
 		equals: XdDocumenterType.
 	self
 		assert: aXdFile manifest documents first components size
-		equals: 2.
+		equals: 1.
 	self
 		assert: aXdFile manifest documents first components first link
 		equals: '1'.
+	"HTML"
+	self
+		assert: aXdFile manifest documents second type
+		equals: XdHtmlType.
+	self
+		assert: aXdFile manifest documents second components size
+		equals: 1.
+	self
+		assert: aXdFile manifest documents second components first link
+		equals: '2'.
+	"Attachments"
 	self assert: aXdFile manifest attachments size equals: 2.
+	"Document source"
 	self assert: aXdFile manifest attachments first id equals: '1'.
 	self
-		assert: aXdFile manifest attachments second fileName
-		equals: 'index.html'.
+		assert: aXdFile manifest attachments first fileName
+		equals: aDocument basename.
 	self
 		assert: aXdFile manifest attachments first fileSize
 		equals: 0.
-	self assert: aXdFile streamingStrategy notNil.
+	"HTML"
+	self assert: aXdFile manifest attachments second id equals: '2'.
+	self
+		assert: aXdFile manifest attachments second fileName
+		equals: XdConstants htmlIndexFile.
+	self
+		assert: aXdFile manifest attachments second fileSize
+		equals: 0.
+
 	self assert: aXdFile exists.
 	self assert: aXdFile streamingStrategy zip members size equals: 3.
 	^ aXdFile
