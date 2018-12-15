@@ -175,6 +175,7 @@ GtDocumenterExamples >> figureFileReference [
 { #category : #'iceberg file' }
 GtDocumenterExamples >> icebergFileName [
 	<gtExample>
+	<noTest>
 	| aFileReference aFileName aHomeDirectoryName |
 	aFileReference := self icebergFileReference.
 	aFileName := aFileReference pillarPrintString.
