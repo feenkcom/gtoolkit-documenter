@@ -203,35 +203,67 @@ XdDocumentExamples >> writeDocumentWithExistingExample [
 XdDocumentExamples >> writeDocumentWithImages [
 	<gtExample>
 
-	| aWriter aXdFile |
-	aWriter := self writer.
-	aXdFile := aWriter
-		streamingStrategy: XdStreamingStrategy bytes;
+	| aDocument aXdFile |
+	aDocument := documentExamples documentWithFigure.
+	aXdFile := self inMemoryWriter
 		document: documentExamples documentWithFigure;
+		documentHtml: documentExamples documentWithFigure;
 		write.
 	self assert: aXdFile notNil.
 	self assert: aXdFile manifest notNil.
-	self assert: aXdFile manifest documents size equals: 1.
+	self assert: aXdFile manifest documents size equals: 2.
+	"Documenter raw source"
 	self
 		assert: aXdFile manifest documents first type
 		equals: XdDocumenterType.
 	self
 		assert: aXdFile manifest documents first components size
-		equals: 3.
+		equals: 2.
 	self
 		assert: aXdFile manifest documents first components first link
 		equals: '1'.
+	self
+		assert: aXdFile manifest documents first components second link
+		equals: '2'.
+	"HTML export"
+	self
+		assert: aXdFile manifest documents second type
+		equals: XdHtmlType.
+	self
+		assert: aXdFile manifest documents second components size
+		equals: 2.
+	self
+		assert: aXdFile manifest documents second components first link
+		equals: '3'.
+	self
+		assert: aXdFile manifest documents second components second link
+		equals: '2'.
+	"Attachments"
 	self assert: aXdFile manifest attachments size equals: 3.
+	"Pillar"
 	self assert: aXdFile manifest attachments first id equals: '1'.
-	self assert: aXdFile manifest attachments second id equals: '2'.
-	self assert: aXdFile manifest attachments third id equals: '3'.
 	self
 		assert: aXdFile manifest attachments first fileName
-		equals: documentExamples fileReferenceWithFigure entry name.
+		equals: aDocument basename.
 	self
 		assert: aXdFile manifest attachments first fileSize
-		equals: documentExamples fileReferenceWithFigure size.
-	self assert: aXdFile streamingStrategy notNil.
+		equals: aDocument text size.
+	"PNG"
+	self assert: aXdFile manifest attachments second id equals: '2'.
+	self
+		assert: aXdFile manifest attachments second fileName
+		equals: documentExamples figureFileName.
+	self
+		assert: aXdFile manifest attachments second fileSize
+		equals: documentExamples figureFileReference size.
+	"HTML"
+	self assert: aXdFile manifest attachments third id equals: '3'.
+	self
+		assert: aXdFile manifest attachments third fileName
+		equals: XdConstants htmlIndexFile.
+	self
+		assert: aXdFile manifest attachments third fileSize isZero not.
+
 	self assert: aXdFile exists.
 	self assert: aXdFile streamingStrategy zip members size equals: 4.
 	^ aXdFile

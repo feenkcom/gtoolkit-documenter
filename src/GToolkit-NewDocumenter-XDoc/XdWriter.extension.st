@@ -1,59 +1,75 @@
 Extension { #name : #XdWriter }
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
-XdWriter >> document: aDocument [
+XdWriter >> attachChanges: aDocument [
 	| aResources |
+	aResources := aDocument resourcer includeChanges; compute.
+	aResources do: [ :eachResource | 
+		eachResource resource binaryReadStreamDo: [ :stream | 
+			self
+				attachment: (GtFileUtility
+					fileNameOf: eachResource resource
+					relativeTo: aDocument rootDirectory)
+				stream: stream
+				size: eachResource resource size ] ]
+]
 
+{ #category : #'*GToolkit-NewDocumenter-XDoc' }
+XdWriter >> attachExportedFiles: aDataWriter [
+	aDataWriter allFiles
+		do: [ :eachFile | 
+			eachFile
+				binaryReadStreamDo: [ :aStream | 
+					self
+						attachment:
+							(GtFileUtility
+								fileNameOf: eachFile
+								relativeTo: aDataWriter rootDirectory)
+						stream: aStream
+						size: eachFile size ] ]
+]
+
+{ #category : #'*GToolkit-NewDocumenter-XDoc' }
+XdWriter >> document: aDocument [
 	self
 		documentType: XdDocumenterType;
 		attachment: aDocument basename text: aDocument string.
-		
-	aResources := aDocument resourcer includeFigures; includeChanges; compute.
-	aResources do: [ :eachResource | 
-		eachResource resource binaryReadStreamDo: [ :stream | 
-			self 
-				attachment: (GtFileUtility fileNameOf: eachResource resource relativeTo: aDocument  rootDirectory ) 
-				stream: stream 
-				size: eachResource resource size ]].
+	self reuseOrAddFigures: aDocument.
+	self attachChanges: aDocument
 ]
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
 XdWriter >> documentHtml: aDocument [
-	| aPRDocument aDataWriter aHtmlWriter aResources anHtmlContent |
-	
+	| aPRDocument aDataWriter aHtmlWriter anHtmlContent |
+	"Existing images"
+	"Crated images"
 	aPRDocument := aDocument parse.
-	self 
+	self
 		assert: [ aPRDocument isPetit2Failure not ]
 		description: [ 'Documenter text cannot be parsed' ].
 	aDataWriter := Gt2ExternalDataWriter new.
 	aHtmlWriter := PRHTMLWriter new.
-	aHtmlWriter configuration 
+	aHtmlWriter configuration
 		gtDataWriter: aDataWriter;
 		gtDocument: aDocument.
-	anHtmlContent :=  aHtmlWriter write: aPRDocument.
-
+	anHtmlContent := aHtmlWriter write: aPRDocument.
 	self
 		documentType: XdHtmlType;
 		attachment: self constants htmlIndexFile text: anHtmlContent.
-		
-	"Existing images"
+	self reuseOrAddFigures: aDocument.
+	self attachExportedFiles: aDataWriter
+]
+
+{ #category : #'*GToolkit-NewDocumenter-XDoc' }
+XdWriter >> reuseOrAddFigures: aDocument [
+	| aResources |
 	aResources := aDocument resourcer includeFigures; compute.
 	aResources do: [ :eachResource | 
 		eachResource resource binaryReadStreamDo: [ :stream | 
-			self 
-				attachment: (GtFileUtility 
-					fileNameOf: eachResource resource 
-					relativeTo: aDocument rootDirectory) 
-				stream: stream 
-				size: eachResource resource size ]].
-	
-	"Crated images"
-	aDataWriter allFiles do: [ :eachFile | 
-		eachFile binaryReadStreamDo: [ :aStream | 
-			self 
-				attachment: (GtFileUtility 
-					fileNameOf: eachFile 
-					relativeTo: aDataWriter rootDirectory)
-				stream: aStream
-				size: eachFile size ] ]
+			self
+				reuseOrAddAttachment: (GtFileUtility
+					fileNameOf: eachResource resource
+					relativeTo: aDocument rootDirectory)
+				stream: stream
+				size: eachResource resource size ] ]
 ]

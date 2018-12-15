@@ -1161,7 +1161,7 @@ Gt2DocumentExamples >> figureFileName [
 { #category : #figure }
 Gt2DocumentExamples >> figureFileReference [
 	<gtExample>
-	^ memorySystem addFileNamed: self figureFileName  withContent: self figureContent
+	^ memorySystem addFileNamed: self figureFileName withContent: self figureContent
 ]
 
 { #category : #figure }
