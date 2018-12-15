@@ -541,38 +541,6 @@ Gt2DocumentExamples >> defaultDocument [
 	^ aDocument
 ]
 
-{ #category : #demo }
-Gt2DocumentExamples >> demoDocument [
-	<gtExample>
-	^ Gt2Document new fileReference: self demoFileReference; read.
-]
-
-{ #category : #'document updates' }
-Gt2DocumentExamples >> demoDocumentUpdateError [
-	<gtExample>
-	| aDocument |
-	aDocument := Gt2Document new fileReference: self demoFileReference; read.
-	2 timesRepeat: [ 
-		Object subclass: #DmAbAddressFoo
-			instanceVariableNames: 'city country telephone'
-			classVariableNames: ''
-			package: 'AddressBookFoo'.
-		4 milliSeconds wait.
-		self class environment removeClassNamed: #DmAbAddressFoo.
-		4 milliSeconds wait.
-	 ].
-	^ aDocument
-]
-
-{ #category : #demo }
-Gt2DocumentExamples >> demoFileReference [
-	<gtExample>
-	^ self constants icebergRepositoriesLocation
-			/ 'feenkcom'/ 'gtoolkit-demos' 
-			/ 'doc' / 'tutorial' 
-			/ 'smalltalks-2018-addressbook' / 'example-driven-development.pillar' 
-]
-
 { #category : #'method - existing one' }
 Gt2DocumentExamples >> documentDeleteAll [
 	<gtExample>
