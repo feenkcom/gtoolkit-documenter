@@ -59,10 +59,28 @@ PRHTMLWriter >> visitGt2ChangesAnnotation: aGt2ChangesAnnotation [
 ]
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
-PRHTMLWriter >> visitGt2ClassAnnotation: aGt2ClassAnnotation [ 
-	canvas tag 
-		name: 'code';
-		with: aGt2ClassAnnotation referencedClass name
+PRHTMLWriter >> visitGt2ClassAnnotation: aGt2ClassAnnotation [
+	| uniqueId |
+	uniqueId := 	aGt2ClassAnnotation hash.
+	canvas tag
+		name: 'div';
+		parameterAt: 'class' put: 'sourceCode';
+		with: [ 
+					canvas tag
+						name: 'a';
+						parameterAt: 'href' put: '#' , uniqueId printString;
+						with: [ canvas nextPutAll: aGt2ClassAnnotation referencedClass name ].
+						
+					canvas tag
+						name: 'div';
+						parameterAt: 'id' put: uniqueId;
+						with: [
+							canvas tag
+								name: 'pre';
+								with: [ canvas lines: aGt2ClassAnnotation referencedClass definition ].
+						]
+				].
+	canvas newLine.
 ]
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
@@ -85,8 +103,25 @@ PRHTMLWriter >> visitGt2IcebergFileAnnotation: aGt2IcebergFileAnnotation [
 ]
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
-PRHTMLWriter >> visitGt2MethodAnnotation: aGt2MethodAnnotation [ 
-	canvas tag 
-		name: 'code';
-		with: aGt2MethodAnnotation referencedMethod fullName
+PRHTMLWriter >> visitGt2MethodAnnotation: aGt2MethodAnnotation [		
+	| uniqueId |
+	uniqueId := 	aGt2MethodAnnotation hash.
+	canvas tag
+		name: 'div';
+		parameterAt: 'class' put: 'sourceCode';
+		with: [ 
+					canvas tag
+						name: 'a';
+						parameterAt: 'href' put: '#' , uniqueId printString;
+						with: [ canvas nextPutAll: aGt2MethodAnnotation referencedMethod name ].
+					canvas tag
+						name: 'div';
+						parameterAt: 'id' put: uniqueId;
+						with: [
+							canvas tag
+								name: 'pre';
+								with: [ canvas lines: aGt2MethodAnnotation referencedMethod sourceCode ].
+						]
+				].
+	canvas newLine.
 ]
