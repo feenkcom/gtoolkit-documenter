@@ -133,6 +133,60 @@ XdDocumentExamples >> writeDocumentWithExamples [
 	^ aXdFile
 ]
 
+{ #category : #class }
+XdDocumentExamples >> writeDocumentWithExistingClass [
+	<gtExample>
+	
+	| aXdFile aDocument |
+	aDocument := documentExamples documentWithExistingClass.
+	aXdFile := self inMemoryWriter
+		document: aDocument;
+		documentHtml: aDocument;
+		write.
+	self assert: aXdFile notNil.
+	self assert: aXdFile manifest notNil.
+	"Pillar raw file (Documenter type)"
+	self assert: aXdFile manifest documents size equals: 2.
+	self
+		assert: aXdFile manifest documents first type
+		equals: XdDocumenterType.
+	self
+		assert: aXdFile manifest documents first components size
+		equals: 1.
+	self
+		assert: aXdFile manifest documents first components first link
+		equals: '1'.
+	"HTML export"
+	self
+		assert: aXdFile manifest documents second type
+		equals: XdHtmlType.
+	self
+		assert: aXdFile manifest documents second components size
+		equals: 1.
+	self
+		assert: aXdFile manifest documents second components first link
+		equals: '2'.
+	"Pillar source file"
+	self assert: aXdFile manifest attachments size equals: 2.
+	self assert: aXdFile manifest attachments first id equals: '1'.
+	self
+		assert: aXdFile manifest attachments first fileName
+		equals: aDocument basename.
+	self
+		assert: aXdFile manifest attachments first fileSize
+		equals: aDocument text size.
+	"HTML file"
+	self assert: aXdFile manifest attachments second id equals: '2'.
+	self
+		assert: aXdFile manifest attachments second fileName
+		equals: XdConstants htmlIndexFile.
+	self assert: aXdFile manifest attachments first fileSize isZero not.
+
+	self assert: aXdFile exists.
+	self assert: aXdFile streamingStrategy zip members size equals: 3.
+	^ aXdFile
+]
+
 { #category : #example }
 XdDocumentExamples >> writeDocumentWithExistingExample [
 	<gtExample>
@@ -199,7 +253,61 @@ XdDocumentExamples >> writeDocumentWithExistingExample [
 	^ aXdFile
 ]
 
-{ #category : #writing }
+{ #category : #method }
+XdDocumentExamples >> writeDocumentWithExistingMethod [
+	<gtExample>
+	
+	| aXdFile aDocument |
+	aDocument := documentExamples documentWithExistingMethod.
+	aXdFile := self inMemoryWriter
+		document: aDocument;
+		documentHtml: aDocument;
+		write.
+	self assert: aXdFile notNil.
+	self assert: aXdFile manifest notNil.
+	"Pillar raw file (Documenter type)"
+	self assert: aXdFile manifest documents size equals: 2.
+	self
+		assert: aXdFile manifest documents first type
+		equals: XdDocumenterType.
+	self
+		assert: aXdFile manifest documents first components size
+		equals: 1.
+	self
+		assert: aXdFile manifest documents first components first link
+		equals: '1'.
+	"HTML export"
+	self
+		assert: aXdFile manifest documents second type
+		equals: XdHtmlType.
+	self
+		assert: aXdFile manifest documents second components size
+		equals: 1.
+	self
+		assert: aXdFile manifest documents second components first link
+		equals: '2'.
+	"Pillar source file"
+	self assert: aXdFile manifest attachments size equals: 2.
+	self assert: aXdFile manifest attachments first id equals: '1'.
+	self
+		assert: aXdFile manifest attachments first fileName
+		equals: aDocument basename.
+	self
+		assert: aXdFile manifest attachments first fileSize
+		equals: aDocument text size.
+	"HTML file"
+	self assert: aXdFile manifest attachments second id equals: '2'.
+	self
+		assert: aXdFile manifest attachments second fileName
+		equals: XdConstants htmlIndexFile.
+	self assert: aXdFile manifest attachments first fileSize isZero not.
+
+	self assert: aXdFile exists.
+	self assert: aXdFile streamingStrategy zip members size equals: 3.
+	^ aXdFile
+]
+
+{ #category : #figure }
 XdDocumentExamples >> writeDocumentWithImages [
 	<gtExample>
 
