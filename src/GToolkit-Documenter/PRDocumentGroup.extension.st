@@ -16,6 +16,7 @@ PRDocumentGroup >> gtTreeFor: aView [
 	<gtView>
 	^ aView explicit
 			title: 'Tree';
+			priority: 2;
 			stencil: [ 
 				| aList |
 				aList := BrSimpleList new.
