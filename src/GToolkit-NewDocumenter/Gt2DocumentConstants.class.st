@@ -160,7 +160,7 @@ Gt2DocumentConstants class >> exportedResultsDirectoryPath [
 { #category : #files }
 Gt2DocumentConstants class >> exportedResultsExtension [
 	<return: #String>
-	^ 'svg'
+	^ 'png'
 ]
 
 { #category : #text }
