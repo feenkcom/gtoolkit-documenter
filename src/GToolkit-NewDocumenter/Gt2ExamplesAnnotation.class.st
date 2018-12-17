@@ -72,6 +72,11 @@ Gt2ExamplesAnnotation >> defaultShowSelector [
 	^ self constants defaultExamplesShowSelector
 ]
 
+{ #category : #testing }
+Gt2ExamplesAnnotation >> doesReferenceExist [
+	^ self hasExample
+]
+
 { #category : #'private - cache' }
 Gt2ExamplesAnnotation >> exampleGroup [
 	<return: #GtExampleGroup>
@@ -185,11 +190,6 @@ Gt2ExamplesAnnotation >> isAffectedByPackageChange: aPackageName [
 
 { #category : #testing }
 Gt2ExamplesAnnotation >> isPreviewDefined [
-	^ self hasExample
-]
-
-{ #category : #testing }
-Gt2ExamplesAnnotation >> isReferenceDefined [
 	^ self hasExample
 ]
 

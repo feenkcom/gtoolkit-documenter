@@ -46,6 +46,12 @@ Gt2ClassAnnotation >> defaultShowSelector [
 	^ self constants defaultClassShowSelector
 ]
 
+{ #category : #testing }
+Gt2ClassAnnotation >> doesReferenceExist [
+	"Return true if a referenced object is defined"
+	^ self isClassDefined
+]
+
 { #category : #'announcement handling' }
 Gt2ClassAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAnnouncement [ 
 	(self referencedClass notNil and: [ 
@@ -72,12 +78,6 @@ Gt2ClassAnnotation >> isClassDefined [
 { #category : #testing }
 Gt2ClassAnnotation >> isPreviewDefined [
 	"Return true if a preview object is defined"
-	^ self isClassDefined
-]
-
-{ #category : #testing }
-Gt2ClassAnnotation >> isReferenceDefined [
-	"Return true if a referenced object is defined"
 	^ self isClassDefined
 ]
 

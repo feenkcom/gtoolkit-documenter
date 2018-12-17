@@ -287,9 +287,9 @@ Gt2DocumentUtility class >> styleLinkInText: aBlRope forNode: aNode [
 { #category : #'text styling' }
 Gt2DocumentUtility class >> styleLinkInText: aBlRope forNode: aNode start: aStartIndex stop: aStopIndex [
 	| aLinkColor theAttributes |
-	aLinkColor := self linkColor: aNode isReferenceDefined.
+	aLinkColor := self linkColor: aNode doesReferenceExist.
 	theAttributes := Array with: (BlTextForegroundAttribute new paint: aLinkColor).
-	aNode isReferenceDefined ifTrue: [ 
+	aNode doesReferenceExist ifTrue: [ 
 		theAttributes := theAttributes , {
 				BrTextHoverStylableAttribute new 
 					attribute: (BlTextUnderlineAttribute new paint: aLinkColor).

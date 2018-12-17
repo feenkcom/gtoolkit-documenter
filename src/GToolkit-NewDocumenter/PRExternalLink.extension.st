@@ -20,7 +20,7 @@ PRExternalLink >> cursorNearbyInText: aBlRope [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRExternalLink >> isReferenceDefined [
+PRExternalLink >> doesReferenceExist [
 	^ self url isString and: [ self url isNotEmpty ]
 ]
 

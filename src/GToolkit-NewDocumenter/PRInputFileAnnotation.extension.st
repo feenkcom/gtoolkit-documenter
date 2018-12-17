@@ -3,7 +3,7 @@ Extension { #name : #PRInputFileAnnotation }
 { #category : #'*GToolkit-NewDocumenter' }
 PRInputFileAnnotation >> browseReferenceFrom: anEvent [
 	anEvent modifiers isShift ifTrue: [ ^ self ].
-	self isReferenceDefined ifFalse: [ ^ self inform: 'Input file does not exist' ].
+	self doesReferenceExist ifFalse: [ ^ self inform: 'Input file does not exist' ].
 	anEvent target fireEvent: (GtPhlowObjectToSpawn new 
 		object: self fileReference;
 		sourceElement: anEvent target)
@@ -22,6 +22,11 @@ PRInputFileAnnotation >> cursorNearbyInText: aBlRope [
 { #category : #'*GToolkit-NewDocumenter' }
 PRInputFileAnnotation >> defaultShowSelector [
 	^ Gt2DocumentConstants defaultShowSelector
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRInputFileAnnotation >> doesReferenceExist [
+	^ self fileReference ifNotNil: #exists ifNil: false
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
@@ -64,12 +69,7 @@ PRInputFileAnnotation >> heightParameterValue [
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRInputFileAnnotation >> isPreviewDefined [
-	^ self isReferenceDefined
-]
-
-{ #category : #'*GToolkit-NewDocumenter' }
-PRInputFileAnnotation >> isReferenceDefined [
-	^ self fileReference ifNotNil: #exists ifNil: false
+	^ self doesReferenceExist
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }

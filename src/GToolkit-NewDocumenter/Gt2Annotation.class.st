@@ -27,6 +27,12 @@ Gt2Annotation >> defaultShowSelector [
 	^ self constants defaultShowSelector
 ]
 
+{ #category : #testing }
+Gt2Annotation >> doesReferenceExist [
+	"Return true if a referenced object is defined"
+	^ self subclassResponsibility
+]
+
 { #category : #'announcement handling' }
 Gt2Annotation >> handleDocumentUpdateRequestedAnnouncement: aGt2DocumentUpdateRequestedAnnouncement [
 	
@@ -47,12 +53,6 @@ Gt2Annotation >> heightParameterValue [
 { #category : #testing }
 Gt2Annotation >> isPreviewDefined [
 	"Return true if a preview object is defined"
-	^ self subclassResponsibility
-]
-
-{ #category : #testing }
-Gt2Annotation >> isReferenceDefined [
-	"Return true if a referenced object is defined"
 	^ self subclassResponsibility
 ]
 

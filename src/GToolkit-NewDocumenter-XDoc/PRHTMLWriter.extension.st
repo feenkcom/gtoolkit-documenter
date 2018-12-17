@@ -75,8 +75,13 @@ PRHTMLWriter >> visitGt2ExampleAnnotation: aGt2ExampleAnnotation [
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
 PRHTMLWriter >> visitGt2IcebergFileAnnotation: aGt2IcebergFileAnnotation [ 
-	self flag: 'ignore for now'.
-	super visitGt2IcebergFileAnnotation: aGt2IcebergFileAnnotation
+	| aHref |
+	aGt2IcebergFileAnnotation isReferenceDefined ifFalse: [ ^ self ]. 
+	aHref := GtFileUtilityConstants localGtDirectoryName, '/', aGt2IcebergFileAnnotation path.
+	canvas tag
+		name: 'a';
+		parameterAt: 'href' put: aHref;
+		with: [ canvas nextPutAll: aHref ].
 ]
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
@@ -84,26 +89,4 @@ PRHTMLWriter >> visitGt2MethodAnnotation: aGt2MethodAnnotation [
 	canvas tag 
 		name: 'code';
 		with: aGt2MethodAnnotation referencedMethod fullName
-]
-
-{ #category : #'*GToolkit-NewDocumenter-XDoc' }
-PRHTMLWriter >> writeExampleAnnotation: aGt2ExampleAnnotation toFile: aFileReference [ 
-	| anExampleReturnValue aContainer aView |
-	
-	anExampleReturnValue := aGt2ExampleAnnotation methodDefinition compiledMethod gtExample returnValue.
-	
-	aContainer := GtPillarExporterContainerElement new.
-	"recommended size"
-	aContainer size: 500@300.
-
-	aView := GtPhlowView empty 
-		on: anExampleReturnValue 
-		perform: aGt2ExampleAnnotation previewShowSelector.
-	aView asElementDo: [ :anElement | aContainer addChild: anElement ].
-	
-	aContainer forceLayout.
-
-	aFileReference ensureDelete.
-	BlSvgExporter new element: aContainer; fileName: aFileReference; export.
-
 ]

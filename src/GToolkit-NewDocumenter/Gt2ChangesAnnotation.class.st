@@ -121,6 +121,11 @@ Gt2ChangesAnnotation >> defaultShowSelector [
 	^ self constants defaultChangesShowSelector
 ]
 
+{ #category : #testing }
+Gt2ChangesAnnotation >> doesReferenceExist [
+	^ self hasChanges
+]
+
 { #category : #'accessing - parameter values' }
 Gt2ChangesAnnotation >> expandedDefaultValue [
 	^ true
@@ -159,11 +164,6 @@ Gt2ChangesAnnotation >> isChangeFileDefined [
 
 { #category : #testing }
 Gt2ChangesAnnotation >> isPreviewDefined [
-	^ self hasChanges
-]
-
-{ #category : #testing }
-Gt2ChangesAnnotation >> isReferenceDefined [
 	^ self hasChanges
 ]
 

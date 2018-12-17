@@ -46,6 +46,12 @@ Gt2MethodAnnotation >> defaultShowSelector [
 	^ self constants defaultMethodShowSelector
 ]
 
+{ #category : #testing }
+Gt2MethodAnnotation >> doesReferenceExist [
+	"Return true if a referenced object is defined"
+	^ self isMethodDefined 
+]
+
 { #category : #'announcement handling' }
 Gt2MethodAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAdded [ 
 	(self referencedMethod notNil and: [ 
@@ -82,12 +88,6 @@ Gt2MethodAnnotation >> isMethodDefined [
 Gt2MethodAnnotation >> isPreviewDefined [
 	"Return true if a preview object is defined"
 	^ self isMethodDefined
-]
-
-{ #category : #testing }
-Gt2MethodAnnotation >> isReferenceDefined [
-	"Return true if a referenced object is defined"
-	^ self isMethodDefined 
 ]
 
 { #category : #accessing }
