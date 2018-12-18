@@ -242,6 +242,27 @@ Gt2Document >> gtResourcesFor: aView [
 ]
 
 { #category : #'gt-extension' }
+Gt2Document >> gtSaveActionFor: anAction [
+	<gtAction>
+	^ anAction button
+		icon: self constants saveButtonIcon asElement;
+		category: #gtTextFor:;
+		priority: 1;
+		action: [ self store ]
+]
+
+{ #category : #'gt-extension' }
+Gt2Document >> gtShowMarkupActionFor: anAction [
+	<gtAction>
+	^ anAction toggle
+		icon: self constants editButtonIcon;
+		category: #gtTextFor:;
+		priority: 3;
+		activatedAction: [ self displayMarkup ];
+		deactivatedAction: [ self hideMarkup ]
+]
+
+{ #category : #'gt-extension' }
 Gt2Document >> gtTextFor: aView [
 	<gtView>
 	self editor ifNil: [ ^ aView empty ].
@@ -253,12 +274,7 @@ Gt2Document >> gtTextFor: aView [
 			action: [ :aWidget | 
 				aWidget fireEvent: (GtPhlowObjectToSpawn new
 					object: self parse;
-					sourceElement: aWidget) ];
-		actionButtonIcon: self constants applyButtonIcon 
-			action: [ self store ];
-		actionToggleIcon: self constants editButtonIcon 
-			activated: [ self displayMarkup ] 
-			deactivated: [ self hideMarkup ]
+					sourceElement: aWidget) ]
 ]
 
 { #category : #'announcement handling' }
