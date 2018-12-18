@@ -56,32 +56,23 @@ Gt2Document >> announcer [
 { #category : #converting }
 Gt2Document >> asElement [
 	<return: #BlElement>
-	^ self asElementWithoutSaveAction
-		addChild: (BlElement new 
+	| anElement aToolbar |
+	anElement := self asElementWithoutSaveAction.
+	aToolbar := BlElement new 
 			layout: BlLinearLayout horizontal;
 			constraintsDo: [ :c | 
 				c ignoreByLayout.
 				c vertical fitContent.
 				c horizontal fitContent.
 				c ignored horizontal alignLeft.
-				c ignored vertical alignBottom ];
-			addChild: (BrButton new
-				look: BrGlamorousButtonWithIconLook;
-				icon: self constants saveButtonIcon asElement;
-				label: self constants saveButtonLabel;
-				action: [ self store ]);
-			addChild: (BlElement new 
-					viewModel: (BrToggleModel new
-						icon: (self isReadingMode 
-							ifTrue: [ self constants readingModeIcon asElement ]
-							ifFalse: [ self constants editingModeIcon asElement ] ) );
-					look: (BrMaterialToggleIconifiedLook new 
-						when: BrToggleActivatedEvent do: [ :anEvent | 
-							anEvent currentTarget widget viewModel icon: self constants editingModeIcon asElement.
-							self displayMarkup ];
-						when: BrToggleDeactivatedEvent do: [ :anEvent | 
-							anEvent currentTarget widget viewModel icon: self constants readingModeIcon asElement.
-							self hideMarkup ]) + BrGlamorousButtonWithIconLook - BrShadowLook))
+				c ignored vertical alignBottom ].
+	self gtActions do: [ :eachAction | 
+		eachAction category = #gtTextFor: ifTrue: [ 
+			eachAction 
+				asElementDo: [ :anActionElement | aToolbar addChild: anActionElement ]
+				withElement: anElement ] ].
+	anElement addChild: aToolbar.
+	^ anElement
 ]
 
 { #category : #converting }
