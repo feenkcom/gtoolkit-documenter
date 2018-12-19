@@ -5,7 +5,7 @@ Gt2Document >> gtXDocExportActionFor: anAction [
 	<gtAction>
 	^ anAction button 
 		icon: BrGlamorousIcons save;
-		category: #gtTextFor:;
+		forViewDefinedIn: #gtTextFor:;
 		priority: 60;
 		action: [ :aButton |
 			| aXdFile |

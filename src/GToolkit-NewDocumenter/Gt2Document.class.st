@@ -67,7 +67,7 @@ Gt2Document >> asElement [
 				c ignored horizontal alignLeft.
 				c ignored vertical alignBottom ].
 	self gtActions do: [ :eachAction | 
-		eachAction category = #gtTextFor: ifTrue: [ 
+		(eachAction target isForViewDefinedIn: #gtTextFor:) ifTrue: [ 
 			eachAction 
 				asElement: [ :anActionElement | aToolbar addChild: anActionElement ]
 				withHostElement: anElement ] ].
@@ -237,7 +237,7 @@ Gt2Document >> gtSaveActionFor: anAction [
 	<gtAction>
 	^ anAction button
 		icon: self constants saveButtonIcon asElement;
-		category: #gtTextFor:;
+		forViewDefinedIn: #gtTextFor:;
 		priority: 1;
 		action: [ self store ]
 ]
@@ -247,7 +247,7 @@ Gt2Document >> gtShowMarkupActionFor: anAction [
 	<gtAction>
 	^ anAction toggle
 		icon: self constants editButtonIcon;
-		category: #gtTextFor:;
+		forViewDefinedIn: #gtTextFor:;
 		priority: 3;
 		activatedAction: [ self displayMarkup ];
 		deactivatedAction: [ self hideMarkup ]
