@@ -64,6 +64,7 @@ XdWriter >> documentHtml: aDocument [
 	aHtmlWriter := PRHTMLWriter new.
 	aHtmlWriter configuration
 		gtDataWriter: aDataWriter;
+		gtUniqueIdGenerator: Gt2UniqueIdGenerator new;
 		gtDocument: aDocument.
 	anHtmlContent := aHtmlWriter write: aPRDocument.
 	self
