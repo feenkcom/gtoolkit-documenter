@@ -61,14 +61,14 @@ PRHTMLWriter >> visitGt2ChangesAnnotation: aGt2ChangesAnnotation [
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
 PRHTMLWriter >> visitGt2ClassAnnotation: aGt2ClassAnnotation [
 	| uniqueId |
-	uniqueId := 	aGt2ClassAnnotation hash.
+	uniqueId := 	self configuration gtUniqueIdGenerator next printString.
 	canvas tag
 		name: 'div';
 		parameterAt: 'class' put: 'sourceCode';
 		with: [ 
 					canvas tag
 						name: 'a';
-						parameterAt: 'href' put: '#' , uniqueId printString;
+						parameterAt: 'href' put: '#' , uniqueId;
 						with: [ canvas nextPutAll: aGt2ClassAnnotation referencedClass name ].
 						
 					canvas tag
@@ -105,14 +105,14 @@ PRHTMLWriter >> visitGt2IcebergFileAnnotation: aGt2IcebergFileAnnotation [
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
 PRHTMLWriter >> visitGt2MethodAnnotation: aGt2MethodAnnotation [		
 	| uniqueId |
-	uniqueId := 	aGt2MethodAnnotation hash.
+	uniqueId := 	self configuration gtUniqueIdGenerator next printString.
 	canvas tag
 		name: 'div';
 		parameterAt: 'class' put: 'sourceCode';
 		with: [ 
 					canvas tag
 						name: 'a';
-						parameterAt: 'href' put: '#' , uniqueId printString;
+						parameterAt: 'href' put: '#' , uniqueId;
 						with: [ canvas nextPutAll: aGt2MethodAnnotation referencedMethod name ].
 					canvas tag
 						name: 'div';
