@@ -16,6 +16,11 @@ PRVisitor >> visitGt2ExampleAnnotation: aGt2ExampleAnnotation [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRVisitor >> visitGt2ExamplesAnnotation: aGt2ExamplesAnnotation [ 
+	self visitAnnotation: aGt2ExamplesAnnotation
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRVisitor >> visitGt2IcebergFileAnnotation: aGt2IcebergFileAnnotation [ 
 	self visitAnnotation: aGt2IcebergFileAnnotation
 ]

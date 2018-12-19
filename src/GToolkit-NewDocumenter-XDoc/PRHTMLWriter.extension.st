@@ -92,6 +92,12 @@ PRHTMLWriter >> visitGt2ExampleAnnotation: aGt2ExampleAnnotation [
 ]
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
+PRHTMLWriter >> visitGt2ExamplesAnnotation: aGt2ExamplesAnnotation [
+	self visitOrderedList: (PROrderedList withAll: (aGt2ExamplesAnnotation allExamples collect: [ :anExample | PRListItem with: (PRText content: anExample method name) ])).
+	
+]
+
+{ #category : #'*GToolkit-NewDocumenter-XDoc' }
 PRHTMLWriter >> visitGt2IcebergFileAnnotation: aGt2IcebergFileAnnotation [ 
 	| aHref |
 	aGt2IcebergFileAnnotation isReferenceDefined ifFalse: [ ^ self ]. 

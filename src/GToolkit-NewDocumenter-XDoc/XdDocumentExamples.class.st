@@ -100,11 +100,12 @@ XdDocumentExamples >> writeDocumentWithClassDefinitionChanges [
 XdDocumentExamples >> writeDocumentWithExamples [
 	<gtExample>
 	
-	| aWriter aXdFile |
-	aWriter := self writer.
-	aXdFile := aWriter
-		streamingStrategy: XdStreamingStrategy bytes;
-		document: documentExamples documentWithExamples;
+	|  aXdFile aDocument |
+			
+	aDocument := documentExamples documentWithExamples.
+	aXdFile := self inMemoryWriter
+		document: aDocument;
+		documentHtml: aDocument;
 		write.
 	"self assert: aXdFile notNil.
 	self assert: aXdFile manifest notNil.

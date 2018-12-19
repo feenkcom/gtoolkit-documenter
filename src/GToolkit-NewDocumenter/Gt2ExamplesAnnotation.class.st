@@ -27,6 +27,17 @@ Gt2ExamplesAnnotation class >> tag [
 	^ self constants examplesAnnotationName
 ]
 
+{ #category : #visiting }
+Gt2ExamplesAnnotation >> accept: aVisitor [
+	^ aVisitor visitGt2ExamplesAnnotation: self
+]
+
+{ #category : #'as yet unclassified' }
+Gt2ExamplesAnnotation >> allExamples [ 
+	<return: #Array of: #GtExampleResult >
+	^ self exampleGroup examples
+]
+
 { #category : #'private - cache' }
 Gt2ExamplesAnnotation >> annotationCacheValueClass [
 	^ Gt2ExamplesAnnotationCacheValue
