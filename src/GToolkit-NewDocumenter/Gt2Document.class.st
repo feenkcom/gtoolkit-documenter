@@ -70,7 +70,7 @@ Gt2Document >> asElement [
 		eachAction category = #gtTextFor: ifTrue: [ 
 			eachAction 
 				asElementDo: [ :anActionElement | aToolbar addChild: anActionElement ]
-				withElement: anElement ] ].
+				withParentElement: anElement ] ].
 	anElement addChild: aToolbar.
 	^ anElement
 ]
