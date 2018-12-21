@@ -1404,8 +1404,8 @@ Gt2DocumentExamples >> resourcerWithIcebergFile [
 	anIcebergFile := aCollectionOfIcebergFiles first.
 	self assert: anIcebergFile name equals: self icebergFileName.
 	self assert: anIcebergFile source equals: aDocument.
-	self assert: anIcebergFile document notNil.
-	self assert: anIcebergFile document exists.
+	self assert: anIcebergFile document notNil description: 'Iceberg document should be non-nil'.
+	self assert: anIcebergFile document exists description: 'Iceberg document should exist'.
 	^ anIcebergFile
 ]
 
