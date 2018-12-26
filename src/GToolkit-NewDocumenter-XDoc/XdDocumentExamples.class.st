@@ -107,33 +107,50 @@ XdDocumentExamples >> writeDocumentWithExamples [
 		document: aDocument;
 		documentHtml: aDocument;
 		write.
-	"self assert: aXdFile notNil.
+	self assert: aXdFile notNil.
 	self assert: aXdFile manifest notNil.
-	self assert: aXdFile manifest documents size equals: 1.
+	"Pillar raw file (Documenter type)"
+	self assert: aXdFile manifest documents size equals: 2.
 	self
 		assert: aXdFile manifest documents first type
-		equals: XdPillarType.
+		equals: XdDocumenterType.
 	self
 		assert: aXdFile manifest documents first components size
-		equals: 2.
+		equals: 1.
 	self
 		assert: aXdFile manifest documents first components first link
 		equals: '1'.
-	self assert: aXdFile manifest attachments size equals: 2.
+	"HTML export"
+	self
+		assert: aXdFile manifest documents second type
+		equals: XdHtmlType.
+	self
+		assert: aXdFile manifest documents second components size
+		equals: 2.
+	self
+		assert: aXdFile manifest documents second components first link
+		equals: '2'.
+	"Pillar source file"
+	self assert: aXdFile manifest attachments size equals: 3.
 	self assert: aXdFile manifest attachments first id equals: '1'.
 	self
 		assert: aXdFile manifest attachments first fileName
-		equals: documentExamples demoFileReference entry name.
+		equals: aDocument basename.
+	self
+		assert: aXdFile manifest attachments first fileSize
+		equals: aDocument text size.
+	"HTML file"
 	self assert: aXdFile manifest attachments second id equals: '2'.
 	self
 		assert: aXdFile manifest attachments second fileName
-		equals: 'index.html'.
+		equals: XdConstants htmlIndexFile.
 	self
-		assert: aXdFile manifest attachments first fileSize
-		equals: documentExamples demoFileReference size.
-	self assert: aXdFile streamingStrategy notNil.
+		assert: aXdFile manifest attachments third fileName
+		equals: XdConstants cssIndexFile.
+	self assert: aXdFile manifest attachments first fileSize isZero not.
+
 	self assert: aXdFile exists.
-	self assert: aXdFile streamingStrategy zip members size equals: 3."
+	self assert: aXdFile streamingStrategy zip members size equals: 4.
 	^ aXdFile
 ]
 
