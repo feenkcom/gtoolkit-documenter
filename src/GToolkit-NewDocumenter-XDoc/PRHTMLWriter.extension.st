@@ -43,12 +43,52 @@ PRHTMLWriter >> gtWriteExampleResult: aGt2ExampleAnnotation [
 ]
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
+PRHTMLWriter >> gtWriteSourceCodeForEntity: anEntityName with: aSourceCode [
+
+	| uniqueId language code |
+	uniqueId := 	self configuration gtUniqueIdGenerator next printString.
+	
+	canvas tag
+		name: 'div';
+		parameterAt: 'class' put: 'sourceCode';
+		with: [ 
+					canvas tag
+						name: 'a';
+						parameterAt: 'href' put: '#' , uniqueId;
+						with: [ canvas nextPutAll: anEntityName ].
+						
+					canvas tag
+						name: 'div';
+						parameterAt: 'id' put: uniqueId;
+						with: [
+							language := PRSmalltalkScriptLanguage default.
+							canvas tag
+								name: 'pre';
+								with: [
+									code := canvas tag
+										name: 'code';
+										yourself.
+									language := PRSmalltalkScriptLanguage default.
+									language isSyntaxHighlightingPossible
+										ifTrue: [ code parameterAt: 'class' put: language printString ].
+									code with: [ 
+										canvas newLine.
+										canvas lines: aSourceCode.
+										canvas newLine.
+									].
+								].
+						]
+				].
+	canvas newLine.
+]
+
+{ #category : #'*GToolkit-NewDocumenter-XDoc' }
 PRHTMLWriter >> visitGt2ChangesAnnotation: aGt2ChangesAnnotation [
 	| aContent |
 	aGt2ChangesAnnotation gtDocument: self configuration gtDocument.
 	aContent := aGt2ChangesAnnotation cachedChanges tutorialStateRope asString.
 	canvas tag
-		name: 'figure';
+		name: 'div';
 		parameterAt: 'class' put: 'changes';
 		with: [ 
 					canvas tag
@@ -60,27 +100,7 @@ PRHTMLWriter >> visitGt2ChangesAnnotation: aGt2ChangesAnnotation [
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
 PRHTMLWriter >> visitGt2ClassAnnotation: aGt2ClassAnnotation [
-	| uniqueId |
-	uniqueId := 	self configuration gtUniqueIdGenerator next printString.
-	canvas tag
-		name: 'div';
-		parameterAt: 'class' put: 'sourceCode';
-		with: [ 
-					canvas tag
-						name: 'a';
-						parameterAt: 'href' put: '#' , uniqueId;
-						with: [ canvas nextPutAll: aGt2ClassAnnotation referencedClass name ].
-						
-					canvas tag
-						name: 'div';
-						parameterAt: 'id' put: uniqueId;
-						with: [
-							canvas tag
-								name: 'pre';
-								with: [ canvas lines: aGt2ClassAnnotation referencedClass definition ].
-						]
-				].
-	canvas newLine.
+	^ self gtWriteSourceCodeForEntity: (aGt2ClassAnnotation referencedClass name) with: (aGt2ClassAnnotation referencedClass definition).
 ]
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
@@ -109,25 +129,6 @@ PRHTMLWriter >> visitGt2IcebergFileAnnotation: aGt2IcebergFileAnnotation [
 ]
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
-PRHTMLWriter >> visitGt2MethodAnnotation: aGt2MethodAnnotation [		
-	| uniqueId |
-	uniqueId := 	self configuration gtUniqueIdGenerator next printString.
-	canvas tag
-		name: 'div';
-		parameterAt: 'class' put: 'sourceCode';
-		with: [ 
-					canvas tag
-						name: 'a';
-						parameterAt: 'href' put: '#' , uniqueId;
-						with: [ canvas nextPutAll: aGt2MethodAnnotation referencedMethod name ].
-					canvas tag
-						name: 'div';
-						parameterAt: 'id' put: uniqueId;
-						with: [
-							canvas tag
-								name: 'pre';
-								with: [ canvas lines: aGt2MethodAnnotation referencedMethod sourceCode ].
-						]
-				].
-	canvas newLine.
+PRHTMLWriter >> visitGt2MethodAnnotation: aGt2MethodAnnotation [	
+	^ self gtWriteSourceCodeForEntity: (aGt2MethodAnnotation referencedMethod name) with: (aGt2MethodAnnotation referencedMethod sourceCode).
 ]
