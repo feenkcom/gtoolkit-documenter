@@ -9,7 +9,8 @@ Class {
 	#traits : 'TGt2DocumentConstants + TBlDebug',
 	#classTraits : 'TGt2DocumentConstants classTrait + TBlDebug classTrait',
 	#instVars : [
-		'memorySystem'
+		'memorySystem',
+		'tempDirectory'
 	],
 	#category : #'GToolkit-NewDocumenter-Examples'
 }
@@ -1187,6 +1188,11 @@ Gt2DocumentExamples >> initialize [
 	super initialize.
 	memorySystem := GtFileSystemExamples new 
 		rootDirectoryName: UUID new asString.
+]
+
+{ #category : #initialization }
+Gt2DocumentExamples >> initializeUsingPhysicalDisk [
+	memorySystem initializeUsingPhysicalDisk
 ]
 
 { #category : #'file reference document' }
