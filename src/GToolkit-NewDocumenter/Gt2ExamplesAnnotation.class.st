@@ -133,8 +133,9 @@ Gt2ExamplesAnnotation >> handleMethodAnnouncement: aMethodModified [
 	((self 
 		isAffectedByMethodChange: aMethodModified selector 
 		of: aMethodModified classAffected originalName) or: [ 
-			 self isAffectedByPackageChange: aMethodModified methodPackage name ])
-				ifFalse: [ ^ self ].
+			aMethodModified methodPackage notNil and: [ 
+				self isAffectedByPackageChange: aMethodModified methodPackage name ] ])
+					ifFalse: [ ^ self ].
 	self rebuildExampleGroup
 ]
 
