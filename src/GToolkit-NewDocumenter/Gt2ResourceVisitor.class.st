@@ -11,7 +11,9 @@ Class {
 		'maxDepth',
 		'documentResource',
 		'visitedDocumentResources',
-		'includeClasses'
+		'includeClasses',
+		'includeExampleAnnotations',
+		'includeChanges'
 	],
 	#category : #'GToolkit-NewDocumenter-Resourcer'
 }
@@ -94,6 +96,7 @@ Gt2ResourceVisitor >> computeResources: aGt2NodeReference [
 	includeInputFiles ifTrue: [ aVisitor includeInputFiles ].
 	includeIcebergFiles ifTrue: [ aVisitor includeIcebergFiles ].
 	includeClasses ifTrue: [ aVisitor includeClasses ].
+	includeChanges ifTrue: [ aVisitor includeChanges ].
 	aVisitor maxDepth: maxDepth - 1.
 	aVisitor get
 ]
@@ -143,6 +146,11 @@ Gt2ResourceVisitor >> includeAll [
 ]
 
 { #category : #initialization }
+Gt2ResourceVisitor >> includeChanges [
+	includeChanges := true
+]
+
+{ #category : #initialization }
 Gt2ResourceVisitor >> includeClasses [
 	includeClasses := true
 ]
@@ -177,6 +185,7 @@ Gt2ResourceVisitor >> initialize [
 	includeInputFiles := false.
 	includeIcebergFiles := false.
 	includeClasses := false.
+	includeChanges := false.
 	maxDepth := 0.
 	visitedDocumentResources := OrderedCollection new.
 ]
@@ -203,6 +212,12 @@ Gt2ResourceVisitor >> resources [
 	^ self documentResource allResources
 ]
 
+{ #category : #visiting }
+Gt2ResourceVisitor >> visit: anObject [
+	anObject gtDocument: self document.
+	super visit: anObject.
+]
+
 { #category : #'visiting-document' }
 Gt2ResourceVisitor >> visitFigure: aPRFigure [ 
 	| aFileReferenceOrNil aFigure aFileName |
@@ -217,6 +232,21 @@ Gt2ResourceVisitor >> visitFigure: aPRFigure [
 			name: aFileName.
 	self addResource: aFigure.
 	super visitFigure: aPRFigure.
+]
+
+{ #category : #'visiting-annotations' }
+Gt2ResourceVisitor >> visitGt2ChangesAnnotation: aGt2ChangesAnnotation [
+	| aFileReferenceOrNil aResource |
+	includeChanges ifFalse: [ ^ super visitGt2ChangesAnnotation: aGt2ChangesAnnotation ].
+	aGt2ChangesAnnotation changeFileExists ifFalse: [ ^ self ].
+	aGt2ChangesAnnotation gtDocument: self document.
+	aFileReferenceOrNil := aGt2ChangesAnnotation changeFile.
+	aResource := Gt2ChangesResource new 
+			source: self document;
+			resource: aFileReferenceOrNil;
+			name: aFileReferenceOrNil basename.
+	self addDocumentResource: aResource.
+	super visitGt2ChangesAnnotation: aGt2ChangesAnnotation
 ]
 
 { #category : #'visiting-annotations' }

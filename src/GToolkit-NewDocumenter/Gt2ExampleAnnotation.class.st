@@ -78,6 +78,11 @@ Gt2ExampleAnnotation >> doNotDisplaySourceCodeParameterValue [
 	^ self noCode
 ]
 
+{ #category : #testing }
+Gt2ExampleAnnotation >> doesReferenceExist [
+	^ self isExampleDefined
+]
+
 { #category : #'accessing - parameter values' }
 Gt2ExampleAnnotation >> example [
 	^ example ifNil: [ example := self referencedExample compiledMethod gtExample ]
@@ -140,11 +145,6 @@ Gt2ExampleAnnotation >> isMethodDefined [
 
 { #category : #testing }
 Gt2ExampleAnnotation >> isPreviewDefined [
-	^ self isExampleDefined
-]
-
-{ #category : #testing }
-Gt2ExampleAnnotation >> isReferenceDefined [
 	^ self isExampleDefined
 ]
 

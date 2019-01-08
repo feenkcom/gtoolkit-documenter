@@ -9,7 +9,7 @@ SmalltalkCISpec {
   ],
   #postLoading : ['scripts/postLoading.st'],
   #testing : {
-    #packages : [ 'GToolkit-Documenter.*' ],
+    #packages : [ 'GToolkit-NewDocumenter.*' ],
     #failOnZeroTests : false,
     #hidePassingTests : true
   }

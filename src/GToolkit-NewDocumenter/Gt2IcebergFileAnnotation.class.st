@@ -27,7 +27,7 @@ Gt2IcebergFileAnnotation >> accept: aVisitor [
 { #category : #'private - actions' }
 Gt2IcebergFileAnnotation >> browseReferenceFrom: aBlClickEvent [ 
 	aBlClickEvent modifiers isShift ifTrue: [ ^ self ].
-	self isReferenceDefined ifFalse: [ ^ self inform: 'Input file does not exist' ].
+	self doesReferenceExist ifFalse: [ ^ self inform: 'Input file does not exist' ].
 	aBlClickEvent target 
 		fireEvent: (GtPhlowObjectToSpawn new
 			object: self fileReference;
@@ -37,6 +37,11 @@ Gt2IcebergFileAnnotation >> browseReferenceFrom: aBlClickEvent [
 { #category : #'api - style' }
 Gt2IcebergFileAnnotation >> cursorLeftInText: aBlRope [
 	self utility hideAllButLinkInText: aBlRope forAnnotation: self
+]
+
+{ #category : #testing }
+Gt2IcebergFileAnnotation >> doesReferenceExist [
+	^ self fileReference ifNotNil: #exists ifNil: false
 ]
 
 { #category : #'accessing - parameter values' }
@@ -58,12 +63,12 @@ Gt2IcebergFileAnnotation >> fileReference [
 
 { #category : #testing }
 Gt2IcebergFileAnnotation >> isPreviewDefined [
-	^ self isReferenceDefined
+	^ self doesReferenceExist
 ]
 
 { #category : #testing }
 Gt2IcebergFileAnnotation >> isReferenceDefined [
-	^ self fileReference ifNotNil: #exists ifNil: false
+	^ self fileReference notNil
 ]
 
 { #category : #accessing }

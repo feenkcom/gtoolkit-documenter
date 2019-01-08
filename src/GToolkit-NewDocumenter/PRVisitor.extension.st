@@ -1,6 +1,11 @@
 Extension { #name : #PRVisitor }
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRVisitor >> visitGt2ChangesAnnotation: aGt2ChangesAnnotation [
+	self visitAnnotation: aGt2ChangesAnnotation
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRVisitor >> visitGt2ClassAnnotation: aGt2ClassAnnotation [ 
 	self visitAnnotation: aGt2ClassAnnotation
 ]
@@ -8,6 +13,11 @@ PRVisitor >> visitGt2ClassAnnotation: aGt2ClassAnnotation [
 { #category : #'*GToolkit-NewDocumenter' }
 PRVisitor >> visitGt2ExampleAnnotation: aGt2ExampleAnnotation [ 
 	self visitAnnotation: aGt2ExampleAnnotation
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRVisitor >> visitGt2ExamplesAnnotation: aGt2ExamplesAnnotation [ 
+	self visitAnnotation: aGt2ExamplesAnnotation
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }

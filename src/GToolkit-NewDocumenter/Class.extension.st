@@ -3,7 +3,14 @@ Extension { #name : #Class }
 { #category : #'*GToolkit-NewDocumenter' }
 Class >> gtDocumentFor: aView [
 	<gtView>
-	^ ((Gt2Document forClass: self) gtTextFor: aView)
+	| aDocument |
+	aDocument := Gt2Document forClass: self. 
+	^ (aDocument gtTextFor: aView)
 		title: 'Comment';
-		priority: -1
+		priority: -1;
+		action: [ :anAction | 
+			aDocument gtSaveActionFor: anAction ];
+		action: [ :anAction | 
+			aDocument gtShowMarkupActionFor: anAction ]
+		
 ]

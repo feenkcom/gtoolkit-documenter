@@ -58,7 +58,7 @@ PRFigure >> cachedPreview: anElement [
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRFigure >> cursorLeftInText: aBlRope [
-	self isReferenceDefined
+	self doesReferenceExist
 		ifTrue: [ self utility hideMarkupsInText: aBlRope start: self start stop: self stop ]
 		ifFalse: [ 
 			self hasChildren 
@@ -69,6 +69,11 @@ PRFigure >> cursorLeftInText: aBlRope [
 { #category : #'*GToolkit-NewDocumenter' }
 PRFigure >> cursorNearbyInText: aBlRope [
 	self utility cursorNeabyInText: aBlRope forNode: self
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
+PRFigure >> doesReferenceExist [
+	^ self figureFileReference ifNil: false ifNotNil: #exists
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
@@ -95,12 +100,7 @@ PRFigure >> heightParameterValue [
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRFigure >> isPreviewDefined [
-	^ self isReferenceDefined
-]
-
-{ #category : #'*GToolkit-NewDocumenter' }
-PRFigure >> isReferenceDefined [
-	^ self figureFileReference ifNil: false ifNotNil: #exists
+	^ self doesReferenceExist
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
@@ -143,7 +143,7 @@ PRFigure >> styleTextWithoutMarkup: aBlRope [
 	super styleTextWithoutMarkup: aBlRope.
 	self utility subtleMarkupsInText: aBlRope start: self start stop: self stop.
 	self utility styleLinkInText: aBlRope forNode: self.
-	self isReferenceDefined
+	self doesReferenceExist
 		ifTrue: [ self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self ]
 		ifFalse: [ 
 			self hasChildren 

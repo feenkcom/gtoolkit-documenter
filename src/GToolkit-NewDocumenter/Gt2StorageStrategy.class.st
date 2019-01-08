@@ -32,6 +32,13 @@ Gt2StorageStrategy class >> null [
 ]
 
 { #category : #accessing }
+Gt2StorageStrategy >> basename [
+	"Return a string representing the document filename"
+	<return: #String>
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
 Gt2StorageStrategy >> evaluationReceiver [
 	"Return an object that is used as a receiver (self) in a codeblock (code snippet) evalution"
 	<return: #Object>
@@ -48,6 +55,7 @@ Gt2StorageStrategy >> exists [
 Gt2StorageStrategy >> name [
 	"Return a string representing the stored document"
 	<return: #String>
+	^ self subclassResponsibility
 ]
 
 { #category : #actions }

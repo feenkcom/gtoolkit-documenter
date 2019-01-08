@@ -23,6 +23,13 @@ Gt2NoStorageStrategy class >> uniqueInstance [
 ]
 
 { #category : #accessing }
+Gt2NoStorageStrategy >> basename [
+	"Return a string representing the document filename"
+	<return: #String>
+	^ 'index.', GtFileUtilityConstants pillarExtension
+]
+
+{ #category : #accessing }
 Gt2NoStorageStrategy >> evaluationReceiver [
 	"Return an object that is used as a receiver (self) in a codeblock (code snippet) evalution"
 	<return: #Object>

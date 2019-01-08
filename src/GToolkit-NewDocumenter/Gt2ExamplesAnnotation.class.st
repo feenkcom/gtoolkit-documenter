@@ -27,6 +27,17 @@ Gt2ExamplesAnnotation class >> tag [
 	^ self constants examplesAnnotationName
 ]
 
+{ #category : #visiting }
+Gt2ExamplesAnnotation >> accept: aVisitor [
+	^ aVisitor visitGt2ExamplesAnnotation: self
+]
+
+{ #category : #'as yet unclassified' }
+Gt2ExamplesAnnotation >> allExamples [ 
+	<return: #Array of: #GtExampleResult >
+	^ self exampleGroup examples
+]
+
 { #category : #'private - cache' }
 Gt2ExamplesAnnotation >> annotationCacheValueClass [
 	^ Gt2ExamplesAnnotationCacheValue
@@ -70,6 +81,11 @@ Gt2ExamplesAnnotation >> cursorLeftInText: aBlRope [
 { #category : #'accessing - parameter values' }
 Gt2ExamplesAnnotation >> defaultShowSelector [
 	^ self constants defaultExamplesShowSelector
+]
+
+{ #category : #testing }
+Gt2ExamplesAnnotation >> doesReferenceExist [
+	^ self hasExample
 ]
 
 { #category : #'private - cache' }
@@ -117,8 +133,9 @@ Gt2ExamplesAnnotation >> handleMethodAnnouncement: aMethodModified [
 	((self 
 		isAffectedByMethodChange: aMethodModified selector 
 		of: aMethodModified classAffected originalName) or: [ 
-			 self isAffectedByPackageChange: aMethodModified methodPackage name ])
-				ifFalse: [ ^ self ].
+			aMethodModified methodPackage notNil and: [ 
+				self isAffectedByPackageChange: aMethodModified methodPackage name ] ])
+					ifFalse: [ ^ self ].
 	self rebuildExampleGroup
 ]
 
@@ -185,11 +202,6 @@ Gt2ExamplesAnnotation >> isAffectedByPackageChange: aPackageName [
 
 { #category : #testing }
 Gt2ExamplesAnnotation >> isPreviewDefined [
-	^ self hasExample
-]
-
-{ #category : #testing }
-Gt2ExamplesAnnotation >> isReferenceDefined [
 	^ self hasExample
 ]
 

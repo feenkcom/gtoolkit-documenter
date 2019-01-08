@@ -56,32 +56,23 @@ Gt2Document >> announcer [
 { #category : #converting }
 Gt2Document >> asElement [
 	<return: #BlElement>
-	^ self asElementWithoutSaveAction
-		addChild: (BlElement new 
+	| anElement aToolbar |
+	anElement := self asElementWithoutSaveAction.
+	aToolbar := BlElement new 
 			layout: BlLinearLayout horizontal;
 			constraintsDo: [ :c | 
 				c ignoreByLayout.
 				c vertical fitContent.
 				c horizontal fitContent.
 				c ignored horizontal alignLeft.
-				c ignored vertical alignBottom ];
-			addChild: (BrButton new
-				look: BrGlamorousButtonWithIconLook;
-				icon: self constants saveButtonIcon asElement;
-				label: self constants saveButtonLabel;
-				action: [ self store ]);
-			addChild: (BlElement new 
-					viewModel: (BrToggleModel new
-						icon: (self isReadingMode 
-							ifTrue: [ self constants readingModeIcon asElement ]
-							ifFalse: [ self constants editingModeIcon asElement ] ) );
-					look: (BrMaterialToggleIconifiedLook new 
-						when: BrToggleActivatedEvent do: [ :anEvent | 
-							anEvent currentTarget widget viewModel icon: self constants editingModeIcon asElement.
-							self displayMarkup ];
-						when: BrToggleDeactivatedEvent do: [ :anEvent | 
-							anEvent currentTarget widget viewModel icon: self constants readingModeIcon asElement.
-							self hideMarkup ]) + BrGlamorousButtonWithIconLook - BrShadowLook))
+				c ignored vertical alignBottom ].
+	self gtActions do: [ :eachAction | 
+		(eachAction target isForViewDefinedIn: #gtTextFor:) ifTrue: [ 
+			eachAction 
+				asElement: [ :anActionElement | aToolbar addChild: anActionElement ]
+				withHostElement: anElement ] ].
+	anElement addChild: aToolbar.
+	^ anElement
 ]
 
 { #category : #converting }
@@ -105,6 +96,12 @@ Gt2Document >> asElementWithoutSaveAction [
 	anElement userData at: self constants documentUserDataKey put: self.
 	self installCompleterForEditorElement: anEditorElement.
 	^ anElement
+]
+
+{ #category : #accessing }
+Gt2Document >> basename [
+	<return: #String>
+	^ self storage basename
 ]
 
 { #category : #cache }
@@ -202,6 +199,7 @@ Gt2Document >> gtResourcesFor: aView [
 	<gtView>
 	^ aView mondrian
 		title: 'Resources';
+		priority: 10;
 		painting: [ :aMondrian | 
 			| aResource |
 			aResource := self resourcer includeDocuments; allDepth; get.
@@ -235,22 +233,39 @@ Gt2Document >> gtResourcesFor: aView [
 ]
 
 { #category : #'gt-extension' }
+Gt2Document >> gtSaveActionFor: anAction [
+	<gtAction>
+	^ anAction button
+		icon: self constants saveButtonIcon asElement;
+		forViewDefinedIn: #gtTextFor:;
+		priority: 1;
+		action: [ self store ]
+]
+
+{ #category : #'gt-extension' }
+Gt2Document >> gtShowMarkupActionFor: anAction [
+	<gtAction>
+	^ anAction toggle
+		icon: self constants editButtonIcon;
+		forViewDefinedIn: #gtTextFor:;
+		priority: 3;
+		activatedAction: [ self displayMarkup ];
+		deactivatedAction: [ self hideMarkup ]
+]
+
+{ #category : #'gt-extension' }
 Gt2Document >> gtTextFor: aView [
 	<gtView>
 	self editor ifNil: [ ^ aView empty ].
 	^ aView explicit
 		title: 'Document';
+		priority: 1;
 		stencil: [ self asElementWithoutSaveAction ];
 		actionButtonIcon: BrGlamorousIcons tree 
 			action: [ :aWidget | 
 				aWidget fireEvent: (GtPhlowObjectToSpawn new
 					object: self parse;
-					sourceElement: aWidget) ];
-		actionButtonIcon: self constants applyButtonIcon 
-			action: [ self store ];
-		actionToggleIcon: self constants editButtonIcon 
-			activated: [ self displayMarkup ] 
-			deactivated: [ self hideMarkup ]
+					sourceElement: aWidget) ]
 ]
 
 { #category : #'announcement handling' }
@@ -336,7 +351,7 @@ Gt2Document >> parse [
 	"Message #isPetit2Failure helps to distinguish between a parsed document or a parser error"
 	<return: #PRDocument or: #PP2Failure>
 	^ PRValidation beSilentDuring: [ 
-		self pillarParser parse: self text asString ].
+		self pillarParser parse: self string ].
 ]
 
 { #category : #utility }
@@ -388,10 +403,15 @@ Gt2Document >> strategy: aGt2StorageStrategy [
 	storageStrategy := aGt2StorageStrategy
 ]
 
+{ #category : #accessing }
+Gt2Document >> string [
+	<return: #String>
+	^ self text asString
+]
+
 { #category : #actions }
 Gt2Document >> styleTextRequest [
 	styleTextProcess request.
-	"self editor styleText."
 ]
 
 { #category : #subscriptions }

@@ -9,7 +9,8 @@ Class {
 	#traits : 'TGt2DocumentConstants + TBlDebug',
 	#classTraits : 'TGt2DocumentConstants classTrait + TBlDebug classTrait',
 	#instVars : [
-		'memorySystem'
+		'memorySystem',
+		'tempDirectory'
 	],
 	#category : #'GToolkit-NewDocumenter-Examples'
 }
@@ -539,38 +540,6 @@ Gt2DocumentExamples >> defaultDocument [
 	self assert: aDocument isSubscribedToSystem not.
 	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument) not.
 	^ aDocument
-]
-
-{ #category : #demo }
-Gt2DocumentExamples >> demoDocument [
-	<gtExample>
-	^ Gt2Document new fileReference: self demoFileReference; read.
-]
-
-{ #category : #'document updates' }
-Gt2DocumentExamples >> demoDocumentUpdateError [
-	<gtExample>
-	| aDocument |
-	aDocument := Gt2Document new fileReference: self demoFileReference; read.
-	2 timesRepeat: [ 
-		Object subclass: #DmAbAddressFoo
-			instanceVariableNames: 'city country telephone'
-			classVariableNames: ''
-			package: 'AddressBookFoo'.
-		4 milliSeconds wait.
-		self class environment removeClassNamed: #DmAbAddressFoo.
-		4 milliSeconds wait.
-	 ].
-	^ aDocument
-]
-
-{ #category : #demo }
-Gt2DocumentExamples >> demoFileReference [
-	<gtExample>
-	^ self constants icebergRepositoriesLocation
-			/ 'feenkcom'/ 'gtoolkit-demos' 
-			/ 'doc' / 'tutorial' 
-			/ 'smalltalks-2018-addressbook' / 'example-driven-development.pillar' 
 ]
 
 { #category : #'method - existing one' }
@@ -1161,7 +1130,7 @@ Gt2DocumentExamples >> figureFileName [
 { #category : #figure }
 Gt2DocumentExamples >> figureFileReference [
 	<gtExample>
-	^ memorySystem addFileNamed: self figureFileName  withContent: self figureContent
+	^ memorySystem addFileNamed: self figureFileName withContent: self figureContent
 ]
 
 { #category : #figure }
@@ -1219,6 +1188,11 @@ Gt2DocumentExamples >> initialize [
 	super initialize.
 	memorySystem := GtFileSystemExamples new 
 		rootDirectoryName: UUID new asString.
+]
+
+{ #category : #initialization }
+Gt2DocumentExamples >> initializeUsingPhysicalDisk [
+	memorySystem initializeUsingPhysicalDisk
 ]
 
 { #category : #'file reference document' }
@@ -1436,8 +1410,8 @@ Gt2DocumentExamples >> resourcerWithIcebergFile [
 	anIcebergFile := aCollectionOfIcebergFiles first.
 	self assert: anIcebergFile name equals: self icebergFileName.
 	self assert: anIcebergFile source equals: aDocument.
-	self assert: anIcebergFile document notNil.
-	self assert: anIcebergFile document exists.
+	self assert: anIcebergFile document notNil description: 'Iceberg document should be non-nil'.
+	self assert: anIcebergFile document exists description: 'Iceberg document should exist'.
 	^ anIcebergFile
 ]
 

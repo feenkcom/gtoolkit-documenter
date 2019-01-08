@@ -3,8 +3,15 @@ Extension { #name : #FileReference }
 { #category : #'*GToolkit-NewDocumenter' }
 FileReference >> gtDocumentFor: aView [
 	<gtView>
-	(#('pier' 'pillar') includes: self extension) ifFalse: [ ^ aView empty ].
+	| aDocument |
+	(#('pier' 'pillar') includes: self extension) ifFalse: [ ^ 
+aView empty ].
 
-	^ ((Gt2Document forFile: self) gtTextFor: aView)
-		priority: 9
+	aDocument := Gt2Document forFile: self.
+	^ (aDocument gtTextFor: aView)
+		priority: 9;
+		action: [ :anAction | 
+			aDocument gtSaveActionFor: anAction ];
+		action: [ :anAction | 
+			aDocument gtShowMarkupActionFor: anAction ]
 ]
