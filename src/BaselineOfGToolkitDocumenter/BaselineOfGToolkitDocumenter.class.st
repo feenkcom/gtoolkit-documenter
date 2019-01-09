@@ -41,7 +41,7 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 				spec repository: 'github://feenkcom/pillar:feenk/src' ];
 			baseline: 'DeepTraverser' with: [
 				spec repository: 'github://feenkcom/DeepTraverser/src' ];
-			baseline: 'Xdoc' with: [
+			baseline: 'XdocClient' with: [
 				spec repository: 'github://feenkcom/xdoc/src' ].
 		spec 
 			package: 'GToolkit-Documenter' with: [
@@ -57,6 +57,6 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 			package: 'GToolkit-NewDocumenter' with: [
 				spec requires: #(#PillarExporter #GToolkitCoder #GToolkitCompleter #GToolkitUtility #GToolkitVariableBindings #GToolkitExamples #GToolkitInspector ). ];
 			package: 'GToolkit-NewDocumenter-XDoc' with: [
-				spec requires: #('GToolkit-NewDocumenter' #GToolkitUtility #Xdoc ). ]. ].
+				spec requires: #('GToolkit-NewDocumenter' #GToolkitUtility #XdocClient ). ]. ].
 
 ]
