@@ -10,7 +10,8 @@ Class {
 		'isSubscribedToSystem',
 		'variableBindings',
 		'storageStrategy',
-		'styleTextProcess'
+		'styleTextProcess',
+		'pillarParser'
 	],
 	#classVars : [
 		'PillarParser'
@@ -357,7 +358,8 @@ Gt2Document >> parse [
 { #category : #utility }
 Gt2Document >> pillarParser [
 	<return: #PRPillarParser>
-	^ self class pillarParser
+	^ pillarParser ifNil: [ 
+		pillarParser := PRPillarParser new optimize ]
 ]
 
 { #category : #private }
