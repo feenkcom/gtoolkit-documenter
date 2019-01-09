@@ -60,12 +60,12 @@ XdDocumentExamples >> writeDocumentWithClassDefinitionChanges [
 		equals: XdHtmlType.
 	self
 		assert: aXdFile manifest documents second components size
-		equals: 2.
+		equals: 1.
 	self
 		assert: aXdFile manifest documents second components first link
 		equals: '3'.
 	"Pillar source file"
-	self assert: aXdFile manifest attachments size equals: 4.
+	self assert: aXdFile manifest attachments size equals: 3.
 	self assert: aXdFile manifest attachments first id equals: '1'.
 	self
 		assert: aXdFile manifest attachments first fileName
@@ -86,13 +86,10 @@ XdDocumentExamples >> writeDocumentWithClassDefinitionChanges [
 	self
 		assert: aXdFile manifest attachments third fileName
 		equals: XdConstants htmlIndexFile.
-	self
-		assert: aXdFile manifest attachments fourth fileName
-		equals: XdConstants cssIndexFile.
 	self assert: aXdFile manifest attachments third fileSize isZero not.
 
 	self assert: aXdFile exists.
-	self assert: aXdFile streamingStrategy zip members size equals: 5.
+	self assert: aXdFile streamingStrategy zip members size equals: 4.
 	^ aXdFile
 ]
 
@@ -126,12 +123,12 @@ XdDocumentExamples >> writeDocumentWithExamples [
 		equals: XdHtmlType.
 	self
 		assert: aXdFile manifest documents second components size
-		equals: 2.
+		equals: 1.
 	self
 		assert: aXdFile manifest documents second components first link
 		equals: '2'.
 	"Pillar source file"
-	self assert: aXdFile manifest attachments size equals: 3.
+	self assert: aXdFile manifest attachments size equals: 2.
 	self assert: aXdFile manifest attachments first id equals: '1'.
 	self
 		assert: aXdFile manifest attachments first fileName
@@ -144,13 +141,10 @@ XdDocumentExamples >> writeDocumentWithExamples [
 	self
 		assert: aXdFile manifest attachments second fileName
 		equals: XdConstants htmlIndexFile.
-	self
-		assert: aXdFile manifest attachments third fileName
-		equals: XdConstants cssIndexFile.
 	self assert: aXdFile manifest attachments first fileSize isZero not.
 
 	self assert: aXdFile exists.
-	self assert: aXdFile streamingStrategy zip members size equals: 4.
+	self assert: aXdFile streamingStrategy zip members size equals: 3.
 	^ aXdFile
 ]
 
@@ -183,12 +177,12 @@ XdDocumentExamples >> writeDocumentWithExistingClass [
 		equals: XdHtmlType.
 	self
 		assert: aXdFile manifest documents second components size
-		equals: 2.
+		equals: 1.
 	self
 		assert: aXdFile manifest documents second components first link
 		equals: '2'.
 	"Pillar source file"
-	self assert: aXdFile manifest attachments size equals: 3.
+	self assert: aXdFile manifest attachments size equals: 2.
 	self assert: aXdFile manifest attachments first id equals: '1'.
 	self
 		assert: aXdFile manifest attachments first fileName
@@ -201,13 +195,10 @@ XdDocumentExamples >> writeDocumentWithExistingClass [
 	self
 		assert: aXdFile manifest attachments second fileName
 		equals: XdConstants htmlIndexFile.
-	self
-		assert: aXdFile manifest attachments third fileName
-		equals: XdConstants cssIndexFile.
 	self assert: aXdFile manifest attachments first fileSize isZero not.
 
 	self assert: aXdFile exists.
-	self assert: aXdFile streamingStrategy zip members size equals: 4.
+	self assert: aXdFile streamingStrategy zip members size equals: 3.
 	^ aXdFile
 ]
 
@@ -240,7 +231,7 @@ XdDocumentExamples >> writeDocumentWithExistingExample [
 		equals: XdHtmlType.
 	self
 		assert: aXdFile manifest documents second components size
-		equals: 3.
+		equals: 2.
 	self
 		assert: aXdFile manifest documents second components first link
 		equals: '2'.
@@ -248,7 +239,7 @@ XdDocumentExamples >> writeDocumentWithExistingExample [
 		assert: aXdFile manifest documents second components second link
 		equals: '3'.
 	"Pillar source file"
-	self assert: aXdFile manifest attachments size equals: 4.
+	self assert: aXdFile manifest attachments size equals: 3.
 	self assert: aXdFile manifest attachments first id equals: '1'.
 	self
 		assert: aXdFile manifest attachments first fileName
@@ -261,14 +252,11 @@ XdDocumentExamples >> writeDocumentWithExistingExample [
 	self
 		assert: aXdFile manifest attachments second fileName
 		equals: XdConstants htmlIndexFile.
-	self
-		assert: aXdFile manifest attachments third fileName
-		equals: XdConstants cssIndexFile.
 	self assert: aXdFile manifest attachments first fileSize isZero not.
 	"Example SVG file"
 	self assert: aXdFile manifest attachments third id equals: '3'.
 	self
-		assert: aXdFile manifest attachments fourth fileName
+		assert: aXdFile manifest attachments third fileName
 		equals: self constants exportedResultsDirectoryName, '/', 
 			(Gt2ExternalDataWriter initialCounterValue + 1) asString, '.', 
 			self constants exportedResultsExtension.
@@ -276,7 +264,7 @@ XdDocumentExamples >> writeDocumentWithExistingExample [
 
 	self assert: aXdFile streamingStrategy notNil.
 	self assert: aXdFile exists.
-	self assert: aXdFile streamingStrategy zip members size equals: 5.
+	self assert: aXdFile streamingStrategy zip members size equals: 4.
 	^ aXdFile
 ]
 
@@ -309,12 +297,12 @@ XdDocumentExamples >> writeDocumentWithExistingMethod [
 		equals: XdHtmlType.
 	self
 		assert: aXdFile manifest documents second components size
-		equals: 2.
+		equals: 1.
 	self
 		assert: aXdFile manifest documents second components first link
 		equals: '2'.
 	"Pillar source file"
-	self assert: aXdFile manifest attachments size equals: 3.
+	self assert: aXdFile manifest attachments size equals: 2.
 	self assert: aXdFile manifest attachments first id equals: '1'.
 	self
 		assert: aXdFile manifest attachments first fileName
@@ -327,12 +315,9 @@ XdDocumentExamples >> writeDocumentWithExistingMethod [
 	self
 		assert: aXdFile manifest attachments second fileName
 		equals: XdConstants htmlIndexFile.
-	self
-		assert: aXdFile manifest attachments third fileName
-		equals: XdConstants cssIndexFile.
 	self assert: aXdFile manifest attachments first fileSize isZero not.
 	self assert: aXdFile exists.
-	self assert: aXdFile streamingStrategy zip members size equals: 4.
+	self assert: aXdFile streamingStrategy zip members size equals: 3.
 	^ aXdFile
 ]
 
@@ -365,12 +350,12 @@ XdDocumentExamples >> writeDocumentWithIcebergFile [
 		equals: XdHtmlType.
 	self
 		assert: aXdFile manifest documents second components size
-		equals: 2.
+		equals: 1.
 	self
 		assert: aXdFile manifest documents second components first link
 		equals: '2'.
 	"Pillar source file"
-	self assert: aXdFile manifest attachments size equals: 3.
+	self assert: aXdFile manifest attachments size equals: 2.
 	self assert: aXdFile manifest attachments first id equals: '1'.
 	self
 		assert: aXdFile manifest attachments first fileName
@@ -384,11 +369,8 @@ XdDocumentExamples >> writeDocumentWithIcebergFile [
 		assert: aXdFile manifest attachments second fileName
 		equals: XdConstants htmlIndexFile.
 	self assert: aXdFile manifest attachments first fileSize isZero not.
-	self
-		assert: aXdFile manifest attachments third fileName
-		equals: XdConstants cssIndexFile.
 	self assert: aXdFile exists.
-	self assert: aXdFile streamingStrategy zip members size equals: 4.
+	self assert: aXdFile streamingStrategy zip members size equals: 3.
 	^ aXdFile
 ]
 
@@ -424,15 +406,15 @@ XdDocumentExamples >> writeDocumentWithImages [
 		equals: XdHtmlType.
 	self
 		assert: aXdFile manifest documents second components size
-		equals: 3.
+		equals: 2.
 	self
 		assert: aXdFile manifest documents second components first link
 		equals: '3'.
 	self
-		assert: aXdFile manifest documents second components third link
+		assert: aXdFile manifest documents second components second link
 		equals: '2'.
 	"Attachments"
-	self assert: aXdFile manifest attachments size equals: 4.
+	self assert: aXdFile manifest attachments size equals: 3.
 	"Pillar"
 	self assert: aXdFile manifest attachments first id equals: '1'.
 	self
@@ -456,11 +438,8 @@ XdDocumentExamples >> writeDocumentWithImages [
 		equals: XdConstants htmlIndexFile.
 	self
 		assert: aXdFile manifest attachments third fileSize isZero not.
-	self
-		assert: aXdFile manifest attachments fourth fileName
-		equals: XdConstants cssIndexFile.
 	self assert: aXdFile exists.
-	self assert: aXdFile streamingStrategy zip members size equals: 5.
+	self assert: aXdFile streamingStrategy zip members size equals: 4.
 	^ aXdFile
 ]
 
@@ -502,12 +481,12 @@ XdDocumentExamples >> writeEmptyDocument [
 		equals: XdHtmlType.
 	self
 		assert: aXdFile manifest documents second components size
-		equals: 2.
+		equals: 1.
 	self
 		assert: aXdFile manifest documents second components first link
 		equals: '2'.
 	"Attachments"
-	self assert: aXdFile manifest attachments size equals: 3.
+	self assert: aXdFile manifest attachments size equals: 2.
 	"Document source"
 	self assert: aXdFile manifest attachments first id equals: '1'.
 	self
@@ -524,11 +503,8 @@ XdDocumentExamples >> writeEmptyDocument [
 	self
 		assert: aXdFile manifest attachments second fileSize
 		equals: 0.
-	self
-		assert: aXdFile manifest attachments third fileName
-		equals: XdConstants cssIndexFile.
 	self assert: aXdFile exists.
-	self assert: aXdFile streamingStrategy zip members size equals: 4.
+	self assert: aXdFile streamingStrategy zip members size equals: 3.
 	^ aXdFile
 ]
 

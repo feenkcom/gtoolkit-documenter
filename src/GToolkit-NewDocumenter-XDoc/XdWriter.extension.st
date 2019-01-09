@@ -30,19 +30,6 @@ XdWriter >> attachExportedFiles: aDataWriter [
 ]
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
-XdWriter >> css [
-	^ '
-	a[aria-expanded=true] .fa-caret-right, a[aria-expanded=false] .fa-caret-down {
-  	 	display: none;
-	}
-	a .fa-caret-right, a .fa-caret-down {
-		padding-left: 5px;
-		color: #ccc;
-	}
-	'
-]
-
-{ #category : #'*GToolkit-NewDocumenter-XDoc' }
 XdWriter >> document: aDocument [
 	self
 		documentType: XdDocumenterType;
@@ -69,8 +56,7 @@ XdWriter >> documentHtml: aDocument [
 	anHtmlContent := aHtmlWriter write: aPRDocument.
 	self
 		documentType: XdHtmlType;
-		attachment: self constants htmlIndexFile text: anHtmlContent;
-		attachment: self constants cssIndexFile text: self css.
+		attachment: self constants htmlIndexFile text: anHtmlContent.
 	self reuseOrAddFigures: aDocument.
 	self attachExportedFiles: aDataWriter
 ]
