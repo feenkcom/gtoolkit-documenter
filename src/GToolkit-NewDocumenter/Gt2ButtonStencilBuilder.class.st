@@ -21,7 +21,7 @@ Gt2ButtonStencilBuilder >> action: anObject [
 
 { #category : #'api - instantiation' }
 Gt2ButtonStencilBuilder >> buildDefault [
-	^ Gt2RunButtonStencil new
+	^ Gt2ButtonStencil new
 		label: self label;
 		icon: self icon;
 		action: self action
