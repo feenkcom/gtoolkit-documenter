@@ -1,5 +1,5 @@
 Class {
-	#name : #Gt2RunButtonStencil,
+	#name : #Gt2ButtonStencil,
 	#superclass : #BrStencil,
 	#instVars : [
 		'action',
@@ -10,17 +10,17 @@ Class {
 }
 
 { #category : #accessing }
-Gt2RunButtonStencil >> action [
+Gt2ButtonStencil >> action [
 	^ action
 ]
 
 { #category : #accessing }
-Gt2RunButtonStencil >> action: aValuable [
+Gt2ButtonStencil >> action: aValuable [
 	action := aValuable
 ]
 
 { #category : #'api - instantiation' }
-Gt2RunButtonStencil >> create [
+Gt2ButtonStencil >> create [
 	| aLook |
 	aLook := BrGlamorousButtonWithIconLook.
 	self hasLabel ifTrue: [ 
@@ -31,41 +31,41 @@ Gt2RunButtonStencil >> create [
 		beSmall;
 		icon: self icon;
 		label: self label;
-		action: self action.
+		action: self action
 ]
 
 { #category : #testing }
-Gt2RunButtonStencil >> hasLabel [
+Gt2ButtonStencil >> hasLabel [
 	^ self label notNil and: [ self label isEmpty not ]
 ]
 
 { #category : #accessing }
-Gt2RunButtonStencil >> icon [
+Gt2ButtonStencil >> icon [
 	<return: #BlElement>
 
 	^ iconStencilBuilder asElement
 ]
 
 { #category : #accessing }
-Gt2RunButtonStencil >> icon: aStencilBuilder [
+Gt2ButtonStencil >> icon: aStencilBuilder [
 	iconStencilBuilder := aStencilBuilder asStencilBuilder
 ]
 
 { #category : #initialization }
-Gt2RunButtonStencil >> initialize [
+Gt2ButtonStencil >> initialize [
 	super initialize.
 
-	self icon: BrGlamorousIcons play.
-	self label: 'Run'.
+	self icon: BrGlamorousIcons playinspect.
+"	self label: 'Run'."
 	self action: [ :aWidget :aButtonModel | self inform: 'Executed' ]
 ]
 
 { #category : #accessing }
-Gt2RunButtonStencil >> label [
+Gt2ButtonStencil >> label [
 	^ label
 ]
 
 { #category : #accessing }
-Gt2RunButtonStencil >> label: aStringOrText [
+Gt2ButtonStencil >> label: aStringOrText [
 	label := aStringOrText
 ]
