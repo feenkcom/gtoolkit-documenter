@@ -10,14 +10,11 @@ Gt2Document >> gtXDocPublishActionFor: anAction [
 		popup: [ (XdPublishInfoStencilBuilder new 
 			info: (XdPublishInfo new
 				author: Author fullName;
-				publishAction: [ self publishXDoc ])) asElement
+				publishAction: [ :aPublishInfo | self publishXDocWithInfo: aPublishInfo ])) asElement
 					constraintsDo: [ :c | 
 					c padding: (BlInsets all: 5).
 					c vertical exact: 300.
-					c horizontal exact: 200 ]. ];
-		action: [ :aButton |
-			| aXdFile |
-			aXdFile := self publishXDoc. ]
+					c horizontal exact: 200 ]. ]
 ]
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
@@ -26,7 +23,22 @@ Gt2Document >> publishXDoc [
 ]
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
+Gt2Document >> publishXDocWithInfo: aXdPublishInfo [
+	| anXdFile |
+	anXdFile := XdWriter new
+		streamingStrategy: XdStreamingStrategy bytes;
+		document: self;
+		documentHtml: self;
+		title: aXdPublishInfo title asString;
+		authorName: aXdPublishInfo author asString;
+		description: aXdPublishInfo description asString;
+		write.
+	XdClient new publish: anXdFile
+]
+
+{ #category : #'*GToolkit-NewDocumenter-XDoc' }
 Gt2Document >> saveToXDoc [
+	<return: #XdFile>
 	^ XdWriter new
 		streamingStrategy: XdStreamingStrategy bytes;
 		document: self;
