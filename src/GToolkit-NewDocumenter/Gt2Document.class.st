@@ -13,16 +13,8 @@ Class {
 		'styleTextProcess',
 		'pillarParser'
 	],
-	#classVars : [
-		'PillarParser'
-	],
 	#category : #'GToolkit-NewDocumenter-Model'
 }
-
-{ #category : #cleanup }
-Gt2Document class >> cleanUp [
-	self resetPillarParser
-]
 
 { #category : #'instance creation' }
 Gt2Document class >> forClass: aClass [
@@ -32,19 +24,6 @@ Gt2Document class >> forClass: aClass [
 { #category : #'instance creation' }
 Gt2Document class >> forFile: aFileReference [
 	^ self new fileReference: aFileReference; read
-]
-
-{ #category : #cleanup }
-Gt2Document class >> pillarParser [
-	<return: #PRPillarParser>
-	^ PillarParser ifNil: [ 
-		PillarParser := PRPillarParser new optimize ]
-]
-
-{ #category : #cleanup }
-Gt2Document class >> resetPillarParser [
-	<script>
-	PillarParser := nil
 ]
 
 { #category : #announcer }
