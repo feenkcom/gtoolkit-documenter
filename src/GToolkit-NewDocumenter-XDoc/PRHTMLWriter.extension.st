@@ -47,16 +47,21 @@ PRHTMLWriter >> gtWriteSourceCodeForEntity: anEntityName with: aSourceCode [
 
 	| uniqueId language code |
 	uniqueId := 	self configuration gtUniqueIdGenerator next printString.
-	
-	canvas tag
-		name: 'div';
-		parameterAt: 'class' put: 'sourceCode';
-		with: [ 
+	aSourceCode 
+		ifNil: [ 
+			canvas tag
+				name: 'span';
+				with: [ canvas nextPutAll: anEntityName ].
+		 ];
+		ifNotNil: [ 
+			canvas tag
+				name: 'span';
+				parameterAt: 'class' put: 'sourceCode';
+				with: [ 
 					canvas tag
 						name: 'a';
 						parameterAt: 'href' put: '#' , uniqueId;
 						with: [ canvas nextPutAll: anEntityName ].
-					aSourceCode ifNotNil: [ 
 						canvas tag
 							name: 'div';
 							parameterAt: 'id' put: uniqueId;
@@ -78,9 +83,8 @@ PRHTMLWriter >> gtWriteSourceCodeForEntity: anEntityName with: aSourceCode [
 										].
 									].
 							].
-					]
-				].
-	canvas newLine.
+					].
+		 ].
 ]
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
