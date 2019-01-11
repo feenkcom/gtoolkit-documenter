@@ -89,17 +89,28 @@ PRHTMLWriter >> gtWriteSourceCodeForEntity: anEntityName with: aSourceCode [
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
 PRHTMLWriter >> visitGt2ChangesAnnotation: aGt2ChangesAnnotation [
-	| aContent |
+	| aContent language code |
 	aGt2ChangesAnnotation gtDocument: self configuration gtDocument.
 	aContent := aGt2ChangesAnnotation cachedChanges tutorialStateRope asString.
 	canvas tag
 		name: 'div';
 		parameterAt: 'class' put: 'changes';
 		with: [ 
-					canvas tag
-						name: 'pre';
-						with: [ canvas lines: aContent ].
+			language := PRSmalltalkScriptLanguage default.						
+			canvas tag
+				name: 'pre';
+				with: [
+					code := canvas tag
+						name: 'code';
+						yourself.
+					language := PRSmalltalkScriptLanguage default.
+					language isSyntaxHighlightingPossible
+						ifTrue: [ code parameterAt: 'class' put: language printString ].
+					code with: [ 
+						canvas lines: aContent
+					].
 				].
+			].
 	canvas newLine
 ]
 
