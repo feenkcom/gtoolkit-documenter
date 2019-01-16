@@ -218,9 +218,9 @@ PRCodeblock >> heightParameterValue [
 PRCodeblock >> newRunButtonAttribute [
 	^ Gt2ButtonAttribute new
 		beAppend;
-		stencil: (Gt2ButtonStencilBuilder new
+		stencil: [ (Gt2ButtonStencil new
 			label: self runButtonLabel;
-			action: self evaluationAction)
+			action: self evaluationAction) ]
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
@@ -278,10 +278,10 @@ PRCodeblock >> resultPreviewAttributes [
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> runButtonLabel [
-	<return: #String>
+	<return: #String or: nil>
 	(self label isString and: [ self label isEmpty not ])
 		ifTrue: [ ^ self label ].
-	^ Gt2DocumentConstants runButtonLabel
+	^ nil
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }

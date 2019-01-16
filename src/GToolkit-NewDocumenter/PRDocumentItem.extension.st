@@ -94,7 +94,7 @@ PRDocumentItem >> gtHTMLExportFor: aView [
 		stencil: [ 
 			BrEditorElement new 
 				editor: (BrTextEditor new
-					text: (PRHTMLWriter write: self) asRopedText readonly);
+					text: (GtHTMLWriter write: self) asRopedText readonly);
 				constraintsDo: [ :c | 
 					c horizontal matchParent.
 					c vertical matchParent ] ]

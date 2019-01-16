@@ -48,7 +48,7 @@ XdWriter >> documentHtml: aDocument [
 		assert: [ aPRDocument isPetit2Failure not ]
 		description: [ 'Documenter text cannot be parsed' ].
 	aDataWriter := Gt2ExternalDataWriter new.
-	aHtmlWriter := PRHTMLWriter new.
+	aHtmlWriter := GtHTMLWriter new.
 	aHtmlWriter configuration
 		gtDataWriter: aDataWriter;
 		gtUniqueIdGenerator: Gt2UniqueIdGenerator new;

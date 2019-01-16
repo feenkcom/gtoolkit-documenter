@@ -4,7 +4,7 @@ Extension { #name : #PRHTMLWriter }
 PRHTMLWriter >> gtWriteExampleCode: aGt2ExampleAnnotation [ 
 	canvas tag
 		name: 'figure';
-		parameterAt: 'class' put: 'gtexample-src';
+		parameterAt: 'class' put: 'sourceCode gtexample-src';
 		with: [ 
 					canvas tag
 						name: 'pre';
@@ -47,19 +47,25 @@ PRHTMLWriter >> gtWriteSourceCodeForEntity: anEntityName with: aSourceCode [
 
 	| uniqueId language code |
 	uniqueId := 	self configuration gtUniqueIdGenerator next printString.
-	
-	canvas tag
-		name: 'div';
-		parameterAt: 'class' put: 'sourceCode';
-		with: [ 
+	aSourceCode 
+		ifNil: [ 
+			canvas tag
+				name: 'span';
+				with: [ canvas nextPutAll: anEntityName ].
+		 ];
+		ifNotNil: [ 
+			canvas tag
+				name: 'span';
+				parameterAt: 'class' put: 'sourceCode';
+				with: [ 
 					canvas tag
 						name: 'a';
 						parameterAt: 'href' put: '#' , uniqueId;
 						with: [ canvas nextPutAll: anEntityName ].
-					aSourceCode ifNotNil: [ 
 						canvas tag
-							name: 'div';
+							name: 'span';
 							parameterAt: 'id' put: uniqueId;
+							parameterAt: 'class' put: 'codeBlock';
 							with: [
 								language := PRSmalltalkScriptLanguage default.
 								canvas tag
@@ -78,24 +84,34 @@ PRHTMLWriter >> gtWriteSourceCodeForEntity: anEntityName with: aSourceCode [
 										].
 									].
 							].
-					]
-				].
-	canvas newLine.
+					].
+		 ].
 ]
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
 PRHTMLWriter >> visitGt2ChangesAnnotation: aGt2ChangesAnnotation [
-	| aContent |
+	| aContent language code |
 	aGt2ChangesAnnotation gtDocument: self configuration gtDocument.
 	aContent := aGt2ChangesAnnotation cachedChanges tutorialStateRope asString.
 	canvas tag
 		name: 'div';
-		parameterAt: 'class' put: 'changes';
+		parameterAt: 'class' put: 'codeBlock changes';
 		with: [ 
-					canvas tag
-						name: 'pre';
-						with: [ canvas lines: aContent ].
+			language := PRSmalltalkScriptLanguage default.						
+			canvas tag
+				name: 'pre';
+				with: [
+					code := canvas tag
+						name: 'code';
+						yourself.
+					language := PRSmalltalkScriptLanguage default.
+					language isSyntaxHighlightingPossible
+						ifTrue: [ code parameterAt: 'class' put: language printString ].
+					code with: [ 
+						canvas lines: aContent
+					].
 				].
+			].
 	canvas newLine
 ]
 

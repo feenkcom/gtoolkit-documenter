@@ -61,7 +61,7 @@ Gt2Styler >> mode: aGt2StylerStrategy [
 { #category : #accessing }
 Gt2Styler >> parser [
 	<return: #PRPillarParser>
-	^ parser ifNil: [ parser := Gt2Document pillarParser ]
+	^ parser ifNil: [ parser := PRPillarParser new optimize ]
 ]
 
 { #category : #accessing }
