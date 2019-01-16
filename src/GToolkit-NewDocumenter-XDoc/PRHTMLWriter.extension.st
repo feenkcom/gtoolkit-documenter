@@ -4,7 +4,7 @@ Extension { #name : #PRHTMLWriter }
 PRHTMLWriter >> gtWriteExampleCode: aGt2ExampleAnnotation [ 
 	canvas tag
 		name: 'figure';
-		parameterAt: 'class' put: 'gtexample-src';
+		parameterAt: 'class' put: 'sourceCode gtexample-src';
 		with: [ 
 					canvas tag
 						name: 'pre';
@@ -65,6 +65,7 @@ PRHTMLWriter >> gtWriteSourceCodeForEntity: anEntityName with: aSourceCode [
 						canvas tag
 							name: 'span';
 							parameterAt: 'id' put: uniqueId;
+							parameterAt: 'class' put: 'codeBlock';
 							with: [
 								language := PRSmalltalkScriptLanguage default.
 								canvas tag
@@ -94,7 +95,7 @@ PRHTMLWriter >> visitGt2ChangesAnnotation: aGt2ChangesAnnotation [
 	aContent := aGt2ChangesAnnotation cachedChanges tutorialStateRope asString.
 	canvas tag
 		name: 'div';
-		parameterAt: 'class' put: 'changes';
+		parameterAt: 'class' put: 'codeBlock changes';
 		with: [ 
 			language := PRSmalltalkScriptLanguage default.						
 			canvas tag
