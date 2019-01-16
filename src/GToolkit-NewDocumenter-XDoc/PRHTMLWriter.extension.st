@@ -63,7 +63,7 @@ PRHTMLWriter >> gtWriteSourceCodeForEntity: anEntityName with: aSourceCode [
 						parameterAt: 'href' put: '#' , uniqueId;
 						with: [ canvas nextPutAll: anEntityName ].
 						canvas tag
-							name: 'div';
+							name: 'span';
 							parameterAt: 'id' put: uniqueId;
 							with: [
 								language := PRSmalltalkScriptLanguage default.
