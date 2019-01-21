@@ -4,7 +4,7 @@ Extension { #name : #PRHTMLWriter }
 PRHTMLWriter >> gtWriteExampleCode: aGt2ExampleAnnotation [ 
 	canvas tag
 		name: 'figure';
-		parameterAt: 'class' put: 'sourceCode gtexample-src';
+		parameterAt: 'class' put: 'codeBlock gtexample-src';
 		with: [ 
 					canvas tag
 						name: 'pre';
@@ -55,7 +55,7 @@ PRHTMLWriter >> gtWriteSourceCodeForEntity: anEntityName with: aSourceCode [
 		 ];
 		ifNotNil: [ 
 			canvas tag
-				name: 'div';
+				name: 'span';
 				parameterAt: 'class' put: 'sourceCode';
 				with: [ 
 					canvas tag
