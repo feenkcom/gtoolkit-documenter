@@ -123,9 +123,21 @@ Gt2ClassAnnotation >> registerToSystemChanges [
 ]
 
 { #category : #'api - style' }
+Gt2ClassAnnotation >> styleLinkButtonInText: aBlRope [
+	(aBlRope from: self start to: self stop) 
+		attribute: (Gt2ButtonAttribute new
+						beAppend;
+						stencil: (Gt2ButtonStencilBuilder new
+							label: self referencedClass name;
+							icon: BrGlamorousIcons inspect;
+							action: [ :button | button phlow spawnObject: self referencedClass realClass] ))
+]
+
+{ #category : #'api - style' }
 Gt2ClassAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
+	self styleLinkButtonInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 	self registerToSystemChanges
 ]
@@ -134,6 +146,7 @@ Gt2ClassAnnotation >> styleTextWithMarkup: aBlRope [
 Gt2ClassAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
-	(self utility mayHideAllButLinkInText: aBlRope forAnnotation: self) ifFalse: [ ^ self ].
-	self utility styleCursorAttributeInText: aBlRope forNode: self.
+	self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self.
+"	(self utility mayHideAllButLinkInText: aBlRope forAnnotation: self) ifFalse: [ ^ self ].
+"	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]
