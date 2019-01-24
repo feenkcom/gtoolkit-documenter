@@ -25,7 +25,7 @@ ConfigurationForPillar >> gtDocument: aGt2Document [
 { #category : #'*GToolkit-NewDocumenter' }
 ConfigurationForPillar >> gtUniqueIdGenerator [
 	<return: #Gt2UniqueIdGenerator>
-	^ self propertyAt: #gtUniqueIdGenerator
+	^ self propertyAt: #gtUniqueIdGenerator ifAbsentPut: [ Gt2UniqueIdGenerator new ]
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
