@@ -11,6 +11,7 @@ Class >> gtDocumentFor: aView [
 		action: [ :anAction | 
 			aDocument gtSaveActionFor: anAction ];
 		action: [ :anAction | 
-			aDocument gtShowMarkupActionFor: anAction ]
-		
+			aDocument gtShowMarkupActionFor: anAction ];
+		action: [:anAction |
+			aDocument gtXDocPublishActionFor: anAction ]
 ]
