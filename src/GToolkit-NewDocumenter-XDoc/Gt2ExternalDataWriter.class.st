@@ -54,7 +54,12 @@ Gt2ExternalDataWriter >> exportExampleResultOf: aGt2ExampleAnnotation to: aRelat
 			aFileReference ensureDelete.
 			aFileReference parent ensureCreateDirectory.
 			
-			BlPngExporter new element: aContainer; fileName: aFileReference; export ].
+			BlExporter png 
+				scaled: 2;
+				background: Color white;
+				element: aContainer; 
+				fileName: aFileReference; 
+				export ].
 ]
 
 { #category : #initialization }

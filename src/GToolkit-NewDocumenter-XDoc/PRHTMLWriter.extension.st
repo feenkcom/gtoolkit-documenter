@@ -55,15 +55,14 @@ PRHTMLWriter >> gtWriteSourceCodeForEntity: anEntityName with: aSourceCode [
 		 ];
 		ifNotNil: [ 
 			canvas tag
-				name: 'span';
+				name: 'div';
 				parameterAt: 'class' put: 'sourceCode';
 				with: [ 
 					canvas tag
 						name: 'a';
-						"parameterAt: 'href' put: '#' , uniqueId;"
 						with: [ canvas nextPutAll: anEntityName ].
 						canvas tag
-							name: 'span';
+							name: 'div';
 							parameterAt: 'id' put: uniqueId;
 							parameterAt: 'class' put: 'codeBlock';
 							with: [

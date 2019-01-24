@@ -89,7 +89,7 @@ XdDocumentExamples >> writeDocumentWithClassDefinitionChanges [
 	self assert: aXdFile manifest attachments third fileSize isZero not.
 
 	self assert: aXdFile exists.
-	self assert: aXdFile streamingStrategy zip members size equals: 4.
+	self assert: aXdFile streamingStrategy zip members size equals: 5.
 	^ aXdFile
 ]
 
@@ -144,7 +144,7 @@ XdDocumentExamples >> writeDocumentWithExamples [
 	self assert: aXdFile manifest attachments first fileSize isZero not.
 
 	self assert: aXdFile exists.
-	self assert: aXdFile streamingStrategy zip members size equals: 3.
+	self assert: aXdFile streamingStrategy zip members size equals: 4.
 	^ aXdFile
 ]
 
@@ -198,7 +198,7 @@ XdDocumentExamples >> writeDocumentWithExistingClass [
 	self assert: aXdFile manifest attachments first fileSize isZero not.
 
 	self assert: aXdFile exists.
-	self assert: aXdFile streamingStrategy zip members size equals: 3.
+	self assert: aXdFile streamingStrategy zip members size equals: 4.
 	^ aXdFile
 ]
 
@@ -264,7 +264,7 @@ XdDocumentExamples >> writeDocumentWithExistingExample [
 
 	self assert: aXdFile streamingStrategy notNil.
 	self assert: aXdFile exists.
-	self assert: aXdFile streamingStrategy zip members size equals: 4.
+	self assert: aXdFile streamingStrategy zip members size equals: 5.
 	^ aXdFile
 ]
 
@@ -317,7 +317,7 @@ XdDocumentExamples >> writeDocumentWithExistingMethod [
 		equals: XdConstants htmlIndexFile.
 	self assert: aXdFile manifest attachments first fileSize isZero not.
 	self assert: aXdFile exists.
-	self assert: aXdFile streamingStrategy zip members size equals: 3.
+	self assert: aXdFile streamingStrategy zip members size equals: 4.
 	^ aXdFile
 ]
 
@@ -370,7 +370,7 @@ XdDocumentExamples >> writeDocumentWithIcebergFile [
 		equals: XdConstants htmlIndexFile.
 	self assert: aXdFile manifest attachments first fileSize isZero not.
 	self assert: aXdFile exists.
-	self assert: aXdFile streamingStrategy zip members size equals: 3.
+	self assert: aXdFile streamingStrategy zip members size equals: 4.
 	^ aXdFile
 ]
 
@@ -439,7 +439,7 @@ XdDocumentExamples >> writeDocumentWithImages [
 	self
 		assert: aXdFile manifest attachments third fileSize isZero not.
 	self assert: aXdFile exists.
-	self assert: aXdFile streamingStrategy zip members size equals: 4.
+	self assert: aXdFile streamingStrategy zip members size equals: 5.
 	^ aXdFile
 ]
 
@@ -504,7 +504,7 @@ XdDocumentExamples >> writeEmptyDocument [
 		assert: aXdFile manifest attachments second fileSize
 		equals: 0.
 	self assert: aXdFile exists.
-	self assert: aXdFile streamingStrategy zip members size equals: 3.
+	self assert: aXdFile streamingStrategy zip members size equals: 4.
 	^ aXdFile
 ]
 
