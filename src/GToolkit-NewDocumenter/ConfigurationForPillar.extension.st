@@ -3,7 +3,7 @@ Extension { #name : #ConfigurationForPillar }
 { #category : #'*GToolkit-NewDocumenter' }
 ConfigurationForPillar >> gtDataWriter [
 	<return: #Gt2ExternalDataWriter>
-	^ self propertyAt: #gtDataWriter: ifAbsentPut: [ Gt2ExternalDataWriter new ]
+	^ self propertyAt: #gtDataWriter ifAbsentPut: [ Gt2ExternalDataWriter new ]
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }

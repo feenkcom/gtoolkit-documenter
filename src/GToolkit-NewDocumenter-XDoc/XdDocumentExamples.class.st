@@ -205,7 +205,6 @@ XdDocumentExamples >> writeDocumentWithExistingClass [
 { #category : #example }
 XdDocumentExamples >> writeDocumentWithExistingExample [
 	<gtExample>
-	<noTest>
 	
 	| aXdFile aDocument |
 	aDocument := documentExamples documentWithExistingExample.
@@ -447,7 +446,6 @@ XdDocumentExamples >> writeDocumentWithImages [
 { #category : #figure }
 XdDocumentExamples >> writeDocumentWithImagesOnPhysicalDisk [
 	<gtExample>
-	<noTest>
 
 	documentExamples initializeUsingPhysicalDisk.
 	^ self writeDocumentWithImages
