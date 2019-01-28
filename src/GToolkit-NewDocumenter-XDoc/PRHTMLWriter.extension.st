@@ -55,33 +55,29 @@ PRHTMLWriter >> gtWriteSourceCodeForEntity: anEntityName with: aSourceCode [
 		 ];
 		ifNotNil: [ 
 			canvas tag
-				name: 'div';
+				name: 'span';
 				parameterAt: 'class' put: 'sourceCode';
 				with: [ 
 					canvas tag
 						name: 'a';
 						with: [ canvas nextPutAll: anEntityName ].
 						canvas tag
-							name: 'div';
+							name: 'span';
 							parameterAt: 'id' put: uniqueId;
 							parameterAt: 'class' put: 'codeBlock';
 							with: [
 								language := PRSmalltalkScriptLanguage default.
-								canvas tag
-									name: 'pre';
-									with: [
-										code := canvas tag
-											name: 'code';
-											yourself.
-										language := PRSmalltalkScriptLanguage default.
-										language isSyntaxHighlightingPossible
-											ifTrue: [ code parameterAt: 'class' put: language printString ].
-										code with: [ 
-											canvas newLine.
-											canvas lines: aSourceCode.
-											canvas newLine.
-										].
-									].
+								code := canvas tag
+									name: 'code';
+									yourself.
+								language := PRSmalltalkScriptLanguage default.
+								language isSyntaxHighlightingPossible
+									ifTrue: [ code parameterAt: 'class' put: language printString ].
+								code with: [ 
+									canvas newLine.
+									canvas lines: aSourceCode.
+									canvas newLine.
+								].
 							].
 					].
 		 ].
