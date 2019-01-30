@@ -27,7 +27,7 @@ GtDocument >> documentParts [
 
 { #category : #accessing }
 GtDocument >> globalBindings [
-	<return: #GtPlaygroundBindings>
+	<return: #GtSnippetBindings>
 	^ globalBindings
 ]
 
@@ -41,7 +41,7 @@ GtDocument >> gtDocumentPartsFor: aView [
 GtDocument >> initialize [
 	super initialize.
 	documentParts := GtDocumentParts new.
-	globalBindings := GtPlaygroundBindings new.
+	globalBindings := GtSnippetBindings new.
 	globalBindings 
 		at: GtDocumenterConstants resultsVariableName 
 		put: documentParts.

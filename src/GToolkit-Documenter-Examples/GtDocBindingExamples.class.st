@@ -24,10 +24,10 @@ GtDocBindingExamples >> defaultHighlightingBindingStrategy [
 ]
 
 { #category : #'binding strategy' }
-GtDocBindingExamples >> defaultPlaygroundBindingStrategy [
+GtDocBindingExamples >> defaultSnippetBindingStrategy [
 	<gtExample>
 	<label: 'Default playground binding strategy'>
-	^ GtPlaygroundBindingStrategy new
+	^ GtSnippetBindingStrategy new
 ]
 
 { #category : #document }
@@ -146,19 +146,11 @@ GtDocBindingExamples >> outsFromEmptyDocument [
 	^ outs value
 ]
 
-{ #category : #'binding strategy' }
-GtDocBindingExamples >> playgroundBindingStrategy [
-	<gtExample>
-	<label: 'Initialized playground bindings'>
-	^ self defaultPlaygroundBindingStrategy
-		bindings: self playgroundBindings
-]
-
 { #category : #bindings }
 GtDocBindingExamples >> playgroundBindings [
 	<gtExample>
 	<label: 'Default playground bindings'>
-	^ GtPlaygroundBindings new
+	^ GtSnippetBindings new
 ]
 
 { #category : #'out bindings' }
@@ -198,11 +190,11 @@ GtDocBindingExamples >> queryDefaultHighlightingBindingStrategy [
 ]
 
 { #category : #'binding strategy' }
-GtDocBindingExamples >> queryDefaultPlaygroundBindingStrategy [
+GtDocBindingExamples >> queryDefaultSnippetBindingStrategy [
 	<gtExample>
 	<label: 'Query default playground binding strategy'>
 	| strategy result |
-	strategy := self defaultPlaygroundBindingStrategy.
+	strategy := self defaultSnippetBindingStrategy.
 	result := strategy bindingOf: self variableOneName.
 	self assert: result isNil.
 	^ strategy
@@ -260,7 +252,7 @@ GtDocBindingExamples >> queryPlaygroundBindingStrategy [
 	<gtExample>
 	<label: 'Query playground binding strategy'>
 	| strategy result |
-	strategy := self playgroundBindingStrategy.
+	strategy := self snippetBindingStrategy.
 	result := strategy bindingOf: self variableOneName.
 	self assert: result notNil.
 	self assert: result key equals: self variableOneName.
@@ -330,6 +322,14 @@ GtDocBindingExamples >> setPlaygroundBindings [
 	self assert: result value equals: 42.
 	self assert: result key equals: self variableOneName.
 	^ bindings
+]
+
+{ #category : #'binding strategy' }
+GtDocBindingExamples >> snippetBindingStrategy [
+	<gtExample>
+	<label: 'Initialized playground bindings'>
+	^ self defaultSnippetBindingStrategy
+		bindings: self playgroundBindings
 ]
 
 { #category : #accessing }

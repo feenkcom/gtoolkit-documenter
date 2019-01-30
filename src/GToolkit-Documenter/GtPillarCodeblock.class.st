@@ -14,7 +14,7 @@ GtPillarCodeblock >> documentClass [
 
 { #category : #actions }
 GtPillarCodeblock >> executeWithPlaygroundStrategy [
-	self executeWithStrategy: GtPlaygroundBindingStrategy new
+	self executeWithStrategy: GtSnippetBindingStrategy new
 ]
 
 { #category : #actions }
