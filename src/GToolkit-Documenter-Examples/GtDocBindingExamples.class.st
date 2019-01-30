@@ -20,7 +20,7 @@ GtDocBindingExamples >> codeSnippetWithPlaygroundBindings [
 GtDocBindingExamples >> defaultHighlightingBindingStrategy [
 	<gtExample>
 	<label: 'Default highlighting binding strategy'>
-	^ GtHighlightingBindingStrategy new
+	^ GtBindingStrategy new
 ]
 
 { #category : #'binding strategy' }

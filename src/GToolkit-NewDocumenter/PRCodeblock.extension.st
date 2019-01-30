@@ -363,7 +363,7 @@ PRCodeblock >> styleScriptInText: aBlText [
 PRCodeblock >> styleSmalltalkInText: aBlRope [
 	| styler strategy |
 	styler := BrRBTextStyler new.
-	strategy := GtHighlightingBindingStrategy new
+	strategy := GtBindingStrategy new
 		bindings: self gtDocument variableBindings.
 	styler workspace: strategy.
 	styler

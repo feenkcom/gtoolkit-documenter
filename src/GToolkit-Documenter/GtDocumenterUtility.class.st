@@ -68,7 +68,7 @@ GtDocumenterUtility class >> newPharoEditorElementFor: aBlText [
 		BlFontGenericFamilyAttribute monospace beNotOverwritableByStyler.
 		(BlFontSizeAttribute size: 14) beNotOverwritableByStyler }.
 	aTextEditor := BrTextEditor new.
-	aTextEditor styler: (BrRBTextStyler new workspace: GtHighlightingBindingStrategy new).
+	aTextEditor styler: (BrRBTextStyler new workspace: GtBindingStrategy new).
 	aTextEditor text: aBlText.
 	anEditorElement := BrEditorElement new.
 	^ anEditorElement editor: aTextEditor.

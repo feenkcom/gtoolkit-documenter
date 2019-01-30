@@ -25,7 +25,7 @@ GtPillarClassReferenceAttribute >> initialize [
 
 { #category : #'instance creation' }
 GtPillarClassReferenceAttribute >> newStyler [
-	^ BrRBTextStyler new workspace: GtHighlightingBindingStrategy new
+	^ BrRBTextStyler new workspace: GtBindingStrategy new
 ]
 
 { #category : #accessing }
