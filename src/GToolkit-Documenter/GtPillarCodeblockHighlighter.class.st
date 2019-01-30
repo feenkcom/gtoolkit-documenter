@@ -153,7 +153,7 @@ GtPillarCodeblockHighlighter >> styleScriptBody [
 GtPillarCodeblockHighlighter >> styleSmalltalkScriptBody [
 	| styler strategy |
 	styler := BrRBTextStyler new.
-	strategy := GtBindingStrategy
+	strategy := GtHighlightingBindingStrategy
 		bindings: self documentPart outBindings.
 	styler workspace: strategy.
 	styler
