@@ -16,6 +16,8 @@ XdWriter >> attachChanges: aDocument [
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
 XdWriter >> attachExportedFiles: aDataWriter [
+	| count |
+	count := 0.
 	aDataWriter allFiles
 		do: [ :eachFile | 
 			eachFile
@@ -26,7 +28,9 @@ XdWriter >> attachExportedFiles: aDataWriter [
 								fileNameOf: eachFile
 								relativeTo: aDataWriter rootDirectory)
 						stream: aStream
-						size: eachFile size ] ]
+						size: eachFile size
+						primary: (count = 0).
+						count := count + 1. ] ]
 ]
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
