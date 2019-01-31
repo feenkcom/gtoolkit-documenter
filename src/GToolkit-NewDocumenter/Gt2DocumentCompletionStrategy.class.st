@@ -437,7 +437,7 @@ Gt2DocumentCompletionStrategy >> scriptCompletionsFor: source at: anIndex [
 
 { #category : #private }
 Gt2DocumentCompletionStrategy >> scriptEndRegex [
-	^ '^\]\]\] *$' asRegex
+	^ '(\r|\n)\]\]\] *$' asRegex
 ]
 
 { #category : #private }
