@@ -271,7 +271,7 @@ Gt2Document >> initialize [
 	styleTextProcess := Gt2StyleTextProcess new document: self.
 	announcer := Announcer new.
 	isSubscribedToSystem := false.
-	variableBindings := GtPlaygroundBindings new.
+	variableBindings := GtSnippetBindings new.
 	cache := Dictionary new.
 	editor := BrTextEditor new.
 	editor styler: self defaultStyler.
