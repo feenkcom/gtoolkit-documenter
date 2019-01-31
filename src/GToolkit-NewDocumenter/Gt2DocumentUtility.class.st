@@ -254,10 +254,10 @@ Gt2DocumentUtility class >> styleCursorAttributeInText: aBlRope from: aStartInde
 	(aBlRope from: aStartIndex to: aStopIndex) attribute: (BrTextCursorAttribute new
 		enterAction: [ :aTextEditor |
 			aNode cursorNearbyInText: aTextEditor text.
-			aTextEditor invalidate: aStartIndex to: aStopIndex; update: aStartIndex to: aStopIndex ];
+			aTextEditor invalidate: aNode start to: aNode stop; update: aNode start to: aNode stop ];
 		leaveAction: [ :aTextEditor |
 			aNode cursorLeftInText: aTextEditor text.
-			aTextEditor invalidate: aStartIndex to: aStopIndex; update: aStartIndex to: aStopIndex ])
+			aTextEditor invalidate: aNode start to: aNode stop; update: aNode start to: aNode stop ])
 ]
 
 { #category : #'text styling' }
