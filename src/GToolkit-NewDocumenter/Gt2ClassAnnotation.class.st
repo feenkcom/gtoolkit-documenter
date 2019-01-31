@@ -38,7 +38,7 @@ Gt2ClassAnnotation >> browseReferenceFrom: anEvent [
 
 { #category : #'api - style' }
 Gt2ClassAnnotation >> cursorLeftInText: aBlRope [
-	self utility hideAllButLinkInText: aBlRope forAnnotation: self
+	self utility hideMarkupsInText: aBlRope start: self start stop: self stop
 ]
 
 { #category : #'accessing - parameter values' }
@@ -126,11 +126,11 @@ Gt2ClassAnnotation >> registerToSystemChanges [
 Gt2ClassAnnotation >> styleLinkButtonInText: aBlRope [
 	(aBlRope from: self start to: self stop) 
 		attribute: (Gt2ButtonAttribute new
-						beAppend;
-						stencil: (Gt2ButtonStencilBuilder new
-							label: self referencedClass name;
-							icon: BrGlamorousIcons inspect;
-							action: [ :button | button phlow spawnObject: self referencedClass realClass] ))
+			beAppend;
+			stencil: (Gt2ButtonStencilBuilder new
+				label: self referencedClass name;
+				icon: BrGlamorousIcons inspect;
+				action: [ :button | button phlow spawnObject: self referencedClass realClass] ))
 ]
 
 { #category : #'api - style' }

@@ -36,7 +36,7 @@ Gt2IcebergFileAnnotation >> browseReferenceFrom: aBlClickEvent [
 
 { #category : #'api - style' }
 Gt2IcebergFileAnnotation >> cursorLeftInText: aBlRope [
-	self utility hideAllButLinkInText: aBlRope forAnnotation: self
+	self utility hideMarkupsInText: aBlRope start: self start stop: self stop
 ]
 
 { #category : #testing }
@@ -96,10 +96,33 @@ Gt2IcebergFileAnnotation >> referenceParameterName [
 	^ self constants pathParameterName
 ]
 
+{ #category : #'accessing - parameter values' }
+Gt2IcebergFileAnnotation >> referenceParameterValue [
+	<return: #String>
+	^ self utility 
+		valueOf: self constants pathParameterName
+		in: self parameters
+		value: [ :aValue | aValue asString ]
+		emptyValue: [ 'N/A' ] 
+		defaultValue: [ 'N/A' ]
+]
+
+{ #category : #'api - style' }
+Gt2IcebergFileAnnotation >> styleLinkButtonInText: aBlRope [
+	(aBlRope from: self start to: self stop) 
+		attribute: (Gt2ButtonAttribute new
+			beAppend;
+			stencil: (Gt2ButtonStencilBuilder new
+				label: self referenceParameterValue;
+				icon: BrGlamorousIcons inspect;
+				action: [ :button | button phlow spawnObject: self fileReference] ))
+]
+
 { #category : #'api - style' }
 Gt2IcebergFileAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
+	self styleLinkButtonInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 ]
 
@@ -107,6 +130,6 @@ Gt2IcebergFileAnnotation >> styleTextWithMarkup: aBlRope [
 Gt2IcebergFileAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
-	(self utility mayHideAllButLinkInText: aBlRope forAnnotation: self) ifFalse: [ ^ self ].
+	self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self.
 	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]
