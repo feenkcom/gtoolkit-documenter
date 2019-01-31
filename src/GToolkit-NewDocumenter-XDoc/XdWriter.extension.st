@@ -36,7 +36,7 @@ XdWriter >> attachExportedFiles: aDataWriter [
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
 XdWriter >> document: aDocument [
 	self
-		documentType: XdDocumenterType;
+		documentType: XdType documenter;
 		attachment: aDocument basename text: aDocument string.
 	self reuseOrAddFigures: aDocument.
 	self attachChanges: aDocument
