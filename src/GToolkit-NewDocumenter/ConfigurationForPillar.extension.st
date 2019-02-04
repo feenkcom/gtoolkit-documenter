@@ -3,7 +3,7 @@ Extension { #name : #ConfigurationForPillar }
 { #category : #'*GToolkit-NewDocumenter' }
 ConfigurationForPillar >> gtDataWriter [
 	<return: #Gt2ExternalDataWriter>
-	^ self propertyAt: #gtDataWriter
+	^ self propertyAt: #gtDataWriter ifAbsentPut: [ Gt2ExternalDataWriter new ]
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
@@ -25,7 +25,7 @@ ConfigurationForPillar >> gtDocument: aGt2Document [
 { #category : #'*GToolkit-NewDocumenter' }
 ConfigurationForPillar >> gtUniqueIdGenerator [
 	<return: #Gt2UniqueIdGenerator>
-	^ self propertyAt: #gtUniqueIdGenerator
+	^ self propertyAt: #gtUniqueIdGenerator ifAbsentPut: [ Gt2UniqueIdGenerator new ]
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }

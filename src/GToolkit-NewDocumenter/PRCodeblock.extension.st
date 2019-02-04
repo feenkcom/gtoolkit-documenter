@@ -102,14 +102,13 @@ PRCodeblock >> endMarkupSize [
 
 { #category : #'*GToolkit-NewDocumenter' }
 PRCodeblock >> evaluateCodeblock [
-	| aStrategy aCommand anErrorCatchingCommand aResult |
+	| snippetBindings aCommand anErrorCatchingCommand aResult |
 	self text isEmpty ifTrue: [ ^ self ].
-	aStrategy := GtPlaygroundBindingStrategy new.
-	aStrategy bindings: self gtDocument variableBindings.
+	snippetBindings := self gtDocument variableBindings.
 	aCommand := GtEvaluateSourceCodeCommand new.
 	aCommand requestor: self.
 	aCommand sourceCode: self text asString.
-	aCommand variableBindings: aStrategy.
+	aCommand variableBindings: snippetBindings.
 	aCommand receiver: self gtDocument evaluationReceiver.
 	anErrorCatchingCommand := aCommand asErrorCatchingCommand.
 	anErrorCatchingCommand execute.

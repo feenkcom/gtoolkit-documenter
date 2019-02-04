@@ -446,7 +446,6 @@ XdDocumentExamples >> writeDocumentWithImages [
 { #category : #figure }
 XdDocumentExamples >> writeDocumentWithImagesOnPhysicalDisk [
 	<gtExample>
-	<noTest>
 
 	documentExamples initializeUsingPhysicalDisk.
 	^ self writeDocumentWithImages

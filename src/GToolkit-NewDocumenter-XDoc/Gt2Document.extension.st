@@ -1,23 +1,6 @@
 Extension { #name : #Gt2Document }
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
-Gt2Document >> gtXDocPublishActionFor: anAction [
-	<gtAction>
-	^ anAction dropdown 
-		icon: BrGlamorousIcons tocloud;
-		forViewDefinedIn: #gtTextFor:;
-		priority: 55;
-		popup: [ (XdPublishInfoStencilBuilder new 
-			info: (XdPublishInfo new
-				author: Author fullName;
-				publishAction: [ :aPublishInfo | self publishXDocWithInfo: aPublishInfo ])) asElement
-					constraintsDo: [ :c | 
-					c padding: (BlInsets all: 5).
-					c vertical exact: 300.
-					c horizontal exact: 200 ]. ]
-]
-
-{ #category : #'*GToolkit-NewDocumenter-XDoc' }
 Gt2Document >> publishXDoc [
 	XdClient new publish: self saveToXDoc
 ]

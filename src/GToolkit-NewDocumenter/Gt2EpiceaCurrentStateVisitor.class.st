@@ -40,12 +40,14 @@ Gt2EpiceaCurrentStateVisitor >> stringForBehavior: aClassOrTrait [
 
 { #category : #visitor }
 Gt2EpiceaCurrentStateVisitor >> stringForExistingBehavior: aClassOrTrait [
-	^ String streamContents: [ :stream |
-		stream
-			nextPutAll: aClassOrTrait definition;
-			nextPut: $.;
-			cr; cr;
-			nextPutAll: aClassOrTrait theMetaClass definition ]
+	^ String
+		streamContents: [ :stream | 
+			stream
+				nextPutAll: aClassOrTrait definition;
+				nextPut: $.;
+				cr;
+				cr;
+				nextPutAll: aClassOrTrait classSide definition ]
 ]
 
 { #category : #visitor }

@@ -56,7 +56,7 @@ Gt2DocumentConstants class >> createButtonLabel [
 
 { #category : #text }
 Gt2DocumentConstants class >> cursorNearbyDistance [
-	^ 5
+	^ 0
 ]
 
 { #category : #'pillar parameter default values' }
