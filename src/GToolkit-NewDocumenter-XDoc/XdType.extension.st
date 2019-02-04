@@ -4,3 +4,8 @@ Extension { #name : #XdType }
 XdType class >> documenter [
 	^ XdDocumenterType
 ]
+
+{ #category : #'*GToolkit-NewDocumenter-XDoc' }
+XdType class >> preview [ 
+	^ XdPreviewType
+]

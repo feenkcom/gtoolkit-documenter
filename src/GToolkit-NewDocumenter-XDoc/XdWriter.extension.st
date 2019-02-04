@@ -16,8 +16,6 @@ XdWriter >> attachChanges: aDocument [
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
 XdWriter >> attachExportedFiles: aDataWriter [
-	| count |
-	count := 0.
 	aDataWriter allFiles
 		do: [ :eachFile | 
 			eachFile
@@ -28,9 +26,7 @@ XdWriter >> attachExportedFiles: aDataWriter [
 								fileNameOf: eachFile
 								relativeTo: aDataWriter rootDirectory)
 						stream: aStream
-						size: eachFile size
-						primary: (count = 0).
-						count := count + 1. ] ]
+						size: eachFile size.] ]
 ]
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
@@ -44,9 +40,7 @@ XdWriter >> document: aDocument [
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
 XdWriter >> documentHtml: aDocument [
-	| aPRDocument aDataWriter aHtmlWriter anHtmlContent |
-	"Existing images"
-	"Crated images"
+	| aPRDocument aDataWriter aHtmlWriter anHtmlContent previewAttachment |
 	aPRDocument := aDocument parse.
 	self
 		assert: [ aPRDocument isPetit2Failure not ]
@@ -62,7 +56,9 @@ XdWriter >> documentHtml: aDocument [
 		documentType: XdHtmlType;
 		attachment: self constants htmlIndexFile text: anHtmlContent.
 	self reuseOrAddFigures: aDocument.
-	self attachExportedFiles: aDataWriter
+	self attachExportedFiles: aDataWriter.
+
+	self addPreview: aDataWriter.
 ]
 
 { #category : #'*GToolkit-NewDocumenter-XDoc' }
