@@ -24,26 +24,26 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 	spec for: #'common' do: [
 		spec 
 			baseline: 'GToolkitCompleter' with: [
-				spec repository: 'github://feenkcom/gtoolkit-completer/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-completer:v0.4.6/src' ];
 			baseline: 'GToolkitCoder' with: [
-				spec repository: 'github://feenkcom/gtoolkit-coder/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-coder:v0.4.6/src' ];
 			baseline: 'GToolkitUtility' with: [
-				spec repository: 'github://feenkcom/gtoolkit-utility/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-utility:v0.4.4/src' ];
 			baseline: 'GToolkitVariableBindings' with: [
-				spec repository: 'github://feenkcom/gtoolkit-playground/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-playground:v0.4.6/src' ];
 			baseline: 'GToolkitVisualizerPhlow' with: [
-				spec repository: 'github://feenkcom/gtoolkit-visualizer/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-visualizer:v0.4.6/src' ];
 			baseline: 'GToolkitExamples' with: [
-				spec repository: 'github://feenkcom/gtoolkit-examples/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-examples:v0.4.4/src' ];
 			baseline: 'GToolkitInspector' with: [
-				spec repository: 'github://feenkcom/gtoolkit-inspector/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-inspector:v0.4.6/src' ];
 			baseline: 'PillarExporter' with: [
-				spec repository: 'github://feenkcom/pillar:feenk/src' ];
+				spec repository: 'github://feenkcom/pillar:v7.3.1/src' ];
 			baseline: 'DeepTraverser' with: [
-				spec repository: 'github://feenkcom/DeepTraverser/src' ];
+				spec repository: 'github://feenkcom/DeepTraverser:v1.1.5/src' ];
 			baseline: 'XdocClient' with: [
-				spec repository: 'github://feenkcom/xdoc/src' ].
-		spec
+				spec repository: 'github://feenkcom/xdoc:v0.4.5/src' ].
+		spec 
 			package: 'GToolkit-NewDocumenter' with: [
 				spec requires: #(#PillarExporter #GToolkitCoder #GToolkitCompleter #GToolkitUtility #GToolkitVariableBindings #GToolkitExamples #GToolkitInspector ). ];
 			package: 'GToolkit-NewDocumenter-XDoc' with: [
