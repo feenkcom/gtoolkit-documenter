@@ -1,5 +1,5 @@
 Class {
-	#name : #Gt2XDocListAnnotation,
+	#name : #Gt2XDocsAnnotation,
 	#superclass : #Gt2Annotation,
 	#instVars : [
 		'client'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #accessing }
-Gt2XDocListAnnotation class >> possibleParameters [
+Gt2XDocsAnnotation class >> possibleParameters [
 	^ {
 		self constants expandedParameterName.
 		self constants heightParameterName.
@@ -16,71 +16,78 @@ Gt2XDocListAnnotation class >> possibleParameters [
 ]
 
 { #category : #protected }
-Gt2XDocListAnnotation class >> tag [
+Gt2XDocsAnnotation class >> tag [
 	^ self constants xdocListAnnotationName
 ]
 
 { #category : #'private - actions' }
-Gt2XDocListAnnotation >> browseReferenceFrom: anEvent [
+Gt2XDocsAnnotation >> browseReferenceFrom: anEvent [
 	"Ignore, should not happen"
 ]
 
 { #category : #accessing }
-Gt2XDocListAnnotation >> client [
+Gt2XDocsAnnotation >> client [
 	<return: #XdClient>
 	^ client
 ]
 
 { #category : #accessing }
-Gt2XDocListAnnotation >> client: anXdClient [
+Gt2XDocsAnnotation >> client: anXdClient [
 	self
 		assert: [ anXdClient notNil ] 
 		description: [ 'XDoc client must be non-nil' ].
 	client := anXdClient.
 ]
 
+{ #category : #'api - style' }
+Gt2XDocsAnnotation >> cursorLeftInText: aBlRope [
+	self utility hideMarkupsInText: aBlRope start: self start stop: self stop
+]
+
 { #category : #'accessing - parameter values' }
-Gt2XDocListAnnotation >> defaultShowSelector [
+Gt2XDocsAnnotation >> defaultShowSelector [
 	^ self constants defaultXDocsShowSelector
 ]
 
 { #category : #testing }
-Gt2XDocListAnnotation >> doesReferenceExist [
+Gt2XDocsAnnotation >> doesReferenceExist [
 	"Return true if a referenced object is defined"
 	^ false
 ]
 
 { #category : #'accessing - parameter values' }
-Gt2XDocListAnnotation >> expandedDefaultValue [
+Gt2XDocsAnnotation >> expandedDefaultValue [
 	^ true
 ]
 
 { #category : #initialization }
-Gt2XDocListAnnotation >> initialize [
+Gt2XDocsAnnotation >> initialize [
 	super initialize.
 	client := XdClient new.
 ]
 
 { #category : #testing }
-Gt2XDocListAnnotation >> isPreviewDefined [
+Gt2XDocsAnnotation >> isPreviewDefined [
 	"Return true if a preview object is defined"
 	^ true
 ]
 
 { #category : #accessing }
-Gt2XDocListAnnotation >> objectToPreview [
+Gt2XDocsAnnotation >> objectToPreview [
 	"Subclasses should define what object to preview"
 	^ self client
 ]
 
 { #category : #'api - style' }
-Gt2XDocListAnnotation >> styleTextWithMarkup: aBlRope [
+Gt2XDocsAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 ]
 
 { #category : #'api - style' }
-Gt2XDocListAnnotation >> styleTextWithoutMarkup: aBlRope [
+Gt2XDocsAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
+	self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self.
+	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]
