@@ -215,7 +215,7 @@ XdDocumentExamples >> writeDocumentWithExistingExample [
 	self assert: aXdFile notNil.
 	self assert: aXdFile manifest notNil.
 	"Pillar raw file (Documenter type)"
-	self assert: aXdFile manifest documents size equals: 2.
+	self assert: aXdFile manifest documents size equals: 3.
 	self
 		assert: aXdFile manifest documents first type
 		equals: XdDocumenterType.
