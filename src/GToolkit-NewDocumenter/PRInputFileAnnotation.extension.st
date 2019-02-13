@@ -97,6 +97,17 @@ PRInputFileAnnotation >> referenceParameterName [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRInputFileAnnotation >> referenceParameterValue [
+	<return: #String>
+	^ self utility 
+		valueOf: self constants pathParameterName
+		in: self parameters
+		value: [ :aValue | aValue asString ]
+		emptyValue: [ 'N/A' ] 
+		defaultValue: [ 'N/A' ]
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRInputFileAnnotation >> showEmptyValue [
 	^ self defaultShowSelector
 ]
@@ -120,9 +131,21 @@ PRInputFileAnnotation >> styleExpandingPreviewInText: aBlRope [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
+PRInputFileAnnotation >> styleLinkButtonInText: aBlRope [
+	(aBlRope from: self start to: self stop) 
+		attribute: (Gt2ButtonAttribute new
+			beAppend;
+			stencil: (Gt2ButtonStencilBuilder new
+				label: self referenceParameterValue;
+				icon: BrGlamorousIcons inspect;
+				action: [ :button | button phlow spawnObject: self fileReference] ))
+]
+
+{ #category : #'*GToolkit-NewDocumenter' }
 PRInputFileAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self utility styleLinkInText: aBlRope forAnnotationNode: self.
+	self styleLinkButtonInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 	
 ]
@@ -131,6 +154,6 @@ PRInputFileAnnotation >> styleTextWithMarkup: aBlRope [
 PRInputFileAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
-	(self utility mayHideAllButLinkInText: aBlRope forAnnotation: self) ifFalse: [ ^ self ].
+	self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self.
 	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]
