@@ -144,3 +144,13 @@ PRHTMLWriter >> visitGt2IcebergFileAnnotation: aGt2IcebergFileAnnotation [
 PRHTMLWriter >> visitGt2MethodAnnotation: aGt2MethodAnnotation [	
 	^ self gtWriteSourceCodeForEntity: (aGt2MethodAnnotation referencedMethod name) with: (aGt2MethodAnnotation referencedMethod sourceCode).
 ]
+
+{ #category : #'*GToolkit-NewDocumenter-XDoc' }
+PRHTMLWriter >> visitGt2XDocsAnnotation: aGt2XDocsAnnotation [	
+	| serverURL |
+	serverURL := aGt2XDocsAnnotation client serverUrl asString.
+	canvas tag
+		name: 'a';
+		parameterAt: 'href' put: serverURL;
+		with: serverURL.
+]

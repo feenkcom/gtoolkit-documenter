@@ -26,6 +26,6 @@ PRVisitor >> visitGt2IcebergFileAnnotation: aGt2IcebergFileAnnotation [
 ]
 
 { #category : #'*GToolkit-NewDocumenter' }
-PRVisitor >> visitGt2MethodAnnotation: aGt2MethodAnnotation [ 
-	self visitAnnotation: aGt2MethodAnnotation
+PRVisitor >> visitGt2XDocsAnnotation: aGt2XDocsAnnotation [ 
+	self visitAnnotation: aGt2XDocsAnnotation
 ]
