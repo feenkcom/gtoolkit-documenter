@@ -20,6 +20,11 @@ Gt2XDocsAnnotation class >> tag [
 	^ self constants xdocListAnnotationName
 ]
 
+{ #category : #accessing }
+Gt2XDocsAnnotation >> accept: aVisitor [
+	^ aVisitor visitGt2XDocsAnnotation: self
+]
+
 { #category : #'private - actions' }
 Gt2XDocsAnnotation >> browseReferenceFrom: anEvent [
 	"Ignore, should not happen"
