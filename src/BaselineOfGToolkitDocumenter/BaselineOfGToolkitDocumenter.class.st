@@ -44,9 +44,9 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 			baseline: 'XdocClient' with: [
 				spec repository: 'github://feenkcom/xdoc/src' ].
 		spec
-			package: 'GToolkit-NewDocumenter' with: [
+			package: 'GToolkit-Documenter' with: [
 				spec requires: #(#PillarExporter #GToolkitCoder #GToolkitCompleter #GToolkitUtility #GToolkitVariableBindings #GToolkitExamples #GToolkitInspector ). ];
-			package: 'GToolkit-NewDocumenter-XDoc' with: [
-				spec requires: #('GToolkit-NewDocumenter' #GToolkitUtility #XdocClient ). ]. ].
+			package: 'GToolkit-Documenter-XDoc' with: [
+				spec requires: #('GToolkit-Documenter' #GToolkitUtility #XdocClient ). ]. ].
 
 ]
