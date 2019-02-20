@@ -1,7 +1,7 @@
 Class {
 	#name : #GtHTMLWriter,
 	#superclass : #PRHTMLWriter,
-	#category : #'GToolkit-Documenter'
+	#category : #'GToolkit-Documenter-XDoc-Writer'
 }
 
 { #category : #'visiting-document' }
