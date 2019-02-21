@@ -91,8 +91,9 @@ XdDocsAnnotation >> styleTextWithMarkup: aBlRope [
 
 { #category : #'api - style' }
 XdDocsAnnotation >> styleTextWithoutMarkup: aBlRope [
-	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
+	self utility subtleMarkupsInText: aBlRope start: self start stop: self stop.
 	self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self.
+	self utility stylePreviewInText: aBlRope forNode: self.
 	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]
