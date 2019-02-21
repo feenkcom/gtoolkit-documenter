@@ -20,6 +20,23 @@ XdDocumentExamples >> constants [
 	^ GtDocumentConstants
 ]
 
+{ #category : #xdocs }
+XdDocumentExamples >> contentWithXDocs [
+	<gtExample>
+	^ '${', self constants xdocListAnnotationName, '}$'
+]
+
+{ #category : #xdocs }
+XdDocumentExamples >> documentWithXDocs [
+	<gtExample>
+	| aDocument |
+	aDocument := documentExamples defaultDocument text: self contentWithXDocs.
+	aDocument privateStyleText.
+	self assert: aDocument string equals: self contentWithXDocs.
+	self assert: aDocument isSubscribedToSystem not.
+	^ aDocument
+]
+
 { #category : #accessing }
 XdDocumentExamples >> inMemoryWriter [
 	<gtExample>
