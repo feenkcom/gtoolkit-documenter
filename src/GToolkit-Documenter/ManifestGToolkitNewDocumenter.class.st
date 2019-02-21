@@ -9,5 +9,5 @@ Class {
 
 { #category : #'code-critics' }
 ManifestGToolkitNewDocumenter class >> ruleRBMissingTranslationsInMenusRuleV1FalsePositive [
-	^ #(#(#(#RGPackage #(#'GToolkit-NewDocumenter')) #'2018-11-10T11:51:24.749574-03:00') )
+	^ #(#(#(#RGPackage #(#'GToolkit-Documenter')) #'2018-11-10T11:51:24.749574-03:00') )
 ]
