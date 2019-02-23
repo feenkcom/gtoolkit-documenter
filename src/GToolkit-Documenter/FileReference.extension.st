@@ -6,6 +6,7 @@ FileReference >> gtDocumentFor: aView [
 	| aDocument |
 	(#('pier' 'pillar') includes: self extension) ifFalse: [ ^ 
 aView empty ].
+	self exists ifFalse: [ ^ aView empty ].
 
 	aDocument := GtDocument forFile: self.
 	^ (aDocument gtTextFor: aView)

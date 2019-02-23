@@ -64,12 +64,15 @@ GtDocument >> asElement [
 GtDocument >> asElementWithoutSaveAction [
 	<return: #BlElement>
 	| anElement anEditorElement |
-	anEditorElement := BrEditorElement new
-			editor: self editor;
-			constraintsDo: [ :c |
-				c padding: (BlInsets all: 10).
-				c vertical matchParent.
-				c horizontal matchParent ].
+
+	anEditorElement := BrEditor new
+		text: self editor text;
+		styler: self editor styler;
+		editor: self editor;
+		look: BrGlamorousRegularEditorLook;
+		matchParent;
+		constraintsDo: [ :c | c padding: (BlInsets all: 10) ].
+
 	anElement := GtSceneInformingElement new
 		layout: BlLinearLayout new;
 		addChild: anEditorElement;
