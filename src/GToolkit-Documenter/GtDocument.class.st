@@ -69,7 +69,7 @@ GtDocument >> asElementWithoutSaveAction [
 		text: self editor text;
 		styler: self editor styler;
 		editor: self editor;
-		look: BrGlamorousEditorLook;
+		look: BrGlamorousRegularEditorLook;
 		matchParent;
 		constraintsDo: [ :c | c padding: (BlInsets all: 10) ].
 
