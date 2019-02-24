@@ -355,8 +355,7 @@ PRCodeblock >> styleScriptInText: aBlText [
 	(aBlText
 		from: (self scriptStartPositionInText: aBlText)
 		to: (self scriptStopPositionInText: aBlText))
-		monospace;
-		fontSize: 14
+		glamorousCodeFontAndSize
 ]
 
 { #category : #'*GToolkit-Documenter' }
