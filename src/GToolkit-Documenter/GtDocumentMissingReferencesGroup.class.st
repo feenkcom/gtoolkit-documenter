@@ -15,7 +15,7 @@ GtDocumentMissingReferencesGroup >> addMissingReferences: aMissingReferencesResu
 ]
 
 { #category : #ui }
-GtDocumentMissingReferencesGroup >> gtViewDocumentsFor: aView [
+GtDocumentMissingReferencesGroup >> gtItemsFor: aView [
 	<gtView>
 	^ aView list 
 		title: 'Documents';
@@ -28,4 +28,9 @@ GtDocumentMissingReferencesGroup >> gtViewDocumentsFor: aView [
 GtDocumentMissingReferencesGroup >> initialize [
 	super initialize.
 	missingReferences := OrderedCollection new.
+]
+
+{ #category : #testing }
+GtDocumentMissingReferencesGroup >> isEmpty [
+	^ missingReferences isEmpty
 ]
