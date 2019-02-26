@@ -388,19 +388,8 @@ PRCodeblock >> styleTextWithMarkup: aBlRope [
 
 { #category : #'*GToolkit-Documenter' }
 PRCodeblock >> styleTextWithoutMarkup: aBlRope [
-	| aStopEndMarkup |
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
-	self utility 
-		mayHideMarkupsInText: aBlRope 
-		start: self start 
-		stop: (self parameterStopPositionInText: aBlRope) 
-		forNode: self.
-	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
-	self utility 
-		mayHideMarkupsInText: aBlRope 
-		start: aStopEndMarkup - self endMarkupSize 
-		stop: aStopEndMarkup 
-		forNode: self.
+	self cursorLeftInText: aBlRope.
 	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]
