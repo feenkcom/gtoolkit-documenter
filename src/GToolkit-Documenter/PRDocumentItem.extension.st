@@ -131,9 +131,12 @@ PRDocumentItem >> gtMarkdownExportFor: aView [
 		title: 'Markdown';
 		priority: 2;
 		stencil: [ 
+			| aString | 
+			[ aString := PRMarkdownWriter write: self ] on: Warning do: [ :anException | anException resume ].
+			aString ifNil: [ aString := '' ].
 			BrEditorElement new 
 				editor: (BrTextEditor new
-					text: (PRMarkdownWriter write: self) asRopedText readonly);
+					text: aString asRopedText readonly);
 				constraintsDo: [ :c | 
 					c horizontal matchParent.
 					c vertical matchParent ] ]
