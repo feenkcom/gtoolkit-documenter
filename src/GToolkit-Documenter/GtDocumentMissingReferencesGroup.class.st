@@ -20,7 +20,8 @@ GtDocumentMissingReferencesGroup >> gtViewDocumentsFor: aView [
 	^ aView list 
 		title: 'Documents';
 		items: [ missingReferences ];
-		itemFormat: [ :aResult | aResult documentSource ]
+		itemFormat: [ :aResult | aResult documentSource ];
+		send: [:aResult | aResult documentSource ]
 ]
 
 { #category : #initialization }
