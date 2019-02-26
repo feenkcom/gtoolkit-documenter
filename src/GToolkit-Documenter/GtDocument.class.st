@@ -285,6 +285,7 @@ GtDocument >> initialize [
 	announcer := Announcer new.
 	isSubscribedToSystem := false.
 	variableBindings := GtSnippetBindings new.
+	variableBindings at: self constants thisDocument put: self.
 	cache := Dictionary new.
 	editor := BrTextEditor new.
 	editor styler: self defaultStyler.

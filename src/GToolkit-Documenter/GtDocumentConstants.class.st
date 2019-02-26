@@ -365,3 +365,8 @@ GtDocumentConstants class >> successColor [
 GtDocumentConstants class >> superscriptFontSize [
 	^ 9
 ]
+
+{ #category : #'variable bindings' }
+GtDocumentConstants class >> thisDocument [
+	^ #'thisDocument'
+]
