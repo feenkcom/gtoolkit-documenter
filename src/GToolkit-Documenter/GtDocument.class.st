@@ -87,6 +87,13 @@ GtDocument >> asElementWithoutSaveAction [
 ]
 
 { #category : #accessing }
+GtDocument >> ast [
+	"Message #isPetit2Failure helps to distinguish between a parsed document or a parser error"
+	<return: #PRDocument or: #PP2Failure>
+	^ self parse
+]
+
+{ #category : #accessing }
 GtDocument >> basename [
 	<return: #String>
 	^ self storage basename
