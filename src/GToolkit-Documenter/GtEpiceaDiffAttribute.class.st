@@ -29,13 +29,13 @@ GtEpiceaDiffAttribute >> beInsert [
 
 { #category : #initialization }
 GtEpiceaDiffAttribute >> beMatch [
-	self text: self constants matchLineIdentificator asRopedText monospace.
+	self text: self constants matchLineIdentificator asRopedText glamorousCodeFontAndSize.
 	self text foreground: self constants matchLineColor.
 ]
 
 { #category : #initialization }
 GtEpiceaDiffAttribute >> beRemove [
-	self text: self constants removeLineIdentificator asRopedText monospace.
+	self text: self constants removeLineIdentificator asRopedText glamorousCodeFontAndSize.
 	self text foreground: self constants removeLineColor.
 ]
 

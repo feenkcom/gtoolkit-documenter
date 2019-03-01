@@ -53,8 +53,7 @@ GtEpiceaDiffStencil >> create [
 			(aRopedText from: initialPosition to: aRopedText size)
 				foreground: self constants removeLineColor.
 			aRopedText insertString: String cr at: aRopedText size. ].
-	aRopedText isEmpty ifFalse: [ 
-		aRopedText attributes: { BlFontGenericFamilyAttribute monospace } ].
+	aRopedText isEmpty ifFalse: [ aRopedText glamorousCodeFontAndSize ].
 	^ aRopedText
 ]
 

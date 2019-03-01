@@ -81,7 +81,7 @@ GtEpicea >> diff [
 						to: self tutorialState;
 						create ]
 				ifFalse: [ '"No changes comparing to current system state"' asRopedText 
-						monospace;
+						glamorousCodeFontAndSize;
 						foreground: self constants subtleColor ] ]
 ]
 
@@ -104,6 +104,7 @@ GtEpicea >> gtDiffFor: aView [
 	^ aView textEditor
 		title: 'Diff';
 		priority: 2;
+		look: BrGlamorousCodeEditorLook new;
 		text: [ :anEditor | 
 			self 
 				when: GtEpiceaUpdatedAnnouncement 
@@ -236,6 +237,7 @@ GtEpicea >> gtTutorialFor: aView [
 	^ aView textEditor
 		title: 'Code';
 		priority: 1;
+		look: BrGlamorousCodeEditorLook new;
 		text: [ :anEditor | 
 			self 
 				when: GtEpiceaUpdatedAnnouncement 
@@ -389,7 +391,7 @@ GtEpicea >> tutorialState [
 GtEpicea >> tutorialStateRope [
 	<return: #BlRope>
 	^ self tutorialState asRopedText
-			monospace; 
+			glamorousCodeFontAndSize; 
 			foreground: self constants matchLineColor
 ]
 
