@@ -6,8 +6,11 @@ Class {
 
 { #category : #'hooks - children' }
 GtSceneInformingElement >> onAddedToSceneGraph [
-	self space when: BlSpaceClosedEvent do: [ :ann |
-		self fireEvent: GtRemovedFromSceneEvent new ].
+	| eventHandler |
+	eventHandler := BlEventHandler on: BlSpaceClosedEvent do: [ :ann |
+		self fireEvent: GtRemovedFromSceneEvent new.
+		self space removeEventHandler: eventHandler ].
+	self space addEventHandler: eventHandler. 
 	self fireEvent: GtAddedToSceneEvent new.
 ]
 
