@@ -45,6 +45,6 @@ GtSymbolStyler >> styleTextWithMarkup: aBlRope forNode: aPRListItem [
 						BlTextElement new 
 							text: indexText; 
 							clipChildren: false;
-							looseMesurement; 
+							editorMesurement; 
 							ascentBaseline ] }.
 ]

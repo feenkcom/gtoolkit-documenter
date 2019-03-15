@@ -52,7 +52,7 @@ GtCounterStyler >> styleIndexWithMarkupInText: aBlRope forNode: aPRListItem [
 						BlTextElement new 
 							text: indexText; 
 							clipChildren: false;
-							looseMesurement; 
+							editorMesurement; 
 							ascentBaseline ] }.
 ]
 
@@ -70,7 +70,7 @@ GtCounterStyler >> styleIndexWithoutMarkupInText: aBlRope forNode: aPRListItem [
 						BlTextElement new 
 							text: anItemIndexText;
 							margin: (BlInsets top: 3 bottom: 0);
-							looseMesurement; 
+							editorMesurement; 
 							ascentBaseline ] }.
 ]
 
