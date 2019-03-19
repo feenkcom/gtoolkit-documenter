@@ -1,9 +1,6 @@
 Class {
 	#name : #GtStyleWithMarkupStrategy,
 	#superclass : #GtStylerStrategy,
-	#classInstVars : [
-		'uniqueInstance'
-	],
 	#category : #'GToolkit-Documenter-Styler'
 }
 
