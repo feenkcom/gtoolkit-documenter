@@ -143,6 +143,14 @@ GtMethodAnnotation >> styleTextWithMarkup: aBlRope [
 ]
 
 { #category : #'api - style' }
+GtMethodAnnotation >> styleTextWithoutInteractions: aBlRope [
+	| aLinkNode |
+	aLinkNode := self utility linkNodeForAnnotation: self.
+	(aBlRope from: aLinkNode start to: aLinkNode stop) glamorousCodeFont.
+	self utility hideAllButLinkInText: aBlRope forAnnotation: self.
+]
+
+{ #category : #'api - style' }
 GtMethodAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.

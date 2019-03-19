@@ -228,6 +228,13 @@ GtChangesAnnotation >> styleTextWithMarkup: aBlRope [
 ]
 
 { #category : #'api - style' }
+GtChangesAnnotation >> styleTextWithoutInteractions: aBlRope [
+	self utility hideMarkupsInText: aBlRope start: self start stop: self stop.
+	self styleExpandingPreviewInText: aBlRope.
+	self registerToSystemChanges.
+]
+
+{ #category : #'api - style' }
 GtChangesAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
