@@ -58,6 +58,11 @@ GtStyler >> mode: aGt2StylerStrategy [
 	mode := aGt2StylerStrategy
 ]
 
+{ #category : #initialization }
+GtStyler >> noInteractions [
+	self mode: GtStylerStrategy noInteractions
+]
+
 { #category : #accessing }
 GtStyler >> parser [
 	<return: #PRPillarParser>

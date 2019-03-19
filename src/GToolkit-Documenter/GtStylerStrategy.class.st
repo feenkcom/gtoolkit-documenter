@@ -3,8 +3,16 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
+	#classInstVars : [
+		'uniqueInstance'
+	],
 	#category : #'GToolkit-Documenter-Styler'
 }
+
+{ #category : #cleanup }
+GtStylerStrategy class >> cleanUp [
+	self resetUniqueInstance
+]
 
 { #category : #'instance creation' }
 GtStylerStrategy class >> displayMarkup [
@@ -16,8 +24,28 @@ GtStylerStrategy class >> hideMarkup [
 	^ GtStyleWithoutMarkupStrategy uniqueInstance
 ]
 
+{ #category : #'instance creation' }
+GtStylerStrategy class >> noInteractions [
+	^ GtStyleWithoutInteractionsStrategy uniqueInstance
+]
+
+{ #category : #cleanup }
+GtStylerStrategy class >> resetUniqueInstance [
+	uniqueInstance := nil
+]
+
+{ #category : #accessing }
+GtStylerStrategy class >> uniqueInstance [
+	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
+]
+
 { #category : #testing }
 GtStylerStrategy >> isEditing [
+	^ false
+]
+
+{ #category : #testing }
+GtStylerStrategy >> isNoInteractions [
 	^ false
 ]
 

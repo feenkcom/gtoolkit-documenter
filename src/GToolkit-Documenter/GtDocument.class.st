@@ -347,6 +347,13 @@ GtDocument >> name [
 	^ self storage name
 ]
 
+{ #category : #initialization }
+GtDocument >> noInteractions [
+	self editor styler mode isNoInteractions ifTrue: [ ^ self ].
+	self editor styler noInteractions.
+	self styleTextRequest
+]
+
 { #category : #actions }
 GtDocument >> parse [
 	"Message #isPetit2Failure helps to distinguish between a parsed document or a parser error"

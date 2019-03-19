@@ -7,21 +7,6 @@ Class {
 	#category : #'GToolkit-Documenter-Styler'
 }
 
-{ #category : #cleanup }
-GtStyleWithoutMarkupStrategy class >> cleanUp [
-	self resetUniqueInstance
-]
-
-{ #category : #cleanup }
-GtStyleWithoutMarkupStrategy class >> resetUniqueInstance [
-	uniqueInstance := nil
-]
-
-{ #category : #accessing }
-GtStyleWithoutMarkupStrategy class >> uniqueInstance [
-	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
-]
-
 { #category : #testing }
 GtStyleWithoutMarkupStrategy >> isReading [
 	^ true

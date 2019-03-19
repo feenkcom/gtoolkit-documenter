@@ -194,6 +194,13 @@ PRDocumentItem >> styleTextWithMarkup: aBlRope [
 ]
 
 { #category : #'*GToolkit-Documenter' }
+PRDocumentItem >> styleTextWithoutInteractions: aBlRope [
+	"Subclasses can add text styling for Documenter reading mode"
+	self styleTextWithoutMarkup: aBlRope 
+
+]
+
+{ #category : #'*GToolkit-Documenter' }
 PRDocumentItem >> styleTextWithoutMarkup: aBlRope [ 
 	"Subclasses can add text styling for Documenter reading mode"
 ]
