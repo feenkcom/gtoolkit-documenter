@@ -1,6 +1,6 @@
 Class {
 	#name : #GtDocumenterClyClassCommentEditorTool,
-	#superclass : #ClyBrowserTool,
+	#superclass : #ClyBrowserToolMorph,
 	#instVars : [
 		'documenter',
 		'editingClass',
@@ -68,12 +68,13 @@ GtDocumenterClyClassCommentEditorTool >> build [
 
 { #category : #building }
 GtDocumenterClyClassCommentEditorTool >> buildDocumenter [
-	| aPageElement |
-	aPageElement := GtDocumenter editorForText: self editingText.
+	| aDocument aPageElement |
+	aDocument := GtDocument forClass: editingClass.
+	aPageElement := aDocument asElement.
 	aPageElement
 		addShortcut: (BlShortcut new
-			combination: (BlKeyCombination builder meta; key: Key s; build);
-			action: [ :aShortcut | self saveComment ]).
+			combination: (BlKeyCombination builder meta; key: BlKeyboardKey s; build);
+			action: [ :aShortcut | aDocument store ]).
 			
 	documenter := GtInspector new.
 	documenter constraintsDo: [ :c |
@@ -100,24 +101,6 @@ GtDocumenterClyClassCommentEditorTool >> detachFromSystem [
 
 	browser system unsubscribe: self.
 	space ifNotNil: [ :aSpace | aSpace hasHostSpace ifTrue: [ space close ] ]
-]
-
-{ #category : #accessing }
-GtDocumenterClyClassCommentEditorTool >> editingText [
-	^editingClass  comment asRopedText
-]
-
-{ #category : #accessing }
-GtDocumenterClyClassCommentEditorTool >> pendingText [
-	^ documenter editor text
-]
-
-{ #category : #controlling }
-GtDocumenterClyClassCommentEditorTool >> saveComment [
-	self pendingText asString = self editingText asString
-		ifFalse: [ editingClass comment: self pendingText asString stamp: Author changeStamp].
-
-	^true
 ]
 
 { #category : #initialization }
