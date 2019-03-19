@@ -38,7 +38,8 @@ GtDocumenterClyClassCommentEditorTool class >> tabOrder [
 GtDocumenterClyClassCommentEditorTool >> attachToSystem [
 
 	browser system 
-		when: (ClyClassChange of: editingClass) send: #triggerUpdate to: self
+		when: (ClyClassChange of: editingClass) send: #triggerUpdate to: self;
+		when: (ClyClassComment of: editingClass) send: #triggerUpdate to: self
 ]
 
 { #category : #testing }
