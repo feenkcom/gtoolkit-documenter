@@ -43,6 +43,18 @@ PRExternalLink >> styleTextWithMarkup: aBlRope [
 ]
 
 { #category : #'*GToolkit-Documenter' }
+PRExternalLink >> styleTextWithoutInteractions: aBlRope [
+	self utility
+		subtleMarkupsInText: aBlRope 
+		start: self start 
+		stop: self start + self startMarkup size - 1.
+	self utility
+		subtleMarkupsInText: aBlRope 
+		start: self stop - self startMarkup size + 1
+		stop: self stop
+]
+
+{ #category : #'*GToolkit-Documenter' }
 PRExternalLink >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
