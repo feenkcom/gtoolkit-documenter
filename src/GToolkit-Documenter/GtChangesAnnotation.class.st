@@ -229,6 +229,10 @@ GtChangesAnnotation >> styleTextWithMarkup: aBlRope [
 
 { #category : #'api - style' }
 GtChangesAnnotation >> styleTextWithoutInteractions: aBlRope [
+	"Enforce Code view only"
+	self parameters 
+		at: self constants showParameterName
+		put: #gtTutorialFor:.
 	self utility hideMarkupsInText: aBlRope start: self start stop: self stop.
 	self styleExpandingPreviewInText: aBlRope.
 	self registerToSystemChanges.
