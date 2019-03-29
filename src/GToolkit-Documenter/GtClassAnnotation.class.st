@@ -137,7 +137,6 @@ GtClassAnnotation >> styleLinkButtonInText: aBlRope [
 GtClassAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
-	self styleLinkButtonInText: aBlRope.
 	self styleExpandingPreviewInText: aBlRope.
 	self registerToSystemChanges
 ]
@@ -154,7 +153,11 @@ GtClassAnnotation >> styleTextWithoutInteractions: aBlRope [
 GtClassAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
-	self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self.
-"	(self utility mayHideAllButLinkInText: aBlRope forAnnotation: self) ifFalse: [ ^ self ].
-"	self utility styleCursorAttributeInText: aBlRope forNode: self.
+	self isClassDefined 
+		ifTrue: [ 
+			self styleLinkButtonInText: aBlRope.
+			self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self ]
+		ifFalse: [ 
+			(self utility mayHideAllButLinkInText: aBlRope forAnnotation: self) ifTrue: [ 
+				self utility styleCursorAttributeInText: aBlRope forNode: self ] ]
 ]
