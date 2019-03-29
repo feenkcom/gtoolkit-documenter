@@ -30,6 +30,19 @@ GtEpiceaCurrentStateVisitor >> initializeWith: anEnvironment [
 	theEnvironment := anEnvironment.
 ]
 
+{ #category : #printing }
+GtEpiceaCurrentStateVisitor >> printProtocol: aProtocol behaviorName: aBehaviorName sourceCode: aSourceCode [
+
+	^ String streamContents: [ :stream |
+		stream
+			nextPutAll: '"protocol: '; 
+			nextPutAll: aProtocol printString;
+			nextPut: $"; cr; cr;
+			nextPutAll: aBehaviorName;
+			nextPutAll: ' >> ';
+			nextPutAll: aSourceCode ]	
+]
+
 { #category : #visitor }
 GtEpiceaCurrentStateVisitor >> stringForBehavior: aClassOrTrait [
 	^ theEnvironment
@@ -75,6 +88,7 @@ GtEpiceaCurrentStateVisitor >> visitMethodChange: aChange [
 				ifPresent: [ :method |
 					self 
 						printProtocol: method protocol
+						behaviorName: behavior name
 						sourceCode: method sourceCode ]
 				ifAbsent: [ '' ] ].
 	^ '' "If class is not present"

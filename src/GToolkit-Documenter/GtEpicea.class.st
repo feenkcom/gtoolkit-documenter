@@ -382,7 +382,7 @@ GtEpicea >> tutorialState [
 		self events 
 			do: [ :eachEvent | 
 				| anOutput |
-				anOutput := eachEvent accept: EpNewStateVisitor new.
+				anOutput := eachEvent accept: GtEpiceaNewStateVisitor new.
 				aStream nextPutAll: anOutput ]
 			separatedBy: [ aStream cr; cr ] ]
 ]
