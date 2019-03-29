@@ -6,7 +6,7 @@ EpEvent >> gtDefinitionFor: aView [
 	^ aView textEditor
 		title: 'Definition';
 		priority: 1;
-		text: [ (self accept: EpNewStateVisitor new) asRopedText 
+		text: [ (self accept: GtEpiceaNewStateVisitor new) asRopedText 
 			monospace; 
 			foreground: GtDocumentConstants matchLineColor ]
 ]
@@ -20,6 +20,6 @@ EpEvent >> gtSystemFor: aView [
 		text: [ GtEpiceaDiffStencil new
 				from: (self accept: (GtEpiceaCurrentStateVisitor 
 					inEnvironment: self class environment));
-				to: (self accept: EpNewStateVisitor new);
+				to: (self accept: GtEpiceaNewStateVisitor new);
 				create ]
 ]
