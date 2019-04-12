@@ -259,10 +259,10 @@ GtDocumentUtility class >> styleCursorAttributeInText: aBlRope from: aStartIndex
 	(aBlRope from: aStartIndex to: aStopIndex) attribute: (BrTextCursorAttribute new
 		enterAction: [ :aTextEditor |
 			aNode cursorNearbyInText: aTextEditor text.
-			aTextEditor invalidate: aNode start to: aNode stop; update: aNode start to: aNode stop ];
+			aTextEditor invalidate: aNode start to: aNode stop ];
 		leaveAction: [ :aTextEditor |
 			aNode cursorLeftInText: aTextEditor text.
-			aTextEditor invalidate: aNode start to: aNode stop; update: aNode start to: aNode stop ])
+			aTextEditor invalidate: aNode start to: aNode stop ])
 ]
 
 { #category : #'text styling' }
@@ -274,7 +274,7 @@ GtDocumentUtility class >> styleExpandingPreviewInText: aBlRope forNode: aNode [
 		isExpanded: aNode cachedIsExpanded;
 		onCachingDo: [ :aBoolean :theAttribute | aNode cachedIsExpanded: aBoolean ];
 		create.
-	(aBlRope from: aNode start to: aNode stop) attributes: theAttributes
+	(aBlRope from: aNode stop to: aNode stop) attributes: theAttributes
 ]
 
 { #category : #'text styling' }
