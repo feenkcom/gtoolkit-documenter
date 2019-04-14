@@ -177,6 +177,19 @@ GtChangesAnnotation >> objectToPreview [
 	^ self cachedChanges
 ]
 
+{ #category : #'accessing - parameter values' }
+GtChangesAnnotation >> pathParameterValue [
+	<return: #String or: nil>
+	^ self utility 
+		valueOf: self constants pathParameterName
+		in: self parameters
+		value: [ :aString | aString isString 
+			ifTrue: [ aString ]
+			ifFalse: [ nil ] ]
+		emptyValue: [ nil ]
+		defaultValue: [ nil ]
+]
+
 { #category : #accessing }
 GtChangesAnnotation >> referenceParameterName [
 	^ self constants pathParameterName
@@ -221,6 +234,12 @@ GtChangesAnnotation >> styleCreateButtonInText: aBlRope [
 GtChangesAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
+	(self nodeStyler: aBlRope) 
+		if: self isChangeFileDefined
+			do: [ :aStyler | aStyler 
+				name: self pathParameterValue;
+				spawnObject: self cachedChanges;
+				styleLinkButton ].
 	self styleExpandingPreviewInText: aBlRope.
 	self styleApplyButtonInText: aBlRope.
 	self styleCreateButtonInText: aBlRope.
@@ -242,6 +261,12 @@ GtChangesAnnotation >> styleTextWithoutInteractions: aBlRope [
 GtChangesAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
-	(self utility mayHideAllButLinkInText: aBlRope forAnnotation: self) ifFalse: [ ^ self ].
-	self utility styleCursorAttributeInText: aBlRope forNode: self.
+	(self nodeStyler: aBlRope)
+		if: self isChangeFileDefined 
+			do: [ :aStyler | aStyler autoHideNode ]
+			otherwise: [ :aStyler |
+				aStyler 
+					keepChildDisplayed: (self nodeFinder 
+						annotationParameter: self constants pathParameterName);
+					autoHideNode ].
 ]

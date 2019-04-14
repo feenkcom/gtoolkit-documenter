@@ -393,9 +393,11 @@ GtExamplesAnnotation >> styleTextWithMarkup: aBlRope [
 GtExamplesAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
-	self hasChildren ifFalse: [ ^ self ].
-	self utility mayHideMarkupsInText: aBlRope forAnnotation: self exceptOfChild: self children first.
-	self utility styleCursorAttributeInText: aBlRope forNode: self.
+	(self nodeStyler: aBlRope)
+		if: self hasChildren 
+			do: [ :aStyler | aStyler 
+				keepChildDisplayed: self children first;
+				autoHideNode ]
 ]
 
 { #category : #'private - styling' }
