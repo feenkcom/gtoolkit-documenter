@@ -17,11 +17,38 @@ GtStyledNodeBuilder >> action: anAction [
 	self properties action: anAction
 ]
 
+{ #category : #'style - cursor' }
+GtStyledNodeBuilder >> activateCursor [
+	self nodeText attribute: (BrTextCursorAttribute new
+		enterAction: self properties cursorEnterAction;
+		leaveAction: self properties cursorLeaveAction)
+]
+
 { #category : #asserting }
 GtStyledNodeBuilder >> assertNode [
 	self
 		assert: [ self node isNotNil ] 
 		description: [ 'Pillar AST node must be initialized' ]
+]
+
+{ #category : #'style - hide' }
+GtStyledNodeBuilder >> autoHideNode [
+	"Hide node only if a cursor is far away"
+	self 
+		if: self isCursorClose
+		do: [ self revealNode ]
+		otherwise: [ self hideNode ].
+	self installDisplayMarkupsHandler
+]
+
+{ #category : #'accessing - properties' }
+GtStyledNodeBuilder >> cursorEnterAction: anAction [
+	self properties cursorEnterAction: anAction
+]
+
+{ #category : #'accessing - properties' }
+GtStyledNodeBuilder >> cursorLeaveAction: anAction [
+	self properties cursorLeaveAction: anAction
 ]
 
 { #category : #accessing }
@@ -44,10 +71,31 @@ GtStyledNodeBuilder >> document: aGtDocument [
 	document := aGtDocument
 ]
 
-{ #category : #'style - general' }
+{ #category : #'style - hide' }
+GtStyledNodeBuilder >> hideNode [
+	"Hide node in the text"
+	self properties shouldKeepChildDisplayed
+		ifFalse: [ self nodeText attribute: GtHideAttribute uniqueInstance ]
+		ifTrue: [ 
+			| aSubNode |
+			aSubNode := self properties keepChildDisplayed.
+			self node = aSubNode ifTrue: [ ^ self ].
+			self installHideAttribute: self start to: aSubNode start - 1.
+			self installHideAttribute: aSubNode stop + 1 to: self stop ].
+]
+
+{ #category : #'style - condition' }
 GtStyledNodeBuilder >> if: aConditionBlock do: aStylingBlock [
 	"Execute the styling block only if the condition block is true"
 	aConditionBlock value ifTrue: [ aStylingBlock cull: self ].
+]
+
+{ #category : #'style - condition' }
+GtStyledNodeBuilder >> if: aConditionBlock do: aStylingBlock otherwise: aSecondStylingBlock [
+	"Execute the styling block only if the condition block is true"
+	aConditionBlock value 
+		ifTrue: [ aStylingBlock cull: self ]
+		ifFalse: [ aSecondStylingBlock cull: self ]
 ]
 
 { #category : #initialization }
@@ -57,6 +105,44 @@ GtStyledNodeBuilder >> initialize [
 	node := nil.
 	properties := GtStyledNodeBuilderProperties new.
 	text := nil.
+]
+
+{ #category : #'style - hide' }
+GtStyledNodeBuilder >> installDisplayMarkupsHandler [
+	"Display markups if a cursor is close to the node"
+	self cursorEnterAction: [ :aTextEditor |
+		self updateText: aTextEditor text.
+		self revealNode.
+		aTextEditor invalidate: self start to: self stop.
+		aTextEditor update: self start to: self stop ].
+	self cursorLeaveAction: [ :aTextEditor |
+		self updateText: aTextEditor text.
+		self hideNode.
+		aTextEditor invalidate: self start to: self stop.
+		aTextEditor update: self start to: self stop ].
+	self activateCursor
+]
+
+{ #category : #'style - hide' }
+GtStyledNodeBuilder >> installHideAttribute: aStartPosition to: aStopPosition [
+	(self text from: aStartPosition to: aStopPosition)
+		attribute: GtHideAttribute uniqueInstance.
+]
+
+{ #category : #'style - cursor' }
+GtStyledNodeBuilder >> isCursorClose [
+	"Return true if a cursor is close to the node"
+
+	<return: #Boolean>
+	^ self document editor cursors
+		detect: [ :eachCursor | eachCursor position between: self start and: self stop ]
+		ifFound: [ :aCursor | true ]
+		ifNone: [ false ]
+]
+
+{ #category : #'accessing - properties' }
+GtStyledNodeBuilder >> keepChildDisplayed: aPRDocumentItem [
+	self properties keepChildDisplayed: aPRDocumentItem
 ]
 
 { #category : #'accessing - properties' }
@@ -84,10 +170,22 @@ GtStyledNodeBuilder >> node: aPRDocumentItem [
 	node := aPRDocumentItem
 ]
 
+{ #category : #'accessing - node' }
+GtStyledNodeBuilder >> nodeText [
+	^ self text from: self start to: self stop
+]
+
 { #category : #accessing }
 GtStyledNodeBuilder >> properties [
 	<return: #GtStyledNodeBuilderProperties>
 	^ properties
+]
+
+{ #category : #'style - hide' }
+GtStyledNodeBuilder >> revealNode [
+	"Reveal node in the text that was hidden"
+	self nodeText clearAttributes: [ :eachAttribute | 
+		eachAttribute = GtHideAttribute uniqueInstance ]
 ]
 
 { #category : #'accessing - properties' }
@@ -112,7 +210,7 @@ GtStyledNodeBuilder >> stop [
 { #category : #'style - button' }
 GtStyledNodeBuilder >> styleLinkButton [
 	"Add button to a node"
-	(self text from: self start to: self stop) 
+	self nodeText 
 		attribute: (GtButtonAttribute new
 			beAppend;
 			stencil: [ BrButton new 
@@ -135,6 +233,17 @@ GtStyledNodeBuilder >> text: aBlRope [
 	self
 		assert: [ text isNil ] 
 		description: [ 'Document text must be itialized only once' ].
+	self
+		assert: [ aBlRope isNotNil ] 
+		description: [ 'Document text must be non-nil' ].
+	text := aBlRope
+]
+
+{ #category : #accessing }
+GtStyledNodeBuilder >> updateText: aBlRope [
+	self
+		assert: [ text isNotNil ] 
+		description: [ 'Document text must be itialized before to be able to update it' ].
 	self
 		assert: [ aBlRope isNotNil ] 
 		description: [ 'Document text must be non-nil' ].

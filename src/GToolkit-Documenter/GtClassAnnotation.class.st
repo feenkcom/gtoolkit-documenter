@@ -129,8 +129,8 @@ GtClassAnnotation >> styleTextWithMarkup: aBlRope [
 	(self nodeStyler: aBlRope) 
 		if: self isClassDefined
 			do: [ :aStyler | aStyler 
-				name: (self referencedClass ifNotNil: #name ifNil: '<empty>');
-				spawnObject: (self referencedClass ifNotNil: #realClass);
+				name: self referencedClass;
+				spawnObject: self referencedClass realClass;
 				styleLinkButton ].
 	self styleExpandingPreviewInText: aBlRope.
 	self registerToSystemChanges
@@ -148,10 +148,12 @@ GtClassAnnotation >> styleTextWithoutInteractions: aBlRope [
 GtClassAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
-	self isClassDefined 
-		ifTrue: [ 
-			self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self ]
-		ifFalse: [ 
-			(self utility mayHideAllButLinkInText: aBlRope forAnnotation: self) ifTrue: [ 
-				self utility styleCursorAttributeInText: aBlRope forNode: self ] ]
+	(self nodeStyler: aBlRope)
+		if: self isClassDefined 
+			do: [ :aStyler | aStyler autoHideNode ]
+			otherwise: [ :aStyler |
+				aStyler 
+					keepChildDisplayed: (self nodeFinder 
+						annotationParameter: self referenceParameterName);
+					autoHideNode ].
 ]

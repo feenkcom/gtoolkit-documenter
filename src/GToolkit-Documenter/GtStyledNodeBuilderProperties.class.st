@@ -7,31 +7,39 @@ Class {
 	#category : #'GToolkit-Documenter-Styler Builder'
 }
 
-{ #category : #'accessing - common properties' }
+{ #category : #'accessing - document properties' }
 GtStyledNodeBuilderProperties >> action [
 	^ self at: #action
 ]
 
-{ #category : #'accessing - common properties' }
+{ #category : #'accessing - document properties' }
 GtStyledNodeBuilderProperties >> action: anAction [
 	^ self at: #action put: anAction
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : #'accessing - basic properties' }
 GtStyledNodeBuilderProperties >> at: aSymbol [
 	^ self collection 
 		at: aSymbol 
 		ifAbsent: [ self error: 'Property must be set before using it' ]
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : #'accessing - basic properties' }
 GtStyledNodeBuilderProperties >> at: aSymbol ifAbsentPut: aValue [
 	^ self collection 
 		at: aSymbol 
 		ifAbsentPut: aValue
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : #'accessing - basic properties' }
+GtStyledNodeBuilderProperties >> at: aSymbol ifPresent: aPresentBlock ifAbsent: anAbsentBlock [
+	^ self collection 
+		at: aSymbol 
+		ifPresent: aPresentBlock 
+		ifAbsent: anAbsentBlock
+]
+
+{ #category : #'accessing - basic properties' }
 GtStyledNodeBuilderProperties >> at: aSymbol put: aValue [
 	^ self collection 
 		at: aSymbol 
@@ -48,18 +56,53 @@ GtStyledNodeBuilderProperties >> collection: anObject [
 	collection := anObject
 ]
 
+{ #category : #'accessing - cursor properties' }
+GtStyledNodeBuilderProperties >> cursorEnterAction [
+	^ self at: #cursorEnterAction
+]
+
+{ #category : #'accessing - cursor properties' }
+GtStyledNodeBuilderProperties >> cursorEnterAction: anAction [
+	self at: #cursorEnterAction put: anAction
+]
+
+{ #category : #'accessing - cursor properties' }
+GtStyledNodeBuilderProperties >> cursorLeaveAction [
+	^ self at: #cursorLeaveAction
+]
+
+{ #category : #'accessing - cursor properties' }
+GtStyledNodeBuilderProperties >> cursorLeaveAction: anAction [
+	self at: #cursorLeaveAction put: anAction
+]
+
 { #category : #initialization }
 GtStyledNodeBuilderProperties >> initialize [
 	super initialize.
 	collection := Dictionary new.
 ]
 
-{ #category : #'accessing - common properties' }
+{ #category : #'accessing - hide properties' }
+GtStyledNodeBuilderProperties >> keepChildDisplayed [
+	^ self at: #keepChildDisplayed
+]
+
+{ #category : #'accessing - hide properties' }
+GtStyledNodeBuilderProperties >> keepChildDisplayed: aPRDocumentItem [
+	self at: #keepChildDisplayed put: aPRDocumentItem
+]
+
+{ #category : #'accessing - document properties' }
 GtStyledNodeBuilderProperties >> name [
 	^ self at: #name
 ]
 
-{ #category : #'accessing - common properties' }
+{ #category : #'accessing - document properties' }
 GtStyledNodeBuilderProperties >> name: aString [
 	^ self at: #name put: aString
+]
+
+{ #category : #'accessing - hide properties' }
+GtStyledNodeBuilderProperties >> shouldKeepChildDisplayed [
+	^ self collection includesKey: #keepChildDisplayed
 ]

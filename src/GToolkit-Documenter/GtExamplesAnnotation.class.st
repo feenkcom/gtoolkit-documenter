@@ -32,7 +32,7 @@ GtExamplesAnnotation >> accept: aVisitor [
 	^ aVisitor visitGt2ExamplesAnnotation: self
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 GtExamplesAnnotation >> allExamples [ 
 	<return: #Array of: #GtExampleResult >
 	^ self exampleGroup examples

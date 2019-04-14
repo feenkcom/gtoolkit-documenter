@@ -148,6 +148,12 @@ PRInputFileAnnotation >> styleTextWithMarkup: aBlRope [
 PRInputFileAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
-	self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self.
-	self utility styleCursorAttributeInText: aBlRope forNode: self.
+	(self gtNodeStyler: aBlRope)
+		if: self doesReferenceExist 
+			do: [ :aStyler | aStyler autoHideNode ]
+			otherwise: [ :aStyler |
+				aStyler 
+					keepChildDisplayed: (self gtNodeFinder 
+						annotationParameter: self constants pathParameterName);
+					autoHideNode ].
 ]
