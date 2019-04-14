@@ -152,6 +152,8 @@ GtClassAnnotation >> styleTextWithoutMarkup: aBlRope [
 		if: self isClassDefined 
 			do: [ :aStyler | aStyler autoHideNode ]
 			otherwise: [ :aStyler |
-				aStyler autoHideAllBut: (self nodeFinder 
-					annotationParameter: self referenceParameterName) ].
+				aStyler 
+					keepChildDisplayed: (self nodeFinder 
+						annotationParameter: self referenceParameterName);
+					autoHideNode ].
 ]

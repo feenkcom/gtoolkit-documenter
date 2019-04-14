@@ -32,6 +32,14 @@ GtStyledNodeBuilderProperties >> at: aSymbol ifAbsentPut: aValue [
 ]
 
 { #category : #'accessing - basic properties' }
+GtStyledNodeBuilderProperties >> at: aSymbol ifPresent: aPresentBlock ifAbsent: anAbsentBlock [
+	^ self collection 
+		at: aSymbol 
+		ifPresent: aPresentBlock 
+		ifAbsent: anAbsentBlock
+]
+
+{ #category : #'accessing - basic properties' }
 GtStyledNodeBuilderProperties >> at: aSymbol put: aValue [
 	^ self collection 
 		at: aSymbol 
@@ -48,22 +56,22 @@ GtStyledNodeBuilderProperties >> collection: anObject [
 	collection := anObject
 ]
 
-{ #category : #'accessing - common properties' }
+{ #category : #'accessing - cursor properties' }
 GtStyledNodeBuilderProperties >> cursorEnterAction [
 	^ self at: #cursorEnterAction
 ]
 
-{ #category : #'accessing - common properties' }
+{ #category : #'accessing - cursor properties' }
 GtStyledNodeBuilderProperties >> cursorEnterAction: anAction [
 	self at: #cursorEnterAction put: anAction
 ]
 
-{ #category : #'accessing - common properties' }
+{ #category : #'accessing - cursor properties' }
 GtStyledNodeBuilderProperties >> cursorLeaveAction [
 	^ self at: #cursorLeaveAction
 ]
 
-{ #category : #'accessing - common properties' }
+{ #category : #'accessing - cursor properties' }
 GtStyledNodeBuilderProperties >> cursorLeaveAction: anAction [
 	self at: #cursorLeaveAction put: anAction
 ]
@@ -74,6 +82,16 @@ GtStyledNodeBuilderProperties >> initialize [
 	collection := Dictionary new.
 ]
 
+{ #category : #'accessing - hide properties' }
+GtStyledNodeBuilderProperties >> keepChildDisplayed [
+	^ self at: #keepChildDisplayed
+]
+
+{ #category : #'accessing - hide properties' }
+GtStyledNodeBuilderProperties >> keepChildDisplayed: aPRDocumentItem [
+	self at: #keepChildDisplayed put: aPRDocumentItem
+]
+
 { #category : #'accessing - document properties' }
 GtStyledNodeBuilderProperties >> name [
 	^ self at: #name
@@ -82,4 +100,9 @@ GtStyledNodeBuilderProperties >> name [
 { #category : #'accessing - document properties' }
 GtStyledNodeBuilderProperties >> name: aString [
 	^ self at: #name put: aString
+]
+
+{ #category : #'accessing - hide properties' }
+GtStyledNodeBuilderProperties >> shouldKeepChildDisplayed [
+	^ self collection includesKey: #keepChildDisplayed
 ]
