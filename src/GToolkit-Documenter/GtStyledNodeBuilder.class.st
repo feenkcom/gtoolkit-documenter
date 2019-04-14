@@ -32,6 +32,16 @@ GtStyledNodeBuilder >> assertNode [
 ]
 
 { #category : #'style - hide' }
+GtStyledNodeBuilder >> autoHideAllBut: aSubNode [
+	"Hide node only if a cursor is far away"
+	self 
+		if: self isCursorClose
+		do: [ self revealNode ]
+		otherwise: [ self hideNodeAllBut: aSubNode ].
+	self installDisplayMarkupsHandlerExcluding: aSubNode
+]
+
+{ #category : #'style - hide' }
 GtStyledNodeBuilder >> autoHideNode [
 	"Hide node only if a cursor is far away"
 	self 
@@ -77,6 +87,14 @@ GtStyledNodeBuilder >> hideNode [
 	self nodeText attribute: GtHideAttribute uniqueInstance.
 ]
 
+{ #category : #'style - hide' }
+GtStyledNodeBuilder >> hideNodeAllBut: aSubNode [
+	"Hide node except of its subnode in the text"
+	self node = aSubNode ifTrue: [ ^ self ].
+	self installHideAttribute: self start to: aSubNode start - 1.
+	self installHideAttribute: aSubNode stop + 1 to: self stop.
+]
+
 { #category : #'style - condition' }
 GtStyledNodeBuilder >> if: aConditionBlock do: aStylingBlock [
 	"Execute the styling block only if the condition block is true"
@@ -114,6 +132,28 @@ GtStyledNodeBuilder >> installDisplayMarkupsHandler [
 		aTextEditor invalidate: self start to: self stop.
 		aTextEditor update: self start to: self stop ].
 	self activateCursor
+]
+
+{ #category : #'style - hide' }
+GtStyledNodeBuilder >> installDisplayMarkupsHandlerExcluding: aSubNode [
+	"Display markups if a cursor is close to the node"
+	self cursorEnterAction: [ :aTextEditor |
+		self updateText: aTextEditor text.
+		self revealNode.
+		aTextEditor invalidate: self start to: self stop.
+		aTextEditor update: self start to: self stop ].
+	self cursorLeaveAction: [ :aTextEditor |
+		self updateText: aTextEditor text.
+		self hideNodeAllBut: aSubNode.
+		aTextEditor invalidate: self start to: self stop.
+		aTextEditor update: self start to: self stop ].
+	self activateCursor
+]
+
+{ #category : #'style - hide' }
+GtStyledNodeBuilder >> installHideAttribute: aStartPosition to: aStopPosition [
+	(self text from: aStartPosition to: aStopPosition)
+		attribute: GtHideAttribute uniqueInstance.
 ]
 
 { #category : #'style - cursor' }

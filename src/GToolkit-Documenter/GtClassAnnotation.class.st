@@ -150,11 +150,8 @@ GtClassAnnotation >> styleTextWithoutMarkup: aBlRope [
 	super styleTextWithoutMarkup: aBlRope.
 	(self nodeStyler: aBlRope)
 		if: self isClassDefined 
-			do: [ :aStyler | aStyler autoHideNode ].
-"	self isClassDefined 
-		ifTrue: [ 
-			self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self ]
-		ifFalse: [ 
-			(self utility mayHideAllButLinkInText: aBlRope forAnnotation: self) ifTrue: [ 
-				self utility styleCursorAttributeInText: aBlRope forNode: self ] ]"
+			do: [ :aStyler | aStyler autoHideNode ]
+			otherwise: [ :aStyler |
+				aStyler autoHideAllBut: (self nodeFinder 
+					annotationParameter: self referenceParameterName) ].
 ]
