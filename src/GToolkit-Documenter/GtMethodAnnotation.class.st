@@ -160,17 +160,12 @@ GtMethodAnnotation >> styleTextWithoutInteractions: aBlRope [
 GtMethodAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
-	(self utility mayHideAllButLinkInText: aBlRope forAnnotation: self) ifFalse: [ ^ self ].
 	(self nodeStyler: aBlRope)
 		if: self isMethodDefined 
-		do: [ :aStyler | aStyler hideNode ]
-		otherwise: [ 
-			(self utility mayHideAllButLinkInText: aBlRope forAnnotation: self) ifTrue: [ 
-				self utility styleCursorAttributeInText: aBlRope forNode: self ] ].
-		"ifTrue: [ 
-			self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self ]
-		ifFalse: [ 
-			(self utility mayHideAllButLinkInText: aBlRope forAnnotation: self) ifTrue: [ 
-				self utility styleCursorAttributeInText: aBlRope forNode: self ] ]."
-	self utility styleCursorAttributeInText: aBlRope forNode: self.
+		do: [ :aStyler | aStyler autoHideNode ]
+		otherwise: [ :aStyler |
+				aStyler 
+					keepChildDisplayed: (self nodeFinder 
+						annotationParameter: self referenceParameterName);
+					autoHideNode ].
 ]
