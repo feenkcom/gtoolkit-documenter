@@ -71,6 +71,18 @@ GtAnnotation >> isPreviewDefined [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'api - style' }
+GtAnnotation >> nodeStyler [
+	^ GtStyledNodeBuilder new 
+		document: self gtDocument; 
+		node: self
+]
+
+{ #category : #'api - style' }
+GtAnnotation >> nodeStyler: aBlText [
+	^ self nodeStyler text: aBlText
+]
+
 { #category : #accessing }
 GtAnnotation >> objectToPreview [
 	"Subclasses should define what object to preview"

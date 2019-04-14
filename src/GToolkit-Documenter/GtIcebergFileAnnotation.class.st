@@ -1,6 +1,8 @@
 Class {
 	#name : #GtIcebergFileAnnotation,
 	#superclass : #GtAnnotation,
+	#traits : 'TDocumentLinkStyler',
+	#classTraits : 'TDocumentLinkStyler classTrait',
 	#category : #'GToolkit-Documenter-Model'
 }
 
@@ -108,17 +110,6 @@ GtIcebergFileAnnotation >> referenceParameterValue [
 ]
 
 { #category : #'api - style' }
-GtIcebergFileAnnotation >> styleLinkButtonInText: aBlRope [
-	(aBlRope from: self start to: self stop) 
-		attribute: (GtButtonAttribute new
-			beAppend;
-			stencil: (GtButtonStencilBuilder new
-				label: self referenceParameterValue;
-				icon: BrGlamorousIcons inspect;
-				action: [ :button | button phlow spawnObject: self fileReference] ))
-]
-
-{ #category : #'api - style' }
 GtIcebergFileAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
@@ -132,4 +123,17 @@ GtIcebergFileAnnotation >> styleTextWithoutMarkup: aBlRope [
 	super styleTextWithoutMarkup: aBlRope.
 	self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self.
 	self utility styleCursorAttributeInText: aBlRope forNode: self.
+]
+
+{ #category : #'private - styling' }
+GtIcebergFileAnnotation >> styledLinkButtonActionFrom: aButton [
+	"Perform an action on mouse click"
+	aButton phlow spawnObject: self fileReference
+]
+
+{ #category : #'private - styling' }
+GtIcebergFileAnnotation >> styledLinkButtonText [
+	"Return a button link name"
+	<return: #String>
+	^ self referenceParameterValue
 ]
