@@ -124,6 +124,12 @@ GtIcebergFileAnnotation >> styleTextWithMarkup: aBlRope [
 GtIcebergFileAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
-	self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self.
-	self utility styleCursorAttributeInText: aBlRope forNode: self.
+	(self nodeStyler: aBlRope)
+		if: self isReferenceDefined 
+			do: [ :aStyler | aStyler autoHideNode ]
+			otherwise: [ :aStyler |
+				aStyler 
+					keepChildDisplayed: (self nodeFinder 
+						annotationParameter: self referenceParameterName);
+					autoHideNode ].
 ]
