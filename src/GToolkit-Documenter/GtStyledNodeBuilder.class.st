@@ -115,10 +115,11 @@ GtStyledNodeBuilder >> styleLinkButton [
 	(self text from: self start to: self stop) 
 		attribute: (GtButtonAttribute new
 			beAppend;
-			stencil: (GtButtonStencilBuilder new
+			stencil: [ BrButton new 
+				look: BrGlamorousLinkButtonWithLabelLook;
+				beSmall;
 				label: self properties name value;
-				icon: BrGlamorousIcons inspect;
-				action: self properties action))
+				action: self properties action ])
 ]
 
 { #category : #accessing }
