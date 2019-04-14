@@ -1,8 +1,6 @@
 Class {
 	#name : #GtIcebergFileAnnotation,
 	#superclass : #GtAnnotation,
-	#traits : 'TDocumentLinkStyler',
-	#classTraits : 'TDocumentLinkStyler classTrait',
 	#category : #'GToolkit-Documenter-Model'
 }
 
@@ -113,7 +111,12 @@ GtIcebergFileAnnotation >> referenceParameterValue [
 GtIcebergFileAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
-	self styleLinkButtonInText: aBlRope.
+	(self nodeStyler: aBlRope) 
+		if: self isReferenceDefined
+			do: [ :aStyler | aStyler 
+				name: (self referenceParameterValue);
+				spawnObject: self fileReference;
+				styleLinkButton ].
 	self styleExpandingPreviewInText: aBlRope.
 ]
 
@@ -123,17 +126,4 @@ GtIcebergFileAnnotation >> styleTextWithoutMarkup: aBlRope [
 	super styleTextWithoutMarkup: aBlRope.
 	self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self.
 	self utility styleCursorAttributeInText: aBlRope forNode: self.
-]
-
-{ #category : #'private - styling' }
-GtIcebergFileAnnotation >> styledLinkButtonActionFrom: aButton [
-	"Perform an action on mouse click"
-	aButton phlow spawnObject: self fileReference
-]
-
-{ #category : #'private - styling' }
-GtIcebergFileAnnotation >> styledLinkButtonText [
-	"Return a button link name"
-	<return: #String>
-	^ self referenceParameterValue
 ]

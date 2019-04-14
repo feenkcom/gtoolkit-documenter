@@ -131,21 +131,15 @@ PRInputFileAnnotation >> styleExpandingPreviewInText: aBlRope [
 ]
 
 { #category : #'*GToolkit-Documenter' }
-PRInputFileAnnotation >> styleLinkButtonInText: aBlRope [
-	(aBlRope from: self start to: self stop) 
-		attribute: (GtButtonAttribute new
-			beAppend;
-			stencil: (GtButtonStencilBuilder new
-				label: self referenceParameterValue;
-				icon: BrGlamorousIcons inspect;
-				action: [ :button | button phlow spawnObject: self fileReference] ))
-]
-
-{ #category : #'*GToolkit-Documenter' }
 PRInputFileAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self utility styleLinkInText: aBlRope forAnnotationNode: self.
-	self styleLinkButtonInText: aBlRope.
+	(self gtNodeStyler: aBlRope) 
+		if: self doesReferenceExist
+			do: [ :aStyler | aStyler 
+				name: self referenceParameterValue;
+				spawnObject: self fileReference;
+				styleLinkButton ].
 	self styleExpandingPreviewInText: aBlRope.
 	
 ]

@@ -1,8 +1,6 @@
 Class {
 	#name : #GtClassAnnotation,
 	#superclass : #GtAnnotation,
-	#traits : 'TDocumentLinkStyler',
-	#classTraits : 'TDocumentLinkStyler classTrait',
 	#instVars : [
 		'referencedClass'
 	],
@@ -156,15 +154,4 @@ GtClassAnnotation >> styleTextWithoutMarkup: aBlRope [
 		ifFalse: [ 
 			(self utility mayHideAllButLinkInText: aBlRope forAnnotation: self) ifTrue: [ 
 				self utility styleCursorAttributeInText: aBlRope forNode: self ] ]
-]
-
-{ #category : #'private - styling' }
-GtClassAnnotation >> styledLinkButtonActionFrom: aButton [
-	aButton phlow spawnObject: (self referencedClass ifNotNil: #realClass)
-]
-
-{ #category : #'private - styling' }
-GtClassAnnotation >> styledLinkButtonText [
-	<return: #String>
-	^ self referencedClass ifNotNil: #name ifNil: '<empty>'
 ]

@@ -72,15 +72,11 @@ GtAnnotation >> isPreviewDefined [
 ]
 
 { #category : #'api - style' }
-GtAnnotation >> nodeStyler [
-	^ GtStyledNodeBuilder new 
-		document: self gtDocument; 
-		node: self
-]
-
-{ #category : #'api - style' }
 GtAnnotation >> nodeStyler: aBlText [
-	^ self nodeStyler text: aBlText
+	^ GtStyledNodeBuilder new
+		document: self gtDocument;
+		node: self;
+		text: aBlText
 ]
 
 { #category : #accessing }

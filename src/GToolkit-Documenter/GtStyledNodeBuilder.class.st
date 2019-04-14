@@ -1,8 +1,8 @@
 Class {
 	#name : #GtStyledNodeBuilder,
 	#superclass : #Object,
-	#traits : 'TDocumentLinkStyler + TGt2DocumentConstants + TBlDebug',
-	#classTraits : 'TDocumentLinkStyler classTrait + TGt2DocumentConstants classTrait + TBlDebug classTrait',
+	#traits : 'TGt2DocumentConstants + TBlDebug',
+	#classTraits : 'TGt2DocumentConstants classTrait + TBlDebug classTrait',
 	#instVars : [
 		'document',
 		'node',
