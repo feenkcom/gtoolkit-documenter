@@ -289,9 +289,13 @@ GtExampleAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self utility subtleMarkupsInText: aBlRope start: self start stop: self stop.
 	self styleLinkInText: aBlRope.
 	self registerToSystemChanges.
-	self isExampleDefined 
-		ifTrue: [ self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self ]
-		ifFalse: [ (self utility mayHideAllButLinkInText: aBlRope forAnnotation: self) ifFalse: [ ^ self ] ].
+	(self nodeStyler: aBlRope)
+		if: self isExampleDefined 
+			do: [ :aStyler | aStyler autoHideNode ]
+			otherwise: [ :aStyler |
+				aStyler 
+					keepChildDisplayed: (self nodeFinder 
+						annotationParameter: self referenceParameterName);
+					autoHideNode ]. 
 	self utility stylePreviewInText: aBlRope forNode: self.
-	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]
