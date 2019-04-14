@@ -44,10 +44,25 @@ GtStyledNodeBuilder >> document: aGtDocument [
 	document := aGtDocument
 ]
 
-{ #category : #'style - general' }
+{ #category : #'style - hide' }
+GtStyledNodeBuilder >> hideNode [
+	"Hide node in the text"
+	(self text from: self start to: self stop)
+		attribute: GtHideAttribute uniqueInstance.
+]
+
+{ #category : #'style - condition' }
 GtStyledNodeBuilder >> if: aConditionBlock do: aStylingBlock [
 	"Execute the styling block only if the condition block is true"
 	aConditionBlock value ifTrue: [ aStylingBlock cull: self ].
+]
+
+{ #category : #'style - condition' }
+GtStyledNodeBuilder >> if: aConditionBlock do: aStylingBlock otherwise: aSecondStylingBlock [
+	"Execute the styling block only if the condition block is true"
+	aConditionBlock value 
+		ifTrue: [ aStylingBlock cull: self ]
+		ifFalse: [ aSecondStylingBlock cull: self ]
 ]
 
 { #category : #initialization }

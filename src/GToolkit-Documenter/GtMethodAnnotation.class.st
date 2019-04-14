@@ -138,6 +138,12 @@ GtMethodAnnotation >> registerToSystemChanges [
 GtMethodAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
+	(self nodeStyler: aBlRope) 
+		if: self isMethodDefined
+			do: [ :aStyler | aStyler 
+				name: self referencedMethod;
+				spawnObject: self referencedMethod;
+				styleLinkButton ].
 	self styleExpandingPreviewInText: aBlRope.
 	self registerToSystemChanges
 ]
@@ -155,5 +161,16 @@ GtMethodAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
 	(self utility mayHideAllButLinkInText: aBlRope forAnnotation: self) ifFalse: [ ^ self ].
+	(self nodeStyler: aBlRope)
+		if: self isMethodDefined 
+		do: [ :aStyler | aStyler hideNode ]
+		otherwise: [ 
+			(self utility mayHideAllButLinkInText: aBlRope forAnnotation: self) ifTrue: [ 
+				self utility styleCursorAttributeInText: aBlRope forNode: self ] ].
+		"ifTrue: [ 
+			self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self ]
+		ifFalse: [ 
+			(self utility mayHideAllButLinkInText: aBlRope forAnnotation: self) ifTrue: [ 
+				self utility styleCursorAttributeInText: aBlRope forNode: self ] ]."
 	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]
