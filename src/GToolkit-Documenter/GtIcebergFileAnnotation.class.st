@@ -108,21 +108,15 @@ GtIcebergFileAnnotation >> referenceParameterValue [
 ]
 
 { #category : #'api - style' }
-GtIcebergFileAnnotation >> styleLinkButtonInText: aBlRope [
-	(aBlRope from: self start to: self stop) 
-		attribute: (GtButtonAttribute new
-			beAppend;
-			stencil: (GtButtonStencilBuilder new
-				label: self referenceParameterValue;
-				icon: BrGlamorousIcons inspect;
-				action: [ :button | button phlow spawnObject: self fileReference] ))
-]
-
-{ #category : #'api - style' }
 GtIcebergFileAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
-	self styleLinkButtonInText: aBlRope.
+	(self nodeStyler: aBlRope) 
+		if: self isReferenceDefined
+			do: [ :aStyler | aStyler 
+				name: (self referenceParameterValue);
+				spawnObject: self fileReference;
+				styleLinkButton ].
 	self styleExpandingPreviewInText: aBlRope.
 ]
 

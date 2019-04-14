@@ -143,6 +143,14 @@ PRDocumentItem >> gtMarkdownExportFor: aView [
 ]
 
 { #category : #'*GToolkit-Documenter' }
+PRDocumentItem >> gtNodeStyler: aBlText [
+	^ GtStyledNodeBuilder new 
+		document: self gtDocument; 
+		node: self; 
+		text: aBlText
+]
+
+{ #category : #'*GToolkit-Documenter' }
 PRDocumentItem >> gtPillarExportFor: aView [
 	<gtViewExports>
 	^ aView explicit
