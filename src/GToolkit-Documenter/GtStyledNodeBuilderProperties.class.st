@@ -2,7 +2,7 @@ Class {
 	#name : #GtStyledNodeBuilderProperties,
 	#superclass : #Object,
 	#instVars : [
-		'collection'
+		'dictionary'
 	],
 	#category : #'GToolkit-Documenter-Styler Builder'
 }
@@ -48,12 +48,13 @@ GtStyledNodeBuilderProperties >> at: aSymbol put: aValue [
 
 { #category : #accessing }
 GtStyledNodeBuilderProperties >> collection [
-	^ collection
+	<return: #Dictionary>
+	^ dictionary
 ]
 
 { #category : #accessing }
 GtStyledNodeBuilderProperties >> collection: anObject [
-	collection := anObject
+	dictionary := anObject
 ]
 
 { #category : #'accessing - cursor properties' }
@@ -79,7 +80,7 @@ GtStyledNodeBuilderProperties >> cursorLeaveAction: anAction [
 { #category : #initialization }
 GtStyledNodeBuilderProperties >> initialize [
 	super initialize.
-	collection := Dictionary new.
+	dictionary := Dictionary new.
 ]
 
 { #category : #'accessing - hide properties' }
