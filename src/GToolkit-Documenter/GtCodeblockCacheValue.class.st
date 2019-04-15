@@ -55,7 +55,7 @@ GtCodeblockCacheValue >> result: anObject [
 	hasResult := true.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 GtCodeblockCacheValue >> symbols [ 
 	<return: #GtCodeblockSymbols or: nil>
 	^ symbols

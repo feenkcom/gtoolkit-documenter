@@ -10,20 +10,6 @@ PRCodeblock >> cacheKey [
 ]
 
 { #category : #'*GToolkit-Documenter' }
-PRCodeblock >> cacheResult: aResult asException: isException [
-	self gtDocument 
-		cacheAt: self cacheKey 
-		ifPresent: [ :aCachedValue |
-			aCachedValue
-				result: aResult;
-				isException: isException;
-				preview: nil ] 
-		ifAbsentPut: [ GtCodeblockCacheValue new
-			result: aResult;
-			isException: isException ]
-]
-
-{ #category : #'*GToolkit-Documenter' }
 PRCodeblock >> cachedPreview [
 	<return: #BlElement or: nil>
 	^ self gtDocument 

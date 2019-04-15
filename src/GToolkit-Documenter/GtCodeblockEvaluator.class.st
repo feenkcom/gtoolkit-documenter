@@ -7,10 +7,44 @@ Class {
 		'node',
 		'document',
 		'text',
-		'selectedCode'
+		'selectedCode',
+		'conditions'
 	],
 	#category : #'GToolkit-Documenter-Code Snippet'
 }
+
+{ #category : #testing }
+GtCodeblockEvaluator >> allConditionsSatisfied [
+	<return: #Boolean>
+	^ self conditions allSatisfy: [ :eachCondition | eachCondition cull: self ]
+]
+
+{ #category : #caching }
+GtCodeblockEvaluator >> cacheResult: aResult asException: isException [
+	self document 
+		cacheAt: self node cacheKey 
+		ifPresent: [ :aCachedValue |
+			aCachedValue
+				result: aResult;
+				isException: isException;
+				preview: nil ] 
+		ifAbsentPut: [ GtCodeblockCacheValue new
+			result: aResult;
+			isException: isException ]
+]
+
+{ #category : #accessing }
+GtCodeblockEvaluator >> condition: aBlock [
+	"Add condition that must be satisfied to evaluate a code snippet"
+	conditions addLast: aBlock
+]
+
+{ #category : #accessing }
+GtCodeblockEvaluator >> conditions [
+	"Return conditions that must be satisfied to evaluate a code snippet"
+	<return: #OrderedCollection>
+	^ conditions
+]
 
 { #category : #accessing }
 GtCodeblockEvaluator >> document [
@@ -43,6 +77,7 @@ GtCodeblockEvaluator >> evaluateBody [
 	"Evaluate a node's body (code snippet)"
 	| aCommand anErrorCatchingCommand |
 	self hasNodeBody ifFalse: [ ^ self ].
+	self allConditionsSatisfied ifFalse: [ ^ self ].
 	aCommand := GtEvaluateSourceCodeCommand new.
 	aCommand requestor: self node.
 	aCommand sourceCode: self selectionOrNodeBody.
@@ -81,6 +116,14 @@ GtCodeblockEvaluator >> initialize [
 	document := nil.
 	node := nil.
 	text := nil.
+	conditions := OrderedCollection new: 1.
+]
+
+{ #category : #'accessing - cursor' }
+GtCodeblockEvaluator >> isCursorPlacedInTheBody [
+	"Return true if a editor cursor is placed inside of the node body (code snippet)"
+	<return: #Boolean>
+	^ self nodeBodyCursor isNotNil
 ]
 
 { #category : #accessing }
@@ -115,6 +158,20 @@ GtCodeblockEvaluator >> nodeBody [
 	^ aString
 ]
 
+{ #category : #'accessing - cursor' }
+GtCodeblockEvaluator >> nodeBodyCursor [
+	"Return node cursor position if inside of the node body (code snippet) or nil"
+	<return: #BrTextEditorSingleCursor or: nil>
+	| aStart aStop |
+	aStart := self startNodeBody.
+	aStop := self stopNodeBody.
+	^ self editor cursors 
+		detect: [ :eachCursor |  
+			eachCursor position between: aStart and: aStop ]
+		ifFound: [ :aCursor | aCursor ] 
+		ifNone: [ nil ]
+]
+
 { #category : #'accessing - node' }
 GtCodeblockEvaluator >> nodeBodySelection [
 	"Return node body (code snippet) selection or nil"
@@ -135,7 +192,7 @@ GtCodeblockEvaluator >> onFinishedEvaluation: anErrorCatchingCommand [
 	"Cache result and announce the result"
 	| aResult |
 	aResult := anErrorCatchingCommand result.
-	self node cacheResult: aResult asException: anErrorCatchingCommand isException.
+	self cacheResult: aResult asException: anErrorCatchingCommand isException.
 	anErrorCatchingCommand isException
 		ifFalse: [ 
 			self document announce: (GtCodeblockSuccessfulEvaluationAnnouncement new 
@@ -147,6 +204,7 @@ GtCodeblockEvaluator >> onFinishedEvaluation: anErrorCatchingCommand [
 				document: self document;
 				codeSnippet: self nodeBody;
 				exception: aResult) ].
+	self document styleTextRequest.
 ]
 
 { #category : #'accessing - selection' }
@@ -171,7 +229,7 @@ GtCodeblockEvaluator >> selectedCode: aString [
 	selectedCode := aString
 ]
 
-{ #category : #'accessing - document' }
+{ #category : #'accessing - selection' }
 GtCodeblockEvaluator >> selectedTextInterval [
 	"Return selected text interval"
 	<return: #Interval or: nil>
