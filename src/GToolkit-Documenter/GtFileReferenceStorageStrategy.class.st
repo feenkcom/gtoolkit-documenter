@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'file'
 	],
-	#category : #'GToolkit-Documenter-Model'
+	#category : #'GToolkit-Documenter-Storage'
 }
 
 { #category : #accessing }

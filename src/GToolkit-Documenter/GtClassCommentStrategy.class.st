@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'classRingDefinition'
 	],
-	#category : #'GToolkit-Documenter-Model'
+	#category : #'GToolkit-Documenter-Storage'
 }
 
 { #category : #accessing }

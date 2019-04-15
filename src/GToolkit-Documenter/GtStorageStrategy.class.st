@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'GToolkit-Documenter-Model'
+	#category : #'GToolkit-Documenter-Storage'
 }
 
 { #category : #factory }

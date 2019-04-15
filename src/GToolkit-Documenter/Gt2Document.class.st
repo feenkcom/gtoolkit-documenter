@@ -1,7 +1,7 @@
 Class {
 	#name : #Gt2Document,
 	#superclass : #GtDocument,
-	#category : #'GToolkit-Documenter-Model'
+	#category : #'GToolkit-Documenter-Document'
 }
 
 { #category : #deprecation }

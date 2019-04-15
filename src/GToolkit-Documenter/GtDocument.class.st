@@ -13,7 +13,7 @@ Class {
 		'styleTextProcess',
 		'pillarParser'
 	],
-	#category : #'GToolkit-Documenter-Model'
+	#category : #'GToolkit-Documenter-Document'
 }
 
 { #category : #accessing }
