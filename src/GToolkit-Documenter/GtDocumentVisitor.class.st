@@ -13,15 +13,21 @@ Class {
 { #category : #accessing }
 GtDocumentVisitor >> document [
 	<return: #GtDocument>
+	self
+		assert: [ document isNotNil ] 
+		description: [ 'Document instance must be itialized before using it' ].
 	^ document
 ]
 
 { #category : #accessing }
-GtDocumentVisitor >> document: aGt2Document [
-	self 
-		assert: [ aGt2Document notNil ]
-		description: [ 'Document must be non-nil' ].
-	document := aGt2Document
+GtDocumentVisitor >> document: aGtDocument [
+	self
+		assert: [ document isNil ] 
+		description: [ 'Document instance must be initialized only once' ].
+	self
+		assert: [ aGtDocument isNotNil ] 
+		description: [ 'Document instance must be non-nil' ].
+	document := aGtDocument
 ]
 
 { #category : #initialization }
