@@ -17,6 +17,16 @@ GtCodeblockAction >> allConditionsSatisfied [
 	^ self conditions allSatisfy: [ :eachCondition | eachCondition cull: self ]
 ]
 
+{ #category : #'accessing - pharo code' }
+GtCodeblockAction >> assertSourceCode: aString [
+	self 
+		assert: [ aString isNotNil ]
+		description: [ 'Pharo source code must be non-nil' ].
+	self 
+		assert: [ aString isString ]
+		description: [ 'Pharo source code must be a string' ].
+]
+
 { #category : #accessing }
 GtCodeblockAction >> condition: aBlock [
 	"Add condition that must be satisfied to evaluate a code snippet"
@@ -67,6 +77,71 @@ GtCodeblockAction >> execute [
 	self subclassResponsibility
 ]
 
+{ #category : #'accessing - pharo code' }
+GtCodeblockAction >> extractBehavior [
+	<return: #Behavior or: nil>
+	| aVariableNode aVariableName aBehavior |
+	aVariableNode := self nodeBodySelection
+		ifNil: [ self variableNodeAtCursor ]
+		ifNotNil: [ :aSelectedString | 
+			self extractVariableNodeFromString: aSelectedString ].
+	aVariableNode ifNil: [ ^ nil ].
+	aVariableName := aVariableNode name value asSymbol.
+	aBehavior := Smalltalk globals at: aVariableName ifAbsent: [ nil ].
+	^ aBehavior
+]
+
+{ #category : #'accessing - pharo code' }
+GtCodeblockAction >> extractSelectorFromString: aString [
+	"Return selector name or nil"
+	<return: #Symbol or: nil>
+	| aPharoNode |
+	self assertSourceCode: aString.
+	aPharoNode := GtPharoParser 
+		parseWithErrors: aString
+		startingAt: GtPharoParser startingStateForStatement..
+	[ aPharoNode isNil ]
+		whileFalse: [ 
+			(aPharoNode isKindOf: GtPharoVariableNode)
+				ifTrue: [ ^ aPharoNode name source asSymbol ].
+			(aPharoNode isKindOf: GtPharoSymbolLiteralNode)
+				ifTrue: [ ^ aPharoNode asSymbol ].
+			(aPharoNode isKindOf: GtPharoMessageSendNode)
+				ifTrue: [ aPharoNode := aPharoNode message ].
+			(aPharoNode isKindOf: GtPharoMessageNode)
+				ifTrue: [ ^ aPharoNode selector ].
+			aPharoNode := aPharoNode parent ].
+	^ nil
+]
+
+{ #category : #'accessing - pharo code' }
+GtCodeblockAction >> extractSelectorSymbol [
+	<return: #Symbol or: nil>
+	| aSelectorSymbol |
+	aSelectorSymbol := self nodeBodySelection
+		ifNil: [ self selectorAtCursor ]
+		ifNotNil: [ :aSelectedString | 
+			self extractSelectorFromString: aSelectedString ].
+	^ aSelectorSymbol
+]
+
+{ #category : #'accessing - pharo code' }
+GtCodeblockAction >> extractVariableNodeFromString: aString [
+	"Return a Pharo source code AST node or nil"
+	<return: #GtPharoProgramNode or: nil>
+	| aPharoNode |
+	self assertSourceCode: aString.
+	aPharoNode := GtPharoParser 
+		parseWithErrors: aString
+		startingAt: GtPharoParser startingStateForStatement.
+	[ aPharoNode isNil ]
+		whileFalse: [ 
+			(aPharoNode isKindOf: GtPharoVariableNode)
+				ifTrue: [ ^ aPharoNode ].
+			aPharoNode := aPharoNode parent ].
+	^ nil
+]
+
 { #category : #testing }
 GtCodeblockAction >> hasNodeBody [
 	"Return true if the given codeblock has a text body (code snippet to evaluate)"
@@ -104,6 +179,23 @@ GtCodeblockAction >> node: aPRDocumentItem [
 		assert: [ aPRDocumentItem isNotNil ] 
 		description: [ 'Pillar AST node must be non-nil' ].
 	node := aPRDocumentItem
+]
+
+{ #category : #'accessing - pharo code' }
+GtCodeblockAction >> nodeAtCursor [
+	<return: #GtPharoProgramNode or: nil>
+	self cursorPositionDo: [ :aPosition |
+		[ | anInnerNode aNodeTextStartPosition |
+			aNodeTextStartPosition := aPosition - self startNodeBody.
+			self sourceAst
+				withAllNodesOfType: GtPharoVariableNode
+				do: [ :eachNode | 
+					(aNodeTextStartPosition between: eachNode startPosition and: eachNode stopPosition)
+						ifTrue: [ anInnerNode := eachNode ] ].
+			^ anInnerNode ]
+				on: Error
+				do: [ :anException | anException return ] ].
+	^ nil
 ]
 
 { #category : #'accessing - node' }
@@ -147,6 +239,11 @@ GtCodeblockAction >> nodeBodySelection [
 	^ nil
 ]
 
+{ #category : #'accessing - pharo code' }
+GtCodeblockAction >> parserStartingState [
+	^ GtPharoParser startingStateForMethodSequence
+]
+
 { #category : #'accessing - selection' }
 GtCodeblockAction >> selectedCode [
 	"Return explicitly set selected code snippet part"
@@ -184,6 +281,19 @@ GtCodeblockAction >> selectionOrNodeBody [
 	^ self selectedCode ifNil: [ self nodeBody ]
 ]
 
+{ #category : #'accessing - pharo code' }
+GtCodeblockAction >> selectorAtCursor [
+	<return: #Symbol or: nil>
+	^ self symbolFor: self nodeAtCursor
+]
+
+{ #category : #'accessing - pharo code' }
+GtCodeblockAction >> sourceAst [
+	^ GtPharoParser 
+		parseWithErrors: self nodeBody 
+		startingAt: self parserStartingState
+]
+
 { #category : #'accessing - node' }
 GtCodeblockAction >> start [
 	"Return starting position of a node"
@@ -212,6 +322,23 @@ GtCodeblockAction >> stopNodeBody [
 	^ self node scriptStopPositionInText: self text
 ]
 
+{ #category : #'accessing - pharo code' }
+GtCodeblockAction >> symbolFor: aProgramNode [
+	<return: #Symbol or: nil>
+	| aCurrentNode |
+	aCurrentNode := aProgramNode.
+	[ aCurrentNode notNil ]
+		whileTrue: [ 
+			(aCurrentNode isKindOf: GtPharoSymbolLiteralNode)
+				ifTrue: [ ^ aProgramNode asSymbol ].
+			(aCurrentNode isKindOf: GtPharoMessageSendNode)
+				ifTrue: [ aCurrentNode := aCurrentNode message ].
+			(aCurrentNode isKindOf: GtPharoMessageNode)
+				ifTrue: [ ^ aCurrentNode selector ].
+			aCurrentNode := aCurrentNode parent ].
+	^ nil
+]
+
 { #category : #accessing }
 GtCodeblockAction >> text [
 	<return: #BlRope>
@@ -235,4 +362,20 @@ GtCodeblockAction >> text: aBlRope [
 { #category : #execution }
 GtCodeblockAction >> value [
 	self execute
+]
+
+{ #category : #'accessing - pharo code' }
+GtCodeblockAction >> variableNodeAtCursor [
+	<return: #GtPharoVariableNode or: nil>
+	self cursorPositionDo: [ :aPosition |
+			| aNodeTextStartPosition | 
+			aNodeTextStartPosition := aPosition - self startNodeBody.
+			[ self sourceAst
+				withAllNodesOfType: GtPharoVariableNode
+				do: [ :eachNode | 
+					(aNodeTextStartPosition between: eachNode startPosition and: eachNode stopPosition)
+						ifTrue: [ ^ eachNode ] ] ]
+				on: Error
+				do: [ :anException | anException return ] ].
+	^ nil
 ]

@@ -1,5 +1,5 @@
 Class {
-	#name : #GtCodeblockBrowseClassAction,
+	#name : #GtCodeblockBrowseImplementorsAction,
 	#superclass : #GtCodeblockAction,
 	#instVars : [
 		'element'
@@ -8,20 +8,19 @@ Class {
 }
 
 { #category : #actions }
-GtCodeblockBrowseClassAction >> browseClass [
-	"Browse a selected class"
-	| aBehavior |
+GtCodeblockBrowseImplementorsAction >> browseImplementors [
+	"Browse a selected implementors"
+	| aSymbol |
 	self hasNodeBody ifFalse: [ ^ self ].
 	self isCursorPlacedInTheBody ifFalse: [ ^ self ].
 	self allConditionsSatisfied ifFalse: [ ^ self ].
-	aBehavior := self extractBehavior.
-	aBehavior ifNil: [ ^ self ].
-	aBehavior isBehavior ifFalse: [ ^ self ].
-	self element phlow spawnObject: (GtClassCoder forClass: aBehavior).
+	aSymbol := self extractSelectorSymbol.
+	aSymbol ifNil: [ ^ self ].
+	self element phlow spawnObject: (GtSearchImplementorsFilter selector: aSymbol).
 ]
 
 { #category : #accessing }
-GtCodeblockBrowseClassAction >> element [
+GtCodeblockBrowseImplementorsAction >> element [
 	<return: #BlElement>
 	self 
 		assert: [ element isNotNil ] 
@@ -30,7 +29,7 @@ GtCodeblockBrowseClassAction >> element [
 ]
 
 { #category : #accessing }
-GtCodeblockBrowseClassAction >> element: aBlElement [
+GtCodeblockBrowseImplementorsAction >> element: aBlElement [
 	self 
 		assert: [ aBlElement isNotNil ] 
 		description: [ 'Element must be non-nil' ].
@@ -38,7 +37,7 @@ GtCodeblockBrowseClassAction >> element: aBlElement [
 ]
 
 { #category : #execution }
-GtCodeblockBrowseClassAction >> execute [
+GtCodeblockBrowseImplementorsAction >> execute [
 	"Perform a default action"
-	self browseClass
+	self browseImplementors
 ]

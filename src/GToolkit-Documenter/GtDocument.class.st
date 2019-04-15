@@ -122,6 +122,19 @@ GtDocument >> browseClass: anEditorElement [
 				element: anEditorElement))
 ]
 
+{ #category : #actions }
+GtDocument >> browseImplementors: anEditorElement [
+	| aPRDocumentOrError |
+	aPRDocumentOrError := self ast. 
+	aPRDocumentOrError isPetit2Failure ifTrue: [ ^ self ].
+	aPRDocumentOrError accept: (
+		GtCodeblockActionVisitor new 
+			action: (GtCodeblockBrowseImplementorsAction new 
+				document: self;
+				text: self text;
+				element: anEditorElement))
+]
+
 { #category : #cache }
 GtDocument >> cache [
 	"It is not recommended to use this method outside of this object.
