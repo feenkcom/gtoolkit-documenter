@@ -231,6 +231,7 @@ GtStyledNodeBuilder >> styleLinkButton [
 			stencil: [ BrButton new 
 				look: BrGlamorousLinkButtonWithLabelLook;
 				beSmall;
+				margin: (BlInsets top: 3);
 				label: self properties name value;
 				action: self properties action ])
 ]
