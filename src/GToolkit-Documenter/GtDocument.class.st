@@ -13,7 +13,7 @@ Class {
 		'styleTextProcess',
 		'pillarParser'
 	],
-	#category : #'GToolkit-Documenter-Model'
+	#category : #'GToolkit-Documenter-Document'
 }
 
 { #category : #accessing }
@@ -83,6 +83,9 @@ GtDocument >> asElementWithoutSaveAction [
 			c horizontal matchParent ].
 	anElement userData at: self constants documentUserDataKey put: self.
 	self installCompleterForEditorElement: anEditorElement.
+	anEditorElement addShortcut: (BlShortcut new
+			combination: BlKeyCombination primaryG;
+			action: [ :theEditorElement | self playAndInspectSelectionOrMethodFrom: theEditorElement ]).
 	^ anElement
 ]
 
@@ -367,6 +370,16 @@ GtDocument >> pillarParser [
 	<return: #PRPillarParser>
 	^ pillarParser ifNil: [ 
 		pillarParser := PRPillarParser new optimize ]
+]
+
+{ #category : #actions }
+GtDocument >> playAndInspectSelectionOrMethodFrom: anEditorElement [
+	| aPRDocumentOrError |
+	self inform: #playAndInspectSelectionOrMethodFrom:.
+	aPRDocumentOrError := self ast. 
+	aPRDocumentOrError isPetit2Failure ifTrue: [ ^ self ].
+	aPRDocumentOrError accept: (GtCodeblockEvaluatorVisitor new 
+		document: self)
 ]
 
 { #category : #private }

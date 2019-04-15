@@ -1,13 +1,9 @@
 Class {
 	#name : #GtStylerVisitor,
-	#superclass : #PRVisitor,
-	#traits : 'TBlDebug + TGt2DocumentConstants + TGt2DocumentUtility',
-	#classTraits : 'TBlDebug classTrait + TGt2DocumentConstants classTrait + TGt2DocumentUtility classTrait',
+	#superclass : #GtDocumentVisitor,
 	#instVars : [
 		'text',
-		'document',
 		'subscriber',
-		'codeblockCounter',
 		'annotationCounter',
 		'listItemStyler',
 		'currentList',
@@ -38,24 +34,9 @@ GtStylerVisitor >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #accessing }
-GtStylerVisitor >> document [
-	<return: #GtDocument>
-	^ document
-]
-
-{ #category : #accessing }
-GtStylerVisitor >> document: aGt2Document [
-	self 
-		assert: [ aGt2Document notNil ]
-		description: [ 'Document must be non-nil' ].
-	document := aGt2Document
-]
-
 { #category : #initialization }
 GtStylerVisitor >> initialize [
 	super initialize.
-	codeblockCounter := 0.
 	annotationCounter := 0.
 	listItemStyler := GtNullListItemStyler uniqueInstance.
 ]
@@ -121,13 +102,6 @@ GtStylerVisitor >> visitAnnotation: anAnnotation [
 	annotationCounter := annotationCounter + 1.
 	anAnnotation counter: annotationCounter.
 	super visitAnnotation: anAnnotation
-]
-
-{ #category : #'visiting-document' }
-GtStylerVisitor >> visitCodeblock: aPRCodeblock [
-	codeblockCounter := codeblockCounter + 1.
-	aPRCodeblock counter: codeblockCounter.
-	super visitCodeblock: aPRCodeblock
 ]
 
 { #category : #'visiting-document' }
