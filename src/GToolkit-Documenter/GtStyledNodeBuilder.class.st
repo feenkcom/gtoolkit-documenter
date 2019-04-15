@@ -222,6 +222,7 @@ GtStyledNodeBuilder >> styleLinkButton [
 
 { #category : #accessing }
 GtStyledNodeBuilder >> text [
+	<return: #BlRope>
 	self
 		assert: [ text isNotNil ] 
 		description: [ 'Document text must be itialized before using it' ].

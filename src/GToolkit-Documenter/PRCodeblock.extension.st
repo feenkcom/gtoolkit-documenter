@@ -102,29 +102,11 @@ PRCodeblock >> endMarkupSize [
 
 { #category : #'*GToolkit-Documenter' }
 PRCodeblock >> evaluateCodeblock [
-	| snippetBindings aCommand anErrorCatchingCommand aResult |
-	self text isEmpty ifTrue: [ ^ self ].
-	snippetBindings := self gtDocument variableBindings.
-	aCommand := GtEvaluateSourceCodeCommand new.
-	aCommand requestor: self.
-	aCommand sourceCode: self text asString.
-	aCommand variableBindings: snippetBindings.
-	aCommand receiver: self gtDocument evaluationReceiver.
-	anErrorCatchingCommand := aCommand asErrorCatchingCommand.
-	anErrorCatchingCommand execute.
-	aResult := anErrorCatchingCommand result.
-	self cacheResult: aResult asException: anErrorCatchingCommand isException.
-	anErrorCatchingCommand isException
-		ifFalse: [ 
-			self gtDocument announce: (GtCodeblockSuccessfulEvaluationAnnouncement new 
-				document: self gtDocument;
-				codeSnippet: self text; 
-				result: aResult) ]
-		ifTrue: [  
-			self gtDocument announce: (GtCodeblockFailedEvaluationAnnouncement new
-				document: self gtDocument;
-				codeSnippet: self text;
-				exception: aResult) ].
+	GtCodeblockEvaluator new
+		document: self gtDocument;
+		node: self;
+		text: self gtDocument text;
+		evaluateSelection
 ]
 
 { #category : #'*GToolkit-Documenter' }
