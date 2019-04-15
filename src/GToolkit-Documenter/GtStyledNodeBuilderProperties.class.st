@@ -77,6 +77,18 @@ GtStyledNodeBuilderProperties >> cursorLeaveAction: anAction [
 	self at: #cursorLeaveAction put: anAction
 ]
 
+{ #category : #'accessing - hide properties' }
+GtStyledNodeBuilderProperties >> hideInterval: anInterval [
+	| anIntervals |
+	anIntervals := self at: #hidingIntervals ifAbsentPut: [ OrderedCollection new: 2 ].
+	anIntervals addLast: anInterval.
+]
+
+{ #category : #'accessing - hide properties' }
+GtStyledNodeBuilderProperties >> hidingIntervals [
+	^ self at: #hidingIntervals
+]
+
 { #category : #initialization }
 GtStyledNodeBuilderProperties >> initialize [
 	super initialize.
@@ -101,6 +113,11 @@ GtStyledNodeBuilderProperties >> name [
 { #category : #'accessing - document properties' }
 GtStyledNodeBuilderProperties >> name: aString [
 	^ self at: #name put: aString
+]
+
+{ #category : #'accessing - hide properties' }
+GtStyledNodeBuilderProperties >> shouldHideParts [
+	^ self collection includesKey: #hidingIntervals
 ]
 
 { #category : #'accessing - hide properties' }
