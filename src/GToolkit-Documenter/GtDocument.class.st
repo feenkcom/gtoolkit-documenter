@@ -11,7 +11,8 @@ Class {
 		'variableBindings',
 		'storageStrategy',
 		'styleTextProcess',
-		'pillarParser'
+		'pillarParser',
+		'addOns'
 	],
 	#category : #'GToolkit-Documenter-Document'
 }
@@ -29,6 +30,12 @@ GtDocument class >> forClass: aClass [
 { #category : #'instance creation' }
 GtDocument class >> forFile: aFileReference [
 	^ self new fileReference: aFileReference; read
+]
+
+{ #category : #accessing }
+GtDocument >> addOns [
+	<return: #GtMethodCoderAddOns>
+	^ addOns
 ]
 
 { #category : #announcer }
@@ -83,9 +90,8 @@ GtDocument >> asElementWithoutSaveAction [
 			c horizontal matchParent ].
 	anElement userData at: self constants documentUserDataKey put: self.
 	self installCompleterForEditorElement: anEditorElement.
-	anEditorElement addShortcut: (BlShortcut new
-			combination: BlKeyCombination primaryG;
-			action: [ :theEditorElement | self playAndInspectSelectionOrMethodFrom: theEditorElement ]).
+	self addOns shortcuts do: [ :eachShortcut |
+		anEditorElement addShortcut: eachShortcut ].
 	^ anElement
 ]
 
@@ -151,6 +157,16 @@ GtDocument >> displayMarkup [
 	self editor styler mode isEditing ifTrue: [ ^ self ].
 	self editor styler displayMarkup.
 	self styleTextRequest.
+]
+
+{ #category : #actions }
+GtDocument >> doItAndGoSelectionOrAll: anEditorElement [
+	| aPRDocumentOrError |
+	self inform: #playAndInspectSelectionOrMethodFrom:.
+	aPRDocumentOrError := self ast. 
+	aPRDocumentOrError isPetit2Failure ifTrue: [ ^ self ].
+	aPRDocumentOrError accept: (GtCodeblockEvaluatorVisitor new 
+		document: self)
 ]
 
 { #category : #accessing }
@@ -302,6 +318,34 @@ GtDocument >> initialize [
 	self text: self defaultText.
 	storageStrategy := GtStorageStrategy null.
 	self subscribeToEditorChanges.
+	self initializeAddOns.
+]
+
+{ #category : #initialization }
+GtDocument >> initializeAddOns [
+	addOns := GtMethodCoderAddOns new.
+	self initializeShortcuts.
+]
+
+{ #category : #initialization }
+GtDocument >> initializeShortcuts [
+
+	addOns
+		addShortcut: (BlShortcut new
+			combination: BlKeyCombination primaryM;
+			action: [ :editorElement | self browseImplementors: editorElement ]);
+		addShortcut: (BlShortcut new
+			combination: BlKeyCombination primaryN;
+			action: [ :editorElement | self browseReferences: editorElement ]);
+		addShortcut: (BlShortcut new
+			combination: BlKeyCombination primaryB;
+			action: [ :editorElement | self browseClass: editorElement ]);
+		addShortcut: (BlShortcut new
+			combination: BlKeyCombination primaryD;
+			action: [ :editorElement | self doItSelectionOrAll: editorElement ]);
+		addShortcut: (BlShortcut new
+			combination: BlKeyCombination primaryG;
+			action: [ :editorElement | self doItAndGoSelectionOrAll: editorElement ])
 ]
 
 { #category : #private }
@@ -370,16 +414,6 @@ GtDocument >> pillarParser [
 	<return: #PRPillarParser>
 	^ pillarParser ifNil: [ 
 		pillarParser := PRPillarParser new optimize ]
-]
-
-{ #category : #actions }
-GtDocument >> playAndInspectSelectionOrMethodFrom: anEditorElement [
-	| aPRDocumentOrError |
-	self inform: #playAndInspectSelectionOrMethodFrom:.
-	aPRDocumentOrError := self ast. 
-	aPRDocumentOrError isPetit2Failure ifTrue: [ ^ self ].
-	aPRDocumentOrError accept: (GtCodeblockEvaluatorVisitor new 
-		document: self)
 ]
 
 { #category : #private }
