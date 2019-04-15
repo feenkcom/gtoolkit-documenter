@@ -71,17 +71,32 @@ GtStyledNodeBuilder >> document: aGtDocument [
 	document := aGtDocument
 ]
 
+{ #category : #'accessing - properties' }
+GtStyledNodeBuilder >> hide: aStartIndex to: aStopIndex [
+	self hideInterval: (aStartIndex to: aStopIndex)
+]
+
+{ #category : #'accessing - properties' }
+GtStyledNodeBuilder >> hideInterval: anInterval [
+	"Hide given interval of a node text"
+	self properties hideInterval: anInterval
+]
+
 { #category : #'style - hide' }
 GtStyledNodeBuilder >> hideNode [
 	"Hide node in the text"
-	self properties shouldKeepChildDisplayed
-		ifFalse: [ self nodeText attribute: GtHideAttribute uniqueInstance ]
-		ifTrue: [ 
+	self properties shouldKeepChildDisplayed ifTrue: [ 
 			| aSubNode |
 			aSubNode := self properties keepChildDisplayed.
 			self node = aSubNode ifTrue: [ ^ self ].
 			self installHideAttribute: self start to: aSubNode start - 1.
-			self installHideAttribute: aSubNode stop + 1 to: self stop ].
+			self installHideAttribute: aSubNode stop + 1 to: self stop.
+			^ self ].
+	self properties shouldHideParts ifTrue: [
+		self properties hidingIntervals do: [ :eachInterval | 
+			self installHideAttribute: eachInterval first to: eachInterval last ].
+		^ self ].
+	self nodeText attribute: GtHideAttribute uniqueInstance.
 ]
 
 { #category : #'style - condition' }

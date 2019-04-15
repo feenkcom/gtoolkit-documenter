@@ -389,6 +389,15 @@ PRCodeblock >> styleTextWithoutInteractions: aBlRope [
 PRCodeblock >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
-	self cursorLeftInText: aBlRope.
-	self utility styleCursorAttributeInText: aBlRope forNode: self.
+	"self cursorLeftInText: aBlRope.
+	self utility styleCursorAttributeInText: aBlRope forNode: self."
+	(self gtNodeStyler: aBlRope)
+		if: (self text isNotNil and: [ self text trimBoth isNotEmpty ])
+			do: [ :aStyler |
+				| aStopEndMarkup | 
+				aStopEndMarkup := self stopEndMarkupInText: aBlRope.
+				aStyler 
+					hide: self start to: (self parameterStopPositionInText: aBlRope);
+					hide: aStopEndMarkup - self endMarkupSize to: aStopEndMarkup;
+					autoHideNode ]
 ]
