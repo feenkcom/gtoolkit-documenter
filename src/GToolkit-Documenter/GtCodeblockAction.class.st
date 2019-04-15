@@ -71,6 +71,11 @@ GtCodeblockAction >> editor [
 	^ self document editor
 ]
 
+{ #category : #'accessing - document' }
+GtCodeblockAction >> evaluationReceiver [
+	^ self document evaluationReceiver
+]
+
 { #category : #execution }
 GtCodeblockAction >> execute [
 	"Perform a default action"
@@ -188,8 +193,7 @@ GtCodeblockAction >> nodeAtCursor [
 		[ | anInnerNode aNodeTextStartPosition |
 			aNodeTextStartPosition := aPosition - self startNodeBody.
 			self sourceAst
-				withAllNodesOfType: GtPharoVariableNode
-				do: [ :eachNode | 
+				withAllNodesDo: [ :eachNode | 
 					(aNodeTextStartPosition between: eachNode startPosition and: eachNode stopPosition)
 						ifTrue: [ anInnerNode := eachNode ] ].
 			^ anInnerNode ]
