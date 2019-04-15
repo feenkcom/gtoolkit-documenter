@@ -10,18 +10,12 @@ Class {
 { #category : #actions }
 GtCodeblockBrowseClassAction >> browseClass [
 	"Browse a selected class"
-	| aVariableNode aVariableName aBehavior |
-	self haltOnce.
+	| aBehavior |
 	self hasNodeBody ifFalse: [ ^ self ].
 	self isCursorPlacedInTheBody ifFalse: [ ^ self ].
 	self allConditionsSatisfied ifFalse: [ ^ self ].
-	aVariableNode := self nodeBodySelection
-		ifNil: [ self variableNodeAtCursor ]
-		ifNotNil: [ :aSelectedString | 
-			self extractVariableNodeFromString: aSelectedString ].
-	aVariableNode ifNil: [ ^ self ].
-	aVariableName := aVariableNode name value asSymbol.
-	aBehavior := Smalltalk globals at: aVariableName ifAbsent: [ ^ self ].
+	aBehavior := self extractBehavior.
+	aBehavior ifNil: [ ^ self ].
 	aBehavior isBehavior ifFalse: [ ^ self ].
 	self element phlow spawnObject: (GtClassCoder forClass: aBehavior).
 ]
@@ -47,6 +41,20 @@ GtCodeblockBrowseClassAction >> element: aBlElement [
 GtCodeblockBrowseClassAction >> execute [
 	"Perform a default action"
 	self browseClass
+]
+
+{ #category : #'accessing - pharo code' }
+GtCodeblockBrowseClassAction >> extractBehavior [
+	<return: #Behavior or: nil>
+	| aVariableNode aVariableName aBehavior |
+	aVariableNode := self nodeBodySelection
+		ifNil: [ self variableNodeAtCursor ]
+		ifNotNil: [ :aSelectedString | 
+			self extractVariableNodeFromString: aSelectedString ].
+	aVariableNode ifNil: [ ^ nil ].
+	aVariableName := aVariableNode name value asSymbol.
+	aBehavior := Smalltalk globals at: aVariableName ifAbsent: [ nil ].
+	^ aBehavior
 ]
 
 { #category : #'accessing - pharo code' }
