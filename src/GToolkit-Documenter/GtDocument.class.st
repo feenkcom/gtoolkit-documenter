@@ -91,7 +91,8 @@ GtDocument >> asElementWithoutSaveAction [
 	anElement userData at: self constants documentUserDataKey put: self.
 	self installCompleterForEditorElement: anEditorElement.
 	self addOns shortcuts do: [ :eachShortcut |
-		anEditorElement addShortcut: eachShortcut ].
+		anEditorElement addShortcut: (eachShortcut copy 
+			action: [ eachShortcut action cull: anEditorElement ]) ].
 	^ anElement
 ]
 
@@ -106,6 +107,19 @@ GtDocument >> ast [
 GtDocument >> basename [
 	<return: #String>
 	^ self storage basename
+]
+
+{ #category : #actions }
+GtDocument >> browseClass: anEditorElement [
+	| aPRDocumentOrError |
+	aPRDocumentOrError := self ast. 
+	aPRDocumentOrError isPetit2Failure ifTrue: [ ^ self ].
+	aPRDocumentOrError accept: (
+		GtCodeblockActionVisitor new 
+			action: (GtCodeblockBrowseClassAction new 
+				document: self;
+				text: self text;
+				element: anEditorElement))
 ]
 
 { #category : #cache }
@@ -162,11 +176,18 @@ GtDocument >> displayMarkup [
 { #category : #actions }
 GtDocument >> doItAndGoSelectionOrAll: anEditorElement [
 	| aPRDocumentOrError |
-	self inform: #playAndInspectSelectionOrMethodFrom:.
 	aPRDocumentOrError := self ast. 
 	aPRDocumentOrError isPetit2Failure ifTrue: [ ^ self ].
-	aPRDocumentOrError accept: (GtCodeblockEvaluatorVisitor new 
-		document: self)
+	aPRDocumentOrError accept: (GtCodeblockActionVisitor new 
+		action: (GtCodeblockEvaluator new
+			document: self;
+			text: self text;
+			condition: [ :anEvaluator | anEvaluator isCursorPlacedInTheBody ]))
+]
+
+{ #category : #actions }
+GtDocument >> doItSelectionOrAll: anEditorElement [
+	self doItAndGoSelectionOrAll: anEditorElement
 ]
 
 { #category : #accessing }
