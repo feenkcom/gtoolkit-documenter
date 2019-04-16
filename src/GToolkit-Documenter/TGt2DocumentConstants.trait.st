@@ -1,6 +1,6 @@
 Trait {
 	#name : #TGt2DocumentConstants,
-	#category : #'GToolkit-Documenter-Model'
+	#category : #'GToolkit-Documenter-Utility'
 }
 
 { #category : #accessing }

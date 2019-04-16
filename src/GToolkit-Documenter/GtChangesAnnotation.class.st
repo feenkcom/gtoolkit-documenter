@@ -1,7 +1,7 @@
 Class {
 	#name : #GtChangesAnnotation,
 	#superclass : #GtAnnotation,
-	#category : #'GToolkit-Documenter-Model'
+	#category : #'GToolkit-Documenter-Annotations'
 }
 
 { #category : #accessing }

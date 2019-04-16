@@ -7,7 +7,7 @@ Class {
 		'referencedPackages',
 		'exampleGroup'
 	],
-	#category : #'GToolkit-Documenter-Model'
+	#category : #'GToolkit-Documenter-Annotations'
 }
 
 { #category : #accessing }

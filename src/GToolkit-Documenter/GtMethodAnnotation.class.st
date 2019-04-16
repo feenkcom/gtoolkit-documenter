@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'referencedMethod'
 	],
-	#category : #'GToolkit-Documenter-Model'
+	#category : #'GToolkit-Documenter-Annotations'
 }
 
 { #category : #accessing }
