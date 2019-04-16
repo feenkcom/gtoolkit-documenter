@@ -1,7 +1,7 @@
 Class {
 	#name : #GtDocumentConstants,
 	#superclass : #Object,
-	#category : #'GToolkit-Documenter-Model'
+	#category : #'GToolkit-Documenter-Utility'
 }
 
 { #category : #ui }

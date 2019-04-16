@@ -3,7 +3,7 @@ Class {
 	#superclass : #PRAbstractAnnotation,
 	#traits : 'TBlDebug + TGt2DocumentConstants + TGt2DocumentUtility',
 	#classTraits : 'TBlDebug classTrait + TGt2DocumentConstants classTrait + TGt2DocumentUtility classTrait',
-	#category : #'GToolkit-Documenter-Model'
+	#category : #'GToolkit-Documenter-Annotations'
 }
 
 { #category : #accessing }
