@@ -6,10 +6,21 @@ Class {
 		'isException',
 		'preview',
 		'symbols',
-		'hasResult'
+		'hasResult',
+		'evaluatedInterval'
 	],
 	#category : #'GToolkit-Documenter-Cache'
 }
+
+{ #category : #accessing }
+GtCodeblockCacheValue >> evaluatedInterval [
+	^ evaluatedInterval
+]
+
+{ #category : #accessing }
+GtCodeblockCacheValue >> evaluatedInterval: anObject [
+	evaluatedInterval := anObject
+]
 
 { #category : #accessing }
 GtCodeblockCacheValue >> hasResult [

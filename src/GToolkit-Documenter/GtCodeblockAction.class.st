@@ -1,6 +1,8 @@
 Class {
 	#name : #GtCodeblockAction,
 	#superclass : #Object,
+	#traits : 'TBlDebug',
+	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'selectedCode',
 		'text',
@@ -150,7 +152,9 @@ GtCodeblockAction >> extractVariableNodeFromString: aString [
 { #category : #testing }
 GtCodeblockAction >> hasNodeBody [
 	"Return true if the given codeblock has a text body (code snippet to evaluate)"
-	^ self nodeBody isNotNil and: [ self nodeBody trimBoth isNotEmpty ]
+	| aString |
+	aString := self nodeBodyString.
+	^ aString isNotNil and: [ aString trimBoth isNotEmpty ]
 ]
 
 { #category : #initialization }
@@ -204,14 +208,13 @@ GtCodeblockAction >> nodeAtCursor [
 
 { #category : #'accessing - node' }
 GtCodeblockAction >> nodeBody [
-	<return: #String>
+	<return: #GtCodeblockSelection>
 	"Return codeblocks's text body (code snippet)"
-	| aString |
-	aString := self node text.
-	self 
-		assert: [ aString isString ]
-		description: [ 'Node body (code snippet) must be a string' ].
-	^ aString
+	| aStart |
+	aStart := self startNodeBody.
+	^ GtCodeblockSelection new 
+		text: self nodeBodyString;
+		interval: (1 to: self stopNodeBody - aStart + 1)
 ]
 
 { #category : #'accessing - cursor' }
@@ -231,16 +234,30 @@ GtCodeblockAction >> nodeBodyCursor [
 { #category : #'accessing - selection' }
 GtCodeblockAction >> nodeBodySelection [
 	"Return node body (code snippet) selection or nil"
-	<return: #String or: nil>
+	<return: #GtCodeblockSelection or: nil>
 	| aStart aStop |
 	aStart := self startNodeBody.
 	aStop := self stopNodeBody.
 	self selectedTextInterval ifNotNil: [ :anInterval | 
 		((aStart <= anInterval first) and: [ anInterval last <= aStop ]) ifTrue: [ 
-			^ (self text 
+			^ GtCodeblockSelection new
+				text: (self text 
 					from: anInterval first 
-					to: anInterval last) asString ] ].
+					to: anInterval last) asString;
+				interval: anInterval - (aStart + 1) ] ].
 	^ nil
+]
+
+{ #category : #'accessing - node' }
+GtCodeblockAction >> nodeBodyString [
+	<return: #String>
+	"Return codeblocks's text body (code snippet)"
+	| aString |
+	aString := self node text.
+	self 
+		assert: [ aString isString ]
+		description: [ 'Node body (code snippet) must be a string' ].
+	^ aString
 ]
 
 { #category : #'accessing - pharo code' }
@@ -251,23 +268,20 @@ GtCodeblockAction >> parserStartingState [
 { #category : #'accessing - selection' }
 GtCodeblockAction >> selectedCode [
 	"Return explicitly set selected code snippet part"
-	<return: #String or: nil>
+	<return: #GtCodeblockSelection or: nil>
 	^ selectedCode
 ]
 
 { #category : #'accessing - selection' }
-GtCodeblockAction >> selectedCode: aString [
+GtCodeblockAction >> selectedCode: aGtCodeblockSelection [
 	"Explicitly set selected code snippet part"
 	self 
-		assert: [ aString isNotNil ] 
+		assert: [ aGtCodeblockSelection isNotNil ] 
 		description: [ 'Selected code snippet part must be non-nil' ].
 	self 
-		assert: [ aString isString ] 
-		description: [ 'Selected code snippet part must be a string' ].
-	self 
-		assert: [ aString isNotEmpty ] 
+		assert: [ aGtCodeblockSelection isNotEmpty ] 
 		description: [ 'Selected code snippet part must be non-empty string' ].
-	selectedCode := aString
+	selectedCode := aGtCodeblockSelection
 ]
 
 { #category : #'accessing - selection' }
@@ -281,7 +295,7 @@ GtCodeblockAction >> selectedTextInterval [
 
 { #category : #'accessing - selection' }
 GtCodeblockAction >> selectionOrNodeBody [
-	<return: #String>
+	<return: #GtCodeblockSelection>
 	^ self selectedCode ifNil: [ self nodeBody ]
 ]
 
@@ -294,7 +308,7 @@ GtCodeblockAction >> selectorAtCursor [
 { #category : #'accessing - pharo code' }
 GtCodeblockAction >> sourceAst [
 	^ GtPharoParser 
-		parseWithErrors: self nodeBody 
+		parseWithErrors: self nodeBodyString
 		startingAt: self parserStartingState
 ]
 
