@@ -18,23 +18,25 @@ GtEpiceaDiffAttribute class >> constants [
 GtEpiceaDiffAttribute >> affect: aBrText in: anEditorElement [
 	^ BrLabel new
 		text: self text;
-		look: BrGlamorousLabelLook new
+		look: BrGlamorousLabelLook new;
+		background: Color gray;
+		padding: (BlInsets all: 3)
 ]
 
 { #category : #initialization }
-GtEpiceaDiffAttribute >> beInsert [
+GtEpiceaDiffAttribute >> asInsert [
 	self text: self constants insertLineIdentificator asRopedText monospace.
 	self text foreground: self constants insertLineColor.
 ]
 
 { #category : #initialization }
-GtEpiceaDiffAttribute >> beMatch [
+GtEpiceaDiffAttribute >> asMatch [
 	self text: self constants matchLineIdentificator asRopedText glamorousCodeFontAndSize.
 	self text foreground: self constants matchLineColor.
 ]
 
 { #category : #initialization }
-GtEpiceaDiffAttribute >> beRemove [
+GtEpiceaDiffAttribute >> asRemove [
 	self text: self constants removeLineIdentificator asRopedText glamorousCodeFontAndSize.
 	self text foreground: self constants removeLineColor.
 ]
@@ -47,7 +49,7 @@ GtEpiceaDiffAttribute >> constants [
 { #category : #initialization }
 GtEpiceaDiffAttribute >> initialize [
 	super initialize.
-	self beMatch.
+	self asMatch.
 	self beAppend.
 ]
 
