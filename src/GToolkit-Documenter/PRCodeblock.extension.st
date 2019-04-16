@@ -10,6 +10,14 @@ PRCodeblock >> cacheKey [
 ]
 
 { #category : #'*GToolkit-Documenter' }
+PRCodeblock >> cachedEvaluatedInterval [
+	^ self gtDocument 
+		cacheAt: self cacheKey 
+		ifPresent: [ :aCachedValue | aCachedValue evaluatedInterval ] 
+		ifAbsent: [ nil ]
+]
+
+{ #category : #'*GToolkit-Documenter' }
 PRCodeblock >> cachedPreview [
 	<return: #BlElement or: nil>
 	^ self gtDocument 
@@ -359,6 +367,11 @@ PRCodeblock >> styleTextWithMarkup: aBlRope [
 	self styleRunButtonInText: aBlRope.
 	self styleSmalltalkInText: aBlRope.
 	self parsePharoCode.
+	(self gtNodeStyler: aBlRope)
+		if: self hasResult 
+			do: [ :aStyler | aStyler 
+						embedResult;
+						highlightEvaluatedCode ].
 	self hasResult ifTrue: [ self styleResultPreviewInText: aBlRope ].
 ]
 
