@@ -15,6 +15,7 @@ GtStyledCodeblockBuilder >> embedResult [
 	(self text from: aGlobalInterval last to: aGlobalInterval last)
 		attribute: (GtPlaygroundEvaluatedCodeButtonAttribute new
 			result: aResult;
+			action: [ self document styleTextRequest ];
 			paint: (Color fromHexString: #'90CAF9'))
 ]
 
