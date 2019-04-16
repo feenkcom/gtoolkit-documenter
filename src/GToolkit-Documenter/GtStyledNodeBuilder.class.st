@@ -160,6 +160,20 @@ GtStyledNodeBuilder >> keepChildDisplayed: aPRDocumentItem [
 	self properties keepChildDisplayed: aPRDocumentItem
 ]
 
+{ #category : #'style - button' }
+GtStyledNodeBuilder >> linkButton [
+	"Add button to a node"
+	self nodeText 
+		attribute: (GtButtonAttribute new
+			beAppend;
+			stencil: [ BrButton new 
+				look: BrGlamorousLinkButtonWithLabelLook;
+				beSmall;
+				margin: (BlInsets top: 3);
+				label: self properties name value;
+				action: self properties action ])
+]
+
 { #category : #'accessing - properties' }
 GtStyledNodeBuilder >> name: aValuable [
 	self properties name: aValuable
@@ -220,20 +234,6 @@ GtStyledNodeBuilder >> stop [
 	"Return ending position of a node"
 	<return: #Integer>
 	^ self node stop
-]
-
-{ #category : #'style - button' }
-GtStyledNodeBuilder >> styleLinkButton [
-	"Add button to a node"
-	self nodeText 
-		attribute: (GtButtonAttribute new
-			beAppend;
-			stencil: [ BrButton new 
-				look: BrGlamorousLinkButtonWithLabelLook;
-				beSmall;
-				margin: (BlInsets top: 3);
-				label: self properties name value;
-				action: self properties action ])
 ]
 
 { #category : #accessing }

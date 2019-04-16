@@ -239,7 +239,7 @@ GtChangesAnnotation >> styleTextWithMarkup: aBlRope [
 			do: [ :aStyler | aStyler 
 				name: self pathParameterValue;
 				spawnObject: self cachedChanges;
-				styleLinkButton ].
+				linkButton ].
 	self styleExpandingPreviewInText: aBlRope.
 	self styleApplyButtonInText: aBlRope.
 	self styleCreateButtonInText: aBlRope.

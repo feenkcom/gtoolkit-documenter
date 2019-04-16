@@ -10,6 +10,25 @@ PRCodeblock >> cacheKey [
 ]
 
 { #category : #'*GToolkit-Documenter' }
+PRCodeblock >> cachedDisplayPreview [
+	<return: #Boolean>
+	^ self gtDocument 
+		cacheAt: self cacheKey
+		ifPresent: [ :aCachedValue | aCachedValue displayResult ] 
+		ifAbsent: [ true ]
+]
+
+{ #category : #'*GToolkit-Documenter' }
+PRCodeblock >> cachedDisplayPreview: aBoolean [
+	self gtDocument 
+		cacheAt: self cacheKey
+		ifPresent: [ :aCachedValue | aCachedValue displayResult: aBoolean ]
+		ifAbsentPut: [ 
+			GtCodeblockCacheValue new 
+				displayResult: aBoolean ]
+]
+
+{ #category : #'*GToolkit-Documenter' }
 PRCodeblock >> cachedEvaluatedInterval [
 	^ self gtDocument 
 		cacheAt: self cacheKey 
@@ -321,6 +340,7 @@ PRCodeblock >> styleParametersInText: aBlRope [
 { #category : #'*GToolkit-Documenter' }
 PRCodeblock >> styleResultPreviewInText: aBlRope [
 	| aStopEndMarkup |
+	self cachedDisplayPreview ifFalse: [ ^ self ].
 	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
 	(aBlRope from: aStopEndMarkup - self endMarkupSize to: aStopEndMarkup)
 		attributes: self resultPreviewAttributes
@@ -364,6 +384,15 @@ PRCodeblock >> styleTextWithMarkup: aBlRope [
 	self styleClosingBracketsInText: aBlRope.
 	self hasSourceCode ifFalse: [ ^ self ].
 	self gtIsSmalltalkLanguage ifFalse: [ ^ self styleScriptInText: aBlRope ].
+	(self gtNodeStyler: aBlRope)
+		action: [ :aWidget :aButtonModel | 
+			GtCodeblockEvaluator new
+				document: self gtDocument;
+				node: self;
+				text: self gtDocument text;
+				doNotDisplayResult;
+				evaluateSelection ];
+		playButton.
 	self styleRunButtonInText: aBlRope.
 	self styleSmalltalkInText: aBlRope.
 	self parsePharoCode.

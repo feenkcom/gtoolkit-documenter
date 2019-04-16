@@ -131,7 +131,7 @@ GtClassAnnotation >> styleTextWithMarkup: aBlRope [
 			do: [ :aStyler | aStyler 
 				name: self referencedClass;
 				spawnObject: self referencedClass realClass;
-				styleLinkButton ].
+				linkButton ].
 	self styleExpandingPreviewInText: aBlRope.
 	self registerToSystemChanges
 ]
