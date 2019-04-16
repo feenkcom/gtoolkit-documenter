@@ -213,7 +213,15 @@ GtDocument >> doItAndGoSelectionOrAll: anEditorElement [
 
 { #category : #actions }
 GtDocument >> doItSelectionOrAll: anEditorElement [
-	self doItAndGoSelectionOrAll: anEditorElement
+	| aPRDocumentOrError |
+	aPRDocumentOrError := self ast. 
+	aPRDocumentOrError isPetit2Failure ifTrue: [ ^ self ].
+	aPRDocumentOrError accept: (GtCodeblockActionVisitor new 
+		action: (GtCodeblockEvaluator new
+			document: self;
+			text: self text;
+			doNotDisplayResult;
+			condition: [ :anEvaluator | anEvaluator isCursorPlacedInTheBody ]))
 ]
 
 { #category : #accessing }

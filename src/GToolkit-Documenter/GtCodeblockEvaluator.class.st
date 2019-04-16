@@ -1,6 +1,9 @@
 Class {
 	#name : #GtCodeblockEvaluator,
 	#superclass : #GtCodeblockAction,
+	#instVars : [
+		'displayResult'
+	],
 	#category : #'GToolkit-Documenter-Code Snippet'
 }
 
@@ -12,12 +15,24 @@ GtCodeblockEvaluator >> cacheResult: aResult selection: aGtCodeblockSelection as
 			aCachedValue
 				result: aResult;
 				evaluatedInterval: aGtCodeblockSelection interval;
+				displayResult: self shouldDisplayResult;
 				isException: isException;
 				preview: nil ] 
 		ifAbsentPut: [ GtCodeblockCacheValue new
 			result: aResult;
 			evaluatedInterval: aGtCodeblockSelection interval;
+			displayResult: self shouldDisplayResult;
 			isException: isException ]
+]
+
+{ #category : #initialization }
+GtCodeblockEvaluator >> displayResult [
+	displayResult := true
+]
+
+{ #category : #initialization }
+GtCodeblockEvaluator >> doNotDisplayResult [
+	displayResult := false
 ]
 
 { #category : #actions }
@@ -60,6 +75,12 @@ GtCodeblockEvaluator >> execute [
 	^ self evaluateSelection
 ]
 
+{ #category : #initialization }
+GtCodeblockEvaluator >> initialize [
+	super initialize.
+	displayResult := true.
+]
+
 { #category : #notifying }
 GtCodeblockEvaluator >> onFinishedEvaluation: anErrorCatchingCommand selection: aGtCodeblockSelection [
 	"Cache result and announce the result"
@@ -81,6 +102,11 @@ GtCodeblockEvaluator >> onFinishedEvaluation: anErrorCatchingCommand selection: 
 				codeSnippet: aGtCodeblockSelection text;
 				exception: aResult) ].
 	self document styleTextRequest.
+]
+
+{ #category : #texting }
+GtCodeblockEvaluator >> shouldDisplayResult [
+	^ displayResult
 ]
 
 { #category : #'accessing - document' }

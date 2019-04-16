@@ -143,7 +143,7 @@ GtMethodAnnotation >> styleTextWithMarkup: aBlRope [
 			do: [ :aStyler | aStyler 
 				name: self referencedMethod;
 				spawnObject: self referencedMethod;
-				styleLinkButton ].
+				linkButton ].
 	self styleExpandingPreviewInText: aBlRope.
 	self registerToSystemChanges
 ]

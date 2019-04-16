@@ -7,10 +7,21 @@ Class {
 		'preview',
 		'symbols',
 		'hasResult',
-		'evaluatedInterval'
+		'evaluatedInterval',
+		'displayResult'
 	],
 	#category : #'GToolkit-Documenter-Cache'
 }
+
+{ #category : #accessing }
+GtCodeblockCacheValue >> displayResult [
+	^ displayResult
+]
+
+{ #category : #accessing }
+GtCodeblockCacheValue >> displayResult: aBoolean [
+	displayResult := aBoolean
+]
 
 { #category : #accessing }
 GtCodeblockCacheValue >> evaluatedInterval [
@@ -33,6 +44,7 @@ GtCodeblockCacheValue >> initialize [
 	isException := false.
 	result := nil.
 	hasResult := false.
+	displayResult := true.
 ]
 
 { #category : #accessing }
