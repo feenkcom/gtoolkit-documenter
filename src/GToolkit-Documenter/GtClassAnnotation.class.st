@@ -130,7 +130,7 @@ GtClassAnnotation >> styleTextWithMarkup: aBlRope [
 		if: self isClassDefined
 			do: [ :aStyler | aStyler 
 				name: self referencedClass;
-				spawnObject: self referencedClass realClass;
+				spawnObject: (GtClassCoder forClass: self referencedClass realClass);
 				linkButton ].
 	self styleExpandingPreviewInText: aBlRope.
 	self registerToSystemChanges
