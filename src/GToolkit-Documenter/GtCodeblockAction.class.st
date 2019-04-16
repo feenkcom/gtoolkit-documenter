@@ -214,7 +214,7 @@ GtCodeblockAction >> nodeBody [
 	aStart := self startNodeBody.
 	^ GtCodeblockSelection new 
 		text: self nodeBodyString;
-		interval: (1 to: self stopNodeBody - aStart + 1)
+		interval: (1 to: self stopNodeBody - aStart - 1)
 ]
 
 { #category : #'accessing - cursor' }
@@ -244,7 +244,7 @@ GtCodeblockAction >> nodeBodySelection [
 				text: (self text 
 					from: anInterval first 
 					to: anInterval last) asString;
-				interval: anInterval - (aStart + 1) ] ].
+				interval: anInterval - aStart ] ].
 	^ nil
 ]
 
