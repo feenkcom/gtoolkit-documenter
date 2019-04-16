@@ -125,6 +125,14 @@ PRCodeblock >> gtLanguageOrSmalltalk [
 ]
 
 { #category : #'*GToolkit-Documenter' }
+PRCodeblock >> gtNodeStyler: aBlText [
+	^ GtStyledCodeblockBuilder new 
+		document: self gtDocument; 
+		node: self; 
+		text: aBlText
+]
+
+{ #category : #'*GToolkit-Documenter' }
 PRCodeblock >> handleClassAddedOrRemovedAnnouncement: aClassAdded [ 
 	| aSymbols |
 	aSymbols := self cachedSymbols.

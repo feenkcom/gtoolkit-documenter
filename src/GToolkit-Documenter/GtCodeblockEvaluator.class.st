@@ -5,42 +5,46 @@ Class {
 }
 
 { #category : #caching }
-GtCodeblockEvaluator >> cacheResult: aResult asException: isException [
+GtCodeblockEvaluator >> cacheResult: aResult selection: aGtCodeblockSelection asException: isException [ 
 	self document 
 		cacheAt: self node cacheKey 
 		ifPresent: [ :aCachedValue |
 			aCachedValue
 				result: aResult;
+				evaluatedInterval: aGtCodeblockSelection interval;
 				isException: isException;
 				preview: nil ] 
 		ifAbsentPut: [ GtCodeblockCacheValue new
 			result: aResult;
+			evaluatedInterval: aGtCodeblockSelection interval;
 			isException: isException ]
 ]
 
 { #category : #actions }
 GtCodeblockEvaluator >> evaluateBody [
 	"Evaluate a node's body (code snippet)"
-	| aCommand anErrorCatchingCommand |
+	| aCommand anErrorCatchingCommand aSelection |
 	self hasNodeBody ifFalse: [ ^ self ].
 	self allConditionsSatisfied ifFalse: [ ^ self ].
+	aSelection := self selectionOrNodeBody.
 	aCommand := GtEvaluateSourceCodeCommand new.
 	aCommand requestor: self node.
-	aCommand sourceCode: self selectionOrNodeBody.
+	aCommand sourceCode: aSelection text.
 	aCommand variableBindings: self variableBindings.
 	aCommand receiver: self evaluationReceiver.
 	anErrorCatchingCommand := aCommand asErrorCatchingCommand.
 	anErrorCatchingCommand execute.
-	self onFinishedEvaluation: anErrorCatchingCommand
+	self onFinishedEvaluation: anErrorCatchingCommand selection: aSelection
 ]
 
 { #category : #actions }
 GtCodeblockEvaluator >> evaluateSelection [
 	"Evaluate a node's body (code snippet)"
-	| aString |
+	| aGtCodeblockSelection |
 	self hasNodeBody ifFalse: [ ^ self ].
-	aString := self nodeBodySelection.
-	aString ifNotNil: [ self selectedCode: aString ].
+	aGtCodeblockSelection := self nodeBodySelection.
+	aGtCodeblockSelection ifNotNil: [ 
+		self selectedCode: aGtCodeblockSelection ].
 	self evaluateBody
 ]
 
@@ -57,21 +61,24 @@ GtCodeblockEvaluator >> execute [
 ]
 
 { #category : #notifying }
-GtCodeblockEvaluator >> onFinishedEvaluation: anErrorCatchingCommand [
+GtCodeblockEvaluator >> onFinishedEvaluation: anErrorCatchingCommand selection: aGtCodeblockSelection [
 	"Cache result and announce the result"
 	| aResult |
 	aResult := anErrorCatchingCommand result.
-	self cacheResult: aResult asException: anErrorCatchingCommand isException.
+	self 
+		cacheResult: aResult 
+		selection: aGtCodeblockSelection 
+		asException: anErrorCatchingCommand isException.
 	anErrorCatchingCommand isException
 		ifFalse: [ 
 			self document announce: (GtCodeblockSuccessfulEvaluationAnnouncement new 
 				document: self document;
-				codeSnippet: self nodeBody; 
+				codeSnippet: aGtCodeblockSelection text; 
 				result: aResult) ]
 		ifTrue: [  
 			self document announce: (GtCodeblockFailedEvaluationAnnouncement new
 				document: self document;
-				codeSnippet: self nodeBody;
+				codeSnippet: aGtCodeblockSelection text;
 				exception: aResult) ].
 	self document styleTextRequest.
 ]
