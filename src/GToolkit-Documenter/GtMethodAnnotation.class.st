@@ -142,7 +142,8 @@ GtMethodAnnotation >> styleTextWithMarkup: aBlRope [
 		if: self isMethodDefined
 			do: [ :aStyler | aStyler 
 				name: self referencedMethod;
-				spawnObject: self referencedMethod;
+				spawnObject: ((GtClassCoder forClass: self referencedMethod realClass) 
+					implementorsFilterString: self referencedMethod selector asString);
 				linkButton ].
 	self styleExpandingPreviewInText: aBlRope.
 	self registerToSystemChanges
