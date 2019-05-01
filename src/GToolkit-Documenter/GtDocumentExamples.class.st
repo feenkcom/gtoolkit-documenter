@@ -237,7 +237,7 @@ GtDocumentExamples >> contentWithClassDefinitionChanges [
 GtDocumentExamples >> contentWithCodeblock [
 	<gtExample>
 	^ '[[[label=Evaluate
-aBook := DmAbAddressBook new.
+aBook := GtDocument new.
 ]]]'
 
 ]

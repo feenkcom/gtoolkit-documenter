@@ -139,6 +139,10 @@ GtStyledNodeBuilder >> hideNode [
 
 { #category : #'style - hide' }
 GtStyledNodeBuilder >> hideTextFrom: aStartPosition to: aStopPosition [
+	"Execute clear actions"
+	self properties shouldClearIt ifTrue: [ 
+		self node clearActions do: [ :eachAction | 
+			eachAction cull: self ] ].
 	"Hide node in the text"
 	self properties shouldKeepChildDisplayed ifTrue: [ 
 			| aSubNode |
@@ -151,11 +155,9 @@ GtStyledNodeBuilder >> hideTextFrom: aStartPosition to: aStopPosition [
 		self properties hidingIntervals do: [ :eachInterval | 
 			self installHideAttribute: eachInterval first to: eachInterval last ].
 		^ self ].
+	"Hide all"
 	(self text from: aStartPosition to: aStopPosition) 
 		attribute: GtHideAttribute uniqueInstance.
-	self properties shouldClearIt ifTrue: [ 
-		self node clearActions do: [ :eachAction | 
-			eachAction cull: self ] ].
 ]
 
 { #category : #'accessing - properties' }
@@ -321,6 +323,13 @@ GtStyledNodeBuilder >> revealTextFrom: aStartPosition to: aStopPosition [
 	"Reveal a text that was hidden"
 	(self text from: aStartPosition to: aStopPosition) clearAttributes: [ :eachAttribute | 
 		eachAttribute = GtHideAttribute uniqueInstance ].
+	"Reveal other hidden parts"
+	self properties shouldHideParts ifTrue: [
+		self properties hidingIntervals do: [ :eachInterval | 
+			(self text from: eachInterval first to: eachInterval last)
+				clearAttributes: [ :eachAttribute | 
+					eachAttribute = GtHideAttribute uniqueInstance ] ] ].
+	"Execute reveal action, e.g,. adding text attributes"
 	self properties shouldExecuteRevealActions ifTrue: [ 
 		self properties revealActions do: [ :eachAction | 
 			eachAction cull: self ] ].
