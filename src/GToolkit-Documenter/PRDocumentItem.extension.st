@@ -114,17 +114,6 @@ PRDocumentItem >> gtLaTeXSbaBookExportFor: aView [
 ]
 
 { #category : #'*GToolkit-Documenter' }
-PRDocumentItem >> gtListItemStyler [
-	<return: #GtListItemStyler>
-	^ self propertyAt: #gtListItemStyler
-]
-
-{ #category : #'*GToolkit-Documenter' }
-PRDocumentItem >> gtListItemStyler: aGt2ListItemStyler [
-	self propertyAt: #gtListItemStyler put: aGt2ListItemStyler
-]
-
-{ #category : #'*GToolkit-Documenter' }
 PRDocumentItem >> gtMarkdownExportFor: aView [
 	<gtViewExports>
 	^ aView explicit

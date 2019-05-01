@@ -19,9 +19,15 @@ GtStyledNodeBuilder >> action: anAction [
 
 { #category : #'style - cursor' }
 GtStyledNodeBuilder >> activateCursor [
-	self nodeText attribute: (BrTextCursorAttribute new
-		enterAction: self properties cursorEnterAction;
-		leaveAction: self properties cursorLeaveAction)
+	self activateCursorFrom: self start to: self stop.
+]
+
+{ #category : #'style - cursor' }
+GtStyledNodeBuilder >> activateCursorFrom: aStartPosition to: aStopPosition [
+	(self text from: aStartPosition to: aStopPosition) 
+		attribute: (BrTextCursorAttribute new
+			enterAction: self properties cursorEnterAction;
+			leaveAction: self properties cursorLeaveAction)
 ]
 
 { #category : #asserting }
@@ -39,6 +45,16 @@ GtStyledNodeBuilder >> autoHideNode [
 		do: [ self revealNode ]
 		otherwise: [ self hideNode ].
 	self installDisplayMarkupsHandler
+]
+
+{ #category : #'style - hide' }
+GtStyledNodeBuilder >> autoHideTextFrom: aStartPosition to: aStopPosition [
+	"Hide a text only if a cursor is far away"
+	self 
+		if: (self isCursorCloseTo: aStartPosition and: aStopPosition)
+		do: [ self revealTextFrom: aStartPosition to: aStopPosition ]
+		otherwise: [ self hideTextFrom: aStartPosition to: aStopPosition ].
+	self installDisplayMarkupsHandlerFrom: aStartPosition to: aStopPosition
 ]
 
 { #category : #'accessing - properties' }
@@ -85,12 +101,18 @@ GtStyledNodeBuilder >> hideInterval: anInterval [
 { #category : #'style - hide' }
 GtStyledNodeBuilder >> hideNode [
 	"Hide node in the text"
+	self hideTextFrom: self start to: self stop
+]
+
+{ #category : #'style - hide' }
+GtStyledNodeBuilder >> hideTextFrom: aStartPosition to: aStopPosition [
+	"Hide node in the text"
 	self properties shouldKeepChildDisplayed ifTrue: [ 
 			| aSubNode |
 			aSubNode := self properties keepChildDisplayed.
 			self node = aSubNode ifTrue: [ ^ self ].
-			self installHideAttribute: self start to: aSubNode start - 1.
-			self installHideAttribute: aSubNode stop + 1 to: self stop.
+			self installHideAttribute: aStartPosition to: aSubNode start - 1.
+			self installHideAttribute: aSubNode stop + 1 to: aStopPosition.
 			^ self ].
 	self properties shouldHideParts ifTrue: [
 		self properties hidingIntervals do: [ :eachInterval | 
@@ -125,17 +147,23 @@ GtStyledNodeBuilder >> initialize [
 { #category : #'style - hide' }
 GtStyledNodeBuilder >> installDisplayMarkupsHandler [
 	"Display markups if a cursor is close to the node"
+	self installDisplayMarkupsHandlerFrom: self start to: self stop.
+]
+
+{ #category : #'style - hide' }
+GtStyledNodeBuilder >> installDisplayMarkupsHandlerFrom: aStartPosition to: aStopPosition [
+	"Display markups if a cursor is close to the node"
 	self cursorEnterAction: [ :aTextEditor |
 		self updateText: aTextEditor text.
-		self revealNode.
-		aTextEditor invalidate: self start to: self stop.
-		aTextEditor update: self start to: self stop ].
+		self revealTextFrom: aStartPosition to: aStopPosition.
+		aTextEditor invalidate: aStartPosition to: aStopPosition.
+		aTextEditor update: aStartPosition to: aStopPosition ].
 	self cursorLeaveAction: [ :aTextEditor |
 		self updateText: aTextEditor text.
-		self hideNode.
-		aTextEditor invalidate: self start to: self stop.
-		aTextEditor update: self start to: self stop ].
-	self activateCursor
+		self hideTextFrom: aStartPosition to: aStopPosition.
+		aTextEditor invalidate: aStartPosition to: aStopPosition.
+		aTextEditor update: aStartPosition to: aStopPosition ].
+	self activateCursorFrom: aStartPosition to: aStopPosition.
 ]
 
 { #category : #'style - hide' }
@@ -149,8 +177,16 @@ GtStyledNodeBuilder >> isCursorClose [
 	"Return true if a cursor is close to the node"
 
 	<return: #Boolean>
+	^ self isCursorCloseTo: self start and: self stop
+]
+
+{ #category : #'style - cursor' }
+GtStyledNodeBuilder >> isCursorCloseTo: aStartPosition and: aStopPosition [
+	"Return true if a cursor is close to the position interval"
+
+	<return: #Boolean>
 	^ self document editor cursors
-		detect: [ :eachCursor | eachCursor position between: self start and: self stop ]
+		detect: [ :eachCursor | eachCursor position between: aStartPosition and: aStopPosition ]
 		ifFound: [ :aCursor | true ]
 		ifNone: [ false ]
 ]
@@ -213,7 +249,13 @@ GtStyledNodeBuilder >> properties [
 { #category : #'style - hide' }
 GtStyledNodeBuilder >> revealNode [
 	"Reveal node in the text that was hidden"
-	self nodeText clearAttributes: [ :eachAttribute | 
+	self revealTextFrom: self start to: self stop.
+]
+
+{ #category : #'style - hide' }
+GtStyledNodeBuilder >> revealTextFrom: aStartPosition to: aStopPosition [
+	"Reveal a text that was hidden"
+	(self text from: aStartPosition to: aStopPosition) clearAttributes: [ :eachAttribute | 
 		eachAttribute = GtHideAttribute uniqueInstance ]
 ]
 
