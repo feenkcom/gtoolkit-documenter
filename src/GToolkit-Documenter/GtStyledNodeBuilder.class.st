@@ -118,7 +118,8 @@ GtStyledNodeBuilder >> hideTextFrom: aStartPosition to: aStopPosition [
 		self properties hidingIntervals do: [ :eachInterval | 
 			self installHideAttribute: eachInterval first to: eachInterval last ].
 		^ self ].
-	self nodeText attribute: GtHideAttribute uniqueInstance.
+	(self text from: aStartPosition to: aStopPosition) 
+		attribute: GtHideAttribute uniqueInstance.
 ]
 
 { #category : #'style - condition' }

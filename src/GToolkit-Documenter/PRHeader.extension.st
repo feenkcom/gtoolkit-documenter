@@ -1,28 +1,6 @@
 Extension { #name : #PRHeader }
 
 { #category : #'*GToolkit-Documenter' }
-PRHeader >> cursorLeftInText: aBlRope [
-	self hideMarkupsInText: aBlRope.
-]
-
-{ #category : #'*GToolkit-Documenter' }
-PRHeader >> cursorNearbyInText: aBlRope [
-	self utility cursorNeabyInText: aBlRope forNode: self
-]
-
-{ #category : #'*GToolkit-Documenter' }
-PRHeader >> hideMarkupsInText: aBlRope [
-	| aMarkup |
-	self level isNumber ifFalse: [ ^ self ].
-	aMarkup := self utility startMarkupFor: self.
-	self utility 
-		mayHideMarkupsInText: aBlRope 
-		start: self start 
-		stop: self start + (aMarkup size * self level) - 1
-		forNode: self.
-]
-
-{ #category : #'*GToolkit-Documenter' }
 PRHeader >> styleTextWithMarkup: aBlRope [
 	(aBlRope
 		from: self start
@@ -36,6 +14,8 @@ PRHeader >> styleTextWithMarkup: aBlRope [
 PRHeader >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithMarkup: aBlRope.
-	self hideMarkupsInText: aBlRope.
-	self utility styleCursorAttributeInText: aBlRope forNode: self.
+	(self gtNodeStyler: aBlRope)
+		if: self level isNumber
+			do: [ :aStyler | aStyler 
+				autoHideTextFrom: self start to: self children first start - 1 ]
 ]
