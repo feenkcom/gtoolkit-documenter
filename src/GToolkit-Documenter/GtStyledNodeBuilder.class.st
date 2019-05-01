@@ -57,6 +57,39 @@ GtStyledNodeBuilder >> autoHideTextFrom: aStartPosition to: aStopPosition [
 	self installDisplayMarkupsHandlerFrom: aStartPosition to: aStopPosition
 ]
 
+{ #category : #'style - button' }
+GtStyledNodeBuilder >> buttonStencil: aStencil [
+	"Add button to a node"
+	| anAttribute |
+	anAttribute := GtButtonAttribute new
+		beAppend;
+		stencil: aStencil.
+	self nodeText attribute: anAttribute.
+	self properties shouldClearIt ifTrue: [ 
+		self clearAttribute: anAttribute from: self start to: self stop ].
+]
+
+{ #category : #'style - clear' }
+GtStyledNodeBuilder >> clearAction: aValuable [
+	self node addClearAction: aValuable
+]
+
+{ #category : #'style - clear' }
+GtStyledNodeBuilder >> clearAttribute: anAttribute from: aStartIndex to: aStopIndex [
+	"Clear attribute that was added dynamicly while hiding/revealing markups"
+	self clearAction: [ :aStyler | 
+		aStyler text 
+			clearAttributes: aStartIndex 
+			to: aStopIndex 
+			if: [ :eachAttribute | eachAttribute = anAttribute ] ]
+]
+
+{ #category : #'accessing - properties' }
+GtStyledNodeBuilder >> clearIt [
+	"Clear what every is created, e.g, text attributes, by this builder"
+	self properties clearIt.
+]
+
 { #category : #'accessing - properties' }
 GtStyledNodeBuilder >> cursorEnterAction: anAction [
 	self properties cursorEnterAction: anAction
@@ -120,6 +153,31 @@ GtStyledNodeBuilder >> hideTextFrom: aStartPosition to: aStopPosition [
 		^ self ].
 	(self text from: aStartPosition to: aStopPosition) 
 		attribute: GtHideAttribute uniqueInstance.
+	self properties shouldClearIt ifTrue: [ 
+		self node clearActions do: [ :eachAction | 
+			eachAction cull: self ] ].
+]
+
+{ #category : #'accessing - properties' }
+GtStyledNodeBuilder >> icon: aValuable [
+	self properties icon: aValuable
+]
+
+{ #category : #'style - button' }
+GtStyledNodeBuilder >> iconButton [
+	"Add button to a node"
+	| anAttribute |
+	anAttribute := GtButtonAttribute new
+		beAppend;
+		stencil: [ BrButton new
+				look: BrGlamorousButtonWithIconLook;
+				beSmall;
+				margin: (BlInsets left: 3);
+				icon: self properties icon value asElement;
+				action: self properties action ].
+	self nodeText attribute: anAttribute.
+	self properties shouldClearIt ifTrue: [ 
+		self clearAttribute: anAttribute from: self start to: self stop ].
 ]
 
 { #category : #'style - condition' }
@@ -247,6 +305,11 @@ GtStyledNodeBuilder >> properties [
 	^ properties
 ]
 
+{ #category : #'accessing - properties' }
+GtStyledNodeBuilder >> revealAction: anAction [
+	self properties revealAction: anAction
+]
+
 { #category : #'style - hide' }
 GtStyledNodeBuilder >> revealNode [
 	"Reveal node in the text that was hidden"
@@ -257,7 +320,10 @@ GtStyledNodeBuilder >> revealNode [
 GtStyledNodeBuilder >> revealTextFrom: aStartPosition to: aStopPosition [
 	"Reveal a text that was hidden"
 	(self text from: aStartPosition to: aStopPosition) clearAttributes: [ :eachAttribute | 
-		eachAttribute = GtHideAttribute uniqueInstance ]
+		eachAttribute = GtHideAttribute uniqueInstance ].
+	self properties shouldExecuteRevealActions ifTrue: [ 
+		self properties revealActions do: [ :eachAction | 
+			eachAction cull: self ] ].
 ]
 
 { #category : #'accessing - properties' }

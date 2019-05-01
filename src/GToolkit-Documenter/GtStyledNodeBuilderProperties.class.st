@@ -46,6 +46,12 @@ GtStyledNodeBuilderProperties >> at: aSymbol put: aValue [
 		put: aValue
 ]
 
+{ #category : #'accessing - hide properties' }
+GtStyledNodeBuilderProperties >> clearIt [
+	"Clear what every is created, e.g, text attributes, by this builder"
+	self at: #clearIt put: true
+]
+
 { #category : #accessing }
 GtStyledNodeBuilderProperties >> collection [
 	<return: #Dictionary>
@@ -89,6 +95,16 @@ GtStyledNodeBuilderProperties >> hidingIntervals [
 	^ self at: #hidingIntervals
 ]
 
+{ #category : #'accessing - document properties' }
+GtStyledNodeBuilderProperties >> icon [
+	^ self at: #icon
+]
+
+{ #category : #'accessing - document properties' }
+GtStyledNodeBuilderProperties >> icon: aString [
+	^ self at: #icon put: aString
+]
+
 { #category : #initialization }
 GtStyledNodeBuilderProperties >> initialize [
 	super initialize.
@@ -113,6 +129,29 @@ GtStyledNodeBuilderProperties >> name [
 { #category : #'accessing - document properties' }
 GtStyledNodeBuilderProperties >> name: aString [
 	^ self at: #name put: aString
+]
+
+{ #category : #'accessing - hide properties' }
+GtStyledNodeBuilderProperties >> revealAction: aValuable [
+	| theValuables |
+	theValuables := self at: #revealActions ifAbsentPut: [ OrderedCollection new: 2 ].
+	theValuables addLast: aValuable.
+]
+
+{ #category : #'accessing - hide properties' }
+GtStyledNodeBuilderProperties >> revealActions [
+	^ self at: #revealActions
+]
+
+{ #category : #'accessing - hide properties' }
+GtStyledNodeBuilderProperties >> shouldClearIt [
+	"Clear what every is created, e.g, text attributes, by this builder"
+	^ self at: #clearIt ifAbsentPut: [ false ]
+]
+
+{ #category : #'accessing - hide properties' }
+GtStyledNodeBuilderProperties >> shouldExecuteRevealActions [
+	^ self collection includesKey: #revealActions
 ]
 
 { #category : #'accessing - hide properties' }
