@@ -111,11 +111,6 @@ GtChangesAnnotation >> createButtonAttribute [
 						sourceElement: aButton) ])
 ]
 
-{ #category : #'api - style' }
-GtChangesAnnotation >> cursorLeftInText: aBlRope [
-	self utility hideAllButLinkInText: aBlRope forAnnotation: self
-]
-
 { #category : #'accessing - parameter values' }
 GtChangesAnnotation >> defaultShowSelector [
 	^ self constants defaultChangesShowSelector

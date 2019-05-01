@@ -6,16 +6,6 @@ PRDocumentItem >> constants [
 ]
 
 { #category : #'*GToolkit-Documenter' }
-PRDocumentItem >> cursorLeftInText: aBlRopedText [ 
-	"Subclasses can add behavior"
-]
-
-{ #category : #'*GToolkit-Documenter' }
-PRDocumentItem >> cursorNearbyInText: aBlRope [
-	"Subclasses can update it"
-]
-
-{ #category : #'*GToolkit-Documenter' }
 PRDocumentItem >> gtAsciiDocExportFor: aView [
 	<gtViewExports>
 	^ aView explicit

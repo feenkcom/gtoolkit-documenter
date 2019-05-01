@@ -34,11 +34,6 @@ GtIcebergFileAnnotation >> browseReferenceFrom: aBlClickEvent [
 			sourceElement: aBlClickEvent target)
 ]
 
-{ #category : #'api - style' }
-GtIcebergFileAnnotation >> cursorLeftInText: aBlRope [
-	self utility hideMarkupsInText: aBlRope start: self start stop: self stop
-]
-
 { #category : #testing }
 GtIcebergFileAnnotation >> doesReferenceExist [
 	^ self fileReference ifNotNil: #exists ifNil: false

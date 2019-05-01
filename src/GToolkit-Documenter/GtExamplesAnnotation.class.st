@@ -71,13 +71,6 @@ GtExamplesAnnotation >> cachedExampleGroup [
 	^ aNewExampleGroup
 ]
 
-{ #category : #'api - style' }
-GtExamplesAnnotation >> cursorLeftInText: aBlRope [
-	self hasChildren ifFalse: [ ^ self ].
-	self utility hideMarkupsInText: aBlRope forAnnotation: self exceptOfChild: self children first.
-	
-]
-
 { #category : #'accessing - parameter values' }
 GtExamplesAnnotation >> defaultShowSelector [
 	^ self constants defaultExamplesShowSelector

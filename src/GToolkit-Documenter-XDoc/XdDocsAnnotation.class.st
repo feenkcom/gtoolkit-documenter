@@ -44,11 +44,6 @@ XdDocsAnnotation >> client: anXdClient [
 	client := anXdClient.
 ]
 
-{ #category : #'api - style' }
-XdDocsAnnotation >> cursorLeftInText: aBlRope [
-	self utility hideMarkupsInText: aBlRope start: self start stop: self stop
-]
-
 { #category : #'accessing - parameter values' }
 XdDocsAnnotation >> defaultShowSelector [
 	^ self constants defaultXDocsShowSelector
@@ -93,7 +88,6 @@ XdDocsAnnotation >> styleTextWithMarkup: aBlRope [
 XdDocsAnnotation >> styleTextWithoutMarkup: aBlRope [
 	super styleTextWithoutMarkup: aBlRope.
 	self utility subtleMarkupsInText: aBlRope start: self start stop: self stop.
-	self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self.
+	(self nodeStyler: aBlRope) autoHideNode.
 	self utility stylePreviewInText: aBlRope forNode: self.
-	self utility styleCursorAttributeInText: aBlRope forNode: self.
 ]

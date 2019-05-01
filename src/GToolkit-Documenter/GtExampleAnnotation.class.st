@@ -65,13 +65,6 @@ GtExampleAnnotation >> codeHeight [
 		defaultValue: [ self constants defaultPreviewHeight ]
 ]
 
-{ #category : #'api - style' }
-GtExampleAnnotation >> cursorLeftInText: aBlRope [
-	self isExampleDefined 
-		ifTrue: [ self utility hideMarkupsInText: aBlRope start: self start stop: self stop ]
-		ifFalse: [ self utility hideAllButLinkInText: aBlRope forAnnotation: self ].
-]
-
 { #category : #compatibility }
 GtExampleAnnotation >> doNotDisplaySourceCodeParameterValue [
 	<compatibility>

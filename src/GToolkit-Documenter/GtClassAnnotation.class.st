@@ -36,11 +36,6 @@ GtClassAnnotation >> browseReferenceFrom: anEvent [
 		sourceElement: anEvent target)
 ]
 
-{ #category : #'api - style' }
-GtClassAnnotation >> cursorLeftInText: aBlRope [
-	self utility hideMarkupsInText: aBlRope start: self start stop: self stop
-]
-
 { #category : #'accessing - parameter values' }
 GtClassAnnotation >> defaultShowSelector [
 	^ self constants defaultClassShowSelector
