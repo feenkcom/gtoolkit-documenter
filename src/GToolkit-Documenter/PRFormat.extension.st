@@ -1,26 +1,6 @@
 Extension { #name : #PRFormat }
 
 { #category : #'*GToolkit-Documenter' }
-PRFormat >> cursorLeftInText: aBlRope [
-	self hideMarkupsInText: aBlRope.
-]
-
-{ #category : #'*GToolkit-Documenter' }
-PRFormat >> cursorNearbyInText: aBlRope [
-	self utility cursorNeabyInText: aBlRope forNode: self
-]
-
-{ #category : #'*GToolkit-Documenter' }
-PRFormat >> hideMarkupsInText: aBlRope [
-	| aMarkup |
-	aMarkup := self utility startMarkupFor: self.
-
-	self utility mayHideMarkupsInText: aBlRope start: self start stop: self start + aMarkup size - 1 forNode: self.
-	self utility mayHideMarkupsInText: aBlRope start: self stop - aMarkup size + 1 stop: self stop forNode: self.
-
-]
-
-{ #category : #'*GToolkit-Documenter' }
 PRFormat >> styleSubText: aBlRope [
 	^ self subclassResponsibility
 ]
@@ -35,8 +15,12 @@ PRFormat >> styleTextWithMarkup: aBlRope [
 
 { #category : #'*GToolkit-Documenter' }
 PRFormat >> styleTextWithoutMarkup: aBlRope [
+	| aMarkup |
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithMarkup: aBlRope.
-	self hideMarkupsInText: aBlRope.
-	self utility styleCursorAttributeInText: aBlRope forNode: self.
+	aMarkup := self utility startMarkupFor: self.
+	(self gtNodeStyler: aBlRope)
+		hide: self start to: self start + aMarkup size - 1;
+		hide: self stop - aMarkup size + 1 to: self stop;
+		autoHideNode.
 ]
