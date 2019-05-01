@@ -278,6 +278,28 @@ GtStyledNodeBuilder >> stop [
 	^ self node stop
 ]
 
+{ #category : #'style - text link' }
+GtStyledNodeBuilder >> styleKnownLinkFrom: aStartIndex to: aStopIndex [
+	self 
+		styleLinkWithColor: self constants linkColor 
+		from: aStartIndex 
+		to: aStopIndex
+]
+
+{ #category : #'style - text link' }
+GtStyledNodeBuilder >> styleLinkWithColor: aColor from: aStartIndex to: aStopIndex [
+	(self text from: aStartIndex to: aStopIndex)
+		foreground: aColor
+]
+
+{ #category : #'style - text link' }
+GtStyledNodeBuilder >> styleUnknownLinkFrom: aStartIndex to: aStopIndex [
+	self 
+		styleLinkWithColor: self constants linkWithErrorColor 
+		from: aStartIndex 
+		to: aStopIndex
+]
+
 { #category : #accessing }
 GtStyledNodeBuilder >> text [
 	<return: #BlRope>
