@@ -8,18 +8,6 @@ PRExternalLink >> browseReferenceFrom: anEvent [
 ]
 
 { #category : #'*GToolkit-Documenter' }
-PRExternalLink >> cursorLeftInText: aBlRope [
-	self hasChildren 
-		ifTrue: [ self styleTextWithoutMarkupWithCaption: aBlRope ]
-		ifFalse: [ self styleTextWithoutMarkupWithoutCaption: aBlRope ].
-]
-
-{ #category : #'*GToolkit-Documenter' }
-PRExternalLink >> cursorNearbyInText: aBlRope [
-	self utility cursorNeabyInText: aBlRope forNode: self
-]
-
-{ #category : #'*GToolkit-Documenter' }
 PRExternalLink >> doesReferenceExist [
 	^ self url isString and: [ self url isNotEmpty ]
 ]
@@ -58,43 +46,24 @@ PRExternalLink >> styleTextWithoutInteractions: aBlRope [
 PRExternalLink >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
-	self hasChildren 
-		ifTrue: [ self styleTextWithoutMarkupWithCaption: aBlRope ]
-		ifFalse: [ self styleTextWithoutMarkupWithoutCaption: aBlRope ].
-	self utility styleCursorAttributeInText: aBlRope forNode: self
-]
-
-{ #category : #'*GToolkit-Documenter' }
-PRExternalLink >> styleTextWithoutMarkupWithCaption: aBlRope [
-	| aStartIndex aStopIndex |
-	aStartIndex := self startMarkup size + self start.
-	aStopIndex := self children first stop.
-	self utility 
-		mayHideMarkupsInText: aBlRope 
-		start: self start
-		stop: aStartIndex - 1
-		forNode: self.
-	self utility 
-		mayHideMarkupsInText: aBlRope 
-		start: aStopIndex + 1
-		stop: self stop
-		forNode: self.	
-]
-
-{ #category : #'*GToolkit-Documenter' }
-PRExternalLink >> styleTextWithoutMarkupWithoutCaption: aBlRope [
-	| aStartIndex aStopIndex aMarkup |
-	aMarkup := self startMarkup.
-	aStartIndex := self start + aMarkup size.
-	aStopIndex := self stop - aMarkup size.
-	self utility
-		mayHideMarkupsInText: aBlRope
-		start: self start
-		stop: aStartIndex - 1
-		forNode: self.
-	self utility
-		mayHideMarkupsInText: aBlRope
-		start: aStopIndex + 1
-		stop: self stop
-		forNode: self
+	(self gtNodeStyler: aBlRope)
+		if: self doesReferenceExist 
+		do: [ :aStyler | 
+			| aMarkup aStartIndex |
+			aMarkup := self startMarkup.
+			aStartIndex := self start + aMarkup size - 1.
+			aStyler 
+				hide: self start to: aStartIndex;
+				if: self hasChildren " = has caption"
+					do: [ :sameStyler | 
+						| aStopIndex | 
+						aStopIndex := self children first stop + 1.
+						sameStyler hide: aStopIndex to: self stop ]
+					otherwise: [ :sameStyler | 
+						| aStopIndex | 
+						aStopIndex := self stop - aMarkup size + 1.
+						sameStyler hide: aStopIndex to: self stop ];
+				"we do not display markups as there is a conflict between 
+				clicking on a link and "
+				hideNode ].
 ]
