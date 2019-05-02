@@ -55,7 +55,7 @@ GtChangesAnnotation >> browseReferenceFrom: aBlClickEvent [
 
 { #category : #'private - cache' }
 GtChangesAnnotation >> cachedChanges [
-	<return: #GtEpicea or: nil>
+	<return: #GtEpicea>
 	| aNewEpicea |
 	self gtDocument 
 		cacheAt: self cacheKey

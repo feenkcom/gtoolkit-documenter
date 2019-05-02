@@ -204,6 +204,11 @@ GtDocumentConstants class >> inputFileAnnotationName [
 	^ PRInputFileAnnotation tag
 ]
 
+{ #category : #'pillar parameter names' }
+GtDocumentConstants class >> inputVariablesParameterName [
+	^ #variables
+]
+
 { #category : #'changes diff' }
 GtDocumentConstants class >> insertLineColor [
 	^ Color green muchDarker
@@ -278,6 +283,11 @@ GtDocumentConstants class >> notAvailableColor [
 { #category : #'pillar parameter names' }
 GtDocumentConstants class >> packagesParameterName [
 	^ #packages
+]
+
+{ #category : #'pillar annotation names' }
+GtDocumentConstants class >> parametrizedExampleAnnotationName [
+	^ #paramExample
 ]
 
 { #category : #'pillar parameter names' }

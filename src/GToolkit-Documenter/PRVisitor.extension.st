@@ -29,3 +29,8 @@ PRVisitor >> visitGt2IcebergFileAnnotation: aGt2IcebergFileAnnotation [
 PRVisitor >> visitGt2XDocsAnnotation: aGt2XDocsAnnotation [ 
 	self visitAnnotation: aGt2XDocsAnnotation
 ]
+
+{ #category : #'*GToolkit-Documenter' }
+PRVisitor >> visitGtParametrizedExampleAnnotation: aGtParametrizedExampleAnnotation [
+	self visitGt2ExampleAnnotation: aGtParametrizedExampleAnnotation
+]

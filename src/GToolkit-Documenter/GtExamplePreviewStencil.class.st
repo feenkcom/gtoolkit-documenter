@@ -91,8 +91,8 @@ GtExamplePreviewStencil >> example [
 ]
 
 { #category : #accessing }
-GtExamplePreviewStencil >> example: anObject [
-	example := anObject
+GtExamplePreviewStencil >> example: aGtExample [
+	example := aGtExample
 ]
 
 { #category : #accessing }

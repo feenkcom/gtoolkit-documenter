@@ -24,17 +24,7 @@ GtExamplePreviewAttribute class >> constants [
 
 { #category : #accessing }
 GtExamplePreviewAttribute >> affect: aBrText in: anEditorElement [
-	^ GtExamplePreviewStencil new
-			example: self example;
-			codeExpanded: self codeExpanded;
-			codeHeight: self codeHeight;
-			noCode: self noCode;
-			previewExpanded: self previewExpanded;
-			previewShowSelector: self previewShowSelector;
-			previewHeight: self previewHeight;
-			resultVariableName: self resultVariableName;
-			document: self document;
-			asElement
+	^ self newExamplePreviewStencil asElement
 ]
 
 { #category : #accessing }
@@ -78,8 +68,16 @@ GtExamplePreviewAttribute >> example [
 ]
 
 { #category : #accessing }
-GtExamplePreviewAttribute >> example: anObject [
-	example := anObject
+GtExamplePreviewAttribute >> example: aGtExample [
+	self 
+		assert: [ aGtExample isNotNil ] 
+		description: [ 'Gt Example must be non-nil' ].
+	example := aGtExample
+]
+
+{ #category : #'instance creation' }
+GtExamplePreviewAttribute >> examplePreviewStencilClass [
+	^ GtExamplePreviewStencil
 ]
 
 { #category : #initialization }
@@ -93,6 +91,20 @@ GtExamplePreviewAttribute >> initialize [
 	previewHeight := self constants defaultPreviewHeight.
 	previewShowSelector := self constants defaultShowSelector.
 	
+]
+
+{ #category : #'instance creation' }
+GtExamplePreviewAttribute >> newExamplePreviewStencil [
+	^ self examplePreviewStencilClass new
+		example: self example;
+		codeExpanded: self codeExpanded;
+		codeHeight: self codeHeight;
+		noCode: self noCode;
+		previewExpanded: self previewExpanded;
+		previewShowSelector: self previewShowSelector;
+		previewHeight: self previewHeight;
+		resultVariableName: self resultVariableName;
+		document: self document
 ]
 
 { #category : #accessing }
