@@ -10,7 +10,9 @@ Class {
 		'noCode',
 		'previewExpanded',
 		'previewHeight',
-		'previewShowSelector'
+		'previewShowSelector',
+		'resultVariableName',
+		'document'
 	],
 	#category : #'GToolkit-Documenter-Text - Attributes'
 }
@@ -30,6 +32,8 @@ GtExamplePreviewAttribute >> affect: aBrText in: anEditorElement [
 			previewExpanded: self previewExpanded;
 			previewShowSelector: self previewShowSelector;
 			previewHeight: self previewHeight;
+			resultVariableName: self resultVariableName;
+			document: self document;
 			asElement
 ]
 
@@ -56,6 +60,16 @@ GtExamplePreviewAttribute >> codeHeight: anObject [
 { #category : #accessing }
 GtExamplePreviewAttribute >> constants [
 	^ GtDocumentConstants
+]
+
+{ #category : #accessing }
+GtExamplePreviewAttribute >> document [
+	^ document
+]
+
+{ #category : #accessing }
+GtExamplePreviewAttribute >> document: anObject [
+	document := anObject
 ]
 
 { #category : #accessing }
@@ -119,4 +133,14 @@ GtExamplePreviewAttribute >> previewShowSelector [
 { #category : #accessing }
 GtExamplePreviewAttribute >> previewShowSelector: anObject [
 	previewShowSelector := anObject
+]
+
+{ #category : #accessing }
+GtExamplePreviewAttribute >> resultVariableName [
+	^ resultVariableName
+]
+
+{ #category : #accessing }
+GtExamplePreviewAttribute >> resultVariableName: anObject [
+	resultVariableName := anObject
 ]

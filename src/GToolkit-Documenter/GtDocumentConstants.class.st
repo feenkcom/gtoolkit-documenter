@@ -320,6 +320,11 @@ GtDocumentConstants class >> resultsLabel [
 	^ 'Results'
 ]
 
+{ #category : #'pillar parameter names' }
+GtDocumentConstants class >> returnVariableParameterName [
+	^ #return
+]
+
 { #category : #ui }
 GtDocumentConstants class >> runButtonIcon [
 	^ BrGlamorousIcons play

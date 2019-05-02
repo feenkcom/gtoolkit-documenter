@@ -335,6 +335,16 @@ GtDocumentExamples >> contentWithExistingExample [
 
 ]
 
+{ #category : #'example - with return variable name' }
+GtDocumentExamples >> contentWithExistingExampleAndReturnVariableName [
+	<gtExample>
+	^ '${', self constants exampleAnnotationName, ':', 
+		self referencedExampleMethod printString, '|',
+		self constants returnVariableParameterName, '=', self returnVariableName asString, '}$', 
+		String crlf, String crlf, 
+		'[[[', String crlf, String crlf, self returnVariableName asString, String crlf, ']]]', String crlf
+]
+
 { #category : #'method - existing one' }
 GtDocumentExamples >> contentWithExistingMethod [
 	<gtExample>
@@ -796,6 +806,18 @@ GtDocumentExamples >> documentWithExistingExample [
 	aDocument privateStyleText.
 	self assert: aDocument text asString equals: self contentWithExistingExample.
 	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
+{ #category : #'example - with return variable name' }
+GtDocumentExamples >> documentWithExistingExampleAndReturnVariableName [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExistingExampleAndReturnVariableName.
+	aDocument privateStyleText.
+	self assert: aDocument text asString equals: self contentWithExistingExampleAndReturnVariableName.
+	self assert: aDocument isSubscribedToSystem.
+	self assert: (aDocument variableBindings hasBindingOf: self returnVariableName) not.
 	^ aDocument
 ]
 
@@ -1445,6 +1467,12 @@ GtDocumentExamples >> resourcerWithInputFileToFigure [
 	self assert: anFigureFile resource notNil.
 	self assert: anFigureFile resource exists.
 	^ aCollectionOfResources
+]
+
+{ #category : #'example - with return variable name' }
+GtDocumentExamples >> returnVariableName [
+	<gtExample>
+	^ #aResult
 ]
 
 { #category : #'non technical people' }

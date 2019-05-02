@@ -21,6 +21,8 @@ GtExampleAnnotation class >> possibleParameters [
 		self constants previewHeightParameterName.
 		self constants previewExpandedParameterName.
 		self constants previewShowParameterName.
+		"assign example result to a variable name"
+		self constants returnVariableParameterName.
 		}
 ]
 
@@ -38,9 +40,7 @@ GtExampleAnnotation >> accept: aVisitor [
 GtExampleAnnotation >> browseReferenceFrom: anEvent [ 
 	anEvent modifiers isShift ifTrue: [ ^ self ].
 	self isExampleDefined ifFalse: [ ^ self inform: 'Example method does not exist' ].
-	anEvent target fireEvent: (GtPhlowObjectToSpawn new 
-		object: self referencedExample;
-		sourceElement: anEvent target)
+	anEvent target phlow spawnObject: self referencedExample.
 ]
 
 { #category : #'accessing - parameter values' }
@@ -179,7 +179,9 @@ GtExampleAnnotation >> previewAttributes [
 				noCode: self noCode;
 				previewExpanded: self previewExpanded;
 				previewShowSelector: self previewShowSelector;
-				previewHeight: self previewHeight);
+				previewHeight: self previewHeight;
+				resultVariableName: self resultVariableName;
+				document: self gtDocument);
 		cache: self cachedPreview;
 		onCachingDo: [ :aCachedElement :theAttribute | 
 			self cachedPreview: aCachedElement ] }
@@ -258,6 +260,19 @@ GtExampleAnnotation >> registerToSystemChanges [
 			send: #handleDocumentUpdateRequestedAnnouncement:
 			to: self
 			for: self gtSubscriber.
+]
+
+{ #category : #'accessing - parameter values' }
+GtExampleAnnotation >> resultVariableName [
+	<return: #Symbol or: nil>
+	^ self utility 
+		valueOf: self constants returnVariableParameterName
+		in: self parameters
+		value: [ :aString | (aString isString or: [ aString isSymbol ])
+			ifTrue: [ aString asSymbol ]
+			ifFalse: [ nil ] ]
+		emptyValue: [ nil ]
+		defaultValue: [ nil ]
 ]
 
 { #category : #'api - style' }
