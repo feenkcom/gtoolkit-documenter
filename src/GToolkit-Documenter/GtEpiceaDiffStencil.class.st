@@ -22,7 +22,7 @@ GtEpiceaDiffStencil >> constants [
 
 { #category : #'api - instantiation' }
 GtEpiceaDiffStencil >> create [
-	<return: #RlBope>
+	<return: #BlRope>
 	| aBuilder aRopedText |
 	aBuilder := PrettyTextDiffBuilder 
 		from: self from 
