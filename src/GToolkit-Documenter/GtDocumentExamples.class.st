@@ -6,8 +6,8 @@ I use ${class:GtDocumentExamplesUtility}$ to simplify examples.
 Class {
 	#name : #GtDocumentExamples,
 	#superclass : #Object,
-	#traits : 'TGt2DocumentConstants + TBlDebug',
-	#classTraits : 'TGt2DocumentConstants classTrait + TBlDebug classTrait',
+	#traits : 'TGt2DocumentConstants + TGtExampleAssertable',
+	#classTraits : 'TGt2DocumentConstants classTrait + TGtExampleAssertable classTrait',
 	#instVars : [
 		'memorySystem',
 		'tempDirectory'
@@ -274,6 +274,12 @@ GtDocumentExamples >> contentWithEmptyCodeblock [
    
 ]]]'
 
+]
+
+{ #category : #'formats, header, and lists' }
+GtDocumentExamples >> contentWithEmptyHeader [
+	<gtExample>
+	^ '!'
 ]
 
 { #category : #changes }
@@ -757,6 +763,15 @@ GtDocumentExamples >> documentWithEmptyCodeblock [
 	aDocument editor styleText.
 	self assert: aDocument text asString equals: self contentWithEmptyCodeblock.
 	self assert: aDocument isSubscribedToSystem not.
+	^ aDocument
+]
+
+{ #category : #'formats, header, and lists' }
+GtDocumentExamples >> documentWithEmptyHeader [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithEmptyHeader.
+	self shouldnt: [ aDocument privateStyleText ] raise: SubscriptOutOfBounds.
 	^ aDocument
 ]
 

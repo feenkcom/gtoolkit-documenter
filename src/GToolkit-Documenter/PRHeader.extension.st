@@ -16,6 +16,9 @@ PRHeader >> styleTextWithoutMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	(self gtNodeStyler: aBlRope)
 		if: self level isNumber
-			do: [ :aStyler | aStyler 
-				autoHideTextFrom: self start to: self children first start - 1 ]
+			do: [ :aStyler |
+				self children isEmpty ifFalse: [
+					aStyler 
+						autoHideTextFrom: self start 
+						to: self children first start - 1 ] ]
 ]
