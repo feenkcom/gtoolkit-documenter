@@ -1,12 +1,13 @@
 Extension { #name : #PRFigure }
 
 { #category : #'*GToolkit-Documenter' }
-PRFigure >> browseReferenceFrom: aBlClickEvent [ 
-	aBlClickEvent modifiers isShift ifTrue: [ ^ self ].
-	aBlClickEvent target 
-		fireEvent: (GtPhlowObjectToSpawn new
-			object: self figureFileReference;
-			sourceElement: aBlClickEvent target)
+PRFigure >> addClearAction: aValuable [
+	self gtDocument 
+		cacheAt: self cacheKey
+		ifPresent: [ :aCachedValue | aCachedValue clearAction: aValuable ]
+		ifAbsentPut: [ 
+			GtAnnotationCacheValue new 
+				clearAction: aValuable ]
 ]
 
 { #category : #'*GToolkit-Documenter' }
@@ -57,18 +58,12 @@ PRFigure >> cachedPreview: anElement [
 ]
 
 { #category : #'*GToolkit-Documenter' }
-PRFigure >> cursorLeftInText: aBlRope [
-	self doesReferenceExist
-		ifTrue: [ self utility hideMarkupsInText: aBlRope start: self start stop: self stop ]
-		ifFalse: [ 
-			self hasChildren 
-				ifTrue: [ self styleTextWithoutMarkupWithCaption: aBlRope ]
-				ifFalse: [ self styleTextWithoutMarkupWithoutCaption: aBlRope ] ].
-]
-
-{ #category : #'*GToolkit-Documenter' }
-PRFigure >> cursorNearbyInText: aBlRope [
-	self utility cursorNeabyInText: aBlRope forNode: self
+PRFigure >> clearActions [
+	<return: #Collection of: #BlockClosure>
+	^ self gtDocument 
+		cacheAt: self cacheKey
+		ifPresent: [ :aCachedValue | aCachedValue clearActions ]
+		ifAbsent: [ #() ]
 ]
 
 { #category : #'*GToolkit-Documenter' }
@@ -134,56 +129,38 @@ PRFigure >> startMarkup [
 { #category : #'*GToolkit-Documenter' }
 PRFigure >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
-	self utility styleLinkInText: aBlRope forNode: self.
+	self utility subtleMarkupsInText: aBlRope start: self start stop: self stop.
+	(self gtNodeStyler: aBlRope)
+		if: self doesReferenceExist
+			do: [ :aStyler | aStyler 
+				icon: BrGlamorousIcons inspect; 
+				spawnObject: [ self figureFileReference ];
+				iconButton ].
 	self utility styleExpandingPreviewInText: aBlRope forNode: self
+]
+
+{ #category : #'*GToolkit-Documenter' }
+PRFigure >> styleTextWithoutInteractions: aBlRope [
+	(self gtNodeStyler: aBlRope)
+		if: self doesReferenceExist
+			do: [ :aStyler | aStyler hideNode ].
+	self utility stylePreviewInText: aBlRope forNode: self.
 ]
 
 { #category : #'*GToolkit-Documenter' }
 PRFigure >> styleTextWithoutMarkup: aBlRope [
 	super styleTextWithoutMarkup: aBlRope.
 	self utility subtleMarkupsInText: aBlRope start: self start stop: self stop.
-	self utility styleLinkInText: aBlRope forNode: self.
-	self doesReferenceExist
-		ifTrue: [ self utility mayHideMarkupsInText: aBlRope start: self start stop: self stop forNode: self ]
-		ifFalse: [ 
-			self hasChildren 
-				ifTrue: [ self styleTextWithoutMarkupWithCaption: aBlRope ]
-				ifFalse: [ self styleTextWithoutMarkupWithoutCaption: aBlRope ] ].
+	(self gtNodeStyler: aBlRope)
+		if: self doesReferenceExist
+			do: [ :aStyler | aStyler 
+				revealAction: [ :sameStyler | sameStyler
+					if: self doesReferenceExist
+						do: [ sameStyler 
+							icon: BrGlamorousIcons inspect; 
+							spawnObject: [ self figureFileReference ];
+							clearIt;
+							iconButton ] ].
+				aStyler autoHideNode ].
 	self utility stylePreviewInText: aBlRope forNode: self.
-	self utility styleCursorAttributeInText: aBlRope forNode: self
-]
-
-{ #category : #'*GToolkit-Documenter' }
-PRFigure >> styleTextWithoutMarkupWithCaption: aBlRope [
-	| aStartIndex aStopIndex |
-	aStartIndex := self startMarkup size + self start.
-	aStopIndex := self children first stop.
-	self utility 
-		mayHideMarkupsInText: aBlRope 
-		start: self start
-		stop: aStartIndex - 1
-		forNode: self.
-	self utility 
-		mayHideMarkupsInText: aBlRope 
-		start: aStopIndex + 1
-		stop: self stop
-		forNode: self.		
-]
-
-{ #category : #'*GToolkit-Documenter' }
-PRFigure >> styleTextWithoutMarkupWithoutCaption: aBlRope [
-	| aStartIndex aStopIndex aMarkup |
-	aMarkup := self startMarkup.
-	aStartIndex := self start + aMarkup size.
-	aStopIndex := self stop - aMarkup size.
-	self utility
-		mayHideMarkupsInText: aBlRope
-		start: self start
-		stop: aStartIndex - 1
-		forNode: self.
-	self utility
-		mayHideMarkupsInText: aBlRope
-		start: aStopIndex + 1
-		stop: self stop
-		forNode: self
 ]

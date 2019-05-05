@@ -245,26 +245,6 @@ GtDocumentUtility class >> startMarkupFor: aNode [
 	^ PRPillarGrammar markups at: (aNode isClass ifTrue: [ aNode ] ifFalse: [ aNode class ])
 ]
 
-{ #category : #'text styling - nearby cursor' }
-GtDocumentUtility class >> styleCursorAttributeInText: aBlRope forNode: aNode [
-	self 
-		styleCursorAttributeInText: aBlRope 
-		from: (self cursorNearbyStartDistanceInText: aBlRope forNode: aNode) 
-		to: (self cursorNearbyStopDistanceInText: aBlRope forNode: aNode)  
-		forNode: aNode
-]
-
-{ #category : #'text styling - nearby cursor' }
-GtDocumentUtility class >> styleCursorAttributeInText: aBlRope from: aStartIndex to: aStopIndex forNode: aNode [
-	(aBlRope from: aStartIndex to: aStopIndex) attribute: (BrTextCursorAttribute new
-		enterAction: [ :aTextEditor |
-			aNode cursorNearbyInText: aTextEditor text.
-			aTextEditor invalidate: aNode start to: aNode stop ];
-		leaveAction: [ :aTextEditor |
-			aNode cursorLeftInText: aTextEditor text.
-			aTextEditor invalidate: aNode start to: aNode stop ])
-]
-
 { #category : #'text styling' }
 GtDocumentUtility class >> styleExpandingPreviewInText: aBlRope forNode: aNode [
 	| theAttributes |

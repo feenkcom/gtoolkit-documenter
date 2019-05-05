@@ -22,6 +22,12 @@ GtNullListItemStyler class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #accessing }
-GtNullListItemStyler >> styleTextWithMarkup: aBlRope forNode: aPRListItem [ 
+{ #category : #style }
+GtNullListItemStyler >> adornListItemSymbolInMarkupViewModeInContext: aGtStyledListItemBuilder [
+	"do nothing"
+]
+
+{ #category : #style }
+GtNullListItemStyler >> adornListItemSymbolInNoMarkupViewModeInContext: aGtStyledListItemBuilder [
+	"do nothing"
 ]

@@ -36,11 +36,6 @@ GtMethodAnnotation >> browseReferenceFrom: anEvent [
 		sourceElement: anEvent target)
 ]
 
-{ #category : #'api - style' }
-GtMethodAnnotation >> cursorLeftInText: aBlRope [
-	self utility hideAllButLinkInText: aBlRope forAnnotation: self
-]
-
 { #category : #'accessing - parameter values' }
 GtMethodAnnotation >> defaultShowSelector [
 	^ self constants defaultMethodShowSelector

@@ -1,8 +1,8 @@
 Class {
 	#name : #GtListItemStyler,
 	#superclass : #Object,
-	#traits : 'TBlDebug + TGt2DocumentConstants + TGt2DocumentUtility',
-	#classTraits : 'TBlDebug classTrait + TGt2DocumentConstants classTrait + TGt2DocumentUtility classTrait',
+	#traits : 'TBlDebug + TGt2DocumentConstants',
+	#classTraits : 'TBlDebug classTrait + TGt2DocumentConstants classTrait',
 	#category : #'GToolkit-Documenter-Styler'
 }
 
@@ -16,30 +16,32 @@ GtListItemStyler class >> utility [
 	^ GtDocumentUtility
 ]
 
+{ #category : #style }
+GtListItemStyler >> adornListItemSymbolInMarkupViewModeInContext: aGtStyledListItemBuilder [
+	self subclassResponsibility
+]
+
+{ #category : #style }
+GtListItemStyler >> adornListItemSymbolInNoMarkupViewModeInContext: aGtStyledListItemBuilder [
+	"Style a list item symbol in no-markup view mode 
+	(as it should be visible in a VISIWIG editor)"
+	self subclassResponsibility
+]
+
+{ #category : #'style - cursor' }
+GtListItemStyler >> clearAdornmentsInContext: aGtStyledListItemBuilder [
+	"Clear all list item symbol adornments"
+	(aGtStyledListItemBuilder listItemSymbolText)
+			clearAttributes: [ :eachAttribute | 
+				eachAttribute class = BrTextAdornmentDynamicAttribute ].
+]
+
 { #category : #accessing }
 GtListItemStyler >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #'as yet unclassified' }
-GtListItemStyler >> cursorLeftInText: aBlRope forNode: aPRListItem [
-]
-
-{ #category : #'as yet unclassified' }
-GtListItemStyler >> cursorNearbyInText: aBlRope forNode: aPRListItem [
-]
-
-{ #category : #accessing }
-GtListItemStyler >> styleTextWithMarkup: aBlRope forNode: aPRListItem [ 
-	self subclassResponsibility
-]
-
-{ #category : #accessing }
-GtListItemStyler >> styleTextWithoutMarkup: aBlRope forNode: aPRListItem [ 
-	self styleTextWithMarkup: aBlRope forNode: aPRListItem
-]
-
-{ #category : #private }
-GtListItemStyler >> utility [
-	^ GtDocumentUtility
+{ #category : #style }
+GtListItemStyler >> updateForNewListItem [
+	"Update what every is needed to style new list item"
 ]

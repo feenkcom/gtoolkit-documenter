@@ -140,7 +140,7 @@ GtStylerVisitor >> visitList: aPRList [
 
 { #category : #'visiting-document' }
 GtStylerVisitor >> visitListItem: aPRListItem [
-	aPRListItem gtListItemStyler: listItemStyler.
+	aPRListItem gtListItemStyler: listItemStyler updateForNewListItem copy.
 	super visitListItem: aPRListItem
 ]
 

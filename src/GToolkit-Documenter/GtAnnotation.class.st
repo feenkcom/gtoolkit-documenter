@@ -32,11 +32,6 @@ GtAnnotation >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #'api - style' }
-GtAnnotation >> cursorNearbyInText: aBlRope [
-	self utility cursorNeabyInText: aBlRope forNode: self
-]
-
 { #category : #'accessing - parameter values' }
 GtAnnotation >> defaultShowSelector [
 	^ self constants defaultShowSelector

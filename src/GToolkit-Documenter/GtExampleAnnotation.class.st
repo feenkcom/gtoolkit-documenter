@@ -21,6 +21,8 @@ GtExampleAnnotation class >> possibleParameters [
 		self constants previewHeightParameterName.
 		self constants previewExpandedParameterName.
 		self constants previewShowParameterName.
+		"assign example result to a variable name"
+		self constants returnVariableParameterName.
 		}
 ]
 
@@ -34,13 +36,35 @@ GtExampleAnnotation >> accept: aVisitor [
 	^ aVisitor visitGt2ExampleAnnotation: self
 ]
 
+{ #category : #'private - cache' }
+GtExampleAnnotation >> annotationCacheValueClass [
+	^ GtExampleAnnotationCacheValue
+]
+
 { #category : #'private - actions' }
 GtExampleAnnotation >> browseReferenceFrom: anEvent [ 
 	anEvent modifiers isShift ifTrue: [ ^ self ].
 	self isExampleDefined ifFalse: [ ^ self inform: 'Example method does not exist' ].
-	anEvent target fireEvent: (GtPhlowObjectToSpawn new 
-		object: self referencedExample;
-		sourceElement: anEvent target)
+	anEvent target phlow spawnObject: self referencedExample.
+]
+
+{ #category : #'private - cache' }
+GtExampleAnnotation >> cachedExample [
+	<return: #GtExample or: nil>
+	| anExampleOrNil |
+	self gtDocument 
+		cacheAt: self cacheKey
+		ifPresent: [ :aCachedValue | 
+			anExampleOrNil := aCachedValue example.
+			anExampleOrNil ifNil: [ 
+				anExampleOrNil := self example.
+				aCachedValue example: anExampleOrNil ] ]
+		ifAbsentPut: [ 
+			anExampleOrNil := self example.
+			self annotationCacheValueClass new 
+				example: anExampleOrNil;
+				isExpanded: self expandedParameterValue ].
+	^ anExampleOrNil
 ]
 
 { #category : #'accessing - parameter values' }
@@ -65,13 +89,6 @@ GtExampleAnnotation >> codeHeight [
 		defaultValue: [ self constants defaultPreviewHeight ]
 ]
 
-{ #category : #'api - style' }
-GtExampleAnnotation >> cursorLeftInText: aBlRope [
-	self isExampleDefined 
-		ifTrue: [ self utility hideMarkupsInText: aBlRope start: self start stop: self stop ]
-		ifFalse: [ self utility hideAllButLinkInText: aBlRope forAnnotation: self ].
-]
-
 { #category : #compatibility }
 GtExampleAnnotation >> doNotDisplaySourceCodeParameterValue [
 	<compatibility>
@@ -83,9 +100,14 @@ GtExampleAnnotation >> doesReferenceExist [
 	^ self isExampleDefined
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : #'private - cache' }
 GtExampleAnnotation >> example [
 	^ example ifNil: [ example := self referencedExample compiledMethod gtExample ]
+]
+
+{ #category : #'private - styling' }
+GtExampleAnnotation >> examplePreviewAttributeClass [
+	^ GtExamplePreviewAttribute
 ]
 
 { #category : #'accessing - parameter values' }
@@ -160,6 +182,21 @@ GtExampleAnnotation >> methodName [
 	^ self referencedExample fullName
 ]
 
+{ #category : #'private - styling' }
+GtExampleAnnotation >> newExamplePreviewAttribute [
+	^ self examplePreviewAttributeClass new
+		beAppend;
+		example: self cachedExample;
+		codeExpanded: self codeExpanded;
+		codeHeight: self codeHeight;
+		noCode: self noCode;
+		previewExpanded: self previewExpanded;
+		previewShowSelector: self previewShowSelector;
+		previewHeight: self previewHeight;
+		resultVariableName: self resultVariableName;
+		document: self gtDocument
+]
+
 { #category : #'accessing - parameter values' }
 GtExampleAnnotation >> noCode [
 	<return: #Boolean>
@@ -172,24 +209,16 @@ GtExampleAnnotation >> noCode [
 
 { #category : #accessing }
 GtExampleAnnotation >> objectToPreview [
-	^ self referencedExample compiledMethod gtExample
+	^ self cachedExample
 ]
 
 { #category : #'private - styling' }
 GtExampleAnnotation >> previewAttributes [
-	^ { GtCachedAttribute new attribute:
-			(GtExamplePreviewAttribute new
-				beAppend;
-				example: self example;
-				codeExpanded: self codeExpanded;
-				codeHeight: self codeHeight;
-				noCode: self noCode;
-				previewExpanded: self previewExpanded;
-				previewShowSelector: self previewShowSelector;
-				previewHeight: self previewHeight);
-		cache: self cachedPreview;
-		onCachingDo: [ :aCachedElement :theAttribute | 
-			self cachedPreview: aCachedElement ] }
+	^ {(GtCachedAttribute new
+			attribute: self newExamplePreviewAttribute;
+			cache: self cachedPreview;
+			onCachingDo: [ :aCachedElement :theAttribute | 
+				self cachedPreview: aCachedElement ])}
 ]
 
 { #category : #'accessing - parameter values' }
@@ -265,6 +294,19 @@ GtExampleAnnotation >> registerToSystemChanges [
 			send: #handleDocumentUpdateRequestedAnnouncement:
 			to: self
 			for: self gtSubscriber.
+]
+
+{ #category : #'accessing - parameter values' }
+GtExampleAnnotation >> resultVariableName [
+	<return: #Symbol or: nil>
+	^ self utility 
+		valueOf: self constants returnVariableParameterName
+		in: self parameters
+		value: [ :aString | (aString isString or: [ aString isSymbol ])
+			ifTrue: [ aString asSymbol ]
+			ifFalse: [ nil ] ]
+		emptyValue: [ nil ]
+		defaultValue: [ nil ]
 ]
 
 { #category : #'api - style' }

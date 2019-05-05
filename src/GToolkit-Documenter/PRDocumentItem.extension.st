@@ -6,16 +6,6 @@ PRDocumentItem >> constants [
 ]
 
 { #category : #'*GToolkit-Documenter' }
-PRDocumentItem >> cursorLeftInText: aBlRopedText [ 
-	"Subclasses can add behavior"
-]
-
-{ #category : #'*GToolkit-Documenter' }
-PRDocumentItem >> cursorNearbyInText: aBlRope [
-	"Subclasses can update it"
-]
-
-{ #category : #'*GToolkit-Documenter' }
 PRDocumentItem >> gtAsciiDocExportFor: aView [
 	<gtViewExports>
 	^ aView explicit
@@ -111,17 +101,6 @@ PRDocumentItem >> gtLaTeXSbaBookExportFor: aView [
 				constraintsDo: [ :c | 
 					c horizontal matchParent.
 					c vertical matchParent ] ]
-]
-
-{ #category : #'*GToolkit-Documenter' }
-PRDocumentItem >> gtListItemStyler [
-	<return: #GtListItemStyler>
-	^ self propertyAt: #gtListItemStyler
-]
-
-{ #category : #'*GToolkit-Documenter' }
-PRDocumentItem >> gtListItemStyler: aGt2ListItemStyler [
-	self propertyAt: #gtListItemStyler put: aGt2ListItemStyler
 ]
 
 { #category : #'*GToolkit-Documenter' }

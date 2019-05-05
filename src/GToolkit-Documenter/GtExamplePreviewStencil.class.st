@@ -11,7 +11,9 @@ Class {
 		'noCode',
 		'previewExpanded',
 		'previewHeight',
-		'previewShowSelector'
+		'previewShowSelector',
+		'resultVariableName',
+		'document'
 	],
 	#category : #'GToolkit-Documenter-Brick - Stencils'
 }
@@ -62,15 +64,25 @@ GtExamplePreviewStencil >> create [
 	self noCode ifFalse: [ 
 		| aCodeElement |
 		aCodeElement := self newCodeElement.
-		"self isCodeHeightDefined ifTrue: [ 
-			aCodeElement constraintsDo: [ :c | c vertical exact: self codeHeight ] ]."
 		aCodeElement when: GtPhlowObjectToSpawn do: [ :anEvent | 
 			anEvent consumed: true.
-			self updatePreviewElement: aPreviewContainerElement in: aContainer with: anEvent object ].
+			self updatePreviewElement: aPreviewContainerElement in: aContainer with: anEvent object.
+			self updateResultVariableBindings: anEvent object ].
 		aContainer addChild: aCodeElement ].
 	self isPreviewExpected ifTrue: [ 
-		self updatePreviewElement: aPreviewContainerElement in: aContainer with: self result ].
+		self updatePreviewElement: aPreviewContainerElement in: aContainer with: self result.
+		self updateResultVariableBindings: self result ].
 	^ aContainer
+]
+
+{ #category : #accessing }
+GtExamplePreviewStencil >> document [
+	^ document
+]
+
+{ #category : #accessing }
+GtExamplePreviewStencil >> document: anObject [
+	document := anObject
 ]
 
 { #category : #accessing }
@@ -79,13 +91,23 @@ GtExamplePreviewStencil >> example [
 ]
 
 { #category : #accessing }
-GtExamplePreviewStencil >> example: anObject [
-	example := anObject
+GtExamplePreviewStencil >> example: aGtExample [
+	example := aGtExample
 ]
 
 { #category : #accessing }
 GtExamplePreviewStencil >> exampleWithResult [
 	^ exampleWithResult ifNil: [ exampleWithResult := self example run ]
+]
+
+{ #category : #testing }
+GtExamplePreviewStencil >> hasDocument [
+	^ self document isNotNil
+]
+
+{ #category : #testing }
+GtExamplePreviewStencil >> hasResultVariableName [
+	^ self resultVariableName isNotNil
 ]
 
 { #category : #initialization }
@@ -208,29 +230,37 @@ GtExamplePreviewStencil >> result [
 	^ self exampleWithResult returnValueOrExampleException
 ]
 
+{ #category : #accessing }
+GtExamplePreviewStencil >> resultVariableName [
+	<return: #Symbol or: nil>
+	^ resultVariableName
+]
+
+{ #category : #accessing }
+GtExamplePreviewStencil >> resultVariableName: anObject [
+	resultVariableName := anObject
+]
+
 { #category : #private }
 GtExamplePreviewStencil >> updatePreviewElement: aPreviewContainerElement in: aWholeContainer with: anObject [
-	| aNewPreview anArrowElement |
+	| aNewPreview |
 	aNewPreview := self newPreviewElementFor: anObject.
 	aPreviewContainerElement removeChildNamed: #preview.
 	aPreviewContainerElement addChild: aNewPreview at: 1 as: #preview.
 
 	self noCode ifFalse: [ 
 		aWholeContainer removeChildNamed: #arrow.
-		anArrowElement := self newArrowElement.
-		anArrowElement 
-			addEventHandlerOn: BlMouseEnterEvent do: [ :anEvent | anArrowElement background: Color random ]; 
-			addEventHandlerOn: BlClickEvent
-			do: [ :anEvent | 
-				self inform: 'click'.
-				aPreviewContainerElement 
-					childNamed: #preview 
-					ifFound: [ :aPreviewElement | 
-						aPreviewContainerElement removeChildNamed: #preview ] 
-					ifNone: [ aPreviewContainerElement addChild: aNewPreview at: 1 as: #preview ] ].
 		aWholeContainer addChild: self newArrowElement at: 2 as: #arrow ].
 
 	aPreviewContainerElement hasParent ifFalse: [ 
 		aWholeContainer addChild: aPreviewContainerElement ].
 	
+]
+
+{ #category : #private }
+GtExamplePreviewStencil >> updateResultVariableBindings: aResult [
+	self hasResultVariableName ifFalse: [ ^ self ].
+	self hasDocument ifFalse: [ ^ self ].
+	self document variableBindings at: self resultVariableName asSymbol put: aResult.
+	self document styleTextRequest.
 ]

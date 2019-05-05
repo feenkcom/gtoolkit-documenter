@@ -10,16 +10,6 @@ PRInputFileAnnotation >> browseReferenceFrom: anEvent [
 ]
 
 { #category : #'*GToolkit-Documenter' }
-PRInputFileAnnotation >> cursorLeftInText: aBlRope [
-	self utility hideAllButLinkInText: aBlRope forAnnotation: self
-]
-
-{ #category : #'*GToolkit-Documenter' }
-PRInputFileAnnotation >> cursorNearbyInText: aBlRope [
-	self utility cursorNeabyInText: aBlRope forNode: self
-]
-
-{ #category : #'*GToolkit-Documenter' }
 PRInputFileAnnotation >> defaultShowSelector [
 	^ GtDocumentConstants defaultShowSelector
 ]

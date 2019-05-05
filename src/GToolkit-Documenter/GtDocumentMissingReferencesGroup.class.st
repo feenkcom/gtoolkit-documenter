@@ -14,6 +14,11 @@ GtDocumentMissingReferencesGroup >> addMissingReferences: aMissingReferencesResu
 	missingReferences add: aMissingReferencesResult
 ]
 
+{ #category : #enumerating }
+GtDocumentMissingReferencesGroup >> collect: aBlock [
+	^ missingReferences collect: aBlock
+]
+
 { #category : #ui }
 GtDocumentMissingReferencesGroup >> gtItemsFor: aView [
 	<gtView>

@@ -83,27 +83,6 @@ PRCodeblock >> cachedSymbols: aGt2CodeblockSymbols [
 ]
 
 { #category : #'*GToolkit-Documenter' }
-PRCodeblock >> cursorLeftInText: aBlRope [
-	| aStopEndMarkup |
-	self utility 
-		mayHideMarkupsInText: aBlRope 
-		start: self start 
-		stop: (self parameterStopPositionInText: aBlRope) 
-		forNode: self.
-	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
-	self utility 
-		mayHideMarkupsInText: aBlRope 
-		start: aStopEndMarkup - self endMarkupSize 
-		stop: aStopEndMarkup 
-		forNode: self
-]
-
-{ #category : #'*GToolkit-Documenter' }
-PRCodeblock >> cursorNearbyInText: aBlRope [
-	self utility cursorNeabyInText: aBlRope forNode: self
-]
-
-{ #category : #'*GToolkit-Documenter' }
 PRCodeblock >> endMarkup [
 	^ PRPillarGrammar endMarkups at: self class
 ]
@@ -408,15 +387,10 @@ PRCodeblock >> styleTextWithMarkup: aBlRope [
 PRCodeblock >> styleTextWithoutInteractions: aBlRope [ 
 	| aStopEndMarkup |
 	self styleParametersInText: aBlRope.
-	self utility 
-		hideMarkupsInText: aBlRope 
-		start: self start 
-		stop: (self parameterStopPositionInText: aBlRope).
 	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
-	self utility 
-		hideMarkupsInText: aBlRope 
-		start: aStopEndMarkup - self endMarkupSize 
-		stop: aStopEndMarkup.
+	(self gtNodeStyler: aBlRope)
+		hideTextFrom: self start to: (self parameterStopPositionInText: aBlRope);
+		hideTextFrom: aStopEndMarkup - self endMarkupSize to: aStopEndMarkup.
 	self hasSourceCode ifFalse: [ ^ self ].
 	self styleScriptInText: aBlRope.
 ]
@@ -425,8 +399,6 @@ PRCodeblock >> styleTextWithoutInteractions: aBlRope [
 PRCodeblock >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
-	"self cursorLeftInText: aBlRope.
-	self utility styleCursorAttributeInText: aBlRope forNode: self."
 	(self gtNodeStyler: aBlRope)
 		if: (self text isNotNil and: [ self text trimBoth isNotEmpty ])
 			do: [ :aStyler |
@@ -435,5 +407,6 @@ PRCodeblock >> styleTextWithoutMarkup: aBlRope [
 				aStyler 
 					hide: self start to: (self parameterStopPositionInText: aBlRope);
 					hide: aStopEndMarkup - self endMarkupSize to: aStopEndMarkup;
-					autoHideNode ]
+					autoHideTextFrom: self start to: (self parameterStopPositionInText: aBlRope);
+					autoHideTextFrom: aStopEndMarkup - self endMarkupSize to: aStopEndMarkup ]
 ]

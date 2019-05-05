@@ -6,8 +6,8 @@ I use ${class:GtDocumentExamplesUtility}$ to simplify examples.
 Class {
 	#name : #GtDocumentExamples,
 	#superclass : #Object,
-	#traits : 'TGt2DocumentConstants + TBlDebug',
-	#classTraits : 'TGt2DocumentConstants classTrait + TBlDebug classTrait',
+	#traits : 'TGt2DocumentConstants + TGtExampleAssertable',
+	#classTraits : 'TGt2DocumentConstants classTrait + TGtExampleAssertable classTrait',
 	#instVars : [
 		'memorySystem',
 		'tempDirectory'
@@ -237,7 +237,7 @@ GtDocumentExamples >> contentWithClassDefinitionChanges [
 GtDocumentExamples >> contentWithCodeblock [
 	<gtExample>
 	^ '[[[label=Evaluate
-aBook := DmAbAddressBook new.
+aBook := GtDocument new.
 ]]]'
 
 ]
@@ -274,6 +274,12 @@ GtDocumentExamples >> contentWithEmptyCodeblock [
    
 ]]]'
 
+]
+
+{ #category : #'formats, header, and lists' }
+GtDocumentExamples >> contentWithEmptyHeader [
+	<gtExample>
+	^ '!'
 ]
 
 { #category : #changes }
@@ -335,11 +341,38 @@ GtDocumentExamples >> contentWithExistingExample [
 
 ]
 
+{ #category : #'example - with return variable name' }
+GtDocumentExamples >> contentWithExistingExampleAndReturnVariableName [
+	<gtExample>
+	^ '${', self constants exampleAnnotationName, ':', 
+		self referencedExampleMethod printString, '|',
+		self constants returnVariableParameterName, '=', self returnVariableName asString, '}$', 
+		String crlf, String crlf, 
+		'[[[', String crlf, String crlf, self returnVariableName asString, String crlf, ']]]', String crlf
+]
+
 { #category : #'method - existing one' }
 GtDocumentExamples >> contentWithExistingMethod [
 	<gtExample>
 	^ '${', self constants methodAnnotationName, ':', self referencedMethod printString, '}$'
 
+]
+
+{ #category : #'example - parametrized one' }
+GtDocumentExamples >> contentWithExistingParametrizedExampleSumNumber [
+"GtDummyExamplesWithParametrizedExampleA>>#parametrizedExample:withTwoArguments:|variables=#(aVariableOne aVariableTwo)|result=aResult}$"
+	<gtExample>
+	^ '[[[', String crlf, String crlf, 
+			self firstInputVariableName asString, ' := ', self firstInputVariableValue asString, '.', String crlf,
+			self secondInputVariableName asString, ' := ', self secondInputVariableValue asString, '.', String crlf,
+			']]]', String crlf, String crlf,
+		'${', self constants parametrizedExampleAnnotationName, ':', 
+		self referencedMethodOfParametrizedExampleSumNumber printString, '|',
+		self constants inputVariablesParameterName, '=', self firstInputVariableName asString, 
+			' ', self secondInputVariableName asString, '|',
+		self constants returnVariableParameterName, '=', self returnVariableName asString, '}$', 
+		String crlf, String crlf, 
+		'[[[', String crlf, String crlf, self returnVariableName asString, String crlf, ']]]', String crlf
 ]
 
 { #category : #'external link' }
@@ -733,6 +766,15 @@ GtDocumentExamples >> documentWithEmptyCodeblock [
 	^ aDocument
 ]
 
+{ #category : #'formats, header, and lists' }
+GtDocumentExamples >> documentWithEmptyHeader [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithEmptyHeader.
+	self shouldnt: [ aDocument privateStyleText ] raise: SubscriptOutOfBounds.
+	^ aDocument
+]
+
 { #category : #changes }
 GtDocumentExamples >> documentWithEpiceaChanges [
 	<gtExample>
@@ -799,6 +841,18 @@ GtDocumentExamples >> documentWithExistingExample [
 	^ aDocument
 ]
 
+{ #category : #'example - with return variable name' }
+GtDocumentExamples >> documentWithExistingExampleAndReturnVariableName [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExistingExampleAndReturnVariableName.
+	aDocument privateStyleText.
+	self assert: aDocument text asString equals: self contentWithExistingExampleAndReturnVariableName.
+	self assert: aDocument isSubscribedToSystem.
+	self assert: (aDocument variableBindings hasBindingOf: self returnVariableName) not.
+	^ aDocument
+]
+
 { #category : #'method - existing one' }
 GtDocumentExamples >> documentWithExistingMethod [
 	<gtExample>
@@ -807,6 +861,18 @@ GtDocumentExamples >> documentWithExistingMethod [
 	aDocument editor styleText.
 	self assert: aDocument text asString equals: self contentWithExistingMethod.
 	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
+{ #category : #'example - parametrized one' }
+GtDocumentExamples >> documentWithExistingParametrizedExampleSumNumber [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExistingParametrizedExampleSumNumber.
+	aDocument privateStyleText.
+	self assert: aDocument text asString equals: self contentWithExistingParametrizedExampleSumNumber.
+	"self assert: aDocument isSubscribedToSystem."
+	self assert: (aDocument variableBindings hasBindingOf: self returnVariableName) not.
 	^ aDocument
 ]
 
@@ -1163,6 +1229,18 @@ GtDocumentExamples >> fileReferenceWithSelfReferencedInputFile [
 	^ memorySystem addPillarFileWithContent: self contentWithSelfReferencedInputFile
 ]
 
+{ #category : #'example - parametrized one' }
+GtDocumentExamples >> firstInputVariableName [
+	<gtExample>
+	^ #aVariableOne
+]
+
+{ #category : #'example - parametrized one' }
+GtDocumentExamples >> firstInputVariableValue [
+	<gtExample>
+	^ 11
+]
+
 { #category : #basic }
 GtDocumentExamples >> fooString [
 	<gtExample>
@@ -1236,6 +1314,15 @@ GtDocumentExamples >> ombuEntry [
 	^ anEpLog entries first
 ]
 
+{ #category : #'example - parametrized one' }
+GtDocumentExamples >> parametrizedExampleSumNumber: aNumber with: anotherNumber [
+	<gtExample>
+	| aResult |
+	aResult := aNumber + anotherNumber.
+	self assert: aResult isNotNil.
+	^ aResult
+]
+
 { #category : #'pillar parser' }
 GtDocumentExamples >> parseRopedTextContent [
 	<gtExample>
@@ -1280,6 +1367,12 @@ GtDocumentExamples >> referencedExampleMethod [
 GtDocumentExamples >> referencedMethod [
 	<gtExample>
 	^ self class >> #referencedMethod
+]
+
+{ #category : #'example - parametrized one' }
+GtDocumentExamples >> referencedMethodOfParametrizedExampleSumNumber [
+	<gtExample>
+	^ self class >> #parametrizedExampleSumNumber:with:
 ]
 
 { #category : #class }
@@ -1447,6 +1540,12 @@ GtDocumentExamples >> resourcerWithInputFileToFigure [
 	^ aCollectionOfResources
 ]
 
+{ #category : #'example - with return variable name' }
+GtDocumentExamples >> returnVariableName [
+	<gtExample>
+	^ #aResult
+]
+
 { #category : #'non technical people' }
 GtDocumentExamples >> ropeHiddenBoldMarkupForNonTechnicalPeople [
 	<gtExample>
@@ -1468,4 +1567,16 @@ GtDocumentExamples >> ropeHiddenBoldMarkupForNonTechnicalPeople [
 	(aRope from: 7 to: 8) attribute: GtHideAttribute uniqueInstance.
 	(aRope from: 3 to: 6) attribute: aSwitchAttribute.
 	^ aRope
+]
+
+{ #category : #'example - parametrized one' }
+GtDocumentExamples >> secondInputVariableName [
+	<gtExample>
+	^ #aVariableTwo
+]
+
+{ #category : #'example - parametrized one' }
+GtDocumentExamples >> secondInputVariableValue [
+	<gtExample>
+	^ 10
 ]
