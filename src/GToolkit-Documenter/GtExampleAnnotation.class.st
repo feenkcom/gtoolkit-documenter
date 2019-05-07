@@ -50,7 +50,7 @@ GtExampleAnnotation >> browseReferenceFrom: anEvent [
 
 { #category : #'private - cache' }
 GtExampleAnnotation >> cachedExample [
-	<return: #GtExample or: nil>
+	<return: #GtExampleWithResult>
 	| anExampleOrNil |
 	self gtDocument 
 		cacheAt: self cacheKey
@@ -102,7 +102,15 @@ GtExampleAnnotation >> doesReferenceExist [
 
 { #category : #'private - cache' }
 GtExampleAnnotation >> example [
-	^ example ifNil: [ example := self referencedExample compiledMethod gtExample asExampleWithResult ]
+	"You should use #cachedExample method by default, not this one."
+	<return: #GtExampleWithResult>
+	example ifNil: [ 
+		example := self referencedExample compiledMethod gtExample asExampleWithResult.
+		example announcer weak 
+			subscribe: GtExampleExecuted 
+			send: #handleExampleExecuted:
+			to: self ].
+	^ example
 ]
 
 { #category : #'private - styling' }
@@ -129,6 +137,15 @@ GtExampleAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [
 			aClassRenamed newName = self referencedExample parentName or: [ 
 				aClassRenamed oldName = self referencedExample parentName ] ])
 			ifFalse: [ ^ self ].
+	self gtDocument styleTextRequest
+]
+
+{ #category : #'announcement handling' }
+GtExampleAnnotation >> handleExampleExecuted: aGtExampleExecuted [
+	self shouldSetResultVariable ifFalse: [ ^ self ].
+	aGtExampleExecuted hasResult ifFalse: [ ^ self ].
+	self gtDocument variableBindings 
+		at: self resultVariableName put: aGtExampleExecuted returnValue.
 	self gtDocument styleTextRequest
 ]
 
@@ -307,6 +324,12 @@ GtExampleAnnotation >> resultVariableName [
 			ifFalse: [ nil ] ]
 		emptyValue: [ nil ]
 		defaultValue: [ nil ]
+]
+
+{ #category : #testing }
+GtExampleAnnotation >> shouldSetResultVariable [
+	<return: #Boolean>
+	^ self resultVariableName isNotNil
 ]
 
 { #category : #'api - style' }
