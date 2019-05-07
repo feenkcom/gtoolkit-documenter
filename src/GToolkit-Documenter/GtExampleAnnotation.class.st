@@ -102,7 +102,7 @@ GtExampleAnnotation >> doesReferenceExist [
 
 { #category : #'private - cache' }
 GtExampleAnnotation >> example [
-	^ example ifNil: [ example := self referencedExample compiledMethod gtExample ]
+	^ example ifNil: [ example := self referencedExample compiledMethod gtExample asExampleWithResult ]
 ]
 
 { #category : #'private - styling' }

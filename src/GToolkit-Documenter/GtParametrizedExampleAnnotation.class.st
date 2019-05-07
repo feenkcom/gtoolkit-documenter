@@ -16,7 +16,7 @@ GtParametrizedExampleAnnotation >> accept: aVisitor [
 
 { #category : #'private - cache' }
 GtParametrizedExampleAnnotation >> example [
-	^ example ifNil: [ example := self referencedExample compiledMethod gtParametrizedExample ]
+	^ example ifNil: [ example := self referencedExample compiledMethod gtParametrizedExample asExampleWithResult ]
 ]
 
 { #category : #'private - styling' }
