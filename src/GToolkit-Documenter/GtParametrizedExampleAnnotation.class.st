@@ -16,7 +16,10 @@ GtParametrizedExampleAnnotation >> accept: aVisitor [
 
 { #category : #'private - cache' }
 GtParametrizedExampleAnnotation >> example [
-	^ example ifNil: [ example := self referencedExample compiledMethod gtParametrizedExample asExampleWithResult ]
+	example ifNil: [ 
+		example := self referencedExample compiledMethod gtParametrizedExample asExampleWithResult.
+		self subscribeToExample ].
+	^ example
 ]
 
 { #category : #'private - styling' }
@@ -64,5 +67,5 @@ GtParametrizedExampleAnnotation >> updateExampleArguments [
 				bindingOf: eachVariableName asSymbol) value ] ].
 	theVariableValues size = self cachedExample numberOfRequieredArguments
 		ifFalse: [ ^ self ].
-	self cachedExample arguments: theVariableValues.
+	self cachedExample changeArguments: theVariableValues.
 ]

@@ -103,13 +103,12 @@ GtExampleAnnotation >> doesReferenceExist [
 { #category : #'private - cache' }
 GtExampleAnnotation >> example [
 	"You should use #cachedExample method by default, not this one."
+
 	<return: #GtExampleWithResult>
-	example ifNil: [ 
-		example := self referencedExample compiledMethod gtExample asExampleWithResult.
-		example announcer weak 
-			subscribe: GtExampleExecuted 
-			send: #handleExampleExecuted:
-			to: self ].
+	example
+		ifNil: [ example := self referencedExample compiledMethod gtExample
+				asExampleWithResult.
+			self subscribeToExample ].
 	^ example
 ]
 
@@ -363,4 +362,12 @@ GtExampleAnnotation >> styleTextWithoutMarkup: aBlRope [
 						annotationParameter: self referenceParameterName);
 					autoHideNode ]. 
 	self utility stylePreviewInText: aBlRope forNode: self.
+]
+
+{ #category : #subscriptions }
+GtExampleAnnotation >> subscribeToExample [
+	^ example announcer weak
+		subscribe: GtExampleExecuted
+		send: #handleExampleExecuted:
+		to: self
 ]
