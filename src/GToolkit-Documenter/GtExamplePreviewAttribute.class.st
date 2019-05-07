@@ -102,9 +102,7 @@ GtExamplePreviewAttribute >> newExamplePreviewStencil [
 		noCode: self noCode;
 		previewExpanded: self previewExpanded;
 		previewShowSelector: self previewShowSelector;
-		previewHeight: self previewHeight;
-		resultVariableName: self resultVariableName;
-		document: self document
+		previewHeight: self previewHeight
 ]
 
 { #category : #accessing }

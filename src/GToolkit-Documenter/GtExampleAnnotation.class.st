@@ -208,9 +208,7 @@ GtExampleAnnotation >> newExamplePreviewAttribute [
 		noCode: self noCode;
 		previewExpanded: self previewExpanded;
 		previewShowSelector: self previewShowSelector;
-		previewHeight: self previewHeight;
-		resultVariableName: self resultVariableName;
-		document: self gtDocument
+		previewHeight: self previewHeight
 ]
 
 { #category : #'accessing - parameter values' }

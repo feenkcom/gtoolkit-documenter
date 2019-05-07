@@ -12,8 +12,7 @@ Class {
 		'previewExpanded',
 		'previewHeight',
 		'previewShowSelector',
-		'resultVariableName',
-		'document'
+		'resultVariableName'
 	],
 	#category : #'GToolkit-Documenter-Brick - Stencils'
 }
@@ -66,23 +65,11 @@ GtExamplePreviewStencil >> create [
 		aCodeElement := self newCodeElement.
 		aCodeElement when: GtPhlowObjectToSpawn do: [ :anEvent | 
 			anEvent consumed: true.
-			self updatePreviewElement: aPreviewContainerElement in: aContainer with: anEvent object.
-			self updateResultVariableBindings: anEvent object ].
+			self updatePreviewElement: aPreviewContainerElement in: aContainer with: anEvent object ].
 		aContainer addChild: aCodeElement ].
 	self isPreviewExpected ifTrue: [ 
-		self updatePreviewElement: aPreviewContainerElement in: aContainer with: self result.
-		self updateResultVariableBindings: self result ].
+		self updatePreviewElement: aPreviewContainerElement in: aContainer with: self result ].
 	^ aContainer
-]
-
-{ #category : #accessing }
-GtExamplePreviewStencil >> document [
-	^ document
-]
-
-{ #category : #accessing }
-GtExamplePreviewStencil >> document: anObject [
-	document := anObject
 ]
 
 { #category : #accessing }
@@ -98,16 +85,6 @@ GtExamplePreviewStencil >> example: aGtExample [
 { #category : #accessing }
 GtExamplePreviewStencil >> exampleWithResult [
 	^ exampleWithResult ifNil: [ exampleWithResult := self example run ]
-]
-
-{ #category : #testing }
-GtExamplePreviewStencil >> hasDocument [
-	^ self document isNotNil
-]
-
-{ #category : #testing }
-GtExamplePreviewStencil >> hasResultVariableName [
-	^ self resultVariableName isNotNil
 ]
 
 { #category : #initialization }
@@ -230,17 +207,6 @@ GtExamplePreviewStencil >> result [
 	^ self exampleWithResult returnValueOrExampleException
 ]
 
-{ #category : #accessing }
-GtExamplePreviewStencil >> resultVariableName [
-	<return: #Symbol or: nil>
-	^ resultVariableName
-]
-
-{ #category : #accessing }
-GtExamplePreviewStencil >> resultVariableName: anObject [
-	resultVariableName := anObject
-]
-
 { #category : #private }
 GtExamplePreviewStencil >> updatePreviewElement: aPreviewContainerElement in: aWholeContainer with: anObject [
 	| aNewPreview |
@@ -255,12 +221,4 @@ GtExamplePreviewStencil >> updatePreviewElement: aPreviewContainerElement in: aW
 	aPreviewContainerElement hasParent ifFalse: [ 
 		aWholeContainer addChild: aPreviewContainerElement ].
 	
-]
-
-{ #category : #private }
-GtExamplePreviewStencil >> updateResultVariableBindings: aResult [
-	self hasResultVariableName ifFalse: [ ^ self ].
-	self hasDocument ifFalse: [ ^ self ].
-	self document variableBindings at: self resultVariableName asSymbol put: aResult.
-	self document styleTextRequest.
 ]

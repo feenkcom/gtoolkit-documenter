@@ -22,11 +22,6 @@ GtParametrizedExampleAnnotation >> example [
 	^ example
 ]
 
-{ #category : #'private - styling' }
-GtParametrizedExampleAnnotation >> examplePreviewAttributeClass [
-	^ GtParametrizedExamplePreviewAttribute
-]
-
 { #category : #'accessing - parameter values' }
 GtParametrizedExampleAnnotation >> inputVariableNames [
 	<return: #Collection of: #Symbol>
@@ -43,12 +38,6 @@ GtParametrizedExampleAnnotation >> inputVariableNames [
 					ifFalse: [ #() ] ] ]
 		emptyValue: [ #() ]
 		defaultValue: [ #() ]
-]
-
-{ #category : #'private - styling' }
-GtParametrizedExampleAnnotation >> newExamplePreviewAttribute [
-	^ super newExamplePreviewAttribute
-		inputVariableNames: self inputVariableNames
 ]
 
 { #category : #'api - styling' }
