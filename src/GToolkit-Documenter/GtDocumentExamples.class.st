@@ -375,6 +375,19 @@ GtDocumentExamples >> contentWithExistingParametrizedExampleSumNumber [
 		'[[[', String crlf, String crlf, self returnVariableName asString, String crlf, ']]]', String crlf
 ]
 
+{ #category : #'example - parametrized one' }
+GtDocumentExamples >> contentWithExistingTwoParametrizedExamples [
+	<gtExample>
+	^	self contentWithExistingParametrizedExampleSumNumber, String crlf, String crlf, 
+		'${', self constants parametrizedExampleAnnotationName, ':', 
+		self referencedMethodOfParametrizedExampleSumNumber printString, '|',
+		self constants inputVariablesParameterName, '=', self firstInputVariableName asString, 
+			' ', self returnVariableName asString, '|',
+		self constants returnVariableParameterName, '=', self secondReturnVariableName asString, '}$', 
+		String crlf, String crlf, 
+		'[[[', String crlf, String crlf, self secondReturnVariableName asString, String crlf, ']]]', String crlf
+]
+
 { #category : #'external link' }
 GtDocumentExamples >> contentWithExternalLink [
 	<gtExample>
@@ -871,6 +884,18 @@ GtDocumentExamples >> documentWithExistingParametrizedExampleSumNumber [
 	aDocument := self defaultDocument text: self contentWithExistingParametrizedExampleSumNumber.
 	aDocument privateStyleText.
 	self assert: aDocument text asString equals: self contentWithExistingParametrizedExampleSumNumber.
+	"self assert: aDocument isSubscribedToSystem."
+	self assert: (aDocument variableBindings hasBindingOf: self returnVariableName) not.
+	^ aDocument
+]
+
+{ #category : #'example - parametrized one' }
+GtDocumentExamples >> documentWithExistingTwoParametrizedExamples [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExistingTwoParametrizedExamples.
+	aDocument privateStyleText.
+	self assert: aDocument text asString equals: self contentWithExistingTwoParametrizedExamples.
 	"self assert: aDocument isSubscribedToSystem."
 	self assert: (aDocument variableBindings hasBindingOf: self returnVariableName) not.
 	^ aDocument
@@ -1579,4 +1604,10 @@ GtDocumentExamples >> secondInputVariableName [
 GtDocumentExamples >> secondInputVariableValue [
 	<gtExample>
 	^ 10
+]
+
+{ #category : #'example - with return variable name' }
+GtDocumentExamples >> secondReturnVariableName [
+	<gtExample>
+	^ #aResultTwo
 ]
