@@ -4,6 +4,11 @@ Class {
 	#category : #'GToolkit-Documenter-Annotations'
 }
 
+{ #category : #accessing }
+GtParametrizedExampleAnnotation class >> possibleParameters [
+	^ super possibleParameters , { self constants inputVariablesParameterName }
+]
+
 { #category : #protected }
 GtParametrizedExampleAnnotation class >> tag [
 	^ self constants parametrizedExampleAnnotationName
