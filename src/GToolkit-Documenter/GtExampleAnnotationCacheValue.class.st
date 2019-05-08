@@ -9,10 +9,11 @@ Class {
 
 { #category : #accessing }
 GtExampleAnnotationCacheValue >> example [
+	<return: #GtExampleWithResult>
 	^ example
 ]
 
 { #category : #accessing }
-GtExampleAnnotationCacheValue >> example: anObject [
-	example := anObject
+GtExampleAnnotationCacheValue >> example: aGtExampleWithResult [
+	example := aGtExampleWithResult
 ]
