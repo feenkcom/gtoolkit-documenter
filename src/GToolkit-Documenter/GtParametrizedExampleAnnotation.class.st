@@ -61,5 +61,5 @@ GtParametrizedExampleAnnotation >> updateExampleArguments [
 				bindingOf: eachVariableName asSymbol) value ] ].
 	theVariableValues size = self cachedExample numberOfRequieredArguments
 		ifFalse: [ ^ self ].
-	self cachedExample changeArguments: theVariableValues.
+	self cachedExample changeArguments: theVariableValues asArray.
 ]
