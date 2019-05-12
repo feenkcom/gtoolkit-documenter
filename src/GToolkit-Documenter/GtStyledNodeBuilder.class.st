@@ -24,7 +24,10 @@ GtStyledNodeBuilder >> activateCursor [
 
 { #category : #'style - cursor' }
 GtStyledNodeBuilder >> activateCursorFrom: aStartPosition to: aStopPosition [
-	(self text from: aStartPosition to: aStopPosition) 
+	| anInitialPosition aFinalPosition |
+	anInitialPosition := self possibleMinCursorPosition: aStartPosition.
+	aFinalPosition := self possibleMaxCursorPosition: aStopPosition.
+	(self text from: anInitialPosition to: aFinalPosition) 
 		attribute: (BrTextCursorAttribute new
 			enterAction: self properties cursorEnterAction;
 			leaveAction: self properties cursorLeaveAction)
@@ -246,8 +249,12 @@ GtStyledNodeBuilder >> isCursorCloseTo: aStartPosition and: aStopPosition [
 	"Return true if a cursor is close to the position interval"
 
 	<return: #Boolean>
+	| anInitialPosition aFinalPosition |
+	anInitialPosition := self possibleMinCursorPosition: aStartPosition.
+	aFinalPosition := self possibleMaxCursorPosition: aStopPosition.
 	^ self document editor cursors
-		detect: [ :eachCursor | eachCursor position between: aStartPosition and: aStopPosition ]
+		detect:
+			[ :eachCursor | eachCursor position between: anInitialPosition and: aFinalPosition ]
 		ifFound: [ :aCursor | true ]
 		ifNone: [ false ]
 ]
@@ -299,6 +306,16 @@ GtStyledNodeBuilder >> node: aPRDocumentItem [
 { #category : #'accessing - node' }
 GtStyledNodeBuilder >> nodeText [
 	^ self text from: self start to: self stop
+]
+
+{ #category : #'style - cursor' }
+GtStyledNodeBuilder >> possibleMaxCursorPosition: aStopPosition [
+	^ aStopPosition min: self textStop
+]
+
+{ #category : #'style - cursor' }
+GtStyledNodeBuilder >> possibleMinCursorPosition: aStartPosition [
+	^ aStartPosition - 1 max: self textStart
 ]
 
 { #category : #accessing }
@@ -394,6 +411,18 @@ GtStyledNodeBuilder >> text: aBlRope [
 		assert: [ aBlRope isNotNil ] 
 		description: [ 'Document text must be non-nil' ].
 	text := aBlRope
+]
+
+{ #category : #'accessing - text' }
+GtStyledNodeBuilder >> textStart [
+	<return: #Integer>
+	^ self text size isZero ifTrue: [ 0 ] ifFalse: [ 1 ]
+]
+
+{ #category : #'accessing - text' }
+GtStyledNodeBuilder >> textStop [
+	<return: #Integer>
+	^ self text size
 ]
 
 { #category : #accessing }
