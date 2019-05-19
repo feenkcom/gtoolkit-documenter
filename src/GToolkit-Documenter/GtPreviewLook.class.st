@@ -8,20 +8,18 @@ Class {
 GtPreviewLook >> initialize [
 	super initialize.
 	self add: BrShadowLook new.
-	changes
-		add:
-			(#(widget background)
-				asBrLookPropertyChangeWithValue: [ Color white asBlBackground ]).
-	changes
-		add:
-			(#(widget margin)
-				asBrLookPropertyChangeWithValue: [ BlInsets
-						top: 5
-						left: 20
-						bottom: 5
-						right: 20 ]).
-	changes
-		add:
+	self
+		addChangeProperty: #(widget background)
+		with: [ Color white asBlBackground ].
+	self
+		addChangeProperty: #(widget margin)
+		with: [ BlInsets
+				top: 5
+				left: 20
+				bottom: 5
+				right: 20 ].
+	self
+		addChange:
 			(BrLookChange new
 				up: [ :e | self widget constraintsDo: [ :c | c textFlow pushLine ] ];
 				down: [ :e |  ];
