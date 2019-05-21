@@ -15,9 +15,9 @@ GtPreviewLook >> initialize [
 		addChangeProperty: #(widget margin)
 		with: [ BlInsets
 				top: 5
-				left: 20
+				left: 5
 				bottom: 5
-				right: 20 ].
+				right: 5 ].
 	self
 		addChange:
 			(BrLookChange new
