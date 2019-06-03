@@ -32,7 +32,7 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 			baseline: 'GToolkitVariableBindings' with: [
 				spec repository: 'github://feenkcom/gtoolkit-playground:v0.6.44/src' ];
 			baseline: 'GToolkitVisualizerPhlow' with: [
-				spec repository: 'github://feenkcom/gtoolkit-visualizer:v0.6.42/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-visualizer:v0.6.43/src' ];
 			baseline: 'GToolkitExamples' with: [
 				spec repository: 'github://feenkcom/gtoolkit-examples:v0.6.11/src' ];
 			baseline: 'GToolkitInspector' with: [
