@@ -21,8 +21,7 @@ GtCounterStyler >> adornListItemSymbolInMarkupViewModeInContext: aGtStyledListIt
 						BlTextElement new 
 							text: anItemIndex; 
 							clipChildren: false;
-							editorMesurement; 
-							ascentBaseline ] }.
+							editorMeasurement ] }.
 ]
 
 { #category : #style }
@@ -38,8 +37,7 @@ GtCounterStyler >> adornListItemSymbolInNoMarkupViewModeInContext: aGtStyledList
 						BlTextElement new 
 							text: anItemIndex;
 							margin: (BlInsets top: 0 bottom: 0);
-							editorMesurement; 
-							ascentBaseline ] }.
+							editorMeasurement ] }.
 ]
 
 { #category : #initialization }
