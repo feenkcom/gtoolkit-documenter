@@ -24,8 +24,7 @@ GtSymbolStyler >> adornListItemSymbolInMarkupViewModeInContext: aGtStyledListIte
 					BlTextElement new 
 						text: indexText; 
 						clipChildren: false;
-						editorMesurement; 
-						ascentBaseline ] }.
+						editorMeasurement ] }.
 ]
 
 { #category : #style }
