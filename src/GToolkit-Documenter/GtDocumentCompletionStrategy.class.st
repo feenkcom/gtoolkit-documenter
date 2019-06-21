@@ -11,7 +11,8 @@ Class {
 		'string',
 		'tagName',
 		'exampleClasses',
-		'allClasses'
+		'allClasses',
+		'gtViewSelectors'
 	],
 	#classVars : [
 		'ParameterValueCompletionSelectors'
@@ -42,6 +43,7 @@ GtDocumentCompletionStrategy class >> initialize [
 			put:
 			(Dictionary new
 				at: self constants nameParameterName put: #exampleMethodsStartingWith:;
+				at: self constants previewShowParameterName put: #examplePreviewShowMethodsStartingWith:;
 				yourself);
 		at: GtMethodAnnotation
 			put:
@@ -257,6 +259,18 @@ GtDocumentCompletionStrategy >> exampleMethodsStartingWith: aString [
 	^ self methodsStartingWith: aString classes: self exampleClasses methods: [ :class | self exampleMethodsIn: class ]
 ]
 
+{ #category : #private }
+GtDocumentCompletionStrategy >> examplePreviewShowMethodsStartingWith: aString [
+	^ (self gtViewSelectors first: max startingWith: aString)
+		collect: [ :each | 
+			self
+				complete: each
+				with: (each allButFirst: aString size)
+				deleting: 0
+				at: position
+				prefixSize: aString size ]
+]
+
 { #category : #initialization }
 GtDocumentCompletionStrategy >> fileReference: aFileReference [
 	directory := (aFileReference exists and: [ aFileReference isDirectory ])
@@ -314,6 +328,19 @@ GtDocumentCompletionStrategy >> filenamesStartingWith: aString in: aFileReferenc
 				prefixSize: filenamePart size.
 			action partial: each last = $/.
 			action ]
+]
+
+{ #category : #private }
+GtDocumentCompletionStrategy >> gtViewSelectors [
+	^ gtViewSelectors
+		ifNil: [ gtViewSelectors := GtPrefixTree new.
+			ProtoObject withAllSubclasses
+				do: [ :each | 
+					each selectors
+						do: [ :sel | 
+							(each >> sel hasPragmaNamed: #gtView)
+								ifTrue: [ gtViewSelectors add: sel ] ] ].
+			gtViewSelectors ]
 ]
 
 { #category : #testing }
