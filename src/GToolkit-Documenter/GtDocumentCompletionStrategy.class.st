@@ -261,14 +261,18 @@ GtDocumentCompletionStrategy >> exampleMethodsStartingWith: aString [
 
 { #category : #private }
 GtDocumentCompletionStrategy >> examplePreviewShowMethodsStartingWith: aString [
-	^ (self gtViewSelectors first: max startingWith: aString)
+	| name |
+	name := (aString notEmpty and: [ aString first = $# ])
+		ifTrue: [ aString allButFirst ]
+		ifFalse: [ aString ].
+	^ (self gtViewSelectors first: max startingWith: name)
 		collect: [ :each | 
 			self
 				complete: each
-				with: (each allButFirst: aString size)
+				with: (each allButFirst: name size)
 				deleting: 0
 				at: position
-				prefixSize: aString size ]
+				prefixSize: name size ]
 ]
 
 { #category : #initialization }
