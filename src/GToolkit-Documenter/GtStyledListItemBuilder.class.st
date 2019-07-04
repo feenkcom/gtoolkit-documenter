@@ -81,7 +81,8 @@ GtStyledListItemBuilder >> itemStyler: aGtListItemStyler [
 { #category : #'accessing - list item symbol' }
 GtStyledListItemBuilder >> listItemSymbolStart [
 	<return: #Integer>
-	^ self start - 1
+
+	^ (self start - 1) max: 1
 ]
 
 { #category : #'accessing - list item symbol' }
