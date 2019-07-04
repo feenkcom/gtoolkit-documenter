@@ -87,7 +87,8 @@ PRFigure >> figureFileReference [
 			aFileReference := (GtFileUtility
 				fileReferenceOfUri: self reference 
 				relativeTo: self gtDocument rootDirectory).
-			aFileReference exists 
+			(aFileReference isNotNil and: [
+			aFileReference exists ])
 				ifTrue: [ aFileReference ]
 				ifFalse: [ | anIcebergFile |
 				
