@@ -83,9 +83,19 @@ PRFigure >> figureFileReference [
 	^ self 
 		propertyAt: #figureFileReference 
 		ifAbsentPut: [ 
-			GtFileUtility
+			| aFileReference |
+			aFileReference := (GtFileUtility
 				fileReferenceOfUri: self reference 
-				relativeTo: self gtDocument rootDirectory ]
+				relativeTo: self gtDocument rootDirectory).
+			aFileReference exists 
+				ifTrue: [ aFileReference ]
+				ifFalse: [ | anIcebergFile |
+				
+					anIcebergFile := (GtIcebergUtility documentAtPath: self localFileOrExternalReference).
+					anIcebergFile exists 
+						ifTrue: [ anIcebergFile ] 
+						ifFalse: [ aFileReference ] ]
+		]
 ]
 
 { #category : #'*GToolkit-Documenter' }
