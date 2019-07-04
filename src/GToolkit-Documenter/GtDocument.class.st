@@ -34,7 +34,7 @@ GtDocument class >> forFile: aFileReference [
 
 { #category : #accessing }
 GtDocument >> addOns [
-	<return: #GtMethodCoderAddOns>
+	<return: #GtSourceCoderAddOns>
 	^ addOns
 ]
 
@@ -378,7 +378,7 @@ GtDocument >> initialize [
 
 { #category : #initialization }
 GtDocument >> initializeAddOns [
-	addOns := GtMethodCoderAddOns new.
+	addOns := GtSourceCoderAddOns new.
 	self initializeShortcuts.
 ]
 
