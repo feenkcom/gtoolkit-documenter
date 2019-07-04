@@ -139,7 +139,7 @@ GtEpicea >> gtEventsFor: aView [
 					aRemoveButton := BrButton new.
 					aRemoveButton
 						layout: BlLinearLayout new;
-						look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
+						look: BrGlamorousButtonWithIconLook;
 						icon: (BlElement new 
 							geometry: BlRectangle new;
 							layout: BlLinearLayout new;
@@ -190,7 +190,7 @@ GtEpicea >> gtGlobalEntriesIn: aView [
 					anAddButton := BrButton new.
 					anAddButton
 						layout: BlLinearLayout new;
-						look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
+						look: BrGlamorousButtonWithIconLook;
 						icon: GtInspectorPlusIconStencil new asElement;
 						action: [ 
 							self addEvent: anOmEntry content.
