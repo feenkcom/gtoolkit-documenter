@@ -34,7 +34,7 @@ GtDocument class >> forFile: aFileReference [
 
 { #category : #accessing }
 GtDocument >> addOns [
-	<return: #GtMethodCoderAddOns>
+	<return: #GtSourceCoderAddOns>
 	^ addOns
 ]
 
@@ -336,10 +336,7 @@ GtDocument >> gtTextFor: aView [
 		priority: 1;
 		stencil: [ self asElementWithoutSaveAction ];
 		actionButtonIcon: BrGlamorousIcons tree 
-			action: [ :aWidget | 
-				aWidget fireEvent: (GtPhlowObjectToSpawn new
-					object: self parse;
-					sourceElement: aWidget) ]
+			action: [ :aWidget | aWidget phlow spawnObject: self parse ]
 ]
 
 { #category : #'announcement handling' }
@@ -378,7 +375,7 @@ GtDocument >> initialize [
 
 { #category : #initialization }
 GtDocument >> initializeAddOns [
-	addOns := GtMethodCoderAddOns new.
+	addOns := GtSourceCoderAddOns new.
 	self initializeShortcuts.
 ]
 
