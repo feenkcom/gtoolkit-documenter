@@ -215,6 +215,12 @@ GtDocumentExamples >> classToDocument [
 	^ self class
 ]
 
+{ #category : #slides }
+GtDocumentExamples >> connectorSlideClass [
+	<gtExample>
+	^ GtConnectorForExampleSlide
+]
+
 { #category : #accessing }
 GtDocumentExamples >> constants [
 	^ GtDocumentConstants
@@ -373,6 +379,16 @@ GtDocumentExamples >> contentWithExistingParametrizedExampleSumNumber [
 		self constants returnVariableParameterName, '=', self returnVariableName asString, '}$', 
 		String crlf, String crlf, 
 		'[[[', String crlf, String crlf, self returnVariableName asString, String crlf, ']]]', String crlf
+]
+
+{ #category : #slides }
+GtDocumentExamples >> contentWithExistingSlides [
+	<gtExample>
+	^ '${', self constants slidesAnnotationName, ':', 
+		self constants slidesParameterName , '=#(',
+			self emptyDocumentSlideClass name, ' ',
+			self connectorSlideClass name, ' ', ')}$'
+
 ]
 
 { #category : #'example - parametrized one' }
@@ -889,6 +905,17 @@ GtDocumentExamples >> documentWithExistingParametrizedExampleSumNumber [
 	^ aDocument
 ]
 
+{ #category : #slides }
+GtDocumentExamples >> documentWithExistingSlides [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExistingSlides.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithExistingSlides.
+	"self assert: aDocument isSubscribedToSystem."
+	^ aDocument
+]
+
 { #category : #'example - parametrized one' }
 GtDocumentExamples >> documentWithExistingTwoParametrizedExamples [
 	<gtExample>
@@ -1180,6 +1207,12 @@ GtDocumentExamples >> emptyDocument [
 	self assert: aDocument isSubscribedToSystem not.
 	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument) not.
 	^ aDocument
+]
+
+{ #category : #slides }
+GtDocumentExamples >> emptyDocumentSlideClass [
+	<gtExample>
+	^ GtEmptyDocumenterSlide
 ]
 
 { #category : #changes }
