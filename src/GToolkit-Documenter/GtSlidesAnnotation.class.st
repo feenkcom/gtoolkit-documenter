@@ -48,7 +48,6 @@ GtSlidesAnnotation >> objectToPreview [
 { #category : #'accessing - parameter values' }
 GtSlidesAnnotation >> slides [
 	<return: #Collection of: #GtSlide>
-	<return: nil>
 	^ slides ifNil: [ slides := self slidesParameterValues ]
 ]
 
