@@ -54,7 +54,6 @@ GtSlidesAnnotation >> slides [
 { #category : #'accessing - parameter values' }
 GtSlidesAnnotation >> slidesParameterValues [
 	<return: #Collection of: #GtSlide>
-	<return: nil>
 	^ self utility
 		valueOf: self constants slidesParameterName
 		in: self parameters
