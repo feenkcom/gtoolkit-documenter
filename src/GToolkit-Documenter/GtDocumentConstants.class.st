@@ -361,6 +361,16 @@ GtDocumentConstants class >> showParameterName [
 	^ #show
 ]
 
+{ #category : #'pillar parameter names' }
+GtDocumentConstants class >> slidesAnnotationName [
+	^ #slides
+]
+
+{ #category : #'pillar parameter names' }
+GtDocumentConstants class >> slidesParameterName [
+	^ #list
+]
+
 { #category : #colors }
 GtDocumentConstants class >> subtleColor [
 	^ Color gray
