@@ -24,7 +24,7 @@ GtSlidesAnnotation class >> tag [
 
 { #category : #testing }
 GtSlidesAnnotation >> hasSlidesDefined [
-	<return: #Bollean>
+	<return: #Boolean>
 	^ self slides isNotNil
 ]
 
