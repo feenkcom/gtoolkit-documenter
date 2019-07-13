@@ -273,7 +273,7 @@ GtStyledNodeBuilder >> linkButton [
 			stencil: [ BrButton new 
 				look: BrGlamorousLinkButtonWithLabelLook;
 				beSmall;
-				margin: (BlInsets top: 3);
+				margin: (BlInsets top: -1);
 				label: self properties name value;
 				action: self properties action ])
 ]
