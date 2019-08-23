@@ -38,7 +38,7 @@ GtSlidesAnnotation >> isPreviewDefined [
 GtSlidesAnnotation >> objectToPreview [
 	"Subclasses should define what object to preview"
 
-	^ (GtSlider new
+	^ (GtSlideShow new
 		slides:
 			(self slides
 				collect: [ :eachClassName | (self class environment at: eachClassName) new ]))
