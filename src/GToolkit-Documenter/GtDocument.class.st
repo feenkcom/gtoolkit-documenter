@@ -79,6 +79,7 @@ GtDocument >> asElementWithoutSaveAction [
 		look: BrGlamorousRegularEditorLook;
 		matchParent;
 		constraintsDo: [ :c | c padding: (BlInsets all: 10) ].
+	self editor styler view: anEditorElement.
 
 	anElement := GtSceneInformingElement new
 		layout: BlLinearLayout new;
