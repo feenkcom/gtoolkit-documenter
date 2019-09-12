@@ -68,7 +68,6 @@ GtPreviewAttribute >> initializeLazyElement: aBlLazyElement [
 		layout: BlLinearLayout vertical;
 		constraintsDo: [ :c | 
 			c textFlow pushLine.
-			c margin: (BlInsets top: 0 left: 20 bottom: 0 right: 20).
 			c horizontal matchParent.
 			c vertical fitContent ];
 		addChild: (BrLabel new 
