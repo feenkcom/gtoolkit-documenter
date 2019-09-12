@@ -17,14 +17,6 @@ GtPreviewAttribute class >> constants [
 ]
 
 { #category : #accessing }
-GtPreviewAttribute >> affect: aBrText in: anEditorElement [
-	^ GtPreviewStencil new
-		result: self result;
-		showSelector: self showSelector;
-		asElement
-]
-
-{ #category : #accessing }
 GtPreviewAttribute >> constants [
 	^ GtDocumentConstants
 ]
@@ -32,6 +24,14 @@ GtPreviewAttribute >> constants [
 { #category : #initialization }
 GtPreviewAttribute >> defaultHeight [
 	^ self constants defaultPreviewHeight
+]
+
+{ #category : #accessing }
+GtPreviewAttribute >> doAffect: aBrText in: anEditorElement [
+	^ GtPreviewStencil new
+		result: self result;
+		showSelector: self showSelector;
+		asElement
 ]
 
 { #category : #accessing }
@@ -56,9 +56,27 @@ GtPreviewAttribute >> initialize [
 	super initialize.
 	
 	self beAppend.
+	self beLazy.
 	result := self.
 	showSelector := self constants defaultShowSelector.
 	height := self defaultHeight.
+]
+
+{ #category : #initialization }
+GtPreviewAttribute >> initializeLazyElement: aBlLazyElement [
+	aBlLazyElement 
+		layout: BlLinearLayout vertical;
+		constraintsDo: [ :c | 
+			c textFlow pushLine.
+			c margin: (BlInsets top: 0 left: 20 bottom: 0 right: 20).
+			c horizontal matchParent.
+			c vertical fitContent ];
+		addChild: (BrLabel new 
+			look: BrLabelLook; 
+			text: ('Preparing view...' asRopedText glamorousRegularFont; italic; foreground: BrGlamorousColors lightBorderColor);
+			alignCenter;
+			hMatchParent;
+			vFitContent)
 ]
 
 { #category : #accessing }

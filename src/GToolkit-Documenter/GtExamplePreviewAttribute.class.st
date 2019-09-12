@@ -23,11 +23,6 @@ GtExamplePreviewAttribute class >> constants [
 ]
 
 { #category : #accessing }
-GtExamplePreviewAttribute >> affect: aBrText in: anEditorElement [
-	^ self newExamplePreviewStencil asElement
-]
-
-{ #category : #accessing }
 GtExamplePreviewAttribute >> codeExpanded [
 	^ codeExpanded
 ]
@@ -53,12 +48,18 @@ GtExamplePreviewAttribute >> constants [
 ]
 
 { #category : #accessing }
+GtExamplePreviewAttribute >> doAffect: aBrText in: anEditorElement [
+	^ self newExamplePreviewStencil asElement
+]
+
+{ #category : #accessing }
 GtExamplePreviewAttribute >> document [
 	^ document
 ]
 
 { #category : #accessing }
 GtExamplePreviewAttribute >> document: anObject [
+	self traceCr.
 	document := anObject
 ]
 
@@ -83,6 +84,7 @@ GtExamplePreviewAttribute >> examplePreviewStencilClass [
 { #category : #initialization }
 GtExamplePreviewAttribute >> initialize [
 	super initialize.
+	self beLazy.
 	codeExpanded := true.
 	codeHeight := self constants defaultPreviewHeight.
 	noCode := true.
@@ -91,6 +93,23 @@ GtExamplePreviewAttribute >> initialize [
 	previewHeight := self constants defaultPreviewHeight.
 	previewShowSelector := self constants defaultShowSelector.
 	
+]
+
+{ #category : #initialization }
+GtExamplePreviewAttribute >> initializeLazyElement: aBlLazyElement [
+	aBlLazyElement 
+		layout: BlLinearLayout vertical;
+		constraintsDo: [ :c | 
+			c textFlow pushLine.
+			c margin: (BlInsets top: 0 left: 20 bottom: 0 right: 20).
+			c horizontal matchParent.
+			c vertical fitContent ];
+		addChild: (BrLabel new 
+			look: BrLabelLook; 
+			text: ('Preparing example...' asRopedText glamorousRegularFont; italic; foreground: BrGlamorousColors lightBorderColor);
+			alignCenter;
+			hMatchParent;
+			vFitContent)
 ]
 
 { #category : #'instance creation' }
