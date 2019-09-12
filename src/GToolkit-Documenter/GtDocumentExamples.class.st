@@ -10,7 +10,8 @@ Class {
 	#classTraits : 'TGt2DocumentConstants classTrait + TGtExampleAssertable classTrait',
 	#instVars : [
 		'memorySystem',
-		'tempDirectory'
+		'tempDirectory',
+		'documents'
 	],
 	#category : #'GToolkit-Documenter-Examples'
 }
@@ -596,8 +597,11 @@ ${variable:name=aVariableOne|expression=Smalltalk os|previewShow=}$
 { #category : #'empty document' }
 GtDocumentExamples >> defaultDocument [
 	<gtExample>
+	<after: #useDefaultStylerStrategy>
 	| aDocument |
 	aDocument := GtDocument new.
+	aDocument editor useSyncStylerStrategy.
+	documents add: aDocument.
 	self assert: aDocument text asString equals: self emptyContent.
 	self assert: aDocument isSubscribedToSystem not.
 	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument) not.
@@ -1324,6 +1328,7 @@ GtDocumentExamples >> initialize [
 	super initialize.
 	memorySystem := GtFileSystemExamples new 
 		rootDirectoryName: UUID new asString.
+	documents := OrderedCollection new.
 ]
 
 { #category : #initialization }
@@ -1351,7 +1356,6 @@ GtDocumentExamples >> modifyAndStoreToClassComment [
 { #category : #'file reference document' }
 GtDocumentExamples >> modifyAndStoreToFileReference [
 	<gtExample>
-	<noTest>
 	| aDocument |
 	aDocument := self documentFromFileReference.
 	aDocument editor inserter 
@@ -1643,4 +1647,9 @@ GtDocumentExamples >> secondInputVariableValue [
 GtDocumentExamples >> secondReturnVariableName [
 	<gtExample>
 	^ #aResultTwo
+]
+
+{ #category : #'empty document' }
+GtDocumentExamples >> useDefaultStylerStrategy [
+	documents do: [ :eachDocument | eachDocument editor useDefaultStylerStrategy ]
 ]
