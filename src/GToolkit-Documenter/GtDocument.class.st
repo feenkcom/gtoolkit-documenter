@@ -528,12 +528,13 @@ GtDocument >> subscribeToEditorChanges [
 
 { #category : #subscriptions }
 GtDocument >> subscribeToSystem [
-	self isSubscribedToSystem ifTrue: [ ^ self ].
-	SystemAnnouncer uniqueInstance weak 
-		subscribe: SystemAnnouncement
+	self isSubscribedToSystem
+		ifTrue: [ ^ self ].
+	SystemAnnouncer uniqueInstance weak
+		when: SystemAnnouncement
 		send: #handleSystemChangeAnnouncement:
 		to: self.
-	isSubscribedToSystem := true.
+	isSubscribedToSystem := true
 ]
 
 { #category : #accessing }
