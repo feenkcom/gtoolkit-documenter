@@ -292,22 +292,22 @@ GtExampleAnnotation >> referencedExample [
 { #category : #subscriptions }
 GtExampleAnnotation >> registerToSystemChanges [
 	self gtDocument
-		subscribe: MethodAdded, MethodRemoved
+		when: MethodAdded , MethodRemoved
 			send: #handleMethodAnnouncement:
 			to: self
 			for: self gtSubscriber;
-		subscribe: ClassAdded, ClassRemoved
+		when: ClassAdded , ClassRemoved
 			send: #handleClassAddedOrRemovedAnnouncement:
 			to: self
 			for: self gtSubscriber;
-		subscribe: ClassRenamed
+		when: ClassRenamed
 			send: #handleClassRenamedAnnouncement:
 			to: self
 			for: self gtSubscriber;
-		subscribe: GtDocumentUpdateRequestedAnnouncement
+		when: GtDocumentUpdateRequestedAnnouncement
 			send: #handleDocumentUpdateRequestedAnnouncement:
 			to: self
-			for: self gtSubscriber.
+			for: self gtSubscriber
 ]
 
 { #category : #'accessing - parameter values' }
@@ -365,7 +365,7 @@ GtExampleAnnotation >> styleTextWithoutMarkup: aBlRope [
 { #category : #subscriptions }
 GtExampleAnnotation >> subscribeToExample [
 	^ example announcer weak
-		subscribe: GtExampleExecuted
+		when: GtExampleExecuted
 		send: #handleExampleExecuted:
 		to: self
 ]
