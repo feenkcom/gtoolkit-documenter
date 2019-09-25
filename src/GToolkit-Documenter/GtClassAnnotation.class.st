@@ -103,18 +103,18 @@ GtClassAnnotation >> referencedClass [
 { #category : #subscriptions }
 GtClassAnnotation >> registerToSystemChanges [
 	self gtDocument
-		subscribe: ClassAdded, ClassRemoved
+		when: ClassAdded , ClassRemoved
 			send: #handleClassAddedOrRemovedAnnouncement:
 			to: self
 			for: self gtSubscriber;
-		subscribe: ClassRenamed
+		when: ClassRenamed
 			send: #handleClassRenamedAnnouncement:
 			to: self
 			for: self gtSubscriber;
-		subscribe: GtDocumentUpdateRequestedAnnouncement
+		when: GtDocumentUpdateRequestedAnnouncement
 			send: #handleDocumentUpdateRequestedAnnouncement:
 			to: self
-			for: self gtSubscriber.
+			for: self gtSubscriber
 ]
 
 { #category : #'api - style' }
