@@ -145,6 +145,11 @@ GtDocumentConstants class >> expandedParameterName [
 	^ #expanded
 ]
 
+{ #category : #'pillar annotation names' }
+GtDocumentConstants class >> explanationAnnotationName [
+	^ #explanation
+]
+
 { #category : #files }
 GtDocumentConstants class >> exportedResultsDirectoryName [
 	<return: #String>
