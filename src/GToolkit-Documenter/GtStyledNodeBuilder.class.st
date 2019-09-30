@@ -123,6 +123,38 @@ GtStyledNodeBuilder >> document: aGtDocument [
 	document := aGtDocument
 ]
 
+{ #category : #'style - button' }
+GtStyledNodeBuilder >> explanation [
+	"Add button to a node"
+	self nodeText 
+		appendingAdornment: [ :aDocumenterText :anEditorElement | 
+			| aContainer aTextPieceElement aRenderedText |
+			aRenderedText := self properties name value asString asRopedText.
+			aContainer := BlElement new
+				clipChildren: false;
+				layout: BlLinearLayout vertical;
+				background: Color veryLightGray;
+				constraintsDo: [ :c |
+					c horizontal fitContent.
+					c vertical fitContent ].
+			aContainer explainer isExplanation: true; model: self properties name value.
+			aTextPieceElement := (BrTextWordPieceStencilBuilder new
+				text: aRenderedText
+				start: (aDocumenterText start - 1 max: 0)
+				end: (aDocumenterText start - 1 max: 0) + aDocumenterText size) asElement.
+			"aContainer addEventHandler: (BlEventDelegator delegate: BrTextEditorRequest to: aTextPieceElement)."
+			aContainer addChildren: { aTextPieceElement } ]
+		
+		" (GtButtonAttribute new
+			beAppend;
+			stencil: [ BrButton new 
+				look: BrGlamorousLinkButtonWithLabelLook;
+				beSmall;
+				margin: (BlInsets top: -1);
+				label: self properties name value;
+				action: self properties action ])"
+]
+
 { #category : #'accessing - properties' }
 GtStyledNodeBuilder >> hide: aStartIndex to: aStopIndex [
 	self hideInterval: (aStartIndex to: aStopIndex)
