@@ -111,22 +111,22 @@ GtMethodAnnotation >> referencedMethod [
 { #category : #subscriptions }
 GtMethodAnnotation >> registerToSystemChanges [
 	self gtDocument
-		subscribe: MethodAdded, MethodRemoved
+		when: MethodAdded , MethodRemoved
 			send: #handleMethodAnnouncement:
 			to: self
 			for: self gtSubscriber;
-		subscribe: ClassAdded, ClassRemoved
+		when: ClassAdded , ClassRemoved
 			send: #handleClassAddedOrRemovedAnnouncement:
 			to: self
 			for: self gtSubscriber;
-		subscribe: ClassRenamed
+		when: ClassRenamed
 			send: #handleClassRenamedAnnouncement:
 			to: self
 			for: self gtSubscriber;
-		subscribe: GtDocumentUpdateRequestedAnnouncement
+		when: GtDocumentUpdateRequestedAnnouncement
 			send: #handleDocumentUpdateRequestedAnnouncement:
 			to: self
-			for: self gtSubscriber.
+			for: self gtSubscriber
 ]
 
 { #category : #'api - style' }
