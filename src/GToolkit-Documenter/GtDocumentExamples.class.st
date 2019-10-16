@@ -1390,7 +1390,7 @@ GtDocumentExamples >> parseRopedTextContent [
 	<gtExample>
 	"This one does not work yet. We need to improve Petit Parser to delegate string comparision."
 	| aPRDocument |
-	aPRDocument := self pillarParser parse: self contentWithExistingMethod asRopedText.
+	aPRDocument := self pillarParser parse: self contentWithExistingMethod asRopedText characters.
 	self assert: aPRDocument notNil.
 	self assert: aPRDocument isPetit2Failure not.
 	^ aPRDocument
