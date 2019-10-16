@@ -83,7 +83,7 @@ GtStyler >> privateStyle: aText [
 	| aPRDocument |
 	self document unsubscribe: self.
 	PRValidation beSilentDuring: [ 
-		aPRDocument := self parser parse: aText asString ].
+		aPRDocument := self parser parse: aText characters asString ].
 	self
 		assert: [ aPRDocument notNil ] 
 		description: [ 'Parsing text should return a Pillar document' ].
