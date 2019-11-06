@@ -318,13 +318,13 @@ GtEpicea >> ombuFile [
 GtEpicea >> ombuFile: aFileReference [
 	ombuFile := aFileReference.
 	self log ifNotNil: [ self log announcer unsubscribe: self ].
-	epiceaLog := EpLog fromFile: "freshFromFile:" ombuFile.
+	epiceaLog := EpLog fromFile: ombuFile.	"freshFromFile:"
 	self privateEvents: (self entries collect: #content).
 	self log announcer
-		subscribe: EpEntryAdded 
-		send: #handleEpEntryAddedAnnouncement: 
+		when: EpEntryAdded
+		send: #handleEpEntryAddedAnnouncement:
 		to: self.
-	self notifyEpiceaChanged.
+	self notifyEpiceaChanged
 ]
 
 { #category : #testing }

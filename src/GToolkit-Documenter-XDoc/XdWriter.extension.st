@@ -40,7 +40,7 @@ XdWriter >> document: aDocument [
 
 { #category : #'*GToolkit-Documenter-XDoc' }
 XdWriter >> documentHtml: aDocument [
-	| aPRDocument aDataWriter aHtmlWriter anHtmlContent previewAttachment |
+	| aPRDocument aDataWriter aHtmlWriter anHtmlContent |
 	aPRDocument := aDocument parse.
 	self
 		assert: [ aPRDocument isPetit2Failure not ]

@@ -193,15 +193,17 @@ GtChangesAnnotation >> referenceParameterName [
 { #category : #subscriptions }
 GtChangesAnnotation >> registerToSystemChanges [
 	self gtDocument
-		subscribe: ClassAnnouncement, MethodAnnouncement, GtDocumentUpdateRequestedAnnouncement
+		when:
+			ClassAnnouncement , MethodAnnouncement
+				, GtDocumentUpdateRequestedAnnouncement
 		send: #handleSystemChange:
 		to: self
 		for: self gtSubscriber.
 	self cachedChanges unsubscribe: self gtSubscriber.
-	self cachedChanges 
-		subscribe: GtEpiceaUpdatedAnnouncement
-		send: #handleEpiceaUpdate: 
-		to: self 
+	self cachedChanges
+		when: GtEpiceaUpdatedAnnouncement
+		send: #handleEpiceaUpdate:
+		to: self
 		for: self gtSubscriber
 ]
 

@@ -283,30 +283,30 @@ GtExamplesAnnotation >> referencedPackages [
 { #category : #subscriptions }
 GtExamplesAnnotation >> registerToSystemChanges [
 	self gtDocument
-		subscribe: MethodAdded, MethodModified, MethodRemoved
+		when: MethodAdded , MethodModified , MethodRemoved
 			send: #handleMethodAnnouncement:
 			to: self
 			for: self gtSubscriber;
-		subscribe: ClassAdded, ClassRemoved
+		when: ClassAdded , ClassRemoved
 			send: #handleClassAddedOrRemovedAnnouncement:
 			to: self
 			for: self gtSubscriber;
-		subscribe: ClassRenamed
+		when: ClassRenamed
 			send: #handleClassRenamedAnnouncement:
 			to: self
 			for: self gtSubscriber;
-		subscribe: ClassRepackaged
+		when: ClassRepackaged
 			send: #handleClassRepackagedAnnouncement:
 			to: self
 			for: self gtSubscriber;
-		subscribe: RPackageRenamed
+		when: RPackageRenamed
 			send: #handlePackageRenamedAnnouncement:
 			to: self
 			for: self gtSubscriber;
-		subscribe: GtDocumentUpdateRequestedAnnouncement
+		when: GtDocumentUpdateRequestedAnnouncement
 			send: #handleDocumentUpdateRequestedAnnouncement:
 			to: self
-			for: self gtSubscriber.
+			for: self gtSubscriber
 ]
 
 { #category : #'private - styling' }
