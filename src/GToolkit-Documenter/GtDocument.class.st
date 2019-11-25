@@ -248,6 +248,16 @@ GtDocument >> exists [
 	^ self storage exists
 ]
 
+{ #category : #accessing }
+GtDocument >> exportToConfluence [
+	| credentials confluence page |
+	credentials := ConfluenceConnection setup.
+	confluence := Gt4ConfluenceAPI  new 
+		credentials: credentials.
+	page := confluence findPageWithTitle: 'Test' inSpaceWithContentID: 'DEV'.
+	page ifNil: [ confluence createPageWithTitle: 'Test' withBody: '<p>test</p>' inSpaceWithKey: 'DEV'.]
+]
+
 { #category : #initialization }
 GtDocument >> fileReference: aFileReference [ 
 	self 
@@ -266,6 +276,16 @@ GtDocument >> fileReferencesFrom: aCollectionOfStringsOrPaths referencedIn: aRoo
 				ifFalse: [ fileReference := aRootDirectory resolve: eachStringOrPath ].
 			fileReference exists ifFalse: nil ifTrue: [ fileReference ] ]
 		thenSelect: #notNil
+]
+
+{ #category : #'gt-extension' }
+GtDocument >> gtExportToConfluenceActionFor: anAction [
+	<gtAction>
+	^ anAction toggle
+		icon: self constants confluenceButtonIcon;
+		forViewDefinedIn: #gtTextFor:;
+		priority: 5;
+		action: [ self exportToConfluence ].
 ]
 
 { #category : #'gt-extension' }
