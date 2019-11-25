@@ -14,7 +14,9 @@ aView empty ].
 		action: [ :anAction | 
 			aDocument gtSaveActionFor: anAction ];
 		action: [ :anAction | 
-			aDocument gtShowMarkupActionFor: anAction ]
+			aDocument gtShowMarkupActionFor: anAction ];
+		action: [ :anAction | 
+			aDocument gtExportToConfluenceActionFor: anAction ].
 ]
 
 { #category : #'*GToolkit-Documenter' }

@@ -45,6 +45,11 @@ GtDocumentConstants class >> codeHeightParameterName [
 ]
 
 { #category : #ui }
+GtDocumentConstants class >> confluenceButtonIcon [
+	^ BrGlamorousIcons cloud
+]
+
+{ #category : #ui }
 GtDocumentConstants class >> createButtonIcon [
 	^ BrGlamorousIcons edit
 ]
