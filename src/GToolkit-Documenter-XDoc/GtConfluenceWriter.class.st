@@ -6,6 +6,10 @@ Class {
 
 { #category : #'visiting-document' }
 GtConfluenceWriter >> visitExternalLink: anExternalLink [
+	canvas tag
+		name: 'a';
+		parameterAt: 'href' put: (anExternalLink localFileOrExternalReference replaceAllRegex: '&' with: '&amp;');
+		with: anExternalLink alias.
 ]
 
 { #category : #visiting }
