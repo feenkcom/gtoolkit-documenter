@@ -250,13 +250,16 @@ GtDocument >> exists [
 
 { #category : #accessing }
 GtDocument >> exportToConfluence [
-	| credentials confluence pageId |
+	| credentials confluence pageId aPRDocument aConfluenceWriter anHtmlContent |
 	credentials := ConfluenceConnection setup.
 	confluence := Gt4ConfluenceAPI  new 
 		credentials: credentials.
 	pageId := confluence findIdOfPageWithTitle: 'Test1' inSpaceWithKey: 'DEV'.
 	pageId ifNil: [ pageId := confluence createPageWithTitle: 'Test1' withBody: '<p></p>' inSpaceWithKey: 'DEV'. ].
-	confluence updatePageWithId: pageId withContent: '<p>Some test content for real</p>'.
+	aPRDocument := self parse.
+	aConfluenceWriter := GtConfluenceWriter new.
+	anHtmlContent := aConfluenceWriter write: aPRDocument.
+	confluence updatePageWithId: pageId withContent: anHtmlContent.
 ]
 
 { #category : #initialization }
