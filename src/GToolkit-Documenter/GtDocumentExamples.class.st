@@ -445,6 +445,23 @@ GtDocumentExamples >> contentWithIcebergFile [
 
 ]
 
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> contentWithInlinedExample [
+	"Accessing www.example.com produces 60 cookies and 3 page visits."
+	<gtExample>
+	^ 'Accessing ',
+	'${', self constants exampleAnnotationName, ':', self referencedExampleComUrlMethod printString, 
+		'|', self constants inlineParameterName, '=#host',
+		'|', self constants expandedParameterName , '=false', 
+	'}$ produces ${', self constants exampleAnnotationName, ':', self referencedExampleCookiesArrayMethod printString, 
+		'|', self constants inlineParameterName, '=#size',
+		'|', self constants expandedParameterName , '=false', 
+	'}$ cookies and ${', self constants exampleAnnotationName, ':', self referencedExamplePageVisitsArrayMethod printString, 
+		'|', self constants inlineParameterName, '=#size',
+		'|', self constants expandedParameterName , '=false', 
+	'}$.'
+]
+
 { #category : #'input file' }
 GtDocumentExamples >> contentWithInputFileToFigure [
 	<gtExample>
@@ -1009,6 +1026,17 @@ GtDocumentExamples >> documentWithIcebergFile [
 	^ aDocument
 ]
 
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> documentWithInlinedExample [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithInlinedExample.
+	aDocument privateStyleText.
+	self assert: aDocument text asString equals: self contentWithInlinedExample.
+	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
 { #category : #'input file' }
 GtDocumentExamples >> documentWithInputFileToFigure [
 	<gtExample>
@@ -1237,6 +1265,25 @@ GtDocumentExamples >> epicea [
 	^ anEpicea
 ]
 
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> exampleComUrl [
+	"I return a URL instance"
+	<gtExample>
+	^ 'https://example.com/index.html' asZnUrl
+]
+
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> exampleCookiesArray [
+	<gtExample>
+	^ (1 to: 60) collect: [ :eachNumber | 'Cookie No. ', eachNumber asString ]
+]
+
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> examplePageVisitsArray [
+	<gtExample>
+	^ (1 to: 3) collect: [ :eachNumber | 'Page No. ', eachNumber asString, ' at ', self exampleComUrl asString ]
+]
+
 { #category : #accessing }
 GtDocumentExamples >> examplesUtility [
 	^ GtDocumentExamplesUtility
@@ -1419,10 +1466,29 @@ GtDocumentExamples >> referencedClass [
 	^ self className
 ]
 
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> referencedExampleComUrlMethod [
+	"I return a compiled method that reference to an example"
+	<gtExample>
+	^ self class >> #exampleComUrl
+]
+
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> referencedExampleCookiesArrayMethod [
+	<gtExample>
+	^ self class >> #exampleCookiesArray
+]
+
 { #category : #'example - existing one' }
 GtDocumentExamples >> referencedExampleMethod [
 	<gtExample>
 	^ self class >> #documentWithMultipleMethods
+]
+
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> referencedExamplePageVisitsArrayMethod [
+	<gtExample>
+	^ self class >> #examplePageVisitsArray
 ]
 
 { #category : #'method - existing one' }

@@ -404,6 +404,11 @@ GtStyledNodeBuilder >> stop [
 ]
 
 { #category : #'style - text link' }
+GtStyledNodeBuilder >> styleKnownLink [
+	self styleKnownLinkFrom: self textStart to: self textStop
+]
+
+{ #category : #'style - text link' }
 GtStyledNodeBuilder >> styleKnownLinkFrom: aStartIndex to: aStopIndex [
 	self 
 		styleLinkWithColor: self constants linkColor 
