@@ -119,7 +119,7 @@ PRHTMLWriter >> visitGt2ClassAnnotation: aGt2ClassAnnotation [
 PRHTMLWriter >> visitGt2ExampleAnnotation: aGt2ExampleAnnotation [
 	aGt2ExampleAnnotation isMethodDefined ifFalse: [ ^ self ].
 	aGt2ExampleAnnotation noCode ifFalse: [ self gtWriteExampleCode: aGt2ExampleAnnotation ].
-	aGt2ExampleAnnotation isPreviewDefined ifFalse: [ ^ self ].
+	aGt2ExampleAnnotation canBeExecuted ifFalse: [ ^ self ].
 	self gtWriteExampleResult: aGt2ExampleAnnotation.
 ]
 
