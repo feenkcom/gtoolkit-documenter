@@ -45,6 +45,11 @@ GtParametrizedExampleAnnotation >> inputVariableNames [
 		defaultValue: [ #() ]
 ]
 
+{ #category : #testing }
+GtParametrizedExampleAnnotation >> isPreviewDefined [
+	^ super isPreviewDefined and: [ self example canBeExecuted ].
+]
+
 { #category : #'api - styling' }
 GtParametrizedExampleAnnotation >> styleText: aBlRope using: aGt2StylerStrategy [
 	super styleText: aBlRope using: aGt2StylerStrategy.
