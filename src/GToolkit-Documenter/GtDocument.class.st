@@ -250,16 +250,26 @@ GtDocument >> exists [
 
 { #category : #accessing }
 GtDocument >> exportToConfluence [
-	| credentials confluence pageId aPRDocument aConfluenceWriter anHtmlContent |
+	| credentials confluence pageId aPRDocument aConfluenceWriter anHtmlContent aDataWriter spaceName pageName |
 	credentials := ConfluenceConnection setup.
 	confluence := Gt4ConfluenceAPI  new 
 		credentials: credentials.
-	pageId := confluence findIdOfPageWithTitle: 'Test1' inSpaceWithKey: 'DEV'.
-	pageId ifNil: [ pageId := confluence createPageWithTitle: 'Test1' withBody: '<p></p>' inSpaceWithKey: 'DEV'. ].
+	spaceName := self class classVariableNamed: #confluenceSpaceName value.
+	pageName := self class classVariableNamed: #confluencePageName value.
+	pageId := confluence findIdOfPageWithTitle: pageName inSpaceWithKey: spaceName.
+	pageId ifNil: [ pageId := confluence createPageWithTitle: pageName withBody: '<p></p>' inSpaceWithKey: spaceName. ].
+	
 	aPRDocument := self parse.
 	aConfluenceWriter := GtConfluenceWriter new.
+	aDataWriter := XdExternalDataWriter new.
+	aConfluenceWriter configuration
+		gtDataWriter: aDataWriter;
+		gtUniqueIdGenerator: XdUniqueIdGenerator new;
+		gtDocument: aPRDocument.
 	anHtmlContent := aConfluenceWriter write: aPRDocument.
 	confluence updatePageWithId: pageId withContent: anHtmlContent.
+	
+	self reuseOrAddFigures: self.
 ]
 
 { #category : #initialization }
@@ -507,6 +517,17 @@ GtDocument >> read [
 { #category : #utility }
 GtDocument >> resourcer [
 	^ GtResourceVisitor new document: self
+]
+
+{ #category : #'as yet unclassified' }
+GtDocument >> reuseOrAddFigures: aDocument [
+	| aResources aResource |
+	aResources := aDocument resourcer includeFigures; compute.
+	aResource := aDocument resourcer includeDocuments; allDepth; get.
+	self halt.
+	aResources do: [ :eachResource | 
+		eachResource resource binaryReadStreamDo: [ :stream | 
+		 ]].
 ]
 
 { #category : #accessing }
