@@ -4,6 +4,19 @@ Class {
 	#category : #'GToolkit-Documenter-XDoc-Writer'
 }
 
+{ #category : #private }
+GtConfluenceWriter >> exportImgFor: aFigure [
+	canvas tag
+		name: 'ac:image';
+		parameterAt: 'ac:height' put: '250';
+		with: [
+			canvas emptyTag
+				name: 'ri:attachment';
+				parameterAt: 'ri:filename' put: 'file.png';
+				closeTag.
+		].
+]
+
 { #category : #'visiting-document' }
 GtConfluenceWriter >> visitExternalLink: anExternalLink [
 	canvas tag
@@ -14,5 +27,5 @@ GtConfluenceWriter >> visitExternalLink: anExternalLink [
 
 { #category : #visiting }
 GtConfluenceWriter >> visitGt2ExampleAnnotation: aGt2ExampleAnnotation [
-	
+	self gtWriteExampleResult: aGt2ExampleAnnotation.
 ]
