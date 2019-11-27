@@ -449,17 +449,17 @@ GtDocumentExamples >> contentWithIcebergFile [
 GtDocumentExamples >> contentWithInlinedExample [
 	"Accessing www.example.com produces 60 cookies and 3 page visits."
 	<gtExample>
-	^ 'Accessing ',
+	^ 'The ',
 	'${', self constants exampleAnnotationName, ':', self referencedExampleComUrlMethod printString, 
 		'|', self constants inlineParameterName, '=#host',
 		'|', self constants expandedParameterName , '=false', 
-	'}$ produces ${', self constants exampleAnnotationName, ':', self referencedExampleCookiesArrayMethod printString, 
+	'}$ website is accessed ${', self constants exampleAnnotationName, ':', self referencedExampleComAccessPerHourMethod printString, 
 		'|', self constants inlineParameterName, '=#size',
 		'|', self constants expandedParameterName , '=false', 
-	'}$ cookies and ${', self constants exampleAnnotationName, ':', self referencedExamplePageVisitsArrayMethod printString, 
+	'}$ times every hour by ${', self constants exampleAnnotationName, ':', self referencedExampleComUniqueAccessPerHour printString, 
 		'|', self constants inlineParameterName, '=#size',
 		'|', self constants expandedParameterName , '=false', 
-	'}$.'
+	'}$ unique users.'
 ]
 
 { #category : #'input file' }
@@ -1266,22 +1266,22 @@ GtDocumentExamples >> epicea [
 ]
 
 { #category : #'example - inlined in text' }
+GtDocumentExamples >> exampleComAccessPerHour [
+	<gtExample>
+	^ (1 to: 60) collect: [ :eachNumber | 'Access No. ', eachNumber asString ]
+]
+
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> exampleComUniqueAccessPerHour [
+	<gtExample>
+	^ (1 to: 3) collect: [ :eachNumber | 'Unique Access No. ', eachNumber asString, ' at ', self exampleComUrl asString ]
+]
+
+{ #category : #'example - inlined in text' }
 GtDocumentExamples >> exampleComUrl [
 	"I return a URL instance"
 	<gtExample>
 	^ 'https://example.com/index.html' asZnUrl
-]
-
-{ #category : #'example - inlined in text' }
-GtDocumentExamples >> exampleCookiesArray [
-	<gtExample>
-	^ (1 to: 60) collect: [ :eachNumber | 'Cookie No. ', eachNumber asString ]
-]
-
-{ #category : #'example - inlined in text' }
-GtDocumentExamples >> examplePageVisitsArray [
-	<gtExample>
-	^ (1 to: 3) collect: [ :eachNumber | 'Page No. ', eachNumber asString, ' at ', self exampleComUrl asString ]
 ]
 
 { #category : #accessing }
@@ -1467,28 +1467,28 @@ GtDocumentExamples >> referencedClass [
 ]
 
 { #category : #'example - inlined in text' }
+GtDocumentExamples >> referencedExampleComAccessPerHourMethod [
+	<gtExample>
+	^ self class >> #exampleComAccessPerHour
+]
+
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> referencedExampleComUniqueAccessPerHour [
+	<gtExample>
+	^ self class >> #exampleComUniqueAccessPerHour
+]
+
+{ #category : #'example - inlined in text' }
 GtDocumentExamples >> referencedExampleComUrlMethod [
 	"I return a compiled method that reference to an example"
 	<gtExample>
 	^ self class >> #exampleComUrl
 ]
 
-{ #category : #'example - inlined in text' }
-GtDocumentExamples >> referencedExampleCookiesArrayMethod [
-	<gtExample>
-	^ self class >> #exampleCookiesArray
-]
-
 { #category : #'example - existing one' }
 GtDocumentExamples >> referencedExampleMethod [
 	<gtExample>
 	^ self class >> #documentWithMultipleMethods
-]
-
-{ #category : #'example - inlined in text' }
-GtDocumentExamples >> referencedExamplePageVisitsArrayMethod [
-	<gtExample>
-	^ self class >> #examplePageVisitsArray
 ]
 
 { #category : #'method - existing one' }
