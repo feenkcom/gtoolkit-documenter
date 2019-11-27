@@ -67,6 +67,12 @@ GtExampleAnnotation >> cachedExample [
 	^ anExampleOrNil
 ]
 
+{ #category : #testing }
+GtExampleAnnotation >> canBeExecuted [
+	"Return true if the example can be executed"
+	^ self isPreviewDefined and: [ self example canBeExecuted ]
+]
+
 { #category : #'accessing - parameter values' }
 GtExampleAnnotation >> codeExpanded [
 	<return: #Boolean>
