@@ -249,13 +249,11 @@ GtDocument >> exists [
 ]
 
 { #category : #accessing }
-GtDocument >> exportToConfluence [
-	| credentials confluence pageId aPRDocument aConfluenceWriter anHtmlContent aDataWriter spaceName pageName |
+GtDocument >> exportToConfluencePage: pageName inSpace: spaceName [
+	| credentials confluence pageId aPRDocument aConfluenceWriter anHtmlContent aDataWriter result |
 	credentials := ConfluenceConnection setup.
 	confluence := Gt4ConfluenceAPI  new 
 		credentials: credentials.
-	spaceName := self class classVariableNamed: #confluenceSpaceName value.
-	pageName := self class classVariableNamed: #confluencePageName value.
 	pageId := confluence findIdOfPageWithTitle: pageName inSpaceWithKey: spaceName.
 	pageId ifNil: [ pageId := confluence createPageWithTitle: pageName withBody: '<p></p>' inSpaceWithKey: spaceName. ].
 	
@@ -267,9 +265,10 @@ GtDocument >> exportToConfluence [
 		gtUniqueIdGenerator: XdUniqueIdGenerator new;
 		gtDocument: aPRDocument.
 	anHtmlContent := aConfluenceWriter write: aPRDocument.
-	confluence updatePageWithId: pageId withContent: anHtmlContent.
+	result := confluence updatePageWithId: pageId withContent: anHtmlContent.
 	
-	self reuseOrAddFigures: self.
+	result ifNil: [ self inform: 'Error exporting page' ] ifNotNil: [ self inform: 'Successfully exported page' ].
+	
 ]
 
 { #category : #initialization }
@@ -290,16 +289,6 @@ GtDocument >> fileReferencesFrom: aCollectionOfStringsOrPaths referencedIn: aRoo
 				ifFalse: [ fileReference := aRootDirectory resolve: eachStringOrPath ].
 			fileReference exists ifFalse: nil ifTrue: [ fileReference ] ]
 		thenSelect: #notNil
-]
-
-{ #category : #'gt-extension' }
-GtDocument >> gtExportToConfluenceActionFor: anAction [
-	<gtAction>
-	^ anAction toggle
-		icon: self constants confluenceButtonIcon;
-		forViewDefinedIn: #gtTextFor:;
-		priority: 5;
-		action: [ self exportToConfluence ].
 ]
 
 { #category : #'gt-extension' }

@@ -27,5 +27,5 @@ GtConfluenceWriter >> visitExternalLink: anExternalLink [
 
 { #category : #visiting }
 GtConfluenceWriter >> visitGt2ExampleAnnotation: aGt2ExampleAnnotation [
-	self gtWriteExampleResult: aGt2ExampleAnnotation.
+	"self gtWriteExampleResult: aGt2ExampleAnnotation."
 ]

@@ -13,5 +13,21 @@ Class >> gtDocumentFor: aView [
 		action: [ :anAction | 
 			aDocument gtShowMarkupActionFor: anAction ];
 		action: [ :anAction | 
-			aDocument gtExportToConfluenceActionFor: anAction ].
+			anAction explicit stencil: [
+				| button enabled |
+				enabled := (self hasClassVarNamed: #confluenceSpaceName) and: [ self hasClassVarNamed:  #confluencePageName].
+				button := BrButton new.
+				button
+					look: BrGlamorousButtonWithIconLook;
+					action: [ 
+						| spaceName pageName |
+						spaceName := (self classVariableNamed: #confluenceSpaceName) value.
+						pageName := (self classVariableNamed: #confluencePageName) value.
+						aDocument exportToConfluencePage: pageName inSpace: spaceName
+					];
+					icon: BrGlamorousIcons tocloud asElement;
+					label: 'Upload to Confluence' translated;
+					enabled: enabled.
+			]
+		].
 ]
