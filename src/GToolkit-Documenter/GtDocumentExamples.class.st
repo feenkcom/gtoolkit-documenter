@@ -445,6 +445,33 @@ GtDocumentExamples >> contentWithIcebergFile [
 
 ]
 
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> contentWithInlinedExample [
+	"The www.example.com website is accessed 60 times every hour by 3 unique users."
+	<gtExample>
+	^ 'The ',
+	'${', self constants exampleAnnotationName, ':', self referencedExampleComUrlMethod printString, 
+		'|', self constants inlineParameterName, '=#host',
+		'|', self constants expandedParameterName , '=false', 
+	'}$ website is accessed ${', self constants exampleAnnotationName, ':', self referencedExampleComAccessPerHourMethod printString, 
+		'|', self constants inlineParameterName, '=#size',
+		'|', self constants expandedParameterName , '=false', 
+	'}$ times every hour by ${', self constants exampleAnnotationName, ':', self referencedExampleComUniqueAccessPerHour printString, 
+		'|', self constants inlineParameterName, '=#size',
+		'|', self constants expandedParameterName , '=false', 
+	'}$ unique users.'
+]
+
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> contentWithInlinedLoremIpsum300 [
+	<gtExample>
+	^ 'I include a very long text: ',
+	'${', self constants exampleAnnotationName, ':', self referencedExampleLoremIpsum300Method printString, 
+		'|', self constants inlineParameterName, '',
+		'|', self constants expandedParameterName , '=false', 
+	'}$ that should be split spread over couple of lines.'
+]
+
 { #category : #'input file' }
 GtDocumentExamples >> contentWithInputFileToFigure [
 	<gtExample>
@@ -1009,6 +1036,28 @@ GtDocumentExamples >> documentWithIcebergFile [
 	^ aDocument
 ]
 
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> documentWithInlinedExample [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithInlinedExample.
+	aDocument privateStyleText.
+	self assert: aDocument text asString equals: self contentWithInlinedExample.
+	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> documentWithInlinedLoremIpsum300 [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithInlinedLoremIpsum300.
+	aDocument privateStyleText.
+	self assert: aDocument text asString equals: self contentWithInlinedLoremIpsum300.
+	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
 { #category : #'input file' }
 GtDocumentExamples >> documentWithInputFileToFigure [
 	<gtExample>
@@ -1237,6 +1286,31 @@ GtDocumentExamples >> epicea [
 	^ anEpicea
 ]
 
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> exampleComAccessPerHour [
+	<gtExample>
+	^ (1 to: 60) collect: [ :eachNumber | 'Access No. ', eachNumber asString ]
+]
+
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> exampleComUniqueAccessPerHour [
+	<gtExample>
+	^ (1 to: 3) collect: [ :eachNumber | 'Unique Access No. ', eachNumber asString, ' at ', self exampleComUrl asString ]
+]
+
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> exampleComUrl [
+	"I return a URL instance"
+	<gtExample>
+	^ 'https://example.com/index.html' asZnUrl
+]
+
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> exampleLoremIpsum300 [
+	<gtExample>
+	^ String loremIpsum: 300
+]
+
 { #category : #accessing }
 GtDocumentExamples >> examplesUtility [
 	^ GtDocumentExamplesUtility
@@ -1417,6 +1491,31 @@ GtDocumentExamples >> pillarParser [
 GtDocumentExamples >> referencedClass [
 	<gtExample>
 	^ self className
+]
+
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> referencedExampleComAccessPerHourMethod [
+	<gtExample>
+	^ self class >> #exampleComAccessPerHour
+]
+
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> referencedExampleComUniqueAccessPerHour [
+	<gtExample>
+	^ self class >> #exampleComUniqueAccessPerHour
+]
+
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> referencedExampleComUrlMethod [
+	"I return a compiled method that reference to an example"
+	<gtExample>
+	^ self class >> #exampleComUrl
+]
+
+{ #category : #'example - inlined in text' }
+GtDocumentExamples >> referencedExampleLoremIpsum300Method [
+	<gtExample>
+	^ self class >> #exampleLoremIpsum300
 ]
 
 { #category : #'example - existing one' }
