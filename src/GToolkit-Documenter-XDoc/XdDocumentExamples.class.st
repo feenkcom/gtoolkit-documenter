@@ -232,7 +232,6 @@ XdDocumentExamples >> writeDocumentWithExistingClass [
 { #category : #example }
 XdDocumentExamples >> writeDocumentWithExistingExample [
 	<gtExample>
-	<noTest>
 	| aXdFile aDocument |
 	aDocument := documentExamples documentWithExistingExample.
 	aXdFile := self inMemoryWriter
