@@ -117,6 +117,7 @@ PRHTMLWriter >> visitGt2ClassAnnotation: aGt2ClassAnnotation [
 
 { #category : #'*GToolkit-Documenter-XDoc' }
 PRHTMLWriter >> visitGt2ExampleAnnotation: aGt2ExampleAnnotation [
+	aGt2ExampleAnnotation gtDocument: self configuration gtDocument.
 	aGt2ExampleAnnotation isMethodDefined ifFalse: [ ^ self ].
 	aGt2ExampleAnnotation noCode ifFalse: [ self gtWriteExampleCode: aGt2ExampleAnnotation ].
 	aGt2ExampleAnnotation canBeExecuted ifFalse: [ ^ self ].
