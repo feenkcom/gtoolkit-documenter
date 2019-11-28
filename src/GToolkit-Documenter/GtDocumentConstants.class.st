@@ -91,6 +91,11 @@ GtDocumentConstants class >> defaultFigureShowSelector [
 ]
 
 { #category : #'pillar parameter default values' }
+GtDocumentConstants class >> defaultInlineValue [
+	^ #yourself
+]
+
+{ #category : #'pillar parameter default values' }
 GtDocumentConstants class >> defaultMethodShowSelector [
 	^ #gtSourceFor:
 ]
@@ -207,6 +212,11 @@ GtDocumentConstants class >> icebergRepositoriesLocation [
 { #category : #ui }
 GtDocumentConstants class >> infoButtonIcon [
 	^ BrGlamorousIcons inspect
+]
+
+{ #category : #'pillar parameter names' }
+GtDocumentConstants class >> inlineParameterName [
+	^ #inline
 ]
 
 { #category : #'pillar annotation names' }
