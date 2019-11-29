@@ -302,12 +302,33 @@ GtStyledNodeBuilder >> linkButton [
 	self nodeText 
 		attribute: (GtButtonAttribute new
 			beAppend;
-			stencil: [ BrButton new 
-				look: BrGlamorousLinkButtonWithLabelLook;
-				beSmall;
-				margin: (BlInsets top: -1);
-				label: self properties name value;
-				action: self properties action ])
+			stencil: [
+				self maySplitString: self properties name value collect: [ :eachLabel | 
+					BrButton new 
+						look: BrGlamorousLinkButtonWithLabelLook;
+						beSmall;
+						margin: (BlInsets top: -1);
+						label: eachLabel;
+						action: self properties action ] ])
+]
+
+{ #category : #'style - text' }
+GtStyledNodeBuilder >> maySplitString: aString [
+	"Split a string according to specific split and reject actions (if they are defined)"
+	<return: #Collection of: #String>
+	| aSplitText |
+	self properties shouldSplit ifFalse: [ ^ Array with: aString ].
+	aSplitText := self properties splitBy split: aString.
+	self properties shouldRejectParts ifFalse: [ ^ aSplitText ].
+	^ aSplitText reject: self properties rejectParts.
+]
+
+{ #category : #'style - text' }
+GtStyledNodeBuilder >> maySplitString: aString collect: aBlock [
+	"Split a string according to specific split and reject actions (if they are defined)
+	and collect an element for every string"
+	<return: #Collection of: #BlElement>
+	^ (self maySplitString: aString) collect: aBlock
 ]
 
 { #category : #'accessing - properties' }
@@ -357,6 +378,17 @@ GtStyledNodeBuilder >> properties [
 ]
 
 { #category : #'accessing - properties' }
+GtStyledNodeBuilder >> rejectParts: aRejectBlock [
+	"Reject text parts as a result of a split action"
+	self properties rejectParts: aRejectBlock
+]
+
+{ #category : #'accessing - properties' }
+GtStyledNodeBuilder >> rejectSeparatorParts [
+	self rejectParts: [ :aString | aString trimBoth isEmpty ]
+]
+
+{ #category : #'accessing - properties' }
 GtStyledNodeBuilder >> revealAction: anAction [
 	self properties revealAction: anAction
 ]
@@ -387,6 +419,24 @@ GtStyledNodeBuilder >> revealTextFrom: aStartPosition to: aStopPosition [
 { #category : #'accessing - properties' }
 GtStyledNodeBuilder >> spawnObject: anAction [
 	^ self action: [ :aButton | aButton phlow spawnObject: anAction value ]
+]
+
+{ #category : #'accessing - properties' }
+GtStyledNodeBuilder >> splitBy: aSplitBlock [
+	"Split text into parts and reject some parts"
+	self properties splitBy: aSplitBlock
+]
+
+{ #category : #'accessing - properties' }
+GtStyledNodeBuilder >> splitBy: aSplitBlock rejectParts: aRejectBlock [
+	"Split text into parts (words) and reject some resulting text parts"
+	self splitBy: aSplitBlock.
+	self rejectParts: aRejectBlock.
+]
+
+{ #category : #'accessing - properties' }
+GtStyledNodeBuilder >> splitByWords [
+	self splitBy: [ :eachCharacter | eachCharacter isSeparator ]
 ]
 
 { #category : #'accessing - node' }

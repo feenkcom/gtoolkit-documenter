@@ -425,6 +425,8 @@ GtExampleAnnotation >> styleTextWithoutMarkup: aBlRope [
 			do: [ :aStyler | aStyler 
 				name: [ self exampleInlinedText ];
 				action: [ :aBrButton | aBrButton phlow spawnObject: self exampleReturnValue ];
+				splitByWords;
+				rejectSeparatorParts;
 				linkButton ]
 			otherwise: [ :aStyler |
 				self utility stylePreviewInText: aBlRope forNode: self ].
