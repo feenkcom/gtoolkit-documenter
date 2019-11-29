@@ -70,12 +70,14 @@ GtConfluenceWriter >> visitExternalLink: anExternalLink [
 
 { #category : #visiting }
 GtConfluenceWriter >> visitGt2ExampleAnnotation: aGt2ExampleAnnotation [
-	"self gtWriteExampleResult: aGt2ExampleAnnotation."
+	aGt2ExampleAnnotation gtDocument: self configuration gtDocument.
+	aGt2ExampleAnnotation isMethodDefined ifFalse: [ ^ self ].
+	aGt2ExampleAnnotation noCode ifFalse: [ self gtWriteExampleCode: aGt2ExampleAnnotation ].
+	aGt2ExampleAnnotation canBeExecuted ifFalse: [ ^ self ].
+	self gtWriteExampleResult: aGt2ExampleAnnotation.
 ]
 
 { #category : #'visiting-document' }
 GtConfluenceWriter >> visitLineBreak: aLineBreak [
-	canvas emptyTag
-		name: 'br';
-		closeTag.
+	canvas linebreak.
 ]
