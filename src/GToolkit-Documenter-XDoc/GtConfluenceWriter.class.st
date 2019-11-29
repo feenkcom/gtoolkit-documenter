@@ -17,6 +17,49 @@ GtConfluenceWriter >> exportImgFor: aFigure [
 		].
 ]
 
+{ #category : #'as yet unclassified' }
+GtConfluenceWriter >> gtWriteSourceCodeForEntity: anEntityName with: aSourceCode [
+	canvas tag
+		name: 'span';
+		with: [ canvas nextPutAll: anEntityName ].
+"	| uniqueId language code |
+	uniqueId := 	self configuration gtUniqueIdGenerator next printString.
+	aSourceCode 
+		ifNil: [ 
+			canvas tag
+				name: 'span';
+				with: [ canvas nextPutAll: anEntityName ].
+		 ];
+		ifNotNil: [ 
+			canvas tag
+				name: 'span';
+				parameterAt: 'class' put: 'sourceCode';
+				with: [ 
+					canvas tag
+						name: 'a';
+						with: [ canvas nextPutAll: anEntityName ].
+						canvas tag
+							name: 'span';
+							parameterAt: 'id' put: uniqueId;
+							parameterAt: 'class' put: 'codeBlock';
+							with: [
+								language := PRSmalltalkScriptLanguage default.
+								code := canvas tag
+									name: 'code';
+									yourself.
+								language := PRSmalltalkScriptLanguage default.
+								language isSyntaxHighlightingPossible
+									ifTrue: [ code parameterAt: 'class' put: language printString ].
+								code with: [ 
+									canvas newLine.
+									canvas lines: aSourceCode.
+									canvas newLine.
+								].
+							].
+					].
+		 ]."
+]
+
 { #category : #'visiting-document' }
 GtConfluenceWriter >> visitExternalLink: anExternalLink [
 	canvas tag
@@ -28,4 +71,11 @@ GtConfluenceWriter >> visitExternalLink: anExternalLink [
 { #category : #visiting }
 GtConfluenceWriter >> visitGt2ExampleAnnotation: aGt2ExampleAnnotation [
 	"self gtWriteExampleResult: aGt2ExampleAnnotation."
+]
+
+{ #category : #'visiting-document' }
+GtConfluenceWriter >> visitLineBreak: aLineBreak [
+	canvas emptyTag
+		name: 'br';
+		closeTag.
 ]
