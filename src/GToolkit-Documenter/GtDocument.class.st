@@ -250,7 +250,7 @@ GtDocument >> exists [
 
 { #category : #accessing }
 GtDocument >> exportToConfluencePage: pageName inSpace: spaceName [
-	| credentials confluence pageId anXdFile aDocument attachments confluenceFile result |
+	| credentials confluence pageId anXdFile aDocument attachments confluenceFile result attachmentsByName attachmentsForDocument |
 	credentials := ConfluenceConnection setup.
 	confluence := Gt4ConfluenceAPI  new 
 		credentials: credentials.
@@ -264,15 +264,20 @@ GtDocument >> exportToConfluencePage: pageName inSpace: spaceName [
 		write.
 		
 	aDocument := anXdFile manifest documentOfType: XdConfluenceType.
-	attachments := anXdFile manifest attachmentsForDocument: aDocument.
+	attachmentsForDocument := anXdFile manifest attachmentsForDocument: aDocument.
 	
 	confluenceFile := anXdFile streamingStrategy 
 		detectFileReference: [ :eachFileReference | 
-			eachFileReference basename = attachments first fileName ]
+			eachFileReference basename = attachmentsForDocument first fileName ]
 		ifFound: [ :aFileReference | aFileReference ] 
 		ifNone: [ self error: 'File reference must be found' ].
-	
 	result := confluence updatePageWithId: pageId withContent: confluenceFile contents.
+
+	attachments := (anXdFile streamingStrategy fileSystem / GtDocumentConstants exportedResultsDirectoryName) children.
+	attachments do: [ :anAttachment |
+		confluence uploadFileFrom: anAttachment forPageWithId: pageId
+	 ].
+	
 	result ifNil: [ self inform: 'Error exporting page' ] ifNotNil: [ self inform: 'Successfully exported page' ].
 	
 ]

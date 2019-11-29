@@ -6,15 +6,17 @@ Class {
 
 { #category : #private }
 GtConfluenceWriter >> exportImgFor: aFigure [
+	canvas linebreak.
 	canvas tag
 		name: 'ac:image';
 		parameterAt: 'ac:height' put: '250';
 		with: [
 			canvas emptyTag
 				name: 'ri:attachment';
-				parameterAt: 'ri:filename' put: 'file.png';
+				parameterAt: 'ri:filename' put: (aFigure localFileOrExternalReference) asFileReference basename;
 				closeTag.
 		].
+	canvas linebreak.
 ]
 
 { #category : #'as yet unclassified' }
