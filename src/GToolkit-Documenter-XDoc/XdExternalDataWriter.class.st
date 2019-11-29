@@ -52,24 +52,25 @@ XdExternalDataWriter >> exportExampleResultOf: aGt2ExampleAnnotation to: aRelati
 	"recommended size"
 	aContainer size: 500@300.
 
-	GtPhlowUseTaskItView 
-		value: false during: [  
-			aView := GtPhlowView empty 
-				on: anExampleReturnValue 
-				perform: aGt2ExampleAnnotation previewShowSelector.
-			aView asElementDo: [ :anElement | aContainer addChild: anElement ].
-	
-			aContainer forceLayout.
+	BrTextAdornmentAttributeUseTaskItRenderer value: false during: [ 
+		GtPhlowUseTaskItView 
+			value: false during: [  
+				aView := GtPhlowView empty 
+					on: anExampleReturnValue 
+					perform: aGt2ExampleAnnotation previewShowSelector.
+				aView asElementDo: [ :anElement | aContainer addChild: anElement ].
+		
+				aContainer forceLayout.
 
-			aFileReference ensureDelete.
-			aFileReference parent ensureCreateDirectory.
-			
-			BlExporter png 
-				scaled: 2;
-				background: Color white;
-				element: aContainer; 
-				fileName: aFileReference; 
-				export ].
+				aFileReference ensureDelete.
+				aFileReference parent ensureCreateDirectory.
+				
+				BlExporter png 
+					scaled: 2;
+					background: Color white;
+					element: aContainer; 
+					fileName: aFileReference; 
+					export ] ].
 ]
 
 { #category : #initialization }
