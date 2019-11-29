@@ -48,7 +48,7 @@ GtStyledNodeBuilderProperties >> at: aSymbol put: aValue [
 
 { #category : #'accessing - hide properties' }
 GtStyledNodeBuilderProperties >> clearIt [
-	"Clear what every is created, e.g, text attributes, by this builder"
+	"Clear what ever is created, e.g, text attributes, by this builder"
 	self at: #clearIt put: true
 ]
 
@@ -105,6 +105,12 @@ GtStyledNodeBuilderProperties >> icon: aString [
 	^ self at: #icon put: aString
 ]
 
+{ #category : #'accessing - basic properties' }
+GtStyledNodeBuilderProperties >> includesKey: aKey [
+	<return: #Boolean>
+	^ self collection includesKey: aKey
+]
+
 { #category : #initialization }
 GtStyledNodeBuilderProperties >> initialize [
 	super initialize.
@@ -129,6 +135,18 @@ GtStyledNodeBuilderProperties >> name [
 { #category : #'accessing - document properties' }
 GtStyledNodeBuilderProperties >> name: aString [
 	^ self at: #name put: aString
+]
+
+{ #category : #'accessing - manipulating text' }
+GtStyledNodeBuilderProperties >> rejectParts [
+	"Return reject text parts action (Character or Block)"
+	^ self at: #rejectParts
+]
+
+{ #category : #'accessing - manipulating text' }
+GtStyledNodeBuilderProperties >> rejectParts: aRejectBlock [
+	"Reject text parts as a result of a split action"
+	self at: #rejectParts put: aRejectBlock.
 ]
 
 { #category : #'accessing - hide properties' }
@@ -162,4 +180,28 @@ GtStyledNodeBuilderProperties >> shouldHideParts [
 { #category : #'accessing - hide properties' }
 GtStyledNodeBuilderProperties >> shouldKeepChildDisplayed [
 	^ self collection includesKey: #keepChildDisplayed
+]
+
+{ #category : #'accessing - manipulating text' }
+GtStyledNodeBuilderProperties >> shouldRejectParts [
+	<return: #Boolean>
+	^ self includesKey: #rejectParts
+]
+
+{ #category : #'accessing - manipulating text' }
+GtStyledNodeBuilderProperties >> shouldSplit [
+	<return: #Boolean>
+	^ self includesKey: #splitBy
+]
+
+{ #category : #'accessing - manipulating text' }
+GtStyledNodeBuilderProperties >> splitBy [
+	"Return a split action (Character, Block)"
+	^ self at: #splitBy
+]
+
+{ #category : #'accessing - manipulating text' }
+GtStyledNodeBuilderProperties >> splitBy: aSplitBlock [
+	"Split text into parts and reject some parts"
+	self at: #splitBy put: aSplitBlock.
 ]
