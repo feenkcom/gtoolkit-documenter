@@ -39,6 +39,29 @@ XdWriter >> document: aDocument [
 ]
 
 { #category : #'*GToolkit-Documenter-XDoc' }
+XdWriter >> documentConfluence: aDocument [
+	| aPRDocument aDataWriter aConfluenceWriter aConfluenceContent |
+	aPRDocument := aDocument parse.
+	self
+		assert: [ aPRDocument isPetit2Failure not ]
+		description: [ 'Documenter text cannot be parsed' ].
+	aDataWriter := XdExternalDataWriter new.
+	aConfluenceWriter := GtConfluenceWriter new.
+	aConfluenceWriter configuration
+		gtDataWriter: aDataWriter;
+		gtUniqueIdGenerator: XdUniqueIdGenerator new;
+		gtDocument: aDocument.
+	aConfluenceContent := aConfluenceWriter write: aPRDocument.
+	self
+		documentType: XdConfluenceType;
+		attachment: self constants confluenceIndexFile text: aConfluenceContent.
+	self reuseOrAddFigures: aDocument.
+	self attachExportedFiles: aDataWriter.
+
+	self addPreview: aDataWriter.
+]
+
+{ #category : #'*GToolkit-Documenter-XDoc' }
 XdWriter >> documentHtml: aDocument [
 	| aPRDocument aDataWriter aHtmlWriter anHtmlContent |
 	aPRDocument := aDocument parse.

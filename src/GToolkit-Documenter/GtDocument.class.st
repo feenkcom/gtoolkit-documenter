@@ -250,23 +250,29 @@ GtDocument >> exists [
 
 { #category : #accessing }
 GtDocument >> exportToConfluencePage: pageName inSpace: spaceName [
-	| credentials confluence pageId aPRDocument aConfluenceWriter anHtmlContent aDataWriter result resources |
+	| credentials confluence pageId anXdFile aDocument attachments confluenceFile result |
 	credentials := ConfluenceConnection setup.
 	confluence := Gt4ConfluenceAPI  new 
 		credentials: credentials.
 	pageId := confluence findIdOfPageWithTitle: pageName inSpaceWithKey: spaceName.
 	pageId ifNil: [ pageId := confluence createPageWithTitle: pageName withBody: '<p></p>' inSpaceWithKey: spaceName. ].
 	
-	aPRDocument := self parse.
-	aConfluenceWriter := GtConfluenceWriter new.
-	aDataWriter := XdExternalDataWriter new.
-	aConfluenceWriter configuration
-		gtDataWriter: aDataWriter;
-		gtUniqueIdGenerator: XdUniqueIdGenerator new;
-		gtDocument: self.
-	anHtmlContent := aConfluenceWriter write: aPRDocument.
-	result := confluence updatePageWithId: pageId withContent: anHtmlContent.
+	anXdFile := XdWriter new
+		streamingStrategy: XdStreamingStrategy bytes;
+		document: self;
+		documentConfluence: self;
+		write.
+		
+	aDocument := anXdFile manifest documentOfType: XdConfluenceType.
+	attachments := anXdFile manifest attachmentsForDocument: aDocument.
 	
+	confluenceFile := anXdFile streamingStrategy 
+		detectFileReference: [ :eachFileReference | 
+			eachFileReference basename = attachments first fileName ]
+		ifFound: [ :aFileReference | aFileReference ] 
+		ifNone: [ self error: 'File reference must be found' ].
+	
+	result := confluence updatePageWithId: pageId withContent: confluenceFile contents.
 	result ifNil: [ self inform: 'Error exporting page' ] ifNotNil: [ self inform: 'Successfully exported page' ].
 	
 ]
