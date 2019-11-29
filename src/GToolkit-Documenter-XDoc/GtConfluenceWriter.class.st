@@ -1,20 +1,22 @@
 Class {
 	#name : #GtConfluenceWriter,
 	#superclass : #PRHTMLWriter,
-	#category : #'GToolkit-Documenter-XDoc-Writer'
+	#category : #'GToolkit-Documenter-XDoc-Confluence'
 }
 
 { #category : #private }
 GtConfluenceWriter >> exportImgFor: aFigure [
+	canvas linebreak.
 	canvas tag
 		name: 'ac:image';
 		parameterAt: 'ac:height' put: '250';
 		with: [
 			canvas emptyTag
 				name: 'ri:attachment';
-				parameterAt: 'ri:filename' put: 'file.png';
+				parameterAt: 'ri:filename' put: (aFigure localFileOrExternalReference) asFileReference basename;
 				closeTag.
 		].
+	canvas linebreak.
 ]
 
 { #category : #'as yet unclassified' }
@@ -70,12 +72,14 @@ GtConfluenceWriter >> visitExternalLink: anExternalLink [
 
 { #category : #visiting }
 GtConfluenceWriter >> visitGt2ExampleAnnotation: aGt2ExampleAnnotation [
-	"self gtWriteExampleResult: aGt2ExampleAnnotation."
+	aGt2ExampleAnnotation gtDocument: self configuration gtDocument.
+	aGt2ExampleAnnotation isMethodDefined ifFalse: [ ^ self ].
+	aGt2ExampleAnnotation noCode ifFalse: [ self gtWriteExampleCode: aGt2ExampleAnnotation ].
+	aGt2ExampleAnnotation canBeExecuted ifFalse: [ ^ self ].
+	self gtWriteExampleResult: aGt2ExampleAnnotation.
 ]
 
 { #category : #'visiting-document' }
 GtConfluenceWriter >> visitLineBreak: aLineBreak [
-	canvas emptyTag
-		name: 'br';
-		closeTag.
+	canvas linebreak.
 ]

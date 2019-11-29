@@ -297,7 +297,6 @@ XdDocumentExamples >> writeDocumentWithExistingExample [
 { #category : #method }
 XdDocumentExamples >> writeDocumentWithExistingMethod [
 	<gtExample>
-	
 	| aXdFile aDocument |
 	aDocument := documentExamples documentWithExistingMethod.
 	aXdFile := self inMemoryWriter

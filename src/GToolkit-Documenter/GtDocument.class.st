@@ -250,22 +250,33 @@ GtDocument >> exists [
 
 { #category : #accessing }
 GtDocument >> exportToConfluencePage: pageName inSpace: spaceName [
-	| credentials confluence pageId aPRDocument aConfluenceWriter anHtmlContent aDataWriter result |
+	| credentials confluence pageId anXdFile aDocument attachments confluenceFile result attachmentsByName attachmentsForDocument |
 	credentials := ConfluenceConnection setup.
 	confluence := Gt4ConfluenceAPI  new 
 		credentials: credentials.
 	pageId := confluence findIdOfPageWithTitle: pageName inSpaceWithKey: spaceName.
 	pageId ifNil: [ pageId := confluence createPageWithTitle: pageName withBody: '<p></p>' inSpaceWithKey: spaceName. ].
 	
-	aPRDocument := self parse.
-	aConfluenceWriter := GtConfluenceWriter new.
-	aDataWriter := XdExternalDataWriter new.
-	aConfluenceWriter configuration
-		gtDataWriter: aDataWriter;
-		gtUniqueIdGenerator: XdUniqueIdGenerator new;
-		gtDocument: aPRDocument.
-	anHtmlContent := aConfluenceWriter write: aPRDocument.
-	result := confluence updatePageWithId: pageId withContent: anHtmlContent.
+	anXdFile := XdWriter new
+		streamingStrategy: XdStreamingStrategy bytes;
+		document: self;
+		documentConfluence: self;
+		write.
+		
+	aDocument := anXdFile manifest documentOfType: XdConfluenceType.
+	attachmentsForDocument := anXdFile manifest attachmentsForDocument: aDocument.
+	
+	confluenceFile := anXdFile streamingStrategy 
+		detectFileReference: [ :eachFileReference | 
+			eachFileReference basename = attachmentsForDocument first fileName ]
+		ifFound: [ :aFileReference | aFileReference ] 
+		ifNone: [ self error: 'File reference must be found' ].
+	result := confluence updatePageWithId: pageId withContent: confluenceFile contents.
+
+	attachments := (anXdFile streamingStrategy fileSystem / GtDocumentConstants exportedResultsDirectoryName) children.
+	attachments do: [ :anAttachment |
+		confluence uploadFileFrom: anAttachment forPageWithId: pageId
+	 ].
 	
 	result ifNil: [ self inform: 'Error exporting page' ] ifNotNil: [ self inform: 'Successfully exported page' ].
 	
@@ -506,17 +517,6 @@ GtDocument >> read [
 { #category : #utility }
 GtDocument >> resourcer [
 	^ GtResourceVisitor new document: self
-]
-
-{ #category : #'as yet unclassified' }
-GtDocument >> reuseOrAddFigures: aDocument [
-	| aResources aResource |
-	aResources := aDocument resourcer includeFigures; compute.
-	aResource := aDocument resourcer includeDocuments; allDepth; get.
-	self halt.
-	aResources do: [ :eachResource | 
-		eachResource resource binaryReadStreamDo: [ :stream | 
-		 ]].
 ]
 
 { #category : #accessing }
