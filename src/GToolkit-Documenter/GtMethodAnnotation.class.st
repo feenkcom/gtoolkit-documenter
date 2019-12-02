@@ -138,6 +138,7 @@ GtMethodAnnotation >> styleTextWithMarkup: aBlRope [
 			do: [ :aStyler | aStyler 
 				name: self referencedMethod;
 				spawnObject: self referencedMethod;
+				splitCamelCase;
 				linkButton ].
 	self styleExpandingPreviewInText: aBlRope.
 	self registerToSystemChanges

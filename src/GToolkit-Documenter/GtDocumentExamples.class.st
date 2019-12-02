@@ -6,8 +6,8 @@ I use ${class:GtDocumentExamplesUtility}$ to simplify examples.
 Class {
 	#name : #GtDocumentExamples,
 	#superclass : #Object,
-	#traits : 'TGt2DocumentConstants + TGtExampleAssertable',
-	#classTraits : 'TGt2DocumentConstants classTrait + TGtExampleAssertable classTrait',
+	#traits : 'TGtDocumentConstants + TBlDebug',
+	#classTraits : 'TGtDocumentConstants classTrait + TBlDebug classTrait',
 	#instVars : [
 		'memorySystem',
 		'tempDirectory',
@@ -408,7 +408,9 @@ GtDocumentExamples >> contentWithExistingTwoParametrizedExamples [
 { #category : #'external link' }
 GtDocumentExamples >> contentWithExternalLink [
 	<gtExample>
-	^ '*Feenk>https://feenk.com*', String cr, '*https://feenk.com*'
+	^ '*Feenk>https://feenk.com*', String cr, 
+		'*https://feenk.com*', String cr,
+		'Here you can see a link that can be split into two lines *https://www.google.com/search?q=how+do+you+feenk+today%3F&oq=how+do+you+feenk+today%3F*.'
 ]
 
 { #category : #figure }

@@ -1,8 +1,8 @@
 Class {
 	#name : #GtExamplePreviewAttribute,
 	#superclass : #BrTextAdornmentAttribute,
-	#traits : 'TGt2DocumentConstants',
-	#classTraits : 'TGt2DocumentConstants classTrait',
+	#traits : 'TGtDocumentConstants',
+	#classTraits : 'TGtDocumentConstants classTrait',
 	#instVars : [
 		'example',
 		'codeExpanded',

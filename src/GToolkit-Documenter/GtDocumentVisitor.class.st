@@ -1,8 +1,8 @@
 Class {
 	#name : #GtDocumentVisitor,
 	#superclass : #PRVisitor,
-	#traits : 'TBlDebug + TGt2DocumentConstants',
-	#classTraits : 'TBlDebug classTrait + TGt2DocumentConstants classTrait',
+	#traits : 'TBlDebug + TGtDocumentConstants',
+	#classTraits : 'TBlDebug classTrait + TGtDocumentConstants classTrait',
 	#instVars : [
 		'document',
 		'codeblockCounter'

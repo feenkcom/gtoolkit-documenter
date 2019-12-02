@@ -1,8 +1,8 @@
 Class {
 	#name : #GtEpiceaDiffStencil,
 	#superclass : #BrStencil,
-	#traits : 'TGt2DocumentConstants',
-	#classTraits : 'TGt2DocumentConstants classTrait',
+	#traits : 'TGtDocumentConstants',
+	#classTraits : 'TGtDocumentConstants classTrait',
 	#instVars : [
 		'from',
 		'to'

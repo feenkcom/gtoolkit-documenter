@@ -4,8 +4,8 @@ I am used by ${class:GtDocumentExamples}$.
 Class {
 	#name : #GtDocumentExamplesUtility,
 	#superclass : #Object,
-	#traits : 'TGt2DocumentConstants + TBlDebug',
-	#classTraits : 'TGt2DocumentConstants classTrait + TBlDebug classTrait',
+	#traits : 'TGtDocumentConstants + TBlDebug',
+	#classTraits : 'TGtDocumentConstants classTrait + TBlDebug classTrait',
 	#category : #'GToolkit-Documenter-Examples'
 }
 

@@ -1,8 +1,8 @@
 Class {
 	#name : #GtStyledNodeBuilder,
 	#superclass : #Object,
-	#traits : 'TGt2DocumentConstants + TBlDebug',
-	#classTraits : 'TGt2DocumentConstants classTrait + TBlDebug classTrait',
+	#traits : 'TGtDocumentConstants + TBlDebug',
+	#classTraits : 'TGtDocumentConstants classTrait + TBlDebug classTrait',
 	#instVars : [
 		'document',
 		'node',
@@ -303,13 +303,27 @@ GtStyledNodeBuilder >> linkButton [
 		attribute: (GtButtonAttribute new
 			beAppend;
 			stencil: [
-				self maySplitString: self properties name value collect: [ :eachLabel | 
-					BrButton new 
-						look: BrGlamorousLinkButtonWithLabelLook;
-						beSmall;
-						margin: (BlInsets top: -1);
-						label: eachLabel;
-						action: self properties action ] ])
+				| anElements |
+				anElements := self 
+					maySplitString: self properties name value 
+					collect: [ :eachLabel | 
+						BrButton new 
+							look: BrGlamorousLinkButtonExteriorInnerLook
+								+ (BrGlamorousLinkButtonLabelLook new labelDo: [ :aLabelElement |
+										aLabelElement padding: (BlInsets all: 0) ]);
+							beSmall;
+							margin: (BlInsets top: -1 left: 0 bottom: 0 right: 0);
+							label: eachLabel;
+							action: self properties action ]
+					shareEvents: { BlMouseOverEvent. BlMouseOutEvent. BlMouseDownEvent. BlMouseUpEvent. BlClickEvent }.
+				anElements size > 1 
+					ifTrue: [ 
+						anElements first margin: (BlInsets top: -1 left: 3 bottom: 0 right: 0).
+						anElements last margin: (BlInsets top: -1 left: 0 bottom: 0 right: 3).
+						anElements allButFirstDo: [ :eachButton | eachButton action: [ "do nothing" ] ] ]
+					ifFalse: [
+						anElements first margin: (BlInsets top: -1 left: 3 bottom: 0 right: 3) ].
+				anElements ])
 ]
 
 { #category : #'style - text' }
@@ -318,7 +332,9 @@ GtStyledNodeBuilder >> maySplitString: aString [
 	<return: #Collection of: #String>
 	| aSplitText |
 	self properties shouldSplit ifFalse: [ ^ Array with: aString ].
-	aSplitText := self properties splitBy split: aString.
+	aSplitText := self properties splitBy value: aString asString.
+	self assert: [ aSplitText isString not ] description: [ 'String must be split into a collection of strings' ].
+	self assert: [ aSplitText isCollection ] description: [ 'String must be split into a collection' ].
 	self properties shouldRejectParts ifFalse: [ ^ aSplitText ].
 	^ aSplitText reject: self properties rejectParts.
 ]
@@ -329,6 +345,19 @@ GtStyledNodeBuilder >> maySplitString: aString collect: aBlock [
 	and collect an element for every string"
 	<return: #Collection of: #BlElement>
 	^ (self maySplitString: aString) collect: aBlock
+]
+
+{ #category : #'style - text' }
+GtStyledNodeBuilder >> maySplitString: aString collect: aBlock shareEvents: aCollectionOfEvents [
+	"Split a string according to specific split and reject actions (if they are defined)
+	and collect an element for every string"
+	<return: #Collection of: #BlElement>
+	| aCollection aHandler |
+	aCollection := self maySplitString: aString collect: aBlock.
+	aCollection size = 1 ifTrue: [ ^ aCollection ].
+	aHandler := BlSharedEventDistributor shareEvents: aCollectionOfEvents.
+	aCollection do: [ :eachElement | eachElement addEventHandler: aHandler ].
+	^ aCollection
 ]
 
 { #category : #'accessing - properties' }
@@ -436,7 +465,52 @@ GtStyledNodeBuilder >> splitBy: aSplitBlock rejectParts: aRejectBlock [
 
 { #category : #'accessing - properties' }
 GtStyledNodeBuilder >> splitByWords [
-	self splitBy: [ :eachCharacter | eachCharacter isSeparator ]
+	self splitBy: [ :aString | 
+		[ :eachCharacter | eachCharacter isSeparator ] split: aString ]
+]
+
+{ #category : #'accessing - properties' }
+GtStyledNodeBuilder >> splitCamelCase [
+	self splitBy: [ :aString | 
+		Array streamContents: [ :anArrayStream | 
+			aString readStreamDo: [ :aStringStream |
+				| aSubStringStream |
+				aSubStringStream := '' writeStream.
+				[ aStringStream atEnd ] whileFalse: [ 
+					| aCharacter | 
+					aCharacter := aStringStream next.
+					aCharacter isUppercase ifTrue: [
+						aSubStringStream isEmpty ifFalse: [ 
+							anArrayStream nextPut: aSubStringStream contents.
+							aSubStringStream := '' writeStream ] ].
+					(aSubStringStream size = 3 and: [ aSubStringStream contents = '>>#' ]) ifTrue: [
+						anArrayStream nextPut: aSubStringStream contents.
+						aSubStringStream := '' writeStream ].
+					(aCharacter = $> and: [ aSubStringStream size > 3 ]) ifTrue: [
+						anArrayStream nextPut: aSubStringStream contents.
+						aSubStringStream := '' writeStream ].
+					aSubStringStream nextPut: aCharacter ].
+				aSubStringStream contents ifNotEmpty: [ :aContent |
+					anArrayStream nextPut: aContent ] ] ] ]
+]
+
+{ #category : #'accessing - properties' }
+GtStyledNodeBuilder >> splitURI [
+	self splitBy: [ :aString | 
+		Array streamContents: [ :anArrayStream | 
+			aString readStreamDo: [ :aStringStream |
+				| aSubStringStream |
+				aSubStringStream := '' writeStream.
+				[ aStringStream atEnd ] whileFalse: [ 
+					| aCharacter | 
+					aCharacter := aStringStream next.
+					aSubStringStream nextPut: aCharacter.
+					('/&.|+\?=' includes: aCharacter) ifTrue: [ 
+						aSubStringStream size = 1 ifFalse: [ 
+							anArrayStream nextPut: aSubStringStream contents.
+							aSubStringStream := '' writeStream ] ] ].
+				aSubStringStream contents ifNotEmpty: [ :aContent |
+					anArrayStream nextPut: aContent ] ] ] ]
 ]
 
 { #category : #'accessing - node' }

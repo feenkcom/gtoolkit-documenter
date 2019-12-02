@@ -111,6 +111,7 @@ GtIcebergFileAnnotation >> styleTextWithMarkup: aBlRope [
 			do: [ :aStyler | aStyler 
 				name: (self referenceParameterValue);
 				spawnObject: self fileReference;
+				splitURI;
 				linkButton ].
 	self styleExpandingPreviewInText: aBlRope.
 ]

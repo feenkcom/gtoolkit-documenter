@@ -25,7 +25,8 @@ PRExternalLink >> styleTextWithMarkup: aBlRope [
 			do: [ :aStyler | aStyler 
 				styleKnownLinkFrom: self start + 1 to: self stop - 1;
 				name: (self hasChildren ifFalse: [ self url ] ifTrue: [ self children first text asString ]);
-				action: [ WebBrowser openOn: self url ] ;
+				action: [ WebBrowser openOn: self url ];
+				splitURI;
 				linkButton ]
 			otherwise: [ :aStyler | aStyler 
 				styleUnknownLinkFrom: self start + 1 to: self stop - 1 ].
