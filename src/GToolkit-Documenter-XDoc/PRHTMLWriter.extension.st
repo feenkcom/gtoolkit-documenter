@@ -39,6 +39,7 @@ PRHTMLWriter >> gtWriteExampleResult: aGt2ExampleAnnotation [
 	aFigure add: (PRText content: 'Result of ' , aGt2ExampleAnnotation methodName).
 	aFigureReference := self configuration gtDataWriter exampleResultReferenceFor: aGt2ExampleAnnotation.
 	aFigure reference: aFigureReference.
+	aGt2ExampleAnnotation parameters at: #previewHeight ifPresent: [:value | aFigure parameterAt: #height put: value].
 	self visitFigure: aFigure.
 ]
 
