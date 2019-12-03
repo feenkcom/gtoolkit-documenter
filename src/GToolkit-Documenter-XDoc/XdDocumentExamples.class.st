@@ -1,8 +1,8 @@
 Class {
 	#name : #XdDocumentExamples,
 	#superclass : #Object,
-	#traits : 'TGt2DocumentConstants',
-	#classTraits : 'TGt2DocumentConstants classTrait',
+	#traits : 'TGtDocumentConstants',
+	#classTraits : 'TGtDocumentConstants classTrait',
 	#instVars : [
 		'documentExamples',
 		'xdocExamples'
