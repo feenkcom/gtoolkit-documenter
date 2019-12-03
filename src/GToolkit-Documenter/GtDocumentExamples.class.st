@@ -6,8 +6,8 @@ I use ${class:GtDocumentExamplesUtility}$ to simplify examples.
 Class {
 	#name : #GtDocumentExamples,
 	#superclass : #Object,
-	#traits : 'TGtDocumentConstants + TBlDebug',
-	#classTraits : 'TGtDocumentConstants classTrait + TBlDebug classTrait',
+	#traits : 'TGtDocumentConstants + TGtExampleAssertable',
+	#classTraits : 'TGtDocumentConstants classTrait + TGtExampleAssertable classTrait',
 	#instVars : [
 		'memorySystem',
 		'tempDirectory',
@@ -32,8 +32,8 @@ GtDocumentExamples >> addEpiceaEvent [
 	| anEpicea anAnnouncements |
 	anEpicea := self epicea.
 	anAnnouncements := OrderedCollection new.
-	anEpicea 
-		subscribe: GtEpiceaUpdatedAnnouncement 
+	anEpicea
+		when: GtEpiceaUpdatedAnnouncement
 		do: [ :anAnnouncement | anAnnouncements addLast: anAnnouncement ].
 	anEpicea addEvent: self ombuEntry content.
 	self assert: anEpicea numberOfEvents equals: 2.
@@ -1361,8 +1361,8 @@ GtDocumentExamples >> epicea [
 	aChangesFile := self changesFileReferenceWithClassDefinition.
 	anAnnouncements := OrderedCollection new.
 	anEpicea := GtEpicea new.
-	anEpicea 
-		subscribe: GtEpiceaUpdatedAnnouncement 
+	anEpicea
+		when: GtEpiceaUpdatedAnnouncement
 		do: [ :anAnnouncement | anAnnouncements addLast: anAnnouncement ].
 	anEpicea ombuFile: aChangesFile.
 	self assert: anEpicea ombuFile equals: aChangesFile.
@@ -1645,13 +1645,18 @@ GtDocumentExamples >> registeredDocument [
 	<gtExample>
 	| aDocument |
 	aDocument := self defaultDocument.
-	aDocument subscribe: SystemAnnouncement do: [ :anAnnouncement | "ignore" ] for: self.
+	aDocument
+		when: SystemAnnouncement
+		do: [ :anAnnouncement | "ignore" ]
+		for: self.
 	self assert: aDocument text asString equals: self emptyContent.
 	self assert: aDocument isSubscribedToSystem.
-	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument).
+	self assert:
+		(SystemAnnouncer uniqueInstance hasSubscriber: aDocument).
 	aDocument unsubscribe: self.
 	self assert: aDocument isSubscribedToSystem not.
-	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument) not.
+	self assert:
+		(SystemAnnouncer uniqueInstance hasSubscriber: aDocument) not.
 	^ aDocument
 ]
 
@@ -1661,8 +1666,8 @@ GtDocumentExamples >> removeEpiceaEvent [
 	| anEpicea anAnnouncements |
 	anEpicea := self epicea.
 	anAnnouncements := OrderedCollection new.
-	anEpicea 
-		subscribe: GtEpiceaUpdatedAnnouncement 
+	anEpicea
+		when: GtEpiceaUpdatedAnnouncement
 		do: [ :anAnnouncement | anAnnouncements addLast: anAnnouncement ].
 	anEpicea removeEvent: anEpicea events first.
 	self assert: anEpicea numberOfEvents equals: 0.
