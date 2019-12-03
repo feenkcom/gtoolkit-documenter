@@ -6,10 +6,15 @@ Class {
 
 { #category : #private }
 GtConfluenceWriter >> exportImgFor: aFigure [
+	| height label |
+	aFigure parameters at: #height ifPresent: [:value | height := value ] ifAbsent: [ height := 200].
+	aFigure parameters at: #label ifPresent: [:value | label := value ] ifAbsent: [ label := ''].
+
 	canvas linebreak.
 	canvas tag
 		name: 'ac:image';
-		parameterAt: 'ac:height' put: '250';
+		parameterAt: 'ac:height' put: (height asString);
+		parameterAt: 'ac:title' put: label;
 		with: [
 			canvas emptyTag
 				name: 'ri:attachment';
@@ -17,6 +22,17 @@ GtConfluenceWriter >> exportImgFor: aFigure [
 				closeTag.
 		].
 	canvas linebreak.
+]
+
+{ #category : #'as yet unclassified' }
+GtConfluenceWriter >> gtWriteExampleResult: aGt2ExampleAnnotation [ 
+	| aFigure aFigureReference |
+	aFigure := PRFigure new.
+	aFigure label: ('Result of ' , aGt2ExampleAnnotation referencedExample selector).
+	aFigureReference := self configuration gtDataWriter exampleResultReferenceFor: aGt2ExampleAnnotation.
+	aFigure reference: aFigureReference.
+	aGt2ExampleAnnotation parameters at: #previewHeight ifPresent: [:value | aFigure parameterAt: #height put: value].
+	self visitFigure: aFigure.
 ]
 
 { #category : #'as yet unclassified' }
@@ -74,7 +90,10 @@ GtConfluenceWriter >> visitExternalLink: anExternalLink [
 GtConfluenceWriter >> visitGt2ExampleAnnotation: aGt2ExampleAnnotation [
 	aGt2ExampleAnnotation gtDocument: self configuration gtDocument.
 	aGt2ExampleAnnotation isMethodDefined ifFalse: [ ^ self ].
-	aGt2ExampleAnnotation noCode ifFalse: [ self gtWriteExampleCode: aGt2ExampleAnnotation ].
+	aGt2ExampleAnnotation noCode ifFalse: [
+		self halt.
+		aGt2ExampleAnnotation expandedParameterValue ifTrue: [ self gtWriteExampleCode: aGt2ExampleAnnotation ].
+	].
 	aGt2ExampleAnnotation canBeExecuted ifFalse: [ ^ self ].
 	self gtWriteExampleResult: aGt2ExampleAnnotation.
 ]
