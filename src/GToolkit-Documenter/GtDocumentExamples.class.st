@@ -870,6 +870,7 @@ GtDocumentExamples >> documentWithEmptyCodeblock [
 { #category : #'formats, header, and lists' }
 GtDocumentExamples >> documentWithEmptyHeader [
 	<gtExample>
+	<noTest>
 	| aDocument |
 	aDocument := self defaultDocument text: self contentWithEmptyHeader.
 	self shouldnt: [ aDocument privateStyleText ] raise: SubscriptOutOfBounds.
