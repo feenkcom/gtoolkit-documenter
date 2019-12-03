@@ -21,6 +21,11 @@ GtDocumentExamples class >> constants [
 	^ GtDocumentConstants
 ]
 
+{ #category : #'examples - supporting methods' }
+GtDocumentExamples class >> differentLabel [
+	^ 'document example class'
+]
+
 { #category : #changes }
 GtDocumentExamples >> addEpiceaEvent [
 	<gtExample>
@@ -341,6 +346,22 @@ GtDocumentExamples >> contentWithExistingClass [
 
 ]
 
+{ #category : #class }
+GtDocumentExamples >> contentWithExistingClassAndCustomizedNameUsingString [
+	<gtExample>
+	^ 'This is a ${', self constants classAnnotationName, ':', self referencedClass , 
+		'|', self constants inlineParameterName, '=class',
+	'}$ with customized name'
+]
+
+{ #category : #class }
+GtDocumentExamples >> contentWithExistingClassAndCustomizedNameUsingSymbol [
+	<gtExample>
+	^ 'This is a ${', self constants classAnnotationName, ':', self referencedClass , 
+		'|', self constants inlineParameterName, '=#differentLabel',
+	'}$ with customized name'
+]
+
 { #category : #'example - existing one' }
 GtDocumentExamples >> contentWithExistingExample [
 	<gtExample>
@@ -361,7 +382,25 @@ GtDocumentExamples >> contentWithExistingExampleAndReturnVariableName [
 { #category : #'method - existing one' }
 GtDocumentExamples >> contentWithExistingMethod [
 	<gtExample>
-	^ '${', self constants methodAnnotationName, ':', self referencedMethod printString, '}$'
+	^ 'This is the ${', self constants methodAnnotationName, ':', self referencedMethod printString, '}$ method.'
+
+]
+
+{ #category : #'method - different name' }
+GtDocumentExamples >> contentWithExistingMethodAndChangedLabelUsingString [
+	<gtExample>
+	^ 'This is the ${', self constants methodAnnotationName, ':', self referencedMethod printString, 
+	'|', self constants inlineParameterName, '=example',
+	'}$ method with a customized name.'
+
+]
+
+{ #category : #'method - different name' }
+GtDocumentExamples >> contentWithExistingMethodAndChangedLabelUsingSymbol [
+	<gtExample>
+	^ 'This is the ${', self constants methodAnnotationName, ':', self referencedMethod printString, 
+	'|', self constants inlineParameterName, '=#selector',
+	'}$ method with a short name (exluding class name).'
 
 ]
 
@@ -892,6 +931,28 @@ GtDocumentExamples >> documentWithExistingClass [
 	^ aDocument
 ]
 
+{ #category : #class }
+GtDocumentExamples >> documentWithExistingClassAndCustomizedNameUsingString [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExistingClassAndCustomizedNameUsingString.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithExistingClassAndCustomizedNameUsingString.
+	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
+{ #category : #class }
+GtDocumentExamples >> documentWithExistingClassAndCustomizedNameUsingSymbol [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExistingClassAndCustomizedNameUsingSymbol.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithExistingClassAndCustomizedNameUsingSymbol.
+	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
 { #category : #'example - existing one' }
 GtDocumentExamples >> documentWithExistingExample [
 	<gtExample>
@@ -922,6 +983,28 @@ GtDocumentExamples >> documentWithExistingMethod [
 	aDocument := self defaultDocument text: self contentWithExistingMethod.
 	aDocument editor styleText.
 	self assert: aDocument text asString equals: self contentWithExistingMethod.
+	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
+{ #category : #'method - different name' }
+GtDocumentExamples >> documentWithExistingMethodAndChangedLabelUsingString [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExistingMethodAndChangedLabelUsingString.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithExistingMethodAndChangedLabelUsingString.
+	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
+{ #category : #'method - different name' }
+GtDocumentExamples >> documentWithExistingMethodAndChangedLabelUsingSymbol [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExistingMethodAndChangedLabelUsingSymbol.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithExistingMethodAndChangedLabelUsingSymbol.
 	self assert: aDocument isSubscribedToSystem.
 	^ aDocument
 ]

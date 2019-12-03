@@ -11,6 +11,9 @@ Class {
 GtMethodAnnotation class >> possibleParameters [
 	^ {
 		self constants nameParameterName.
+		"customized name"
+		self constants inlineParameterName.
+		"full view"
 		self constants expandedParameterName.
 		self constants showParameterName.
 		self constants heightParameterName.
@@ -71,6 +74,31 @@ GtMethodAnnotation >> handleMethodAnnouncement: aMethodModified [
 			and: [ aMethodModified selector = self referencedMethod selector ]])
 				ifFalse: [ ^ self ].
 	self gtDocument styleTextRequest
+]
+
+{ #category : #'accessing - parameter values' }
+GtMethodAnnotation >> inlineParameterValue [
+	<return: #Symbol>
+	^ self utility 
+		valueOf: self constants inlineParameterName 
+		in: self parameters
+		value: [ :aSymbol | aSymbol isSymbol 
+			ifTrue: [ aSymbol ]
+			ifFalse: [ aSymbol asString ] ]
+		emptyValue: [ self constants defaultInlineValue ]
+		defaultValue: [ self constants defaultInlineValue ]
+]
+
+{ #category : #'private - accessing' }
+GtMethodAnnotation >> inlinedText [
+	"Return a displayed class name (that can be anything)"
+	<return: #String>
+	| anInlineValue |
+	anInlineValue := self inlineParameterValue.
+	anInlineValue isSymbol ifFalse: [ ^ anInlineValue asString ].
+	^ [ (anInlineValue value: self referencedMethod) asString ]
+		on: Error 
+		do: [ :anException | anException printString ]
 ]
 
 { #category : #testing }
@@ -136,8 +164,8 @@ GtMethodAnnotation >> styleTextWithMarkup: aBlRope [
 	(self nodeStyler: aBlRope) 
 		if: self isMethodDefined
 			do: [ :aStyler | aStyler 
-				name: self referencedMethod;
-				spawnObject: self referencedMethod;
+				name: [ self inlinedText ];
+				spawnObject: [ self referencedMethod ];
 				splitCamelCase;
 				linkButton ].
 	self styleExpandingPreviewInText: aBlRope.

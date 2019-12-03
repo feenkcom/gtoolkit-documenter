@@ -178,6 +178,11 @@ GtDocumentConstants class >> exportedResultsExtension [
 	^ 'png'
 ]
 
+{ #category : #'pillar parameter names' }
+GtDocumentConstants class >> fullViewParameterName [
+	^ #full
+]
+
 { #category : #text }
 GtDocumentConstants class >> headerFontSize [
 	^ 27

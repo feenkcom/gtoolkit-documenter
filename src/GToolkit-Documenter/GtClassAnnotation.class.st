@@ -11,6 +11,10 @@ Class {
 GtClassAnnotation class >> possibleParameters [
 	^ {
 		self constants nameParameterName.
+		"rendering"
+		self constants inlineParameterName.
+		"full view"
+		self constants fullViewParameterName.
 		self constants expandedParameterName.
 		self constants showParameterName.
 		self constants heightParameterName.
@@ -65,9 +69,41 @@ GtClassAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [
 	self gtDocument styleTextRequest
 ]
 
+{ #category : #'accessing - parameter values' }
+GtClassAnnotation >> inlineParameterValue [
+	<return: #Symbol>
+	^ self utility 
+		valueOf: self constants inlineParameterName 
+		in: self parameters
+		value: [ :aSymbol | aSymbol isSymbol 
+			ifTrue: [ aSymbol ]
+			ifFalse: [ aSymbol asString ] ]
+		emptyValue: [ self constants defaultInlineValue ]
+		defaultValue: [ self constants defaultInlineValue ]
+]
+
+{ #category : #'private - accessing' }
+GtClassAnnotation >> inlinedText [
+	"Return a displayed class name (that can be anything)"
+	<return: #String>
+	| anInlineValue |
+	anInlineValue := self inlineParameterValue.
+	anInlineValue isSymbol ifFalse: [ ^ anInlineValue asString ].
+	^ [ (anInlineValue value: self referencedClass realClass) asString ]
+		on: Error 
+		do: [ :anException | anException printString ]
+]
+
 { #category : #testing }
 GtClassAnnotation >> isClassDefined [
 	^ self referencedClass notNil and: [ self referencedClass isDefined ]
+]
+
+{ #category : #testing }
+GtClassAnnotation >> isInlinedParameterValueDefined [
+	"Return true if an inlined parameter is properly defined"
+	<return: #Boolean>
+	^ self inlineParameterValue isNotNil
 ]
 
 { #category : #testing }
@@ -124,8 +160,8 @@ GtClassAnnotation >> styleTextWithMarkup: aBlRope [
 	(self nodeStyler: aBlRope) 
 		if: self isClassDefined
 			do: [ :aStyler | aStyler 
-				name: self referencedClass;
-				spawnObject: self referencedClass realClass;
+				name: [ self inlinedText ];
+				spawnObject: [ self referencedClass realClass ];
 				splitCamelCase;
 				linkButton ].
 	self styleExpandingPreviewInText: aBlRope.
