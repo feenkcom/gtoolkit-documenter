@@ -350,7 +350,7 @@ GtDocumentExamples >> contentWithExistingClass [
 GtDocumentExamples >> contentWithExistingClassAndCustomizedNameUsingString [
 	<gtExample>
 	^ 'This is a ${', self constants classAnnotationName, ':', self referencedClass , 
-		'|', self constants inlineParameterName, '=class',
+		'|', self constants labelParameterName, '=class',
 	'}$ with customized name'
 ]
 
@@ -358,7 +358,7 @@ GtDocumentExamples >> contentWithExistingClassAndCustomizedNameUsingString [
 GtDocumentExamples >> contentWithExistingClassAndCustomizedNameUsingSymbol [
 	<gtExample>
 	^ 'This is a ${', self constants classAnnotationName, ':', self referencedClass , 
-		'|', self constants inlineParameterName, '=#differentLabel',
+		'|', self constants labelParameterName, '=#differentLabel',
 	'}$ with customized name'
 ]
 
@@ -390,7 +390,7 @@ GtDocumentExamples >> contentWithExistingMethod [
 GtDocumentExamples >> contentWithExistingMethodAndChangedLabelUsingString [
 	<gtExample>
 	^ 'This is the ${', self constants methodAnnotationName, ':', self referencedMethod printString, 
-	'|', self constants inlineParameterName, '=example',
+	'|', self constants labelParameterName, '=example',
 	'}$ method with a customized name.'
 
 ]
@@ -399,7 +399,7 @@ GtDocumentExamples >> contentWithExistingMethodAndChangedLabelUsingString [
 GtDocumentExamples >> contentWithExistingMethodAndChangedLabelUsingSymbol [
 	<gtExample>
 	^ 'This is the ${', self constants methodAnnotationName, ':', self referencedMethod printString, 
-	'|', self constants inlineParameterName, '=#selector',
+	'|', self constants labelParameterName, '=#selector',
 	'}$ method with a short name (exluding class name).'
 
 ]
@@ -492,13 +492,13 @@ GtDocumentExamples >> contentWithInlinedExample [
 	<gtExample>
 	^ 'The ',
 	'${', self constants exampleAnnotationName, ':', self referencedExampleComUrlMethod printString, 
-		'|', self constants inlineParameterName, '=#host',
+		'|', self constants labelParameterName, '=#host',
 		'|', self constants expandedParameterName , '=false', 
 	'}$ website is accessed ${', self constants exampleAnnotationName, ':', self referencedExampleComAccessPerHourMethod printString, 
-		'|', self constants inlineParameterName, '=#size',
+		'|', self constants labelParameterName, '=#size',
 		'|', self constants expandedParameterName , '=false', 
 	'}$ times every hour by ${', self constants exampleAnnotationName, ':', self referencedExampleComUniqueAccessPerHour printString, 
-		'|', self constants inlineParameterName, '=#size',
+		'|', self constants labelParameterName, '=#size',
 		'|', self constants expandedParameterName , '=false', 
 	'}$ unique users.'
 ]
@@ -508,7 +508,7 @@ GtDocumentExamples >> contentWithInlinedLoremIpsum300 [
 	<gtExample>
 	^ 'I include a very long text: ',
 	'${', self constants exampleAnnotationName, ':', self referencedExampleLoremIpsum300Method printString, 
-		'|', self constants inlineParameterName, '',
+		'|', self constants labelParameterName, '',
 		'|', self constants expandedParameterName , '=false', 
 	'}$ that should be split spread over couple of lines.'
 ]

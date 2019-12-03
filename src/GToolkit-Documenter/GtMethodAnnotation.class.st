@@ -12,7 +12,7 @@ GtMethodAnnotation class >> possibleParameters [
 	^ {
 		self constants nameParameterName.
 		"customized name"
-		self constants inlineParameterName.
+		self constants labelParameterName.
 		"full view"
 		self constants expandedParameterName.
 		self constants showParameterName.
@@ -76,31 +76,6 @@ GtMethodAnnotation >> handleMethodAnnouncement: aMethodModified [
 	self gtDocument styleTextRequest
 ]
 
-{ #category : #'accessing - parameter values' }
-GtMethodAnnotation >> inlineParameterValue [
-	<return: #Symbol>
-	^ self utility 
-		valueOf: self constants inlineParameterName 
-		in: self parameters
-		value: [ :aSymbol | aSymbol isSymbol 
-			ifTrue: [ aSymbol ]
-			ifFalse: [ aSymbol asString ] ]
-		emptyValue: [ self constants defaultInlineValue ]
-		defaultValue: [ self constants defaultInlineValue ]
-]
-
-{ #category : #'private - accessing' }
-GtMethodAnnotation >> inlinedText [
-	"Return a displayed class name (that can be anything)"
-	<return: #String>
-	| anInlineValue |
-	anInlineValue := self inlineParameterValue.
-	anInlineValue isSymbol ifFalse: [ ^ anInlineValue asString ].
-	^ [ (anInlineValue value: self referencedMethod) asString ]
-		on: Error 
-		do: [ :anException | anException printString ]
-]
-
 { #category : #testing }
 GtMethodAnnotation >> isMethodDefined [
 	"Return true if a method is defined in the system"
@@ -111,6 +86,31 @@ GtMethodAnnotation >> isMethodDefined [
 GtMethodAnnotation >> isPreviewDefined [
 	"Return true if a preview object is defined"
 	^ self isMethodDefined
+]
+
+{ #category : #'accessing - parameter values' }
+GtMethodAnnotation >> labelParameterValue [
+	<return: #Symbol>
+	^ self utility 
+		valueOf: self constants labelParameterName 
+		in: self parameters
+		value: [ :aSymbol | aSymbol isSymbol 
+			ifTrue: [ aSymbol ]
+			ifFalse: [ aSymbol asString ] ]
+		emptyValue: [ self constants defaultInlineValue ]
+		defaultValue: [ self constants defaultInlineValue ]
+]
+
+{ #category : #'private - accessing' }
+GtMethodAnnotation >> labelText [
+	"Return a displayed class name (that can be anything)"
+	<return: #String>
+	| anInlineValue |
+	anInlineValue := self labelParameterValue.
+	anInlineValue isSymbol ifFalse: [ ^ anInlineValue asString ].
+	^ [ (anInlineValue value: self referencedMethod) asString ]
+		on: Error 
+		do: [ :anException | anException printString ]
 ]
 
 { #category : #accessing }
@@ -164,7 +164,7 @@ GtMethodAnnotation >> styleTextWithMarkup: aBlRope [
 	(self nodeStyler: aBlRope) 
 		if: self isMethodDefined
 			do: [ :aStyler | aStyler 
-				name: [ self inlinedText ];
+				name: [ self labelText ];
 				spawnObject: [ self referencedMethod ];
 				splitCamelCase;
 				linkButton ].

@@ -12,7 +12,7 @@ GtClassAnnotation class >> possibleParameters [
 	^ {
 		self constants nameParameterName.
 		"rendering"
-		self constants inlineParameterName.
+		self constants labelParameterName.
 		"full view"
 		self constants fullViewParameterName.
 		self constants expandedParameterName.
@@ -69,11 +69,29 @@ GtClassAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [
 	self gtDocument styleTextRequest
 ]
 
+{ #category : #testing }
+GtClassAnnotation >> isClassDefined [
+	^ self referencedClass notNil and: [ self referencedClass isDefined ]
+]
+
+{ #category : #testing }
+GtClassAnnotation >> isLabelParameterValueDefined [
+	"Return true if an inlined parameter is properly defined"
+	<return: #Boolean>
+	^ self labelParameterValue isNotNil
+]
+
+{ #category : #testing }
+GtClassAnnotation >> isPreviewDefined [
+	"Return true if a preview object is defined"
+	^ self isClassDefined
+]
+
 { #category : #'accessing - parameter values' }
-GtClassAnnotation >> inlineParameterValue [
+GtClassAnnotation >> labelParameterValue [
 	<return: #Symbol>
 	^ self utility 
-		valueOf: self constants inlineParameterName 
+		valueOf: self constants labelParameterName 
 		in: self parameters
 		value: [ :aSymbol | aSymbol isSymbol 
 			ifTrue: [ aSymbol ]
@@ -83,33 +101,15 @@ GtClassAnnotation >> inlineParameterValue [
 ]
 
 { #category : #'private - accessing' }
-GtClassAnnotation >> inlinedText [
+GtClassAnnotation >> labelText [
 	"Return a displayed class name (that can be anything)"
 	<return: #String>
 	| anInlineValue |
-	anInlineValue := self inlineParameterValue.
+	anInlineValue := self labelParameterValue.
 	anInlineValue isSymbol ifFalse: [ ^ anInlineValue asString ].
 	^ [ (anInlineValue value: self referencedClass realClass) asString ]
 		on: Error 
 		do: [ :anException | anException printString ]
-]
-
-{ #category : #testing }
-GtClassAnnotation >> isClassDefined [
-	^ self referencedClass notNil and: [ self referencedClass isDefined ]
-]
-
-{ #category : #testing }
-GtClassAnnotation >> isInlinedParameterValueDefined [
-	"Return true if an inlined parameter is properly defined"
-	<return: #Boolean>
-	^ self inlineParameterValue isNotNil
-]
-
-{ #category : #testing }
-GtClassAnnotation >> isPreviewDefined [
-	"Return true if a preview object is defined"
-	^ self isClassDefined
 ]
 
 { #category : #accessing }
@@ -160,7 +160,7 @@ GtClassAnnotation >> styleTextWithMarkup: aBlRope [
 	(self nodeStyler: aBlRope) 
 		if: self isClassDefined
 			do: [ :aStyler | aStyler 
-				name: [ self inlinedText ];
+				name: [ self labelText ];
 				spawnObject: [ self referencedClass realClass ];
 				splitCamelCase;
 				linkButton ].
