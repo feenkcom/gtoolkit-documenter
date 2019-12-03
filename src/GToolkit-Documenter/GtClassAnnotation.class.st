@@ -78,7 +78,12 @@ GtClassAnnotation >> isClassDefined [
 GtClassAnnotation >> isLabelParameterValueDefined [
 	"Return true if an inlined parameter is properly defined"
 	<return: #Boolean>
-	^ self labelParameterValue isNotNil
+	^ self utility 
+		valueOf: self constants labelParameterName 
+		in: self parameters
+		value: [ :aSymbol | true ]
+		emptyValue: [ false ]
+		defaultValue: [ false ].
 ]
 
 { #category : #testing }
