@@ -34,6 +34,7 @@ GtSplitTextStencilExamples >> helloFeenkString [
 { #category : #'examples - elements' }
 GtSplitTextStencilExamples >> splitHelloFeenkIntoElements [
 	<gtExample>
+	<noTest>
 	| theWords aStencil theElements |
 	theWords := self helloFeenkCollection.
 	aStencil := self basicStencil stringParts: theWords.
@@ -45,6 +46,7 @@ GtSplitTextStencilExamples >> splitHelloFeenkIntoElements [
 { #category : #'examples - elements' }
 GtSplitTextStencilExamples >> splitQuestionIntoElements [
 	<gtExample>
+	<noTest>
 	| aSentence theWords aStencil theElements |
 	aSentence := self stringQuestion.
 	theWords := Character space split: aSentence.
