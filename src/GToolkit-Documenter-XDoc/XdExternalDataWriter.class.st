@@ -1,8 +1,8 @@
 Class {
 	#name : #XdExternalDataWriter,
 	#superclass : #Object,
-	#traits : 'TGt2DocumentConstants',
-	#classTraits : 'TGt2DocumentConstants classTrait',
+	#traits : 'TGtDocumentConstants',
+	#classTraits : 'TGtDocumentConstants classTrait',
 	#instVars : [
 		'associatedNames',
 		'counter',
@@ -52,25 +52,23 @@ XdExternalDataWriter >> exportExampleResultOf: aGt2ExampleAnnotation to: aRelati
 	"recommended size"
 	aContainer size: 500@300.
 
-	BrTextAdornmentAttributeUseTaskItRenderer value: false during: [ 
-		GtPhlowUseTaskItView 
-			value: false during: [  
-				aView := GtPhlowView empty 
-					on: anExampleReturnValue 
-					perform: aGt2ExampleAnnotation previewShowSelector.
-				aView asElementDo: [ :anElement | aContainer addChild: anElement ].
-		
-				aContainer forceLayout.
+	BlUseAsyncFeatures value: false during: [ 
+		aView := GtPhlowView empty 
+			on: anExampleReturnValue 
+			perform: aGt2ExampleAnnotation previewShowSelector.
+		aView asElementDo: [ :anElement | aContainer addChild: anElement ].
 
-				aFileReference ensureDelete.
-				aFileReference parent ensureCreateDirectory.
-				
-				BlExporter png 
-					scaled: 2;
-					background: Color white;
-					element: aContainer; 
-					fileName: aFileReference; 
-					export ] ].
+		aContainer forceLayout.
+
+		aFileReference ensureDelete.
+		aFileReference parent ensureCreateDirectory.
+		
+		BlExporter png 
+			scaled: 2;
+			background: Color white;
+			element: aContainer; 
+			fileName: aFileReference; 
+			export ].
 ]
 
 { #category : #initialization }
