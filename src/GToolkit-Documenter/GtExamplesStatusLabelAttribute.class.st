@@ -1,8 +1,8 @@
 Class {
 	#name : #GtExamplesStatusLabelAttribute,
 	#superclass : #BrTextAdornmentAttribute,
-	#traits : 'TGt2DocumentConstants',
-	#classTraits : 'TGt2DocumentConstants classTrait',
+	#traits : 'TGtDocumentConstants',
+	#classTraits : 'TGtDocumentConstants classTrait',
 	#instVars : [
 		'total',
 		'results',

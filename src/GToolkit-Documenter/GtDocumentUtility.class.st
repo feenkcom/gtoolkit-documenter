@@ -1,8 +1,8 @@
 Class {
 	#name : #GtDocumentUtility,
 	#superclass : #Object,
-	#traits : 'TGt2DocumentConstants',
-	#classTraits : 'TGt2DocumentConstants classTrait',
+	#traits : 'TGtDocumentConstants',
+	#classTraits : 'TGtDocumentConstants classTrait',
 	#category : #'GToolkit-Documenter-Utility'
 }
 

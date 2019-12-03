@@ -1,8 +1,8 @@
 Class {
 	#name : #GtNodeNodeFinder,
 	#superclass : #Object,
-	#traits : 'TGt2DocumentConstants + TBlDebug',
-	#classTraits : 'TGt2DocumentConstants classTrait + TBlDebug classTrait',
+	#traits : 'TGtDocumentConstants + TBlDebug',
+	#classTraits : 'TGtDocumentConstants classTrait + TBlDebug classTrait',
 	#instVars : [
 		'node'
 	],

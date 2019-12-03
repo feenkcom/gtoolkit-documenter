@@ -1,8 +1,8 @@
 Class {
 	#name : #GtEpicea,
 	#superclass : #Object,
-	#traits : 'TBlDebug + TGt2DocumentConstants + TGtAnnouncer',
-	#classTraits : 'TBlDebug classTrait + TGt2DocumentConstants classTrait + TGtAnnouncer classTrait',
+	#traits : 'TBlDebug + TGtDocumentConstants + TGtAnnouncer',
+	#classTraits : 'TBlDebug classTrait + TGtDocumentConstants classTrait + TGtAnnouncer classTrait',
 	#instVars : [
 		'announcer',
 		'ombuFile',

@@ -1,8 +1,8 @@
 Class {
 	#name : #GtDocumentCompletionStrategy,
 	#superclass : #GtCompletionStrategy,
-	#traits : 'TGt2DocumentConstants',
-	#classTraits : 'TGt2DocumentConstants classTrait',
+	#traits : 'TGtDocumentConstants',
+	#classTraits : 'TGtDocumentConstants classTrait',
 	#instVars : [
 		'directory',
 		'annotationTags',

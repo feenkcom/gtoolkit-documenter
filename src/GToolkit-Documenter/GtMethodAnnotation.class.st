@@ -11,6 +11,9 @@ Class {
 GtMethodAnnotation class >> possibleParameters [
 	^ {
 		self constants nameParameterName.
+		"customized name"
+		self constants labelParameterName.
+		"full view"
 		self constants expandedParameterName.
 		self constants showParameterName.
 		self constants heightParameterName.
@@ -85,6 +88,31 @@ GtMethodAnnotation >> isPreviewDefined [
 	^ self isMethodDefined
 ]
 
+{ #category : #'accessing - parameter values' }
+GtMethodAnnotation >> labelParameterValue [
+	<return: #Symbol>
+	^ self utility 
+		valueOf: self constants labelParameterName 
+		in: self parameters
+		value: [ :aSymbol | aSymbol isSymbol 
+			ifTrue: [ aSymbol ]
+			ifFalse: [ aSymbol asString ] ]
+		emptyValue: [ self constants defaultInlineValue ]
+		defaultValue: [ self constants defaultInlineValue ]
+]
+
+{ #category : #'private - accessing' }
+GtMethodAnnotation >> labelText [
+	"Return a displayed class name (that can be anything)"
+	<return: #String>
+	| anInlineValue |
+	anInlineValue := self labelParameterValue.
+	anInlineValue isSymbol ifFalse: [ ^ anInlineValue asString ].
+	^ [ (anInlineValue value: self referencedMethod) asString ]
+		on: Error 
+		do: [ :anException | anException printString ]
+]
+
 { #category : #accessing }
 GtMethodAnnotation >> objectToPreview [
 	"Subclasses should define what object to preview"
@@ -136,8 +164,9 @@ GtMethodAnnotation >> styleTextWithMarkup: aBlRope [
 	(self nodeStyler: aBlRope) 
 		if: self isMethodDefined
 			do: [ :aStyler | aStyler 
-				name: self referencedMethod;
-				spawnObject: self referencedMethod;
+				name: [ self labelText ];
+				spawnObject: [ self referencedMethod ];
+				splitCamelCase;
 				linkButton ].
 	self styleExpandingPreviewInText: aBlRope.
 	self registerToSystemChanges

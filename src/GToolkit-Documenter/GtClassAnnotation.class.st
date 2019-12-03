@@ -11,6 +11,10 @@ Class {
 GtClassAnnotation class >> possibleParameters [
 	^ {
 		self constants nameParameterName.
+		"rendering"
+		self constants labelParameterName.
+		"full view"
+		self constants fullViewParameterName.
 		self constants expandedParameterName.
 		self constants showParameterName.
 		self constants heightParameterName.
@@ -71,9 +75,41 @@ GtClassAnnotation >> isClassDefined [
 ]
 
 { #category : #testing }
+GtClassAnnotation >> isLabelParameterValueDefined [
+	"Return true if an inlined parameter is properly defined"
+	<return: #Boolean>
+	^ self labelParameterValue isNotNil
+]
+
+{ #category : #testing }
 GtClassAnnotation >> isPreviewDefined [
 	"Return true if a preview object is defined"
 	^ self isClassDefined
+]
+
+{ #category : #'accessing - parameter values' }
+GtClassAnnotation >> labelParameterValue [
+	<return: #Symbol>
+	^ self utility 
+		valueOf: self constants labelParameterName 
+		in: self parameters
+		value: [ :aSymbol | aSymbol isSymbol 
+			ifTrue: [ aSymbol ]
+			ifFalse: [ aSymbol asString ] ]
+		emptyValue: [ self constants defaultInlineValue ]
+		defaultValue: [ self constants defaultInlineValue ]
+]
+
+{ #category : #'private - accessing' }
+GtClassAnnotation >> labelText [
+	"Return a displayed class name (that can be anything)"
+	<return: #String>
+	| anInlineValue |
+	anInlineValue := self labelParameterValue.
+	anInlineValue isSymbol ifFalse: [ ^ anInlineValue asString ].
+	^ [ (anInlineValue value: self referencedClass realClass) asString ]
+		on: Error 
+		do: [ :anException | anException printString ]
 ]
 
 { #category : #accessing }
@@ -124,8 +160,9 @@ GtClassAnnotation >> styleTextWithMarkup: aBlRope [
 	(self nodeStyler: aBlRope) 
 		if: self isClassDefined
 			do: [ :aStyler | aStyler 
-				name: self referencedClass;
-				spawnObject: self referencedClass realClass;
+				name: [ self labelText ];
+				spawnObject: [ self referencedClass realClass ];
+				splitCamelCase;
 				linkButton ].
 	self styleExpandingPreviewInText: aBlRope.
 	self registerToSystemChanges

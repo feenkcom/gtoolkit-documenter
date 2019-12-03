@@ -14,7 +14,7 @@ GtExampleAnnotation class >> possibleParameters [
 		self constants nameParameterName.
 		"rendering"
 		self constants expandedParameterName.
-		self constants inlineParameterName.
+		self constants labelParameterName.
 		"source code"
 		self constants codeHeightParameterName.
 		self constants codeExpandedParameterName.
@@ -120,25 +120,6 @@ GtExampleAnnotation >> example [
 	^ example
 ]
 
-{ #category : #'private - accessing' }
-GtExampleAnnotation >> exampleInlinedText [
-	"Return a string that represents an example return value. 
-	This string is supposed to be inlined in a document text."
-	<return: #String>
-	| anObject aMessageSymbol anExample |
-	self canBeExecuted ifFalse: [ ^ '<cannot execute>' ].
-	self isInlinedValueExpected ifFalse: [ ^ '<cannot inline>' ].
-	anExample := self cachedExample.
-	anExample hasResult ifFalse: [ anExample run ].
-	anExample hasResult ifFalse: [ ^ '<something failed during example execution>' ].
-	anObject := anExample returnValue.
-	aMessageSymbol := self inlineParameterValue.
-	aMessageSymbol ifNil: [ ^ '<message not defined>' ].
-	^ [ (aMessageSymbol value: anObject) asString ] 
-		on: Error 
-		do: [ :anException | anException printString ]
-]
-
 { #category : #'private - styling' }
 GtExampleAnnotation >> examplePreviewAttributeClass [
 	^ GtExamplePreviewAttribute
@@ -203,19 +184,6 @@ GtExampleAnnotation >> hasLabel [
 	^ false
 ]
 
-{ #category : #'accessing - parameter values' }
-GtExampleAnnotation >> inlineParameterValue [
-	<return: #Symbol>
-	^ self utility 
-		valueOf: self constants inlineParameterName 
-		in: self parameters
-		value: [ :aSymbol | aSymbol isSymbol 
-			ifTrue: [ aSymbol ]
-			ifFalse: [ self constants defaultInlineValue ] ]
-		emptyValue: [ self constants defaultInlineValue ]
-		defaultValue: [ nil ]
-]
-
 { #category : #testing }
 GtExampleAnnotation >> isExampleDefined [
 	"Return true if an example method is defined in the system"
@@ -223,17 +191,17 @@ GtExampleAnnotation >> isExampleDefined [
 ]
 
 { #category : #testing }
-GtExampleAnnotation >> isInlinedParameterValueDefined [
-	"Return true if an inlined parameter is properly defined"
-	<return: #Boolean>
-	^ self inlineParameterValue isNotNil
-]
-
-{ #category : #testing }
 GtExampleAnnotation >> isInlinedValueExpected [
 	"Return true if an inlined value is expected and can be provided (example executed)"
 	<return: #Boolean>
-	^ self isInlinedParameterValueDefined and: [ self canBeExecuted ]
+	^ self isLabelParameterValueDefined and: [ self canBeExecuted ]
+]
+
+{ #category : #testing }
+GtExampleAnnotation >> isLabelParameterValueDefined [
+	"Return true if an inlined parameter is properly defined"
+	<return: #Boolean>
+	^ self labelParameterValue isNotNil
 ]
 
 { #category : #compatibility }
@@ -245,6 +213,38 @@ GtExampleAnnotation >> isMethodDefined [
 { #category : #testing }
 GtExampleAnnotation >> isPreviewDefined [
 	^ self isExampleDefined
+]
+
+{ #category : #'accessing - parameter values' }
+GtExampleAnnotation >> labelParameterValue [
+	<return: #Symbol>
+	^ self utility 
+		valueOf: self constants labelParameterName 
+		in: self parameters
+		value: [ :aSymbol | aSymbol isSymbol 
+			ifTrue: [ aSymbol ]
+			ifFalse: [ self constants defaultInlineValue ] ]
+		emptyValue: [ self constants defaultInlineValue ]
+		defaultValue: [ nil ]
+]
+
+{ #category : #'private - accessing' }
+GtExampleAnnotation >> labelText [
+	"Return a string that represents an example return value. 
+	This string is supposed to be inlined in a document text."
+	<return: #String>
+	| anObject aMessageSymbol anExample |
+	self canBeExecuted ifFalse: [ ^ '<cannot execute>' ].
+	self isInlinedValueExpected ifFalse: [ ^ '<cannot inline>' ].
+	anExample := self cachedExample.
+	anExample hasResult ifFalse: [ anExample run ].
+	anExample hasResult ifFalse: [ ^ '<something failed during example execution>' ].
+	anObject := anExample returnValue.
+	aMessageSymbol := self labelParameterValue.
+	aMessageSymbol ifNil: [ ^ '<message not defined>' ].
+	^ [ (aMessageSymbol value: anObject) asString ] 
+		on: Error 
+		do: [ :anException | anException printString ]
 ]
 
 { #category : #compatibility }
@@ -423,7 +423,7 @@ GtExampleAnnotation >> styleTextWithoutMarkup: aBlRope [
 	(self nodeStyler: aBlRope)
 		if: self isInlinedValueExpected
 			do: [ :aStyler | aStyler 
-				name: [ self exampleInlinedText ];
+				name: [ self labelText ];
 				action: [ :aBrButton | aBrButton phlow spawnObject: self exampleReturnValue ];
 				splitByWords;
 				rejectSeparatorParts;

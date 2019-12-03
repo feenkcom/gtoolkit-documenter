@@ -1,8 +1,8 @@
 Class {
 	#name : #GtAnnotation,
 	#superclass : #PRAbstractAnnotation,
-	#traits : 'TBlDebug + TGt2DocumentConstants + TGt2DocumentUtility',
-	#classTraits : 'TBlDebug classTrait + TGt2DocumentConstants classTrait + TGt2DocumentUtility classTrait',
+	#traits : 'TBlDebug + TGtDocumentConstants + TGtDocumentUtility',
+	#classTraits : 'TBlDebug classTrait + TGtDocumentConstants classTrait + TGtDocumentUtility classTrait',
 	#category : #'GToolkit-Documenter-Annotations'
 }
 

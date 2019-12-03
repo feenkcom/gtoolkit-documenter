@@ -6,8 +6,8 @@ I use ${class:GtDocumentExamplesUtility}$ to simplify examples.
 Class {
 	#name : #GtDocumentExamples,
 	#superclass : #Object,
-	#traits : 'TGt2DocumentConstants + TGtExampleAssertable',
-	#classTraits : 'TGt2DocumentConstants classTrait + TGtExampleAssertable classTrait',
+	#traits : 'TGtDocumentConstants + TGtExampleAssertable',
+	#classTraits : 'TGtDocumentConstants classTrait + TGtExampleAssertable classTrait',
 	#instVars : [
 		'memorySystem',
 		'tempDirectory',
@@ -21,14 +21,19 @@ GtDocumentExamples class >> constants [
 	^ GtDocumentConstants
 ]
 
+{ #category : #'examples - supporting methods' }
+GtDocumentExamples class >> differentLabel [
+	^ 'document example class'
+]
+
 { #category : #changes }
 GtDocumentExamples >> addEpiceaEvent [
 	<gtExample>
 	| anEpicea anAnnouncements |
 	anEpicea := self epicea.
 	anAnnouncements := OrderedCollection new.
-	anEpicea 
-		subscribe: GtEpiceaUpdatedAnnouncement 
+	anEpicea
+		when: GtEpiceaUpdatedAnnouncement
 		do: [ :anAnnouncement | anAnnouncements addLast: anAnnouncement ].
 	anEpicea addEvent: self ombuEntry content.
 	self assert: anEpicea numberOfEvents equals: 2.
@@ -341,6 +346,22 @@ GtDocumentExamples >> contentWithExistingClass [
 
 ]
 
+{ #category : #class }
+GtDocumentExamples >> contentWithExistingClassAndCustomizedNameUsingString [
+	<gtExample>
+	^ 'This is a ${', self constants classAnnotationName, ':', self referencedClass , 
+		'|', self constants labelParameterName, '=class',
+	'}$ with customized name'
+]
+
+{ #category : #class }
+GtDocumentExamples >> contentWithExistingClassAndCustomizedNameUsingSymbol [
+	<gtExample>
+	^ 'This is a ${', self constants classAnnotationName, ':', self referencedClass , 
+		'|', self constants labelParameterName, '=#differentLabel',
+	'}$ with customized name'
+]
+
 { #category : #'example - existing one' }
 GtDocumentExamples >> contentWithExistingExample [
 	<gtExample>
@@ -361,7 +382,25 @@ GtDocumentExamples >> contentWithExistingExampleAndReturnVariableName [
 { #category : #'method - existing one' }
 GtDocumentExamples >> contentWithExistingMethod [
 	<gtExample>
-	^ '${', self constants methodAnnotationName, ':', self referencedMethod printString, '}$'
+	^ 'This is the ${', self constants methodAnnotationName, ':', self referencedMethod printString, '}$ method.'
+
+]
+
+{ #category : #'method - different name' }
+GtDocumentExamples >> contentWithExistingMethodAndChangedLabelUsingString [
+	<gtExample>
+	^ 'This is the ${', self constants methodAnnotationName, ':', self referencedMethod printString, 
+	'|', self constants labelParameterName, '=example',
+	'}$ method with a customized name.'
+
+]
+
+{ #category : #'method - different name' }
+GtDocumentExamples >> contentWithExistingMethodAndChangedLabelUsingSymbol [
+	<gtExample>
+	^ 'This is the ${', self constants methodAnnotationName, ':', self referencedMethod printString, 
+	'|', self constants labelParameterName, '=#selector',
+	'}$ method with a short name (exluding class name).'
 
 ]
 
@@ -408,7 +447,9 @@ GtDocumentExamples >> contentWithExistingTwoParametrizedExamples [
 { #category : #'external link' }
 GtDocumentExamples >> contentWithExternalLink [
 	<gtExample>
-	^ '*Feenk>https://feenk.com*', String cr, '*https://feenk.com*'
+	^ '*Feenk>https://feenk.com*', String cr, 
+		'*https://feenk.com*', String cr,
+		'Here you can see a link that can be split into two lines *https://www.google.com/search?q=how+do+you+feenk+today%3F&oq=how+do+you+feenk+today%3F*.'
 ]
 
 { #category : #figure }
@@ -451,13 +492,13 @@ GtDocumentExamples >> contentWithInlinedExample [
 	<gtExample>
 	^ 'The ',
 	'${', self constants exampleAnnotationName, ':', self referencedExampleComUrlMethod printString, 
-		'|', self constants inlineParameterName, '=#host',
+		'|', self constants labelParameterName, '=#host',
 		'|', self constants expandedParameterName , '=false', 
 	'}$ website is accessed ${', self constants exampleAnnotationName, ':', self referencedExampleComAccessPerHourMethod printString, 
-		'|', self constants inlineParameterName, '=#size',
+		'|', self constants labelParameterName, '=#size',
 		'|', self constants expandedParameterName , '=false', 
 	'}$ times every hour by ${', self constants exampleAnnotationName, ':', self referencedExampleComUniqueAccessPerHour printString, 
-		'|', self constants inlineParameterName, '=#size',
+		'|', self constants labelParameterName, '=#size',
 		'|', self constants expandedParameterName , '=false', 
 	'}$ unique users.'
 ]
@@ -467,7 +508,7 @@ GtDocumentExamples >> contentWithInlinedLoremIpsum300 [
 	<gtExample>
 	^ 'I include a very long text: ',
 	'${', self constants exampleAnnotationName, ':', self referencedExampleLoremIpsum300Method printString, 
-		'|', self constants inlineParameterName, '',
+		'|', self constants labelParameterName, '',
 		'|', self constants expandedParameterName , '=false', 
 	'}$ that should be split spread over couple of lines.'
 ]
@@ -890,6 +931,28 @@ GtDocumentExamples >> documentWithExistingClass [
 	^ aDocument
 ]
 
+{ #category : #class }
+GtDocumentExamples >> documentWithExistingClassAndCustomizedNameUsingString [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExistingClassAndCustomizedNameUsingString.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithExistingClassAndCustomizedNameUsingString.
+	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
+{ #category : #class }
+GtDocumentExamples >> documentWithExistingClassAndCustomizedNameUsingSymbol [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExistingClassAndCustomizedNameUsingSymbol.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithExistingClassAndCustomizedNameUsingSymbol.
+	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
 { #category : #'example - existing one' }
 GtDocumentExamples >> documentWithExistingExample [
 	<gtExample>
@@ -920,6 +983,28 @@ GtDocumentExamples >> documentWithExistingMethod [
 	aDocument := self defaultDocument text: self contentWithExistingMethod.
 	aDocument editor styleText.
 	self assert: aDocument text asString equals: self contentWithExistingMethod.
+	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
+{ #category : #'method - different name' }
+GtDocumentExamples >> documentWithExistingMethodAndChangedLabelUsingString [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExistingMethodAndChangedLabelUsingString.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithExistingMethodAndChangedLabelUsingString.
+	self assert: aDocument isSubscribedToSystem.
+	^ aDocument
+]
+
+{ #category : #'method - different name' }
+GtDocumentExamples >> documentWithExistingMethodAndChangedLabelUsingSymbol [
+	<gtExample>
+	| aDocument |
+	aDocument := self defaultDocument text: self contentWithExistingMethodAndChangedLabelUsingSymbol.
+	aDocument editor styleText.
+	self assert: aDocument text asString equals: self contentWithExistingMethodAndChangedLabelUsingSymbol.
 	self assert: aDocument isSubscribedToSystem.
 	^ aDocument
 ]
@@ -1275,8 +1360,8 @@ GtDocumentExamples >> epicea [
 	aChangesFile := self changesFileReferenceWithClassDefinition.
 	anAnnouncements := OrderedCollection new.
 	anEpicea := GtEpicea new.
-	anEpicea 
-		subscribe: GtEpiceaUpdatedAnnouncement 
+	anEpicea
+		when: GtEpiceaUpdatedAnnouncement
 		do: [ :anAnnouncement | anAnnouncements addLast: anAnnouncement ].
 	anEpicea ombuFile: aChangesFile.
 	self assert: anEpicea ombuFile equals: aChangesFile.
@@ -1559,13 +1644,18 @@ GtDocumentExamples >> registeredDocument [
 	<gtExample>
 	| aDocument |
 	aDocument := self defaultDocument.
-	aDocument subscribe: SystemAnnouncement do: [ :anAnnouncement | "ignore" ] for: self.
+	aDocument
+		when: SystemAnnouncement
+		do: [ :anAnnouncement | "ignore" ]
+		for: self.
 	self assert: aDocument text asString equals: self emptyContent.
 	self assert: aDocument isSubscribedToSystem.
-	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument).
+	self assert:
+		(SystemAnnouncer uniqueInstance hasSubscriber: aDocument).
 	aDocument unsubscribe: self.
 	self assert: aDocument isSubscribedToSystem not.
-	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument) not.
+	self assert:
+		(SystemAnnouncer uniqueInstance hasSubscriber: aDocument) not.
 	^ aDocument
 ]
 
@@ -1575,8 +1665,8 @@ GtDocumentExamples >> removeEpiceaEvent [
 	| anEpicea anAnnouncements |
 	anEpicea := self epicea.
 	anAnnouncements := OrderedCollection new.
-	anEpicea 
-		subscribe: GtEpiceaUpdatedAnnouncement 
+	anEpicea
+		when: GtEpiceaUpdatedAnnouncement
 		do: [ :anAnnouncement | anAnnouncements addLast: anAnnouncement ].
 	anEpicea removeEvent: anEpicea events first.
 	self assert: anEpicea numberOfEvents equals: 0.

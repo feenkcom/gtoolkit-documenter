@@ -178,6 +178,11 @@ GtDocumentConstants class >> exportedResultsExtension [
 	^ 'png'
 ]
 
+{ #category : #'pillar parameter names' }
+GtDocumentConstants class >> fullViewParameterName [
+	^ #full
+]
+
 { #category : #text }
 GtDocumentConstants class >> headerFontSize [
 	^ 27
@@ -216,7 +221,10 @@ GtDocumentConstants class >> infoButtonIcon [
 
 { #category : #'pillar parameter names' }
 GtDocumentConstants class >> inlineParameterName [
-	^ #inline
+	self 
+		deprecated: 'Please use #labelParameterName instead.'
+		transformWith: '`@receiver inlineParameterName' -> '`@receiver labelParameterName'.
+	^ self labelParameterName
 ]
 
 { #category : #'pillar annotation names' }
@@ -247,6 +255,11 @@ GtDocumentConstants class >> issuesButtonLabel [
 { #category : #text }
 GtDocumentConstants class >> labelFontSize [
 	^ 12
+]
+
+{ #category : #'pillar parameter names' }
+GtDocumentConstants class >> labelParameterName [
+	^ #label
 ]
 
 { #category : #colors }

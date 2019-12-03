@@ -1,8 +1,8 @@
 Class {
 	#name : #GtStyleTextProcess,
 	#superclass : #Object,
-	#traits : 'TBlDebug + TGt2DocumentConstants',
-	#classTraits : 'TBlDebug classTrait + TGt2DocumentConstants classTrait',
+	#traits : 'TBlDebug + TGtDocumentConstants',
+	#classTraits : 'TBlDebug classTrait + TGtDocumentConstants classTrait',
 	#instVars : [
 		'document',
 		'process',

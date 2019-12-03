@@ -1,8 +1,8 @@
 Class {
 	#name : #GtPreviewStencil,
 	#superclass : #BrStencil,
-	#traits : 'TGt2DocumentConstants',
-	#classTraits : 'TGt2DocumentConstants classTrait',
+	#traits : 'TGtDocumentConstants',
+	#classTraits : 'TGtDocumentConstants classTrait',
 	#instVars : [
 		'result',
 		'showSelector',
