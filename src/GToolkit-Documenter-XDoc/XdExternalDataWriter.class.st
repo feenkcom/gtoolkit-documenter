@@ -52,7 +52,7 @@ XdExternalDataWriter >> exportExampleResultOf: aGt2ExampleAnnotation to: aRelati
 	"recommended size"
 	aContainer size: 500@300.
 
-	BlUseAsyncFeatures value: false during: [ 
+	BlUseAsyncFeatures disableDuring: [ 
 		aView := GtPhlowView empty 
 			on: anExampleReturnValue 
 			perform: aGt2ExampleAnnotation previewShowSelector.
