@@ -308,7 +308,7 @@ GtDocumentExamples >> contentWithExampleHiddenPreview [
 		self referencedMethod printString,
 		'|', self constants previewShowParameterName, '=', #gtBytecodeFor:, 
 		'|', self constants previewExpandedParameterName, '=', false asString,
-		'|', self constants previewHeightParameterName, '=', 100 asString,
+		'|', self constants previewHeightParameterName, '=', self previewHeightHudredValue asString,
 		'|', self constants codeExpandedParameterName, '=', true asString, 
 		'|', self constants codeHeightParameterName, '=', 50 asString, '}$'
 ]
@@ -1570,6 +1570,11 @@ GtDocumentExamples >> pillarParser [
 	<gtExample>
 	^ PRPillarParser new optimize.
 	
+]
+
+{ #category : #basic }
+GtDocumentExamples >> previewHeightHudredValue [
+	^ 100
 ]
 
 { #category : #class }
