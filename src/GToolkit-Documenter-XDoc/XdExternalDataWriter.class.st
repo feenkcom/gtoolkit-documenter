@@ -44,13 +44,15 @@ XdExternalDataWriter >> exampleResultReferenceFor: aGt2ExampleAnnotation [
 
 { #category : #private }
 XdExternalDataWriter >> exportExampleResultOf: aGt2ExampleAnnotation to: aRelativePath [ 
-	| aFileReference anExampleReturnValue aContainer aView |
+	| aFileReference anExampleReturnValue aContainer aView aScaleFactor aHeight |
 	aFileReference := memoryStore referenceTo: aRelativePath.
 	anExampleReturnValue := aGt2ExampleAnnotation methodDefinition compiledMethod gtExample returnValue.
 	
 	aContainer := XdExporterContainerElement new.
 	"recommended size"
-	aContainer size: 500@300.
+	aScaleFactor := self constants exportFigureScaleFactor.
+	aHeight := aGt2ExampleAnnotation previewHeight.
+	aContainer size: self constants defaultExportFigureWidth @ aHeight.
 
 	BlUseAsyncFeatures disableDuring: [ 
 		aView := GtPhlowView empty 
@@ -64,7 +66,7 @@ XdExternalDataWriter >> exportExampleResultOf: aGt2ExampleAnnotation to: aRelati
 		aFileReference parent ensureCreateDirectory.
 		
 		BlExporter png 
-			scaled: 2;
+			scaled: aScaleFactor;
 			background: Color white;
 			element: aContainer; 
 			fileName: aFileReference; 

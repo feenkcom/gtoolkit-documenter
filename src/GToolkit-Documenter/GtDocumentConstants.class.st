@@ -85,6 +85,12 @@ GtDocumentConstants class >> defaultExamplesShowSelector [
 	^ #gtExpandableExamplesFor: "#gtExamplesFor:"
 ]
 
+{ #category : #'file export' }
+GtDocumentConstants class >> defaultExportFigureWidth [
+	"Exported figure width wihout considering the scale factor at ${method:GtDocumentConstants class>>#exportFigureScaleFactor}$"
+	^ 500
+]
+
 { #category : #'pillar parameter default values' }
 GtDocumentConstants class >> defaultFigureShowSelector [
 	^ #gtFigureFor:
@@ -158,6 +164,12 @@ GtDocumentConstants class >> expandedParameterName [
 { #category : #'pillar annotation names' }
 GtDocumentConstants class >> explanationAnnotationName [
 	^ #explanation
+]
+
+{ #category : #'file export' }
+GtDocumentConstants class >> exportFigureScaleFactor [
+	"Scale factor that is used then exporting to PNG (non-vector) format"
+	^ 2
 ]
 
 { #category : #files }
