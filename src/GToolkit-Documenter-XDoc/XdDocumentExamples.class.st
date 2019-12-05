@@ -294,6 +294,39 @@ XdDocumentExamples >> writeDocumentWithExistingExample [
 	^ aXdFile
 ]
 
+{ #category : #example }
+XdDocumentExamples >> writeDocumentWithExistingExampleAndPreviewHeight [
+	<gtExample>
+	| aXdFile aDocument theMembers theFigure aForm |
+	aDocument := documentExamples documentWithExampleHiddenPreview.
+	aXdFile := self inMemoryWriter
+		document: aDocument;
+		documentHtml: aDocument;
+		write.
+	self assert: aXdFile notNil.
+	self assert: aXdFile manifest notNil.
+	"Example figure file"
+	self assert: aXdFile manifest attachments third id equals: '3'.
+	self
+		assert: aXdFile manifest attachments third fileName
+		equals: self constants exportedResultsDirectoryName, '/', 
+			(XdExternalDataWriter initialCounterValue + 1) asString, '.', 
+			self constants exportedResultsExtension.
+	self assert: aXdFile manifest attachments third fileSize isZero not.
+
+	self assert: aXdFile streamingStrategy notNil.
+	self assert: aXdFile exists.
+	theMembers := aXdFile streamingStrategy zip members.
+	self assert: theMembers size equals: 5.
+	
+	"Check figure height"
+	theFigure := theMembers third.
+	self assert: theFigure localFileName equals: aXdFile manifest attachments third fileName.
+	aForm := ImageReadWriter gtFormFromBuffer: theFigure gtBytes.
+	self assert: aForm height equals: documentExamples previewHeightHudredValue * self constants exportFigureScaleFactor.
+	^ aXdFile
+]
+
 { #category : #method }
 XdDocumentExamples >> writeDocumentWithExistingMethod [
 	<gtExample>
