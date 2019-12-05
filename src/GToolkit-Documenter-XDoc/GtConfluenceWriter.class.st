@@ -39,7 +39,7 @@ GtConfluenceWriter >> gtWriteExampleResult: aGt2ExampleAnnotation [
 { #category : #'as yet unclassified' }
 GtConfluenceWriter >> gtWriteSourceCodeForEntity: anEntityName with: aSourceCode [
 	canvas tag
-		name: 'span';
+		name: 'em';
 		with: [ canvas nextPutAll: anEntityName ].
 "	| uniqueId language code |
 	uniqueId := 	self configuration gtUniqueIdGenerator next printString.
@@ -103,6 +103,16 @@ GtConfluenceWriter >> visitGt2ExampleAnnotation: aGt2ExampleAnnotation [
 	aGt2ExampleAnnotation isLabelParameterValueDefined ifFalse: [ 
 		self gtWriteExampleResult: aGt2ExampleAnnotation.
 	].
+]
+
+{ #category : #visiting }
+GtConfluenceWriter >> visitGt2MethodAnnotation: aGt2MethodAnnotation [	
+	| name |
+	aGt2MethodAnnotation isLabelParameterValueDefined 
+		ifTrue: [ name := aGt2MethodAnnotation labelText ]
+		ifFalse: [ name := aGt2MethodAnnotation referencedMethod name ].
+	self gtWriteSourceCodeForEntity: name with: (aGt2MethodAnnotation referencedMethod sourceCode). 
+	
 ]
 
 { #category : #'visiting-document' }

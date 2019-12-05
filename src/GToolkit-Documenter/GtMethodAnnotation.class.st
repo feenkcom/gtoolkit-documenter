@@ -77,6 +77,18 @@ GtMethodAnnotation >> handleMethodAnnouncement: aMethodModified [
 ]
 
 { #category : #testing }
+GtMethodAnnotation >> isLabelParameterValueDefined [
+	"Return true if an inlined parameter is properly defined"
+	<return: #Boolean>
+	^ self utility 
+		valueOf: self constants labelParameterName 
+		in: self parameters
+		value: [ :aSymbol | true ]
+		emptyValue: [ false ]
+		defaultValue: [ false ].
+]
+
+{ #category : #testing }
 GtMethodAnnotation >> isMethodDefined [
 	"Return true if a method is defined in the system"
 	^ self referencedMethod notNil and: [ self referencedMethod isDefined ]
