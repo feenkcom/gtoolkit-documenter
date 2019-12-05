@@ -88,6 +88,13 @@ GtConfluenceWriter >> visitExternalLink: anExternalLink [
 ]
 
 { #category : #visiting }
+GtConfluenceWriter >> visitGt2ClassAnnotation: aGt2ClassAnnotation [
+  | name |
+  name := aGt2ClassAnnotation isLabelParameterValueDefined ifTrue: [ aGt2ClassAnnotation labelText ] ifFalse: [ aGt2ClassAnnotation referencedClass name ].
+  self gtWriteSourceCodeForEntity: name with: aGt2ClassAnnotation referencedClass definition
+]
+
+{ #category : #visiting }
 GtConfluenceWriter >> visitGt2ExampleAnnotation: aGt2ExampleAnnotation [
 	aGt2ExampleAnnotation gtDocument: self configuration gtDocument.
 	aGt2ExampleAnnotation isMethodDefined ifFalse: [ ^ self ].
@@ -106,13 +113,10 @@ GtConfluenceWriter >> visitGt2ExampleAnnotation: aGt2ExampleAnnotation [
 ]
 
 { #category : #visiting }
-GtConfluenceWriter >> visitGt2MethodAnnotation: aGt2MethodAnnotation [	
-	| name |
-	aGt2MethodAnnotation isLabelParameterValueDefined 
-		ifTrue: [ name := aGt2MethodAnnotation labelText ]
-		ifFalse: [ name := aGt2MethodAnnotation referencedMethod name ].
-	self gtWriteSourceCodeForEntity: name with: (aGt2MethodAnnotation referencedMethod sourceCode). 
-	
+GtConfluenceWriter >> visitGt2MethodAnnotation: aGt2MethodAnnotation [
+  | name |
+  name := aGt2MethodAnnotation isLabelParameterValueDefined ifTrue: [ aGt2MethodAnnotation labelText ] ifFalse: [ aGt2MethodAnnotation referencedMethod name ].
+  self gtWriteSourceCodeForEntity: name with: aGt2MethodAnnotation referencedMethod sourceCode
 ]
 
 { #category : #'visiting-document' }
