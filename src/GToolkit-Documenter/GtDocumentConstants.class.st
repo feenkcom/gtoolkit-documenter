@@ -88,7 +88,7 @@ GtDocumentConstants class >> defaultExamplesShowSelector [
 { #category : #'file export' }
 GtDocumentConstants class >> defaultExportFigureWidth [
 	"Exported figure width wihout considering the scale factor at ${method:GtDocumentConstants class>>#exportFigureScaleFactor}$"
-	^ 500
+	^ 800
 ]
 
 { #category : #'pillar parameter default values' }
