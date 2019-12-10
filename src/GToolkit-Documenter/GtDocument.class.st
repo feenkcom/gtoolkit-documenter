@@ -250,7 +250,7 @@ GtDocument >> exists [
 
 { #category : #accessing }
 GtDocument >> exportToConfluencePage: pageName inSpace: spaceName [
-	| credentials confluence pageId anXdFile aDocument attachments confluenceFile result attachmentsByName attachmentsForDocument |
+	| credentials confluence pageId anXdFile aDocument attachments confluenceFile result attachmentsForDocument |
 	credentials := ConfluenceConnection setup.
 	confluence := Gt4ConfluenceAPI  new 
 		credentials: credentials.
@@ -274,6 +274,7 @@ GtDocument >> exportToConfluencePage: pageName inSpace: spaceName [
 	result := confluence updatePageWithId: pageId withContent: confluenceFile contents.
 
 	attachments := (anXdFile streamingStrategy fileSystem / GtDocumentConstants exportedResultsDirectoryName) children.
+	confluence deleteAttachmentsForPageWithId: pageId.
 	attachments do: [ :anAttachment |
 		confluence uploadFileFrom: anAttachment forPageWithId: pageId
 	 ].
