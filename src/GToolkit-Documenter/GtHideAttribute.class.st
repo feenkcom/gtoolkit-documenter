@@ -3,12 +3,6 @@ Class {
 	#superclass : #BrTextAdornmentAttribute,
 	#traits : 'TGtDocumentConstants',
 	#classTraits : 'TGtDocumentConstants classTrait',
-	#instVars : [
-		'total',
-		'results',
-		'successes',
-		'issues'
-	],
 	#classInstVars : [
 		'uniqueInstance'
 	],
@@ -37,9 +31,7 @@ GtHideAttribute class >> uniqueInstance [
 
 { #category : #accessing }
 GtHideAttribute >> affect: aBrText in: anEditorElement [
-	| anElement |
-	anElement := BlElement new size: 0@0; background: BlBackground transparent.
-	^ anElement
+	^ #()
 ]
 
 { #category : #accessing }

@@ -89,6 +89,17 @@ GtCachedAttribute >> shouldReplace [
 	^ self attribute shouldReplace
 ]
 
+{ #category : #initialization }
+GtCachedAttribute >> storeOn: aStream [
+	super storeOn: aStream.
+	
+	aStream
+		nextPutAll: ' attribute: ';
+		nextPut: $(;
+		store: attribute;
+		nextPut: $)
+]
+
 { #category : #private }
 GtCachedAttribute >> updateCache: aBlElement [
 	self cache: aBlElement.

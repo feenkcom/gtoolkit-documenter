@@ -640,6 +640,12 @@ GtDocumentExamples >> contentWithSelfReferencedInputFile [
 
 ]
 
+{ #category : #'pillar parser' }
+GtDocumentExamples >> contentWithTextSpaceClassAnnotationSpaceText [
+	<gtExample>
+	^ 'hello  ${', self constants classAnnotationName, ':', Object name asString, '}$ or hi'
+]
+
 { #category : #'example - two same in one document' }
 GtDocumentExamples >> contentWithTwoExistingExamples [
 	<gtExample>
@@ -1542,6 +1548,17 @@ GtDocumentExamples >> parametrizedExampleSumNumber: aNumber with: anotherNumber 
 	aResult := aNumber + anotherNumber.
 	self assert: aResult isNotNil.
 	^ aResult
+]
+
+{ #category : #'pillar parser' }
+GtDocumentExamples >> parseContentWithTextSpaceClassAnnotationSpaceText [ 
+	<gtExample>
+	| aPillarDocument aText |
+	aPillarDocument := self pillarParser parse: self contentWithTextSpaceClassAnnotationSpaceText.
+	aText := aPillarDocument children first children third.
+	self assert: aText class equals: PRText.
+	self assert: aText text equals: ' or hi'.
+	^ aPillarDocument
 ]
 
 { #category : #'pillar parser' }
