@@ -27,7 +27,7 @@ GtPreviewAttribute >> defaultHeight [
 ]
 
 { #category : #accessing }
-GtPreviewAttribute >> doAffect: aBrText in: anEditorElement [
+GtPreviewAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 	^ GtPreviewStencil new
 		result: self result;
 		showSelector: self showSelector;

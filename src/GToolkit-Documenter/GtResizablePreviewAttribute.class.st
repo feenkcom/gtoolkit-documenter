@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #accessing }
-GtResizablePreviewAttribute >> doAffect: aBrText in: anEditorElement [
+GtResizablePreviewAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 	^ GtResizablePreviewStencil new
 		result: self result;
 		showSelector: self showSelector;
