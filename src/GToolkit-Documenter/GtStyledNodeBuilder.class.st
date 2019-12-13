@@ -127,7 +127,7 @@ GtStyledNodeBuilder >> document: aGtDocument [
 GtStyledNodeBuilder >> explanation [
 	"Add button to a node"
 	self nodeText 
-		appendingAdornment: [ :aDocumenterText :anEditorElement | 
+		appendingAdornment: [ :aTBrTextEditorTextualPiece :anEditorElement | 
 			| aContainer aTextPieceElement aRenderedText |
 			aRenderedText := self properties name value asString asRopedText.
 			aContainer := BlElement new
@@ -138,11 +138,9 @@ GtStyledNodeBuilder >> explanation [
 					c horizontal fitContent.
 					c vertical fitContent ].
 			aContainer explainer isExplanation: true; model: self properties name value.
-			aTextPieceElement := (BrTextWordPieceStencilBuilder new
-				text: aRenderedText
-				start: (aDocumenterText start - 1 max: 0)
-				end: (aDocumenterText start - 1 max: 0) + aDocumenterText size) asElement.
-			"aContainer addEventHandler: (BlEventDelegator delegate: BrTextEditorRequest to: aTextPieceElement)."
+			aTextPieceElement := (BrTextElementWithCursors new
+				editorMeasurement;
+				segmentPiece: (BrTextEditorLineSegmentPiece new initializeWith: aRenderedText from: 0 to: aRenderedText size)).
 			aContainer addChildren: { aTextPieceElement } ]
 		
 		" (GtButtonAttribute new

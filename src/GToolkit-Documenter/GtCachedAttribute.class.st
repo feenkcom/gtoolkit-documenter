@@ -10,11 +10,11 @@ Class {
 }
 
 { #category : #accessing }
-GtCachedAttribute >> affect: aBrText in: anEditorElement [
+GtCachedAttribute >> affect: aTBrTextEditorTextualPiece in: anEditorElement [
 	^ self hasCache 
 			ifTrue: [ self cache removeFromParent ]
 			ifFalse: [ | anElement |
-				anElement := self attribute affect: aBrText in: anEditorElement.
+				anElement := self attribute affect: aTBrTextEditorTextualPiece in: anEditorElement.
 				self updateCache: anElement.
 				anElement ]
 ]

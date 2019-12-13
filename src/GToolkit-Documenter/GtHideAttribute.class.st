@@ -30,7 +30,7 @@ GtHideAttribute class >> uniqueInstance [
 ]
 
 { #category : #accessing }
-GtHideAttribute >> affect: aBrText in: anEditorElement [
+GtHideAttribute >> affect: aTBrTextEditorTextualPiece in: anEditorElement [
 	^ #()
 ]
 

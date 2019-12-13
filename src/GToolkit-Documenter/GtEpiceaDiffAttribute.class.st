@@ -15,7 +15,7 @@ GtEpiceaDiffAttribute class >> constants [
 ]
 
 { #category : #accessing }
-GtEpiceaDiffAttribute >> affect: aBrText in: anEditorElement [
+GtEpiceaDiffAttribute >> affect: aTBrTextEditorTextualPiece in: anEditorElement [
 	^ BrLabel new
 		text: self text;
 		look: BrGlamorousLabelLook new;

@@ -48,7 +48,7 @@ GtExamplePreviewAttribute >> constants [
 ]
 
 { #category : #accessing }
-GtExamplePreviewAttribute >> doAffect: aBrText in: anEditorElement [
+GtExamplePreviewAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 	^ self newExamplePreviewStencil asElement
 ]
 

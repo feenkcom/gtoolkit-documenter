@@ -18,7 +18,7 @@ GtExamplesStatusLabelAttribute class >> constants [
 ]
 
 { #category : #accessing }
-GtExamplesStatusLabelAttribute >> affect: aBrText in: anEditorElement [
+GtExamplesStatusLabelAttribute >> affect: aTBrTextEditorTextualPiece in: anEditorElement [
 	| anElement |
 	anElement := BrLabel new
 		look: (BrGlamorousLabelLook new fontSize: self constants labelFontSize);
