@@ -92,7 +92,7 @@ PRFigure >> figureFileReference [
 				ifTrue: [ aFileReference ]
 				ifFalse: [ | anIcebergFile |
 				
-					anIcebergFile := (GtIcebergUtility documentAtPath: self localFileOrExternalReference).
+					anIcebergFile := (GtIcebergUtility resourceAtPath: self localFileOrExternalReference).
 					anIcebergFile exists 
 						ifTrue: [ anIcebergFile ] 
 						ifFalse: [ aFileReference ] ]
