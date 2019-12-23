@@ -223,7 +223,7 @@ GtDocumentConstants class >> icebergFileAnnotationName [
 { #category : #files }
 GtDocumentConstants class >> icebergRepositoriesLocation [
 	<return: #FileReference>
-	^ GtIcebergUtility repositoriesLocation
+	^ GtResourcesUtility default repositoriesLocation
 ]
 
 { #category : #ui }
@@ -287,7 +287,7 @@ GtDocumentConstants class >> linkWithErrorColor [
 { #category : #files }
 GtDocumentConstants class >> localGtDirectory [
 	<return: #FileReference>
-	^ GtFileUtilityConstants localGtDirectory
+	^ GtResourcesUtilityConstants localGtDirectory
 ]
 
 { #category : #'changes diff' }

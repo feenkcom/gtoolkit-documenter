@@ -1410,7 +1410,7 @@ GtDocumentExamples >> examplesUtility [
 { #category : #figure }
 GtDocumentExamples >> figureContent [
 	<gtExample>
-	(GtIcebergUtility resourceAtPath: Path * 'feenkcom' / 'gtoolkit-inspector' / 'doc' / 'gt.png') 
+	(GtResourcesUtility resourceAtPath: Path * 'feenkcom' / 'gtoolkit-inspector' / 'doc' / 'gt.png') 
 		binaryReadStreamDo: [ :stream | ^ stream contents ].
 ]
 
