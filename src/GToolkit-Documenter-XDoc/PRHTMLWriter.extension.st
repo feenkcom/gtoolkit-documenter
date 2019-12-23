@@ -135,7 +135,7 @@ PRHTMLWriter >> visitGt2ExamplesAnnotation: aGt2ExamplesAnnotation [
 PRHTMLWriter >> visitGt2IcebergFileAnnotation: aGt2IcebergFileAnnotation [ 
 	| aHref |
 	aGt2IcebergFileAnnotation isReferenceDefined ifFalse: [ ^ self ]. 
-	aHref := GtFileUtilityConstants localGtDirectoryName, '/', aGt2IcebergFileAnnotation path.
+	aHref := GtResourcesUtilityConstants localGtDirectoryName, '/', aGt2IcebergFileAnnotation path.
 	canvas tag
 		name: 'a';
 		parameterAt: 'href' put: aHref;
