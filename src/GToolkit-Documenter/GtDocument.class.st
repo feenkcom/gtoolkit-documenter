@@ -500,7 +500,7 @@ GtDocument >> parse [
 GtDocument >> pillarParser [
 	<return: #PRPillarParser>
 	^ pillarParser ifNil: [ 
-		pillarParser := PRPillarParser new optimize ]
+		pillarParser := GtDocumenterParser new optimize ]
 ]
 
 { #category : #private }
