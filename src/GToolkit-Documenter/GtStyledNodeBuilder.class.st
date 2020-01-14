@@ -248,15 +248,19 @@ GtStyledNodeBuilder >> installDisplayMarkupsHandler [
 GtStyledNodeBuilder >> installDisplayMarkupsHandlerFrom: aStartPosition to: aStopPosition [
 	"Display markups if a cursor is close to the node"
 	self cursorEnterAction: [ :aTextEditor |
+		| aSafeStopPosition |
+		aSafeStopPosition := aStopPosition min: aTextEditor text size.
 		self updateText: aTextEditor text.
-		self revealTextFrom: aStartPosition to: aStopPosition.
-		aTextEditor invalidate: aStartPosition to: aStopPosition.
-		aTextEditor update: aStartPosition to: aStopPosition ].
+		self revealTextFrom: aStartPosition to: aSafeStopPosition.
+		aTextEditor invalidate: aStartPosition to: aSafeStopPosition.
+		aTextEditor update: aStartPosition to: aSafeStopPosition ].
 	self cursorLeaveAction: [ :aTextEditor |
+		| aSafeStopPosition |
+		aSafeStopPosition := aStopPosition min: aTextEditor text size.
 		self updateText: aTextEditor text.
-		self hideTextFrom: aStartPosition to: aStopPosition.
-		aTextEditor invalidate: aStartPosition to: aStopPosition.
-		aTextEditor update: aStartPosition to: aStopPosition ].
+		self hideTextFrom: aStartPosition to: aSafeStopPosition.
+		aTextEditor invalidate: aStartPosition to: aSafeStopPosition.
+		aTextEditor update: aStartPosition to: aSafeStopPosition ].
 	self activateCursorFrom: aStartPosition to: aStopPosition.
 ]
 
