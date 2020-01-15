@@ -252,15 +252,17 @@ GtStyledNodeBuilder >> installDisplayMarkupsHandlerFrom: aStartPosition to: aSto
 		aSafeStopPosition := aStopPosition min: aTextEditor text size.
 		self updateText: aTextEditor text.
 		self revealTextFrom: aStartPosition to: aSafeStopPosition.
-		aTextEditor invalidate: aStartPosition to: aSafeStopPosition.
-		aTextEditor update: aStartPosition to: aSafeStopPosition ].
+		aTextEditor updater
+			from: aStartPosition to: aSafeStopPosition;
+			update ].
 	self cursorLeaveAction: [ :aTextEditor |
 		| aSafeStopPosition |
 		aSafeStopPosition := aStopPosition min: aTextEditor text size.
 		self updateText: aTextEditor text.
 		self hideTextFrom: aStartPosition to: aSafeStopPosition.
-		aTextEditor invalidate: aStartPosition to: aSafeStopPosition.
-		aTextEditor update: aStartPosition to: aSafeStopPosition ].
+		aTextEditor updater
+			from: aStartPosition to: aSafeStopPosition;
+			update ].
 	self activateCursorFrom: aStartPosition to: aStopPosition.
 ]
 
