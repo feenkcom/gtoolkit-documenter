@@ -47,13 +47,15 @@ GtStyledListItemBuilder >> installDisplayMarkupsHandler [
 	self cursorEnterAction: [ :aTextEditor |
 		self updateText: aTextEditor text.
 		self revealListItemSymbolMarkup.
-		aTextEditor invalidate: self listItemSymbolStart to: self listItemSymbolStop.
-		aTextEditor update: self listItemSymbolStart to: self listItemSymbolStop ].
+		aTextEditor updater
+			from: self listItemSymbolStart to: self listItemSymbolStop;
+			update ].
 	self cursorLeaveAction: [ :aTextEditor |
 		self updateText: aTextEditor text.
 		self hideListItemSymbolMarkup.
-		aTextEditor invalidate: self listItemSymbolStart to: self listItemSymbolStop.
-		aTextEditor update: self listItemSymbolStart to: self listItemSymbolStop ].
+		aTextEditor updater
+			from: self listItemSymbolStart to: self listItemSymbolStop;
+			update ].
 	self activateCursorFrom: self listItemSymbolStart to: self listItemSymbolStop.
 ]
 
