@@ -102,13 +102,9 @@ GtExamplePreviewAttribute >> initializeLazyElement: aBlLazyElement [
 		constraintsDo: [ :c | 
 			c textFlow pushLine.
 			c horizontal matchParent.
-			c vertical fitContent ];
-		addChild: (BrLabel new 
-			look: BrLabelLook; 
-			text: ('Preparing example...' asRopedText glamorousRegularFont; italic; foreground: BrGlamorousColors lightBorderColor);
-			alignCenter;
-			hMatchParent;
-			vFitContent)
+			c vertical exact: self totalHeight ];
+		postAction: [ :theLazyElement :aResultElement | 
+			theLazyElement constraintsDo: [ :c | c vertical fitContent ] ]
 ]
 
 { #category : #'instance creation' }
@@ -171,4 +167,16 @@ GtExamplePreviewAttribute >> resultVariableName [
 { #category : #accessing }
 GtExamplePreviewAttribute >> resultVariableName: anObject [
 	resultVariableName := anObject
+]
+
+{ #category : #accessing }
+GtExamplePreviewAttribute >> totalHeight [
+	^ self noCode 
+		ifTrue: [ self previewHeight ]
+		ifFalse: [ 
+			self codeExpanded 
+				ifTrue: [ 
+					self codeHeight + self previewHeight + 16 "arrow" ]
+				ifFalse: [ 
+					70 + 16 + self previewHeight ] ]
 ]
