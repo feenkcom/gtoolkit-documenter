@@ -171,12 +171,15 @@ GtExamplePreviewAttribute >> resultVariableName: anObject [
 
 { #category : #accessing }
 GtExamplePreviewAttribute >> totalHeight [
-	^ self noCode 
-		ifTrue: [ self previewHeight ]
-		ifFalse: [ 
-			self codeExpanded 
-				ifTrue: [ 
-					self codeHeight + self previewHeight + 16 "arrow" ]
-				ifFalse: [ 
-					70 + 16 + self previewHeight ] ]
+	"only preview"
+	self noCode ifTrue: [ ^ self previewHeight ].
+	"collapsed code, arrow, expanded preview"
+	(self codeExpanded not and: [ self previewExpanded ]) 
+		ifTrue: [ ^ 70 + 16 + self previewHeight ].
+	"expanded code, no arrow, no preview"
+	(self codeExpanded and: [ self previewExpanded not ]) 
+		ifTrue: [ ^ "code" (self example sourceCode lines size * 16) + "header" 75 + "buttons" 30 ].
+	"expanded code, arrow, expanded preview"
+	 ^ "code" (self example sourceCode lines size * 16) + "header" 75 + "buttons" 30 +
+		"arrow" 16 + "preview" self previewHeight
 ]
