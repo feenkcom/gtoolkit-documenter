@@ -94,7 +94,6 @@ GtExamplePreviewStencil >> initialize [
 	codeHeight := self constants defaultCodeHeight.
 	noCode := false.
 	example := (GtDocumentExamples >> #documentWithExistingExample) gtExample.
-	exampleWithResult := nil.
 	previewExpanded := self constants defaultPreviewExpanded.
 	previewHeight := self constants defaultPreviewHeight.
 	previewShowSelector := self constants defaultShowSelector.

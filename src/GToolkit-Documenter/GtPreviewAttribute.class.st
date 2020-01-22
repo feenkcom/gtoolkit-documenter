@@ -69,13 +69,9 @@ GtPreviewAttribute >> initializeLazyElement: aBlLazyElement [
 		constraintsDo: [ :c | 
 			c textFlow pushLine.
 			c horizontal matchParent.
-			c vertical fitContent ];
-		addChild: (BrLabel new 
-			look: BrLabelLook; 
-			text: ('Preparing view...' asRopedText glamorousRegularFont; italic; foreground: BrGlamorousColors lightBorderColor);
-			alignCenter;
-			hMatchParent;
-			vFitContent)
+			c vertical exact: self height ];
+		postAction: [ :theLazyElement :aResultElement | 
+			theLazyElement constraintsDo: [ :c | c vertical fitContent ] ]
 ]
 
 { #category : #accessing }
