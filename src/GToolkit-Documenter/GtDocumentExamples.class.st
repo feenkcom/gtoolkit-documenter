@@ -77,6 +77,16 @@ GtDocumentExamples >> anotherFileReferenceWithFigure [
 		withContent: self contentWithFigure
 ]
 
+{ #category : #stencils }
+GtDocumentExamples >> basicResizablePreviewStencil [
+	<gtExample>
+	| aStencil |
+	aStencil := GtResizablePreviewStencil new.
+	self assert: aStencil result isNotNil.
+	self assert: aStencil showSelector isSymbol.
+	^ aStencil
+]
+
 { #category : #figure }
 GtDocumentExamples >> brokenFigureContent [
 	<gtExample>
@@ -1695,6 +1705,44 @@ GtDocumentExamples >> removeEpiceaEvent [
 	self assert: anEpicea numberOfEvents equals: 0.
 	self assert: anAnnouncements size equals: 1.
 	^ anEpicea
+]
+
+{ #category : #stencils }
+GtDocumentExamples >> resizablePreviewStencilOnClass [
+	<gtExample>
+	| aStencil aClass |
+	aStencil := self basicResizablePreviewStencil.
+	aClass := Object.
+	aStencil
+		result: aClass;
+		showSelector: self constants defaultClassShowSelector.
+	self assert: aStencil result equals: aClass.
+	self assert: aStencil showSelector equals: self constants defaultClassShowSelector.
+	^ aStencil
+]
+
+{ #category : #stencils }
+GtDocumentExamples >> resizablePreviewStencilOnMethod [
+	<gtExample>
+	| aStencil aMethod |
+	aStencil := self basicResizablePreviewStencil.
+	aMethod := (Object>>#size) asRingDefinition.
+	aStencil
+		result: aMethod;
+		showSelector: self constants defaultMethodShowSelector.
+	self assert: aStencil result equals: aMethod.
+	self assert: aStencil showSelector equals: self constants defaultMethodShowSelector.
+	^ aStencil
+]
+
+{ #category : #stencils }
+GtDocumentExamples >> resizablePreviewStencilOnMethodAsElement [
+	<gtExample>
+	| aStencil anElement |
+	aStencil := self resizablePreviewStencilOnMethod.
+	anElement := aStencil asElement.
+	self assert: (anElement isKindOf: GtCoderElement).
+	^ anElement
 ]
 
 { #category : #resourcer }

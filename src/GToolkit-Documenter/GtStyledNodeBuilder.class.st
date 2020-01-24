@@ -312,9 +312,7 @@ GtStyledNodeBuilder >> linkButton [
 					maySplitString: self properties name value 
 					collect: [ :eachLabel | 
 						BrButton new 
-							look: BrGlamorousLinkButtonExteriorInnerLook
-								+ (BrGlamorousLinkButtonLabelLook new labelDo: [ :aLabelElement |
-										aLabelElement padding: (BlInsets all: 0) ]);
+							look: BrGlamorousLinkButtonWithLabelLook;
 							beSmall;
 							margin: (BlInsets top: -1 left: 0 bottom: 0 right: 0);
 							label: eachLabel;

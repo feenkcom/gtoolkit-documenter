@@ -56,7 +56,7 @@ GtPreviewStencil >> height: anInteger [
 GtPreviewStencil >> initialize [
 	super initialize.
 
-	result := self class.
+	result := Object.
 	showSelector := self constants defaultShowSelector.
 	height := self defaultHeight.
 ]
