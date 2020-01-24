@@ -1708,7 +1708,21 @@ GtDocumentExamples >> removeEpiceaEvent [
 ]
 
 { #category : #stencils }
-GtDocumentExamples >> resizablePreviewStencil [
+GtDocumentExamples >> resizablePreviewStencilOnClass [
+	<gtExample>
+	| aStencil aClass |
+	aStencil := self basicResizablePreviewStencil.
+	aClass := Object.
+	aStencil
+		result: aClass;
+		showSelector: self constants defaultClassShowSelector.
+	self assert: aStencil result equals: aClass.
+	self assert: aStencil showSelector equals: self constants defaultClassShowSelector.
+	^ aStencil
+]
+
+{ #category : #stencils }
+GtDocumentExamples >> resizablePreviewStencilOnMethod [
 	<gtExample>
 	| aStencil aMethod |
 	aStencil := self basicResizablePreviewStencil.
@@ -1722,10 +1736,10 @@ GtDocumentExamples >> resizablePreviewStencil [
 ]
 
 { #category : #stencils }
-GtDocumentExamples >> resizablePreviewStencilAsElement [
+GtDocumentExamples >> resizablePreviewStencilOnMethodAsElement [
 	<gtExample>
 	| aStencil anElement |
-	aStencil := self resizablePreviewStencil.
+	aStencil := self resizablePreviewStencilOnMethod.
 	anElement := aStencil asElement.
 	self assert: (anElement isKindOf: GtCoderElement).
 	^ anElement
