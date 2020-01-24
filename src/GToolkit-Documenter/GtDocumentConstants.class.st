@@ -103,7 +103,7 @@ GtDocumentConstants class >> defaultInlineValue [
 
 { #category : #'pillar parameter default values' }
 GtDocumentConstants class >> defaultMethodShowSelector [
-	^ #gtSourceFor:
+	^ #gtBasicSourceFor:
 ]
 
 { #category : #'pillar parameter default values' }
