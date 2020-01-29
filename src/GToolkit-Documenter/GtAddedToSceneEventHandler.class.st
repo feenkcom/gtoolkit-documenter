@@ -6,7 +6,7 @@ Class {
 
 { #category : #accessing }
 GtAddedToSceneEventHandler >> eventClass [
-	^ GtAddedToSceneEvent
+	^ BlElementAddedToSceneGraphEvent
 ]
 
 { #category : #'api - event managing' }

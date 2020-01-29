@@ -6,7 +6,7 @@ Class {
 
 { #category : #accessing }
 GtRemovedFromSceneEventHandler >> eventClass [ 
-	^ GtRemovedFromSceneEvent
+	^ BlElementRemovedFromSceneGraphEvent
 ]
 
 { #category : #'api - event managing' }
