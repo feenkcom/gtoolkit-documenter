@@ -272,9 +272,8 @@ PRCodeblock >> scriptStartPositionInText: aBlText [
 
 { #category : #'*GToolkit-Documenter' }
 PRCodeblock >> scriptStopPositionInText: aBlRope [
-	| aStopEndMarkup |
-	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
-	^ aStopEndMarkup - self endMarkupSize - 1
+
+	^(self scriptStartPositionInText: aBlRope) + text size
 ]
 
 { #category : #'*GToolkit-Documenter' }
@@ -292,10 +291,8 @@ PRCodeblock >> showParameterValue [
 
 { #category : #'*GToolkit-Documenter' }
 PRCodeblock >> stopEndMarkupInText: aBlRope [
-	| aFoundIndex |
-	aFoundIndex := (aBlRope from: self start to: self stop) finder
-		reversed; startAtEnd; character: self endMarkup last; search.
-	^ aFoundIndex + self start - 1
+
+	^ self stop
 ]
 
 { #category : #'*GToolkit-Documenter' }
