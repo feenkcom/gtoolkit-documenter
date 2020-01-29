@@ -80,7 +80,7 @@ GtDocument >> asElementWithoutSaveAction [
 		matchParent;
 		constraintsDo: [ :c | c padding: (BlInsets all: 10) ].
 
-	anElement := GtSceneInformingElement new
+	anElement := BlSceneInformingElement new
 		layout: BlLinearLayout new;
 		addChild: anEditorElement;
 		addEventHandler: (GtAddedToSceneEventHandler new document: self);
