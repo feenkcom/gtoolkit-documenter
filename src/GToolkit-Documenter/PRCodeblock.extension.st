@@ -272,8 +272,21 @@ PRCodeblock >> scriptStartPositionInText: aBlText [
 
 { #category : #'*GToolkit-Documenter' }
 PRCodeblock >> scriptStopPositionInText: aBlRope [
+	"Answer the index of the last character of the code (before the line end)"
 
-	^(self scriptStartPositionInText: aBlRope) + text size
+	| lastLineBreakIndex |
+
+	"The code block end marker is always on its own line.
+	Search for the line-end of the previous line"
+	lastLineBreakIndex := (aBlRope from: self start to: self stop - 1) finder
+			pattern: [ :aText :anIndex | (aText at: anIndex) isLineBreak ]; 
+			reversed; startAtEnd;
+			search.
+	"Add the start offset and subtract two:
+	1. The start offset is 1 based, not 0.
+	2. We want the index before the line-end"
+	^ lastLineBreakIndex + self start - 2.
+
 ]
 
 { #category : #'*GToolkit-Documenter' }
@@ -291,8 +304,9 @@ PRCodeblock >> showParameterValue [
 
 { #category : #'*GToolkit-Documenter' }
 PRCodeblock >> stopEndMarkupInText: aBlRope [
+	"Answer the index of the last character of the code block marker (before the final line-end)"
 
-	^ self stop
+	^ self stop - 1
 ]
 
 { #category : #'*GToolkit-Documenter' }
