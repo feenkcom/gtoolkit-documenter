@@ -312,7 +312,7 @@ GtStyledNodeBuilder >> linkButton [
 					maySplitString: self properties name value 
 					collect: [ :eachLabel | 
 						BrButton new 
-							look: BrGlamorousLinkButtonWithLabelLook;
+							look: BrGlamorousLinkSquaredButtonWithLabelLook;
 							beSmall;
 							margin: (BlInsets top: -1 left: 0 bottom: 0 right: 0);
 							label: eachLabel;
@@ -321,10 +321,25 @@ GtStyledNodeBuilder >> linkButton [
 				anElements size > 1 
 					ifTrue: [ 
 						anElements first margin: (BlInsets top: -1 left: 3 bottom: 0 right: 0).
+						anElements first padding: (BlInsets top: 3 left: 3 bottom: 3 right: 0).
+						anElements first geometry: ( BlRectangle cornerRadii: (BlCornerRadii new
+							topLeft: 4;
+							topRight: 0;
+							bottomLeft: 4;
+							bottomRight: 0)).
 						anElements last margin: (BlInsets top: -1 left: 0 bottom: 0 right: 3).
+						anElements last padding: (BlInsets top: 3 left: 0 bottom: 3 right: 3).
+						anElements last geometry: ( BlRectangle cornerRadii: (BlCornerRadii new
+							topLeft: 0;
+							topRight: 4;
+							bottomLeft: 0;
+							bottomRight: 4)).
 						anElements allButFirstDo: [ :eachButton | eachButton action: [ "do nothing" ] ] ]
 					ifFalse: [
-						anElements first margin: (BlInsets top: -1 left: 3 bottom: 0 right: 3) ].
+						anElements first 
+							margin: (BlInsets top: -1 left: 3 bottom: 0 right: 3);
+							padding: (BlInsets top: 3 left: 3 bottom: 3 right: 3);
+							geometry: (BlRectangle cornerRadius: 4) ].
 				anElements ])
 ]
 
