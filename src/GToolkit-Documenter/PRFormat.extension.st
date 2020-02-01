@@ -15,12 +15,10 @@ PRFormat >> styleTextWithMarkup: aBlRope [
 
 { #category : #'*GToolkit-Documenter' }
 PRFormat >> styleTextWithoutMarkup: aBlRope [
-	| aMarkup |
+
 	self styleTextWithMarkup: aBlRope.
-	super styleTextWithMarkup: aBlRope.
-	aMarkup := self utility startMarkupFor: self.
 	(self gtNodeStyler: aBlRope)
-		hide: self start to: self start + aMarkup size - 1;
-		hide: self stop - aMarkup size + 1 to: self stop;
+		hide: self start to: children first start - 1;
+		hide: children last stop + 1 to: self stop;
 		autoHideNode.
 ]
