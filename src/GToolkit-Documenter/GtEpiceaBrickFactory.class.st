@@ -15,7 +15,7 @@ GtEpiceaBrickFactory class >> default [
 { #category : #strings }
 GtEpiceaBrickFactory >> emphasizedStringFor: aString [
 	
-	^ self stringFor: (aString asRopedText bold)
+	^ self stringFor: (aString asRopedText bold; glamorousRegularFont)
 ]
 
 { #category : #colors }
@@ -28,7 +28,7 @@ GtEpiceaBrickFactory >> softerTextColor [
 GtEpiceaBrickFactory >> stringFor: aString [
 
 	^ BlTextElement new 
-		text: aString asRopedText;
+		text: aString asRopedText glamorousRegularFont;
 		padding: (BlInsets top: 0 left: 0 bottom: 0 right: 3);
 		constraintsDo: [ :c | 
 			c linear vertical alignCenter ]
@@ -37,7 +37,7 @@ GtEpiceaBrickFactory >> stringFor: aString [
 { #category : #strings }
 GtEpiceaBrickFactory >> stringFor: aString color: aColor [
 
-	^ self stringFor: (aString asRopedText foreground: aColor)
+	^ self stringFor: (aString asRopedText foreground: aColor; glamorousRegularFont)
 ]
 
 { #category : #colors }
