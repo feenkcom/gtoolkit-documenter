@@ -499,8 +499,8 @@ GtDocument >> parse [
 { #category : #utility }
 GtDocument >> pillarParser [
 	<return: #PRPillarParser>
-	^ pillarParser ifNil: [ 
-		pillarParser := GtDocumenterParser new optimize ]
+
+	^ pillarParser ifNil: [ pillarParser := GtDocumenterParser default ]
 ]
 
 { #category : #private }
