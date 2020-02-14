@@ -5,12 +5,27 @@ This is a hack that partially fixes this issue: *https://github.com/feenkcom/gto
 Class {
 	#name : #GtDocumenterParser,
 	#superclass : #PRPillarGrammar,
+	#classInstVars : [
+		'default'
+	],
 	#category : #'GToolkit-Documenter-Styler'
 }
 
+{ #category : #accessing }
+GtDocumenterParser class >> default [
+	^ default ifNil: [ default := self new optimize ]
+]
+
 { #category : #parsing }
 GtDocumenterParser class >> parse: aStream [
-	^ self new optimize parse: aStream
+	^ self default parse: aStream
+]
+
+{ #category : #parsing }
+GtDocumenterParser class >> reset [
+	<script: 'self reset'>
+
+	default := nil
 ]
 
 { #category : #'grammar - Anchor' }
