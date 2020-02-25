@@ -61,7 +61,6 @@ GtDocumentExamples >> addingAndRemovingClass [
 
 { #category : #'input file' }
 GtDocumentExamples >> anotherFileName [
-	<gtExample>
 	^ 'another.pillar'
 ]
 
@@ -89,7 +88,6 @@ GtDocumentExamples >> basicResizablePreviewStencil [
 
 { #category : #figure }
 GtDocumentExamples >> brokenFigureContent [
-	<gtExample>
 	| aByteArray |
 	aByteArray := self figureContent.
 	aByteArray at: 1 put: 3.
@@ -206,13 +204,11 @@ GtDocumentExamples >> changesDirectory [
 
 { #category : #changes }
 GtDocumentExamples >> changesDirectoryName [
-	<gtExample>
 	^ 'changes'
 ]
 
 { #category : #changes }
 GtDocumentExamples >> changesFileNameWithClassDefinition [
-	<gtExample>
 	^ 'class-definition.ombu'
 ]
 
@@ -244,20 +240,17 @@ GtDocumentExamples >> constants [
 
 { #category : #'non technical people' }
 GtDocumentExamples >> contentBoldForNonTechnicalPeople [
-	<gtExample>
 	^ '""bold""    '
 ]
 
 { #category : #changes }
 GtDocumentExamples >> contentWithClassDefinitionChanges [
-	<gtExample>
 	^ '${', self constants changesAnnotationName, ':', 
 			self changesDirectoryName, '/', self changesFileNameWithClassDefinition , '}$'
 ]
 
 { #category : #codeblock }
 GtDocumentExamples >> contentWithCodeblock [
-	<gtExample>
 	^ '[[[label=Evaluate
 aBook := GtDocument new.
 ]]]'
@@ -266,7 +259,6 @@ aBook := GtDocument new.
 
 { #category : #codeblock }
 GtDocumentExamples >> contentWithCodeblockAndEmptyLineAfter [
-	<gtExample>
 	^ '[[[label=Evaluate
 4 factorial.
 ]]]
@@ -276,7 +268,6 @@ GtDocumentExamples >> contentWithCodeblockAndEmptyLineAfter [
 
 { #category : #codeblock }
 GtDocumentExamples >> contentWithCodeblockOnException [
-	<gtExample>
 	^ '[[[
 1/0
 ]]]'
@@ -285,13 +276,11 @@ GtDocumentExamples >> contentWithCodeblockOnException [
 
 { #category : #'commented line' }
 GtDocumentExamples >> contentWithCommentedLine [
-	<gtExample>
 	^ '%% a commented line'
 ]
 
 { #category : #codeblock }
 GtDocumentExamples >> contentWithEmptyCodeblock [
-	<gtExample>
 	^ '[[[label=Evaluate
    
 ]]]'
@@ -300,20 +289,17 @@ GtDocumentExamples >> contentWithEmptyCodeblock [
 
 { #category : #'formats, header, and lists' }
 GtDocumentExamples >> contentWithEmptyHeader [
-	<gtExample>
 	^ '!'
 ]
 
 { #category : #changes }
 GtDocumentExamples >> contentWithEpiceaChanges [
-	<gtExample>
 	^ '${', self constants changesAnnotationName, ':', self referencesChangesFile , '}$'
 
 ]
 
 { #category : #'example - existing one' }
 GtDocumentExamples >> contentWithExampleHiddenPreview [
-	<gtExample>
 	^ '${', self constants exampleAnnotationName, ':', 
 		self referencedMethod printString,
 		'|', self constants previewShowParameterName, '=', #gtBytecodeFor:, 
@@ -325,7 +311,6 @@ GtDocumentExamples >> contentWithExampleHiddenPreview [
 
 { #category : #'example - existing one' }
 GtDocumentExamples >> contentWithExampleParameters [
-	<gtExample>
 	^ '${', self constants exampleAnnotationName, ':', 
 		self referencedMethod printString,
 		'|', 'incorrectOne=true',
@@ -338,7 +323,6 @@ GtDocumentExamples >> contentWithExampleParameters [
 
 { #category : #examples }
 GtDocumentExamples >> contentWithExamples [
-	<gtExample>
 	^ '${', self constants examplesAnnotationName, ':', 
 		self constants classesParameterName , '=#(', 
 			GtDocumentExamples name, ' ', BrBasicExamples name, ')',
@@ -351,14 +335,12 @@ GtDocumentExamples >> contentWithExamples [
 
 { #category : #class }
 GtDocumentExamples >> contentWithExistingClass [
-	<gtExample>
 	^ '${', self constants classAnnotationName, ':', self referencedClass , '}$'
 
 ]
 
 { #category : #class }
 GtDocumentExamples >> contentWithExistingClassAndCustomizedNameUsingString [
-	<gtExample>
 	^ 'This is a ${', self constants classAnnotationName, ':', self referencedClass , 
 		'|', self constants labelParameterName, '=class',
 	'}$ with customized name'
@@ -366,7 +348,6 @@ GtDocumentExamples >> contentWithExistingClassAndCustomizedNameUsingString [
 
 { #category : #class }
 GtDocumentExamples >> contentWithExistingClassAndCustomizedNameUsingSymbol [
-	<gtExample>
 	^ 'This is a ${', self constants classAnnotationName, ':', self referencedClass , 
 		'|', self constants labelParameterName, '=#differentLabel',
 	'}$ with customized name'
@@ -374,14 +355,12 @@ GtDocumentExamples >> contentWithExistingClassAndCustomizedNameUsingSymbol [
 
 { #category : #'example - existing one' }
 GtDocumentExamples >> contentWithExistingExample [
-	<gtExample>
 	^ '${', self constants exampleAnnotationName, ':', self referencedExampleMethod printString, '}$'
 
 ]
 
 { #category : #'example - with return variable name' }
 GtDocumentExamples >> contentWithExistingExampleAndReturnVariableName [
-	<gtExample>
 	^ '${', self constants exampleAnnotationName, ':', 
 		self referencedExampleMethod printString, '|',
 		self constants returnVariableParameterName, '=', self returnVariableName asString, '}$', 
@@ -391,14 +370,12 @@ GtDocumentExamples >> contentWithExistingExampleAndReturnVariableName [
 
 { #category : #'method - existing one' }
 GtDocumentExamples >> contentWithExistingMethod [
-	<gtExample>
 	^ 'This is the ${', self constants methodAnnotationName, ':', self referencedMethod printString, '}$ method.'
 
 ]
 
 { #category : #'method - different name' }
 GtDocumentExamples >> contentWithExistingMethodAndChangedLabelUsingString [
-	<gtExample>
 	^ 'This is the ${', self constants methodAnnotationName, ':', self referencedMethod printString, 
 	'|', self constants labelParameterName, '=example',
 	'}$ method with a customized name.'
@@ -407,7 +384,6 @@ GtDocumentExamples >> contentWithExistingMethodAndChangedLabelUsingString [
 
 { #category : #'method - different name' }
 GtDocumentExamples >> contentWithExistingMethodAndChangedLabelUsingSymbol [
-	<gtExample>
 	^ 'This is the ${', self constants methodAnnotationName, ':', self referencedMethod printString, 
 	'|', self constants labelParameterName, '=#selector',
 	'}$ method with a short name (exluding class name).'
@@ -417,7 +393,6 @@ GtDocumentExamples >> contentWithExistingMethodAndChangedLabelUsingSymbol [
 { #category : #'example - parametrized one' }
 GtDocumentExamples >> contentWithExistingParametrizedExampleSumNumber [
 "GtDummyExamplesWithParametrizedExampleA>>#parametrizedExample:withTwoArguments:|variables=#(aVariableOne aVariableTwo)|result=aResult}$"
-	<gtExample>
 	^ '[[[', String crlf, String crlf, 
 			self firstInputVariableName asString, ' := ', self firstInputVariableValue asString, '.', String crlf,
 			self secondInputVariableName asString, ' := ', self secondInputVariableValue asString, '.', String crlf,
@@ -433,7 +408,6 @@ GtDocumentExamples >> contentWithExistingParametrizedExampleSumNumber [
 
 { #category : #slides }
 GtDocumentExamples >> contentWithExistingSlides [
-	<gtExample>
 	^ '${', self constants slidesAnnotationName, ':', 
 		self constants slidesParameterName , '=#(',
 			self emptyDocumentSlideClass name, ' ',
@@ -443,7 +417,6 @@ GtDocumentExamples >> contentWithExistingSlides [
 
 { #category : #'example - parametrized one' }
 GtDocumentExamples >> contentWithExistingTwoParametrizedExamples [
-	<gtExample>
 	^	self contentWithExistingParametrizedExampleSumNumber, String crlf, String crlf, 
 		'${', self constants parametrizedExampleAnnotationName, ':', 
 		self referencedMethodOfParametrizedExampleSumNumber printString, '|',
@@ -456,7 +429,6 @@ GtDocumentExamples >> contentWithExistingTwoParametrizedExamples [
 
 { #category : #'external link' }
 GtDocumentExamples >> contentWithExternalLink [
-	<gtExample>
 	^ '*Feenk>https://feenk.com*', String cr, 
 		'*https://feenk.com*', String cr,
 		'Here you can see a link that can be split into two lines *https://www.google.com/search?q=how+do+you+feenk+today%3F&oq=how+do+you+feenk+today%3F*.'
@@ -464,7 +436,6 @@ GtDocumentExamples >> contentWithExternalLink [
 
 { #category : #figure }
 GtDocumentExamples >> contentWithFigure [
-	<gtExample>
 	"^ '! Glamorous Toolkit
 	The Glamorous Toolkit (GT) is the moldable integrated development environment.
 	+Glamorous Toolkit>
@@ -478,7 +449,6 @@ GtDocumentExamples >> contentWithFigure [
 
 { #category : #'formats, header, and lists' }
 GtDocumentExamples >> contentWithHeaders [
-	<gtExample>
 	^ '! Header One
 !! Header Two
 !!! Header Three
@@ -490,7 +460,6 @@ GtDocumentExamples >> contentWithHeaders [
 
 { #category : #'iceberg file' }
 GtDocumentExamples >> contentWithIcebergFile [
-	<gtExample>
 	^ '${', self constants icebergFileAnnotationName, ':', 
 			self constants pathParameterName, '=', self icebergFileName, '}$'
 
@@ -499,7 +468,6 @@ GtDocumentExamples >> contentWithIcebergFile [
 { #category : #'example - inlined in text' }
 GtDocumentExamples >> contentWithInlinedExample [
 	"The www.example.com website is accessed 60 times every hour by 3 unique users."
-	<gtExample>
 	^ 'The ',
 	'${', self constants exampleAnnotationName, ':', self referencedExampleComUrlMethod printString, 
 		'|', self constants labelParameterName, '=#host',
@@ -515,7 +483,6 @@ GtDocumentExamples >> contentWithInlinedExample [
 
 { #category : #'example - inlined in text' }
 GtDocumentExamples >> contentWithInlinedLoremIpsum300 [
-	<gtExample>
 	^ 'I include a very long text: ',
 	'${', self constants exampleAnnotationName, ':', self referencedExampleLoremIpsum300Method printString, 
 		'|', self constants labelParameterName, '',
@@ -525,14 +492,12 @@ GtDocumentExamples >> contentWithInlinedLoremIpsum300 [
 
 { #category : #'input file' }
 GtDocumentExamples >> contentWithInputFileToFigure [
-	<gtExample>
 	^ '${', self constants inputFileAnnotationName, ':', self anotherFileName , '}$'
 
 ]
 
 { #category : #'example - existing one' }
 GtDocumentExamples >> contentWithInvalidParameter [
-	<gtExample>
 	^ '${', self constants exampleAnnotationName, ':', 
 		self referencedMethod printString,
 		'|hi|', '=true', '}$'
@@ -540,7 +505,6 @@ GtDocumentExamples >> contentWithInvalidParameter [
 
 { #category : #'example - existing one' }
 GtDocumentExamples >> contentWithInvalidParameter2 [
-	<gtExample>
 	^ '${', self constants exampleAnnotationName, ':', 
 		self referencedMethod printString,
 		'||' , '}$'
@@ -548,13 +512,11 @@ GtDocumentExamples >> contentWithInvalidParameter2 [
 
 { #category : #'example - existing one' }
 GtDocumentExamples >> contentWithInvalidParameter3 [
-	<gtExample>
 	^ '${', self constants exampleAnnotationName, ':', '}$'
 ]
 
 { #category : #'formats, header, and lists' }
 GtDocumentExamples >> contentWithLists [
-	<gtExample>
 	^ '
 Ordered list:
 # one
@@ -592,13 +554,11 @@ Another definition list:
 
 { #category : #'formats, header, and lists' }
 GtDocumentExamples >> contentWithMarkups [
-	<gtExample>
 	^ '""bold"" ''''italic'''' ==monospace== --strikethrought-- @@subscript@@ ^^superscript^^ __underline__ {{{raw}}}'
 ]
 
 { #category : #'method - multiple' }
 GtDocumentExamples >> contentWithMultipleMethods [
-	<gtExample>
 	^ '${', self constants methodAnnotationName, 
 			':', self referencedMethod printString,
 			'|', self constants expandedParameterName, '}$', String cr, String cr,
@@ -611,14 +571,12 @@ GtDocumentExamples >> contentWithMultipleMethods [
 
 { #category : #class }
 GtDocumentExamples >> contentWithNotExistingClass [
-	<gtExample>
 	^ '${', self constants classAnnotationName, ':', self referencedNotExistingClass , '}$'
 
 ]
 
 { #category : #examples }
 GtDocumentExamples >> contentWithNotExistingExamples [
-	<gtExample>
 	^ '${', self constants examplesAnnotationName, ':', 
 		self constants classesParameterName , '=#(', 
 			self referencedNotExistingClass, ')' , '}$'
@@ -627,7 +585,6 @@ GtDocumentExamples >> contentWithNotExistingExamples [
 
 { #category : #examples }
 GtDocumentExamples >> contentWithNotExistingPackageExamples [
-	<gtExample>
 	^ '${', self constants examplesAnnotationName, ':', 
 		self constants packagesParameterName , '=#(''', 
 			self referencedNotExistingPackageName, ''')' , '}$'
@@ -636,7 +593,6 @@ GtDocumentExamples >> contentWithNotExistingPackageExamples [
 
 { #category : #codeblock }
 GtDocumentExamples >> contentWithSelfCodeblock [
-	<gtExample>
 	^ '[[[
 self
 ]]]'
@@ -645,27 +601,23 @@ self
 
 { #category : #'input file' }
 GtDocumentExamples >> contentWithSelfReferencedInputFile [
-	<gtExample>
 	^ '${', self constants inputFileAnnotationName, ':', memorySystem pillarFileName, '}$'
 
 ]
 
 { #category : #'pillar parser' }
 GtDocumentExamples >> contentWithTextSpaceClassAnnotationSpaceText [
-	<gtExample>
 	^ 'hello  ${', self constants classAnnotationName, ':', Object name asString, '}$ or hi'
 ]
 
 { #category : #'example - two same in one document' }
 GtDocumentExamples >> contentWithTwoExistingExamples [
-	<gtExample>
 	^ self contentWithExistingExample, String cr, String cr, 
 		self contentWithExistingExample, String cr, String cr
 ]
 
 { #category : #variable }
 GtDocumentExamples >> contentWithVariable [
-	<gtExample>
 	^ '${variable:name=aVariableOne|value=43|previewShow=}$
 
 ${variable:name=aVariableOne|expression=Smalltalk os|previewShow=}$
@@ -1347,7 +1299,6 @@ GtDocumentExamples >> documentWithTwoExistingExamples [
 
 { #category : #'empty document' }
 GtDocumentExamples >> emptyContent [
-	<gtExample>
 	^ ''
 
 ]
@@ -1469,13 +1420,11 @@ GtDocumentExamples >> fileReferenceWithSelfReferencedInputFile [
 
 { #category : #'example - parametrized one' }
 GtDocumentExamples >> firstInputVariableName [
-	<gtExample>
 	^ #aVariableOne
 ]
 
 { #category : #'example - parametrized one' }
 GtDocumentExamples >> firstInputVariableValue [
-	<gtExample>
 	^ 11
 ]
 
@@ -1493,7 +1442,6 @@ GtDocumentExamples >> fooText [
 
 { #category : #'iceberg file' }
 GtDocumentExamples >> icebergFileName [
-	<gtExample>
 	^ 'feenkcom/gtoolkit-documenter/doc/index.pillar'
 ]
 
@@ -1638,7 +1586,6 @@ GtDocumentExamples >> referencedExampleLoremIpsum300Method [
 
 { #category : #'example - existing one' }
 GtDocumentExamples >> referencedExampleMethod [
-	<gtExample>
 	^ self class >> #documentWithMultipleMethods
 ]
 
@@ -1650,7 +1597,6 @@ GtDocumentExamples >> referencedMethod [
 
 { #category : #'example - parametrized one' }
 GtDocumentExamples >> referencedMethodOfParametrizedExampleSumNumber [
-	<gtExample>
 	^ self class >> #parametrizedExampleSumNumber:with:
 ]
 
@@ -1866,7 +1812,6 @@ GtDocumentExamples >> resourcerWithInputFileToFigure [
 
 { #category : #'example - with return variable name' }
 GtDocumentExamples >> returnVariableName [
-	<gtExample>
 	^ #aResult
 ]
 
@@ -1895,13 +1840,11 @@ GtDocumentExamples >> ropeHiddenBoldMarkupForNonTechnicalPeople [
 
 { #category : #'example - parametrized one' }
 GtDocumentExamples >> secondInputVariableName [
-	<gtExample>
 	^ #aVariableTwo
 ]
 
 { #category : #'example - parametrized one' }
 GtDocumentExamples >> secondInputVariableValue [
-	<gtExample>
 	^ 10
 ]
 
