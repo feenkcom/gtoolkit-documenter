@@ -48,29 +48,36 @@ GtDocument >> announcer [
 { #category : #converting }
 GtDocument >> asElement [
 	<return: #BlElement>
-	| anElement aToolbar |
-	anElement := self asElementWithoutSaveAction.
+	| aContainer anEditorElement aToolbar |
+	
+	anEditorElement := self asElementWithoutSaveAction.
 	aToolbar := BlElement new 
 			layout: BlLinearLayout horizontal;
 			constraintsDo: [ :c | 
-				c ignoreByLayout.
 				c vertical fitContent.
 				c horizontal fitContent.
-				c ignored horizontal alignLeft.
-				c ignored vertical alignBottom ].
+				c frame horizontal alignLeft.
+				c frame vertical alignBottom ].
 	self gtActions do: [ :eachAction | 
 		(eachAction target isForViewDefinedIn: #gtTextFor:) ifTrue: [ 
 			eachAction 
 				asElement: [ :anActionElement | aToolbar addChild: anActionElement ]
-				withHostElement: anElement ] ].
-	anElement addChild: aToolbar.
-	^ anElement
+				withHostElement: anEditorElement ] ].
+	
+	aContainer := BlElement new.
+	aContainer layout: BlFrameLayout new.
+	aContainer constraintsDo: [ :c | 
+		c vertical matchParent.
+		c horizontal matchParent. ].
+	aContainer addChildren: { anEditorElement . aToolbar }.
+	
+	^ aContainer
 ]
 
 { #category : #converting }
 GtDocument >> asElementWithoutSaveAction [
 	<return: #BlElement>
-	| anElement anEditorElement |
+	| anEditorElement |
 
 	anEditorElement := BrEditor new
 		text: self editor text;
@@ -78,22 +85,18 @@ GtDocument >> asElementWithoutSaveAction [
 		editor: self editor;
 		look: BrGlamorousRegularEditorLook;
 		matchParent;
-		constraintsDo: [ :c | c padding: (BlInsets all: 10) ].
-
-	anElement := BlSceneInformingElement new
-		layout: BlLinearLayout new;
-		addChild: anEditorElement;
+		constraintsDo: [ :c | c padding: (BlInsets all: 10) ];
 		addEventHandler: (GtAddedToSceneEventHandler new document: self);
-		addEventHandler: (GtRemovedFromSceneEventHandler new document: self);
-		constraintsDo: [ :c |
-			c vertical matchParent.
-			c horizontal matchParent ].
-	anElement userData at: self constants documentUserDataKey put: self.
+		addEventHandler: (GtRemovedFromSceneEventHandler new document: self).
+
+	anEditorElement userData at: self constants documentUserDataKey put: self.
+
 	self installCompleterForEditorElement: anEditorElement.
 	self addOns shortcuts do: [ :eachShortcut |
 		anEditorElement addShortcut: (eachShortcut copy 
 			action: [ eachShortcut action cull: anEditorElement ]) ].
-	^ anElement
+
+	^ anEditorElement
 ]
 
 { #category : #accessing }
@@ -246,41 +249,6 @@ GtDocument >> evaluationReceiver [
 GtDocument >> exists [
 	<return: #Boolean>
 	^ self storage exists
-]
-
-{ #category : #accessing }
-GtDocument >> exportToConfluencePage: pageName inSpace: spaceName [
-	| credentials confluence pageId anXdFile aDocument attachments confluenceFile result attachmentsForDocument |
-	credentials := ConfluenceConnection setup.
-	confluence := Gt4ConfluenceAPI  new 
-		credentials: credentials.
-	pageId := confluence findIdOfPageWithTitle: pageName inSpaceWithKey: spaceName.
-	pageId ifNil: [ pageId := confluence createPageWithTitle: pageName withBody: '<p></p>' inSpaceWithKey: spaceName. ].
-	
-	anXdFile := XdWriter new
-		streamingStrategy: XdStreamingStrategy bytes;
-		document: self;
-		documentConfluence: self;
-		write.
-		
-	aDocument := anXdFile manifest documentOfType: XdConfluenceType.
-	attachmentsForDocument := anXdFile manifest attachmentsForDocument: aDocument.
-	
-	confluenceFile := anXdFile streamingStrategy 
-		detectFileReference: [ :eachFileReference | 
-			eachFileReference basename = attachmentsForDocument first fileName ]
-		ifFound: [ :aFileReference | aFileReference ] 
-		ifNone: [ self error: 'File reference must be found' ].
-	result := confluence updatePageWithId: pageId withContent: confluenceFile contents.
-
-	attachments := (anXdFile streamingStrategy fileSystem / GtDocumentConstants exportedResultsDirectoryName) children.
-	confluence deleteAttachmentsForPageWithId: pageId.
-	attachments do: [ :anAttachment |
-		confluence uploadFileFrom: anAttachment forPageWithId: pageId
-	 ].
-	
-	result ifNil: [ self inform: 'Error exporting page' ] ifNotNil: [ self inform: 'Successfully exported page' ].
-	
 ]
 
 { #category : #initialization }
