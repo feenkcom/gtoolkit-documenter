@@ -1687,9 +1687,7 @@ GtDocumentExamples >> resizablePreviewStencilOnMethodAsElement [
 	| aStencil anElement |
 	aStencil := self resizablePreviewStencilOnMethod.
 	anElement := aStencil asElement.
-	self assert: anElement class equals: BlSceneInformingElement.
-	self assert: anElement childrenCount equals: 1.
-	self assert: anElement child class equals: GtCoderElement.
+	self assert: anElement class equals: GtCoderElement.
 	^ anElement
 ]
 

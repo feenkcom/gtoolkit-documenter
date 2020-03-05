@@ -48,29 +48,36 @@ GtDocument >> announcer [
 { #category : #converting }
 GtDocument >> asElement [
 	<return: #BlElement>
-	| anElement aToolbar |
-	anElement := self asElementWithoutSaveAction.
+	| aContainer anEditorElement aToolbar |
+	
+	anEditorElement := self asElementWithoutSaveAction.
 	aToolbar := BlElement new 
 			layout: BlLinearLayout horizontal;
 			constraintsDo: [ :c | 
-				c ignoreByLayout.
 				c vertical fitContent.
 				c horizontal fitContent.
-				c ignored horizontal alignLeft.
-				c ignored vertical alignBottom ].
+				c frame horizontal alignLeft.
+				c frame vertical alignBottom ].
 	self gtActions do: [ :eachAction | 
 		(eachAction target isForViewDefinedIn: #gtTextFor:) ifTrue: [ 
 			eachAction 
 				asElement: [ :anActionElement | aToolbar addChild: anActionElement ]
-				withHostElement: anElement ] ].
-	anElement addChild: aToolbar.
-	^ anElement
+				withHostElement: anEditorElement ] ].
+	
+	aContainer := BlElement new.
+	aContainer layout: BlFrameLayout new.
+	aContainer constraintsDo: [ :c | 
+		c vertical matchParent.
+		c horizontal matchParent. ].
+	aContainer addChildren: { anEditorElement . aToolbar }.
+	
+	^ aContainer
 ]
 
 { #category : #converting }
 GtDocument >> asElementWithoutSaveAction [
 	<return: #BlElement>
-	| anElement anEditorElement |
+	| anEditorElement |
 
 	anEditorElement := BrEditor new
 		text: self editor text;
@@ -78,22 +85,18 @@ GtDocument >> asElementWithoutSaveAction [
 		editor: self editor;
 		look: BrGlamorousRegularEditorLook;
 		matchParent;
-		constraintsDo: [ :c | c padding: (BlInsets all: 10) ].
-
-	anElement := BlSceneInformingElement new
-		layout: BlLinearLayout new;
-		addChild: anEditorElement;
+		constraintsDo: [ :c | c padding: (BlInsets all: 10) ];
 		addEventHandler: (GtAddedToSceneEventHandler new document: self);
-		addEventHandler: (GtRemovedFromSceneEventHandler new document: self);
-		constraintsDo: [ :c |
-			c vertical matchParent.
-			c horizontal matchParent ].
-	anElement userData at: self constants documentUserDataKey put: self.
+		addEventHandler: (GtRemovedFromSceneEventHandler new document: self).
+
+	anEditorElement userData at: self constants documentUserDataKey put: self.
+
 	self installCompleterForEditorElement: anEditorElement.
 	self addOns shortcuts do: [ :eachShortcut |
 		anEditorElement addShortcut: (eachShortcut copy 
 			action: [ eachShortcut action cull: anEditorElement ]) ].
-	^ anElement
+
+	^ anEditorElement
 ]
 
 { #category : #accessing }
