@@ -49,6 +49,49 @@ Class >> gtConfluenceCredentialsForm [
 ]
 
 { #category : #'*GToolkit-Documenter' }
+Class >> gtConfluencePageDetailsForm [
+	| content  labelAndInput page space |
+	labelAndInput := [ :label |
+		{ 
+			BrLabel new look: (BrGlamorousLabelLook new foreground: Color gray);
+				padding: (BlInsets top: 0 right: 20 bottom: 2 left: 0);
+				text: (label asRopedText glamorousRegularFont readonly).
+			BrEditor new 
+				look: BrGlamorousCodeEditorLook;
+				margin: (BlInsets bottom: 1);
+				border: (BlBorder paint: Color gray width: 0.5).
+		}
+	]. 
+	page := labelAndInput value: 'Page:'.
+	space := labelAndInput value: 'Space:'.
+	content := BlElement new
+		layout: (BlGridLayout horizontal columnCount: 2; cellSpacing: 10);
+			constraintsDo: [ :c |
+				c horizontal matchParent .
+				c vertical fitContent ];
+			addChildren: page;
+			addChildren: space.
+			
+	^ BlElement new 
+		constraintsDo: [:c | 
+			c horizontal exact: 300. 
+			c vertical fitContent. ];
+		layout: BlLinearLayout vertical;
+		padding: (BlInsets all: 10);
+		addChild: content;
+		addChild: (
+			BrButton new
+				constraintsDo: [ :c |
+					c linear horizontal alignRight ];
+				margin: (BlInsets top: 10 right: 10 bottom: 0 left: 0);
+				look: BrGlamorousButtonWithIconLook; 
+				icon: BrGlamorousIcons save asElement; 
+				label: 'Save'; 
+				action: [
+		]).
+]
+
+{ #category : #'*GToolkit-Documenter' }
 Class >> gtDocumentFor: aView [
 	<gtView>
 	| aDocument |
