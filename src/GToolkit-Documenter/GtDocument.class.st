@@ -48,9 +48,10 @@ GtDocument >> announcer [
 { #category : #converting }
 GtDocument >> asElement [
 	<return: #BlElement>
-	| aContainer anEditorElement aToolbar |
+	| aDocumentElement aToolbar |
 	
-	anEditorElement := self asElementWithoutSaveAction.
+	aDocumentElement := self asElementWithoutSaveAction.
+
 	aToolbar := BlElement new 
 			layout: BlLinearLayout horizontal;
 			constraintsDo: [ :c | 
@@ -58,45 +59,31 @@ GtDocument >> asElement [
 				c horizontal fitContent.
 				c frame horizontal alignLeft.
 				c frame vertical alignBottom ].
+
 	self gtActions do: [ :eachAction | 
 		(eachAction target isForViewDefinedIn: #gtTextFor:) ifTrue: [ 
 			eachAction 
 				asElement: [ :anActionElement | aToolbar addChild: anActionElement ]
-				withHostElement: anEditorElement ] ].
+				withHostElement: aDocumentElement ] ].
 	
-	aContainer := BlElement new.
-	aContainer layout: BlFrameLayout new.
-	aContainer constraintsDo: [ :c | 
-		c vertical matchParent.
-		c horizontal matchParent. ].
-	aContainer addChildren: { anEditorElement . aToolbar }.
+	aDocumentElement addChild: aToolbar.
 	
-	^ aContainer
+	^ aDocumentElement
 ]
 
 { #category : #converting }
 GtDocument >> asElementWithoutSaveAction [
 	<return: #BlElement>
-	| anEditorElement |
+	| aDocumentElement |
+	
+	aDocumentElement := GtDocumentElement new document: self.
+	aDocumentElement
+		when: BlElementAddedToSceneGraphEvent do: [ self updateAndSubscribeToSystem ];
+		when: BlElementRemovedFromSceneGraphEvent do: [ self unsubscribeFromSystem ].
 
-	anEditorElement := BrEditor new
-		text: self editor text;
-		styler: self editor styler;
-		editor: self editor;
-		look: BrGlamorousRegularEditorLook;
-		matchParent;
-		constraintsDo: [ :c | c padding: (BlInsets all: 10) ];
-		addEventHandler: (GtAddedToSceneEventHandler new document: self);
-		addEventHandler: (GtRemovedFromSceneEventHandler new document: self).
+	aDocumentElement userData at: self constants documentUserDataKey put: self.
 
-	anEditorElement userData at: self constants documentUserDataKey put: self.
-
-	self installCompleterForEditorElement: anEditorElement.
-	self addOns shortcuts do: [ :eachShortcut |
-		anEditorElement addShortcut: (eachShortcut copy 
-			action: [ eachShortcut action cull: anEditorElement ]) ].
-
-	^ anEditorElement
+	^ aDocumentElement
 ]
 
 { #category : #accessing }

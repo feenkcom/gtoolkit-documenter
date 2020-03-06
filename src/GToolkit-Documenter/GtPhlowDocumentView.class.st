@@ -14,8 +14,7 @@ GtPhlowDocumentView >> asElementDo: aBlock [
 	anElement := aDocument asElementWithoutSaveAction.
 	aText := (self textBuilder glamourValueWithArgs: { anElement. aDocument }) asRopedText.
 	aDocument text: aText.
-	^ aBlock value: anElement.
-	
+	^ aBlock value: anElement
 ]
 
 { #category : #initialization }
