@@ -301,6 +301,7 @@ GtDocument >> gtSaveActionFor: anAction [
 	<gtAction>
 	^ anAction button
 		icon: self constants saveButtonIcon asElement;
+		label: 'Save' translated;
 		forViewDefinedIn: #gtTextFor:;
 		priority: 1;
 		action: [ self store ]
