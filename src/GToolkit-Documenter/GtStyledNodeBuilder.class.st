@@ -317,7 +317,10 @@ GtStyledNodeBuilder >> linkButton [
 							margin: (BlInsets top: -1 left: 0 bottom: 0 right: 0);
 							label: eachLabel;
 							action: self properties action ]
-					shareEvents: { BlMouseOverEvent. BlMouseOutEvent. BlMouseDownEvent. BlMouseUpEvent. BlClickEvent }.
+					shareEvents: {
+						BlMouseEnterEvent. BlMouseLeaveEvent.
+						BlMouseDownEvent. BlMouseUpEvent. BlClickEvent.
+						BlDragEnterEvent . BlDragLeaveEvent. BlDragEndEvent . BlDragStartEvent }.
 				anElements size > 1 
 					ifTrue: [ 
 						anElements first margin: (BlInsets top: -1 left: 3 bottom: 0 right: 0).
