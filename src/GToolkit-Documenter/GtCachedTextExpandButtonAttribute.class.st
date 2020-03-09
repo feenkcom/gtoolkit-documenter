@@ -10,7 +10,7 @@ Class {
 { #category : #accessing }
 GtCachedTextExpandButtonAttribute >> affect: aTBrTextEditorTextualPiece in: anEditorElement [
 	^ (super affect: aTBrTextEditorTextualPiece in: anEditorElement)
-		margin: (BlInsets top: 3 right: 5 bottom: 0 left: 5)
+		margin: (BlInsets top: 3 right: 0 bottom: 0 left: 0)
 ]
 
 { #category : #initialization }
