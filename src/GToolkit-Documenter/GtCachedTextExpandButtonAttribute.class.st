@@ -7,12 +7,6 @@ Class {
 	#category : #'GToolkit-Documenter-Text - Attributes'
 }
 
-{ #category : #accessing }
-GtCachedTextExpandButtonAttribute >> affect: aTBrTextEditorTextualPiece in: anEditorElement [
-	^ (super affect: aTBrTextEditorTextualPiece in: anEditorElement)
-		margin: (BlInsets top: 3 right: 0 bottom: 0 left: 0)
-]
-
 { #category : #initialization }
 GtCachedTextExpandButtonAttribute >> initialize [
 	super initialize.
