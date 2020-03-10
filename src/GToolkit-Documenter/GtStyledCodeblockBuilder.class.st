@@ -17,8 +17,7 @@ GtStyledCodeblockBuilder >> embedResult [
 			result: aResult;
 			action: [ 
 				self node cachedDisplayPreview: true.
-				self document styleTextRequest ];
-			paint: (Color fromHexString: #'90CAF9'))
+				self document styleTextRequest ])
 ]
 
 { #category : #'accessing - node' }
