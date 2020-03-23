@@ -22,6 +22,11 @@ PRInputFileAnnotation >> browseReferenceFrom: anEvent [
 ]
 
 { #category : #'*GToolkit-Documenter' }
+PRInputFileAnnotation class >> constants [
+	^ GtDocumentConstants
+]
+
+{ #category : #'*GToolkit-Documenter' }
 PRInputFileAnnotation >> defaultShowSelector [
 	^ GtDocumentConstants defaultShowSelector
 ]
@@ -55,6 +60,14 @@ PRInputFileAnnotation >> fileReference [
 							aFile exists ifTrue: [ aFile ] ifFalse: [ nil ] ] ]
 				emptyValue: [ nil ] 
 				defaultValue: [ nil ] ]
+]
+
+{ #category : #'*GToolkit-Documenter' }
+PRInputFileAnnotation class >> gtDocumenterParameters [
+	^ {
+		#path.
+		self constants alignmentParameterName.
+	}.
 ]
 
 { #category : #'*GToolkit-Documenter' }

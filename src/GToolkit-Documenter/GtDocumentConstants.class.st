@@ -11,7 +11,7 @@ GtDocumentConstants class >> alignmentParameterName [
 
 { #category : #'pillar parameter default values' }
 GtDocumentConstants class >> alignmentTypes [
-	^ #('paragraphWidth' 'pageWidth' 'fullWidth')   
+	^ #('paragraphWidth' 'documentWidth' 'fullWidth')
 ]
 
 { #category : #ui }

@@ -67,6 +67,11 @@ PRFigure >> clearActions [
 ]
 
 { #category : #'*GToolkit-Documenter' }
+PRFigure class >> constants [
+	^ GtDocumentConstants
+]
+
+{ #category : #'*GToolkit-Documenter' }
 PRFigure >> doesReferenceExist [
 	^ self figureFileReference ifNil: false ifNotNil: #exists
 ]
@@ -97,6 +102,14 @@ PRFigure >> figureFileReference [
 						ifTrue: [ anIcebergFile ] 
 						ifFalse: [ aFileReference ] ]
 		]
+]
+
+{ #category : #'*GToolkit-Documenter' }
+PRFigure class >> gtDocumenterParameters [
+	^ {
+		#value.
+		self constants alignmentParameterName.
+	}.
 ]
 
 { #category : #'*GToolkit-Documenter' }
