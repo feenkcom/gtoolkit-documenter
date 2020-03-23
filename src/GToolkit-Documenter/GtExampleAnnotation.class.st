@@ -23,6 +23,7 @@ GtExampleAnnotation class >> possibleParameters [
 		self constants previewHeightParameterName.
 		self constants previewExpandedParameterName.
 		self constants previewShowParameterName.
+		self constants alignmentParameterName.
 		"assign example result to a variable name"
 		self constants returnVariableParameterName.
 		}
