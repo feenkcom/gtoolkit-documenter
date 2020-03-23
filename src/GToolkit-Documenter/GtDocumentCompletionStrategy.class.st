@@ -438,7 +438,7 @@ GtDocumentCompletionStrategy >> parameterValueActionsForClass: class name: param
 GtDocumentCompletionStrategy >> parametersStartingWith: aString delete: anInteger includeDefaultValues: aBoolean [
 	self annotationClass
 		ifNotNil: [ :class | 
-			^ ((class possibleParameters select: [ :each | aString isEmpty or: [ each beginsWith: aString ] ])
+			^ ((class gtDocumenterParameters select: [ :each | aString isEmpty or: [ each beginsWith: aString ] ])
 				collect: [ :each | 
 					self
 						complete: each , '='
