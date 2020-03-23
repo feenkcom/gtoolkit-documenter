@@ -4,6 +4,16 @@ Class {
 	#category : #'GToolkit-Documenter-Utility'
 }
 
+{ #category : #'pillar parameter names' }
+GtDocumentConstants class >> alignmentParameterName [
+	^ #alignment
+]
+
+{ #category : #'pillar parameter default values' }
+GtDocumentConstants class >> alignmentTypes [
+	^ #('paragraphWidth' 'pageWidth' 'fullWidth')   
+]
+
 { #category : #ui }
 GtDocumentConstants class >> applyButtonIcon [
 	^ BrGlamorousIcons accept
@@ -62,6 +72,11 @@ GtDocumentConstants class >> createButtonLabel [
 { #category : #text }
 GtDocumentConstants class >> cursorNearbyDistance [
 	^ 0
+]
+
+{ #category : #'pillar parameter default values' }
+GtDocumentConstants class >> defaultAlignment [
+	^ 'paragraphWidth'   
 ]
 
 { #category : #'pillar parameter default values' }
