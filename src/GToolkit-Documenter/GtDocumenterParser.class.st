@@ -36,7 +36,8 @@ GtDocumenterParser >> annotatedParagraph [
 { #category : #'grammar - Annotation' }
 GtDocumenterParser >> annotation [
 	^ super annotation ==> [ :array | 
-			(array third withParameters: (array fourth ifNil: [ PRParameters new ]))
+			self flag: 'This is specific change for Documenter'.
+			(array third gtWithParameters: (array fourth ifNil: [ PRParameters new ]))
 				start: array first start;
 				stop: array sixth stop ]
 ]

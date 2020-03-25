@@ -23,6 +23,7 @@ GtExampleAnnotation class >> possibleParameters [
 		self constants previewHeightParameterName.
 		self constants previewExpandedParameterName.
 		self constants previewShowParameterName.
+		self constants alignmentParameterName.
 		"assign example result to a variable name"
 		self constants returnVariableParameterName.
 		}
@@ -36,6 +37,18 @@ GtExampleAnnotation class >> tag [
 { #category : #visitor }
 GtExampleAnnotation >> accept: aVisitor [
 	^ aVisitor visitGt2ExampleAnnotation: self
+]
+
+{ #category : #'as yet unclassified' }
+GtExampleAnnotation >> alignmentParameterValue [
+	^ GtDocumentUtility
+			valueOf: GtDocumentConstants alignmentParameterName
+			in: self parameters
+			value: [ :anAlignment | (GtDocumentConstants alignmentTypes includes: anAlignment) 
+				ifTrue: [ anAlignment ]
+				ifFalse: [ GtDocumentConstants defaultAlignment ] ]
+			emptyValue: [ GtDocumentConstants defaultAlignment ]
+			defaultValue: [ GtDocumentConstants defaultAlignment ]
 ]
 
 { #category : #'private - cache' }
@@ -182,6 +195,18 @@ GtExampleAnnotation >> hasCaption [
 GtExampleAnnotation >> hasLabel [
 	<compatibility>
 	^ false
+]
+
+{ #category : #testing }
+GtExampleAnnotation >> isAlignmentParameterValueDefined [
+	"Return true if an alignment parameter is properly defined"
+	<return: #Boolean>
+	^ self utility 
+		valueOf: self constants alignmentParameterName 
+		in: self parameters
+		value: [ :aSymbol | true ]
+		emptyValue: [ false ]
+		defaultValue: [ false ].
 ]
 
 { #category : #testing }

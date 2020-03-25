@@ -1,12 +1,29 @@
 Extension { #name : #PRInputFileAnnotation }
 
 { #category : #'*GToolkit-Documenter' }
+PRInputFileAnnotation >> alignmentParameterValue [
+	^ GtDocumentUtility
+			valueOf: GtDocumentConstants alignmentParameterName
+			in: self parameters
+			value: [ :anAlignment | (GtDocumentConstants alignmentTypes includes: anAlignment) 
+				ifTrue: [ anAlignment ]
+				ifFalse: [ GtDocumentConstants defaultAlignment ] ]
+			emptyValue: [ GtDocumentConstants defaultAlignment ]
+			defaultValue: [ GtDocumentConstants defaultAlignment ]
+]
+
+{ #category : #'*GToolkit-Documenter' }
 PRInputFileAnnotation >> browseReferenceFrom: anEvent [
 	anEvent modifiers isShift ifTrue: [ ^ self ].
 	self doesReferenceExist ifFalse: [ ^ self inform: 'Input file does not exist' ].
 	anEvent target fireEvent: (GtPhlowObjectToSpawn new 
 		object: self fileReference;
 		sourceElement: anEvent target)
+]
+
+{ #category : #'*GToolkit-Documenter' }
+PRInputFileAnnotation class >> constants [
+	^ GtDocumentConstants
 ]
 
 { #category : #'*GToolkit-Documenter' }
@@ -43,6 +60,14 @@ PRInputFileAnnotation >> fileReference [
 							aFile exists ifTrue: [ aFile ] ifFalse: [ nil ] ] ]
 				emptyValue: [ nil ] 
 				defaultValue: [ nil ] ]
+]
+
+{ #category : #'*GToolkit-Documenter' }
+PRInputFileAnnotation class >> gtDocumenterParameters [
+	^ {
+		#path.
+		self constants alignmentParameterName.
+	}.
 ]
 
 { #category : #'*GToolkit-Documenter' }

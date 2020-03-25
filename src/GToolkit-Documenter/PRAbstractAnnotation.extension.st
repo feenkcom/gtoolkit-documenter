@@ -74,6 +74,46 @@ PRAbstractAnnotation >> expandedParameterValue [
 ]
 
 { #category : #'*GToolkit-Documenter' }
+PRAbstractAnnotation class >> gtDocumenterParameters [
+	(self canUnderstand: #gtDocumenterParameters) 
+		ifTrue: [ ^ self gtDocumenterParameters ] 
+		ifFalse: [ ^ self possibleParameters ].
+]
+
+{ #category : #'*GToolkit-Documenter' }
+PRAbstractAnnotation class >> gtValidateParameters: aPRParameters dictionary: parametersDictionary in: anAnnotation [
+	| usedKeys |
+	usedKeys := parametersDictionary keys.
+	usedKeys isEmpty
+		and: [ self hasParameters
+				ifTrue: [ PRValidation strategy missingAnnotationParametersIn: anAnnotation ] ].
+	(usedKeys
+		allSatisfy: [ :each | self gtDocumenterParameters includes: each asSymbol ])
+		ifFalse: [ PRValidation strategy
+				invalidParameterNames: (usedKeys difference: self gtDocumenterParameters)
+				forAnnotation: anAnnotation
+				withParameters: aPRParameters ].
+	self hasParameters not
+		and: [ usedKeys isNotEmpty
+				ifTrue: [ PRValidation strategy unexpectedParameterIn: anAnnotation ] ]
+]
+
+{ #category : #'*GToolkit-Documenter' }
+PRAbstractAnnotation class >> gtWithParameters: aPRParameters [
+	| parameters anInstance |
+	anInstance := self with: aPRParameters.
+	PRParserUtility fixFirstParameter: aPRParameters for: anInstance.
+	parameters := PRParametersToOrderedDictionary of: aPRParameters.
+	self gtValidateParameters: aPRParameters dictionary: parameters in: anInstance.
+	^ anInstance
+		hadAllKeys:
+			(self gtDocumenterParameters
+				difference: (parameters keys collect: #asSymbol)) isEmpty;
+		parameters: parameters;
+		yourself
+]
+
+{ #category : #'*GToolkit-Documenter' }
 PRAbstractAnnotation >> styleTextWithMarkup: aBlRope [
 	"Subclasses can add more styling"
 	super styleTextWithMarkup: aBlRope.

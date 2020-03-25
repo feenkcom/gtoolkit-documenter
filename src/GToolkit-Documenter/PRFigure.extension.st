@@ -11,6 +11,18 @@ PRFigure >> addClearAction: aValuable [
 ]
 
 { #category : #'*GToolkit-Documenter' }
+PRFigure >> alignmentParameterValue [
+	^ GtDocumentUtility
+			valueOf: GtDocumentConstants alignmentParameterName
+			in: self parameters
+			value: [ :anAlignment | (GtDocumentConstants alignmentTypes includes: anAlignment) 
+				ifTrue: [ anAlignment ]
+				ifFalse: [ GtDocumentConstants defaultAlignment ] ]
+			emptyValue: [ GtDocumentConstants defaultAlignment ]
+			defaultValue: [ GtDocumentConstants defaultAlignment ]
+]
+
+{ #category : #'*GToolkit-Documenter' }
 PRFigure >> cacheKey [
 	^ GtFigureCacheKey new
 		fileName: self figureFileReference;
@@ -67,6 +79,11 @@ PRFigure >> clearActions [
 ]
 
 { #category : #'*GToolkit-Documenter' }
+PRFigure class >> constants [
+	^ GtDocumentConstants
+]
+
+{ #category : #'*GToolkit-Documenter' }
 PRFigure >> doesReferenceExist [
 	^ self figureFileReference ifNil: false ifNotNil: #exists
 ]
@@ -97,6 +114,14 @@ PRFigure >> figureFileReference [
 						ifTrue: [ anIcebergFile ] 
 						ifFalse: [ aFileReference ] ]
 		]
+]
+
+{ #category : #'*GToolkit-Documenter' }
+PRFigure class >> gtDocumenterParameters [
+	^ {
+		#value.
+		self constants alignmentParameterName.
+	}.
 ]
 
 { #category : #'*GToolkit-Documenter' }
