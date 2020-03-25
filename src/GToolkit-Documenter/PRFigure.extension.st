@@ -11,6 +11,18 @@ PRFigure >> addClearAction: aValuable [
 ]
 
 { #category : #'*GToolkit-Documenter' }
+PRFigure >> alignmentParameterValue [
+	^ GtDocumentUtility
+			valueOf: GtDocumentConstants alignmentParameterName
+			in: self parameters
+			value: [ :anAlignment | (GtDocumentConstants alignmentTypes includes: anAlignment) 
+				ifTrue: [ anAlignment ]
+				ifFalse: [ GtDocumentConstants defaultAlignment ] ]
+			emptyValue: [ GtDocumentConstants defaultAlignment ]
+			defaultValue: [ GtDocumentConstants defaultAlignment ]
+]
+
+{ #category : #'*GToolkit-Documenter' }
 PRFigure >> cacheKey [
 	^ GtFigureCacheKey new
 		fileName: self figureFileReference;

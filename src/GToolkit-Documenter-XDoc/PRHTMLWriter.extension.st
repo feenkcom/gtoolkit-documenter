@@ -4,7 +4,7 @@ Extension { #name : #PRHTMLWriter }
 PRHTMLWriter >> gtWriteExampleCode: aGt2ExampleAnnotation [ 
 	canvas tag
 		name: 'figure';
-		parameterAt: 'class' put: 'codeBlock gtexample-src';
+		parameterAt: 'class' put: 'codeBlock gtexample-src ', aGt2ExampleAnnotation alignmentParameterValue;
 		with: [ 
 					canvas tag
 						name: 'pre';
@@ -39,7 +39,8 @@ PRHTMLWriter >> gtWriteExampleResult: aGt2ExampleAnnotation [
 	aFigure add: (PRText content: 'Result of ' , aGt2ExampleAnnotation methodName).
 	aFigureReference := self configuration gtDataWriter exampleResultReferenceFor: aGt2ExampleAnnotation.
 	aFigure reference: aFigureReference.
-	aGt2ExampleAnnotation parameters at: #previewHeight ifPresent: [:value | aFigure parameterAt: #height put: value].
+	aFigure parameterAt: GtDocumentConstants alignmentParameterName put: aGt2ExampleAnnotation alignmentParameterValue.
+	aFigure parameterAt: GtDocumentConstants heightParameterName put: aGt2ExampleAnnotation previewHeight.
 	self visitFigure: aFigure.
 ]
 
