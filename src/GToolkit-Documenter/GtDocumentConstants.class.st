@@ -11,7 +11,7 @@ GtDocumentConstants class >> alignmentParameterName [
 
 { #category : #'pillar parameter default values' }
 GtDocumentConstants class >> alignmentTypes [
-	^ #('paragraphWidth' 'documentWidth' 'fullWidth')
+	^ AlignmentStrategy allSubclasses collect: #strategyName
 ]
 
 { #category : #ui }
@@ -76,7 +76,7 @@ GtDocumentConstants class >> cursorNearbyDistance [
 
 { #category : #'pillar parameter default values' }
 GtDocumentConstants class >> defaultAlignment [
-	^ 'paragraphWidth'   
+	^ ParagraphWidthAlignmentStrategy strategyName.
 ]
 
 { #category : #'pillar parameter default values' }
