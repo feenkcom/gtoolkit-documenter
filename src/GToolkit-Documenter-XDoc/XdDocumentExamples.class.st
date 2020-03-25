@@ -47,7 +47,7 @@ XdDocumentExamples >> inMemoryWriter [
 XdDocumentExamples >> initialize [
 	super initialize.
 	documentExamples := GtDocumentExamples new.
-	xdocExamples := XdReaderWriterExamples new.
+	xdocExamples := XdExamples new.
 ]
 
 { #category : #options }

@@ -18,6 +18,15 @@ XdDocumenterType class >> mainDocument: aXdDocument ofXdFileInPharo: aXdFile [
 	self
 		assert: [ aXdFile exists ] 
 		description: [ 'XDoc file must exist' ].
+	self flag: 'XDoc API proposeal [feenkcom/gtoolkit#888]'.
+	"^ aXdFile navigator
+		onErrorReturnNil;
+		document: aXdDocument;
+		mainAttachment;
+		string;
+		as: [ :aString | GtDocument new text: aString ]
+		find."
+		
 	aFileSystem := FileSystem zip: aXdFile streamingStrategy.
 	aFileSystem open.
 	theAttachments := aXdFile manifest attachmentsForDocument: aXdDocument.
