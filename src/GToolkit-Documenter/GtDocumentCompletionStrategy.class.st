@@ -12,7 +12,8 @@ Class {
 		'tagName',
 		'exampleClasses',
 		'allClasses',
-		'gtViewSelectors'
+		'gtViewSelectors',
+		'allAlignments'
 	],
 	#classVars : [
 		'ParameterValueCompletionSelectors'
@@ -44,6 +45,7 @@ GtDocumentCompletionStrategy class >> initialize [
 			(Dictionary new
 				at: self constants nameParameterName put: #exampleMethodsStartingWith:;
 				at: self constants previewShowParameterName put: #examplePreviewShowMethodsStartingWith:;
+				at: self constants alignmentParameterName put: #alignmentValueStartingWith:;
 				yourself);
 		at: GtMethodAnnotation
 			put:
@@ -61,6 +63,26 @@ GtDocumentCompletionStrategy class >> initialize [
 				at: self constants pathParameterName put: #filenamesStartingWith:;
 				yourself)
 		
+]
+
+{ #category : #private }
+GtDocumentCompletionStrategy >> alignmentValueStartingWith: aString [
+	| aName |
+	self traceCr: aString.
+	aName := aString asString.
+	^ (self allAlignmentValues first: max startingWith: aName)
+		collect: [ :each | 
+			self
+				complete: each
+				with: (each allButFirst: aName size)
+				deleting: 0
+				at: position
+				prefixSize: aName size ]
+]
+
+{ #category : #accessing }
+GtDocumentCompletionStrategy >> allAlignmentValues [
+	^ allAlignments ifNil: [ allAlignments := GtPrefixTree withAll: (AlignmentStrategy allSubclasses collect: [ :each | each strategyName ]) ]
 ]
 
 { #category : #private }
