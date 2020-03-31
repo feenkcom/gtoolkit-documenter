@@ -16,7 +16,10 @@ GtDocument >> publishXDocWithInfo: aXdPublishInfo [
 		authorName: aXdPublishInfo author asString;
 		description: aXdPublishInfo description asString;
 		write.
-	XdClient new publish: anXdFile
+	XdClient new 
+		username: aXdPublishInfo username
+			password: aXdPublishInfo password;
+		publish: anXdFile
 ]
 
 { #category : #'*GToolkit-Documenter-XDoc' }
