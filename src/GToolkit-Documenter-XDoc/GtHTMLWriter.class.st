@@ -39,7 +39,6 @@ GtHTMLWriter >> visitFigure: aFigure [
 	canvas newLine.
 	canvas tag
 		name: 'figure';
-		parameterAt: 'class' put: aFigure alignmentParameterValue;
 		with:
 				[ 
 			canvas newLine.
