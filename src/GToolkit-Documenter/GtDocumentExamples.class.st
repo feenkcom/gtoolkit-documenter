@@ -318,7 +318,8 @@ GtDocumentExamples >> contentWithExampleParameters [
 		'|', self constants previewExpandedParameterName, '=', true asString,
 		'|', self constants previewHeightParameterName, '=', 100 asString,
 		'|', self constants codeExpandedParameterName, '=', false asString, 
-		'|', self constants codeHeightParameterName, '=', 50 asString, '}$'
+		'|', self constants codeHeightParameterName, '=', 50 asString,
+		'|', self constants alignmentParameterName , '=', FullWidthAlignmentStrategy strategyName, '}$'
 ]
 
 { #category : #examples }
