@@ -26,7 +26,7 @@ GtExamplesStatusLabelAttribute >> affect: aTBrTextEditorTextualPiece in: anEdito
 	anElement margin: (BlInsets left: 5);
 		padding:
 			(BlInsets
-				top: 4
+				top: 1
 				left: 0
 				bottom: 0
 				right: 0).
