@@ -17,8 +17,8 @@ GtDocument >> publishXDocWithInfo: aXdPublishInfo [
 		description: aXdPublishInfo description asString;
 		write.
 	XdClient new 
-		username: aXdPublishInfo username
-			password: aXdPublishInfo password;
+		username: aXdPublishInfo username asString
+			password: aXdPublishInfo password asString;
 		publish: anXdFile
 ]
 
