@@ -169,7 +169,7 @@ PRFigure >> styleTextWithMarkup: aBlRope [
 	(self gtNodeStyler: aBlRope)
 		if: self doesReferenceExist
 			do: [ :aStyler | aStyler 
-				icon: BrGlamorousIcons inspect; 
+				icon: BrGlamorousVectorIcons inspect; 
 				spawnObject: [ self figureFileReference ];
 				iconButton ].
 	self utility styleExpandingPreviewInText: aBlRope forNode: self
@@ -193,7 +193,7 @@ PRFigure >> styleTextWithoutMarkup: aBlRope [
 				revealAction: [ :sameStyler | sameStyler
 					if: self doesReferenceExist
 						do: [ sameStyler 
-							icon: BrGlamorousIcons inspect; 
+							icon: BrGlamorousVectorIcons inspect; 
 							spawnObject: [ self figureFileReference ];
 							clearIt;
 							iconButton ] ].

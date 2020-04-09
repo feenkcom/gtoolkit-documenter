@@ -55,7 +55,7 @@ GtButtonStencil >> icon: aStencilBuilder [
 GtButtonStencil >> initialize [
 	super initialize.
 
-	self icon: BrGlamorousIcons playinspect.
+	self icon: BrGlamorousVectorIcons playinspect.
 "	self label: 'Run'."
 	self action: [ :aWidget :aButtonModel | self inform: 'Executed' ]
 ]

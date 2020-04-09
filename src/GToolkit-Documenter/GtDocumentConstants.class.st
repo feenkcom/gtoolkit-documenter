@@ -16,7 +16,7 @@ GtDocumentConstants class >> alignmentTypes [
 
 { #category : #ui }
 GtDocumentConstants class >> applyButtonIcon [
-	^ BrGlamorousIcons accept
+	^ BrGlamorousVectorIcons accept
 ]
 
 { #category : #ui }
@@ -243,7 +243,7 @@ GtDocumentConstants class >> icebergRepositoriesLocation [
 
 { #category : #ui }
 GtDocumentConstants class >> infoButtonIcon [
-	^ BrGlamorousIcons inspect
+	^ BrGlamorousVectorIcons inspect
 ]
 
 { #category : #'pillar parameter names' }
@@ -397,7 +397,7 @@ GtDocumentConstants class >> returnVariableParameterName [
 
 { #category : #ui }
 GtDocumentConstants class >> runButtonIcon [
-	^ BrGlamorousIcons play
+	^ BrGlamorousVectorIcons play
 ]
 
 { #category : #ui }

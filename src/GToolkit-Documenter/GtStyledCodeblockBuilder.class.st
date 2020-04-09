@@ -53,7 +53,7 @@ GtStyledCodeblockBuilder >> playButton [
 				look: BrGlamorousButtonWithIconLook;
 				beSmall;
 				margin: (BlInsets left: 3 right: 3);
-				icon: BrGlamorousIcons play asElement;
+				icon: BrGlamorousVectorIcons play;
 				action: self properties action ])
 ]
 
