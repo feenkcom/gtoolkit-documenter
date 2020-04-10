@@ -41,7 +41,7 @@ GtButtonStencilBuilder >> icon: anObject [
 GtButtonStencilBuilder >> initialize [
 	super initialize.
 	label := 'Button'.
-	icon := BrGlamorousIcons play.
+	icon := BrGlamorousVectorIcons play.
 	action := [ :aWidget :aButtonModel | self inform: 'Action!' ]
 ]
 
