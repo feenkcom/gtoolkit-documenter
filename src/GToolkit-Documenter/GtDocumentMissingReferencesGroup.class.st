@@ -39,3 +39,8 @@ GtDocumentMissingReferencesGroup >> initialize [
 GtDocumentMissingReferencesGroup >> isEmpty [
 	^ missingReferences isEmpty
 ]
+
+{ #category : #accessing }
+GtDocumentMissingReferencesGroup >> size [
+	^ missingReferences size
+]

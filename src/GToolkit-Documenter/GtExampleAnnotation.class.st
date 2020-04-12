@@ -39,7 +39,7 @@ GtExampleAnnotation >> accept: aVisitor [
 	^ aVisitor visitGt2ExampleAnnotation: self
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - parameter values' }
 GtExampleAnnotation >> alignmentParameterValue [
 	^ GtDocumentUtility
 			valueOf: GtDocumentConstants alignmentParameterName
@@ -212,7 +212,10 @@ GtExampleAnnotation >> isAlignmentParameterValueDefined [
 { #category : #testing }
 GtExampleAnnotation >> isExampleDefined [
 	"Return true if an example method is defined in the system"
-	^ self referencedExample notNil and: [ self referencedExample isDefined ]
+	^ self referencedExample notNil and: [ 
+		self referencedExample isDefined and: [
+			self referencedExample compiledMethod isNotNil and: [ 
+				self referencedExample compiledMethod gtExample isNotNil ] ] ]
 ]
 
 { #category : #testing }
