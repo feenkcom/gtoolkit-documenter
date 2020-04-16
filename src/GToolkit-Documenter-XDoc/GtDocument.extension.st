@@ -1,6 +1,14 @@
 Extension { #name : #GtDocument }
 
 { #category : #'*GToolkit-Documenter-XDoc' }
+GtDocument >> deleteXDocWithInformation: aXdShareInformation [
+	XdClient new 
+		username: aXdShareInformation username asString
+		password: aXdShareInformation password asString;
+		deleteUrl: aXdShareInformation publicUrl asString.
+]
+
+{ #category : #'*GToolkit-Documenter-XDoc' }
 GtDocument >> publishXDoc [
 	XdClient new publish: self saveToXDoc
 ]
@@ -23,6 +31,23 @@ GtDocument >> publishXDocWithInfo: aXdPublishInfo [
 ]
 
 { #category : #'*GToolkit-Documenter-XDoc' }
+GtDocument >> publishXDocWithInformation: aXdShareInformation [
+	| anXdFile |
+	anXdFile := XdWriter new
+		streamingStrategy: XdStreamingStrategy bytes;
+		document: self;
+		documentHtml: self;
+		title: aXdShareInformation title asString;
+		authorName: aXdShareInformation author asString;
+		description: aXdShareInformation description asString;
+		write.
+	XdClient new 
+		username: aXdShareInformation username asString
+			password: aXdShareInformation password asString;
+		publish: anXdFile
+]
+
+{ #category : #'*GToolkit-Documenter-XDoc' }
 GtDocument >> saveToXDoc [
 	<return: #XdFile>
 	^ XdWriter new
@@ -30,4 +55,21 @@ GtDocument >> saveToXDoc [
 		document: self;
 		documentHtml: self;
 		write.
+]
+
+{ #category : #'*GToolkit-Documenter-XDoc' }
+GtDocument >> updateXDocWithInformation: aXdShareInformation [
+	| anXdFile |
+	anXdFile := XdWriter new
+		streamingStrategy: XdStreamingStrategy bytes;
+		document: self;
+		documentHtml: self;
+		title: aXdShareInformation title asString;
+		authorName: aXdShareInformation author asString;
+		description: aXdShareInformation description asString;
+		write.
+	XdClient new 
+		username: aXdShareInformation username asString
+		password: aXdShareInformation password asString;
+		update: anXdFile url: aXdShareInformation publicUrl asString.
 ]
