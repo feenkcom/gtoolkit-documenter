@@ -2,7 +2,7 @@ Extension { #name : #GtDocument }
 
 { #category : #'*GToolkit-Documenter-XDoc' }
 GtDocument >> deleteXDocWithInformation: aXdShareInformation [
-	XdClient new 
+	^ XdClient new 
 		username: aXdShareInformation username asString
 		password: aXdShareInformation password asString;
 		deleteUrl: aXdShareInformation publicUrl asString.
@@ -41,7 +41,7 @@ GtDocument >> publishXDocWithInformation: aXdShareInformation [
 		authorName: aXdShareInformation author asString;
 		description: aXdShareInformation description asString;
 		write.
-	XdClient new 
+	^ XdClient new 
 		username: aXdShareInformation username asString
 			password: aXdShareInformation password asString;
 		publish: anXdFile
@@ -68,7 +68,7 @@ GtDocument >> updateXDocWithInformation: aXdShareInformation [
 		authorName: aXdShareInformation author asString;
 		description: aXdShareInformation description asString;
 		write.
-	XdClient new 
+	^ XdClient new 
 		username: aXdShareInformation username asString
 		password: aXdShareInformation password asString;
 		update: anXdFile url: aXdShareInformation publicUrl asString.
