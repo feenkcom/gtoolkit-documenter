@@ -8,12 +8,12 @@ Class {
 		'annotationTags',
 		'max',
 		'position',
-		'string',
 		'tagName',
 		'exampleClasses',
 		'allClasses',
 		'gtViewSelectors',
-		'allAlignments'
+		'allAlignments',
+		'text'
 	],
 	#classVars : [
 		'ParameterValueCompletionSelectors'
@@ -39,6 +39,7 @@ GtDocumentCompletionStrategy class >> initialize [
 			put:
 			(Dictionary new
 				at: self constants nameParameterName put: #classesStartingWith:;
+				at: self constants showParameterName put: #examplePreviewShowMethodsStartingWith:;
 				yourself);
 		at: GtExampleAnnotation
 			put:
@@ -51,16 +52,19 @@ GtDocumentCompletionStrategy class >> initialize [
 			put:
 			(Dictionary new
 				at: self constants nameParameterName put: #methodsStartingWith:;
+				at: self constants showParameterName put: #examplePreviewShowMethodsStartingWith:;
 				yourself);
 		at: GtIcebergFileAnnotation
 			put:
 			(Dictionary new
 				at: self constants pathParameterName put: #icebergFilenamesStartingWith:;
+				at: self constants showParameterName put: #examplePreviewShowMethodsStartingWith:;
 				yourself);
 		at: PRInputFileAnnotation
 			put:
 			(Dictionary new
 				at: self constants pathParameterName put: #filenamesStartingWith:;
+				at: self constants showParameterName put: #examplePreviewShowMethodsStartingWith:;
 				yourself)
 		
 ]
@@ -68,7 +72,6 @@ GtDocumentCompletionStrategy class >> initialize [
 { #category : #private }
 GtDocumentCompletionStrategy >> alignmentValueStartingWith: aString [
 	| aName |
-	self traceCr: aString.
 	aName := aString asString.
 	^ (self allAlignmentValues first: max startingWith: aName)
 		collect: [ :each | 
@@ -133,9 +136,9 @@ GtDocumentCompletionStrategy >> annotationParameterActionsFor: parameterString s
 			| name value nameWithoutEquals hasEquals |
 			name := parts first.
 			value := parts last.
-			name isNil
-				ifTrue: [ name := value.
-					value := '' ].
+			name ifNil: [ 
+				name := value.
+				value := '' ].
 			nameWithoutEquals := name copyWithout: $=.
 			hasEquals := name ~= nameWithoutEquals.
 			^ (position between: parameterStart and: parameterStart + nameWithoutEquals size - 1)
@@ -160,7 +163,7 @@ GtDocumentCompletionStrategy >> annotationParametersActionsFor: parametersString
 		do: [ :each | 
 			(position between: each first + parametersStart and: each last + parametersStart)
 				ifTrue: [ ^ self annotationParameterActionsFor: (parametersString copyFrom: each first to: each last) startAt: parametersStart + each first ] ].
-	char := string at: position.
+	char := text at: position.
 	(':|' includes: char)
 		ifTrue: [ ^ self parametersStartingWith: '' delete: 0 includeDefaultValues: true ].
 	^ #()
@@ -220,17 +223,17 @@ GtDocumentCompletionStrategy >> completionActionsFor: aText at: positionInteger 
 		ifTrue: [ ^ #() ].
 	position := positionInteger.
 	max := maxSize.
-	string := aText asString.
-	(self annotationRegex matchingRangesIn: string)
+	text := aText characters.
+	(self annotationRegex matchingRangesIn: text)
 		do: [ :each | 
 			(positionInteger between: each first and: each last)
-				ifTrue: [ ^ self annotationActionsIn: (string copyFrom: each first to: each last) startAt: each first ] ].
-	(self fileRegex matchingRangesIn: string)
+				ifTrue: [ ^ self annotationActionsIn: (text copyFrom: each first to: each last) asString startAt: each first ] ].
+	(self fileRegex matchingRangesIn: text)
 		do: [ :each | 
 			(positionInteger between: each first and: each last)
-				ifTrue: [ ^ self fileReferenceActionsIn: (string copyFrom: each first to: each last) ] ].
-	(self scriptCompletionsFor: string at: positionInteger) ifNotNil: [ :completions | ^ completions ].
-	((string at: positionInteger) = $$ and: [ positionInteger = 1 or: [ (string at: positionInteger - 1) ~= $} ] ])
+				ifTrue: [ ^ self fileReferenceActionsIn: (text copyFrom: each first to: each last) asString ] ].
+	(self scriptCompletionsFor: text at: positionInteger) ifNotNil: [ :completions | ^ completions ].
+	((text at: positionInteger) = $$ and: [ positionInteger = 1 or: [ (text at: positionInteger - 1) ~= $} ] ])
 		ifTrue: [ ^ self allAnnotationActions ].
 	^ #()
 ]
@@ -247,7 +250,7 @@ GtDocumentCompletionStrategy >> defaultParameterValueActionsFor: class startingW
 
 { #category : #accessing }
 GtDocumentCompletionStrategy >> directoryReference [
-	^ directory ifNil: [ FileSystem workingDirectory ]
+	^ directory ifNil: [ FileLocator imageDirectory asFileReference ]
 ]
 
 { #category : #private }
