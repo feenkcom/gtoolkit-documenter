@@ -485,14 +485,12 @@ GtDocumentCompletionStrategy >> scriptCompletionsFor: source at: anIndex [
 		do: [ :each | 
 			each last < anIndex
 				ifTrue: [ startIndex := each last + 1 ] ].
-	startIndex isNil
-		ifTrue: [ ^ nil ].
+	startIndex ifNil: [ ^ nil ].
 	(self scriptEndRegex matchingRangesIn: source)
 		reverseDo: [ :each | 
 			each first > anIndex
 				ifTrue: [ endIndex := each first - 1 ] ].
-	endIndex isNil
-		ifTrue: [ ^ nil ].
+	endIndex ifNil: [ ^ nil ].
 	actions := GtPharoCompletionStrategy newForSnippet
 		completionActionsFor: (source copyFrom: startIndex to: endIndex) asRopedText
 		at: anIndex - startIndex + 1
@@ -503,7 +501,7 @@ GtDocumentCompletionStrategy >> scriptCompletionsFor: source at: anIndex [
 
 { #category : #private }
 GtDocumentCompletionStrategy >> scriptEndRegex [
-	^ '(\r|\n)\]\]\] *$' asRegex
+	^ '(|r|\n)\]\]\] *(\r|\n)?' asRegex
 ]
 
 { #category : #private }
