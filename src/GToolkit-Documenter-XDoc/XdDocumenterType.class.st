@@ -48,7 +48,7 @@ XdDocumenterType class >> openDocument: aXdDocument ofXdFileInPharo: aXdFile [
 	| aDocument |
 	aDocument := self mainDocument: aXdDocument ofXdFileInPharo: aXdFile.
 	aDocument ifNil: [ ^ self ].
-	^ GtInspector openOn: aDocument title: 'Documenter'.
+	^ GtPager openWrappedOn: aDocument title: 'Documenter'.
 ]
 
 { #category : #accessing }
