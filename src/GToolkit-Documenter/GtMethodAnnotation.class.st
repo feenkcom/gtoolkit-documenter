@@ -34,9 +34,7 @@ GtMethodAnnotation >> accept: aVisitor [
 GtMethodAnnotation >> browseReferenceFrom: anEvent [
 	anEvent modifiers isShift ifTrue: [ ^ self ].
 	self isMethodDefined ifFalse: [ ^ self inform: 'Method does not exist' ].
-	anEvent target fireEvent: (GtPhlowObjectToSpawn new 
-		object: self referencedMethod;
-		sourceElement: anEvent target)
+	anEvent target phlow spawnObject: self referencedMethod
 ]
 
 { #category : #'accessing - parameter values' }

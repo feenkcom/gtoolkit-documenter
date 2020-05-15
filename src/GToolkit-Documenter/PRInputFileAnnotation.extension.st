@@ -16,9 +16,7 @@ PRInputFileAnnotation >> alignmentParameterValue [
 PRInputFileAnnotation >> browseReferenceFrom: anEvent [
 	anEvent modifiers isShift ifTrue: [ ^ self ].
 	self doesReferenceExist ifFalse: [ ^ self inform: 'Input file does not exist' ].
-	anEvent target fireEvent: (GtPhlowObjectToSpawn new 
-		object: self fileReference;
-		sourceElement: anEvent target)
+	anEvent target phlow spawnObject: self fileReference.
 ]
 
 { #category : #'*GToolkit-Documenter' }

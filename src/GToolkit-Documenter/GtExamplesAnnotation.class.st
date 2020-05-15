@@ -47,9 +47,7 @@ GtExamplesAnnotation >> annotationCacheValueClass [
 GtExamplesAnnotation >> browseReferenceFrom: anEvent [
 	anEvent modifiers isShift ifTrue: [ ^ self ].
 	self hasExample ifFalse: [ ^ self inform: 'There is no defined example' ].
-	anEvent target fireEvent: (GtPhlowObjectToSpawn new 
-		object: self cachedExampleGroup;
-		sourceElement: anEvent target)
+	anEvent target phlow spawnObject: self cachedExampleGroup
 ]
 
 { #category : #'private - cache' }

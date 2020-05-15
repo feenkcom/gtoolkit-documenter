@@ -47,10 +47,7 @@ GtChangesAnnotation >> applyChanges [
 { #category : #'private - actions' }
 GtChangesAnnotation >> browseReferenceFrom: aBlClickEvent [ 
 	aBlClickEvent modifiers isShift ifTrue: [ ^ self ].
-	aBlClickEvent target 
-		fireEvent: (GtPhlowObjectToSpawn new
-			object: self cachedChanges;
-			sourceElement: aBlClickEvent target)
+	aBlClickEvent target phlow spawnObject: self cachedChanges
 ]
 
 { #category : #'private - cache' }
@@ -106,9 +103,7 @@ GtChangesAnnotation >> createButtonAttribute [
 			label: self constants createButtonLabel;
 			icon: self constants createButtonIcon;
 			action: [ :aButton |
-					aButton fireEvent: (GtPhlowObjectToSpawn new
-						object: self cachedChanges;
-						sourceElement: aButton) ])
+					aButton phlow spawnObject: self cachedChanges ])
 ]
 
 { #category : #'accessing - parameter values' }
