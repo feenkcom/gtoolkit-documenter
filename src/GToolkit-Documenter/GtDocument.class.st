@@ -282,10 +282,7 @@ GtDocument >> gtResourcesFor: aView [
 							description: ((eachResource document text asString 
 									first: (100 min: eachResource document text size))
 								asRopedText foreground: Color gray);
-							action: [ :aBrCard | aBrCard			 
-								 fireEvent: (GtPhlowObjectToSpawn new
-									object: eachResource;
-									sourceElement: aBrCard) ].
+							action: [ :aBrCard | aBrCard phlow spawnObject: eachResource ].
 						 ]];
 				with: aResource withAllResources.
 			aMondrian edges 

@@ -28,10 +28,7 @@ GtIcebergFileAnnotation >> accept: aVisitor [
 GtIcebergFileAnnotation >> browseReferenceFrom: aBlClickEvent [ 
 	aBlClickEvent modifiers isShift ifTrue: [ ^ self ].
 	self doesReferenceExist ifFalse: [ ^ self inform: 'Input file does not exist' ].
-	aBlClickEvent target 
-		fireEvent: (GtPhlowObjectToSpawn new
-			object: self fileReference;
-			sourceElement: aBlClickEvent target)
+	aBlClickEvent target phlow spawnObject: self fileReference
 ]
 
 { #category : #testing }

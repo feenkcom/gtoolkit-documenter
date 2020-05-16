@@ -35,9 +35,7 @@ GtClassAnnotation >> accept: aVisitor [
 GtClassAnnotation >> browseReferenceFrom: anEvent [
 	anEvent modifiers isShift ifTrue: [ ^ self ].
 	self isClassDefined ifFalse: [ ^ self inform: 'Class does not exist' ].
-	anEvent target fireEvent: (GtPhlowObjectToSpawn new 
-		object: self referencedClass realClass;
-		sourceElement: anEvent target)
+	anEvent target phlow spawnObject: self referencedClass realClass
 ]
 
 { #category : #'accessing - parameter values' }
