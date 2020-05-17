@@ -5,8 +5,9 @@ PRHeader >> styleTextWithMarkup: aBlRope [
 	(aBlRope
 		from: self start
 		to: self stop)
+			bold;
 			fontSize: self constants headerFontSize - (self level * self constants headerLevelStep)";
-			paragraphMargin: (BlInsets top: 15 left: 20 bottom: 15 right: 20)".
+			paragraphMargin: (BlInsets top: 100 left: 0 bottom: 10 right: 0)".
 	super styleTextWithMarkup: aBlRope
 ]
 

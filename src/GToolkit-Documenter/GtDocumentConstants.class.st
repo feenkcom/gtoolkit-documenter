@@ -212,7 +212,7 @@ GtDocumentConstants class >> fullViewParameterName [
 
 { #category : #text }
 GtDocumentConstants class >> headerFontSize [
-	^ 27
+	^ 22
 ]
 
 { #category : #text }
