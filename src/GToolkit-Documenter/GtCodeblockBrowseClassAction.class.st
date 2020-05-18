@@ -17,7 +17,7 @@ GtCodeblockBrowseClassAction >> browseClass [
 	aBehavior := self extractBehavior.
 	aBehavior ifNil: [ ^ self ].
 	aBehavior isBehavior ifFalse: [ ^ self ].
-	self element phlow spawnObject: (GtClassCoder forClass: aBehavior).
+	self element phlow spawnTool: (GtClassCoderTool observedClass: aBehavior).
 ]
 
 { #category : #accessing }
