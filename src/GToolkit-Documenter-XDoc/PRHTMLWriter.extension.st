@@ -35,8 +35,8 @@ PRHTMLWriter >> gtWriteExampleCode: aGt2ExampleAnnotation [
 PRHTMLWriter >> gtWriteExampleResult: aGt2ExampleAnnotation [ 
 	| aFigure aFigureReference |
 	aFigure := PRFigure new.
-	aFigure label: 'figure-' , aGt2ExampleAnnotation methodName.
-	aFigure add: (PRText content: 'Result of ' , aGt2ExampleAnnotation methodName).
+	"Since we do not want caption, we do not set the figure label"
+	aFigure add: (PRText content: '').
 	aFigureReference := self configuration gtDataWriter exampleResultReferenceFor: aGt2ExampleAnnotation.
 	aFigure reference: aFigureReference.
 	aFigure parameterAt: GtDocumentConstants alignmentParameterName put: aGt2ExampleAnnotation alignmentParameterValue.
