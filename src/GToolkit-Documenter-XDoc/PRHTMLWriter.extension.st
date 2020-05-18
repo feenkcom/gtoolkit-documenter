@@ -45,6 +45,13 @@ PRHTMLWriter >> gtWriteExampleResult: aGt2ExampleAnnotation [
 ]
 
 { #category : #'*GToolkit-Documenter-XDoc' }
+PRHTMLWriter >> gtWriteLabel: aGt2ExampleAnnotation [
+	canvas tag
+		name: 'code';
+		with: aGt2ExampleAnnotation labelText.
+]
+
+{ #category : #'*GToolkit-Documenter-XDoc' }
 PRHTMLWriter >> gtWriteSourceCodeForEntity: anEntityName with: aSourceCode [
 
 	| uniqueId language code |
@@ -114,13 +121,19 @@ PRHTMLWriter >> visitGt2ChangesAnnotation: aGt2ChangesAnnotation [
 
 { #category : #'*GToolkit-Documenter-XDoc' }
 PRHTMLWriter >> visitGt2ClassAnnotation: aGt2ClassAnnotation [
-	^ self gtWriteSourceCodeForEntity: (aGt2ClassAnnotation referencedClass name) with: (aGt2ClassAnnotation referencedClass definition).
+	aGt2ClassAnnotation isLabelParameterValueDefined ifTrue: [ 
+		^ self gtWriteLabel: aGt2ClassAnnotation ].
+	self 
+		gtWriteSourceCodeForEntity: (aGt2ClassAnnotation referencedClass name) 
+		with: (aGt2ClassAnnotation referencedClass definition).
 ]
 
 { #category : #'*GToolkit-Documenter-XDoc' }
 PRHTMLWriter >> visitGt2ExampleAnnotation: aGt2ExampleAnnotation [
 	aGt2ExampleAnnotation gtDocument: self configuration gtDocument.
 	aGt2ExampleAnnotation isMethodDefined ifFalse: [ ^ self ].
+	aGt2ExampleAnnotation isLabelParameterValueDefined ifTrue: [ 
+		^ self gtWriteLabel: aGt2ExampleAnnotation ].
 	aGt2ExampleAnnotation noCode ifFalse: [ self gtWriteExampleCode: aGt2ExampleAnnotation ].
 	aGt2ExampleAnnotation canBeExecuted ifFalse: [ ^ self ].
 	self gtWriteExampleResult: aGt2ExampleAnnotation.
@@ -145,7 +158,11 @@ PRHTMLWriter >> visitGt2IcebergFileAnnotation: aGt2IcebergFileAnnotation [
 
 { #category : #'*GToolkit-Documenter-XDoc' }
 PRHTMLWriter >> visitGt2MethodAnnotation: aGt2MethodAnnotation [	
-	^ self gtWriteSourceCodeForEntity: (aGt2MethodAnnotation referencedMethod name) with: (aGt2MethodAnnotation referencedMethod sourceCode).
+	aGt2MethodAnnotation isLabelParameterValueDefined ifTrue: [ 
+		^ self gtWriteLabel: aGt2MethodAnnotation ].
+	^ self 
+		gtWriteSourceCodeForEntity: (aGt2MethodAnnotation referencedMethod name) 
+		with: (aGt2MethodAnnotation referencedMethod sourceCode).
 ]
 
 { #category : #'*GToolkit-Documenter-XDoc' }
