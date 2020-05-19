@@ -19,7 +19,7 @@ GtNodeNodeFinder >> annotationParameter: aParameterName [
 			eachParameter key = aParameterName or: [ 
 				eachParameter value isNil ] ] 
 		ifFound: [ :aParameter | aParameter valueNode ]
-		ifNone: [ self ].
+		ifNone: [ self node ].
 ]
 
 { #category : #accessing }
