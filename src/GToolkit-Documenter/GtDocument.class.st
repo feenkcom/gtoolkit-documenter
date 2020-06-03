@@ -298,6 +298,7 @@ GtDocument >> gtSaveActionFor: anAction [
 	<gtAction>
 	^ anAction button
 		icon: self constants saveButtonIcon asElement;
+		tooltip: 'Save document';
 		forViewDefinedIn: #gtTextFor:;
 		priority: 1;
 		action: [ self store ]
