@@ -309,6 +309,7 @@ GtDocument >> gtShowMarkupActionFor: anAction [
 	<gtAction>
 	^ anAction toggle
 		icon: self constants editButtonIcon;
+		tooltip: 'Show/Hide Markups';
 		forViewDefinedIn: #gtTextFor:;
 		priority: 3;
 		activatedAction: [ self displayMarkup ];
@@ -324,6 +325,7 @@ GtDocument >> gtTextFor: aView [
 		priority: 1;
 		stencil: [ self asElementWithoutSaveAction ];
 		actionButtonIcon: BrGlamorousIcons tree 
+			tooltip: 'Display AST nodes'
 			action: [ :aWidget | aWidget phlow spawnObject: self parse ]
 ]
 
@@ -332,6 +334,7 @@ GtDocument >> gtXDocPublishActionFor: anAction [
 	<gtAction>
 	^ anAction dropdown 
 		icon: BrGlamorousIcons tocloud;
+		tooltip: 'Publish to Feenk blog';
 		forViewDefinedIn: #gtTextFor:;
 		priority: 55;
 		content: [ XdDocumenterShareDialogStencil new document: self ]
