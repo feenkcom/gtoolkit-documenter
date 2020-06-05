@@ -1057,6 +1057,27 @@ GtDocumentExamples >> documentWithFigure [
 	^ aDocument
 ]
 
+{ #category : #figure }
+GtDocumentExamples >> documentWithFigureCache [
+	<gtExample>
+	| aDocument anElement aSpace anElement2 aSpace2 |
+	aDocument := self documentWithFigure.
+	self assert: aDocument cache size equals: 0.
+	BlUseAsyncFeatures disableDuring: [ 
+		anElement := aDocument asElement.
+		aSpace := self putInSpace: anElement.
+		aSpace pulse ].
+	self assert: aDocument cache size equals: 1.
+	BlUseAsyncFeatures disableDuring: [ 
+		anElement2 := aDocument asElement.
+		aSpace2 := self putInSpace: anElement2.
+		aSpace2 pulse ].
+	self assert: aDocument cache size equals: 1.
+	aSpace close.
+	aSpace2 close.
+	^ aDocument
+]
+
 { #category : #'formats, header, and lists' }
 GtDocumentExamples >> documentWithHeadersInEditingMode [
 	<gtExample>
@@ -1492,6 +1513,17 @@ GtDocumentExamples >> modifyAndStoreToFileReference [
 	^ aDocument 
 ]
 
+{ #category : #space }
+GtDocumentExamples >> newSpace [
+	<gtExample>
+	| aSpace |
+	aSpace := BlSpace new.
+	aSpace title: 'Documenter Examples'.
+	aSpace extent: 600@400.
+	aSpace withHalos.
+	^ aSpace
+]
+
 { #category : #changes }
 GtDocumentExamples >> ombuEntry [
 	<gtExample>
@@ -1552,6 +1584,18 @@ GtDocumentExamples >> pillarParser [
 { #category : #basic }
 GtDocumentExamples >> previewHeightHudredValue [
 	^ 100
+]
+
+{ #category : #space }
+GtDocumentExamples >> putInSpace: aBlElement [
+	<gtExample>
+	| aSpace |
+	self 
+		assert: [ aBlElement isNotNil ]
+		description: [ 'Element must be non-nil' ].
+	aSpace := self newSpace.
+	aSpace root addChild: aBlElement.
+	^ aSpace
 ]
 
 { #category : #class }

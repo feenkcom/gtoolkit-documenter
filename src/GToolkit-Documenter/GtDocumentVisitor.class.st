@@ -5,7 +5,8 @@ Class {
 	#classTraits : 'TBlDebug classTrait + TGtDocumentConstants classTrait',
 	#instVars : [
 		'document',
-		'codeblockCounter'
+		'codeblockCounter',
+		'figureCounter'
 	],
 	#category : #'GToolkit-Documenter-Styler'
 }
@@ -34,6 +35,7 @@ GtDocumentVisitor >> document: aGtDocument [
 GtDocumentVisitor >> initialize [
 	super initialize.
 	codeblockCounter := 0.
+	figureCounter := 0.
 ]
 
 { #category : #'visiting-document' }
@@ -41,4 +43,11 @@ GtDocumentVisitor >> visitCodeblock: aPRCodeblock [
 	codeblockCounter := codeblockCounter + 1.
 	aPRCodeblock counter: codeblockCounter.
 	super visitCodeblock: aPRCodeblock
+]
+
+{ #category : #'visiting-document' }
+GtDocumentVisitor >> visitFigure: aPRFigure [
+	figureCounter := figureCounter + 1.
+	aPRFigure counter: figureCounter.
+	super visitFigure: aPRFigure
 ]
