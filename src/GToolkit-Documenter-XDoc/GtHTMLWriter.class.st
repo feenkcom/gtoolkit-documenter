@@ -39,8 +39,9 @@ GtHTMLWriter >> visitFigure: aFigure [
 	canvas newLine.
 	canvas tag
 		name: 'figure';
+		parameterAt: 'class' put: aFigure alignmentParameterValue;
 		with:
-				[ 
+			[ 
 			canvas newLine.
 			canvas nextPut: Character tab.
 			self exportImgFor: aFigure.
@@ -52,5 +53,5 @@ GtHTMLWriter >> visitFigure: aFigure [
 						[ 
 					aFigure label ifNotNil: [ self writeCounterForFigure: aFigure ].
 					self visitReference: aFigure ].
-			canvas newLine ]
+			canvas newLine ].
 ]
