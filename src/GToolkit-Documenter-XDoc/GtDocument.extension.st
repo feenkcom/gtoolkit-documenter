@@ -58,6 +58,19 @@ GtDocument >> saveToXDoc [
 ]
 
 { #category : #'*GToolkit-Documenter-XDoc' }
+GtDocument >> saveToXDocWithInformation: aXdShareInformation [
+	<return: #XdFile>
+	^ XdWriter new
+		streamingStrategy: XdStreamingStrategy bytes;
+		document: self;
+		documentHtml: self;
+		title: aXdShareInformation title asString;
+		authorName: aXdShareInformation author asString;
+		description: aXdShareInformation description asString;
+		write.
+]
+
+{ #category : #'*GToolkit-Documenter-XDoc' }
 GtDocument >> updateXDocWithInformation: aXdShareInformation [
 	| anXdFile |
 	anXdFile := XdWriter new
