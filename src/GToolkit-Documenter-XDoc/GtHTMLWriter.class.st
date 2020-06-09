@@ -18,8 +18,7 @@ GtHTMLWriter >> visitCodeblock: aCodeBlock [
 					code := canvas tag
 						name: 'code';
 						yourself.
-					language isSyntaxHighlightingPossible
-						ifTrue: [ code parameterAt: 'class' put: language printString ].
+					code parameterAt: 'class' put: language printString.
 					code with: [ 
 						canvas lines: aCodeBlock text.
 					].
