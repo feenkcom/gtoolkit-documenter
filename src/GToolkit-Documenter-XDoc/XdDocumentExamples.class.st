@@ -237,6 +237,7 @@ XdDocumentExamples >> writeDocumentWithExistingExample [
 	aXdFile := self inMemoryWriter
 		document: aDocument;
 		documentHtml: aDocument;
+		preview;
 		write.
 	self assert: aXdFile notNil.
 	self assert: aXdFile manifest notNil.

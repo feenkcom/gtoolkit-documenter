@@ -57,8 +57,6 @@ XdWriter >> documentConfluence: aDocument [
 		attachment: self constants confluenceIndexFile text: aConfluenceContent.
 	self reuseOrAddFigures: aDocument.
 	self attachExportedFiles: aDataWriter.
-
-	self addPreview: aDataWriter.
 ]
 
 { #category : #'*GToolkit-Documenter-XDoc' }
@@ -80,8 +78,6 @@ XdWriter >> documentHtml: aDocument [
 		attachment: self constants htmlIndexFile text: anHtmlContent.
 	self reuseOrAddFigures: aDocument.
 	self attachExportedFiles: aDataWriter.
-
-	self addPreview: aDataWriter.
 ]
 
 { #category : #'*GToolkit-Documenter-XDoc' }

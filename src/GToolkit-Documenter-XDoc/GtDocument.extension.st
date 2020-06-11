@@ -9,38 +9,9 @@ GtDocument >> deleteXDocWithInformation: aXdShareInformation [
 ]
 
 { #category : #'*GToolkit-Documenter-XDoc' }
-GtDocument >> publishXDoc [
-	XdClient new publish: self saveToXDoc
-]
-
-{ #category : #'*GToolkit-Documenter-XDoc' }
-GtDocument >> publishXDocWithInfo: aXdPublishInfo [
-	| anXdFile |
-	anXdFile := XdWriter new
-		streamingStrategy: XdStreamingStrategy bytes;
-		document: self;
-		documentHtml: self;
-		title: aXdPublishInfo title asString;
-		authorName: aXdPublishInfo author asString;
-		description: aXdPublishInfo description asString;
-		write.
-	XdClient new 
-		username: aXdPublishInfo username asString
-			password: aXdPublishInfo password asString;
-		publish: anXdFile
-]
-
-{ #category : #'*GToolkit-Documenter-XDoc' }
 GtDocument >> publishXDocWithInformation: aXdShareInformation [
 	| anXdFile |
-	anXdFile := XdWriter new
-		streamingStrategy: XdStreamingStrategy bytes;
-		document: self;
-		documentHtml: self;
-		title: aXdShareInformation title asString;
-		authorName: aXdShareInformation author asString;
-		description: aXdShareInformation description asString;
-		write.
+	anXdFile := self saveToXDocWithInformation: aXdShareInformation.
 	^ XdClient new 
 		username: aXdShareInformation username asString
 			password: aXdShareInformation password asString;
@@ -50,11 +21,7 @@ GtDocument >> publishXDocWithInformation: aXdShareInformation [
 { #category : #'*GToolkit-Documenter-XDoc' }
 GtDocument >> saveToXDoc [
 	<return: #XdFile>
-	^ XdWriter new
-		streamingStrategy: XdStreamingStrategy bytes;
-		document: self;
-		documentHtml: self;
-		write.
+	^ self saveToXDocWithInformation: XdShareInformation new
 ]
 
 { #category : #'*GToolkit-Documenter-XDoc' }
@@ -64,6 +31,7 @@ GtDocument >> saveToXDocWithInformation: aXdShareInformation [
 		streamingStrategy: XdStreamingStrategy bytes;
 		document: self;
 		documentHtml: self;
+		preview;
 		title: aXdShareInformation title asString;
 		authorName: aXdShareInformation author asString;
 		description: aXdShareInformation description asString;
@@ -73,14 +41,7 @@ GtDocument >> saveToXDocWithInformation: aXdShareInformation [
 { #category : #'*GToolkit-Documenter-XDoc' }
 GtDocument >> updateXDocWithInformation: aXdShareInformation [
 	| anXdFile |
-	anXdFile := XdWriter new
-		streamingStrategy: XdStreamingStrategy bytes;
-		document: self;
-		documentHtml: self;
-		title: aXdShareInformation title asString;
-		authorName: aXdShareInformation author asString;
-		description: aXdShareInformation description asString;
-		write.
+	anXdFile := self saveToXDocWithInformation: aXdShareInformation.
 	^ XdClient new 
 		username: aXdShareInformation username asString
 		password: aXdShareInformation password asString;
