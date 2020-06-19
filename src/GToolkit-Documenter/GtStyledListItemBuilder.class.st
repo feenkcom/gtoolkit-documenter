@@ -46,16 +46,10 @@ GtStyledListItemBuilder >> installDisplayMarkupsHandler [
 	"Display markups if a cursor is close to the list item symbol"
 	self cursorEnterAction: [ :aTextEditor |
 		self updateText: aTextEditor text.
-		self revealListItemSymbolMarkup.
-		aTextEditor updater
-			from: self listItemSymbolStart to: self listItemSymbolStop;
-			update ].
+		self revealListItemSymbolMarkup ].
 	self cursorLeaveAction: [ :aTextEditor |
 		self updateText: aTextEditor text.
-		self hideListItemSymbolMarkup.
-		aTextEditor updater
-			from: self listItemSymbolStart to: self listItemSymbolStop;
-			update ].
+		self hideListItemSymbolMarkup ].
 	self activateCursorFrom: self listItemSymbolStart to: self listItemSymbolStop.
 ]
 
