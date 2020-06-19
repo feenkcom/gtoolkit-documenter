@@ -210,6 +210,11 @@ GtDocumentConstants class >> fullViewParameterName [
 	^ #full
 ]
 
+{ #category : #margins }
+GtDocumentConstants class >> headerBottomMargin [
+	^ self paragraphBottomMargin * 6
+]
+
 { #category : #text }
 GtDocumentConstants class >> headerFontSize [
 	^ 22
@@ -218,6 +223,15 @@ GtDocumentConstants class >> headerFontSize [
 { #category : #text }
 GtDocumentConstants class >> headerLevelStep [
 	^ 2
+]
+
+{ #category : #margins }
+GtDocumentConstants class >> headerMargin [
+	^ BlInsets 
+		top: 0 
+		left: 0 
+		bottom: self headerBottomMargin 
+		right: 0
 ]
 
 { #category : #'pillar parameter names' }
@@ -345,6 +359,20 @@ GtDocumentConstants class >> packagesParameterName [
 	^ #packages
 ]
 
+{ #category : #margins }
+GtDocumentConstants class >> paragraphBottomMargin [
+	^ 5
+]
+
+{ #category : #margins }
+GtDocumentConstants class >> paragraphMargin [
+	^ BlInsets 
+		top: 0 
+		left: 0 
+		bottom: self paragraphBottomMargin 
+		right: 0
+]
+
 { #category : #'pillar annotation names' }
 GtDocumentConstants class >> parametrizedExampleAnnotationName [
 	^ #paramExample
@@ -454,4 +482,14 @@ GtDocumentConstants class >> superscriptFontSize [
 { #category : #'variable bindings' }
 GtDocumentConstants class >> thisDocument [
 	^ #'thisDocument'
+]
+
+{ #category : #margins }
+GtDocumentConstants >> defaultParagraphMarginBottomValue [
+	^ 10
+]
+
+{ #category : #margins }
+GtDocumentConstants >> paragraphMarginBottomValue [
+	^ 10
 ]
