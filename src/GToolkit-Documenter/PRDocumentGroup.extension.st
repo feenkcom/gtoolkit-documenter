@@ -13,5 +13,6 @@ PRDocumentGroup >> gtChildrenFor: aView [
 	^ aView tree
 		title: 'Structure';
 		items: [ { self } ];
-		children: [ :aNode | aNode gtChildren ]
+		children: [ :aNode | aNode gtChildren ];
+		expandUpTo: 3
 ]
