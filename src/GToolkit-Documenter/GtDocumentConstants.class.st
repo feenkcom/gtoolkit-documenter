@@ -212,7 +212,7 @@ GtDocumentConstants class >> fullViewParameterName [
 
 { #category : #margins }
 GtDocumentConstants class >> headerBottomMargin [
-	^ self paragraphBottomMargin * 6
+	^ self paragraphBottomMargin
 ]
 
 { #category : #text }
@@ -226,12 +226,17 @@ GtDocumentConstants class >> headerLevelStep [
 ]
 
 { #category : #margins }
-GtDocumentConstants class >> headerMargin [
+GtDocumentConstants class >> headerMarginForLevel: aLevelNumber [
 	^ BlInsets 
-		top: 0 
+		top: ((5 - aLevelNumber) min: 1) * self headerTopMargin 
 		left: 0 
 		bottom: self headerBottomMargin 
 		right: 0
+]
+
+{ #category : #margins }
+GtDocumentConstants class >> headerTopMargin [
+	^ self paragraphTopMargin * 3
 ]
 
 { #category : #'pillar parameter names' }
@@ -371,6 +376,11 @@ GtDocumentConstants class >> paragraphMargin [
 		left: 0 
 		bottom: self paragraphBottomMargin 
 		right: 0
+]
+
+{ #category : #margins }
+GtDocumentConstants class >> paragraphTopMargin [
+	^ 5
 ]
 
 { #category : #'pillar annotation names' }
