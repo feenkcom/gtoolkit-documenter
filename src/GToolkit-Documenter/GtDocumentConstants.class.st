@@ -228,7 +228,7 @@ GtDocumentConstants class >> headerLevelStep [
 { #category : #margins }
 GtDocumentConstants class >> headerMarginForLevel: aLevelNumber [
 	^ BlInsets 
-		top: ((5 - aLevelNumber) min: 1) * self headerTopMargin 
+		top: ((6 - (aLevelNumber)) min: 1) * self headerTopMargin 
 		left: 0 
 		bottom: self headerBottomMargin 
 		right: 0
@@ -236,7 +236,7 @@ GtDocumentConstants class >> headerMarginForLevel: aLevelNumber [
 
 { #category : #margins }
 GtDocumentConstants class >> headerTopMargin [
-	^ self paragraphTopMargin * 3
+	^ self paragraphTopMargin * 5
 ]
 
 { #category : #'pillar parameter names' }
