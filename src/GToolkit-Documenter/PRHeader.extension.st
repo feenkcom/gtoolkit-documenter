@@ -8,7 +8,7 @@ PRHeader >> styleTextWithMarkup: aBlRope [
 		to: self stop)
 			bold;
 			fontSize: self constants headerFontSize - (self level * self constants headerLevelStep);
-			paragraphMargin: self constants headerMargin.
+			paragraphMargin: (self constants headerMarginForLevel: self level).
 ]
 
 { #category : #'*GToolkit-Documenter' }
