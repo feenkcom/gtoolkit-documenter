@@ -493,13 +493,3 @@ GtDocumentConstants class >> superscriptFontSize [
 GtDocumentConstants class >> thisDocument [
 	^ #'thisDocument'
 ]
-
-{ #category : #margins }
-GtDocumentConstants >> defaultParagraphMarginBottomValue [
-	^ 10
-]
-
-{ #category : #margins }
-GtDocumentConstants >> paragraphMarginBottomValue [
-	^ 10
-]
