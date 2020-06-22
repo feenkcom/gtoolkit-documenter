@@ -104,7 +104,7 @@ GtEpicea >> gtDiffFor: aView [
 	^ aView textEditor
 		title: 'Diff';
 		priority: 1;
-		look: BrGlamorousCodeEditorLook new;
+		look: BrGlamorousCodeEditorLook;
 		text: [ :anEditor | 
 			self 
 				when: GtEpiceaUpdatedAnnouncement 
@@ -237,7 +237,7 @@ GtEpicea >> gtTutorialFor: aView [
 	^ aView textEditor
 		title: 'Code';
 		priority: 2;
-		look: BrGlamorousCodeEditorLook new;
+		look: BrGlamorousCodeEditorLook;
 		text: [ :anEditor | 
 			self 
 				when: GtEpiceaUpdatedAnnouncement 
