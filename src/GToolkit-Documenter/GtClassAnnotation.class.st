@@ -141,7 +141,7 @@ GtClassAnnotation >> referencedClass [
 
 { #category : #subscriptions }
 GtClassAnnotation >> registerToSystemChanges [
-	self gtDocument
+	self gtDocument systemAnnouncer
 		when: ClassAdded , ClassRemoved
 			send: #handleClassAddedOrRemovedAnnouncement:
 			to: self

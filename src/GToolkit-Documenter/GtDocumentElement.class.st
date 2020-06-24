@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'document'
 	],
-	#category : #'GToolkit-Documenter-Document'
+	#category : #'GToolkit-Documenter-! Core'
 }
 
 { #category : #accessing }

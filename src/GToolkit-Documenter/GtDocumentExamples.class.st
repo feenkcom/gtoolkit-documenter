@@ -636,12 +636,12 @@ GtDocumentExamples >> defaultDocument [
 	<gtExample>
 	<after: #useDefaultStylerStrategy>
 	| aDocument |
-	aDocument := GtDocument new.
+	aDocument := GtDocumenter new.
 	aDocument editor useSyncStylerStrategy.
 	documents add: aDocument.
 	self assert: aDocument text asString equals: self emptyContent.
 	self assert: aDocument isSubscribedToSystem not.
-	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument) not.
+	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument systemSubscriber) not.
 	^ aDocument
 ]
 
@@ -674,7 +674,7 @@ GtDocumentExamples >> documentDeleteMethodAnnotation [
 	aDocument editor styleText.
 	self 
 		assert: aDocument text asString 
-		equals: ( self contentWithExistingMethod last asString).
+		equals: self contentWithExistingMethod last asString.
 	self assert: aDocument isSubscribedToSystem not.
 	^ aDocument
 ]
@@ -713,8 +713,8 @@ GtDocumentExamples >> documentInEditingModeWithMarkups [
 	<gtExample>
 	| aDocument |
 	aDocument := self defaultDocument
-		displayMarkup;
-	 	text: self contentWithMarkups.
+		showMarkup;
+		text: self contentWithMarkups.
 	self assert: aDocument text asString equals: self contentWithMarkups.
 	self assert: aDocument isSubscribedToSystem not.
 	^ aDocument
@@ -1028,9 +1028,11 @@ GtDocumentExamples >> documentWithExternalLinkInEditingMode [
 	<gtExample>
 	| aDocument |
 	aDocument := self defaultDocument text: self contentWithExternalLink.
-	aDocument displayMarkup.
+	aDocument showMarkup.
 	aDocument privateStyleText.
-	self assert: aDocument text asString equals: self contentWithExternalLink.
+	self
+		assert: aDocument text asString
+		equals: self contentWithExternalLink.
 	^ aDocument
 ]
 
@@ -1060,6 +1062,7 @@ GtDocumentExamples >> documentWithFigure [
 { #category : #figure }
 GtDocumentExamples >> documentWithFigureCache [
 	<gtExample>
+	<noTest>
 	| aDocument anElement aSpace anElement2 aSpace2 |
 	aDocument := self documentWithFigure.
 	self assert: aDocument cache size equals: 0.
@@ -1083,7 +1086,7 @@ GtDocumentExamples >> documentWithHeadersInEditingMode [
 	<gtExample>
 	| aDocument |
 	aDocument := self defaultDocument text: self contentWithHeaders.
-	aDocument displayMarkup.
+	aDocument showMarkup.
 	aDocument privateStyleText.
 	self assert: aDocument text asString equals: self contentWithHeaders.
 	self assert: aDocument isSubscribedToSystem not.
@@ -1307,9 +1310,13 @@ GtDocumentExamples >> documentWithTwoExistingExamples [
 	<gtExample>
 	| aDocument aCache |
 	aDocument := self defaultDocument.
-	aDocument displayMarkup; text: self contentWithTwoExistingExamples.
+	aDocument
+		showMarkup;
+		text: self contentWithTwoExistingExamples.
 	aDocument privateStyleText.
-	self assert: aDocument text asString equals: self contentWithTwoExistingExamples.
+	self
+		assert: aDocument text asString
+		equals: self contentWithTwoExistingExamples.
 	self assert: aDocument isSubscribedToSystem.
 	aCache := aDocument cache keys asOrderedCollection.
 	self assert: aCache size equals: 2.
@@ -1668,7 +1675,7 @@ GtDocumentExamples >> registeredDocument [
 	<gtExample>
 	| aDocument |
 	aDocument := self defaultDocument.
-	aDocument
+	aDocument systemAnnouncer
 		when: SystemAnnouncement
 		do: [ :anAnnouncement | "ignore" ]
 		for: self.

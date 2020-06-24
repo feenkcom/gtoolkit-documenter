@@ -14,7 +14,7 @@ Class {
 		'pillarParser',
 		'addOns'
 	],
-	#category : #'GToolkit-Documenter-Document'
+	#category : #'GToolkit-Documenter-! Core'
 }
 
 { #category : #accessing }
@@ -171,7 +171,7 @@ GtDocument >> constants [
 
 { #category : #initialization }
 GtDocument >> defaultStyler [
-	^ GtStyler new 
+	^ GtDocumenterStyler new 
 		document: self; 
 		parser: self pillarParser;
 		hideMarkup
@@ -184,9 +184,7 @@ GtDocument >> defaultText [
 
 { #category : #initialization }
 GtDocument >> displayMarkup [
-	self editor styler mode isEditing ifTrue: [ ^ self ].
-	self editor styler displayMarkup.
-	self styleTextRequest.
+	self showMarkup
 ]
 
 { #category : #actions }
@@ -327,17 +325,6 @@ GtDocument >> gtTextFor: aView [
 		actionButtonIcon: BrGlamorousIcons tree 
 			tooltip: 'Display AST nodes'
 			action: [ :aWidget | aWidget phlow spawnObject: self parse ]
-]
-
-{ #category : #xdocs }
-GtDocument >> gtXDocPublishActionFor: anAction [
-	<gtAction>
-	^ anAction dropdown 
-		icon: BrGlamorousIcons tocloud;
-		tooltip: 'Publish to Feenk blog';
-		forViewDefinedIn: #gtTextFor:;
-		priority: 55;
-		content: [ XdDocumenterShareDialogStencil new document: self ]
 ]
 
 { #category : #'announcement handling' }
@@ -493,6 +480,13 @@ GtDocument >> rootDirectory [
 	^ self storage rootDirectory
 ]
 
+{ #category : #initialization }
+GtDocument >> showMarkup [
+	self editor styler mode isEditing ifTrue: [ ^ self ].
+	self editor styler displayMarkup.
+	self styleTextRequest.
+]
+
 { #category : #accessing }
 GtDocument >> storage [
 	<return: #GtStorageStrategy>
@@ -536,6 +530,11 @@ GtDocument >> subscribeToSystem [
 		send: #handleSystemChangeAnnouncement:
 		to: self.
 	isSubscribedToSystem := true
+]
+
+{ #category : #announcer }
+GtDocument >> systemAnnouncer [
+	^ self
 ]
 
 { #category : #accessing }

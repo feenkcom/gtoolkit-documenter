@@ -229,7 +229,7 @@ PRCodeblock >> parsePharoCode [
 
 { #category : #'*GToolkit-Documenter' }
 PRCodeblock >> registerToSystemChanges [
-	self gtDocument
+	self gtDocument systemAnnouncer
 		when: MethodAdded , MethodRemoved
 			send: #handleMethodAnnouncement:
 			to: self

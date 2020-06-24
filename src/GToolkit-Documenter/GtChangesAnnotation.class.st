@@ -187,7 +187,7 @@ GtChangesAnnotation >> referenceParameterName [
 
 { #category : #subscriptions }
 GtChangesAnnotation >> registerToSystemChanges [
-	self gtDocument
+	self gtDocument systemAnnouncer
 		when:
 			ClassAnnouncement , MethodAnnouncement
 				, GtDocumentUpdateRequestedAnnouncement

@@ -1,5 +1,5 @@
 Class {
-	#name : #GtStyler,
+	#name : #GtDocumenterStyler,
 	#superclass : #BlTextStyler,
 	#instVars : [
 		'parser',
@@ -11,18 +11,18 @@ Class {
 }
 
 { #category : #initialization }
-GtStyler >> displayMarkup [
+GtDocumenterStyler >> displayMarkup [
 	self mode: GtStylerStrategy displayMarkup
 ]
 
 { #category : #accessing }
-GtStyler >> document [
+GtDocumenterStyler >> document [
 	<return: #GtDocument>
 	^ document
 ]
 
 { #category : #accessing }
-GtStyler >> document: aGt2Document [
+GtDocumenterStyler >> document: aGt2Document [
 	document ifNotNil: [ :anOldDocument | anOldDocument editor removeEventHandler: self ].
 	self 
 		assert: [ aGt2Document notNil ]
@@ -33,25 +33,25 @@ GtStyler >> document: aGt2Document [
 ]
 
 { #category : #initialization }
-GtStyler >> hideMarkup [
+GtDocumenterStyler >> hideMarkup [
 	self mode: GtStylerStrategy hideMarkup
 ]
 
 { #category : #initialization }
-GtStyler >> initialize [
+GtDocumenterStyler >> initialize [
 	super initialize.
 	editorEventHandler := GtStylerEventHandler new subscriber: self.
 	mode := GtStylerStrategy displayMarkup.
 ]
 
 { #category : #accessing }
-GtStyler >> mode [
+GtDocumenterStyler >> mode [
 	<return: #GtStylerStrategy>
 	^ mode
 ]
 
 { #category : #accessing }
-GtStyler >> mode: aGt2StylerStrategy [
+GtDocumenterStyler >> mode: aGt2StylerStrategy [
 	self 
 		assert: [ aGt2StylerStrategy notNil ] 
 		description: [ 'Styling strategy must be non-nil' ].
@@ -59,18 +59,18 @@ GtStyler >> mode: aGt2StylerStrategy [
 ]
 
 { #category : #initialization }
-GtStyler >> noInteractions [
+GtDocumenterStyler >> noInteractions [
 	self mode: GtStylerStrategy noInteractions
 ]
 
 { #category : #accessing }
-GtStyler >> parser [
+GtDocumenterStyler >> parser [
 	<return: #PRPillarParser>
 	^ parser ifNil: [ parser := PRPillarParser new optimize ]
 ]
 
 { #category : #accessing }
-GtStyler >> parser: aPRPillarParser [
+GtDocumenterStyler >> parser: aPRPillarParser [
 	self 
 		assert: [ aPRPillarParser notNil ]
 		description: [ 'Pillar parser for styling text must be non-nil' ].
@@ -78,7 +78,7 @@ GtStyler >> parser: aPRPillarParser [
 ]
 
 { #category : #private }
-GtStyler >> privateStyle: aText [
+GtDocumenterStyler >> privateStyle: aText [
 	<return: #BlRope>
 	| aPRDocument |
 	self document unsubscribe: self.

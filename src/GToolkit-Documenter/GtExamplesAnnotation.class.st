@@ -280,7 +280,7 @@ GtExamplesAnnotation >> referencedPackages [
 
 { #category : #subscriptions }
 GtExamplesAnnotation >> registerToSystemChanges [
-	self gtDocument
+	self gtDocument systemAnnouncer
 		when: MethodAdded , MethodModified , MethodRemoved
 			send: #handleMethodAnnouncement:
 			to: self
