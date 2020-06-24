@@ -7,7 +7,7 @@ PRHeader >> styleTextWithMarkup: aBlRope [
 		from: self start
 		to: self stop)
 			bold;
-			fontSize: self constants headerFontSize - (self level * self constants headerLevelStep);
+			fontSize: self gtDocument normalFontSize * 3 - (self level * self constants headerLevelStep);
 			paragraphMargin: (self constants headerMarginForLevel: self level).
 ]
 

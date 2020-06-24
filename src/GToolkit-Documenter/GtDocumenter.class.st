@@ -141,6 +141,8 @@ GtDocumenter >> normalFontSize [
 { #category : #'api - styling' }
 GtDocumenter >> normalFontSize: aNumber [
 	documenterModel normalFontSize: aNumber.
+	self styler fontSize: aNumber.
+	self styleTextRequest.
 ]
 
 { #category : #'hooks - children' }

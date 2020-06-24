@@ -1,14 +1,24 @@
 Class {
 	#name : #GtDocumenterStyler,
 	#superclass : #BlTextStyler,
+	#traits : 'TBlTextStyleable',
+	#classTraits : 'TBlTextStyleable classTrait',
 	#instVars : [
 		'parser',
 		'document',
 		'editorEventHandler',
-		'mode'
+		'mode',
+		'attributesBuilder'
 	],
 	#category : #'GToolkit-Documenter-Styler'
 }
+
+{ #category : #accessing }
+GtDocumenterStyler >> attributesBuilder [
+	<return: #BlTextAttributesBuilder>
+	
+	^ attributesBuilder
+]
 
 { #category : #initialization }
 GtDocumenterStyler >> displayMarkup [
@@ -42,6 +52,8 @@ GtDocumenterStyler >> initialize [
 	super initialize.
 	editorEventHandler := GtStylerEventHandler new subscriber: self.
 	mode := GtStylerStrategy displayMarkup.
+
+	attributesBuilder := BlTextDelegatedAttributesBuilder new.	
 ]
 
 { #category : #accessing }
@@ -90,6 +102,9 @@ GtDocumenterStyler >> privateStyle: aText [
 	self
 		assert: [ aPRDocument isPetit2Failure not ] 
 		description: [ 'Target text should be a valid Pillar format' ].
+		
+	self attributesBuilder applyOn: aText.
+	
 	aPRDocument accept: (GtStylerVisitor new 
 		document: self document;
 		mode: self mode;
