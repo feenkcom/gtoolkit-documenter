@@ -75,7 +75,7 @@ GtDocumenterModel >> handleSystemChangeAnnouncement: aSystemAnnouncement [
 	self announcer announce: aSystemAnnouncement
 ]
 
-{ #category : #testing }
+{ #category : #subscriptions }
 GtDocumenterModel >> hasDocumentSubscriptions [
 	^ self announcer numberOfSubscriptions isZero not
 ]
@@ -121,6 +121,12 @@ GtDocumenterModel >> mayRequestDocumentUpdate [
 GtDocumenterModel >> maySubscribeToSystem [
 	self hasDocumentSubscriptions ifFalse: [ ^ self ].
 	self subscribeToSystem
+]
+
+{ #category : #subscriptions }
+GtDocumenterModel >> mayUnsubscribeFromSystem [
+	self hasDocumentSubscriptions ifTrue: [ ^ self ].
+	self unsubscribeFromSystem
 ]
 
 { #category : #'api - storage' }
@@ -215,8 +221,12 @@ GtDocumenterModel >> systemAnnouncer [
 ]
 
 { #category : #'api - announcer' }
-GtDocumenterModel >> unsubscribe: aSubscriber [
-	^ self announcer unsubscribe: aSubscriber
+GtDocumenterModel >> unsubscribe: anObject [
+	"Unsubscribe all subscriptions of anObject from the receiver"
+	| theRemovedSubscriptions |
+	theRemovedSubscriptions := self announcer unsubscribe: anObject.
+	self mayUnsubscribeFromSystem.
+	^ theRemovedSubscriptions
 ]
 
 { #category : #subscriptions }

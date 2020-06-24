@@ -1682,7 +1682,7 @@ GtDocumentExamples >> registeredDocument [
 	self assert: aDocument text asString equals: self emptyContent.
 	self assert: aDocument isSubscribedToSystem.
 	self assert:
-		(SystemAnnouncer uniqueInstance hasSubscriber: aDocument).
+		(SystemAnnouncer uniqueInstance hasSubscriber: aDocument systemSubscriber).
 	aDocument unsubscribe: self.
 	self assert: aDocument isSubscribedToSystem not.
 	self assert:
