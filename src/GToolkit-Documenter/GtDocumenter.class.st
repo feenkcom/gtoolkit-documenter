@@ -1,6 +1,8 @@
 Class {
 	#name : #GtDocumenter,
-	#superclass : #BrEditor,
+	#superclass : #BlElement,
+	#traits : 'TBrLayoutResizable',
+	#classTraits : 'TBrLayoutResizable classTrait',
 	#instVars : [
 		'documenterModel'
 	],
@@ -60,21 +62,8 @@ GtDocumenter >> classComment: aClass [
 ]
 
 { #category : #defaults }
-GtDocumenter >> defaultParser [
-	^ GtDocumenterParser new
-]
-
-{ #category : #defaults }
 GtDocumenter >> defaultStorage [
 	^ GtStorageStrategy null
-]
-
-{ #category : #defaults }
-GtDocumenter >> defaultStyler [
-	^ GtDocumenterStyler new 
-		document: self; 
-		parser: self defaultParser;
-		hideMarkup
 ]
 
 { #category : #'api - styling' }
@@ -85,6 +74,18 @@ GtDocumenter >> displayMarkup [
 			'`@receiver displayMarkup'
 				-> '`@receiver showMarkup'.
 	self showMarkup
+]
+
+{ #category : #editor }
+GtDocumenter >> editor [
+	<return: #BrTextEditor>
+	^ self editorElement editor
+]
+
+{ #category : #editor }
+GtDocumenter >> editorElement [
+	<return: #BrEditor>
+	^ self childNamed: #editor
 ]
 
 { #category : #'api - storage' }
@@ -110,14 +111,25 @@ GtDocumenter >> hideMarkup [
 { #category : #initialization }
 GtDocumenter >> initialize [
 	super initialize.
-	
-	self viewModel add: (documenterModel := GtDocumenterModel new).
+	self viewModel: (documenterModel := GtDocumenterModel new 
+		add: (BrInteractiveModel withAll: {
+				BrLayoutHorizontalResizerModel matchParent.
+				BrLayoutVerticalResizerModel matchParent })).
+	self initializeEditor.
 
-	self styler: self defaultStyler.
-	
-	self look: GtDocumenterLook.
+	self look: BrLayoutResizerLook inherit.
 	self matchParent.
+]
 
+{ #category : #initialization }
+GtDocumenter >> initializeEditor [
+	| anEditor |
+	anEditor := GtDocumenterEditor new
+		look: GtDocumenterEditorLook.
+			
+	self addChild: anEditor as: #editor.
+	
+	anEditor document: self.
 ]
 
 { #category : #'api - announcer' }
@@ -135,14 +147,12 @@ GtDocumenter >> name [
 { #category : #'api - styling' }
 GtDocumenter >> normalFontSize [
 	<rerturn: #Number>
-	^ documenterModel normalFontSize
+	^ self editorElement normalFontSize
 ]
 
 { #category : #'api - styling' }
 GtDocumenter >> normalFontSize: aNumber [
-	documenterModel normalFontSize: aNumber.
-	self styler fontSize: aNumber.
-	self styleTextRequest.
+	self editorElement normalFontSize: aNumber.
 ]
 
 { #category : #'hooks - children' }
@@ -197,8 +207,8 @@ GtDocumenter >> rootDirectory [
 
 { #category : #'api - styling' }
 GtDocumenter >> showMarkup [
-	self editor styler mode isEditing ifTrue: [ ^ self ].
-	self editor styler displayMarkup.
+	self editorElement styler mode isEditing ifTrue: [ ^ self ].
+	self editorElement styler displayMarkup.
 	self styleTextRequest.
 ]
 
@@ -221,7 +231,13 @@ GtDocumenter >> string [
 
 { #category : #'api - styling' }
 GtDocumenter >> styleTextRequest [
-	self editor styleText
+	self editorElement styleTextRequest
+]
+
+{ #category : #editor }
+GtDocumenter >> styler [
+	<return: #GtDocumenterStyler>
+	^ self editorElement styler.
 ]
 
 { #category : #'api - announcer' }
@@ -233,6 +249,17 @@ GtDocumenter >> systemAnnouncer [
 { #category : #'api - announcer' }
 GtDocumenter >> systemSubscriber [
 	^ documenterModel
+]
+
+{ #category : #'api - content' }
+GtDocumenter >> text [
+	<rerturn: #BlText>
+	^ self editorElement text
+]
+
+{ #category : #'api - content' }
+GtDocumenter >> text: aText [
+	self editorElement text: aText
 ]
 
 { #category : #'api - announcer' }

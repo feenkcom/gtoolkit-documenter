@@ -1,5 +1,5 @@
 Class {
-	#name : #GtDocumenterLook,
+	#name : #GtDocumenterEditorLook,
 	#superclass : #BrGlamorousEditorLook,
 	#instVars : [
 		'normalFontSize'
@@ -8,21 +8,22 @@ Class {
 }
 
 { #category : #defaults }
-GtDocumenterLook >> defaultFontSize [
+GtDocumenterEditorLook >> defaultFontSize [
 	^ 16
 ]
 
 { #category : #initialization }
-GtDocumenterLook >> initialize [
+GtDocumenterEditorLook >> initialize [
 	super initialize.
 	normalFontSize := self defaultFontSize.
 	self 
 		glamorousRegularFont;
 		fontSize: self normalFontSize.
+	self add: BrLayoutResizerLook inherit.
 ]
 
 { #category : #initialization }
-GtDocumenterLook >> initializeListeners [
+GtDocumenterEditorLook >> initializeListeners [
 	super initializeListeners.
 	
 	self 
@@ -31,24 +32,26 @@ GtDocumenterLook >> initializeListeners [
 ]
 
 { #category : #initialization }
-GtDocumenterLook >> initializeRequests [
+GtDocumenterEditorLook >> initializeRequests [
 	super initializeRequests.
 
 	self request: GtDocumenterNormalFontSizeRequest new.
 ]
 
 { #category : #accessing }
-GtDocumenterLook >> normalFontSize [
+GtDocumenterEditorLook >> normalFontSize [
 	^ normalFontSize
 ]
 
 { #category : #accessing }
-GtDocumenterLook >> normalFontSize: aNumber [
+GtDocumenterEditorLook >> normalFontSize: aNumber [
 	normalFontSize := aNumber.
 	self onNormalFontSizeChanged.
 ]
 
 { #category : #hooks }
-GtDocumenterLook >> onNormalFontSizeChanged [
-	self widgetDo: [ :aWidget | aWidget styleTextRequest ]
+GtDocumenterEditorLook >> onNormalFontSizeChanged [
+	self widgetDo: [ :aWidget | 
+		aWidget styler fontSize: self normalFontSize.
+		aWidget styleTextRequest ]
 ]

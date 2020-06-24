@@ -8,7 +8,6 @@ Class {
 		'announcer',
 		'mutexSubscription',
 		'isSubscribedToSystem',
-		'normalFontSize',
 		'variableBindings'
 	],
 	#category : #'GToolkit-Documenter-! Core'
@@ -36,11 +35,6 @@ GtDocumenterModel >> classComment: aClass [
 { #category : #defaults }
 GtDocumenterModel >> defaultAnnouncer [
 	^ GtAnnouncer new
-]
-
-{ #category : #defaults }
-GtDocumenterModel >> defaultFontSize [
-	^ 16
 ]
 
 { #category : #defaults }
@@ -85,20 +79,10 @@ GtDocumenterModel >> initialize [
 	super initialize.
 	mutexSubscription := Mutex new.
 	isSubscribedToSystem := false.
-	normalFontSize := self defaultFontSize.
 	announcer := self defaultAnnouncer.
 	storage := self defaultStorage.
 	variableBindings := self defaultVariableBindings.
 	
-]
-
-{ #category : #initialization }
-GtDocumenterModel >> initializeListeners [
-	super initializeListeners.
-	
-	self 
-		when: GtDocumenterNormalFontSizeRequest 
-		reply: [ :aResponse | aResponse normalFontSize: self normalFontSize ].
 ]
 
 { #category : #'api - announcer' }
@@ -133,31 +117,6 @@ GtDocumenterModel >> mayUnsubscribeFromSystem [
 GtDocumenterModel >> name [
 	<return: #String>
 	^ self storage name
-]
-
-{ #category : #'api - font size' }
-GtDocumenterModel >> normalFontSize [
-	"Return a normal text font size"
-	^ normalFontSize
-]
-
-{ #category : #'api - font size' }
-GtDocumenterModel >> normalFontSize: aNumber [
-	self 
-		assert: [ aNumber isNotNil ] 
-		description: [ 'Normal font size must be non-nil' ].
-	self 
-		assert: [ aNumber isNumber ] 
-		description: [ 'Normal font size must be a number' ].
-	normalFontSize = aNumber ifTrue: [ ^ self ].
-	normalFontSize := aNumber.
-	self notifyNormalFontSizeChanged.
-]
-
-{ #category : #notifying }
-GtDocumenterModel >> notifyNormalFontSizeChanged [
-	self dispatchEvent: (GtDocumenterNormalFontSizeChanged new 
-		normalFontSize: self normalFontSize)
 ]
 
 { #category : #'api - storage' }
