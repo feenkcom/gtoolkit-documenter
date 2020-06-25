@@ -25,6 +25,11 @@ GtDocumenterEditor >> classComment: aClass [
 	storageModel classComment: aClass
 ]
 
+{ #category : #'api - styling' }
+GtDocumenterEditor >> decreaseNormalFontSize [
+	^ normalFontSizeModel decreaseNormalFontSize
+]
+
 { #category : #defaults }
 GtDocumenterEditor >> defaultParser [
 	^ GtDocumenterParser new
@@ -62,6 +67,11 @@ GtDocumenterEditor >> fileReference: aFileReference [
 	storageModel fileReference: aFileReference
 ]
 
+{ #category : #'api - styling' }
+GtDocumenterEditor >> increaseNormalFontSize [
+	^ normalFontSizeModel increaseNormalFontSize
+]
+
 { #category : #initialization }
 GtDocumenterEditor >> initialize [
 	super initialize.
@@ -83,13 +93,13 @@ GtDocumenterEditor >> name [
 	^ storageModel name
 ]
 
-{ #category : #accessing }
+{ #category : #'api - styling' }
 GtDocumenterEditor >> normalFontSize [
 	<rerturn: #Number>
 	^ normalFontSizeModel normalFontSize
 ]
 
-{ #category : #accessing }
+{ #category : #'api - styling' }
 GtDocumenterEditor >> normalFontSize: aNumber [
 	normalFontSizeModel normalFontSize: aNumber
 ]

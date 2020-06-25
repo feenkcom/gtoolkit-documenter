@@ -11,14 +11,20 @@ aView empty ].
 		title: 'Document';
 		priority: 1;
 		disableAsync;
-		stencil: [ GtDocumenter forClass: self ];
+		stencil: [ GtDocumenter forFile: self asFileReference ];
 		actionButtonIcon: BrGlamorousVectorIcons accept 
 			tooltip: 'Save document' 
 			action: [ :aToggle :aTab | aTab viewContentElement save ];
 		actionToggleIcon: BrGlamorousIcons edit 
 			tooltip: 'Show/Hide Markups'
 			activated: [ :aToggle :aTab | aTab viewContentElement showMarkup ] 
-			deactivated: [ :aToggle :aTab | aTab viewContentElement hideMarkup ]
+			deactivated: [ :aToggle :aTab | aTab viewContentElement hideMarkup ];
+		actionButtonIcon: BrGlamorousVectorIcons remove
+			tooltip: 'Decrease font size'
+			action: [ :aToggle :aTab | aTab viewContentElement decreaseNormalFontSize ];
+		actionButtonIcon: BrGlamorousVectorIcons add
+			tooltip: 'Increase font size'
+			action: [ :aToggle :aTab | aTab viewContentElement increaseNormalFontSize ]
 ]
 
 { #category : #'*GToolkit-Documenter' }

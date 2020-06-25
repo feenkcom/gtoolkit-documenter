@@ -34,7 +34,7 @@ GtDocument class >> forFile: aFileReference [
 
 { #category : #testing }
 GtDocument class >> isDeprecated [
-	^ false
+	^ true
 ]
 
 { #category : #accessing }
