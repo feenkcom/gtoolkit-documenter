@@ -441,6 +441,11 @@ GtDocument >> noInteractions [
 	self styleTextRequest
 ]
 
+{ #category : #accessing }
+GtDocument >> normalFontSize [
+	^ 12
+]
+
 { #category : #actions }
 GtDocument >> parse [
 	"Message #isPetit2Failure helps to distinguish between a parsed document or a parser error"

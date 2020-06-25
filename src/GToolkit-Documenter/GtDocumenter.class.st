@@ -64,7 +64,7 @@ GtDocumenter >> cacheAt: aKey ifPresent: aPresentBlock ifAbsentPut: anAbsentBloc
 
 { #category : #'api - storage' }
 GtDocumenter >> classComment: aClass [
-	documenterModel classComment: aClass
+	self editorElement classComment: aClass
 ]
 
 { #category : #defaults }
@@ -104,7 +104,7 @@ GtDocumenter >> evaluationReceiver [
 
 { #category : #'api - storage' }
 GtDocumenter >> fileReference: aFileReference [ 
-	documenterModel fileReference: aFileReference
+	self editorElement fileReference: aFileReference
 ]
 
 { #category : #'api - styling' }
@@ -131,7 +131,7 @@ GtDocumenter >> initialize [
 GtDocumenter >> initializeEditor [
 	| anEditor |
 	anEditor := GtDocumenterEditor new
-		look: GtDocumenterEditorLook.
+		look: GtDocumenterEditorLook + GtDocumenterEditorCompleterLook.
 			
 	self addChild: anEditor as: #editor.
 	
@@ -147,7 +147,7 @@ GtDocumenter >> isSubscribedToSystem [
 { #category : #'api - storage' }
 GtDocumenter >> name [
 	<return: #String>
-	^ documenterModel name
+	^ self storage name
 ]
 
 { #category : #'api - styling' }
@@ -196,7 +196,7 @@ GtDocumenter >> privateStyleText [
 
 { #category : #'api - storage' }
 GtDocumenter >> read [
-	documenterModel read
+	self storage read
 ]
 
 { #category : #'api - resourcer' }
@@ -208,12 +208,12 @@ GtDocumenter >> resourcer [
 GtDocumenter >> rootDirectory [
 	"Return root directory to access external data, e.g., images, change files"
 	<return: #FileReference>
-	^ documenterModel rootDirectory
+	^ self storage rootDirectory
 ]
 
 { #category : #'api - storage' }
 GtDocumenter >> save [
-	documenterModel save
+	self storage save
 ]
 
 { #category : #'api - styling' }
@@ -226,7 +226,7 @@ GtDocumenter >> showMarkup [
 { #category : #'api - storage' }
 GtDocumenter >> storage [
 	<return: #GtStorageStrategy>
-	^ documenterModel storage
+	^ self editorElement storage
 ]
 
 { #category : #'api - storage' }
