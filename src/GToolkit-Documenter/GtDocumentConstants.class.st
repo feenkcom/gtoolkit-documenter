@@ -216,8 +216,8 @@ GtDocumentConstants class >> headerBottomMargin [
 ]
 
 { #category : #text }
-GtDocumentConstants class >> headerFontSize [
-	^ 42
+GtDocumentConstants class >> headerFontSizeMultiplier [
+	^ 3
 ]
 
 { #category : #text }
@@ -296,11 +296,6 @@ GtDocumentConstants class >> insertLineIdentificator [
 { #category : #ui }
 GtDocumentConstants class >> issuesButtonLabel [
 	^ 'Issues'
-]
-
-{ #category : #text }
-GtDocumentConstants class >> labelFontSize [
-	^ 12
 ]
 
 { #category : #'pillar parameter names' }

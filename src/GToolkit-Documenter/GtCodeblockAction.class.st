@@ -49,10 +49,10 @@ GtCodeblockAction >> cursorPositionDo: aBlock [
 
 { #category : #accessing }
 GtCodeblockAction >> document [
-	<return: #GtDocument>
+	<return: #GtDocumenter>
 	self
 		assert: [ document isNotNil ] 
-		description: [ 'Document instance must be itialized before using it' ].
+		description: [ 'Documenter instance must be initialized before using it' ].
 	^ document
 ]
 

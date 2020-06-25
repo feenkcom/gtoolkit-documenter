@@ -23,7 +23,7 @@ GtNodeResource >> allResources [
 
 { #category : #accessing }
 GtNodeResource >> document [
-	<return: #GtDocument>
+	<return: #GtDocumenter>
 	^ document
 ]
 
@@ -46,7 +46,9 @@ GtNodeResource >> gtResourcesFor: aView [
 GtNodeResource >> gtTextFor: aView [
 	<gtView>
 	self document ifNil: [ ^ aView empty ].
-	^ self document gtTextFor: aView
+	^ aView explicit
+		title: 'Document';
+		stencil: [ self document ]
 ]
 
 { #category : #initialization }

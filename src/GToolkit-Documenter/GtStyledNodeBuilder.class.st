@@ -105,10 +105,10 @@ GtStyledNodeBuilder >> cursorLeaveAction: anAction [
 
 { #category : #accessing }
 GtStyledNodeBuilder >> document [
-	<return: #GtDocument>
+	<return: #GtDocumenter>
 	self
 		assert: [ document isNotNil ] 
-		description: [ 'Document instance must be itialized before using it' ].
+		description: [ 'Documenter instance must be initialized before using it' ].
 	^ document
 ]
 
@@ -306,7 +306,7 @@ GtStyledNodeBuilder >> linkButton [
 					maySplitString: self properties name value 
 					collect: [ :eachLabel | 
 						BrButton new 
-							look: BrGlamorousLinkSquaredButtonWithLabelLook;
+							look: (BrGlamorousLinkSquaredButtonWithLabelLook new fontSize: self normalFontSize);
 							beSmall;
 							margin: (BlInsets top: -1 left: 0 bottom: 0 right: 0);
 							label: eachLabel;
@@ -402,6 +402,11 @@ GtStyledNodeBuilder >> node: aPRDocumentItem [
 { #category : #'accessing - node' }
 GtStyledNodeBuilder >> nodeText [
 	^ self text from: self start to: self stop
+]
+
+{ #category : #'accessing - document' }
+GtStyledNodeBuilder >> normalFontSize [
+	^ self document normalFontSize
 ]
 
 { #category : #'style - cursor' }

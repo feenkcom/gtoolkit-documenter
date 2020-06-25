@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'normalFontSize'
 	],
-	#category : #'GToolkit-Documenter-! Core'
+	#category : #'GToolkit-Documenter-! Editor - Events'
 }
 
 { #category : #accessing }

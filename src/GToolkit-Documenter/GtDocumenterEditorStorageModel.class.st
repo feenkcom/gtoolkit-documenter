@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'storage'
 	],
-	#category : #'GToolkit-Documenter-! Core'
+	#category : #'GToolkit-Documenter-! Editor - Model'
 }
 
 { #category : #'api - storage' }
@@ -31,6 +31,12 @@ GtDocumenterEditorStorageModel >> evaluationReceiver [
 	"Return an object that is used as a receiver (self) in a codeblock (code snippet) evalution"
 	<return: #Object>
 	^ self storage evaluationReceiver
+]
+
+{ #category : #'api - storage' }
+GtDocumenterEditorStorageModel >> exists [
+	<return: #Boolean>
+	^ self storage exists
 ]
 
 { #category : #'api - storage' }

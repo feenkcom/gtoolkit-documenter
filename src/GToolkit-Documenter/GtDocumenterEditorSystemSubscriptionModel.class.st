@@ -9,7 +9,7 @@ Class {
 		'isSubscribedToSystem',
 		'variableBindings'
 	],
-	#category : #'GToolkit-Documenter-! Core'
+	#category : #'GToolkit-Documenter-! Editor - Model'
 }
 
 { #category : #'api - announcer' }

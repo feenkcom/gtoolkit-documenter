@@ -18,10 +18,16 @@ GtExamplesStatusLabelAttribute class >> constants [
 ]
 
 { #category : #accessing }
-GtExamplesStatusLabelAttribute >> affect: aTBrTextEditorTextualPiece in: anEditorElement [
+GtExamplesStatusLabelAttribute >> constants [
+	^ GtDocumentConstants
+]
+
+{ #category : #accessing }
+GtExamplesStatusLabelAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
+
 	| anElement |
 	anElement := BrLabel new
-		look: (BrGlamorousLabelLook new fontSize: self constants labelFontSize);
+		look: (BrGlamorousLabelLook new fontSize: anEditorElement normalFontSize);
 		text: self resultLabel.
 	anElement margin: (BlInsets left: 5);
 		padding:
@@ -31,11 +37,6 @@ GtExamplesStatusLabelAttribute >> affect: aTBrTextEditorTextualPiece in: anEdito
 				bottom: 0
 				right: 0).
 	^ anElement
-]
-
-{ #category : #accessing }
-GtExamplesStatusLabelAttribute >> constants [
-	^ GtDocumentConstants
 ]
 
 { #category : #initialization }

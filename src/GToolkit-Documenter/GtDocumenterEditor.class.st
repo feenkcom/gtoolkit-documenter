@@ -6,7 +6,7 @@ Class {
 		'storageModel',
 		'subscriptionModel'
 	],
-	#category : #'GToolkit-Documenter-! Core'
+	#category : #'GToolkit-Documenter-! Editor - UI'
 }
 
 { #category : #'api - announcer' }
@@ -49,6 +49,12 @@ GtDocumenterEditor >> evaluationReceiver [
 	It is typically a class in case of class comment, file in case of file content, and nil in other cases."
 	<return: #Object>
 	^ storageModel evaluationReceiver
+]
+
+{ #category : #'api - storage' }
+GtDocumenterEditor >> exists [
+	<return: #Boolean>
+	^ storageModel exists
 ]
 
 { #category : #'api - storage' }

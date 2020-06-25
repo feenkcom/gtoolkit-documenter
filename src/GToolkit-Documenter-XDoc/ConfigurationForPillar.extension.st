@@ -13,7 +13,7 @@ ConfigurationForPillar >> gtDataWriter: aGt2ExternalDataWriter [
 
 { #category : #'*GToolkit-Documenter-XDoc' }
 ConfigurationForPillar >> gtDocument [
-	<return: #GtDocument>
+	<return: #GtDocumenter>
 	^ self propertyAt: #gtDocument
 ]
 

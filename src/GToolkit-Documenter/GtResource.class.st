@@ -64,7 +64,7 @@ GtResource >> printOn: aStream [
 
 { #category : #accessing }
 GtResource >> source [
-	<return: #GtDocument>
+	<return: #GtDocumenter>
 	^ source
 ]
 

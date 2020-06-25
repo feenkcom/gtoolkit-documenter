@@ -10,7 +10,7 @@ Class {
 
 { #category : #accessing }
 GtStylerEventHandler >> document [
-	<return: #GtDocument>
+	<return: #GtDocumenter>
 	^ document
 ]
 

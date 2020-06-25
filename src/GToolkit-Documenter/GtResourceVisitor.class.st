@@ -50,7 +50,7 @@ GtResourceVisitor >> addResource: aFileReference named: aString asDocument: aDoc
 	| aResource |
 	aResource := aDocumentResourceClass new 
 			source: self document;
-			document: (GtDocument forFile: aFileReference);
+			document: (GtDocumenter forFile: aFileReference);
 			name: aString.
 	self addDocumentResource: aResource.
 ]
@@ -103,7 +103,7 @@ GtResourceVisitor >> computeResources: aGt2NodeReference [
 
 { #category : #accessing }
 GtResourceVisitor >> document [
-	<return: #GtDocument>
+	<return: #GtDocumenter>
 	^ documentResource document
 ]
 
@@ -260,7 +260,7 @@ GtResourceVisitor >> visitGt2ClassAnnotation: aGt2ClassAnnotation [
 		ifFalse: [ ^ super visitGt2ClassAnnotation: aGt2ClassAnnotation ].
 	aResource := GtClassResource new 
 			source: self document;
-			document: (GtDocument forClass: aRGClassDefinitionOrNil realClass);
+			document: (GtDocumenter forClass: aRGClassDefinitionOrNil realClass);
 			name: aRGClassDefinitionOrNil name.
 	self addDocumentResource: aResource.
 	super visitGt2ClassAnnotation: aGt2ClassAnnotation
