@@ -40,6 +40,45 @@ GtDocumenter >> basename [
 	^ self editorElement basename
 ]
 
+{ #category : #'api - user actions' }
+GtDocumenter >> browseClass [
+	| aPRDocumentOrError |
+	aPRDocumentOrError := self ast. 
+	aPRDocumentOrError isPetit2Failure ifTrue: [ ^ self ].
+	aPRDocumentOrError accept: (
+		GtCodeblockActionVisitor new 
+			action: (GtCodeblockBrowseClassAction new 
+				document: self;
+				text: self text;
+				element: self editorElement))
+]
+
+{ #category : #'api - user actions' }
+GtDocumenter >> browseImplementors [
+	| aPRDocumentOrError |
+	aPRDocumentOrError := self ast. 
+	aPRDocumentOrError isPetit2Failure ifTrue: [ ^ self ].
+	aPRDocumentOrError accept: (
+		GtCodeblockActionVisitor new 
+			action: (GtCodeblockBrowseImplementorsAction new 
+				document: self;
+				text: self text;
+				element: self editorElement))
+]
+
+{ #category : #'api - user actions' }
+GtDocumenter >> browseReferences [
+	| aPRDocumentOrError |
+	aPRDocumentOrError := self ast. 
+	aPRDocumentOrError isPetit2Failure ifTrue: [ ^ self ].
+	aPRDocumentOrError accept: (
+		GtCodeblockActionVisitor new 
+			action: (GtCodeblockBrowseReferencesAction new 
+				document: self;
+				text: self text;
+				element: self editorElement))
+]
+
 { #category : #'api - cache' }
 GtDocumenter >> cache [
 	"Text attributes can cache values.
@@ -77,6 +116,31 @@ GtDocumenter >> displayMarkup [
 			'`@receiver displayMarkup'
 				-> '`@receiver showMarkup'.
 	self showMarkup
+]
+
+{ #category : #'api - user actions' }
+GtDocumenter >> doItAndGoSelectionOrAll [
+	| aPRDocumentOrError |
+	aPRDocumentOrError := self ast. 
+	aPRDocumentOrError isPetit2Failure ifTrue: [ ^ self ].
+	aPRDocumentOrError accept: (GtCodeblockActionVisitor new 
+		action: (GtCodeblockEvaluator new
+			document: self;
+			text: self text;
+			condition: [ :anEvaluator | anEvaluator isCursorPlacedInTheBody ]))
+]
+
+{ #category : #'api - user actions' }
+GtDocumenter >> doItSelectionOrAll [
+	| aPRDocumentOrError |
+	aPRDocumentOrError := self ast. 
+	aPRDocumentOrError isPetit2Failure ifTrue: [ ^ self ].
+	aPRDocumentOrError accept: (GtCodeblockActionVisitor new 
+		action: (GtCodeblockEvaluator new
+			document: self;
+			text: self text;
+			doNotDisplayResult;
+			condition: [ :anEvaluator | anEvaluator isCursorPlacedInTheBody ]))
 ]
 
 { #category : #editor }
@@ -118,6 +182,7 @@ GtDocumenter >> initialize [
 				BrLayoutHorizontalResizerModel matchParent.
 				BrLayoutVerticalResizerModel matchParent }).
 	self initializeEditor.
+	self initializeShortcuts.
 
 	self look: BrLayoutResizerLook inherit.
 	self matchParent.
@@ -132,6 +197,27 @@ GtDocumenter >> initializeEditor [
 	self addChild: anEditor as: #editor.
 	
 	anEditor document: self.
+]
+
+{ #category : #initialization }
+GtDocumenter >> initializeShortcuts [
+
+	self editorElement
+		addShortcut: (BlShortcut new
+			combination: BlKeyCombination primaryM;
+			action: [ :anEvent | self browseImplementors ]);
+		addShortcut: (BlShortcut new
+			combination: BlKeyCombination primaryN;
+			action: [ :anEvent | self browseReferences ]);
+		addShortcut: (BlShortcut new
+			combination: BlKeyCombination primaryB;
+			action: [ :anEvent | self browseClass ]);
+		addShortcut: (BlShortcut new
+			combination: BlKeyCombination primaryD;
+			action: [ :anEvent | self doItSelectionOrAll ]);
+		addShortcut: (BlShortcut new
+			combination: BlKeyCombination primaryG;
+			action: [ :anEvent | self doItAndGoSelectionOrAll ])
 ]
 
 { #category : #'api - announcer' }

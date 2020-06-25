@@ -107,7 +107,7 @@ PRCodeblock >> evaluationAction [
 		"create a `once` subscription to restyle text once code snippet is executed.
 		We should not restyle text right after the `execute` statement since execution
 		could happen asynchronous"
-		(self gtDocument
+		(self gtDocument systemAnnouncer
 			when: GtCodeblockEvalutedAnnouncement
 			doOnce: [
 				self gtDocument styleTextRequest ]
