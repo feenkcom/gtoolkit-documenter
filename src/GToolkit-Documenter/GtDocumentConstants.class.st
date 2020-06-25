@@ -217,7 +217,7 @@ GtDocumentConstants class >> headerBottomMargin [
 
 { #category : #text }
 GtDocumentConstants class >> headerFontSizeMultiplier [
-	^ 3
+	^ 2
 ]
 
 { #category : #text }
@@ -367,7 +367,7 @@ GtDocumentConstants class >> paragraphBottomMargin [
 { #category : #margins }
 GtDocumentConstants class >> paragraphMargin [
 	^ BlInsets 
-		top: 0 
+		top: self paragraphTopMargin
 		left: 0 
 		bottom: self paragraphBottomMargin 
 		right: 0
