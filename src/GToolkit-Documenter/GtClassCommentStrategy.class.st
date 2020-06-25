@@ -77,8 +77,7 @@ GtClassCommentStrategy >> rootDirectory [
 ]
 
 { #category : #actions }
-GtClassCommentStrategy >> store: aGt2Document [ 
-	| aNewContent aBackupFile |
+GtClassCommentStrategy >> save: aGt2Document [ 
 	self 
 		assert: [ self classToComment notNil ]
 		description: [ 'Class to document must be non-nil to store a comment there' ].

@@ -1,28 +1,38 @@
 Class {
-	#name : #GtStyler,
+	#name : #GtDocumenterStyler,
 	#superclass : #BlTextStyler,
+	#traits : 'TBlTextStyleable',
+	#classTraits : 'TBlTextStyleable classTrait',
 	#instVars : [
 		'parser',
 		'document',
 		'editorEventHandler',
-		'mode'
+		'mode',
+		'attributesBuilder'
 	],
 	#category : #'GToolkit-Documenter-Styler'
 }
 
+{ #category : #accessing }
+GtDocumenterStyler >> attributesBuilder [
+	<return: #BlTextAttributesBuilder>
+	
+	^ attributesBuilder
+]
+
 { #category : #initialization }
-GtStyler >> displayMarkup [
+GtDocumenterStyler >> displayMarkup [
 	self mode: GtStylerStrategy displayMarkup
 ]
 
 { #category : #accessing }
-GtStyler >> document [
+GtDocumenterStyler >> document [
 	<return: #GtDocument>
 	^ document
 ]
 
 { #category : #accessing }
-GtStyler >> document: aGt2Document [
+GtDocumenterStyler >> document: aGt2Document [
 	document ifNotNil: [ :anOldDocument | anOldDocument editor removeEventHandler: self ].
 	self 
 		assert: [ aGt2Document notNil ]
@@ -33,25 +43,27 @@ GtStyler >> document: aGt2Document [
 ]
 
 { #category : #initialization }
-GtStyler >> hideMarkup [
+GtDocumenterStyler >> hideMarkup [
 	self mode: GtStylerStrategy hideMarkup
 ]
 
 { #category : #initialization }
-GtStyler >> initialize [
+GtDocumenterStyler >> initialize [
 	super initialize.
 	editorEventHandler := GtStylerEventHandler new subscriber: self.
 	mode := GtStylerStrategy displayMarkup.
+
+	attributesBuilder := BlTextDelegatedAttributesBuilder new.	
 ]
 
 { #category : #accessing }
-GtStyler >> mode [
+GtDocumenterStyler >> mode [
 	<return: #GtStylerStrategy>
 	^ mode
 ]
 
 { #category : #accessing }
-GtStyler >> mode: aGt2StylerStrategy [
+GtDocumenterStyler >> mode: aGt2StylerStrategy [
 	self 
 		assert: [ aGt2StylerStrategy notNil ] 
 		description: [ 'Styling strategy must be non-nil' ].
@@ -59,18 +71,18 @@ GtStyler >> mode: aGt2StylerStrategy [
 ]
 
 { #category : #initialization }
-GtStyler >> noInteractions [
+GtDocumenterStyler >> noInteractions [
 	self mode: GtStylerStrategy noInteractions
 ]
 
 { #category : #accessing }
-GtStyler >> parser [
+GtDocumenterStyler >> parser [
 	<return: #PRPillarParser>
 	^ parser ifNil: [ parser := PRPillarParser new optimize ]
 ]
 
 { #category : #accessing }
-GtStyler >> parser: aPRPillarParser [
+GtDocumenterStyler >> parser: aPRPillarParser [
 	self 
 		assert: [ aPRPillarParser notNil ]
 		description: [ 'Pillar parser for styling text must be non-nil' ].
@@ -78,7 +90,7 @@ GtStyler >> parser: aPRPillarParser [
 ]
 
 { #category : #private }
-GtStyler >> privateStyle: aText [
+GtDocumenterStyler >> privateStyle: aText [
 	<return: #BlRope>
 	| aPRDocument |
 	self document unsubscribe: self.
@@ -90,6 +102,9 @@ GtStyler >> privateStyle: aText [
 	self
 		assert: [ aPRDocument isPetit2Failure not ] 
 		description: [ 'Target text should be a valid Pillar format' ].
+		
+	self attributesBuilder applyOn: aText.
+	
 	aPRDocument accept: (GtStylerVisitor new 
 		document: self document;
 		mode: self mode;

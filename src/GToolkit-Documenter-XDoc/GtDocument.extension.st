@@ -9,6 +9,17 @@ GtDocument >> deleteXDocWithInformation: aXdShareInformation [
 ]
 
 { #category : #'*GToolkit-Documenter-XDoc' }
+GtDocument >> gtXDocPublishActionFor: anAction [
+	<gtAction>
+	^ anAction dropdown 
+		icon: BrGlamorousIcons tocloud;
+		tooltip: 'Publish to Feenk blog';
+		forViewDefinedIn: #gtTextFor:;
+		priority: 55;
+		content: [ XdDocumenterShareDialogStencil new document: self ]
+]
+
+{ #category : #'*GToolkit-Documenter-XDoc' }
 GtDocument >> publishXDocWithInformation: aXdShareInformation [
 	| anXdFile |
 	anXdFile := self saveToXDocWithInformation: aXdShareInformation.

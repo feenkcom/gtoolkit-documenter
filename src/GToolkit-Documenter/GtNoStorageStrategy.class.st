@@ -60,6 +60,6 @@ GtNoStorageStrategy >> rootDirectory [
 ]
 
 { #category : #actions }
-GtNoStorageStrategy >> store: aGt2Document [ 
+GtNoStorageStrategy >> save: aGt2Document [ 
 	"ignore"
 ]

@@ -14,7 +14,7 @@ Class {
 		'pillarParser',
 		'addOns'
 	],
-	#category : #'GToolkit-Documenter-Document'
+	#category : #'GToolkit-Documenter-! Core'
 }
 
 { #category : #accessing }
@@ -171,7 +171,7 @@ GtDocument >> constants [
 
 { #category : #initialization }
 GtDocument >> defaultStyler [
-	^ GtStyler new 
+	^ GtDocumenterStyler new 
 		document: self; 
 		parser: self pillarParser;
 		hideMarkup
@@ -184,9 +184,7 @@ GtDocument >> defaultText [
 
 { #category : #initialization }
 GtDocument >> displayMarkup [
-	self editor styler mode isEditing ifTrue: [ ^ self ].
-	self editor styler displayMarkup.
-	self styleTextRequest.
+	self showMarkup
 ]
 
 { #category : #actions }
@@ -329,17 +327,6 @@ GtDocument >> gtTextFor: aView [
 			action: [ :aWidget | aWidget phlow spawnObject: self parse ]
 ]
 
-{ #category : #xdocs }
-GtDocument >> gtXDocPublishActionFor: anAction [
-	<gtAction>
-	^ anAction dropdown 
-		icon: BrGlamorousIcons tocloud;
-		tooltip: 'Publish to Feenk blog';
-		forViewDefinedIn: #gtTextFor:;
-		priority: 55;
-		content: [ XdDocumenterShareDialogStencil new document: self ]
-]
-
 { #category : #'announcement handling' }
 GtDocument >> handleSystemChangeAnnouncement: aSystemAnnouncement [
 	announcer announce: aSystemAnnouncement
@@ -454,6 +441,11 @@ GtDocument >> noInteractions [
 	self styleTextRequest
 ]
 
+{ #category : #accessing }
+GtDocument >> normalFontSize [
+	^ 12
+]
+
 { #category : #actions }
 GtDocument >> parse [
 	"Message #isPetit2Failure helps to distinguish between a parsed document or a parser error"
@@ -493,6 +485,18 @@ GtDocument >> rootDirectory [
 	^ self storage rootDirectory
 ]
 
+{ #category : #actions }
+GtDocument >> save [
+	storageStrategy store: self
+]
+
+{ #category : #initialization }
+GtDocument >> showMarkup [
+	self editor styler mode isEditing ifTrue: [ ^ self ].
+	self editor styler displayMarkup.
+	self styleTextRequest.
+]
+
 { #category : #accessing }
 GtDocument >> storage [
 	<return: #GtStorageStrategy>
@@ -501,7 +505,12 @@ GtDocument >> storage [
 
 { #category : #actions }
 GtDocument >> store [
-	storageStrategy store: self
+	self
+		deprecated: 'Please use save method instead.'
+		transformWith:
+			'`@receiver store'
+				-> '`@receiver save'.
+	self save
 ]
 
 { #category : #initialization }
@@ -536,6 +545,11 @@ GtDocument >> subscribeToSystem [
 		send: #handleSystemChangeAnnouncement:
 		to: self.
 	isSubscribedToSystem := true
+]
+
+{ #category : #announcer }
+GtDocument >> systemAnnouncer [
+	^ self
 ]
 
 { #category : #accessing }

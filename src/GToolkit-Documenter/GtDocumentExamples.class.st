@@ -636,12 +636,12 @@ GtDocumentExamples >> defaultDocument [
 	<gtExample>
 	<after: #useDefaultStylerStrategy>
 	| aDocument |
-	aDocument := GtDocument new.
+	aDocument := GtDocumenter new.
 	aDocument editor useSyncStylerStrategy.
 	documents add: aDocument.
 	self assert: aDocument text asString equals: self emptyContent.
 	self assert: aDocument isSubscribedToSystem not.
-	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument) not.
+	self assert: (SystemAnnouncer uniqueInstance hasSubscriber: aDocument systemSubscriber) not.
 	^ aDocument
 ]
 
@@ -674,7 +674,7 @@ GtDocumentExamples >> documentDeleteMethodAnnotation [
 	aDocument editor styleText.
 	self 
 		assert: aDocument text asString 
-		equals: ( self contentWithExistingMethod last asString).
+		equals: self contentWithExistingMethod last asString.
 	self assert: aDocument isSubscribedToSystem not.
 	^ aDocument
 ]
@@ -713,8 +713,8 @@ GtDocumentExamples >> documentInEditingModeWithMarkups [
 	<gtExample>
 	| aDocument |
 	aDocument := self defaultDocument
-		displayMarkup;
-	 	text: self contentWithMarkups.
+		showMarkup;
+		text: self contentWithMarkups.
 	self assert: aDocument text asString equals: self contentWithMarkups.
 	self assert: aDocument isSubscribedToSystem not.
 	^ aDocument
@@ -758,8 +758,10 @@ GtDocumentExamples >> documentWithClassDefinitionChanges [
 	aChangesFile := self changesFileReferenceWithClassDefinition.
 	aDocument := self defaultDocument fileReference: self fileReference.
 	aDocument text: self contentWithClassDefinitionChanges.
-	aDocument store.
-	self assert: aDocument text asString equals: self contentWithClassDefinitionChanges.
+	aDocument save.
+	self
+		assert: aDocument text asString
+		equals: self contentWithClassDefinitionChanges.
 	self assert: aChangesFile exists.
 	^ aDocument
 ]
@@ -851,8 +853,10 @@ GtDocumentExamples >> documentWithEpiceaChanges [
 	| aDocument |
 	aDocument := self defaultDocument fileReference: self fileReference.
 	aDocument text: self contentWithEpiceaChanges.
-	aDocument store.
-	self assert: aDocument text asString equals: self contentWithEpiceaChanges.
+	aDocument save.
+	self
+		assert: aDocument text asString
+		equals: self contentWithEpiceaChanges.
 	^ aDocument
 ]
 
@@ -1028,9 +1032,11 @@ GtDocumentExamples >> documentWithExternalLinkInEditingMode [
 	<gtExample>
 	| aDocument |
 	aDocument := self defaultDocument text: self contentWithExternalLink.
-	aDocument displayMarkup.
+	aDocument showMarkup.
 	aDocument privateStyleText.
-	self assert: aDocument text asString equals: self contentWithExternalLink.
+	self
+		assert: aDocument text asString
+		equals: self contentWithExternalLink.
 	^ aDocument
 ]
 
@@ -1060,6 +1066,7 @@ GtDocumentExamples >> documentWithFigure [
 { #category : #figure }
 GtDocumentExamples >> documentWithFigureCache [
 	<gtExample>
+	<noTest>
 	| aDocument anElement aSpace anElement2 aSpace2 |
 	aDocument := self documentWithFigure.
 	self assert: aDocument cache size equals: 0.
@@ -1083,7 +1090,7 @@ GtDocumentExamples >> documentWithHeadersInEditingMode [
 	<gtExample>
 	| aDocument |
 	aDocument := self defaultDocument text: self contentWithHeaders.
-	aDocument displayMarkup.
+	aDocument showMarkup.
 	aDocument privateStyleText.
 	self assert: aDocument text asString equals: self contentWithHeaders.
 	self assert: aDocument isSubscribedToSystem not.
@@ -1307,9 +1314,13 @@ GtDocumentExamples >> documentWithTwoExistingExamples [
 	<gtExample>
 	| aDocument aCache |
 	aDocument := self defaultDocument.
-	aDocument displayMarkup; text: self contentWithTwoExistingExamples.
+	aDocument
+		showMarkup;
+		text: self contentWithTwoExistingExamples.
 	aDocument privateStyleText.
-	self assert: aDocument text asString equals: self contentWithTwoExistingExamples.
+	self
+		assert: aDocument text asString
+		equals: self contentWithTwoExistingExamples.
 	self assert: aDocument isSubscribedToSystem.
 	aCache := aDocument cache keys asOrderedCollection.
 	self assert: aCache size equals: 2.
@@ -1488,15 +1499,21 @@ GtDocumentExamples >> modifyAndStoreToClassComment [
 	| aDocument aPreviousComment |
 	aPreviousComment := self classToDocument comment.
 	aDocument := self documentFromClassComment.
-	aDocument editor inserter 
-		at: 0; string: '! Inserted Header', String cr, String cr; insert.
-	aDocument store.
-	self assert: aDocument text asString equals: self classToDocument comment.
+	aDocument editor inserter
+		at: 0;
+		string: '! Inserted Header' , String cr , String cr;
+		insert.
+	aDocument save.
+	self
+		assert: aDocument text asString
+		equals: self classToDocument comment.
 	self assert: (aDocument text asString = aPreviousComment) not.
-	aDocument text: aPreviousComment; store.
+	aDocument
+		text: aPreviousComment;
+		save.
 	self assert: aDocument text asString equals: aPreviousComment.
 	self assert: self classToDocument comment equals: aPreviousComment.
-	^ aDocument 
+	^ aDocument
 ]
 
 { #category : #'file reference document' }
@@ -1504,13 +1521,19 @@ GtDocumentExamples >> modifyAndStoreToFileReference [
 	<gtExample>
 	| aDocument |
 	aDocument := self documentFromFileReference.
-	aDocument editor inserter 
-		at: 0; string: '! Inserted Header', String cr, String cr; insert.
-	aDocument store.
-	self assert: (aDocument text asString endsWith: self contentWithMultipleMethods).
-	self assert: (aDocument text asString = self contentWithMultipleMethods) not.
-	self assert: aDocument storage file contents equals: aDocument text asString.
-	^ aDocument 
+	aDocument editor inserter
+		at: 0;
+		string: '! Inserted Header' , String cr , String cr;
+		insert.
+	aDocument save.
+	self
+		assert: (aDocument text asString endsWith: self contentWithMultipleMethods).
+	self
+		assert: (aDocument text asString = self contentWithMultipleMethods) not.
+	self
+		assert: aDocument storage file contents
+		equals: aDocument text asString.
+	^ aDocument
 ]
 
 { #category : #space }
@@ -1518,6 +1541,7 @@ GtDocumentExamples >> newSpace [
 	<gtExample>
 	| aSpace |
 	aSpace := BlSpace new.
+	aSpace host: BlHeadlessHost new.
 	aSpace title: 'Documenter Examples'.
 	aSpace extent: 600@400.
 	aSpace withHalos.
@@ -1668,14 +1692,14 @@ GtDocumentExamples >> registeredDocument [
 	<gtExample>
 	| aDocument |
 	aDocument := self defaultDocument.
-	aDocument
+	aDocument systemAnnouncer
 		when: SystemAnnouncement
 		do: [ :anAnnouncement | "ignore" ]
 		for: self.
 	self assert: aDocument text asString equals: self emptyContent.
 	self assert: aDocument isSubscribedToSystem.
 	self assert:
-		(SystemAnnouncer uniqueInstance hasSubscriber: aDocument).
+		(SystemAnnouncer uniqueInstance hasSubscriber: aDocument systemSubscriber).
 	aDocument unsubscribe: self.
 	self assert: aDocument isSubscribedToSystem not.
 	self assert:

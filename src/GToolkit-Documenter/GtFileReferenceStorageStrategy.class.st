@@ -64,7 +64,7 @@ GtFileReferenceStorageStrategy >> rootDirectory [
 ]
 
 { #category : #actions }
-GtFileReferenceStorageStrategy >> store: aGt2Document [ 
+GtFileReferenceStorageStrategy >> save: aGt2Document [ 
 	| aNewContent aBackupFile |
 	self 
 		assert: [ self file notNil ]

@@ -148,7 +148,7 @@ GtMethodAnnotation >> referencedMethod [
 
 { #category : #subscriptions }
 GtMethodAnnotation >> registerToSystemChanges [
-	self gtDocument
+	self gtDocument systemAnnouncer
 		when: MethodAdded , MethodRemoved
 			send: #handleMethodAnnouncement:
 			to: self
