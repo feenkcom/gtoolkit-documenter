@@ -71,7 +71,7 @@ GtDocumenterEditorSystemSubscriptionModel >> mayRequestDocumentUpdate [
 			document: aDocumenter) ]
 ]
 
-{ #category : #updating }
+{ #category : #subscriptions }
 GtDocumenterEditorSystemSubscriptionModel >> maySubscribeToSystem [
 	self hasDocumentSubscriptions ifFalse: [ ^ self ].
 	self subscribeToSystem
