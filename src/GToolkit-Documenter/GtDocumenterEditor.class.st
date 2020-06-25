@@ -6,7 +6,7 @@ Class {
 		'storageModel',
 		'subscriptionModel'
 	],
-	#category : #'GToolkit-Documenter-! Core'
+	#category : #'GToolkit-Documenter-! Editor - UI'
 }
 
 { #category : #'api - announcer' }

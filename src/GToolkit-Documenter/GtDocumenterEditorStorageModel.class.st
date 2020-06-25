@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'storage'
 	],
-	#category : #'GToolkit-Documenter-! Core'
+	#category : #'GToolkit-Documenter-! Editor - Model'
 }
 
 { #category : #'api - storage' }

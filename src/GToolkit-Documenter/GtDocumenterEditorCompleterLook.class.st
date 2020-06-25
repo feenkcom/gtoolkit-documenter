@@ -6,7 +6,7 @@ Class {
 		'completionStrategy',
 		'completionController'
 	],
-	#category : #'GToolkit-Documenter-! Core'
+	#category : #'GToolkit-Documenter-! Editor - Look'
 }
 
 { #category : #initialization }

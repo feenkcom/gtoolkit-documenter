@@ -32,6 +32,11 @@ GtDocument class >> forFile: aFileReference [
 	^ self new fileReference: aFileReference; read
 ]
 
+{ #category : #testing }
+GtDocument class >> isDeprecated [
+	^ true
+]
+
 { #category : #accessing }
 GtDocument >> addOns [
 	<return: #GtSourceCoderAddOns>

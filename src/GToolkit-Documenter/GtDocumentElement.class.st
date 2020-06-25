@@ -9,6 +9,11 @@ Class {
 	#category : #'GToolkit-Documenter-! Core'
 }
 
+{ #category : #testing }
+GtDocumentElement class >> isDeprecated [
+	^ true
+]
+
 { #category : #accessing }
 GtDocumentElement >> document [
 	^ document

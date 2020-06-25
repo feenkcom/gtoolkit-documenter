@@ -216,8 +216,8 @@ GtDocumentConstants class >> headerBottomMargin [
 ]
 
 { #category : #text }
-GtDocumentConstants class >> headerFontSize [
-	^ 42
+GtDocumentConstants class >> headerFontSizeMultiplier [
+	^ 3
 ]
 
 { #category : #text }
