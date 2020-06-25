@@ -853,8 +853,10 @@ GtDocumentExamples >> documentWithEpiceaChanges [
 	| aDocument |
 	aDocument := self defaultDocument fileReference: self fileReference.
 	aDocument text: self contentWithEpiceaChanges.
-	aDocument store.
-	self assert: aDocument text asString equals: self contentWithEpiceaChanges.
+	aDocument save.
+	self
+		assert: aDocument text asString
+		equals: self contentWithEpiceaChanges.
 	^ aDocument
 ]
 
@@ -1497,15 +1499,21 @@ GtDocumentExamples >> modifyAndStoreToClassComment [
 	| aDocument aPreviousComment |
 	aPreviousComment := self classToDocument comment.
 	aDocument := self documentFromClassComment.
-	aDocument editor inserter 
-		at: 0; string: '! Inserted Header', String cr, String cr; insert.
-	aDocument store.
-	self assert: aDocument text asString equals: self classToDocument comment.
+	aDocument editor inserter
+		at: 0;
+		string: '! Inserted Header' , String cr , String cr;
+		insert.
+	aDocument save.
+	self
+		assert: aDocument text asString
+		equals: self classToDocument comment.
 	self assert: (aDocument text asString = aPreviousComment) not.
-	aDocument text: aPreviousComment; store.
+	aDocument
+		text: aPreviousComment;
+		save.
 	self assert: aDocument text asString equals: aPreviousComment.
 	self assert: self classToDocument comment equals: aPreviousComment.
-	^ aDocument 
+	^ aDocument
 ]
 
 { #category : #'file reference document' }
@@ -1513,13 +1521,19 @@ GtDocumentExamples >> modifyAndStoreToFileReference [
 	<gtExample>
 	| aDocument |
 	aDocument := self documentFromFileReference.
-	aDocument editor inserter 
-		at: 0; string: '! Inserted Header', String cr, String cr; insert.
-	aDocument store.
-	self assert: (aDocument text asString endsWith: self contentWithMultipleMethods).
-	self assert: (aDocument text asString = self contentWithMultipleMethods) not.
-	self assert: aDocument storage file contents equals: aDocument text asString.
-	^ aDocument 
+	aDocument editor inserter
+		at: 0;
+		string: '! Inserted Header' , String cr , String cr;
+		insert.
+	aDocument save.
+	self
+		assert: (aDocument text asString endsWith: self contentWithMultipleMethods).
+	self
+		assert: (aDocument text asString = self contentWithMultipleMethods) not.
+	self
+		assert: aDocument storage file contents
+		equals: aDocument text asString.
+	^ aDocument
 ]
 
 { #category : #space }

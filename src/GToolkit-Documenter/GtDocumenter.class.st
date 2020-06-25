@@ -40,7 +40,7 @@ GtDocumenter >> ast [
 { #category : #'api - storage' }
 GtDocumenter >> basename [
 	<return: #String>
-	^ self storage basename
+	^ self editorElement basename
 ]
 
 { #category : #'api - cache' }
@@ -99,7 +99,7 @@ GtDocumenter >> evaluationReceiver [
 	"Return an object that is used as a receiver (self) in a codeblock (code snippet) evalution.
 	It is typically a class in case of class comment, file in case of file content, and nil in other cases."
 	<return: #Object>
-	^ self storage evaluationReceiver
+	^ self editorElement evaluationReceiver
 ]
 
 { #category : #'api - storage' }
@@ -147,7 +147,7 @@ GtDocumenter >> isSubscribedToSystem [
 { #category : #'api - storage' }
 GtDocumenter >> name [
 	<return: #String>
-	^ self storage name
+	^ self editorElement name
 ]
 
 { #category : #'api - styling' }
@@ -196,7 +196,7 @@ GtDocumenter >> privateStyleText [
 
 { #category : #'api - storage' }
 GtDocumenter >> read [
-	self storage read
+	self editorElement read
 ]
 
 { #category : #'api - resourcer' }
@@ -208,12 +208,12 @@ GtDocumenter >> resourcer [
 GtDocumenter >> rootDirectory [
 	"Return root directory to access external data, e.g., images, change files"
 	<return: #FileReference>
-	^ self storage rootDirectory
+	^ self editorElement rootDirectory
 ]
 
 { #category : #'api - storage' }
 GtDocumenter >> save [
-	self storage save
+	self editorElement save
 ]
 
 { #category : #'api - styling' }
