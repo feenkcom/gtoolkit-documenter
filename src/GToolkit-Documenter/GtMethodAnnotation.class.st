@@ -175,7 +175,8 @@ GtMethodAnnotation >> styleTextWithMarkup: aBlRope [
 		if: self isMethodDefined
 			do: [ :aStyler | aStyler 
 				name: [ self labelText ];
-				spawnObject: [ self referencedMethod ];
+				spawnTool: [ self referencedMethod ifNotNil: [ :aMethod | 
+					GtMethodCoderTool compiledMethod: aMethod ] ];
 				splitCamelCase;
 				linkButton ].
 	self styleExpandingPreviewInText: aBlRope.
