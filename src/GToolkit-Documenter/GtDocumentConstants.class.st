@@ -298,11 +298,6 @@ GtDocumentConstants class >> issuesButtonLabel [
 	^ 'Issues'
 ]
 
-{ #category : #text }
-GtDocumentConstants class >> labelFontSize [
-	^ 12
-]
-
 { #category : #'pillar parameter names' }
 GtDocumentConstants class >> labelParameterName [
 	^ #label
