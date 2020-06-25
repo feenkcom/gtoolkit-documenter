@@ -304,7 +304,7 @@ GtDocument >> gtSaveActionFor: anAction [
 		tooltip: 'Save document';
 		forViewDefinedIn: #gtTextFor:;
 		priority: 1;
-		action: [ self store ]
+		action: [ self save ]
 ]
 
 { #category : #'gt-extension' }
@@ -492,7 +492,7 @@ GtDocument >> rootDirectory [
 
 { #category : #actions }
 GtDocument >> save [
-	storageStrategy store: self
+	storageStrategy save: self
 ]
 
 { #category : #initialization }
