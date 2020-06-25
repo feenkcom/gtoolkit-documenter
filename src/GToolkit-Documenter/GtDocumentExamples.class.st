@@ -1,5 +1,5 @@
 "
-I exemplify Documenter project. The main class is ${class:GtDocument}$.
+I exemplify Documenter project. The main class is ${class:GtDocumenter}$.
 
 I use ${class:GtDocumentExamplesUtility}$ to simplify examples.
 "

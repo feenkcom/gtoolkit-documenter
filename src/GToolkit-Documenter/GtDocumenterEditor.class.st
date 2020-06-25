@@ -52,6 +52,12 @@ GtDocumenterEditor >> evaluationReceiver [
 ]
 
 { #category : #'api - storage' }
+GtDocumenterEditor >> exists [
+	<return: #Boolean>
+	^ storageModel exists
+]
+
+{ #category : #'api - storage' }
 GtDocumenterEditor >> fileReference: aFileReference [ 
 	storageModel fileReference: aFileReference
 ]

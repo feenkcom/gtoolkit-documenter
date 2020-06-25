@@ -164,6 +164,12 @@ GtDocumenter >> evaluationReceiver [
 ]
 
 { #category : #'api - storage' }
+GtDocumenter >> exists [
+	<return: #Boolean>
+	^ self editorElement exists
+]
+
+{ #category : #'api - storage' }
 GtDocumenter >> fileReference: aFileReference [ 
 	self editorElement fileReference: aFileReference
 ]

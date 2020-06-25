@@ -34,6 +34,12 @@ GtDocumenterEditorStorageModel >> evaluationReceiver [
 ]
 
 { #category : #'api - storage' }
+GtDocumenterEditorStorageModel >> exists [
+	<return: #Boolean>
+	^ self storage exists
+]
+
+{ #category : #'api - storage' }
 GtDocumenterEditorStorageModel >> fileReference: aFileReference [ 
 	self 
 		assert: [ aFileReference notNil ]
