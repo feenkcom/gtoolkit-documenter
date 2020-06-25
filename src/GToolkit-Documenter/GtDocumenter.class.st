@@ -3,9 +3,6 @@ Class {
 	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable',
 	#classTraits : 'TBrLayoutResizable classTrait',
-	#instVars : [
-		'documenterModel'
-	],
 	#category : #'GToolkit-Documenter-! Core'
 }
 
@@ -26,7 +23,7 @@ GtDocumenter class >> forText: aStringOrText [
 
 { #category : #'api - announcer' }
 GtDocumenter >> announce: anAnnouncement [
-	^ documenterModel announce: anAnnouncement
+	^ self editorElement announce: anAnnouncement
 ]
 
 { #category : #'api - ast' }
@@ -117,10 +114,9 @@ GtDocumenter >> hideMarkup [
 { #category : #initialization }
 GtDocumenter >> initialize [
 	super initialize.
-	self viewModel: (documenterModel := GtDocumenterModel new 
-		add: (BrInteractiveModel withAll: {
+	self viewModel: (BrInteractiveModel withAll: {
 				BrLayoutHorizontalResizerModel matchParent.
-				BrLayoutVerticalResizerModel matchParent })).
+				BrLayoutVerticalResizerModel matchParent }).
 	self initializeEditor.
 
 	self look: BrLayoutResizerLook inherit.
@@ -141,7 +137,7 @@ GtDocumenter >> initializeEditor [
 { #category : #'api - announcer' }
 GtDocumenter >> isSubscribedToSystem [
 	<return: #Boolean>
-	^ documenterModel isSubscribedToSystem
+	^ self editorElement isSubscribedToSystem
 ]
 
 { #category : #'api - storage' }
@@ -159,18 +155,6 @@ GtDocumenter >> normalFontSize [
 { #category : #'api - styling' }
 GtDocumenter >> normalFontSize: aNumber [
 	self editorElement normalFontSize: aNumber.
-]
-
-{ #category : #'hooks - children' }
-GtDocumenter >> onAddedToSceneGraph [
-	super onAddedToSceneGraph.
-	documenterModel updateAndSubscribeToSystem
-]
-
-{ #category : #'hooks - children' }
-GtDocumenter >> onRemovedFromSceneGraph [
-	super onRemovedFromSceneGraph.
-	documenterModel unsubscribeFromSystem.
 ]
 
 { #category : #'api - ast' }
@@ -259,12 +243,12 @@ GtDocumenter >> styler [
 { #category : #'api - announcer' }
 GtDocumenter >> systemAnnouncer [
 	<return: #Announcer>
-	^ documenterModel systemAnnouncer
+	^ self editorElement systemAnnouncer
 ]
 
 { #category : #'api - announcer' }
 GtDocumenter >> systemSubscriber [
-	^ documenterModel
+	^ self editorElement systemSubscriber
 ]
 
 { #category : #'api - content' }
@@ -280,11 +264,11 @@ GtDocumenter >> text: aText [
 
 { #category : #'api - announcer' }
 GtDocumenter >> unsubscribe: aSubscriber [
-	^ documenterModel unsubscribe: aSubscriber
+	^ self editorElement unsubscribe: aSubscriber
 ]
 
 { #category : #'api - variables' }
 GtDocumenter >> variableBindings [
 	<return: #GtSnippetBindings>
-	^ documenterModel variableBindings
+	^ self editorElement variableBindings
 ]

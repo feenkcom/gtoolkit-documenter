@@ -47,6 +47,15 @@ GtDocumenterEditorStorageModel >> initialize [
 	storage := self defaultStorage.
 ]
 
+{ #category : #initialization }
+GtDocumenterEditorStorageModel >> initializeListeners [
+	super initializeListeners.
+	
+	self 
+		when: GtDocumenterStorageRequest 
+		reply: [ :aResponse | aResponse storage: self storage ].
+]
+
 { #category : #'api - storage' }
 GtDocumenterEditorStorageModel >> name [
 	<return: #String>

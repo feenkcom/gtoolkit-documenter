@@ -1,5 +1,5 @@
 Class {
-	#name : #GtDocumenterModel,
+	#name : #GtDocumenterEditorSystemSubscriptionModel,
 	#superclass : #BrWidgetModel,
 	#traits : 'TGtDocumentConstants',
 	#classTraits : 'TGtDocumentConstants classTrait',
@@ -13,40 +13,40 @@ Class {
 }
 
 { #category : #'api - announcer' }
-GtDocumenterModel >> announce: anAnnouncement [
+GtDocumenterEditorSystemSubscriptionModel >> announce: anAnnouncement [
 	self announcer announce: anAnnouncement
 ]
 
 { #category : #'api - announcer' }
-GtDocumenterModel >> announcer [
+GtDocumenterEditorSystemSubscriptionModel >> announcer [
 	<return: #Announcer>
 	^ announcer
 ]
 
 { #category : #defaults }
-GtDocumenterModel >> defaultAnnouncer [
+GtDocumenterEditorSystemSubscriptionModel >> defaultAnnouncer [
 	^ GtAnnouncer new
 ]
 
 { #category : #defaults }
-GtDocumenterModel >> defaultVariableBindings [
+GtDocumenterEditorSystemSubscriptionModel >> defaultVariableBindings [
 	^ GtSnippetBindings new
 			at: self constants thisDocument 
 			put: self.
 ]
 
 { #category : #'announcement handling' }
-GtDocumenterModel >> handleSystemChangeAnnouncement: aSystemAnnouncement [
+GtDocumenterEditorSystemSubscriptionModel >> handleSystemChangeAnnouncement: aSystemAnnouncement [
 	self announcer announce: aSystemAnnouncement
 ]
 
 { #category : #subscriptions }
-GtDocumenterModel >> hasDocumentSubscriptions [
+GtDocumenterEditorSystemSubscriptionModel >> hasDocumentSubscriptions [
 	^ self announcer numberOfSubscriptions isZero not
 ]
 
 { #category : #initialization }
-GtDocumenterModel >> initialize [
+GtDocumenterEditorSystemSubscriptionModel >> initialize [
 	super initialize.
 	mutexSubscription := Mutex new.
 	isSubscribedToSystem := false.
@@ -55,23 +55,14 @@ GtDocumenterModel >> initialize [
 	
 ]
 
-{ #category : #initialization }
-GtDocumenterModel >> initializeListeners [
-	super initializeListeners.
-	
-	self 
-		when: GtDocumenterStorageChanged 
-		reply: [ :aResponse | aResponse storage: self storage ].
-]
-
 { #category : #'api - announcer' }
-GtDocumenterModel >> isSubscribedToSystem [
+GtDocumenterEditorSystemSubscriptionModel >> isSubscribedToSystem [
 	<return: #Boolean>
 	^ mutexSubscription critical: [ isSubscribedToSystem ]
 ]
 
 { #category : #updating }
-GtDocumenterModel >> mayRequestDocumentUpdate [
+GtDocumenterEditorSystemSubscriptionModel >> mayRequestDocumentUpdate [
 	self isSubscribedToSystem ifFalse: [ ^ self ].
 	self hasDocumentSubscriptions ifFalse: [ ^ self ].
 	self widgetDo: [ :aDocumenter | 
@@ -81,19 +72,19 @@ GtDocumenterModel >> mayRequestDocumentUpdate [
 ]
 
 { #category : #updating }
-GtDocumenterModel >> maySubscribeToSystem [
+GtDocumenterEditorSystemSubscriptionModel >> maySubscribeToSystem [
 	self hasDocumentSubscriptions ifFalse: [ ^ self ].
 	self subscribeToSystem
 ]
 
 { #category : #subscriptions }
-GtDocumenterModel >> mayUnsubscribeFromSystem [
+GtDocumenterEditorSystemSubscriptionModel >> mayUnsubscribeFromSystem [
 	self hasDocumentSubscriptions ifTrue: [ ^ self ].
 	self unsubscribeFromSystem
 ]
 
 { #category : #subscriptions }
-GtDocumenterModel >> setSubscribedIfAlreadySubscribedDo: aBlock [
+GtDocumenterEditorSystemSubscriptionModel >> setSubscribedIfAlreadySubscribedDo: aBlock [
 	| wantEvaluateBlock |
 	wantEvaluateBlock := false.
 	mutexSubscription critical: [ 
@@ -104,7 +95,7 @@ GtDocumenterModel >> setSubscribedIfAlreadySubscribedDo: aBlock [
 ]
 
 { #category : #subscriptions }
-GtDocumenterModel >> subscribeToSystem [
+GtDocumenterEditorSystemSubscriptionModel >> subscribeToSystem [
 	self setSubscribedIfAlreadySubscribedDo: [ ^ self ].
 	SystemAnnouncer uniqueInstance weak
 		when: SystemAnnouncement
@@ -113,14 +104,19 @@ GtDocumenterModel >> subscribeToSystem [
 ]
 
 { #category : #'api - announcer' }
-GtDocumenterModel >> systemAnnouncer [
+GtDocumenterEditorSystemSubscriptionModel >> systemAnnouncer [
 	<return: #Announcer>
 	self subscribeToSystem.
 	^ self announcer
 ]
 
 { #category : #'api - announcer' }
-GtDocumenterModel >> unsubscribe: anObject [
+GtDocumenterEditorSystemSubscriptionModel >> systemSubscriber [
+	^ self
+]
+
+{ #category : #'api - announcer' }
+GtDocumenterEditorSystemSubscriptionModel >> unsubscribe: anObject [
 	"Unsubscribe all subscriptions of anObject from the receiver"
 	| theRemovedSubscriptions |
 	theRemovedSubscriptions := self announcer unsubscribe: anObject.
@@ -129,7 +125,7 @@ GtDocumenterModel >> unsubscribe: anObject [
 ]
 
 { #category : #subscriptions }
-GtDocumenterModel >> unsubscribeFromSystem [
+GtDocumenterEditorSystemSubscriptionModel >> unsubscribeFromSystem [
 	mutexSubscription critical: [ 
 		self isSubscribedToSystem ifFalse: [ ^ self ].
 		SystemAnnouncer uniqueInstance unsubscribe: self.
@@ -137,14 +133,14 @@ GtDocumenterModel >> unsubscribeFromSystem [
 ]
 
 { #category : #'api - updating' }
-GtDocumenterModel >> updateAndSubscribeToSystem [
+GtDocumenterEditorSystemSubscriptionModel >> updateAndSubscribeToSystem [
 	self 
 		maySubscribeToSystem;
 		mayRequestDocumentUpdate
 ]
 
 { #category : #'api - variables' }
-GtDocumenterModel >> variableBindings [
+GtDocumenterEditorSystemSubscriptionModel >> variableBindings [
 	<return: #GtSnippetBindings>
 	^ variableBindings
 ]

@@ -3,10 +3,16 @@ Class {
 	#superclass : #BrEditor,
 	#instVars : [
 		'normalFontSizeModel',
-		'storageModel'
+		'storageModel',
+		'subscriptionModel'
 	],
 	#category : #'GToolkit-Documenter-! Core'
 }
+
+{ #category : #'api - announcer' }
+GtDocumenterEditor >> announce: anAnnouncement [
+	^ subscriptionModel announce: anAnnouncement
+]
 
 { #category : #'api - storage' }
 GtDocumenterEditor >> basename [
@@ -55,7 +61,14 @@ GtDocumenterEditor >> initialize [
 	super initialize.
 	self viewModel add: (normalFontSizeModel := GtDocumenterEditorNormalFontSizeModel new).
 	self viewModel add: (storageModel := GtDocumenterEditorStorageModel new).
+	self viewModel add: (subscriptionModel := GtDocumenterEditorSystemSubscriptionModel new).
 	self styler: self defaultStyler.
+]
+
+{ #category : #'api - announcer' }
+GtDocumenterEditor >> isSubscribedToSystem [
+	<return: #Boolean>
+	^ subscriptionModel isSubscribedToSystem
 ]
 
 { #category : #'api - storage' }
@@ -73,6 +86,18 @@ GtDocumenterEditor >> normalFontSize [
 { #category : #accessing }
 GtDocumenterEditor >> normalFontSize: aNumber [
 	normalFontSizeModel normalFontSize: aNumber
+]
+
+{ #category : #'hooks - children' }
+GtDocumenterEditor >> onAddedToSceneGraph [
+	super onAddedToSceneGraph.
+	subscriptionModel updateAndSubscribeToSystem
+]
+
+{ #category : #'hooks - children' }
+GtDocumenterEditor >> onRemovedFromSceneGraph [
+	super onRemovedFromSceneGraph.
+	subscriptionModel unsubscribeFromSystem.
 ]
 
 { #category : #'api - storage' }
@@ -111,4 +136,26 @@ GtDocumenterEditor >> store [
 { #category : #'api - styling' }
 GtDocumenterEditor >> styleTextRequest [
 	self editor styleText
+]
+
+{ #category : #'api - announcer' }
+GtDocumenterEditor >> systemAnnouncer [
+	<return: #Announcer>
+	^ subscriptionModel systemAnnouncer
+]
+
+{ #category : #'api - announcer' }
+GtDocumenterEditor >> systemSubscriber [
+	^ subscriptionModel systemSubscriber
+]
+
+{ #category : #'api - announcer' }
+GtDocumenterEditor >> unsubscribe: aSubscriber [
+	^ subscriptionModel unsubscribe: aSubscriber
+]
+
+{ #category : #'api - variables' }
+GtDocumenterEditor >> variableBindings [
+	<return: #GtSnippetBindings>
+	^ subscriptionModel variableBindings
 ]
