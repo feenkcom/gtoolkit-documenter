@@ -1,8 +1,8 @@
 Class {
 	#name : #GtDocumenter,
 	#superclass : #BlElement,
-	#traits : 'TBrLayoutResizable',
-	#classTraits : 'TBrLayoutResizable classTrait',
+	#traits : 'TBrLayoutResizable + TGtDocumentConstants',
+	#classTraits : 'TBrLayoutResizable classTrait + TGtDocumentConstants classTrait',
 	#category : #'GToolkit-Documenter-! Core'
 }
 
@@ -166,6 +166,72 @@ GtDocumenter >> evaluationReceiver [
 { #category : #'api - storage' }
 GtDocumenter >> fileReference: aFileReference [ 
 	self editorElement fileReference: aFileReference
+]
+
+{ #category : #'gt-extension' }
+GtDocumenter >> gtASTActionFor: anAction [
+	<gtAction>
+	^ anAction button
+		icon: BrGlamorousIcons tree;
+		tooltip: 'Display AST nodes';
+		forViewDefinedIn: #gtLiveFor:;
+		priority: 50;
+		action: [ :aWidget | aWidget phlow spawnObject: self parse ]
+]
+
+{ #category : #'gt-extension' }
+GtDocumenter >> gtResourcesFor: aView [
+	<gtView>
+	^ aView mondrian
+		title: 'Resources';
+		priority: 0.3;
+		painting: [ :aMondrian | 
+			| aResource |
+			aResource := self resourcer includeDocuments; allDepth; get.
+			aMondrian nodes 
+				stencil: [ :eachResource |
+					BrCard new
+						size: 200@100;
+						look: BrShadowLook + BrGlamorousLabelLook + BrDescriptionLook 
+							+ BrGlamorousWithVerticalResizerLook + BrGlamorousWithHorizontalResizerLook;
+						margin: (BlInsets all: 10);
+						padding: (BlInsets all: 10);
+						background: Color white;
+						title: (eachResource document name asRopedText bold);
+						description: ((eachResource document text asString 
+								first: (100 min: eachResource document text size))
+							asRopedText foreground: Color gray);
+						action: [ :aBrCard | aBrCard phlow spawnObject: eachResource ] ];
+				with: aResource withAllResources.
+			aMondrian edges 
+				fromRightCenter;
+				toLeftCenter;
+				connectToAll: #resources.
+			aMondrian layout custom: (GtGradHorizontalDominanceCenteredTreeLayout new 
+				levelDistance: 50; nodeDistance: 10) ] 
+]
+
+{ #category : #'gt-extension' }
+GtDocumenter >> gtSaveActionFor: anAction [
+	<gtAction>
+	^ anAction button
+		icon: self constants saveButtonIcon asElement;
+		tooltip: 'Save document';
+		forViewDefinedIn: #gtLiveFor:;
+		priority: 1;
+		action: [ self save ]
+]
+
+{ #category : #'gt-extension' }
+GtDocumenter >> gtShowMarkupActionFor: anAction [
+	<gtAction>
+	^ anAction toggle
+		icon: self constants editButtonIcon;
+		tooltip: 'Show/Hide Markups';
+		forViewDefinedIn: #gtLiveFor:;
+		priority: 3;
+		activatedAction: [ self showMarkup ];
+		deactivatedAction: [ self hideMarkup ]
 ]
 
 { #category : #'api - styling' }
