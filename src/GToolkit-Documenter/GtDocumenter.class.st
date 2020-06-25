@@ -21,6 +21,11 @@ GtDocumenter class >> forText: aStringOrText [
 	^ self new text: aStringOrText
 ]
 
+{ #category : #'api - toolbar' }
+GtDocumenter >> addToobarItem: anElement [
+	self toolbar addItem: anElement
+]
+
 { #category : #'api - announcer' }
 GtDocumenter >> announce: anAnnouncement [
 	^ self editorElement announce: anAnnouncement
@@ -109,8 +114,31 @@ GtDocumenter >> decreaseNormalFontSize [
 ]
 
 { #category : #defaults }
+GtDocumenter >> defaultEditorChildName [
+	^ #editor
+]
+
+{ #category : #defaults }
 GtDocumenter >> defaultStorage [
 	^ GtStorageStrategy null
+]
+
+{ #category : #defaults }
+GtDocumenter >> defaultToolbar [
+	^ BrToolbar new
+		look: BrGlamorousToolbarLook;
+		margin: (BlInsets top: 0 left: 0 bottom: 3 right: 0);
+		visibility: BlVisibility gone;
+		fitContent;
+		constraintsDo: [ :c | 
+			c frame horizontal alignLeft.
+			c frame vertical alignBottom ].
+	
+]
+
+{ #category : #defaults }
+GtDocumenter >> defaultToolbarChildName [
+	^ #toolbar
 ]
 
 { #category : #'api - styling' }
@@ -148,16 +176,16 @@ GtDocumenter >> doItSelectionOrAll [
 			condition: [ :anEvaluator | anEvaluator isCursorPlacedInTheBody ]))
 ]
 
-{ #category : #editor }
+{ #category : #'private - editor' }
 GtDocumenter >> editor [
 	<return: #BrTextEditor>
 	^ self editorElement editor
 ]
 
-{ #category : #editor }
+{ #category : #'private - editor' }
 GtDocumenter >> editorElement [
 	<return: #BrEditor>
-	^ self childNamed: #editor
+	^ self childNamed: self defaultEditorChildName
 ]
 
 { #category : #'api - storage' }
@@ -180,14 +208,11 @@ GtDocumenter >> fileReference: aFileReference [
 ]
 
 { #category : #'gt-extension' }
-GtDocumenter >> gtASTActionFor: anAction [
-	<gtAction>
-	^ anAction button
-		icon: BrGlamorousIcons tree;
-		tooltip: 'Display AST nodes';
-		forViewDefinedIn: #gtLiveFor:;
-		priority: 50;
-		action: [ :aWidget | aWidget phlow spawnObject: self parse ]
+GtDocumenter >> gtLiveFor: aView [
+	^ (super gtLiveFor: aView)
+		actionButtonIcon: BrGlamorousIcons tree
+			tooltip: 'Display AST nodes' 
+			action: [ :aWidget | aWidget phlow spawnObject: self parse ]
 ]
 
 { #category : #'gt-extension' }
@@ -252,6 +277,11 @@ GtDocumenter >> hideMarkup [
 	self styleTextRequest
 ]
 
+{ #category : #'api - toolbar' }
+GtDocumenter >> hideToolbar [
+	self toolbar visibility: BlVisibility gone.
+]
+
 { #category : #'api - styling' }
 GtDocumenter >> increaseNormalFontSize [
 	^ self editorElement increaseNormalFontSize
@@ -265,7 +295,10 @@ GtDocumenter >> initialize [
 				BrLayoutVerticalResizerModel matchParent }).
 	self initializeEditor.
 	self initializeShortcuts.
+	
+	self initializeToolbar.
 
+	self layout: BlFrameLayout new.
 	self look: BrLayoutResizerLook inherit.
 	self matchParent.
 ]
@@ -276,7 +309,7 @@ GtDocumenter >> initializeEditor [
 	anEditor := GtDocumenterEditor new
 		look: GtDocumenterEditorLook + GtDocumenterEditorCompleterLook.
 			
-	self addChild: anEditor as: #editor.
+	self addChild: anEditor as: self defaultEditorChildName.
 	
 	anEditor document: self.
 ]
@@ -300,6 +333,11 @@ GtDocumenter >> initializeShortcuts [
 		addShortcut: (BlShortcut new
 			combination: BlKeyCombination primaryG;
 			action: [ :anEvent | self doItAndGoSelectionOrAll ])
+]
+
+{ #category : #initialization }
+GtDocumenter >> initializeToolbar [
+	self addChild: self defaultToolbar as: self defaultToolbarChildName
 ]
 
 { #category : #'api - announcer' }
@@ -351,6 +389,16 @@ GtDocumenter >> read [
 	self editorElement read
 ]
 
+{ #category : #'api - toolbar' }
+GtDocumenter >> removeToobarItem: anElement [
+	self toolbar removeItem: anElement
+]
+
+{ #category : #'api - toolbar' }
+GtDocumenter >> removeToobarItemAt: anIndex [
+	self toolbar removeItemAt: anIndex
+]
+
 { #category : #'api - resourcer' }
 GtDocumenter >> resourcer [
 	^ GtResourceVisitor new document: self
@@ -373,6 +421,11 @@ GtDocumenter >> showMarkup [
 	self editorElement styler mode isEditing ifTrue: [ ^ self ].
 	self editorElement styler displayMarkup.
 	self styleTextRequest.
+]
+
+{ #category : #'api - toolbar' }
+GtDocumenter >> showToolbar [
+	self toolbar visibility: BlVisibility visible.
 ]
 
 { #category : #'api - storage' }
@@ -402,7 +455,7 @@ GtDocumenter >> styleTextRequest [
 	self editorElement styleTextRequest
 ]
 
-{ #category : #editor }
+{ #category : #'private - editor' }
 GtDocumenter >> styler [
 	<return: #GtDocumenterStyler>
 	^ self editorElement styler.
@@ -430,6 +483,12 @@ GtDocumenter >> text: aText [
 	self editorElement text: aText
 ]
 
+{ #category : #'private - toobar' }
+GtDocumenter >> toolbar [
+	<return: #BrToolbar>
+	^ self childNamed: self defaultToolbarChildName
+]
+
 { #category : #'api - announcer' }
 GtDocumenter >> unsubscribe: aSubscriber [
 	^ self editorElement unsubscribe: aSubscriber
@@ -439,4 +498,14 @@ GtDocumenter >> unsubscribe: aSubscriber [
 GtDocumenter >> variableBindings [
 	<return: #GtSnippetBindings>
 	^ self editorElement variableBindings
+]
+
+{ #category : #'api - toolbar' }
+GtDocumenter >> withDefaultToolbar [
+	self gtActions do: [ :eachAction | 
+		(eachAction target isForViewDefinedIn: #gtLiveFor:) ifTrue: [ 
+			eachAction 
+				asElement: [ :anActionElement |  self addToobarItem: anActionElement ]
+				withHostElement: self ] ].
+	self showToolbar
 ]
