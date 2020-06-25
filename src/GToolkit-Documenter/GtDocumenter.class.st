@@ -37,6 +37,12 @@ GtDocumenter >> ast [
 		self parser parse: self text characters ].
 ]
 
+{ #category : #'api - storage' }
+GtDocumenter >> basename [
+	<return: #String>
+	^ self storage basename
+]
+
 { #category : #'api - cache' }
 GtDocumenter >> cache [
 	"Text attributes can cache values.
@@ -205,6 +211,11 @@ GtDocumenter >> rootDirectory [
 	^ documenterModel rootDirectory
 ]
 
+{ #category : #'api - storage' }
+GtDocumenter >> save [
+	documenterModel save
+]
+
 { #category : #'api - styling' }
 GtDocumenter >> showMarkup [
 	self editorElement styler mode isEditing ifTrue: [ ^ self ].
@@ -220,7 +231,12 @@ GtDocumenter >> storage [
 
 { #category : #'api - storage' }
 GtDocumenter >> store [
-	documenterModel store
+	self
+		deprecated: 'Please use save method instead.'
+		transformWith:
+			'`@receiver store'
+				-> '`@receiver save'.
+	self save
 ]
 
 { #category : #'api - content' }

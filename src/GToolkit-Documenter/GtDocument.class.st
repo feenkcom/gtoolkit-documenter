@@ -480,6 +480,11 @@ GtDocument >> rootDirectory [
 	^ self storage rootDirectory
 ]
 
+{ #category : #actions }
+GtDocument >> save [
+	storageStrategy store: self
+]
+
 { #category : #initialization }
 GtDocument >> showMarkup [
 	self editor styler mode isEditing ifTrue: [ ^ self ].
@@ -495,7 +500,12 @@ GtDocument >> storage [
 
 { #category : #actions }
 GtDocument >> store [
-	storageStrategy store: self
+	self
+		deprecated: 'Please use save method instead.'
+		transformWith:
+			'`@receiver store'
+				-> '`@receiver save'.
+	self save
 ]
 
 { #category : #initialization }

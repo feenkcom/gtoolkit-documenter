@@ -70,6 +70,16 @@ GtStorageStrategy >> rootDirectory [
 ]
 
 { #category : #actions }
-GtStorageStrategy >> store: aGt2Document [ 
+GtStorageStrategy >> save: aGt2Document [ 
 	self subclassResponsibility
+]
+
+{ #category : #actions }
+GtStorageStrategy >> store: aGt2Document [ 
+	self
+		deprecated: 'Please use save: method instead.'
+		transformWith:
+			'`@receiver store: `@argument'
+				-> '`@receiver save: `@argument'.
+	self save: aGt2Document
 ]

@@ -758,8 +758,10 @@ GtDocumentExamples >> documentWithClassDefinitionChanges [
 	aChangesFile := self changesFileReferenceWithClassDefinition.
 	aDocument := self defaultDocument fileReference: self fileReference.
 	aDocument text: self contentWithClassDefinitionChanges.
-	aDocument store.
-	self assert: aDocument text asString equals: self contentWithClassDefinitionChanges.
+	aDocument save.
+	self
+		assert: aDocument text asString
+		equals: self contentWithClassDefinitionChanges.
 	self assert: aChangesFile exists.
 	^ aDocument
 ]

@@ -25,6 +25,12 @@ GtDocumenterModel >> announcer [
 ]
 
 { #category : #'api - storage' }
+GtDocumenterModel >> basename [
+	<return: #String>
+	^ self storage basename
+]
+
+{ #category : #'api - storage' }
 GtDocumenterModel >> classComment: aClass [ 
 	self 
 		assert: [ aClass notNil ]
@@ -132,6 +138,11 @@ GtDocumenterModel >> rootDirectory [
 	^ self storage rootDirectory
 ]
 
+{ #category : #'api - storage' }
+GtDocumenterModel >> save [
+	self widgetDo: [ :aDocumenter | self storage save: aDocumenter ]
+]
+
 { #category : #subscriptions }
 GtDocumenterModel >> setSubscribedIfAlreadySubscribedDo: aBlock [
 	| wantEvaluateBlock |
@@ -155,12 +166,6 @@ GtDocumenterModel >> storage: aGtStorageStrategy [
 		assert: [ aGtStorageStrategy isNotNil ] 
 		description: [ 'Storage strategy must be non-nil' ].
 	storage := aGtStorageStrategy
-]
-
-{ #category : #'api - storage' }
-GtDocumenterModel >> store [
-	self widgetDo: [ :aDocumenter |
-		self storage store: aDocumenter ]
 ]
 
 { #category : #subscriptions }
