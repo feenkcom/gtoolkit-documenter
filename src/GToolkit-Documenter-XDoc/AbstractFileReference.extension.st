@@ -9,5 +9,5 @@ AbstractFileReference >> gtXDocPublishActionFor: anAction [
 		priority: 55;
 		content: [
 			 XdDocumenterShareDialogStencil new 
-			 	document: (GtDocument forFile: self) ].
+			 	document: (GtDocumenter forFile: self) ].
 ]

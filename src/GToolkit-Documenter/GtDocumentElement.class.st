@@ -11,7 +11,7 @@ Class {
 
 { #category : #testing }
 GtDocumentElement class >> isDeprecated [
-	^ true
+	^ false
 ]
 
 { #category : #accessing }

@@ -31,7 +31,7 @@ GtStyleTextProcess >> delay [
 
 { #category : #accessing }
 GtStyleTextProcess >> document [
-	<return: #GtDocument>
+	<return: #GtDocumenter>
 	^ document
 ]
 

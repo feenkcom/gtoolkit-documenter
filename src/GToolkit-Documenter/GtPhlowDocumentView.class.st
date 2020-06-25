@@ -9,11 +9,10 @@ Class {
 
 { #category : #converting }
 GtPhlowDocumentView >> asElementDo: aBlock [
-	| aDocument anElement aText |
-	aDocument := GtDocument new.
-	anElement := aDocument asElementWithoutSaveAction.
-	aText := (self textBuilder glamourValueWithArgs: { anElement. aDocument }) asRopedText.
-	aDocument text: aText.
+	| anElement aText |
+	anElement := GtDocumenter new.
+	aText := (self textBuilder glamourValueWithArgs: { anElement }) asRopedText.
+	anElement text: aText.
 	^ aBlock value: anElement
 ]
 

@@ -105,10 +105,10 @@ GtStyledNodeBuilder >> cursorLeaveAction: anAction [
 
 { #category : #accessing }
 GtStyledNodeBuilder >> document [
-	<return: #GtDocument>
+	<return: #GtDocumenter>
 	self
 		assert: [ document isNotNil ] 
-		description: [ 'Document instance must be itialized before using it' ].
+		description: [ 'Documenter instance must be initialized before using it' ].
 	^ document
 ]
 

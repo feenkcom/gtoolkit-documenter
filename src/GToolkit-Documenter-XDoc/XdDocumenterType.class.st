@@ -7,7 +7,7 @@ Class {
 { #category : #accessing }
 XdDocumenterType class >> mainDocument: aXdDocument ofXdFileInPharo: aXdFile [
 	"Return an Bloc elemment or an object that understands #asElement."
-	<return: #GtDocument>
+	<return: #GtDocumenter>
 	| aFileSystem theAttachments |
 	self
 		assert: [ aXdDocument notNil ] 
@@ -32,7 +32,7 @@ XdDocumenterType class >> mainDocument: aXdDocument ofXdFileInPharo: aXdFile [
 	theAttachments := aXdFile manifest attachmentsForDocument: aXdDocument.
 	^ aFileSystem root files 
 		detect: [ :eachFile | eachFile basename = theAttachments first fileName ] 
-		ifFound: [ :aFileReference | GtDocument forFile: aFileReference ] 
+		ifFound: [ :aFileReference | GtDocumenter forFile: aFileReference ] 
 		ifNone: [ nil ]
 ]
 
@@ -54,10 +54,10 @@ XdDocumenterType class >> openDocument: aXdDocument ofXdFileInPharo: aXdFile [
 { #category : #accessing }
 XdDocumenterType class >> toolForDocument: aXdDocument ofXdFileInPharo: aXdFile [
 	"Return an Bloc elemment or an object that understands #asElement."
-	<return: #GtDocument>
+	<return: #GtDocumenter>
 	| aDocument |
 	aDocument := self mainDocument: aXdDocument ofXdFileInPharo: aXdFile.
-	^ aDocument ifNil: [ GtDocument new ].
+	^ aDocument ifNil: [ GtDocumenter new ].
 ]
 
 { #category : #accessing }

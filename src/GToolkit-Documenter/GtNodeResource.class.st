@@ -23,7 +23,7 @@ GtNodeResource >> allResources [
 
 { #category : #accessing }
 GtNodeResource >> document [
-	<return: #GtDocument>
+	<return: #GtDocumenter>
 	^ document
 ]
 

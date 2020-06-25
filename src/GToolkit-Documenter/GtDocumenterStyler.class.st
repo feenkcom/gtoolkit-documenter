@@ -27,7 +27,7 @@ GtDocumenterStyler >> displayMarkup [
 
 { #category : #accessing }
 GtDocumenterStyler >> document [
-	<return: #GtDocument>
+	<return: #GtDocumenter>
 	^ document
 ]
 

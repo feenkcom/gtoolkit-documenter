@@ -49,7 +49,7 @@ PRDocumentItem >> gtDeckJSExportFor: aView [
 
 { #category : #'*GToolkit-Documenter' }
 PRDocumentItem >> gtDocument [
-	<return: #GtDocument>
+	<return: #GtDocumenter>
 	^ self propertyAt: #gtDocument
 ]
 

@@ -9,5 +9,5 @@ Class >> gtXDocPublishActionFor: anAction [
 		priority: 55;
 		content: [
 			 XdDocumenterShareDialogStencil new 
-			 	document: (GtDocument forClass: self) ].
+			 	document: (GtDocumenter forClass: self) ].
 ]

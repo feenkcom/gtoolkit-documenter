@@ -748,7 +748,7 @@ GtDocumentExamples >> documentWithBrokenFigure [
 { #category : #resourcer }
 GtDocumentExamples >> documentWithClassComment [
 	<gtExample>
-	^ GtDocument forClass: self class
+	^ GtDocumenter forClass: self class
 ]
 
 { #category : #changes }
@@ -1774,19 +1774,19 @@ GtDocumentExamples >> resourcerWithAllDepthInfiniteRecursion [
 { #category : #resourcer }
 GtDocumentExamples >> resourcerWithClasses [
 	<gtExample>
-	| aDocument aClassResource aClass |
-	aDocument := self documentWithClassComment.
-	aClassResource := aDocument resourcer includeClasses; get.
+	| aDocumenter aClassResource aClass |
+	aDocumenter := self documentWithClassComment.
+	aClassResource := aDocumenter resourcer includeClasses; get.
 	self assert: aClassResource notNil.
 	self assert: aClassResource resources size equals: 2.
 	aClass := aClassResource resources first.
-	self assert: aClass name equals: GtDocument name.
-	self assert: aClass source equals: aDocument.
+	self assert: aClass name equals: GtDocumenter name.
+	self assert: aClass source equals: aDocumenter.
 	self assert: aClass resources notNil.
 	self assert: aClass resources isEmpty.
 	aClass := aClassResource resources second.
 	self assert: aClass name equals: GtDocumentExamplesUtility name.
-	self assert: aClass source equals: aDocument.
+	self assert: aClass source equals: aDocumenter.
 	self assert: aClass resources notNil.
 	self assert: aClass resources isEmpty.
 	^ aClassResource
@@ -1801,7 +1801,7 @@ GtDocumentExamples >> resourcerWithClassesMaxDepth [
 	self assert: aClassResource notNil.
 	self assert: aClassResource resources size equals: 2.
 	aClass := aClassResource resources first.
-	self assert: aClass name equals: GtDocument name.
+	self assert: aClass name equals: GtDocumenter name.
 	self assert: aClass source equals: aDocument.
 	self assert: aClass resources notNil.
 	self assert: aClass resources isEmpty.
