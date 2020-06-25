@@ -7,9 +7,19 @@ Class {
 	#category : #'GToolkit-Documenter-! Editor - Model'
 }
 
+{ #category : #'api - font size' }
+GtDocumenterEditorNormalFontSizeModel >> decreaseNormalFontSize [
+	self resizeNormalFontSizeBy: -2
+]
+
 { #category : #defaults }
 GtDocumenterEditorNormalFontSizeModel >> defaultFontSize [
 	^ 16
+]
+
+{ #category : #'api - font size' }
+GtDocumenterEditorNormalFontSizeModel >> increaseNormalFontSize [
+	self resizeNormalFontSizeBy: 2
 ]
 
 { #category : #initialization }
@@ -50,4 +60,14 @@ GtDocumenterEditorNormalFontSizeModel >> normalFontSize: aNumber [
 GtDocumenterEditorNormalFontSizeModel >> notifyNormalFontSizeChanged [
 	self dispatchEvent: (GtDocumenterNormalFontSizeChanged new 
 		normalFontSize: self normalFontSize)
+]
+
+{ #category : #'api - font size' }
+GtDocumenterEditorNormalFontSizeModel >> resizeNormalFontSizeBy: anInteger [
+	| aNewFontSize |
+	self 
+		assert: [ anInteger isInteger ] 
+		description: [ 'Font size resize number must be an integer' ].
+	aNewFontSize := (self normalFontSize + anInteger) max: 5.
+	self normalFontSize: aNewFontSize
 ]

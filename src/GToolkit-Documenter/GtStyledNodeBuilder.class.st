@@ -470,6 +470,11 @@ GtStyledNodeBuilder >> spawnObject: anAction [
 ]
 
 { #category : #'accessing - properties' }
+GtStyledNodeBuilder >> spawnTool: anAction [
+	^ self action: [ :aButton | aButton phlow spawnTool: anAction value ]
+]
+
+{ #category : #'accessing - properties' }
 GtStyledNodeBuilder >> splitBy: aSplitBlock [
 	"Split text into parts and reject some parts"
 	self properties splitBy: aSplitBlock

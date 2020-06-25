@@ -35,7 +35,7 @@ GtClassAnnotation >> accept: aVisitor [
 GtClassAnnotation >> browseReferenceFrom: anEvent [
 	anEvent modifiers isShift ifTrue: [ ^ self ].
 	self isClassDefined ifFalse: [ ^ self inform: 'Class does not exist' ].
-	anEvent target phlow spawnObject: self referencedClass realClass
+	anEvent target phlow spawnTool: (GtClassCoderTool observedClass: self referencedClass realClass)
 ]
 
 { #category : #'accessing - parameter values' }
@@ -164,7 +164,7 @@ GtClassAnnotation >> styleTextWithMarkup: aBlRope [
 		if: self isClassDefined
 			do: [ :aStyler | aStyler 
 				name: [ self labelText ];
-				spawnObject: [ self referencedClass realClass ];
+				spawnTool: [ GtClassCoderTool observedClass: self referencedClass realClass ];
 				splitCamelCase;
 				linkButton ].
 	self styleExpandingPreviewInText: aBlRope.

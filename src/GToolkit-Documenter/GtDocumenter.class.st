@@ -103,6 +103,11 @@ GtDocumenter >> classComment: aClass [
 	self editorElement classComment: aClass
 ]
 
+{ #category : #'api - styling' }
+GtDocumenter >> decreaseNormalFontSize [
+	^ self editorElement decreaseNormalFontSize
+]
+
 { #category : #defaults }
 GtDocumenter >> defaultStorage [
 	^ GtStorageStrategy null
@@ -224,7 +229,7 @@ GtDocumenter >> gtSaveActionFor: anAction [
 		icon: self constants saveButtonIcon asElement;
 		tooltip: 'Save document';
 		forViewDefinedIn: #gtLiveFor:;
-		priority: 1;
+		priority: 3;
 		action: [ self save ]
 ]
 
@@ -245,6 +250,11 @@ GtDocumenter >> hideMarkup [
 	self styler mode isReading ifTrue: [ ^ self ].
 	self styler hideMarkup.
 	self styleTextRequest
+]
+
+{ #category : #'api - styling' }
+GtDocumenter >> increaseNormalFontSize [
+	^ self editorElement increaseNormalFontSize
 ]
 
 { #category : #initialization }
