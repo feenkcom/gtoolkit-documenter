@@ -26,7 +26,7 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 			baseline: 'GToolkitCompleter' with: [
 				spec repository: 'github://feenkcom/gtoolkit-completer:v0.7.556/src' ];
 			baseline: 'GToolkitCoder' with: [
-				spec repository: 'github://feenkcom/gtoolkit-coder:v0.7.669/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-coder:v0.7.670/src' ];
 			baseline: 'GToolkitUtility' with: [
 				spec repository: 'github://feenkcom/gtoolkit-utility:v0.7.36/src' ];
 			baseline: 'GToolkitVariableBindings' with: [
