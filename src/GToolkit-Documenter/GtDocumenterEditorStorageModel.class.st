@@ -1,3 +1,8 @@
+"
+I hold ${class:GtStorageStrategy}$ object that knows how to store a specific document.
+I am used by ${class:GtDocumenterEditor}$.
+
+"
 Class {
 	#name : #GtDocumenterEditorStorageModel,
 	#superclass : #BrWidgetModel,

@@ -1,3 +1,9 @@
+"
+I dynamically subscribe to and unsubscribe from ${class:SystemAnnouncer}$ unique instance.
+I inform document instances, in particular ${class:PRDocumentItem}$ Pillar AST document nodes about system changes.
+I am used by ${class:GtDocumenterEditor}$.
+
+"
 Class {
 	#name : #GtDocumenterEditorSystemSubscriptionModel,
 	#superclass : #BrWidgetModel,
@@ -28,13 +34,6 @@ GtDocumenterEditorSystemSubscriptionModel >> defaultAnnouncer [
 	^ GtAnnouncer new
 ]
 
-{ #category : #defaults }
-GtDocumenterEditorSystemSubscriptionModel >> defaultVariableBindings [
-	^ GtSnippetBindings new
-			at: self constants thisDocument 
-			put: self.
-]
-
 { #category : #'announcement handling' }
 GtDocumenterEditorSystemSubscriptionModel >> handleSystemChangeAnnouncement: aSystemAnnouncement [
 	self announcer announce: aSystemAnnouncement
@@ -51,8 +50,6 @@ GtDocumenterEditorSystemSubscriptionModel >> initialize [
 	mutexSubscription := Mutex new.
 	isSubscribedToSystem := false.
 	announcer := self defaultAnnouncer.
-	variableBindings := self defaultVariableBindings.
-	
 ]
 
 { #category : #'api - announcer' }
@@ -137,10 +134,4 @@ GtDocumenterEditorSystemSubscriptionModel >> updateAndSubscribeToSystem [
 	self 
 		maySubscribeToSystem;
 		mayRequestDocumentUpdate
-]
-
-{ #category : #'api - variables' }
-GtDocumenterEditorSystemSubscriptionModel >> variableBindings [
-	<return: #GtSnippetBindings>
-	^ variableBindings
 ]

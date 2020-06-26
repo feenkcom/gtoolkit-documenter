@@ -1,3 +1,8 @@
+"
+I install ${class:GtDocumentCompletionStrategy}$ on ${class:GtDocumenterEditor}$.
+I am used by ${class:GtDocumenterEditor}$.
+
+"
 Class {
 	#name : #GtDocumenterEditorCompleterLook,
 	#superclass : #BrLook,

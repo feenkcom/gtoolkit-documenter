@@ -1,3 +1,9 @@
+"
+I am a ${class:BrGlamorousEditorLook}$ look.
+I set a normal font size in ${class:GtDocumenterStyler}$ when changed.
+I am used by ${class:GtDocumenterEditor}$.
+
+"
 Class {
 	#name : #GtDocumenterEditorLook,
 	#superclass : #BrGlamorousEditorLook,
