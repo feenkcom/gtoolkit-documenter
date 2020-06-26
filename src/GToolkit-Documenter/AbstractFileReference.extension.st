@@ -11,7 +11,7 @@ aView empty ].
 		title: 'Document';
 		priority: 1;
 		disableAsync;
-		stencil: [ GtDocumenter forFile: self asFileReference ];
+		stencil: [ (GtDocumenter forFile: self asFileReference) withToolBar ];
 		actionButtonIcon: BrGlamorousVectorIcons accept 
 			tooltip: 'Save document' 
 			action: [ :aToggle :aTab | aTab viewContentElement save ];
