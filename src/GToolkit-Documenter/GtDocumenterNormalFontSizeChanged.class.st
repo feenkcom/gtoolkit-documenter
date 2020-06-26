@@ -1,3 +1,7 @@
+"
+I inform about normal font size changes in ${class:GtDocumenterEditor}$.
+
+"
 Class {
 	#name : #GtDocumenterNormalFontSizeChanged,
 	#superclass : #BrEditorChangedEvent,

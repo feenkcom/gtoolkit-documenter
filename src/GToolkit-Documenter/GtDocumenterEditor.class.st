@@ -1,10 +1,23 @@
+"
+I am a ${class:BrEditor}$ specific for ${class:GtDocumenter}$. 
+
+I extend ${class:BrEditor}$ by: 
+- ${class:GtDocumenterEditorNormalFontSizeModel}$,
+- ${class:GtDocumenterEditorStorageModel}$,
+- ${class:GtDocumenterEditorSystemSubscriptionModel}$, and
+- ${class:GtDocumenterEditorVariableBindingsModel}$.
+
+"
 Class {
 	#name : #GtDocumenterEditor,
 	#superclass : #BrEditor,
+	#traits : 'TGtDocumentConstants',
+	#classTraits : 'TGtDocumentConstants classTrait',
 	#instVars : [
 		'normalFontSizeModel',
 		'storageModel',
-		'subscriptionModel'
+		'subscriptionModel',
+		'variableBindindsModel'
 	],
 	#category : #'GToolkit-Documenter-! Editor - UI'
 }
@@ -67,6 +80,17 @@ GtDocumenterEditor >> fileReference: aFileReference [
 	storageModel fileReference: aFileReference
 ]
 
+{ #category : #'gt-extensions' }
+GtDocumenterEditor >> gtVariableBindingsFor: aView [
+	<gtView>
+	variableBindindsModel ifNil: [ ^ aView empty ].
+	^ aView forward
+		title: 'Variables';
+		priority: 3;
+		object: [ variableBindindsModel ];
+		view: #gtVariableBindingsFor:
+]
+
 { #category : #'api - styling' }
 GtDocumenterEditor >> increaseNormalFontSize [
 	^ normalFontSizeModel increaseNormalFontSize
@@ -78,6 +102,10 @@ GtDocumenterEditor >> initialize [
 	self viewModel add: (normalFontSizeModel := GtDocumenterEditorNormalFontSizeModel new).
 	self viewModel add: (storageModel := GtDocumenterEditorStorageModel new).
 	self viewModel add: (subscriptionModel := GtDocumenterEditorSystemSubscriptionModel new).
+	self viewModel add: (variableBindindsModel := GtDocumenterEditorVariableBindingsModel new).
+	self variableBindings
+			at: self constants thisDocument 
+			put: self.
 	self styler: self defaultStyler.
 ]
 
@@ -173,5 +201,5 @@ GtDocumenterEditor >> unsubscribe: aSubscriber [
 { #category : #'api - variables' }
 GtDocumenterEditor >> variableBindings [
 	<return: #GtSnippetBindings>
-	^ subscriptionModel variableBindings
+	^ variableBindindsModel variableBindings
 ]

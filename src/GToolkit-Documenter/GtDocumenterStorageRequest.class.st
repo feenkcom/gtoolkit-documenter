@@ -1,3 +1,7 @@
+"
+I request a current ${class:GtStorageStrategy}$ for ${class:GtDocumenterEditor}$.
+
+"
 Class {
 	#name : #GtDocumenterStorageRequest,
 	#superclass : #BrEditorRequest,

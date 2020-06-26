@@ -1,3 +1,7 @@
+"
+I inform about ${class:GtStorageStrategy}$ changes in ${class:GtDocumenterEditor}$.
+
+"
 Class {
 	#name : #GtDocumenterStorageChanged,
 	#superclass : #BrEditorChangedEvent,

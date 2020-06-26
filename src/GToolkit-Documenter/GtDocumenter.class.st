@@ -1,3 +1,14 @@
+"
+I am a main class for creating and consuming live documents directly in the development environment. 
+I use Pillar markup language for the content rendering.
+
+I am used for:
+- documentation of existing code,
+- tutorials, and
+- interactive data notebook.
+
+
+"
 Class {
 	#name : #GtDocumenter,
 	#superclass : #BlElement,
@@ -270,6 +281,20 @@ GtDocumenter >> gtShowMarkupActionFor: anAction [
 		deactivatedAction: [ self hideMarkup ]
 ]
 
+{ #category : #'gt-extensions' }
+GtDocumenter >> gtVariableBindingsFor: aView [
+	<gtView>
+	self 
+		childNamed: self defaultEditorChildName 
+		ifFound: [ :anEditor | "ignore" ] 
+		ifNone: [ ^ aView empty ].
+	^ aView forward
+		title: 'Variables';
+		priority: 3;
+		object: [ self editorElement ];
+		view: #gtVariableBindingsFor:
+]
+
 { #category : #'api - styling' }
 GtDocumenter >> hideMarkup [
 	self styler mode isReading ifTrue: [ ^ self ].
@@ -294,9 +319,9 @@ GtDocumenter >> initialize [
 				BrLayoutHorizontalResizerModel matchParent.
 				BrLayoutVerticalResizerModel matchParent }).
 	self initializeEditor.
-	self initializeShortcuts.
-	
+	self initializeShortcuts.	
 	self initializeToolbar.
+	self initializeVariableBindings.
 
 	self layout: BlFrameLayout new.
 	self look: BrLayoutResizerLook inherit.
@@ -338,6 +363,13 @@ GtDocumenter >> initializeShortcuts [
 { #category : #initialization }
 GtDocumenter >> initializeToolbar [
 	self addChild: self defaultToolbar as: self defaultToolbarChildName
+]
+
+{ #category : #initialization }
+GtDocumenter >> initializeVariableBindings [
+	self variableBindings
+			at: self constants thisDocument 
+			put: self.
 ]
 
 { #category : #'api - announcer' }
