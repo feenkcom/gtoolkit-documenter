@@ -106,6 +106,7 @@ GtDocumenterEditor >> initialize [
 	self variableBindings
 			at: self constants thisDocument 
 			put: self.
+	self editor stylerStrategy: GtDocumenterTimeLimitedTextStylerTaskItStrategy new.
 	self styler: self defaultStyler.
 ]
 
