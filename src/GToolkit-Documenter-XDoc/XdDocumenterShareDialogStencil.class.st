@@ -14,9 +14,9 @@ XdDocumenterShareDialogStencil >> create [
 	anInformation := XdDocumenterShareInformation default last.
 	anActions := XdShareActions new.
 	anActions 
-		publishAction: [ self document publishXDocWithInformation: anInformation ];
-		updateAction: [ self document updateXDocWithInformation: anInformation ];
-		deleteAction: [ self document deleteXDocWithInformation: anInformation ].
+		publishAction: [ self document xdocPublisher information: anInformation; publish ];
+		updateAction: [ self document xdocPublisher information: anInformation; update ];
+		deleteAction: [ self document xdocPublisher information: anInformation; delete ].
 	^ XdShareDialogElement new  
 		look: XdShareDialogLook;
 		layout: BlLinearLayout vertical;

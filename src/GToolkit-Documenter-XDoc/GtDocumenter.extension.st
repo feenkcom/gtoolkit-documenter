@@ -34,21 +34,11 @@ GtDocumenter >> gtXDocPublishActionFor: anAction [
 ]
 
 { #category : #'*GToolkit-Documenter-XDoc' }
-GtDocumenter >> saveToXDoc [
-	<return: #XdFile>
-	^ self saveToXDocWithInformation: XdShareInformation new
+GtDocumenter >> xdocPublisher [
+	^ XdDocumenterPublisher forDocument: self
 ]
 
 { #category : #'*GToolkit-Documenter-XDoc' }
-GtDocumenter >> saveToXDocWithInformation: aXdShareInformation [
-	<return: #XdFile>
-	^ XdWriter new
-		streamingStrategy: XdStreamingStrategy bytes;
-		document: self;
-		documentHtml: self;
-		preview;
-		title: aXdShareInformation title asString;
-		authorName: aXdShareInformation author asString;
-		description: aXdShareInformation description asString;
-		write.
+GtDocumenter >> xdocSaver [
+	^ XdDocumenterSaver forDocument: self
 ]
