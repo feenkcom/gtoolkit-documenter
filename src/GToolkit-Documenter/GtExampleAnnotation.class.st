@@ -467,7 +467,7 @@ GtExampleAnnotation >> styleTextWithoutMarkup: aBlRope [
 
 { #category : #subscriptions }
 GtExampleAnnotation >> subscribeToExample [
-	^ example announcer weak
+	^ example announcer
 		when: GtExampleExecuted
 		send: #handleExampleExecuted:
 		to: self
