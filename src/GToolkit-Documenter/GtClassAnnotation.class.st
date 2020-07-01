@@ -164,7 +164,10 @@ GtClassAnnotation >> styleTextWithMarkup: aBlRope [
 		if: self isClassDefined
 			do: [ :aStyler | aStyler 
 				name: [ self labelText ];
-				spawnTool: [ GtClassCoderTool observedClass: self referencedClass realClass ];
+				spawnTool: [ 
+					GtPhlowCompositeTool new
+						addTool: (GtDocumenterTool forClass: self referencedClass realClass);
+						addTool: (GtClassCoderTool forClass: self referencedClass realClass) ];
 				splitCamelCase;
 				linkButton ].
 	self styleExpandingPreviewInText: aBlRope.

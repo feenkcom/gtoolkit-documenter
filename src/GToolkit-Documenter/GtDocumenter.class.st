@@ -12,8 +12,8 @@ I am used for:
 Class {
 	#name : #GtDocumenter,
 	#superclass : #BlElement,
-	#traits : 'TBrLayoutResizable + TGtDocumentConstants',
-	#classTraits : 'TBrLayoutResizable classTrait + TGtDocumentConstants classTrait',
+	#traits : 'TBrLayoutResizable + TGtDocumentConstants + TGtPagerPageInstantiator',
+	#classTraits : 'TBrLayoutResizable classTrait + TGtDocumentConstants classTrait + TGtPagerPageInstantiator classTrait',
 	#category : #'GToolkit-Documenter-! Core'
 }
 

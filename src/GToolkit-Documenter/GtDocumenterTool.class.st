@@ -9,12 +9,16 @@ Class {
 
 { #category : #'instance creation' }
 GtDocumenterTool class >> forClass: aClass [
-	^ self new valuable: [ GtDocumenter forClass: aClass ]
+	^ self new valuable: [ (GtDocumenter forClass: aClass) 
+		withDefaultToolbar;
+		asPagerPageElement ]
 ]
 
 { #category : #'instance creation' }
 GtDocumenterTool class >> forFile: aFileReference [
-	^ self new valuable: [ GtDocumenter forFile: aFileReference ]
+	^ self new valuable: [ (GtDocumenter forFile: aFileReference) 
+		withDefaultToolbar;
+		asPagerPageElement ]
 ]
 
 { #category : #'api - converting' }
@@ -25,7 +29,7 @@ GtDocumenterTool >> asElementDo: aOneArgBlock [
 
 { #category : #defaults }
 GtDocumenterTool >> defaultValuable [
-	^ [ GtDocumenter new ]
+	^ [ GtDocumenter new asPagerPageElement ]
 ]
 
 { #category : #initialization }
