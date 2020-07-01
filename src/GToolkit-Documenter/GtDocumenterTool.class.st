@@ -20,7 +20,7 @@ GtDocumenterTool class >> forFile: aFileReference [
 { #category : #'api - converting' }
 GtDocumenterTool >> asElementDo: aOneArgBlock [
 	"Create a tool element and execute the block."
-	aOneArgBlock cull: self valuable value
+	^ aOneArgBlock cull: self valuable value
 ]
 
 { #category : #defaults }
@@ -32,6 +32,11 @@ GtDocumenterTool >> defaultValuable [
 GtDocumenterTool >> initialize [
 	super initialize.
 	valuable := self defaultValuable.
+]
+
+{ #category : #'api - accessing' }
+GtDocumenterTool >> name [
+	^ 'documenter'
 ]
 
 { #category : #'api - accessing' }
