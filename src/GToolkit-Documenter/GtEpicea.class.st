@@ -168,36 +168,34 @@ GtEpicea >> gtEventsFor: aView [
 { #category : #'gt-extension' }
 GtEpicea >> gtGlobalEntriesIn: aView [
 	<gtView>
-	^ aView explicit 
+	^ aView explicit
 		title: 'Global Changes';
 		priority: 20;
-		stencil: [ 
-			| aList aGlobalLog |
+		stencil: [ | aList aGlobalLog |
 			aGlobalLog := EpMonitor current log entries reversed.
-			aList := BrColumnedList new display: aGlobalLog.
+			aList := BrColumnedList new items: aGlobalLog.
 			aList addEventHandler: GtInspectorListToSelectHandler new.
 			aList constraintsDo: [ :c | c padding: (BlInsets top: 10) ].
-			
-			aList column 
+			aList column
 				title: 'Icon';
-				stencil: [ :anOmEntry :anIndex | 
-					(anOmEntry content accept: EpIconVisitor new) asElement ].
-				
-			aList column 
+				stencil:
+						[ :anOmEntry :anIndex | (anOmEntry content accept: EpIconVisitor new) asElement ].
+			aList column
 				title: 'Description';
-				stencil: [ :anOmEntry :anIndex |
-					| anAddButton aContainer | 
+				stencil: [ :anOmEntry :anIndex | 
+					| anAddButton aContainer |
 					anAddButton := BrButton new.
 					anAddButton
 						layout: BlLinearLayout new;
 						look: BrGlamorousButtonWithIconLook;
 						icon: GtInspectorPlusIconStencil new asElement;
-						action: [ 
-							self addEvent: anOmEntry content.
-							anAddButton enqueueTask: (BlTaskAction new 
-								action: [ anAddButton visibility: BlVisibility hidden ]) ];
+						action: [ self addEvent: anOmEntry content.
+							anAddButton
+								enqueueTask:
+									(BlTaskAction new
+										action: [ anAddButton visibility: BlVisibility hidden ]) ];
 						visibility: BlVisibility hidden.
-					aContainer := BlElement new 
+					aContainer := BlElement new
 						layout: BlLinearLayout horizontal;
 						addChildren: (anOmEntry content accept: GtEpiceaBrickVisitor new);
 						addChild: anAddButton;
@@ -205,13 +203,14 @@ GtEpicea >> gtGlobalEntriesIn: aView [
 							c horizontal fitContent.
 							c vertical fitContent.
 							c linear vertical alignCenter ].
-					aContainer when: BlMouseEnterEvent do: [ :anEvent | 
-						anAddButton visibility: BlVisibility visible ].
-					aContainer when: BlMouseLeaveEvent do: [ :anEvent | 
-						anAddButton visibility: BlVisibility hidden ].
+					aContainer
+						when: BlMouseEnterEvent
+						do: [ :anEvent | anAddButton visibility: BlVisibility visible ].
+					aContainer
+						when: BlMouseLeaveEvent
+						do: [ :anEvent | anAddButton visibility: BlVisibility hidden ].
 					aContainer ].
-			aList
-			 ]
+			aList ]
 ]
 
 { #category : #'gt-extension' }
