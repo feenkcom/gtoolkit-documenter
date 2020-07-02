@@ -215,18 +215,13 @@ GtEpicea >> gtGlobalEntriesIn: aView [
 
 { #category : #'gt-extension' }
 GtEpicea >> gtPreviewFor: aView [
-	^ aView explicit
+	^ aView composite
 		title: 'Document Preview';
 		priority: 50;
-		stencil: [  
-			| aExportsViews aCompositeView |
-			aExportsViews := GtPhlowViewsCollector new
+		collectorDo: [ :aCollector |
+			aCollector 
 				pragmaName: #gtViewChanges;
-				fromObject: self;
-				collect.
-			aCompositeView := GtPhlowView empty composite views: aExportsViews.
-			aCompositeView asElementDo: [ :anElement | anElement ]
-		 ]
+				fromObject: self ]
 ]
 
 { #category : #'gt-extension' }
