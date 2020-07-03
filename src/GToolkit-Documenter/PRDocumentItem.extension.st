@@ -61,18 +61,13 @@ PRDocumentItem >> gtDocument: aGt2Document [
 { #category : #'*GToolkit-Documenter' }
 PRDocumentItem >> gtExportsFor: aView [
 	<gtView>
-	^ aView explicit
+	^ aView composite
 		title: 'Exports';
 		priority: 1;
-		stencil: [ 
-			| aExportsViews aCompositeView |
-			aExportsViews :=  GtPhlowViewsCollector new
+		collectorDo: [ :aCollector |
+			aCollector
 				pragmaName: #gtViewExports;
-				fromObject: self;
-				collect.
-			aCompositeView := GtPhlowView empty composite views: aExportsViews.
-			aCompositeView asElementDo: [ :anElement | anElement ]
-		]
+				fromObject: self ]
 ]
 
 { #category : #'*GToolkit-Documenter' }
