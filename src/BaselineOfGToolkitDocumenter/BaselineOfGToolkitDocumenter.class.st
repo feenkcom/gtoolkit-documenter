@@ -1,6 +1,5 @@
 "
 !Documenter
-
 The Documenter is a tool for creating and consuming live documents directly in the development environment. 
 
 At its core it offers a live editor for manipulating Pillar documents. The interaction happens seamlessly directly in the text editor, and it can be combined with different types of previews to serve several classes of use cases:
