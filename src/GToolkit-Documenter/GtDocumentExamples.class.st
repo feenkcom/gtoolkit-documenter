@@ -442,9 +442,9 @@ GtDocumentExamples >> contentWithFigure [
 	+Glamorous Toolkit>
 	', self figureFileUri, '+'"
     ^ '! Glamorous Toolkit
-    The Glamorous Toolkit (GT) is the moldable integrated development environment.
+The Glamorous Toolkit (GT) is the moldable integrated development environment.
 
-    +Glamorous Toolkit>', self figureFileUri, '+'
++Glamorous Toolkit>', self figureFileUri, '+'
 
 ]
 
