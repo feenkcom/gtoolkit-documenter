@@ -48,14 +48,14 @@ GtCodeblockBrowseReferencesAction >> extractReferencesFilter [
 	^ self nodeBodySelection
 		ifNil: [ self referencesFilterAtCursor ]
 		ifNotNil: [ :aSelectedString | 
-			self extractReferencesFilterFromString: aSelectedString ].
+			self extractReferencesFilterFromString: aSelectedString asString ].
 ]
 
 { #category : #private }
 GtCodeblockBrowseReferencesAction >> extractReferencesFilterFromString: aSelectedString [
 	| aPharoNode |
 	aPharoNode := GtPharoParser 
-		parseWithErrors: aSelectedString
+		parseWithErrors: aSelectedString 
 		startingAt: GtPharoParser startingStateForStatement.
 	[ aPharoNode isNil ]
 		whileFalse: [ 

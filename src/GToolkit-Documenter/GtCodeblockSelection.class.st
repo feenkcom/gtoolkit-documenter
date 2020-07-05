@@ -11,6 +11,11 @@ Class {
 }
 
 { #category : #accessing }
+GtCodeblockSelection >> asString [
+	^ self text asString
+]
+
+{ #category : #accessing }
 GtCodeblockSelection >> interval [
 	<return: #Interval>
 	self 
