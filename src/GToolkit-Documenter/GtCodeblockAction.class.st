@@ -91,7 +91,7 @@ GtCodeblockAction >> extractBehavior [
 	aVariableNode := self nodeBodySelection
 		ifNil: [ self variableNodeAtCursor ]
 		ifNotNil: [ :aSelectedString | 
-			self extractVariableNodeFromString: aSelectedString ].
+			self extractVariableNodeFromString: aSelectedString asString ].
 	aVariableNode ifNil: [ ^ nil ].
 	aVariableName := aVariableNode name value asSymbol.
 	aBehavior := Smalltalk globals at: aVariableName ifAbsent: [ nil ].
@@ -128,7 +128,7 @@ GtCodeblockAction >> extractSelectorSymbol [
 	aSelectorSymbol := self nodeBodySelection
 		ifNil: [ self selectorAtCursor ]
 		ifNotNil: [ :aSelectedString | 
-			self extractSelectorFromString: aSelectedString ].
+			self extractSelectorFromString: aSelectedString asString ].
 	^ aSelectorSymbol
 ]
 
