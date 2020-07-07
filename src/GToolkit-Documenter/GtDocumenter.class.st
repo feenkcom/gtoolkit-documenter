@@ -324,7 +324,7 @@ GtDocumenter >> initialize [
 	self initializeVariableBindings.
 
 	self layout: BlFrameLayout new.
-	self look: BrLayoutResizerLook inherit.
+	self look: (BrLayoutResizerLook inherit inherit: self editorElement).
 	self matchParent.
 ]
 
