@@ -532,6 +532,11 @@ GtDocumenter >> variableBindings [
 	^ self editorElement variableBindings
 ]
 
+{ #category : #'api - variables' }
+GtDocumenter >> variableBindings: aGtSnippetBindings [
+	self editorElement variableBindings: aGtSnippetBindings
+]
+
 { #category : #'api - toolbar' }
 GtDocumenter >> withDefaultToolbar [
 	self gtActions do: [ :eachAction | 

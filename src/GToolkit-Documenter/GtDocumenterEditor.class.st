@@ -204,3 +204,8 @@ GtDocumenterEditor >> variableBindings [
 	<return: #GtSnippetBindings>
 	^ variableBindindsModel variableBindings
 ]
+
+{ #category : #'api - variables' }
+GtDocumenterEditor >> variableBindings: aGtSnippetBindings [
+	variableBindindsModel variableBindings: aGtSnippetBindings
+]
