@@ -182,6 +182,9 @@ XdDocumentExamples >> writeDocumentWithExistingClass [
 	| aXdFile aDocument |
 	aDocument := documentExamples documentWithExistingClass.
 	aXdFile := self inMemoryWriter
+		title: 'Existing Class Example';
+		description: 'Document with an existing class reference.';
+		authorName: 'Feenk team';
 		document: aDocument;
 		documentHtml: aDocument;
 		write.

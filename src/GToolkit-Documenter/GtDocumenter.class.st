@@ -218,7 +218,7 @@ GtDocumenter >> fileReference: aFileReference [
 	self editorElement fileReference: aFileReference
 ]
 
-{ #category : #'gt-extension' }
+{ #category : #'gt-extensions' }
 GtDocumenter >> gtLiveFor: aView [
 	^ (super gtLiveFor: aView)
 		actionButtonIcon: BrGlamorousIcons tree
@@ -226,7 +226,7 @@ GtDocumenter >> gtLiveFor: aView [
 			action: [ :aWidget | aWidget phlow spawnObject: self parse ]
 ]
 
-{ #category : #'gt-extension' }
+{ #category : #'gt-extensions' }
 GtDocumenter >> gtResourcesFor: aView [
 	<gtView>
 	^ aView mondrian
@@ -258,7 +258,7 @@ GtDocumenter >> gtResourcesFor: aView [
 				levelDistance: 50; nodeDistance: 10) ] 
 ]
 
-{ #category : #'gt-extension' }
+{ #category : #'gt-extensions' }
 GtDocumenter >> gtSaveActionFor: anAction [
 	<gtAction>
 	^ anAction button
@@ -269,7 +269,7 @@ GtDocumenter >> gtSaveActionFor: anAction [
 		action: [ self save ]
 ]
 
-{ #category : #'gt-extension' }
+{ #category : #'gt-extensions' }
 GtDocumenter >> gtShowMarkupActionFor: anAction [
 	<gtAction>
 	^ anAction toggle
