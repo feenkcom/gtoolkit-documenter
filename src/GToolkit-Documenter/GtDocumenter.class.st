@@ -324,7 +324,7 @@ GtDocumenter >> initialize [
 	self initializeVariableBindings.
 
 	self layout: BlFrameLayout new.
-	self look: BrLayoutResizerLook inherit.
+	self look: (BrLayoutResizerLook inherit inherit: self editorElement).
 	self matchParent.
 ]
 
@@ -530,6 +530,11 @@ GtDocumenter >> unsubscribe: aSubscriber [
 GtDocumenter >> variableBindings [
 	<return: #GtSnippetBindings>
 	^ self editorElement variableBindings
+]
+
+{ #category : #'api - variables' }
+GtDocumenter >> variableBindings: aGtSnippetBindings [
+	self editorElement variableBindings: aGtSnippetBindings
 ]
 
 { #category : #'api - toolbar' }

@@ -121,7 +121,7 @@ GtEpicea >> gtEventsFor: aView [
 		stencil: [ 
 			| aList |
 			aList := BrColumnedList new display: self events.
-			aList addEventHandler: GtInspectorListToSelectHandler new.
+			aList addEventHandler: GtPhlowListToSelectHandler new.
 			aList constraintsDo: [ :c | c padding: (BlInsets top: 10) ].
 			self announcer 
 				when: GtEpiceaUpdatedAnnouncement 
@@ -174,7 +174,7 @@ GtEpicea >> gtGlobalEntriesIn: aView [
 		stencil: [ | aList aGlobalLog |
 			aGlobalLog := EpMonitor current log entries reversed.
 			aList := BrColumnedList new items: aGlobalLog.
-			aList addEventHandler: GtInspectorListToSelectHandler new.
+			aList addEventHandler: GtPhlowListToSelectHandler new.
 			aList constraintsDo: [ :c | c padding: (BlInsets top: 10) ].
 			aList column
 				title: 'Icon';

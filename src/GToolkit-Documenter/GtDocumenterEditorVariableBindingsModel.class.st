@@ -51,3 +51,11 @@ GtDocumenterEditorVariableBindingsModel >> variableBindings [
 	<return: #GtSnippetBindings>
 	^ variableBindings
 ]
+
+{ #category : #accessing }
+GtDocumenterEditorVariableBindingsModel >> variableBindings: aGtSnippetBindings [
+	self 
+		assert: [ aGtSnippetBindings isNotNil ] 
+		description: [ 'Variable bindings must be non-nil' ].
+	variableBindings := aGtSnippetBindings
+]
