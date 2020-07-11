@@ -33,7 +33,7 @@ GtDocumenter class >> forText: aStringOrText [
 ]
 
 { #category : #'api - toolbar' }
-GtDocumenter >> addToobarItem: anElement [
+GtDocumenter >> addToolbarItem: anElement [
 	self toolbar addItem: anElement
 ]
 
@@ -422,12 +422,12 @@ GtDocumenter >> read [
 ]
 
 { #category : #'api - toolbar' }
-GtDocumenter >> removeToobarItem: anElement [
+GtDocumenter >> removeToolbarItem: anElement [
 	self toolbar removeItem: anElement
 ]
 
 { #category : #'api - toolbar' }
-GtDocumenter >> removeToobarItemAt: anIndex [
+GtDocumenter >> removeToolbarItemAt: anIndex [
 	self toolbar removeItemAt: anIndex
 ]
 
@@ -542,7 +542,7 @@ GtDocumenter >> withDefaultToolbar [
 	self gtActions do: [ :eachAction | 
 		(eachAction target isForViewDefinedIn: #gtLiveFor:) ifTrue: [ 
 			eachAction 
-				asElement: [ :anActionElement |  self addToobarItem: anActionElement ]
+				asElement: [ :anActionElement |  self addToolbarItem: anActionElement ]
 				withHostElement: self ] ].
 	self showToolbar
 ]
