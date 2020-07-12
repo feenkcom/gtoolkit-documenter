@@ -24,17 +24,15 @@ GtClassCommentStrategy >> classToComment: aClass [
 	self 
 		assert: [ aClass notNil ]
 		description: [ 'Class to document must be non-nil' ].
-	classRingDefinition := aClass asRingDefinition
+	classRingDefinition := aClass instanceSide asRingDefinition
 ]
 
 { #category : #accessing }
 GtClassCommentStrategy >> comment [
 	<return: #String>
-	^ self classToComment isDefined 
-		ifTrue: [ self classToComment realClass comment ]
-		ifFalse: [ self classToComment hasComment
-			ifTrue: [ self classToComment comment content ]
-			ifFalse: [ '' ] ]
+	self classToComment isDefined ifTrue: [ ^ self realClassComment ].
+	self classToComment hasComment ifFalse: [ ^ '' ].
+	^ self classToComment comment content asString
 ]
 
 { #category : #accessing }
@@ -68,6 +66,15 @@ GtClassCommentStrategy >> read: aGt2Document [
 		assert: [ self classToComment isDefined ]
 		description: [ 'Class to document must exist in the system' ].
 	aGt2Document text: self comment
+]
+
+{ #category : #accessing }
+GtClassCommentStrategy >> realClassComment [
+	<return: #String>
+	| aClass |
+	aClass := self classToComment realClass.
+	aClass hasComment ifFalse: [ ^ '' ].
+	^ aClass comment.
 ]
 
 { #category : #accessing }
