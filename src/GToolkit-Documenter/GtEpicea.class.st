@@ -105,11 +105,8 @@ GtEpicea >> gtDiffFor: aView [
 		title: 'Diff';
 		priority: 1;
 		look: BrGlamorousCodeEditorLook;
-		text: [ :anEditor | 
-			self 
-				when: GtEpiceaUpdatedAnnouncement 
-				do: [ anEditor text: self diff asRopedText ].		
-			self diff ]
+		updateWhen: GtEpiceaUpdatedAnnouncement in: self;
+		text: [ :anEditor | self diff ]
 ]
 
 { #category : #'gt-extension' }
@@ -232,11 +229,8 @@ GtEpicea >> gtTutorialFor: aView [
 		title: 'Code';
 		priority: 2;
 		look: BrGlamorousCodeEditorLook;
-		text: [ :anEditor | 
-			self 
-				when: GtEpiceaUpdatedAnnouncement 
-				do: [ anEditor text: self tutorialStateRope ].
-			self tutorialStateRope ]
+		updateWhen: GtEpiceaUpdatedAnnouncement in: self;
+		text: [ :anEditor | self tutorialStateRope ]
 ]
 
 { #category : #'announcement handling' }
