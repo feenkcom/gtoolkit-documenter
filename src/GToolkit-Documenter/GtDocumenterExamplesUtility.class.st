@@ -1,5 +1,5 @@
 "
-I am used by ${class:GtDocumentExamples}$.
+I am used by ${class:GtDocumenterExamples}$.
 "
 Class {
 	#name : #GtDocumenterExamplesUtility,

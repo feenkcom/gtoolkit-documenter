@@ -1,7 +1,7 @@
 "
 I exemplify Documenter project. The main class is ${class:GtDocumenter}$.
 
-I use ${class:GtDocumentExamplesUtility}$ to simplify examples.
+I use ${class:GtDocumenterExamplesUtility}$ to simplify examples.
 "
 Class {
 	#name : #GtDocumenterExamples,
