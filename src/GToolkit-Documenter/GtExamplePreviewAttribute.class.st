@@ -88,7 +88,7 @@ GtExamplePreviewAttribute >> initialize [
 	codeExpanded := true.
 	codeHeight := self constants defaultPreviewHeight.
 	noCode := true.
-	example := (GtDocumentExamples >> #documentWithExistingExample) gtExample.
+	example := (GtDocumenterExamples >> #documentWithExistingExample) gtExample.
 	previewExpanded := self constants defaultPreviewExpanded.
 	previewHeight := self constants defaultPreviewHeight.
 	previewShowSelector := self constants defaultShowSelector.
