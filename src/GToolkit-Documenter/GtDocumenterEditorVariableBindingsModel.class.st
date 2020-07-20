@@ -1,11 +1,9 @@
 "
 I hold ${class:GtSnippetBindings}$ that holds code snippet and example variable values.
 I am used by ${class:GtDocumenterEditor}$.
-
 !! Example 
-
 Evaluating the code snippet in the following example stores ==aBook== variable value in the ${class:GtDocumenterEditor}$ instance: 
-${example:GtDocumentExamples>>#documentWithCodeblock|noCode=true|previewExpanded=true}$
+${example:GtDocumenterExamples>>#documentWithCodeblock|noCode=true|previewExpanded=true}$
 
 
 "
