@@ -8,7 +8,7 @@ Class {
 XdDocumenterType class >> mainDocument: aXdDocument ofXdFileInPharo: aXdFile [
 	"Return an Bloc elemment or an object that understands #asElement."
 	<return: #GtDocumenter>
-	| aFileSystem theAttachments |
+	| theAttachments |
 	self
 		assert: [ aXdDocument notNil ] 
 		description: [ 'XDoc document must be non-nil' ].
@@ -26,11 +26,10 @@ XdDocumenterType class >> mainDocument: aXdDocument ofXdFileInPharo: aXdFile [
 		string;
 		as: [ :aString | GtDocument new text: aString ]
 		find."
-		
-	aFileSystem := FileSystem zip: aXdFile streamingStrategy.
-	aFileSystem open.
+	aXdFile extract.
+
 	theAttachments := aXdFile manifest attachmentsForDocument: aXdDocument.
-	^ aFileSystem root files 
+	^ aXdFile streamingStrategy extracted allFiles 
 		detect: [ :eachFile | eachFile basename = theAttachments first fileName ] 
 		ifFound: [ :aFileReference | GtDocumenter forFile: aFileReference ] 
 		ifNone: [ nil ]
