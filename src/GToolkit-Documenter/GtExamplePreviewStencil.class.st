@@ -129,7 +129,7 @@ GtExamplePreviewStencil >> newArrowElement [
 { #category : #'instance creation' }
 GtExamplePreviewStencil >> newCodeElement [
 	<return: #BlElement>
-	^ ((GtMethodCoder forExample: self example) expanded: self codeExpanded) asElement
+	^ ((GtMethodCoder forExample: self example) expanded: self codeExpanded; withHeader) asElement
 ]
 
 { #category : #'instance creation' }
