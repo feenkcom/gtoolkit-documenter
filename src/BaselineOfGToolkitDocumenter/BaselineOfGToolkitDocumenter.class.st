@@ -23,25 +23,25 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 	spec for: #'common' do: [
 		spec 
 			baseline: 'GToolkitCompleter' with: [
-				spec repository: 'github://feenkcom/gtoolkit-completer:v0.7.612/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-completer:v0.8.0/src' ];
 			baseline: 'GToolkitCoder' with: [
-				spec repository: 'github://feenkcom/gtoolkit-coder:v0.7.739/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-coder:v0.8.0/src' ];
 			baseline: 'GToolkitUtility' with: [
-				spec repository: 'github://feenkcom/gtoolkit-utility:v0.7.37/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.0/src' ];
 			baseline: 'GToolkitVariableBindings' with: [
-				spec repository: 'github://feenkcom/gtoolkit-playground:v0.7.667/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-playground:v0.8.0/src' ];
 			baseline: 'GToolkitVisualizerPhlow' with: [
-				spec repository: 'github://feenkcom/gtoolkit-visualizer:v0.7.648/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-visualizer:v0.8.0/src' ];
 			baseline: 'GToolkitExamples' with: [
-				spec repository: 'github://feenkcom/gtoolkit-examples:v0.7.23/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-examples:v0.8.0/src' ];
 			baseline: 'GToolkitInspector' with: [
-				spec repository: 'github://feenkcom/gtoolkit-inspector:v0.7.731/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-inspector:v0.8.0/src' ];
 			baseline: 'PillarExporter' with: [
-				spec repository: 'github://feenkcom/pillar:v7.3.20/src' ];
+				spec repository: 'github://feenkcom/pillar:v7.3.21/src' ];
 			baseline: 'DeepTraverser' with: [
-				spec repository: 'github://feenkcom/DeepTraverser:v1.1.50/src' ];
+				spec repository: 'github://feenkcom/DeepTraverser:v1.1.51/src' ];
 			baseline: 'XdocClient' with: [
-				spec repository: 'github://feenkcom/xdoc:v0.7.214/src' ].
+				spec repository: 'github://feenkcom/xdoc:v0.8.0/src' ].
 		spec 
 			package: 'GToolkit-Documenter' with: [
 				spec requires: #('PillarExporter' 'GToolkitCoder' 'GToolkitCompleter' 'GToolkitUtility' 'GToolkitVariableBindings' 'GToolkitExamples' 'GToolkitInspector' ). ];
