@@ -319,14 +319,14 @@ GtStyledNodeBuilder >> linkButton [
 					ifTrue: [ 
 						anElements first margin: (BlInsets top: -1 left: 3 bottom: 0 right: 0).
 						anElements first padding: (BlInsets top: 3 left: 3 bottom: 3 right: 0).
-						anElements first geometry: ( BlRectangle cornerRadii: (BlCornerRadii new
+						anElements first geometry: ( BlRoundedRectangleGeometry cornerRadii: (BlCornerRadii new
 							topLeft: 4;
 							topRight: 0;
 							bottomLeft: 4;
 							bottomRight: 0)).
 						anElements last margin: (BlInsets top: -1 left: 0 bottom: 0 right: 3).
 						anElements last padding: (BlInsets top: 3 left: 0 bottom: 3 right: 3).
-						anElements last geometry: ( BlRectangle cornerRadii: (BlCornerRadii new
+						anElements last geometry: ( BlRoundedRectangleGeometry cornerRadii: (BlCornerRadii new
 							topLeft: 0;
 							topRight: 4;
 							bottomLeft: 0;
@@ -336,7 +336,7 @@ GtStyledNodeBuilder >> linkButton [
 						anElements first 
 							margin: (BlInsets top: -1 left: 3 bottom: 0 right: 3);
 							padding: (BlInsets top: 3 left: 3 bottom: 3 right: 3);
-							geometry: (BlRectangle cornerRadius: 4) ].
+							geometry: (BlRoundedRectangleGeometry cornerRadius: 4) ].
 				anElements ])
 ]
 
