@@ -138,7 +138,6 @@ GtEpicea >> gtEventsFor: aView [
 						layout: BlLinearLayout new;
 						look: BrGlamorousButtonWithIconLook;
 						icon: (BlElement new 
-							geometry: BlRoundedRectangleGeometry new;
 							layout: BlLinearLayout new;
 							background: Color lightGray;
 							size: 10@3);
