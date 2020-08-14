@@ -1,3 +1,6 @@
+"
+This was deprecated. See ${class:name=GtDocumenter}$ instead.
+"
 Class {
 	#name : #GtDocument,
 	#superclass : #Object,
