@@ -6,45 +6,38 @@ PRDocumentItem >> constants [
 ]
 
 { #category : #'*GToolkit-Documenter' }
-PRDocumentItem >> gtAsciiDocExportFor: aView [
-	<gtViewExports>
-	^ aView explicit
-		title: 'AsciiDoc';
+PRDocumentItem >> gt: aString exportFor: aView writer: writer priority: aNumber [
+
+	| result |
+	result := aView explicit
+		title: aString;
 		stencil: [ 
 			BrEditorElement new 
 				editor: (BrTextEditor new
-					text: (PRAsciiDocWriter write: self) asRopedText readonly);
+					text: (writer write: self) asRopedText readonly);
 				constraintsDo: [ :c | 
 					c horizontal matchParent.
-					c vertical matchParent ] ]
+					c vertical matchParent ] ].
+	aNumber ifNotNil: [ result priority: aNumber ].
+	^ result
+]
+
+{ #category : #'*GToolkit-Documenter' }
+PRDocumentItem >> gtAsciiDocExportFor: aView [
+	<gtViewExports>
+	^ self gt: 'AsciiDoc' exportFor: aView writer: PRAsciiDocWriter priority: nil
 ]
 
 { #category : #'*GToolkit-Documenter' }
 PRDocumentItem >> gtBeamerExportFor: aView [
 	<gtViewExports>
-	^ aView explicit
-		title: 'Beamer';
-		stencil: [ 
-			BrEditorElement new 
-				editor: (BrTextEditor new
-					text: (PRBeamerWriter write: self) asRopedText readonly);
-				constraintsDo: [ :c | 
-					c horizontal matchParent.
-					c vertical matchParent ] ]
+	^ self gt: 'Beamer' exportFor: aView writer: PRBeamerWriter priority: nil
 ]
 
 { #category : #'*GToolkit-Documenter' }
 PRDocumentItem >> gtDeckJSExportFor: aView [
 	<gtViewExports>
-	^ aView explicit
-		title: 'DeckJS';
-		stencil: [ 
-			BrEditorElement new 
-				editor: (BrTextEditor new
-					text: (PRDeckJSWriter write: self) asRopedText readonly);
-				constraintsDo: [ :c | 
-					c horizontal matchParent.
-					c vertical matchParent ] ]
+	^ self gt: 'DeckJS' exportFor: aView writer: PRDeckJSWriter priority: nil
 ]
 
 { #category : #'*GToolkit-Documenter' }
@@ -73,47 +66,19 @@ PRDocumentItem >> gtExportsFor: aView [
 { #category : #'*GToolkit-Documenter' }
 PRDocumentItem >> gtLaTeXExportFor: aView [
 	<gtViewExports>
-	^ aView explicit
-		title: 'LaTeX';
-		stencil: [ 
-			BrEditorElement new 
-				editor: (BrTextEditor new
-					text: (PRLaTeXWriter write: self) asRopedText readonly);
-				constraintsDo: [ :c | 
-					c horizontal matchParent.
-					c vertical matchParent ] ]
+	^ self gt: 'LaTeX' exportFor: aView writer: PRLaTeXWriter priority: nil
 ]
 
 { #category : #'*GToolkit-Documenter' }
 PRDocumentItem >> gtLaTeXSbaBookExportFor: aView [
 	<gtViewExports>
-	^ aView explicit
-		title: 'LaTeX (sbabook)';
-		stencil: [ 
-			BrEditorElement new 
-				editor: (BrTextEditor new
-					text: (PRSBALaTeXWriter write: self) asRopedText readonly);
-				constraintsDo: [ :c | 
-					c horizontal matchParent.
-					c vertical matchParent ] ]
+	^ self gt: 'LaTeX (sbabook)' exportFor: aView writer: PRSBALaTeXWriter priority: nil
 ]
 
 { #category : #'*GToolkit-Documenter' }
 PRDocumentItem >> gtMarkdownExportFor: aView [
 	<gtViewExports>
-	^ aView explicit
-		title: 'Markdown';
-		priority: 2;
-		stencil: [ 
-			| aString | 
-			[ aString := PRMarkdownWriter write: self ] on: Warning do: [ :anException | anException resume ].
-			aString ifNil: [ aString := '' ].
-			BrEditorElement new 
-				editor: (BrTextEditor new
-					text: aString asRopedText readonly);
-				constraintsDo: [ :c | 
-					c horizontal matchParent.
-					c vertical matchParent ] ]
+	^ self gt: 'Markdown' exportFor: aView writer: PRMarkdownWriter priority: 2
 ]
 
 { #category : #'*GToolkit-Documenter' }
@@ -133,16 +98,7 @@ PRDocumentItem >> gtNodeStyler: aBlText [
 { #category : #'*GToolkit-Documenter' }
 PRDocumentItem >> gtPillarExportFor: aView [
 	<gtViewExports>
-	^ aView explicit
-		title: 'Pillar';
-		priority: 1;
-		stencil: [ 
-			BrEditorElement new 
-				editor: (BrTextEditor new
-					text: (PRPillarWriter write: self) asRopedText readonly);
-				constraintsDo: [ :c | 
-					c horizontal matchParent.
-					c vertical matchParent ] ]
+	^ self gt: 'Pillar' exportFor: aView writer: PRPillarWriter priority: 1
 ]
 
 { #category : #'*GToolkit-Documenter' }
@@ -159,16 +115,7 @@ PRDocumentItem >> gtSubscriber: anObject [
 { #category : #'*GToolkit-Documenter' }
 PRDocumentItem >> gtTextExportFor: aView [
 	<gtViewExports>
-	^ aView explicit
-		title: 'Text';
-		priority: 4;
-		stencil: [ 
-			BrEditorElement new 
-				editor: (BrTextEditor new
-					text: (PRTextWriter write: self) asRopedText readonly);
-				constraintsDo: [ :c | 
-					c horizontal matchParent.
-					c vertical matchParent ] ]
+	^ self gt: 'Text' exportFor: aView writer: PRTextWriter priority: 4
 ]
 
 { #category : #'*GToolkit-Documenter' }
