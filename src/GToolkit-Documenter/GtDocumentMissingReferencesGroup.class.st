@@ -22,11 +22,11 @@ GtDocumentMissingReferencesGroup >> collect: aBlock [
 { #category : #ui }
 GtDocumentMissingReferencesGroup >> gtItemsFor: aView [
 	<gtView>
-	^ aView list 
+	^ aView list
 		title: 'Documents';
 		items: [ missingReferences ];
-		itemFormat: [ :aResult | aResult documentSource ];
-		send: [:aResult | aResult documentSource ]
+		itemText: [ :aResult | aResult documentSource ];
+		send: [ :aResult | aResult documentSource ]
 ]
 
 { #category : #initialization }
