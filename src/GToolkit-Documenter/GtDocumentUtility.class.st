@@ -247,14 +247,13 @@ GtDocumentUtility class >> startMarkupFor: aNode [
 
 { #category : #'text styling' }
 GtDocumentUtility class >> styleExpandingPreviewInText: aBlRope forNode: aNode [
-	| theAttributes |
+	| anAttribute |
 	aNode isPreviewDefined ifFalse: [ ^ self ].
-	theAttributes := GtCachedTextExpandButtonAttributeStencil new
-		attributesCreatingBlock: [ aNode previewAttributes ];
+	anAttribute := GtCachedTextExpandButtonAttribute new
 		isExpanded: aNode cachedIsExpanded;
-		onCachingDo: [ :aBoolean :theAttribute | aNode cachedIsExpanded: aBoolean ];
-		create.
-	(aBlRope from: aNode stop to: aNode stop) attributes: theAttributes
+		attributesCreatingBlock: [ aNode previewAttributes ];
+		onCachingDo: [ :aBoolean :theAttribute | aNode cachedIsExpanded: aBoolean ].
+	(aBlRope from: aNode stop to: aNode stop) attribute: anAttribute
 ]
 
 { #category : #'text styling' }
