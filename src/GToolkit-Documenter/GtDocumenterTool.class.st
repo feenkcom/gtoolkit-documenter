@@ -27,20 +27,14 @@ GtDocumenterTool >> asElementDo: aOneArgBlock [
 	^ aOneArgBlock cull: self valuable value
 ]
 
-{ #category : #'api - converting' }
-GtDocumenterTool >> asTabDo: aBlock [
-	| aTab |
-	aTab := BrTab new
-		look: BrGlamorousTabSwitcherWithIconLook;
-		label: self name;
-		icon: BrGlamorousIcons file;
-		stencil: [ self asElementDo: [ :anElement | anElement ] ].
-	aBlock cull: aTab.
-]
-
 { #category : #defaults }
 GtDocumenterTool >> defaultValuable [
 	^ [ GtDocumenter new asPagerPageElement ]
+]
+
+{ #category : #'api - converting' }
+GtDocumenterTool >> icon [
+	^ BrGlamorousIcons file
 ]
 
 { #category : #initialization }
@@ -52,6 +46,11 @@ GtDocumenterTool >> initialize [
 { #category : #'api - accessing' }
 GtDocumenterTool >> name [
 	^ 'documenter'
+]
+
+{ #category : #'private - accessing' }
+GtDocumenterTool >> tabLook [
+	^ BrGlamorousTabSwitcherWithIconLook
 ]
 
 { #category : #'api - accessing' }
