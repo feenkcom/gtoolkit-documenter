@@ -278,7 +278,7 @@ GtDocumentUtility class >> styleLinkInText: aBlRope forNode: aNode start: aStart
 		ifTrue: [ theAttributes := theAttributes
 				,
 					{(BrTextHoverStylableAttribute new
-						attribute: (BlTextDecorationAttribute new underline new color: aLinkColor)).
+						attribute: (BlTextDecorationAttribute new underline color: aLinkColor)).
 					(BrTextClickAttribute new
 						action:
 							[ :aText :aTarget :aTextEditor :anEvent | aNode browseReferenceFrom: anEvent ])} ].
