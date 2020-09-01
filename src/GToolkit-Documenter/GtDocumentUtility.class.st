@@ -272,19 +272,18 @@ GtDocumentUtility class >> styleLinkInText: aBlRope forNode: aNode [
 GtDocumentUtility class >> styleLinkInText: aBlRope forNode: aNode start: aStartIndex stop: aStopIndex [
 	| aLinkColor theAttributes |
 	aLinkColor := self linkColor: aNode doesReferenceExist.
-	theAttributes := Array with: (BlTextForegroundAttribute new paint: aLinkColor).
-	aNode doesReferenceExist ifTrue: [ 
-		theAttributes := theAttributes , {
-				BrTextHoverStylableAttribute new 
-					attribute: (BlTextUnderlineAttribute new paint: aLinkColor).
-				BrTextClickAttribute new 
-					action: [ :aText :aTarget :aTextEditor :anEvent | 
-						aNode browseReferenceFrom: anEvent ] } ].
-
-	(aBlRope  
-		from: aStartIndex 
-		to: (aStartIndex max: aStopIndex))
-			attributes: theAttributes.
+	theAttributes := Array
+		with: (BlTextForegroundAttribute new paint: aLinkColor).
+	aNode doesReferenceExist
+		ifTrue: [ theAttributes := theAttributes
+				,
+					{(BrTextHoverStylableAttribute new
+						attribute: (BlTextDecorationAttribute new underline color: aLinkColor)).
+					(BrTextClickAttribute new
+						action:
+							[ :aText :aTarget :aTextEditor :anEvent | aNode browseReferenceFrom: anEvent ])} ].
+	(aBlRope from: aStartIndex to: (aStartIndex max: aStopIndex))
+		attributes: theAttributes
 ]
 
 { #category : #'text styling' }
