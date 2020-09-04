@@ -25,8 +25,10 @@ GtStyledNodeBuilder >> activateCursor [
 { #category : #'style - cursor' }
 GtStyledNodeBuilder >> activateCursorFrom: aStartPosition to: aStopPosition [
 	| anInitialPosition aFinalPosition |
+
 	anInitialPosition := self possibleMinCursorPosition: aStartPosition.
 	aFinalPosition := self possibleMaxCursorPosition: aStopPosition.
+
 	(self text from: anInitialPosition to: aFinalPosition) 
 		attribute: (BrTextCursorAttribute new
 			enterAction: self properties cursorEnterAction;
@@ -247,17 +249,16 @@ GtStyledNodeBuilder >> installDisplayMarkupsHandler [
 { #category : #'style - hide' }
 GtStyledNodeBuilder >> installDisplayMarkupsHandlerFrom: aStartPosition to: aStopPosition [
 	"Display markups if a cursor is close to the node"
-	self cursorEnterAction: [ :aTextEditor |
-		| aSafeStopPosition |
-		aSafeStopPosition := aStopPosition min: aTextEditor text size.
+
+	self cursorEnterAction: [ :aTextEditor :anEvent :aStart :anEnd |
 		self updateText: aTextEditor text.
-		self revealTextFrom: aStartPosition to: aSafeStopPosition ].
-	self cursorLeaveAction: [ :aTextEditor |
-		| aSafeStopPosition |
-		aSafeStopPosition := aStopPosition min: aTextEditor text size.
+		self revealTextFrom: aStart to: anEnd ].
+
+	self cursorLeaveAction: [ :aTextEditor :anEvent :aStart :anEnd |
 		self updateText: aTextEditor text.
-		self hideTextFrom: aStartPosition to: aSafeStopPosition ].
-	self activateCursorFrom: aStartPosition to: aStopPosition.
+		self hideTextFrom: aStart to: anEnd ].
+
+	self activateCursorFrom: aStartPosition to: aStopPosition
 ]
 
 { #category : #'style - hide' }
