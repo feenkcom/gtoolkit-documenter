@@ -220,6 +220,7 @@ GtDocumenter >> fileReference: aFileReference [
 
 { #category : #'gt-extensions' }
 GtDocumenter >> gtLiveFor: aView [
+	<gtView>
 	^ (super gtLiveFor: aView)
 		actionButtonIcon: BrGlamorousIcons tree
 			tooltip: 'Display AST nodes' 
