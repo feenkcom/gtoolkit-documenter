@@ -16,7 +16,6 @@ GtExampleAnnotation class >> possibleParameters [
 		self constants expandedParameterName.
 		self constants labelParameterName.
 		"source code"
-		self constants codeHeightParameterName.
 		self constants codeExpandedParameterName.
 		self constants noCodeParameterName.
 		"result"
@@ -96,18 +95,6 @@ GtExampleAnnotation >> codeExpanded [
 		in: self parameters 
 		emptyValue: [ true ] 
 		defaultValue: [ true ]
-]
-
-{ #category : #'accessing - parameter values' }
-GtExampleAnnotation >> codeHeight [
-	^ self utility 
-		valueOf: self constants codeHeightParameterName
-		in: self parameters
-		value: [ :aNumber | aNumber isNumber 
-			ifTrue: [ aNumber ]
-			ifFalse: [ self constants defaultPreviewHeight ] ]
-		emptyValue: [ self constants defaultPreviewHeight ]
-		defaultValue: [ self constants defaultPreviewHeight ]
 ]
 
 { #category : #compatibility }
@@ -298,7 +285,6 @@ GtExampleAnnotation >> newExamplePreviewAttribute [
 		beAppend;
 		example: self cachedExample;
 		codeExpanded: self codeExpanded;
-		codeHeight: self codeHeight;
 		noCode: self noCode;
 		previewExpanded: self previewExpanded;
 		previewShowSelector: self previewShowSelector;

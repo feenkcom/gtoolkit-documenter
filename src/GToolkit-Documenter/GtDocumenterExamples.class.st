@@ -305,8 +305,7 @@ GtDocumenterExamples >> contentWithExampleHiddenPreview [
 		'|', self constants previewShowParameterName, '=', #gtBytecodeFor:, 
 		'|', self constants previewExpandedParameterName, '=', false asString,
 		'|', self constants previewHeightParameterName, '=', self previewHeightHudredValue asString,
-		'|', self constants codeExpandedParameterName, '=', true asString, 
-		'|', self constants codeHeightParameterName, '=', 50 asString, '}$'
+		'|', self constants codeExpandedParameterName, '=', true asString, '}$'
 ]
 
 { #category : #'example - existing one' }
@@ -318,7 +317,6 @@ GtDocumenterExamples >> contentWithExampleParameters [
 		'|', self constants previewExpandedParameterName, '=', true asString,
 		'|', self constants previewHeightParameterName, '=', 100 asString,
 		'|', self constants codeExpandedParameterName, '=', false asString, 
-		'|', self constants codeHeightParameterName, '=', 50 asString,
 		'|', self constants alignmentParameterName , '=', FullWidthAlignmentStrategy strategyName, '}$'
 ]
 

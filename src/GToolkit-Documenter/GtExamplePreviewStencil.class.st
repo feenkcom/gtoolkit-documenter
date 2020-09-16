@@ -7,7 +7,6 @@ Class {
 		'example',
 		'exampleWithResult',
 		'codeExpanded',
-		'codeHeight',
 		'noCode',
 		'previewExpanded',
 		'previewHeight',
@@ -30,16 +29,6 @@ GtExamplePreviewStencil >> codeExpanded [
 { #category : #accessing }
 GtExamplePreviewStencil >> codeExpanded: anObject [
 	codeExpanded := anObject
-]
-
-{ #category : #accessing }
-GtExamplePreviewStencil >> codeHeight [
-	^ codeHeight
-]
-
-{ #category : #accessing }
-GtExamplePreviewStencil >> codeHeight: anObject [
-	codeHeight := anObject
 ]
 
 { #category : #accessing }
@@ -91,17 +80,11 @@ GtExamplePreviewStencil >> exampleWithResult [
 GtExamplePreviewStencil >> initialize [
 	super initialize.
 	codeExpanded := true.
-	codeHeight := self constants defaultCodeHeight.
 	noCode := false.
 	example := (GtDocumenterExamples >> #documentWithExistingExample) gtExample.
 	previewExpanded := self constants defaultPreviewExpanded.
 	previewHeight := self constants defaultPreviewHeight.
 	previewShowSelector := self constants defaultShowSelector.
-]
-
-{ #category : #testing }
-GtExamplePreviewStencil >> isCodeHeightDefined [
-	^ self codeHeight isZero not
 ]
 
 { #category : #testing }
