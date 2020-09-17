@@ -6,7 +6,6 @@ Class {
 	#instVars : [
 		'example',
 		'codeExpanded',
-		'codeHeight',
 		'noCode',
 		'previewExpanded',
 		'previewHeight',
@@ -30,16 +29,6 @@ GtExamplePreviewAttribute >> codeExpanded [
 { #category : #accessing }
 GtExamplePreviewAttribute >> codeExpanded: anObject [
 	codeExpanded := anObject
-]
-
-{ #category : #accessing }
-GtExamplePreviewAttribute >> codeHeight [
-	^ codeHeight
-]
-
-{ #category : #accessing }
-GtExamplePreviewAttribute >> codeHeight: anObject [
-	codeHeight := anObject
 ]
 
 { #category : #accessing }
@@ -86,7 +75,6 @@ GtExamplePreviewAttribute >> initialize [
 	super initialize.
 	self beLazy.
 	codeExpanded := true.
-	codeHeight := self constants defaultPreviewHeight.
 	noCode := true.
 	example := (GtDocumenterExamples >> #documentWithExistingExample) gtExample.
 	previewExpanded := self constants defaultPreviewExpanded.
@@ -112,7 +100,6 @@ GtExamplePreviewAttribute >> newExamplePreviewStencil [
 	^ self examplePreviewStencilClass new
 		example: self example;
 		codeExpanded: self codeExpanded;
-		codeHeight: self codeHeight;
 		noCode: self noCode;
 		previewExpanded: self previewExpanded;
 		previewShowSelector: self previewShowSelector;

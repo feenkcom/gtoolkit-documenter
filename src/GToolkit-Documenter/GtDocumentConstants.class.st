@@ -49,11 +49,6 @@ GtDocumentConstants class >> codeExpandedParameterName [
 	^ #codeExpanded
 ]
 
-{ #category : #'pillar parameter names' }
-GtDocumentConstants class >> codeHeightParameterName [
-	^ #codeHeight
-]
-
 { #category : #ui }
 GtDocumentConstants class >> confluenceButtonIcon [
 	^ BrGlamorousIcons cloud
@@ -87,12 +82,6 @@ GtDocumentConstants class >> defaultChangesShowSelector [
 { #category : #'pillar parameter default values' }
 GtDocumentConstants class >> defaultClassShowSelector [
 	^ #gtDefinitionFor:
-]
-
-{ #category : #'pillar parameter default values' }
-GtDocumentConstants class >> defaultCodeHeight [
-	"Zero means use a default Coder value"
-	^ 0
 ]
 
 { #category : #'pillar parameter default values' }
