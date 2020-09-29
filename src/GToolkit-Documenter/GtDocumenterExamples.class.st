@@ -230,7 +230,7 @@ GtDocumenterExamples >> classToDocument [
 { #category : #slides }
 GtDocumenterExamples >> connectorSlideClass [
 	<gtExample>
-	^ GtConnectorForExampleSlide
+	^ GtConnectorForExampleLiveSlide
 ]
 
 { #category : #accessing }
@@ -1350,7 +1350,8 @@ GtDocumenterExamples >> emptyDocument [
 { #category : #slides }
 GtDocumenterExamples >> emptyDocumentSlideClass [
 	<gtExample>
-	^ GtEmptyDocumenterSlide
+	^ GtDocumenterLiveSlide new
+		document: GtDocumenter new.
 ]
 
 { #category : #changes }
