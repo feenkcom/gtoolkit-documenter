@@ -133,18 +133,6 @@ GtDocumenterEditor >> normalFontSize: aNumber [
 	normalFontSizeModel normalFontSize: aNumber
 ]
 
-{ #category : #'hooks - children' }
-GtDocumenterEditor >> onAddedToSceneGraph [
-	super onAddedToSceneGraph.
-	subscriptionModel updateAndSubscribeToSystem
-]
-
-{ #category : #'hooks - children' }
-GtDocumenterEditor >> onRemovedFromSceneGraph [
-	super onRemovedFromSceneGraph.
-	subscriptionModel unsubscribeFromSystem.
-]
-
 { #category : #'api - storage' }
 GtDocumenterEditor >> read [
 	^ storageModel read

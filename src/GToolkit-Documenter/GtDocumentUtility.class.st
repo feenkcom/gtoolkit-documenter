@@ -253,7 +253,7 @@ GtDocumentUtility class >> styleExpandingPreviewInText: aBlRope forNode: aNode [
 		isExpanded: aNode cachedIsExpanded;
 		attributesCreatingBlock: [ aNode previewAttributes ];
 		onCachingDo: [ :aBoolean :theAttribute | aNode cachedIsExpanded: aBoolean ].
-	(aBlRope from: aNode stop to: aNode stop) attribute: anAttribute
+	(aBlRope from: aNode start to: aNode stop) attribute: anAttribute
 ]
 
 { #category : #'text styling' }
