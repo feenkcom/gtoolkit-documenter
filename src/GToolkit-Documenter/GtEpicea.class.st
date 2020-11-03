@@ -112,51 +112,52 @@ GtEpicea >> gtDiffFor: aView [
 { #category : #'gt-extension' }
 GtEpicea >> gtEventsFor: aView [
 	<gtView>
-	^ aView explicit 
+	^ aView explicit
 		title: 'Change List';
 		priority: 3;
-		stencil: [ 
-			| aList |
-			aList := BrColumnedList new display: self events.
+		stencil: [ | aList |
+			aList := BrColumnedList new items: self events.
 			aList addEventHandler: GtPhlowListToSelectHandler new.
 			aList constraintsDo: [ :c | c padding: (BlInsets top: 10) ].
-			self announcer 
-				when: GtEpiceaUpdatedAnnouncement 
-				do: [ :anAnnouncement | aList display: self events ].
-			
-			aList column 
+			self announcer
+				when: GtEpiceaUpdatedAnnouncement
+				do: [ :anAnnouncement | aList items: self events ].
+			aList column
 				title: 'Icon';
-				stencil: [ :anEpEvent :anIndex | 
-					(anEpEvent accept: EpIconVisitor new) asElement ].
-				
-			aList column 
+				stencil:
+						[ :anEpEvent :anIndex | (anEpEvent accept: EpIconVisitor new) asElement ].
+			aList column
 				title: 'Description';
-				stencil: [ :anEpEvent :anIndex |
-					| aRemoveButton aContainer | 
+				stencil: [ :anEpEvent :anIndex | 
+					| aRemoveButton aContainer |
 					aRemoveButton := BrButton new.
 					aRemoveButton
 						layout: BlLinearLayout new;
 						look: BrGlamorousButtonWithIconLook;
-						icon: (BlElement new 
-							layout: BlLinearLayout new;
-							background: Color lightGray;
-							size: 10@3);
-						action: [ 
-							self removeEvent: anEpEvent.
-							aRemoveButton enqueueTask: (BlTaskAction new 
-								action: [ aRemoveButton visibility: BlVisibility hidden ]) ];
+						icon:
+							(BlElement new
+								layout: BlLinearLayout new;
+								background: Color lightGray;
+								size: 10 @ 3);
+						action: [ self removeEvent: anEpEvent.
+							aRemoveButton
+								enqueueTask:
+									(BlTaskAction new
+										action: [ aRemoveButton visibility: BlVisibility hidden ]) ];
 						visibility: BlVisibility hidden.
-					aContainer := BlElement new 
+					aContainer := BlElement new
 						layout: BlLinearLayout horizontal;
 						addChildren: (anEpEvent accept: GtEpiceaBrickVisitor new);
 						addChild: aRemoveButton;
 						constraintsDo: [ :c | 
 							c horizontal fitContent.
 							c vertical fitContent ].
-					aContainer when: BlMouseEnterEvent do: [ :anEvent | 
-						aRemoveButton visibility: BlVisibility visible ].
-					aContainer when: BlMouseLeaveEvent do: [ :anEvent | 
-						aRemoveButton visibility: BlVisibility hidden ].
+					aContainer
+						when: BlMouseEnterEvent
+						do: [ :anEvent | aRemoveButton visibility: BlVisibility visible ].
+					aContainer
+						when: BlMouseLeaveEvent
+						do: [ :anEvent | aRemoveButton visibility: BlVisibility hidden ].
 					aContainer ].
 			aList ]
 ]
