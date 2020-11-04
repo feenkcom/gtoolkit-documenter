@@ -10,7 +10,7 @@ Class {
 		'events',
 		'diff',
 		'applyErrorHandler',
-		'hasImpact',
+		'impacted',
 		'previousNumberOfEvents'
 	],
 	#classVars : [
@@ -57,12 +57,13 @@ GtEpicea >> applyChanges [
 GtEpicea >> computeImpact [
 	"Return true if impact changed"
 	<return: #Boolean>
-	| anOldImpactState |
-	anOldImpactState := hasImpact.
-	hasImpact := self events anySatisfy: [ :eachEvent | 
+	| oldImpacted changed |
+	oldImpacted := impacted.
+	impacted := self events select: [ :eachEvent | 
 			eachEvent accept: (EpHasImpactVisitor inEnvironment: self theEnvironment) ].
-	hasImpact = anOldImpactState ifFalse: [ diff := nil ].
-	^ hasImpact ~= anOldImpactState
+	changed := impacted ~= oldImpacted.
+	changed ifTrue: [ diff := nil ].
+	^ changed
 ]
 
 { #category : #accessing }
@@ -249,14 +250,14 @@ GtEpicea >> hasChanges [
 GtEpicea >> hasImpact [
 	"Return true, if changes have impact to the current system state"
 	<return: #Boolean>
-	^ hasImpact
+	^ impacted notEmpty
 ]
 
 { #category : #initialization }
 GtEpicea >> initialize [
 	super initialize.
 	announcer := Announcer new.
-	hasImpact := false.
+	impacted := OrderedCollection new.
 	previousNumberOfEvents := 0.
 	applyErrorHandler := [ :anException | | message |
 		DebugMode ifTrue: [ anException pass ].
