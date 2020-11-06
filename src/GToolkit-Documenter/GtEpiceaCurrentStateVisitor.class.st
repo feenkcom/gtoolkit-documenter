@@ -2,7 +2,8 @@ Class {
 	#name : #GtEpiceaCurrentStateVisitor,
 	#superclass : #EpOldStateVisitor,
 	#instVars : [
-		'theEnvironment'
+		'theEnvironment',
+		'showClassNameInMethodSource'
 	],
 	#category : #'GToolkit-Documenter-Epicea'
 }
@@ -32,15 +33,29 @@ GtEpiceaCurrentStateVisitor >> initializeWith: anEnvironment [
 
 { #category : #printing }
 GtEpiceaCurrentStateVisitor >> printProtocol: aProtocol behaviorName: aBehaviorName sourceCode: aSourceCode [
+	^ String
+		streamContents: [ :stream | 
+			stream
+				nextPutAll: '"protocol: ';
+				nextPutAll: aProtocol printString;
+				nextPut: $";
+				cr;
+				cr.
+			self showClassNameInMethodSource
+				ifTrue: [ stream
+						nextPutAll: aBehaviorName;
+						nextPutAll: ' >> ' ].
+			stream nextPutAll: aSourceCode ]
+]
 
-	^ String streamContents: [ :stream |
-		stream
-			nextPutAll: '"protocol: '; 
-			nextPutAll: aProtocol printString;
-			nextPut: $"; cr; cr;
-			nextPutAll: aBehaviorName;
-			nextPutAll: ' >> ';
-			nextPutAll: aSourceCode ]	
+{ #category : #accessing }
+GtEpiceaCurrentStateVisitor >> showClassNameInMethodSource [
+	^ showClassNameInMethodSource ifNil: [ true ]
+]
+
+{ #category : #accessing }
+GtEpiceaCurrentStateVisitor >> showClassNameInMethodSource: aBoolean [
+	showClassNameInMethodSource := aBoolean
 ]
 
 { #category : #visitor }
