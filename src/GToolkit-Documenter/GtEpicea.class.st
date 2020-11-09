@@ -86,6 +86,45 @@ GtEpicea >> diff [
 						foreground: self constants subtleColor ] ]
 ]
 
+{ #category : #'gt-extension' }
+GtEpicea >> diffElements [
+	| elements |
+	elements := OrderedCollection new.
+	self events
+		do: [ :each | 
+			| previous builder new element |
+			previous := each
+				accept:
+					((GtEpiceaCurrentStateVisitor inEnvironment: self class environment)
+						showClassNameInMethodSource: false).
+			new := each accept: EpNewStateVisitor new.
+			previous = new
+				ifFalse: [ builder := (GtEpiceaDiffBuilder from: previous to: new)
+						isMethod: (each isKindOf: EpMethodChange).
+					element := BrVerticalPane new.
+					element margin: (BlInsets all: 3).
+					element hMatchParent.
+					element vFitContent.
+					element
+						addChild: (GtEpiceaDiffElement on: builder) vFitContent beSmall.
+					element
+						addChild:
+							(BrButton new
+								look: BrGlamorousButtonWithIconLook;
+								icon: BrGlamorousVectorIcons accept;
+								label: 'Accept';
+								margin:
+									(BlInsets
+										top: 0
+										left: 5
+										bottom: 5
+										right: 0);
+								action: [ each applyCodeChange ]).
+					element addLook: (BrShadowLook new width: 1).
+					elements add: element ] ].
+	^ elements
+]
+
 { #category : #accessing }
 GtEpicea >> entries [
 	<return: #OrderedeCollection of: #OmEntry>
@@ -100,14 +139,59 @@ GtEpicea >> events [
 
 { #category : #'gt-extension' }
 GtEpicea >> gtDiffFor: aView [
-	<gtView>
-	<gtViewChanges>
+	"<gtView>
+	<gtViewChanges>"
 	^ aView textEditor
 		title: 'Diff';
 		priority: 1;
 		look: BrGlamorousCodeEditorLook;
 		updateWhen: GtEpiceaUpdatedAnnouncement in: self;
 		text: [ :anEditor | self diff ]
+]
+
+{ #category : #'gt-extension' }
+GtEpicea >> gtDiffsFor: aView [
+	<gtView>
+	<gtViewChanges>
+	^ aView explicit
+		title: 'Diff';
+		priority: 1;
+		updateWhen: GtEpiceaUpdatedAnnouncement in: self;
+		stencil: [ | element headerElement label diffElement |
+			element := BrVerticalPane new.
+			element matchParent.
+			headerElement := BrHorizontalPane new
+				padding: (BlInsets all: 0);
+				hMatchParent;
+				vFitContent.
+			label := BrLabel new look: BrGlamorousLabelLook.
+			label
+				text:
+					('Current:' asRopedText glamorousCodeSmallSize
+						foreground: BrGlamorousColors defaultButtonTextColor).
+			label margin: (BlInsets left: 15).
+			label hMatchParent.
+			headerElement addChild: label.
+			headerElement
+				addChild:
+					(BlElement new
+						height: 0;
+						width: 15;
+						yourself).
+			label := BrLabel new look: BrGlamorousLabelLook.
+			label
+				text:
+					('Change:' asRopedText glamorousCodeSmallSize
+						foreground: BrGlamorousColors defaultButtonTextColor).
+			label hMatchParent.
+			headerElement addChild: label.
+			element addChild: headerElement.
+			diffElement := BrVerticalPane new.
+			diffElement hMatchParent.
+			diffElement vFitContent.
+			diffElement addChildren: self diffElements.
+			element addChild: diffElement asScrollableElement.
+			element ]
 ]
 
 { #category : #'gt-extension' }
