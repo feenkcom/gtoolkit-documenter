@@ -345,19 +345,19 @@ GtDocumenter >> initializeEditor [
 GtDocumenter >> initializeShortcuts [
 
 	self editorElement
-		addShortcut: (BlShortcut new
+		addShortcut: (BlShortcutWithAction new
 			combination: BlKeyCombination primaryM;
 			action: [ :anEvent | self browseImplementors ]);
-		addShortcut: (BlShortcut new
+		addShortcut: (BlShortcutWithAction new
 			combination: BlKeyCombination primaryN;
 			action: [ :anEvent | self browseReferences ]);
-		addShortcut: (BlShortcut new
+		addShortcut: (BlShortcutWithAction new
 			combination: BlKeyCombination primaryB;
 			action: [ :anEvent | self browseClass ]);
-		addShortcut: (BlShortcut new
+		addShortcut: (BlShortcutWithAction new
 			combination: BlKeyCombination primaryD;
 			action: [ :anEvent | self doItSelectionOrAll ]);
-		addShortcut: (BlShortcut new
+		addShortcut: (BlShortcutWithAction new
 			combination: BlKeyCombination primaryG;
 			action: [ :anEvent | self doItAndGoSelectionOrAll ])
 ]

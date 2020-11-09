@@ -379,19 +379,19 @@ GtDocument >> initializeAddOns [
 GtDocument >> initializeShortcuts [
 
 	addOns
-		addShortcut: (BlShortcut new
+		addShortcut: (BlShortcutWithAction new
 			combination: BlKeyCombination primaryM;
 			action: [ :anEvent | self browseImplementors: anEvent currentTarget ]);
-		addShortcut: (BlShortcut new
+		addShortcut: (BlShortcutWithAction new
 			combination: BlKeyCombination primaryN;
 			action: [ :anEvent | self browseReferences: anEvent currentTarget ]);
-		addShortcut: (BlShortcut new
+		addShortcut: (BlShortcutWithAction new
 			combination: BlKeyCombination primaryB;
 			action: [ :anEvent | self browseClass: anEvent currentTarget ]);
-		addShortcut: (BlShortcut new
+		addShortcut: (BlShortcutWithAction new
 			combination: BlKeyCombination primaryD;
 			action: [ :anEvent | self doItSelectionOrAll: anEvent currentTarget ]);
-		addShortcut: (BlShortcut new
+		addShortcut: (BlShortcutWithAction new
 			combination: BlKeyCombination primaryG;
 			action: [ :anEvent | self doItAndGoSelectionOrAll: anEvent currentTarget ])
 ]
