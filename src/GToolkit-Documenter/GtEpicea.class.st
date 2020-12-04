@@ -106,7 +106,7 @@ GtEpicea >> diffElements [
 					element hMatchParent.
 					element vFitContent.
 					element
-						addChild: (GtEpiceaDiffElement on: builder) vFitContent beSmall.
+						addChild: (GtEpiceaDiffElement on: builder) vFitContent beSmallSize.
 					element
 						addChild:
 							(BrButton new
