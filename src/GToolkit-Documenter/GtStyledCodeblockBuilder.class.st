@@ -51,7 +51,7 @@ GtStyledCodeblockBuilder >> playButton [
 			beAppend;
 			stencil: [ BrButton new 
 				look: BrGlamorousButtonWithIconLook;
-				beSmall;
+				beSmallSize;
 				margin: (BlInsets left: 3 right: 3);
 				icon: BrGlamorousVectorIcons play;
 				action: self properties action ])

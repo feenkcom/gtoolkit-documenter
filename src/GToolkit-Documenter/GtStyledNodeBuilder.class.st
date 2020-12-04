@@ -308,7 +308,7 @@ GtStyledNodeBuilder >> linkButton [
 					collect: [ :eachLabel | 
 						BrButton new 
 							look: (BrGlamorousLinkSquaredButtonWithLabelLook new fontSize: self normalFontSize);
-							beSmall;
+							beSmallSize;
 							margin: (BlInsets top: -1 left: 0 bottom: 0 right: 0);
 							label: eachLabel;
 							action: self properties action ]

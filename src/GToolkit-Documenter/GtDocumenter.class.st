@@ -316,9 +316,6 @@ GtDocumenter >> increaseNormalFontSize [
 { #category : #initialization }
 GtDocumenter >> initialize [
 	super initialize.
-	self viewModel: (BrInteractiveModel withAll: {
-				BrLayoutHorizontalResizerModel matchParent.
-				BrLayoutVerticalResizerModel matchParent }).
 	self initializeEditor.
 	self initializeShortcuts.	
 	self initializeToolbar.
