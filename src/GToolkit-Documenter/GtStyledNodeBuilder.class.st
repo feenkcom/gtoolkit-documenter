@@ -208,7 +208,7 @@ GtStyledNodeBuilder >> iconButton [
 		beAppend;
 		stencil: [ BrButton new
 				look: BrGlamorousButtonWithIconLook;
-				beSmall;
+				beSmallSize;
 				margin: (BlInsets left: 3);
 				icon: self properties icon value asElement;
 				action: self properties action ].

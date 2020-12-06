@@ -1889,7 +1889,7 @@ GtDocumenterExamples >> ropeHiddenBoldMarkupForNonTechnicalPeople [
 	| aRope anElement aSwitchAttribute |
 	anElement := BrButton new 
 				look: BrGlamorousButtonWithLabelLook;
-				beSmall;
+				beSmallSize;
 				label: 'Display Markups'.
 	aSwitchAttribute := BrTextHoverAttribute new
 		enterAction: [ :aText :aTextElement :anEditorElement :anEvent |
