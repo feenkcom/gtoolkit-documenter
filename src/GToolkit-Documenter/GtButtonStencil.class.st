@@ -28,7 +28,7 @@ GtButtonStencil >> create [
 
 	^ BrButton new
 		look: aLook;
-		beSmall;
+		beSmallSize;
 		icon: self icon;
 		label: self label;
 		action: self action

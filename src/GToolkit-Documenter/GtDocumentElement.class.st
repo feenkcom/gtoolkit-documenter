@@ -54,8 +54,5 @@ GtDocumentElement >> initialize [
 	super initialize.
 	
 	self layout: BlFrameLayout new.
-
-	self viewModel: (BrInteractiveModel withAll: { 
-		BrLayoutHorizontalResizerModel matchParent.
-		BrLayoutVerticalResizerModel matchParent })
+	self matchParent.
 ]

@@ -39,7 +39,9 @@ GtDocumenterStyler >> document: aGt2Document [
 		description: [ 'Document must be non-nil' ].
 	document := aGt2Document.
 	editorEventHandler document: aGt2Document.
-	aGt2Document editor addEventHandler: editorEventHandler.
+	(aGt2Document editor hasEventHandler: editorEventHandler)
+		ifFalse: [ aGt2Document editor addEventHandler: editorEventHandler ]
+	
 ]
 
 { #category : #initialization }
