@@ -1757,7 +1757,7 @@ GtDocumenterExamples >> resizablePreviewStencilOnMethodAsElement [
 	| aStencil anElement |
 	aStencil := self resizablePreviewStencilOnMethod.
 	anElement := aStencil asElement.
-	self assert: anElement class equals: GtExpandableCoderElement.
+	self assert: anElement class equals: GtExpandableMethodCoderElement.
 	^ anElement
 ]
 
