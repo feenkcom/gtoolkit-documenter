@@ -5,11 +5,6 @@ Class {
 }
 
 { #category : #initialize }
-GtEpiceaDiffElement >> editorLook [
-	^ BrGlamorousCodeEditorLook new
-]
-
-{ #category : #initialize }
 GtEpiceaDiffElement >> initialize [
 	super initialize.
 	leftElement geometry: (BlRoundedRectangleGeometry cornerRadius: 4).
