@@ -1,6 +1,6 @@
 Class {
 	#name : #GtCachedTextExpandButtonAttribute,
-	#superclass : #BrTextExpandButtonAttribute,
+	#superclass : #BrGlamorousTrangleExpanderTextAttribute,
 	#instVars : [
 		'onCachingAction'
 	],
