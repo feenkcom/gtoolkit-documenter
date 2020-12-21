@@ -6,13 +6,27 @@ I am used by ${class:GtDocumenter}$.
 Class {
 	#name : #XdDocumenterPublisher,
 	#superclass : #XdDocumenterSaver,
+	#classInstVars : [
+		'defaultXdClient'
+	],
 	#category : #'GToolkit-Documenter-XDoc-Publishers'
 }
+
+{ #category : #accessing }
+XdDocumenterPublisher class >> defaultXdClient [
+	defaultXdClient ifNil: [ defaultXdClient := XdClient  new ].
+	^ defaultXdClient
+]
+
+{ #category : #accessing }
+XdDocumenterPublisher class >> defaultXdClient: anXdClient [
+	defaultXdClient := anXdClient 
+]
 
 { #category : #'api - publishing' }
 XdDocumenterPublisher >> delete [
 	<return: #XdCommandAnswer>
-	^ XdClient new 
+	^ self class defaultXdClient 
 			username: self information username asString
 			password: self information password asString;
 			deleteUrl: self information publicUrl asString.
@@ -22,7 +36,7 @@ XdDocumenterPublisher >> delete [
 XdDocumenterPublisher >> publish [
 	<return: #XdCommandAnswer>
 	self hasFile ifFalse: [ self save ].
-	^ XdClient new 
+	^ self class defaultXdClient
 			username: self information username asString
 			password: self information password asString;
 			publish: self file
@@ -32,7 +46,7 @@ XdDocumenterPublisher >> publish [
 XdDocumenterPublisher >> update [
 	<return: #XdCommandAnswer>
 	self hasFile ifFalse: [ self save ].
-	^ XdClient new 
+	^ self class defaultXdClient 
 			username: self information username asString
 			password: self information password asString;
 			update: self file url: self information publicUrl asString.
