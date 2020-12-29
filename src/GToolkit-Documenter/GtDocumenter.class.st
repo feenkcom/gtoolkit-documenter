@@ -14,6 +14,9 @@ Class {
 	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable + TGtDocumentConstants + TGtPagerPageInstantiator',
 	#classTraits : 'TBrLayoutResizable classTrait + TGtDocumentConstants classTrait + TGtPagerPageInstantiator classTrait',
+	#instVars : [
+		'titleNotifier'
+	],
 	#category : #'GToolkit-Documenter-! Core'
 }
 
@@ -116,7 +119,8 @@ GtDocumenter >> cacheAt: aKey ifPresent: aPresentBlock ifAbsentPut: anAbsentBloc
 
 { #category : #'api - storage' }
 GtDocumenter >> classComment: aClass [
-	self editorElement classComment: aClass
+	self editorElement classComment: aClass.
+	self updateTitleLabel.
 ]
 
 { #category : #'api - styling' }
@@ -215,7 +219,8 @@ GtDocumenter >> exists [
 
 { #category : #'api - storage' }
 GtDocumenter >> fileReference: aFileReference [ 
-	self editorElement fileReference: aFileReference
+	self editorElement fileReference: aFileReference.
+	self updateTitleLabel.
 ]
 
 { #category : #'gt-extensions' }
@@ -320,6 +325,7 @@ GtDocumenter >> initialize [
 	self initializeShortcuts.	
 	self initializeToolbar.
 	self initializeVariableBindings.
+	self initializeTitleNotifier.
 
 	self layout: BlFrameLayout new.
 	self padding: (BlInsets all: 5).
@@ -357,6 +363,14 @@ GtDocumenter >> initializeShortcuts [
 		addShortcut: (BlShortcutWithAction new
 			combination: BlKeyCombination primaryG;
 			action: [ :anEvent | self doItAndGoSelectionOrAll ])
+]
+
+{ #category : #initialization }
+GtDocumenter >> initializeTitleNotifier [
+	titleNotifier := (GtPhlowTitleIconAndLabelNotifier new
+		longLabel: [ self name ifEmpty: [ 'Documenter' ] ];
+		icon: [ BrGlamorousIcons file ]).
+	self addEventHandler: titleNotifier.
 ]
 
 { #category : #initialization }
@@ -511,7 +525,14 @@ GtDocumenter >> text [
 
 { #category : #'api - content' }
 GtDocumenter >> text: aText [
-	self editorElement text: aText
+	self editorElement text: aText.
+	self updateTitleLabel.
+]
+
+{ #category : #'private - accessing' }
+GtDocumenter >> titleNotifier [
+	<return: #GtPhlowTitleNotifier>
+	^ titleNotifier
 ]
 
 { #category : #'private - toobar' }
@@ -523,6 +544,11 @@ GtDocumenter >> toolbar [
 { #category : #'api - announcer' }
 GtDocumenter >> unsubscribe: aSubscriber [
 	^ self editorElement unsubscribe: aSubscriber
+]
+
+{ #category : #'private - updating' }
+GtDocumenter >> updateTitleLabel [
+	self titleNotifier notifyIfFocused
 ]
 
 { #category : #'api - variables' }
