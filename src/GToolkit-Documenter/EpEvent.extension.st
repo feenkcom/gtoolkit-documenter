@@ -6,9 +6,7 @@ EpEvent >> gtDefinitionFor: aView [
 	^ aView textEditor
 		title: 'Definition';
 		priority: 1;
-		text: [ (self accept: GtEpiceaNewStateVisitor new) asRopedText 
-			monospace; 
-			foreground: GtDocumentConstants matchLineColor ]
+		text: [ (self accept: GtEpiceaNewStateVisitor new) asRopedText foreground: GtDocumentConstants matchLineColor ]
 ]
 
 { #category : #'*GToolkit-Documenter' }

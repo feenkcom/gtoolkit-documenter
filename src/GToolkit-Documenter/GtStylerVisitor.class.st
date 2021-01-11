@@ -167,10 +167,6 @@ GtStylerVisitor >> visitParameter: aPRParameter [
 GtStylerVisitor >> visitRaw: aPRRaw [
 	aPRRaw start ifNil: [ ^ self ].
 	self flag: 'fix Pillar'.
-	(self text
-		from: aPRRaw start
-		to: aPRRaw stop)
-			monospace.
 	super visitRaw: aPRRaw
 ]
 

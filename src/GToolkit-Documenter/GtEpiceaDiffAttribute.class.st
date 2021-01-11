@@ -25,7 +25,7 @@ GtEpiceaDiffAttribute >> affect: aTBrTextEditorTextualPiece in: anEditorElement 
 
 { #category : #initialization }
 GtEpiceaDiffAttribute >> asInsert [
-	self text: self constants insertLineIdentificator asRopedText monospace.
+	self text: self constants insertLineIdentificator asRopedText.
 	self text foreground: self constants insertLineColor.
 ]
 
