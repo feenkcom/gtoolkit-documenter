@@ -2,9 +2,7 @@ Extension { #name : #PRRaw }
 
 { #category : #'*GToolkit-Documenter' }
 PRRaw >> styleTextWithMarkup: aBlRope [
-	super styleTextWithMarkup: aBlRope.
-	(aBlRope from: self start to: self stop) monospace.
-	
+	super styleTextWithMarkup: aBlRope
 ]
 
 { #category : #'*GToolkit-Documenter' }
