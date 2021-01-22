@@ -3,8 +3,8 @@ Class {
 	#superclass : #BrTextAdornmentAttribute,
 	#instVars : [
 		'attribute',
-		'cache',
-		'onCachingAction'
+		'onCachingAction',
+		'cachedElement'
 	],
 	#category : #'GToolkit-Documenter-Text - Attributes'
 }
@@ -44,12 +44,12 @@ GtCachedAttribute >> beReplace [
 { #category : #accessing }
 GtCachedAttribute >> cache [
 	<return: #BlElement or: nil>
-	^ cache
+	^ cachedElement
 ]
 
 { #category : #accessing }
 GtCachedAttribute >> cache: aBlElement [
-	cache := aBlElement.
+	cachedElement := aBlElement.
 ]
 
 { #category : #testing }
@@ -61,7 +61,7 @@ GtCachedAttribute >> hasCache [
 GtCachedAttribute >> initialize [
 	super initialize.
 	attribute := GtPreviewAttribute new.
-	cache := nil.
+	cachedElement := nil.
 	onCachingAction := [ :aCachedElement :theAttribute | "do nothing" ].
 ]
 
