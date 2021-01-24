@@ -9,6 +9,11 @@ Class {
 	#category : #'GToolkit-Documenter-Text - Attributes'
 }
 
+{ #category : #testing }
+GtCachedAttribute class >> isDeprecated [
+	^ true
+]
+
 { #category : #accessing }
 GtCachedAttribute >> affect: aTBrTextEditorTextualPiece in: anEditorElement [
 	^ self hasCache 
