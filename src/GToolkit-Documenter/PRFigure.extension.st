@@ -141,15 +141,13 @@ PRFigure >> objectToPreview [
 
 { #category : #'*GToolkit-Documenter' }
 PRFigure >> previewAttributes [
-	^ {GtCachedAttribute new
-		attribute:
-			(GtResizablePreviewAttribute new
-				result: self objectToPreview;
-				showSelector: self showParameterValue;
-				height: self heightParameterValue);
-		cache: self cachedPreview;
-		onCachingDo:
-				[ :aCachedElement :theAttribute | self cachedPreview: aCachedElement ]}
+	^ { 
+		GtResizablePreviewAttribute new
+			withCache: self selector: #cachedPreview;
+			result: self objectToPreview;
+			showSelector: self showParameterValue;
+			height: self heightParameterValue
+		}
 ]
 
 { #category : #'*GToolkit-Documenter' }

@@ -88,15 +88,13 @@ GtAnnotation >> objectToPreview [
 
 { #category : #'private - styling' }
 GtAnnotation >> previewAttributes [
-	^ {GtCachedAttribute new
-		attribute:
-			(GtResizablePreviewAttribute new
-				result: self objectToPreview;
-				showSelector: self showParameterValue;
-				height: self heightParameterValue);
-		cache: self cachedPreview;
-		onCachingDo:
-				[ :aCachedElement :theAttribute | self cachedPreview: aCachedElement ]}
+	^ {
+		GtResizablePreviewAttribute new
+			withCache: self selector: #cachedPreview;
+			result: self objectToPreview;
+			showSelector: self showParameterValue;
+			height: self heightParameterValue
+		}
 ]
 
 { #category : #accessing }

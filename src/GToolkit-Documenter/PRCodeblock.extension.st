@@ -39,6 +39,7 @@ PRCodeblock >> cachedEvaluatedInterval [
 { #category : #'*GToolkit-Documenter' }
 PRCodeblock >> cachedPreview [
 	<return: #BlElement or: nil>
+
 	^ self gtDocument 
 		cacheAt: self cacheKey
 		ifPresent: [ :aCachedValue | aCachedValue preview ] 
@@ -246,14 +247,12 @@ PRCodeblock >> registerToSystemChanges [
 
 { #category : #'*GToolkit-Documenter' }
 PRCodeblock >> resultPreviewAttributes [
-	^ {GtCachedAttribute new
-			attribute: (GtResizablePreviewAttribute new
-				result: self cachedResult;
-				showSelector: self showParameterValue;
-				height: self heightParameterValue);
-			cache: self cachedPreview;
-			onCachingDo: [ :aCachedElement :theAttribute | 
-				self cachedPreview: aCachedElement ]
+	^ {
+		GtResizablePreviewAttribute new
+			withCache: self selector: #cachedPreview;
+			result: self cachedResult;
+			showSelector: self showParameterValue;
+			height: self heightParameterValue
 		}
 ]
 

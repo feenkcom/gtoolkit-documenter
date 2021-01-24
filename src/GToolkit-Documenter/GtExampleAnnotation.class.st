@@ -282,6 +282,7 @@ GtExampleAnnotation >> methodName [
 { #category : #'private - styling' }
 GtExampleAnnotation >> newExamplePreviewAttribute [
 	^ self examplePreviewAttributeClass new
+		withCache: self selector: #cachedPreview;
 		beAppend;
 		example: self cachedExample;
 		codeExpanded: self codeExpanded;
@@ -308,11 +309,7 @@ GtExampleAnnotation >> objectToPreview [
 
 { #category : #'private - styling' }
 GtExampleAnnotation >> previewAttributes [
-	^ {(GtCachedAttribute new
-			attribute: self newExamplePreviewAttribute;
-			cache: self cachedPreview;
-			onCachingDo: [ :aCachedElement :theAttribute | 
-				self cachedPreview: aCachedElement ])}
+	^ { self newExamplePreviewAttribute }
 ]
 
 { #category : #'accessing - parameter values' }
