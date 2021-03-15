@@ -1,7 +1,6 @@
 Class {
 	#name : #GtDocumenterStyler,
 	#superclass : #BlTextStyler,
-	#traits : 'TBlTextStyleable',
 	#classTraits : 'TBlTextStyleable classTrait',
 	#instVars : [
 		'parser',
