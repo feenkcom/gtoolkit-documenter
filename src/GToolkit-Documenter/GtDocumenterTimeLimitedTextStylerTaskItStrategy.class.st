@@ -5,9 +5,10 @@ Class {
 }
 
 { #category : #'instance creation' }
-GtDocumenterTimeLimitedTextStylerTaskItStrategy >> newStylingCommandFor: aBlText afterDo: aBlock [
+GtDocumenterTimeLimitedTextStylerTaskItStrategy >> newStylingCommandFor: aBlText with: aBlTextStyler inEditorElement: aBrEditorElement  afterDo: aBlock [
 	<return: #BlTktTimeLimitedCommand>
+
 	^ BlTktTimeLimitedCommand new
-		command: (super newStylingCommandFor: aBlText afterDo: aBlock);
+		command: (super newStylingCommandFor: aBlText with: aBlTextStyler inEditorElement: aBrEditorElement afterDo: aBlock);
 		allowedDuration: 3 seconds
 ]

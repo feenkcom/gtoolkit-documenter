@@ -42,7 +42,7 @@ GtDocument class >> isDeprecated [
 
 { #category : #accessing }
 GtDocument >> addOns [
-	<return: #GtSourceCoderAddOns>
+	<return: #GtTextualCoderAddOns>
 	^ addOns
 ]
 
@@ -371,7 +371,7 @@ GtDocument >> initialize [
 
 { #category : #initialization }
 GtDocument >> initializeAddOns [
-	addOns := GtSourceCoderAddOns new.
+	addOns := GtTextualCoderAddOns new.
 	self initializeShortcuts.
 ]
 
