@@ -142,7 +142,7 @@ GtStyledNodeBuilder >> explanation [
 			aContainer explainer isExplanation: true; model: self properties name value.
 			aTextPieceElement := (BrTextElementWithCursors new
 				editorMeasurement;
-				segmentPiece: (BrTextEditorLineSegmentPiece new initializeWith: aRenderedText from: 0 to: aRenderedText size)).
+				segmentPiece: (BrTextEditorLineSegmentPiece new initializeWith: aRenderedText from: 0 to: aRenderedText size delimiter: 0)).
 			aContainer addChildren: { aTextPieceElement } ]
 		
 		" (GtButtonAttribute new
