@@ -1,6 +1,6 @@
 Class {
 	#name : #GtPreviewLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#category : #'GToolkit-Documenter-Brick - Looks'
 }
 

@@ -5,7 +5,7 @@ I am used by ${class:GtDocumenterEditor}$.
 "
 Class {
 	#name : #GtDocumenterEditorCompleterLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'storage',
 		'completionStrategy',
