@@ -33,7 +33,7 @@ GtDocumentElement >> document: aGtDocument [
 		text: document editor text;
 		styler: document editor styler;
 		editor: document editor;
-		look: BrGlamorousRegularEditorLook;
+		aptitude: BrGlamorousRegularEditorAptitude;
 		matchParent;
 		constraintsDo: [ :c | c padding: (BlInsets all: 10) ].
 
@@ -44,7 +44,7 @@ GtDocumentElement >> document: aGtDocument [
 		
 	self addChild: anEditorElement.
 
-	self look: (BrLayoutResizerLook new
+	self aptitude: (BrLayoutResizerAptitude new
 		inherit;
 		inherit: anEditorElement)
 ]

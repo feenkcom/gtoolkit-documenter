@@ -106,11 +106,11 @@ GtEpicea >> diffElements [
 					element hMatchParent.
 					element vFitContent.
 					element
-						addChild: ((GtEpiceaDiffElement on: builder) look: GtDiffFlatLook) vFitContent beSmallSize.
+						addChild: ((GtEpiceaDiffElement on: builder) aptitude: GtDiffFlatAptitude) vFitContent beSmallSize.
 					element
 						addChild:
 							(BrButton new
-								look: BrGlamorousButtonWithIconLook;
+								aptitude: BrGlamorousButtonWithIconAptitude;
 								icon: BrGlamorousVectorIcons accept;
 								label: 'Accept';
 								margin:
@@ -120,7 +120,7 @@ GtEpicea >> diffElements [
 										bottom: 5
 										right: 0);
 								action: [ each applyCodeChange ]).
-					element addLook: (BrShadowLook new width: 1).
+					element addAptitude: (BrShadowAptitude new width: 1).
 					elements add: element ] ].
 	^ elements
 ]
@@ -144,7 +144,7 @@ GtEpicea >> gtDiffFor: aView [
 	^ aView textEditor
 		title: 'Diff';
 		priority: 1;
-		look: BrGlamorousCodeEditorLook;
+		aptitude: BrGlamorousCodeEditorAptitude;
 		updateWhen: GtEpiceaUpdatedAnnouncement in: self;
 		text: [ :anEditor | self diff ]
 ]
@@ -164,7 +164,7 @@ GtEpicea >> gtDiffsFor: aView [
 				padding: (BlInsets all: 0);
 				hMatchParent;
 				vFitContent.
-			label := BrLabel new look: BrGlamorousLabelLook.
+			label := BrLabel new aptitude: BrGlamorousLabelAptitude.
 			label
 				text:
 					('Current:' asRopedText glamorousCodeSmallSize
@@ -178,7 +178,7 @@ GtEpicea >> gtDiffsFor: aView [
 						height: 0;
 						width: 15;
 						yourself).
-			label := BrLabel new look: BrGlamorousLabelLook.
+			label := BrLabel new aptitude: BrGlamorousLabelAptitude.
 			label
 				text:
 					('Change:' asRopedText glamorousCodeSmallSize
@@ -218,7 +218,7 @@ GtEpicea >> gtEventsFor: aView [
 					aRemoveButton := BrButton new.
 					aRemoveButton
 						layout: BlLinearLayout new;
-						look: BrGlamorousButtonWithIconLook;
+						aptitude: BrGlamorousButtonWithIconAptitude;
 						icon:
 							(BlElement new
 								layout: BlLinearLayout new;
@@ -269,7 +269,7 @@ GtEpicea >> gtGlobalEntriesIn: aView [
 					anAddButton := BrButton new.
 					anAddButton
 						layout: BlLinearLayout new;
-						look: BrGlamorousButtonWithIconLook;
+						aptitude: BrGlamorousButtonWithIconAptitude;
 						icon: GtInspectorPlusIconStencil new asElement;
 						action: [ self addEvent: anOmEntry content.
 							anAddButton
@@ -313,7 +313,7 @@ GtEpicea >> gtTutorialFor: aView [
 	^ aView textEditor
 		title: 'Code';
 		priority: 2;
-		look: BrGlamorousCodeEditorLook;
+		aptitude: BrGlamorousCodeEditorAptitude;
 		updateWhen: GtEpiceaUpdatedAnnouncement in: self;
 		text: [ :anEditor | self tutorialStateRope ]
 ]

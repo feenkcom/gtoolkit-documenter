@@ -1,13 +1,13 @@
 Class {
-	#name : #GtPreviewLook,
+	#name : #GtPreviewAptitude,
 	#superclass : #BrAptitude,
 	#category : #'GToolkit-Documenter-Brick - Looks'
 }
 
 { #category : #initialization }
-GtPreviewLook >> initialize [
+GtPreviewAptitude >> initialize [
 	super initialize.
-	self add: BrShadowLook new.
+	self add: BrShadowAptitude new.
 	self
 		addChangeProperty: #(widget background)
 		with: [ Color white asBlBackground ].

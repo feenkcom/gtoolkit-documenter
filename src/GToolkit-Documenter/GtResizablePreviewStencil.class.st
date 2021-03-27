@@ -13,6 +13,6 @@ GtResizablePreviewStencil >> newContainerFor: aWrappedElement [
 				c horizontal matchParent.
 				c vertical exact: self height ]
 		 ].
-	aResult addLook: GtPreviewLook.
+	aResult addAptitude: GtPreviewAptitude.
 	^ aResult
 ]

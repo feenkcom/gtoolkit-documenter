@@ -279,8 +279,8 @@ GtDocument >> gtResourcesFor: aView [
 					eachResource isDocument ifTrue: [ 
 						anElement := BrCard new
 							size: 200@100;
-							look: BrShadowLook + BrGlamorousLabelLook + BrDescriptionLook 
-								+ BrGlamorousWithVerticalResizerLook + BrGlamorousWithHorizontalResizerLook;
+							aptitude: BrShadowAptitude + BrGlamorousLabelAptitude + BrDescriptionAptitude 
+								+ BrGlamorousWithVerticalResizerAptitude + BrGlamorousWithHorizontalResizerAptitude;
 							margin: (BlInsets all: 10);
 							padding: (BlInsets all: 10);
 							background: Color white;

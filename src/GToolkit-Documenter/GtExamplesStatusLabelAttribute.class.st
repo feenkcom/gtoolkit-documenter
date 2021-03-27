@@ -27,7 +27,7 @@ GtExamplesStatusLabelAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEdi
 
 	| anElement |
 	anElement := BrLabel new
-		look: (BrGlamorousLabelLook new fontSize: anEditorElement normalFontSize);
+		aptitude: (BrGlamorousLabelAptitude new fontSize: anEditorElement normalFontSize);
 		text: self resultLabel.
 	anElement margin: (BlInsets left: 5);
 		padding:

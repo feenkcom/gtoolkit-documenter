@@ -22,7 +22,7 @@ XdDocumenterExamples >> basicHeader [
 	<gtExample>
 	| aHeader |
 	aHeader := XdDocumenterHeader new.
-	aHeader look: GtCoderExpanderWithoutShadowLook.
+	aHeader aptitude: GtCoderExpanderWithoutShadowAptitude.
 	aHeader hMatchParent; vFitContent.
 	self assert: aHeader xdFile equals: XdFile null.
 	^ aHeader

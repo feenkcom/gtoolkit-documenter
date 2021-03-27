@@ -4,7 +4,7 @@ I am used by ${class:GtDocumenterEditor}$.
 
 "
 Class {
-	#name : #GtDocumenterEditorCompleterLook,
+	#name : #GtDocumenterEditorCompleterAptitude,
 	#superclass : #BrAptitude,
 	#instVars : [
 		'storage',
@@ -15,7 +15,7 @@ Class {
 }
 
 { #category : #initialization }
-GtDocumenterEditorCompleterLook >> initialize [
+GtDocumenterEditorCompleterAptitude >> initialize [
 	super initialize.
 	completionStrategy := GtDocumentCompletionStrategy new.
 	completionStrategy
@@ -30,7 +30,7 @@ GtDocumenterEditorCompleterLook >> initialize [
 ]
 
 { #category : #initialization }
-GtDocumenterEditorCompleterLook >> initializeListeners [
+GtDocumenterEditorCompleterAptitude >> initializeListeners [
 	super initializeListeners.
 	
 	self 
@@ -39,32 +39,32 @@ GtDocumenterEditorCompleterLook >> initializeListeners [
 ]
 
 { #category : #initialization }
-GtDocumenterEditorCompleterLook >> initializeRequests [
+GtDocumenterEditorCompleterAptitude >> initializeRequests [
 	super initializeRequests.
 
 	self request: GtDocumenterStorageRequest new.
 ]
 
 { #category : #private }
-GtDocumenterEditorCompleterLook >> installControllerOn: aDocumenterEditor [
+GtDocumenterEditorCompleterAptitude >> installControllerOn: aDocumenterEditor [
 	completionController textElement: aDocumenterEditor.
 	completionController install.
 
 ]
 
 { #category : #accessing }
-GtDocumenterEditorCompleterLook >> onStorageChange [
+GtDocumenterEditorCompleterAptitude >> onStorageChange [
 	completionStrategy fileReference: self storage rootDirectory.
 ]
 
 { #category : #accessing }
-GtDocumenterEditorCompleterLook >> storage [
+GtDocumenterEditorCompleterAptitude >> storage [
 	<return: #GtStorageStrategy>
 	^ storage
 ]
 
 { #category : #accessing }
-GtDocumenterEditorCompleterLook >> storage: aGtStorageStrategy [
+GtDocumenterEditorCompleterAptitude >> storage: aGtStorageStrategy [
 	self 
 		assert: [ aGtStorageStrategy isNotNil ] 
 		description: [ 'Storage strategy must be non-nil' ].
@@ -73,7 +73,7 @@ GtDocumenterEditorCompleterLook >> storage: aGtStorageStrategy [
 ]
 
 { #category : #private }
-GtDocumenterEditorCompleterLook >> uninstallControllerOn: anElement [
+GtDocumenterEditorCompleterAptitude >> uninstallControllerOn: anElement [
 	completionController uninstall.
 	completionController textElement: nil.
 ]

@@ -22,12 +22,12 @@ GtButtonStencil >> action: aValuable [
 { #category : #'api - instantiation' }
 GtButtonStencil >> create [
 	| aLook |
-	aLook := BrGlamorousButtonWithIconLook.
+	aLook := BrGlamorousButtonWithIconAptitude.
 	self hasLabel ifTrue: [ 
-		aLook := aLook + BrGlamorousButtonLabelLook ].
+		aLook := aLook + BrGlamorousButtonLabelAptitude ].
 
 	^ BrButton new
-		look: aLook;
+		aptitude: aLook;
 		beSmallSize;
 		icon: self icon;
 		label: self label;

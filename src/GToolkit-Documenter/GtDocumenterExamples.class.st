@@ -1888,7 +1888,7 @@ GtDocumenterExamples >> ropeHiddenBoldMarkupForNonTechnicalPeople [
 	<gtExample>
 	| aRope anElement aSwitchAttribute |
 	anElement := BrButton new 
-				look: BrGlamorousButtonWithLabelLook;
+				aptitude: BrGlamorousButtonWithLabelAptitude;
 				beSmallSize;
 				label: 'Display Markups'.
 	aSwitchAttribute := BrTextHoverAttribute new

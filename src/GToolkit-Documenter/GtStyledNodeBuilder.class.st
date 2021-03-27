@@ -207,7 +207,7 @@ GtStyledNodeBuilder >> iconButton [
 	anAttribute := GtButtonAttribute new
 		beAppend;
 		stencil: [ BrButton new
-				look: BrGlamorousButtonWithIconLook;
+				aptitude: BrGlamorousButtonWithIconAptitude;
 				beSmallSize;
 				margin: (BlInsets left: 3);
 				icon: self properties icon value asElement;
@@ -307,7 +307,7 @@ GtStyledNodeBuilder >> linkButton [
 					maySplitString: self properties name value 
 					collect: [ :eachLabel | 
 						BrButton new 
-							look: (BrGlamorousLinkSquaredButtonWithLabelLook new fontSize: self normalFontSize);
+							aptitude: (BrGlamorousLinkSquaredButtonWithLabelAptitude new fontSize: self normalFontSize);
 							beSmallSize;
 							margin: (BlInsets top: -1 left: 0 bottom: 0 right: 0);
 							label: eachLabel;

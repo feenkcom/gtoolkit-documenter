@@ -18,7 +18,7 @@ XdDocumenterShareDialogStencil >> create [
 		updateAction: [ self document xdocPublisher information: anInformation; update ];
 		deleteAction: [ self document xdocPublisher information: anInformation; delete ].
 	^ XdShareDialogElement new  
-		look: XdShareDialogLook;
+		aptitude: XdShareDialogAptitude;
 		layout: BlLinearLayout vertical;
 		constraintsDo: [ :c |
 			c padding: (BlInsets all: 5).

@@ -141,7 +141,7 @@ GtDocumenter >> defaultStorage [
 { #category : #defaults }
 GtDocumenter >> defaultToolbar [
 	^ BrToolbar new
-		look: BrGlamorousToolbarLook;
+		aptitude: BrGlamorousToolbarAptitude;
 		margin: (BlInsets top: 0 left: 0 bottom: 3 right: 0);
 		visibility: BlVisibility gone;
 		fitContent;
@@ -245,8 +245,8 @@ GtDocumenter >> gtResourcesFor: aView [
 				stencil: [ :eachResource |
 					BrCard new
 						size: 200@100;
-						look: BrShadowLook + BrGlamorousLabelLook + BrDescriptionLook 
-							+ BrGlamorousWithVerticalResizerLook + BrGlamorousWithHorizontalResizerLook;
+						aptitude: BrShadowAptitude + BrGlamorousLabelAptitude + BrDescriptionAptitude 
+							+ BrGlamorousWithVerticalResizerAptitude + BrGlamorousWithHorizontalResizerAptitude;
 						margin: (BlInsets all: 10);
 						padding: (BlInsets all: 10);
 						background: Color white;
@@ -329,7 +329,7 @@ GtDocumenter >> initialize [
 
 	self layout: BlFrameLayout new.
 	self padding: (BlInsets all: 5).
-	self look: (BrLayoutResizerLook inherit inherit: self editorElement).
+	self aptitude: (BrLayoutResizerAptitude inherit inherit: self editorElement).
 	self matchParent.
 ]
 
@@ -337,7 +337,7 @@ GtDocumenter >> initialize [
 GtDocumenter >> initializeEditor [
 	| anEditor |
 	anEditor := GtDocumenterEditor new
-		look: GtDocumenterEditorLook + GtDocumenterEditorCompleterLook.
+		aptitude: GtDocumenterEditorAptitude + GtDocumenterEditorCompleterAptitude.
 			
 	self addChild: anEditor as: self defaultEditorChildName.
 	
