@@ -91,6 +91,8 @@ GtClassCommentStrategy >> save: aGt2Document [
 	self 
 		assert: [ self classToComment isDefined ]
 		description: [ 'Class to document must exist in the system to store a comment there' ].
-	self classToComment realClass comment: aGt2Document text asString
-	
+		
+	GtPharoCodeModifier
+		classComment: aGt2Document text asString
+		of: self classToComment realClass
 ]
