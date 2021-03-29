@@ -28,8 +28,6 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 				spec repository: 'github://feenkcom/gtoolkit-coder/src' ];
 			baseline: 'GToolkitUtility' with: [
 				spec repository: 'github://feenkcom/gtoolkit-utility/src' ];
-			baseline: 'GToolkitVariableBindings' with: [
-				spec repository: 'github://feenkcom/gtoolkit-playground/src' ];
 			baseline: 'GToolkitVisualizerPhlow' with: [
 				spec repository: 'github://feenkcom/gtoolkit-visualizer/src' ];
 			baseline: 'GToolkitExamples' with: [
@@ -44,7 +42,7 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 				spec repository: 'github://feenkcom/xdoc/src' ].
 		spec
 			package: 'GToolkit-Documenter' with: [
-				spec requires: #(#PillarExporter #GToolkitCoder #GToolkitCompleter #GToolkitUtility #GToolkitVariableBindings #GToolkitExamples #GToolkitInspector ). ];
+				spec requires: #(#PillarExporter #GToolkitCoder #GToolkitCompleter #GToolkitUtility #GToolkitExamples #GToolkitInspector ). ];
 			package: 'GToolkit-Documenter-XDoc' with: [
 				spec requires: #('GToolkit-Documenter' #GToolkitUtility #XdocClient ). ]. ].
 
