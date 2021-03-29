@@ -31,6 +31,11 @@ GtDocumenter class >> forFile: aFileReference [
 ]
 
 { #category : #'instance creation' }
+GtDocumenter class >> forPackage: anRPackage [
+	^ self new packageComment: anRPackage; read
+]
+
+{ #category : #'instance creation' }
 GtDocumenter class >> forText: aStringOrText [
 	^ self new text: aStringOrText
 ]
@@ -406,6 +411,12 @@ GtDocumenter >> normalFontSize [
 { #category : #'api - styling' }
 GtDocumenter >> normalFontSize: aNumber [
 	self editorElement normalFontSize: aNumber.
+]
+
+{ #category : #'api - storage' }
+GtDocumenter >> packageComment: anRPackage [
+	self editorElement packageComment: anRPackage.
+	self updateTitleLabel.
 ]
 
 { #category : #'api - ast' }
