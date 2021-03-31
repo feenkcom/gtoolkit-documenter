@@ -50,7 +50,7 @@ GtDocumenterTool >> name [
 
 { #category : #'private - accessing' }
 GtDocumenterTool >> tabLook [
-	^ BrGlamorousTabSwitcherWithIconLook
+	^ BrGlamorousTabSwitcherWithIconAptitude
 ]
 
 { #category : #'api - accessing' }

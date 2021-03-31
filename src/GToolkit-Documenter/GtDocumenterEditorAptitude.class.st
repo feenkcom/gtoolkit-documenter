@@ -5,8 +5,8 @@ I am used by ${class:GtDocumenterEditor}$.
 
 "
 Class {
-	#name : #GtDocumenterEditorLook,
-	#superclass : #BrGlamorousEditorLook,
+	#name : #GtDocumenterEditorAptitude,
+	#superclass : #BrGlamorousEditorAptitude,
 	#instVars : [
 		'normalFontSize'
 	],
@@ -14,22 +14,22 @@ Class {
 }
 
 { #category : #defaults }
-GtDocumenterEditorLook >> defaultFontSize [
+GtDocumenterEditorAptitude >> defaultFontSize [
 	^ 16
 ]
 
 { #category : #initialization }
-GtDocumenterEditorLook >> initialize [
+GtDocumenterEditorAptitude >> initialize [
 	super initialize.
 	normalFontSize := self defaultFontSize.
 	self 
 		glamorousRegularFont;
 		fontSize: self normalFontSize.
-	self add: BrLayoutResizerLook inherit.
+	self add: BrLayoutResizerAptitude inherit.
 ]
 
 { #category : #initialization }
-GtDocumenterEditorLook >> initializeListeners [
+GtDocumenterEditorAptitude >> initializeListeners [
 	super initializeListeners.
 	
 	self 
@@ -38,25 +38,25 @@ GtDocumenterEditorLook >> initializeListeners [
 ]
 
 { #category : #initialization }
-GtDocumenterEditorLook >> initializeRequests [
+GtDocumenterEditorAptitude >> initializeRequests [
 	super initializeRequests.
 
 	self request: GtDocumenterNormalFontSizeRequest new.
 ]
 
 { #category : #accessing }
-GtDocumenterEditorLook >> normalFontSize [
+GtDocumenterEditorAptitude >> normalFontSize [
 	^ normalFontSize
 ]
 
 { #category : #accessing }
-GtDocumenterEditorLook >> normalFontSize: aNumber [
+GtDocumenterEditorAptitude >> normalFontSize: aNumber [
 	normalFontSize := aNumber.
 	self onNormalFontSizeChanged.
 ]
 
 { #category : #hooks }
-GtDocumenterEditorLook >> onNormalFontSizeChanged [
+GtDocumenterEditorAptitude >> onNormalFontSizeChanged [
 	self widgetDo: [ :aWidget | 
 		aWidget styler fontSize: self normalFontSize.
 		aWidget styleTextRequest ]

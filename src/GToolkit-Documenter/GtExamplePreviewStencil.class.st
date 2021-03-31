@@ -120,13 +120,13 @@ GtExamplePreviewStencil >> newContainerWithHeight: aHeightNumber [
 	aContainer := BlElement new.
 	^ aContainer
 		layout: BlLinearLayout vertical;
-		look: GtPreviewLook;
+		aptitude: GtPreviewAptitude;
 		addChild: (BrResizer new
 			target: aContainer;
 			"addEventHandlerOn: BlDoubleClickEvent do: [ :anEvent |
 				aResizableElement constraintsDo: [ :c | c vertical fitContent ] ]; "
 			beBottom;
-			look: BrGlamorousResizerLook;
+			aptitude: BrGlamorousResizerAptitude;
 			constraintsDo: [ :c | 
 				c ignoreByLayout.
 				c ignored horizontal weight: 0.5 ]);

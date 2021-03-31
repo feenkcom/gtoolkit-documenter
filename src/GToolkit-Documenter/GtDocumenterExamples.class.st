@@ -51,11 +51,12 @@ GtDocumenterExamples >> addingAndRemovingClass [
 	self assert: anElement notNil.
 	aDocument editor styleText.
 	self class environment at: aClassName ifAbsent: [ 
-		Object subclass: aClassName
-			instanceVariableNames: ''
-			classVariableNames: ''
-			package: 'GToolkitDocumenterDummyPackage'. ].
-	self class environment removeClassNamed: aClassName.
+		GtPharoCodeModifier
+			createSubclassOf: Object
+			named: aClassName
+			package: 'GToolkitDocumenterDummyPackage' ].
+	
+	GtPharoCodeModifier removeBehaviorNamed: aClassName.
 	^ aDocument
 ]
 
@@ -1888,7 +1889,7 @@ GtDocumenterExamples >> ropeHiddenBoldMarkupForNonTechnicalPeople [
 	<gtExample>
 	| aRope anElement aSwitchAttribute |
 	anElement := BrButton new 
-				look: BrGlamorousButtonWithLabelLook;
+				aptitude: BrGlamorousButtonWithLabelAptitude;
 				beSmallSize;
 				label: 'Display Markups'.
 	aSwitchAttribute := BrTextHoverAttribute new
