@@ -23,27 +23,27 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 	spec for: #'common' do: [
 		spec 
 			baseline: 'GToolkitCompleter' with: [
-				spec repository: 'github://feenkcom/gtoolkit-completer/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-completer:v0.8.305/src' ];
 			baseline: 'GToolkitCoder' with: [
-				spec repository: 'github://feenkcom/gtoolkit-coder/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-coder:v0.8.382/src' ];
 			baseline: 'GToolkitUtility' with: [
-				spec repository: 'github://feenkcom/gtoolkit-utility/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.27/src' ];
 			baseline: 'GToolkitVisualizerPhlow' with: [
-				spec repository: 'github://feenkcom/gtoolkit-visualizer/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-visualizer:v0.8.327/src' ];
 			baseline: 'GToolkitExamples' with: [
-				spec repository: 'github://feenkcom/gtoolkit-examples/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-examples:v0.8.19/src' ];
 			baseline: 'GToolkitInspector' with: [
-				spec repository: 'github://feenkcom/gtoolkit-inspector/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-inspector:v0.8.375/src' ];
 			baseline: 'PillarExporter' with: [
-				spec repository: 'github://feenkcom/pillar:feenk/src' ];
+				spec repository: 'github://feenkcom/pillar:v7.3.23/src' ];
 			baseline: 'DeepTraverser' with: [
-				spec repository: 'github://feenkcom/DeepTraverser/src' ];
+				spec repository: 'github://feenkcom/DeepTraverser:v1.1.73/src' ];
 			baseline: 'XdocClient' with: [
-				spec repository: 'github://feenkcom/xdoc/src' ].
-		spec
+				spec repository: 'github://feenkcom/xdoc:v0.8.321/src' ].
+		spec 
 			package: 'GToolkit-Documenter' with: [
-				spec requires: #(#PillarExporter #GToolkitCoder #GToolkitCompleter #GToolkitUtility #GToolkitExamples #GToolkitInspector ). ];
+				spec requires: #('PillarExporter' 'GToolkitCoder' 'GToolkitCompleter' 'GToolkitUtility' 'GToolkitExamples' 'GToolkitInspector' ). ];
 			package: 'GToolkit-Documenter-XDoc' with: [
-				spec requires: #('GToolkit-Documenter' #GToolkitUtility #XdocClient ). ]. ].
+				spec requires: #('GToolkit-Documenter' 'GToolkitUtility' 'XdocClient' ). ]. ].
 
 ]
