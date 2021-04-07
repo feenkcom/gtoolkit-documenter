@@ -33,13 +33,13 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 			baseline: 'GToolkitExamples' with: [
 				spec repository: 'github://feenkcom/gtoolkit-examples:v0.8.21/src' ];
 			baseline: 'GToolkitInspector' with: [
-				spec repository: 'github://feenkcom/gtoolkit-inspector:v0.8.380/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-inspector:v0.8.381/src' ];
 			baseline: 'PillarExporter' with: [
 				spec repository: 'github://feenkcom/pillar:v7.3.23/src' ];
 			baseline: 'DeepTraverser' with: [
 				spec repository: 'github://feenkcom/DeepTraverser:v1.1.75/src' ];
 			baseline: 'XdocClient' with: [
-				spec repository: 'github://feenkcom/xdoc:v0.8.325/src' ].
+				spec repository: 'github://feenkcom/xdoc:v0.8.326/src' ].
 		spec 
 			package: 'GToolkit-Documenter' with: [
 				spec requires: #('PillarExporter' 'GToolkitCoder' 'GToolkitCompleter' 'GToolkitUtility' 'GToolkitExamples' 'GToolkitInspector' ). ];
