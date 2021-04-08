@@ -329,7 +329,7 @@ GtDocumenter >> initialize [
 
 	self layout: BlFrameLayout new.
 	self padding: (BlInsets all: 5).
-	self aptitude: (BrLayoutResizerAptitude inherit inherit: self editorElement).
+	self aptitude: (BrLayoutResizerAptitude new inherit: self editorElement).
 	self matchParent.
 ]
 
