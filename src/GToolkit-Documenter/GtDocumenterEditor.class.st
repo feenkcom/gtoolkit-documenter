@@ -134,6 +134,11 @@ GtDocumenterEditor >> normalFontSize: aNumber [
 ]
 
 { #category : #'api - storage' }
+GtDocumenterEditor >> packageComment: anRPackage [
+	storageModel packageComment: anRPackage
+]
+
+{ #category : #'api - storage' }
 GtDocumenterEditor >> read [
 	^ storageModel read
 ]

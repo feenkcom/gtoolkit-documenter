@@ -80,6 +80,14 @@ GtDocumenterEditorStorageModel >> notifyStorageChanged [
 ]
 
 { #category : #'api - storage' }
+GtDocumenterEditorStorageModel >> packageComment: anRPackage [ 
+	self 
+		assert: [ anRPackage notNil ]
+		description: [ 'Package to document must be non-nil' ].
+	self storage: (GtStorageStrategy packageComment: anRPackage)
+]
+
+{ #category : #'api - storage' }
 GtDocumenterEditorStorageModel >> read [
 	self widgetDo: [ :aDocumenter |
 		self storage read: aDocumenter ]

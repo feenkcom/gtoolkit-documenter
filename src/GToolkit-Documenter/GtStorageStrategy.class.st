@@ -31,6 +31,16 @@ GtStorageStrategy class >> null [
 	^ GtNoStorageStrategy uniqueInstance
 ]
 
+{ #category : #factory }
+GtStorageStrategy class >> packageComment [
+	^ GtPackageCommentStrategy new
+]
+
+{ #category : #factory }
+GtStorageStrategy class >> packageComment: anRPackage [
+	^ self packageComment packageToComment: anRPackage
+]
+
 { #category : #accessing }
 GtStorageStrategy >> basename [
 	"Return a string representing the document filename"
