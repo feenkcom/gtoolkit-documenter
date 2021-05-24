@@ -157,6 +157,8 @@ GtEpicea >> gtDiffsFor: aView [
 		title: 'Diff';
 		priority: 1;
 		updateWhen: GtEpiceaUpdatedAnnouncement in: self;
+		actionUpdateButton;
+		actionButtonIcon: BrGlamorousVectorIcons accept tooltip: 'Apply changes' action: [ self applyChanges ];
 		stencil: [ | element headerElement label diffElement |
 			element := BrVerticalPane new.
 			element matchParent.
@@ -315,6 +317,8 @@ GtEpicea >> gtTutorialFor: aView [
 		priority: 2;
 		aptitude: BrGlamorousCodeEditorAptitude;
 		updateWhen: GtEpiceaUpdatedAnnouncement in: self;
+		actionUpdateButton;
+		actionButtonIcon: BrGlamorousVectorIcons accept tooltip: 'Apply changes' action: [ self applyChanges ];
 		text: [ :anEditor | self tutorialStateRope ]
 ]
 
