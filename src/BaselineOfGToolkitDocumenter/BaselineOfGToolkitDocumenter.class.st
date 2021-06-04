@@ -1,5 +1,5 @@
 "
-1. Documenter
+!Documenter
 The Documenter is a tool for creating and consuming live documents directly in the development environment. 
 
 At its core it offers a live editor for manipulating Pillar documents. The interaction happens seamlessly directly in the text editor, and it can be combined with different types of previews to serve several classes of use cases:
@@ -8,8 +8,7 @@ At its core it offers a live editor for manipulating Pillar documents. The inter
 - interactive data notebooks
 
 Take a look at the demo file here:
-[documenter.pillar](fileLocator://gtResource/feenkcom/gtoolkit-demos/doc/tutorial/esug-2018-documenter/documenter.pillar)
-
+${icebergFile:path=feenkcom/gtoolkit-demos/doc/tutorial/esug-2018-documenter/documenter.pillar}$
 
 "
 Class {

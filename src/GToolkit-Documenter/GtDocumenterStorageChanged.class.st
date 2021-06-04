@@ -1,6 +1,5 @@
 "
-I inform about {{gtClass:GtStorageStrategy}} changes in {{gtClass:GtDocumenterEditor}}.
-
+I inform about ${class:GtStorageStrategy}$ changes in ${class:GtDocumenterEditor}$.
 
 "
 Class {

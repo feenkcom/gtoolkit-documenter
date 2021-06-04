@@ -1,6 +1,5 @@
 "
-I inform about normal font size changes in {{gtClass:GtDocumenterEditor}}.
-
+I inform about normal font size changes in ${class:GtDocumenterEditor}$.
 
 "
 Class {

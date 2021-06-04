@@ -1,7 +1,6 @@
 "
-I install {{gtClass:GtDocumentCompletionStrategy}} on {{gtClass:GtDocumenterEditor}}.
-I am used by {{gtClass:GtDocumenterEditor}}.
-
+I install ${class:GtDocumentCompletionStrategy}$ on ${class:GtDocumenterEditor}$.
+I am used by ${class:GtDocumenterEditor}$.
 
 "
 Class {

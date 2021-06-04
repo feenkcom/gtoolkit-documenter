@@ -1,7 +1,6 @@
 "
-I hold {{gtClass:GtStorageStrategy}} object that knows how to store a specific document.
-I am used by {{gtClass:GtDocumenterEditor}}.
-
+I hold ${class:GtStorageStrategy}$ object that knows how to store a specific document.
+I am used by ${class:GtDocumenterEditor}$.
 
 "
 Class {

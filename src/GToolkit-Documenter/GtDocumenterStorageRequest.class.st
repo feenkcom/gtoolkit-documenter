@@ -1,6 +1,5 @@
 "
-I request a current {{gtClass:GtStorageStrategy}} for {{gtClass:GtDocumenterEditor}}.
-
+I request a current ${class:GtStorageStrategy}$ for ${class:GtDocumenterEditor}$.
 
 "
 Class {

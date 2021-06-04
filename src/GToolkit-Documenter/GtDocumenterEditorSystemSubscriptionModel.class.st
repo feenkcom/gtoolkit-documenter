@@ -1,8 +1,7 @@
 "
-I dynamically subscribe to and unsubscribe from {{gtClass:SystemAnnouncer}} unique instance.
-I inform document instances, in particular {{gtClass:PRDocumentItem}} Pillar AST document nodes about system changes.
-I am used by {{gtClass:GtDocumenterEditor}}.
-
+I dynamically subscribe to and unsubscribe from ${class:SystemAnnouncer}$ unique instance.
+I inform document instances, in particular ${class:PRDocumentItem}$ Pillar AST document nodes about system changes.
+I am used by ${class:GtDocumenterEditor}$.
 
 "
 Class {

@@ -1,6 +1,5 @@
 "
-I request a normal font size for {{gtClass:GtDocumenterEditor}}.
-
+I request a normal font size for ${class:GtDocumenterEditor}$.
 
 "
 Class {
