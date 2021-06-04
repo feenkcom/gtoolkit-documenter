@@ -1,5 +1,7 @@
 "
-This was deprecated. See ${class:name=GtDocumenter}$ instead.
+This was deprecated. See {{gtClass:name=GtDocumenter}} instead.
+
+
 "
 Class {
 	#name : #GtDocument,

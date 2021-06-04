@@ -1,7 +1,8 @@
 "
-I am a ${class:BrGlamorousEditorLook}$ look.
-I set a normal font size in ${class:GtDocumenterStyler}$ when changed.
-I am used by ${class:GtDocumenterEditor}$.
+I am a {{gtClass:BrGlamorousEditorLook}} look.
+I set a normal font size in {{gtClass:GtDocumenterStyler}} when changed.
+I am used by {{gtClass:GtDocumenterEditor}}.
+
 
 "
 Class {

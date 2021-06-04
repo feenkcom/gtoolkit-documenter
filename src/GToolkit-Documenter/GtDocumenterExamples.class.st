@@ -1,7 +1,9 @@
 "
-I exemplify Documenter project. The main class is ${class:GtDocumenter}$.
+I exemplify Documenter project. The main class is {{gtClass:GtDocumenter}}.
 
-I use ${class:GtDocumenterExamplesUtility}$ to simplify examples.
+I use {{gtClass:GtDocumenterExamplesUtility}} to simplify examples.
+
+
 "
 Class {
 	#name : #GtDocumenterExamples,

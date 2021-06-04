@@ -1,11 +1,11 @@
 "
-I am a ${class:BrEditor}$ specific for ${class:GtDocumenter}$. 
+I am a {{gtClass:BrEditor}} specific for {{gtClass:GtDocumenter}}. 
 
-I extend ${class:BrEditor}$ by: 
-- ${class:GtDocumenterEditorNormalFontSizeModel}$,
-- ${class:GtDocumenterEditorStorageModel}$,
-- ${class:GtDocumenterEditorSystemSubscriptionModel}$, and
-- ${class:GtDocumenterEditorVariableBindingsModel}$.
+I extend {{gtClass:BrEditor}} by: 
+- {{gtClass:GtDocumenterEditorNormalFontSizeModel}},
+- {{gtClass:GtDocumenterEditorStorageModel}},
+- {{gtClass:GtDocumenterEditorSystemSubscriptionModel}}, and
+- {{gtClass:GtDocumenterEditorVariableBindingsModel}}.
 
 "
 Class {

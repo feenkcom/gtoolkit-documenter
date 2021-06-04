@@ -1,5 +1,6 @@
 "
-This is a hack that partially fixes this issue: *https://github.com/feenkcom/gtoolkit/issues/700*.
+This is a hack that partially fixes this issue: <https://github.com/feenkcom/gtoolkit/issues/700>.
+
 
 "
 Class {

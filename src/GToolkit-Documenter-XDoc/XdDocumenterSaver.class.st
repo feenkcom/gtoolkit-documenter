@@ -1,6 +1,7 @@
 "
-I store a ${class:GtDocumenter}$ content (text) into a ${class:XdFile}$.
-I am used by ${class:GtDocumenter}$.
+I store a {{gtClass:GtDocumenter}} content (text) into a {{gtClass:XdFile}}.
+I am used by {{gtClass:GtDocumenter}}.
+
 
 "
 Class {

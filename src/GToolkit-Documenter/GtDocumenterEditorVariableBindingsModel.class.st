@@ -1,9 +1,10 @@
 "
-I hold ${class:GtSnippetBindings}$ that holds code snippet and example variable values.
-I am used by ${class:GtDocumenterEditor}$.
-!! Example 
-Evaluating the code snippet in the following example stores ==aBook== variable value in the ${class:GtDocumenterEditor}$ instance: 
-${example:GtDocumenterExamples>>#documentWithCodeblock|noCode=true|previewExpanded=true}$
+I hold {{gtClass:GtSnippetBindings}} that holds code snippet and example variable values.
+I am used by {{gtClass:GtDocumenterEditor}}.
+1. # Example 
+
+Evaluating the code snippet in the following example stores `aBook` variable value in the {{gtClass:GtDocumenterEditor}} instance: 
+{{gtExample:GtDocumenterExamples>>#documentWithCodeblock|noCode=true|previewExpanded=true}}
 
 
 "

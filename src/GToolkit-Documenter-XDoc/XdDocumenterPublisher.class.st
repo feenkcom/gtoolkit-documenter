@@ -1,6 +1,7 @@
 "
-I publish a ${class:GtDocumenter}$ content (text) as a ${class:XdFile}$.
-I am used by ${class:GtDocumenter}$.
+I publish a {{gtClass:GtDocumenter}} content (text) as a {{gtClass:XdFile}}.
+I am used by {{gtClass:GtDocumenter}}.
+
 
 "
 Class {

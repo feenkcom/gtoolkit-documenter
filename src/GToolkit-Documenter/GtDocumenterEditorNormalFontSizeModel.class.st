@@ -1,6 +1,7 @@
 "
 I hold normal font size of a document. The font size can be changed while reading and editing a document.
-I am used by ${class:GtDocumenterEditor}$.
+I am used by {{gtClass:GtDocumenterEditor}}.
+
 
 "
 Class {
