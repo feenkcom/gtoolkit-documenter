@@ -497,7 +497,8 @@ GtDocumenter >> string [
 
 { #category : #'api - styling' }
 GtDocumenter >> styleTextRequest [
-	self editorElement styleTextRequest
+	self editorElement enqueueTask: (BlTaskAction new action: [
+		self editorElement styleTextRequest ])
 ]
 
 { #category : #'private - editor' }
