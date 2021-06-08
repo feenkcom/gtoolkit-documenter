@@ -314,7 +314,7 @@ GtEpicea >> gtTutorialFor: aView [
 	<gtViewChanges>
 	^ aView textEditor
 		title: 'Code';
-		priority: 2;
+		priority: 0;
 		aptitude: BrGlamorousCodeEditorAptitude;
 		updateWhen: GtEpiceaUpdatedAnnouncement in: self;
 		actionUpdateButton;
