@@ -5,7 +5,6 @@ Class {
 	#classTraits : 'TBlDebug classTrait + TGtDocumentConstants classTrait + TGtAnnouncer classTrait',
 	#instVars : [
 		'announcer',
-		'ombuFile',
 		'epiceaLog',
 		'events',
 		'diff',
@@ -20,16 +19,31 @@ Class {
 }
 
 { #category : #accessing }
+GtEpicea class >> allInSessionStore [
+	<script>
+	| monitor directory currentGlobalName |
+	monitor := EpMonitor current.
+	directory := monitor sessionStore baseLocator.
+	currentGlobalName := monitor sessionStore store globalName.
+	^ (EpFileLogNode fromAllLogsIn: directory)
+		sort: [ :a :b | a modificationTime >= b modificationTime ];
+		collect: [ :n | 
+			| node |
+			node := n globalName = currentGlobalName
+				ifTrue: [ EpMonitorLogNode for: monitor ]
+				ifFalse: [ n ].
+			self new
+				log: node log;
+				yourself ]
+]
+
+{ #category : #accessing }
 GtEpicea class >> constants [
 	^ GtDocumentConstants
 ]
 
 { #category : #modification }
-GtEpicea >> addEvent: anEpEvent [ 
-	self ombuFile parent exists ifFalse: [ self ombuFile parent ensureCreateDirectory ].
-	self 
-		assert: [ self ombuFile parent exists ] 
-		description: [ 'The parent directory of the Epicea change file must exist' ].
+GtEpicea >> addEvent: anEpEvent [
 	self log addEntryWith: anEpEvent tags: [ :tags | "ignore" ].
 	self log store flush.
 ]
@@ -56,13 +70,19 @@ GtEpicea >> applyChanges [
 { #category : #private }
 GtEpicea >> computeImpact [
 	"Return true if impact changed"
+
 	<return: #Boolean>
 	| oldImpacted changed |
 	oldImpacted := impacted.
-	impacted := self events select: [ :eachEvent | 
-			eachEvent accept: (EpHasImpactVisitor inEnvironment: self theEnvironment) ].
+	impacted := self events
+		select: [ :eachEvent | 
+			eachEvent isCodeChange
+				ifTrue: [ eachEvent
+						accept: (EpHasImpactVisitor inEnvironment: self theEnvironment) ]
+				ifFalse: [ false ] ].
 	changed := impacted ~= oldImpacted.
-	changed ifTrue: [ diff := nil ].
+	changed
+		ifTrue: [ diff := nil ].
 	^ changed
 ]
 
@@ -211,6 +231,7 @@ GtEpicea >> gtEventsFor: aView [
 				do: [ :anAnnouncement | aList items: self events ].
 			aList column
 				title: 'Icon';
+				width: 16;
 				stencil:
 						[ :anEpEvent :anIndex | (anEpEvent accept: EpIconVisitor new) asElement ].
 			aList column
@@ -262,6 +283,7 @@ GtEpicea >> gtGlobalEntriesIn: aView [
 			aList constraintsDo: [ :c | c padding: (BlInsets top: 10) ].
 			aList column
 				title: 'Icon';
+				width: 16;
 				stencil:
 						[ :anOmEntry :anIndex | (anOmEntry content accept: EpIconVisitor new) asElement ].
 			aList column
@@ -360,6 +382,18 @@ GtEpicea >> log [
 	^ epiceaLog
 ]
 
+{ #category : #accessing }
+GtEpicea >> log: anEpLog [
+	self log ifNotNil: [ self log announcer unsubscribe: self ].
+	epiceaLog := anEpLog.
+	self privateEvents: (self entries collect: #content).
+	self log announcer
+		when: EpEntryAdded
+		send: #handleEpEntryAddedAnnouncement:
+		to: self.
+	self notifyEpiceaChanged
+]
+
 { #category : #notifying }
 GtEpicea >> notifyEpiceaChanged [
 	| anImpactChanged |
@@ -388,26 +422,26 @@ GtEpicea >> numberOfEvents [
 { #category : #accessing }
 GtEpicea >> ombuFile [
 	<return: #FileReference>
-	^ ombuFile
+	^ self log store writingFileReference
 ]
 
 { #category : #accessing }
 GtEpicea >> ombuFile: aFileReference [
-	ombuFile := aFileReference.
-	self log ifNotNil: [ self log announcer unsubscribe: self ].
-	epiceaLog := EpLog fromFile: ombuFile.	"freshFromFile:"
-	self privateEvents: (self entries collect: #content).
-	self log announcer
-		when: EpEntryAdded
-		send: #handleEpEntryAddedAnnouncement:
-		to: self.
-	self notifyEpiceaChanged
+	self log: (EpLog fromFile: aFileReference)
 ]
 
 { #category : #testing }
 GtEpicea >> ombuFileExists [
 	<return: #Boolean>
 	^ self ombuFile notNil and: [ self ombuFile exists ]
+]
+
+{ #category : #accessing }
+GtEpicea >> printOn: aStream [
+	super printOn: aStream.
+	aStream nextPut: $(.
+	self log store printOn: aStream.
+	aStream nextPut: $)
 ]
 
 { #category : #private }
@@ -426,7 +460,7 @@ GtEpicea >> privateEvents: aCollection [
 GtEpicea >> removeEvent: anEpEvent [
 	| aNewEvents |
 	aNewEvents := self events reject: [ :eachEvent | eachEvent = anEpEvent ].
-	ombuFile ensureDelete.
+	self log gtReset.
 	aNewEvents do: [ :eachEvent | 
 		self log addEntryWith: eachEvent tags: [ :tags | "ignore" ] ].
 	self log store flush.

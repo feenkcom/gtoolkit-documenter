@@ -28,6 +28,20 @@ aView empty ].
 ]
 
 { #category : #'*GToolkit-Documenter' }
+AbstractFileReference >> gtEventsFor: aView [
+	<gtView>
+	(self isFile and: [ self extension asLowercase = 'ombu' ])
+		ifFalse: [ ^ aView empty ].
+	^ aView forward
+		title: 'Change List';
+		priority: 10;
+		object: [ GtEpicea new
+				ombuFile: self;
+				yourself ];
+		view: #gtEventsFor:
+]
+
+{ #category : #'*GToolkit-Documenter' }
 AbstractFileReference >> parseWithGt2Documenter [
 	| encoding |
 	encoding := [ self binaryReadStreamDo: [ :in | (ZnCharacterEncoder detectEncoding: in upToEnd) identifier ] ]
