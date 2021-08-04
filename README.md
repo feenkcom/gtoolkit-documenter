@@ -1,5 +1,9 @@
  # GT Documenter
-Documenter is the tool for creating and consuming live documents directly in the development environment. It is part of the [Glamorous Toolkit project](https://github.com/feenkcom/gtoolkit). It exploits the [Bloc project](https://github.com/pharo-graphics/Bloc) for rendering, and the [Pillar project](https://github.com/pillar-markup/pillar) for the markup language.
+Documenter is the tool for creating and consuming live documents directly in the development environment.
+
+It was part of [Glamorous Toolkit](https://github.com/feenkcom/gtoolkit). It was replaced by [Lepiter](https://github.com/feenkcom/lepiter).
+
+It exploits the [Bloc project](https://github.com/pharo-graphics/Bloc) for rendering, and the [Pillar project](https://github.com/pillar-markup/pillar) for the markup language.
 
 At its core it offers a live editor for manipulating Pillar documents. The interaction happens seamlessly directly in the text editor, and it can be combined with different types of previews to serve several classes of use cases:
 - documentation of existing code
