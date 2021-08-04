@@ -329,7 +329,7 @@ XdDocumentExamples >> writeDocumentWithExistingExampleAndPreviewHeight [
 	
 	"Check figure height"
 	theFigure := theMembers third.
-	self assert: theFigure localFileName equals: aXdFile manifest attachments third fileName.
+	self assert: theFigure localFileName equals: (fileName copyReplaceAll: '/' with: FileSystem disk delimiter asString).
 	aForm := ImageReadWriter gtFormFromBuffer: theFigure gtBytes.
 	self assert: aForm height equals: documentExamples previewHeightHudredValue * self constants exportFigureScaleFactor.
 	^ aXdFile
