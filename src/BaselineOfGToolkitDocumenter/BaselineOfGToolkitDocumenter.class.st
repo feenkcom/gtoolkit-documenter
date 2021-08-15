@@ -12,12 +12,12 @@ ${icebergFile:path=feenkcom/gtoolkit-demos/doc/tutorial/esug-2018-documenter/doc
 
 "
 Class {
-	#name : #BaselineOfGToolkitDocumenter,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfGToolkitDocumenter
+	#name : 'BaselineOfGToolkitDocumenter',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfGToolkitDocumenter'
 }
 
-{ #category : #baseline }
+{ #category : 'baseline' }
 BaselineOfGToolkitDocumenter >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
@@ -35,7 +35,7 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 			baseline: 'GToolkitInspector' with: [
 				spec repository: 'github://feenkcom/gtoolkit-inspector:main/src' ];
 			baseline: 'PillarExporter' with: [
-				spec repository: 'github://feenkcom/pillar:main/src' ];
+				spec repository: 'github://feenkcom/pillar:v7.3.25/src' ];
 			baseline: 'DeepTraverser' with: [
 				spec repository: 'github://feenkcom/DeepTraverser:main/src' ];
 			baseline: 'XdocClient' with: [
