@@ -38,7 +38,7 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 				spec repository: 'github://feenkcom/gtoolkit-examples:v0.8.33/src' ].
 		spec
 			baseline: 'GToolkitInspector' with: [
-				spec repository: 'github://feenkcom/gtoolkit-inspector:v0.8.532/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-inspector:v0.8.533/src' ].
 		spec
 			baseline: 'PillarExporter' with: [
 				spec repository: 'github://feenkcom/pillar:v7.3.25/src' ].
