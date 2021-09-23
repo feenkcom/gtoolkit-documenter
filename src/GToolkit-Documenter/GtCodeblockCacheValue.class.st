@@ -1,6 +1,6 @@
 Class {
-	#name : #GtCodeblockCacheValue,
-	#superclass : #GtCacheValue,
+	#name : 'GtCodeblockCacheValue',
+	#superclass : 'GtCacheValue',
 	#instVars : [
 		'result',
 		'isException',
@@ -10,35 +10,35 @@ Class {
 		'evaluatedInterval',
 		'displayResult'
 	],
-	#category : #'GToolkit-Documenter-Cache'
+	#category : 'GToolkit-Documenter-Cache'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockCacheValue >> displayResult [
 	^ displayResult
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockCacheValue >> displayResult: aBoolean [
 	displayResult := aBoolean
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockCacheValue >> evaluatedInterval [
 	^ evaluatedInterval
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockCacheValue >> evaluatedInterval: anObject [
 	evaluatedInterval := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockCacheValue >> hasResult [
 	^ hasResult
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtCodeblockCacheValue >> initialize [
 	super initialize.
 	isException := false.
@@ -47,44 +47,44 @@ GtCodeblockCacheValue >> initialize [
 	displayResult := true.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockCacheValue >> isException [
 	^ isException
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockCacheValue >> isException: anObject [
 	isException := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockCacheValue >> preview [
 	^ preview
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockCacheValue >> preview: anObject [
 	preview := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockCacheValue >> result [
 	^ result
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockCacheValue >> result: anObject [
 	result := anObject.
 	hasResult := true.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockCacheValue >> symbols [ 
 	<return: #GtCodeblockSymbols or: nil>
 	^ symbols
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockCacheValue >> symbols: aGt2CodeblockSymbols [ 
 	symbols := aGt2CodeblockSymbols
 ]

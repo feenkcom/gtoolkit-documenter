@@ -1,25 +1,25 @@
 Class {
-	#name : #GtButtonStencilBuilder,
-	#superclass : #BrTextAdornmentStencilBuilder,
+	#name : 'GtButtonStencilBuilder',
+	#superclass : 'BrTextAdornmentStencilBuilder',
 	#instVars : [
 		'label',
 		'icon',
 		'action'
 	],
-	#category : #'GToolkit-Documenter-Brick - Stencils'
+	#category : 'GToolkit-Documenter-Brick - Stencils'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtButtonStencilBuilder >> action [
 	^ action
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtButtonStencilBuilder >> action: anObject [
 	action := anObject
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 GtButtonStencilBuilder >> buildDefault [
 	^ GtButtonStencil new
 		label: self label;
@@ -27,17 +27,17 @@ GtButtonStencilBuilder >> buildDefault [
 		action: self action
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtButtonStencilBuilder >> icon [
 	^ icon
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtButtonStencilBuilder >> icon: anObject [
 	icon := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtButtonStencilBuilder >> initialize [
 	super initialize.
 	label := 'Button'.
@@ -45,12 +45,12 @@ GtButtonStencilBuilder >> initialize [
 	action := [ :aWidget :aButtonModel | self inform: 'Action!' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtButtonStencilBuilder >> label [
 	^ label
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtButtonStencilBuilder >> label: anObject [
 	label := anObject
 ]

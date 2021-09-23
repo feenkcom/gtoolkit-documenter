@@ -1,6 +1,6 @@
 Class {
-	#name : #GtSplitTextStencil,
-	#superclass : #BrStencil,
+	#name : 'GtSplitTextStencil',
+	#superclass : 'BrStencil',
 	#traits : 'TGt2DocumentConstants',
 	#classTraits : 'TGt2DocumentConstants classTrait',
 	#instVars : [
@@ -11,10 +11,10 @@ Class {
 		'oneStencil',
 		'theElements'
 	],
-	#category : #'GToolkit-Documenter-Brick - Stencils'
+	#category : 'GToolkit-Documenter-Brick - Stencils'
 }
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 GtSplitTextStencil >> create [
 	<return: #Collection of: #BlElement>
 
@@ -24,13 +24,13 @@ GtSplitTextStencil >> create [
 	^ self returnCollectionWithMoreElements
 ]
 
-{ #category : #'accessing - convenience' }
+{ #category : 'accessing - convenience' }
 GtSplitTextStencil >> numberOfTextParts [
 	<return: #Integer>
 	^ self textParts size
 ]
 
-{ #category : #'private - create' }
+{ #category : 'private - create' }
 GtSplitTextStencil >> returnCollectionWithTwoElements [
 	<return: #Collection of: #BlElement>
 	self 
@@ -43,7 +43,7 @@ GtSplitTextStencil >> returnCollectionWithTwoElements [
 	^ theElements
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtSplitTextStencil >> stringParts: aCollectionOfString [
 	self 
 		assert: [ aCollectionOfString isNotNil ] 
@@ -51,13 +51,13 @@ GtSplitTextStencil >> stringParts: aCollectionOfString [
 	self textParts: (aCollectionOfString collect: #asRopedText)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtSplitTextStencil >> textParts [
 	<return: #Collection of: #BlText>
 	^ textParts
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtSplitTextStencil >> textParts: aCollectionOfBlText [
 	self 
 		assert: [ aCollectionOfBlText isNotNil ] 

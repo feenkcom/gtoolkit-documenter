@@ -1,47 +1,47 @@
 Class {
-	#name : #GtAnnotationCacheKey,
-	#superclass : #GtCacheKey,
+	#name : 'GtAnnotationCacheKey',
+	#superclass : 'GtCacheKey',
 	#instVars : [
 		'name',
 		'parameters'
 	],
-	#category : #'GToolkit-Documenter-Cache'
+	#category : 'GToolkit-Documenter-Cache'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 GtAnnotationCacheKey >> = anObject [
 	^ super = anObject and: [ 
 		self name = anObject name and: [ 
 			self parameters = anObject parameters ] ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 GtAnnotationCacheKey >> hash [
 	^ (super hash bitXor: self name hash)
 		bitXor: self parameters hash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtAnnotationCacheKey >> name [
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtAnnotationCacheKey >> name: anObject [
 	name := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtAnnotationCacheKey >> parameters [
 	^ parameters
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtAnnotationCacheKey >> parameters: anObject [
 	parameters := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 GtAnnotationCacheKey >> printOn: aStream [
 	aStream 
 		nextPutAll: 'annotation key: ';

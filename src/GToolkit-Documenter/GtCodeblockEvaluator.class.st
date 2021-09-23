@@ -1,13 +1,13 @@
 Class {
-	#name : #GtCodeblockEvaluator,
-	#superclass : #GtCodeblockAction,
+	#name : 'GtCodeblockEvaluator',
+	#superclass : 'GtCodeblockAction',
 	#instVars : [
 		'displayResult'
 	],
-	#category : #'GToolkit-Documenter-Code Snippet'
+	#category : 'GToolkit-Documenter-Code Snippet'
 }
 
-{ #category : #caching }
+{ #category : 'caching' }
 GtCodeblockEvaluator >> cacheResult: aResult selection: aGtCodeblockSelection asException: isException [ 
 	self document 
 		cacheAt: self node cacheKey 
@@ -25,17 +25,17 @@ GtCodeblockEvaluator >> cacheResult: aResult selection: aGtCodeblockSelection as
 			isException: isException ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtCodeblockEvaluator >> displayResult [
 	displayResult := true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtCodeblockEvaluator >> doNotDisplayResult [
 	displayResult := false
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtCodeblockEvaluator >> evaluateBody [
 	"Evaluate a node's body (code snippet)"
 	| aCommand anErrorCatchingCommand aSelection |
@@ -52,7 +52,7 @@ GtCodeblockEvaluator >> evaluateBody [
 	self onFinishedEvaluation: anErrorCatchingCommand selection: aSelection
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtCodeblockEvaluator >> evaluateSelection [
 	"Evaluate a node's body (code snippet)"
 	| aGtCodeblockSelection |
@@ -63,25 +63,25 @@ GtCodeblockEvaluator >> evaluateSelection [
 	self evaluateBody
 ]
 
-{ #category : #'accessing - document' }
+{ #category : 'accessing - document' }
 GtCodeblockEvaluator >> evaluationReceiver [
 	<return: #Object>
 	^ self document evaluationReceiver
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 GtCodeblockEvaluator >> execute [
 	"Perform a default action"
 	^ self evaluateSelection
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtCodeblockEvaluator >> initialize [
 	super initialize.
 	displayResult := true.
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 GtCodeblockEvaluator >> onFinishedEvaluation: anErrorCatchingCommand selection: aGtCodeblockSelection [
 	"Cache result and announce the result"
 	| aResult |
@@ -104,12 +104,12 @@ GtCodeblockEvaluator >> onFinishedEvaluation: anErrorCatchingCommand selection: 
 	self document styleTextRequest.
 ]
 
-{ #category : #texting }
+{ #category : 'texting' }
 GtCodeblockEvaluator >> shouldDisplayResult [
 	^ displayResult
 ]
 
-{ #category : #'accessing - document' }
+{ #category : 'accessing - document' }
 GtCodeblockEvaluator >> variableBindings [
 	<return: #GtSnippetBindings>
 	^ self document variableBindings

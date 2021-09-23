@@ -23,7 +23,7 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #GtSplitWordsAttribute,
-	#superclass : #BrTextAdornmentDynamicAttribute,
-	#category : #'GToolkit-Documenter-Text - Attributes'
+	#name : 'GtSplitWordsAttribute',
+	#superclass : 'BrTextAdornmentDynamicAttribute',
+	#category : 'GToolkit-Documenter-Text - Attributes'
 }

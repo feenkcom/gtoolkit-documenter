@@ -1,5 +1,5 @@
 Class {
-	#name : #GtButtonAttribute,
-	#superclass : #BrTextAdornmentDynamicAttribute,
-	#category : #'GToolkit-Documenter-Text - Attributes'
+	#name : 'GtButtonAttribute',
+	#superclass : 'BrTextAdornmentDynamicAttribute',
+	#category : 'GToolkit-Documenter-Text - Attributes'
 }

@@ -19,16 +19,16 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #GtDocumenterParserCheck,
-	#superclass : #Object,
+	#name : 'GtDocumenterParserCheck',
+	#superclass : 'Object',
 	#instVars : [
 		'pillarSource',
 		'messages'
 	],
-	#category : #'GToolkit-Documenter-Styler'
+	#category : 'GToolkit-Documenter-Styler'
 }
 
-{ #category : #'steps - subchecks' }
+{ #category : 'steps - subchecks' }
 GtDocumenterParserCheck >> check: aString [
 	"Check the supplied string for problematic text.
 	Signal GtParserCheckFailure if problems are found."
@@ -41,14 +41,14 @@ GtDocumenterParserCheck >> check: aString [
 		[ GtParserCheckFailure signalSource: pillarSource messages: messages ].
 ]
 
-{ #category : #'private - checks' }
+{ #category : 'private - checks' }
 GtDocumenterParserCheck >> checkSource [
 	"Check the supplied pillar source"
 
 	self checkUnbalancedPlus.
 ]
 
-{ #category : #'private - checks' }
+{ #category : 'private - checks' }
 GtDocumenterParserCheck >> checkUnbalancedPlus [
 	"Check for an odd number of plus signs (which are used to link to images).
 	Ignore escaped plus signs (\+)"
@@ -67,22 +67,22 @@ GtDocumenterParserCheck >> checkUnbalancedPlus [
 		[ messages add: 'Unbalanced plus signs at ', indexes asString ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocumenterParserCheck >> messages [
 	^ messages
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocumenterParserCheck >> pillarSource [
 	^ pillarSource
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocumenterParserCheck >> pillarSource: anObject [
 	pillarSource := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocumenterParserCheck >> reset [ 
 	"Reset the state to check another string"
 

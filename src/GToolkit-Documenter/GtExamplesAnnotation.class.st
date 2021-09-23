@@ -1,16 +1,16 @@
 Class {
-	#name : #GtExamplesAnnotation,
-	#superclass : #GtAnnotation,
+	#name : 'GtExamplesAnnotation',
+	#superclass : 'GtAnnotation',
 	#instVars : [
 		'referencedClasses',
 		'referencedMethods',
 		'referencedPackages',
 		'exampleGroup'
 	],
-	#category : #'GToolkit-Documenter-Annotations'
+	#category : 'GToolkit-Documenter-Annotations'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtExamplesAnnotation class >> possibleParameters [
 	^ {
 		self constants methodsParameterName.
@@ -22,35 +22,35 @@ GtExamplesAnnotation class >> possibleParameters [
 		}
 ]
 
-{ #category : #protected }
+{ #category : 'protected' }
 GtExamplesAnnotation class >> tag [
 	^ self constants examplesAnnotationName
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 GtExamplesAnnotation >> accept: aVisitor [
 	^ aVisitor visitGt2ExamplesAnnotation: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtExamplesAnnotation >> allExamples [ 
 	<return: #Array of: #GtExampleResult >
 	^ self exampleGroup examples
 ]
 
-{ #category : #'private - cache' }
+{ #category : 'private - cache' }
 GtExamplesAnnotation >> annotationCacheValueClass [
 	^ GtExamplesAnnotationCacheValue
 ]
 
-{ #category : #'private - actions' }
+{ #category : 'private - actions' }
 GtExamplesAnnotation >> browseReferenceFrom: anEvent [
 	anEvent modifiers isShift ifTrue: [ ^ self ].
 	self hasExample ifFalse: [ ^ self inform: 'There is no defined example' ].
 	anEvent target phlow spawnObject: self cachedExampleGroup
 ]
 
-{ #category : #'private - cache' }
+{ #category : 'private - cache' }
 GtExamplesAnnotation >> cachedExampleGroup [
 	<return: #GtExampleGroup or: nil>
 	| aNewExampleGroup |
@@ -69,17 +69,17 @@ GtExamplesAnnotation >> cachedExampleGroup [
 	^ aNewExampleGroup
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : 'accessing - parameter values' }
 GtExamplesAnnotation >> defaultShowSelector [
 	^ self constants defaultExamplesShowSelector
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtExamplesAnnotation >> doesReferenceExist [
 	^ self hasExample
 ]
 
-{ #category : #'private - cache' }
+{ #category : 'private - cache' }
 GtExamplesAnnotation >> exampleGroup [
 	<return: #GtExampleGroup>
 	| theMethods theClasses thePackages |
@@ -94,7 +94,7 @@ GtExamplesAnnotation >> exampleGroup [
 	^ exampleGroup := GtExampleGroup withAll: theMethods, theClasses, thePackages
 ]
 
-{ #category : #'announcement handling' }
+{ #category : 'announcement handling' }
 GtExamplesAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAnnouncement [ 
 	((self isAffectedByClassChange: aClassAnnouncement classAffected originalName)
 		or: [ self isAffectedByPackageChange: aClassAnnouncement packageAffected name ])
@@ -102,7 +102,7 @@ GtExamplesAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAnnouncemen
 	self rebuildExampleGroup
 ]
 
-{ #category : #'announcement handling' }
+{ #category : 'announcement handling' }
 GtExamplesAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [
 	((self isAffectedByClassChange: aClassRenamed newName)
 		or: [ (self isAffectedByClassChange: aClassRenamed oldName) or: [ 
@@ -111,7 +111,7 @@ GtExamplesAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [
 	self rebuildExampleGroup
 ]
 
-{ #category : #'announcement handling' }
+{ #category : 'announcement handling' }
 GtExamplesAnnotation >> handleClassRepackagedAnnouncement: aClassRepackaged [
 	((self isAffectedByPackageChange: aClassRepackaged newPackage name)
 		or: [ self isAffectedByPackageChange: aClassRepackaged oldPackage name ])
@@ -119,7 +119,7 @@ GtExamplesAnnotation >> handleClassRepackagedAnnouncement: aClassRepackaged [
 	self rebuildExampleGroup
 ]
 
-{ #category : #'announcement handling' }
+{ #category : 'announcement handling' }
 GtExamplesAnnotation >> handleMethodAnnouncement: aMethodModified [
 	((self 
 		isAffectedByMethodChange: aMethodModified selector 
@@ -130,7 +130,7 @@ GtExamplesAnnotation >> handleMethodAnnouncement: aMethodModified [
 	self rebuildExampleGroup
 ]
 
-{ #category : #'announcement handling' }
+{ #category : 'announcement handling' }
 GtExamplesAnnotation >> handlePackageRenamedAnnouncement: aRPackageRenamed [
 	((self isAffectedByPackageChange: aRPackageRenamed newName) or: [ 
 		self isAffectedByPackageChange: aRPackageRenamed oldName ])
@@ -138,39 +138,39 @@ GtExamplesAnnotation >> handlePackageRenamedAnnouncement: aRPackageRenamed [
 	self rebuildExampleGroup
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtExamplesAnnotation >> hasErrors [
 	^ self hasExample and: [ self cachedExampleGroup numberOfErrors isZero not ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtExamplesAnnotation >> hasExample [
 	| aGroup |
 	aGroup := self cachedExampleGroup.
 	^ aGroup notNil and: [ aGroup examples notEmpty ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtExamplesAnnotation >> hasFailures [
 	^ self hasExample and: [ self cachedExampleGroup numberOfFailures isZero not ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtExamplesAnnotation >> hasFailuresOrErrors [
 	^ self hasExample and: [ self cachedExampleGroup numberOfFailuresAndErrors isZero not ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtExamplesAnnotation >> hasResults [
 	^ self hasExample and: [ self cachedExampleGroup numberOfResults isZero not ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtExamplesAnnotation >> hasSuccesses [
 	^ self hasExample and: [ self cachedExampleGroup numberOfSuccesses isZero not ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtExamplesAnnotation >> isAffectedByClassChange: aClassName [
 	^ (self referencedClasses anySatisfy: [ :eachClass | 
 			eachClass name = aClassName ]) or: [ 
@@ -178,25 +178,25 @@ GtExamplesAnnotation >> isAffectedByClassChange: aClassName [
 				eachMethod parentName = aClassName ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtExamplesAnnotation >> isAffectedByMethodChange: aSelector of: aClassName [
 	^ (self referencedMethods anySatisfy: [ :eachMethod | 
 				eachMethod parentName = aClassName and: [ eachMethod selector = aSelector ] ])
 			or: [ self isAffectedByClassChange: aClassName ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtExamplesAnnotation >> isAffectedByPackageChange: aPackageName [
 	^ (self referencedPackages anySatisfy: [ :eachPackage | 
 			eachPackage name = aPackageName ])
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtExamplesAnnotation >> isPreviewDefined [
 	^ self hasExample
 ]
 
-{ #category : #'private - styling' }
+{ #category : 'private - styling' }
 GtExamplesAnnotation >> issuesButtonLabel [
 	<return: #BlRope>
 	| anAmount |
@@ -205,7 +205,7 @@ GtExamplesAnnotation >> issuesButtonLabel [
 		(' issue' asPluralBasedOn: anAmount)
 ]
 
-{ #category : #'private - cache' }
+{ #category : 'private - cache' }
 GtExamplesAnnotation >> newExampleGroup [
 	<return: #GtExampleGroup>
 	| theMethods theClasses thePackages |
@@ -219,12 +219,12 @@ GtExamplesAnnotation >> newExampleGroup [
 	^ GtExampleGroup withAll: theMethods, theClasses, thePackages
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtExamplesAnnotation >> objectToPreview [
 	^ self cachedExampleGroup
 ]
 
-{ #category : #'private - actions' }
+{ #category : 'private - actions' }
 GtExamplesAnnotation >> rebuildExampleGroup [
 	self gtDocument 
 		cacheAt: self cacheKey
@@ -236,7 +236,7 @@ GtExamplesAnnotation >> rebuildExampleGroup [
 	self gtDocument styleTextRequest
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : 'accessing - parameter values' }
 GtExamplesAnnotation >> referencedClasses [
 	<return: #Array of: #RGClassDefinition>
 	^ referencedClasses ifNil: [ 
@@ -250,7 +250,7 @@ GtExamplesAnnotation >> referencedClasses [
 				defaultValue: [ #() ] ]
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : 'accessing - parameter values' }
 GtExamplesAnnotation >> referencedMethods [
 	<return: #Array of: #RGMethodDefinition>
 	^ referencedMethods ifNil: [ 
@@ -264,7 +264,7 @@ GtExamplesAnnotation >> referencedMethods [
 				defaultValue: [ #() ] ]
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : 'accessing - parameter values' }
 GtExamplesAnnotation >> referencedPackages [
 	<return: #Array of: #RGPackage>
 	^ referencedPackages ifNil: [ 
@@ -278,7 +278,7 @@ GtExamplesAnnotation >> referencedPackages [
 				defaultValue: [ #() ] ]
 ]
 
-{ #category : #subscriptions }
+{ #category : 'subscriptions' }
 GtExamplesAnnotation >> registerToSystemChanges [
 	self gtDocument systemAnnouncer
 		when: MethodAdded , MethodModified , MethodRemoved
@@ -307,7 +307,7 @@ GtExamplesAnnotation >> registerToSystemChanges [
 			for: self gtSubscriber
 ]
 
-{ #category : #'private - styling' }
+{ #category : 'private - styling' }
 GtExamplesAnnotation >> resultsLabelAttribute [
 	| aGroup |
 	aGroup := self cachedExampleGroup.
@@ -319,7 +319,7 @@ GtExamplesAnnotation >> resultsLabelAttribute [
 		issues: aGroup numberOfFailuresAndErrors
 ]
 
-{ #category : #'private - styling' }
+{ #category : 'private - styling' }
 GtExamplesAnnotation >> runButtonAttribute [
 	^ GtButtonAttribute new
 		beAppend;
@@ -329,7 +329,7 @@ GtExamplesAnnotation >> runButtonAttribute [
 			action: [ self runExamples ])
 ]
 
-{ #category : #'private - styling' }
+{ #category : 'private - styling' }
 GtExamplesAnnotation >> runButtonLabel [
 	<return: #BlRope>
 	| anAmount |
@@ -338,7 +338,7 @@ GtExamplesAnnotation >> runButtonLabel [
 		anAmount asString, (' example' asPluralBasedOn: anAmount)
 ]
 
-{ #category : #'private - actions' }
+{ #category : 'private - actions' }
 GtExamplesAnnotation >> runExamples [
 	self cachedExampleGroup runAll.
 	self gtDocument 
@@ -350,27 +350,27 @@ GtExamplesAnnotation >> runExamples [
 	self gtDocument styleTextRequest
 ]
 
-{ #category : #'private - styling' }
+{ #category : 'private - styling' }
 GtExamplesAnnotation >> styleLinkInText: aBlRope [
 	self hasChildren ifFalse: [ ^ self ].
 	self utility styleLinkInText: aBlRope forNode: self withLinkAt: self children first
 ]
 
-{ #category : #'private - styling' }
+{ #category : 'private - styling' }
 GtExamplesAnnotation >> styleResultsInText: aBlRope [
 	self hasResults ifFalse: [ ^ self ].
 	(aBlRope from: self start to: self stop) 
 		attribute: self resultsLabelAttribute
 ]
 
-{ #category : #'private - styling' }
+{ #category : 'private - styling' }
 GtExamplesAnnotation >> styleRunButtonInText: aBlRope [
 	self hasExample ifFalse: [ ^ self ].
 	(aBlRope from: self start to: self stop) 
 		attribute: self runButtonAttribute
 ]
 
-{ #category : #'api - style' }
+{ #category : 'api - style' }
 GtExamplesAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
@@ -380,7 +380,7 @@ GtExamplesAnnotation >> styleTextWithMarkup: aBlRope [
 	self registerToSystemChanges.
 ]
 
-{ #category : #'api - style' }
+{ #category : 'api - style' }
 GtExamplesAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.
@@ -391,7 +391,7 @@ GtExamplesAnnotation >> styleTextWithoutMarkup: aBlRope [
 				autoHideNode ]
 ]
 
-{ #category : #'private - styling' }
+{ #category : 'private - styling' }
 GtExamplesAnnotation >> successButtonLabel [
 	<return: #BlRope>
 	| anAmount |

@@ -1,25 +1,25 @@
 Class {
-	#name : #GtClassCommentStrategy,
-	#superclass : #GtStorageStrategy,
+	#name : 'GtClassCommentStrategy',
+	#superclass : 'GtStorageStrategy',
 	#instVars : [
 		'classRingDefinition'
 	],
-	#category : #'GToolkit-Documenter-Storage'
+	#category : 'GToolkit-Documenter-Storage'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtClassCommentStrategy >> basename [
 	"Return a string representing the document filename"
 	<return: #String>
 	^ self name, '.', GtFileUtilityConstants pillarExtension
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtClassCommentStrategy >> classToComment [
 	^ classRingDefinition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtClassCommentStrategy >> classToComment: aClass [
 	self 
 		assert: [ aClass notNil ]
@@ -27,7 +27,7 @@ GtClassCommentStrategy >> classToComment: aClass [
 	classRingDefinition := aClass instanceSide asRingDefinition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtClassCommentStrategy >> comment [
 	<return: #String>
 	self classToComment isDefined ifTrue: [ ^ self realClassComment ].
@@ -35,7 +35,7 @@ GtClassCommentStrategy >> comment [
 	^ self classToComment comment content asString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtClassCommentStrategy >> evaluationReceiver [
 	"Return an object that is used as a receiver (self) in a codeblock (code snippet) evalution"
 	<return: #Object>
@@ -44,20 +44,20 @@ GtClassCommentStrategy >> evaluationReceiver [
 		ifFalse: [ self classToComment ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtClassCommentStrategy >> exists [
 	<return: #Boolean>
 	^ self classToComment isDefined
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtClassCommentStrategy >> name [
 	"Return a string representing the stored document"
 	<return: #String>
 	^ self classToComment name
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtClassCommentStrategy >> read: aGt2Document [ 
 	self 
 		assert: [ self classToComment notNil ]
@@ -68,7 +68,7 @@ GtClassCommentStrategy >> read: aGt2Document [
 	aGt2Document text: self comment
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtClassCommentStrategy >> realClassComment [
 	<return: #String>
 	| aClass |
@@ -77,13 +77,13 @@ GtClassCommentStrategy >> realClassComment [
 	^ aClass comment.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtClassCommentStrategy >> rootDirectory [
 	<return: #FileReference>
 	^ FileSystem workingDirectory
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtClassCommentStrategy >> save: aGt2Document [ 
 	self 
 		assert: [ self classToComment notNil ]

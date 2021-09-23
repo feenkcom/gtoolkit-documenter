@@ -1,10 +1,10 @@
 Class {
-	#name : #GtInputFile,
-	#superclass : #GtLeaveResource,
-	#category : #'GToolkit-Documenter-Resourcer'
+	#name : 'GtInputFile',
+	#superclass : 'GtLeaveResource',
+	#category : 'GToolkit-Documenter-Resourcer'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtInputFile >> isFile [
 	^ true
 ]

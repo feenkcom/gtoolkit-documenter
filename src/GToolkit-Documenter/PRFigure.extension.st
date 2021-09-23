@@ -1,6 +1,6 @@
-Extension { #name : #PRFigure }
+Extension { #name : 'PRFigure' }
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure >> addClearAction: aValuable [
 	self gtDocument 
 		cacheAt: self cacheKey
@@ -10,7 +10,7 @@ PRFigure >> addClearAction: aValuable [
 				clearAction: aValuable ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure >> alignmentParameterValue [
 	^ GtDocumentUtility
 			valueOf: GtDocumentConstants alignmentParameterName
@@ -22,14 +22,14 @@ PRFigure >> alignmentParameterValue [
 			defaultValue: [ GtDocumentConstants defaultAlignment ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure >> cacheKey [
 	^ GtFigureCacheKey new
 		fileName: self figureFileReference;
 		counter: self counter
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure >> cachedIsExpanded [
 	<return: #Boolean>
 	self gtDocument
@@ -41,7 +41,7 @@ PRFigure >> cachedIsExpanded [
 	^ self expandedParameterValue
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure >> cachedIsExpanded: aBoolean [
 	self gtDocument 
 		cacheAt: self cacheKey
@@ -50,7 +50,7 @@ PRFigure >> cachedIsExpanded: aBoolean [
 			GtAnnotationCacheValue new isExpanded: aBoolean ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure >> cachedPreview [
 	<return: #BlElement or: nil>
 	^ self gtDocument 
@@ -59,7 +59,7 @@ PRFigure >> cachedPreview [
 		ifAbsent: [ nil ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure >> cachedPreview: anElement [
 	self gtDocument 
 		cacheAt: self cacheKey
@@ -69,7 +69,7 @@ PRFigure >> cachedPreview: anElement [
 				preview: anElement ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure >> clearActions [
 	<return: #Collection of: #BlockClosure>
 	^ self gtDocument 
@@ -78,22 +78,22 @@ PRFigure >> clearActions [
 		ifAbsent: [ #() ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure class >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure >> doesReferenceExist [
 	^ self figureFileReference ifNil: false ifNotNil: #exists
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure >> expandedParameterValue [
 	^ true
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure >> figureFileReference [
 	"Return a figure file reference or nil if figure reference is not file"
 	<return: #FileReference or: nil>
@@ -116,7 +116,7 @@ PRFigure >> figureFileReference [
 		]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure class >> gtDocumenterParameters [
 	^ {
 		#value.
@@ -124,22 +124,22 @@ PRFigure class >> gtDocumenterParameters [
 	}.
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure >> heightParameterValue [
 	^ GtDocumentConstants defaultPreviewHeight
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure >> isPreviewDefined [
 	^ self doesReferenceExist
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure >> objectToPreview [
 	^ self figureFileReference
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure >> previewAttributes [
 	^ { 
 		GtResizablePreviewAttribute new
@@ -150,17 +150,17 @@ PRFigure >> previewAttributes [
 		}
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure >> showParameterValue [
 	^ GtDocumentConstants defaultFigureShowSelector
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure >> startMarkup [
 	^ self utility startMarkupFor: self class
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self utility subtleMarkupsInText: aBlRope start: self start stop: self stop.
@@ -173,7 +173,7 @@ PRFigure >> styleTextWithMarkup: aBlRope [
 	self utility styleExpandingPreviewInText: aBlRope forNode: self
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure >> styleTextWithoutInteractions: aBlRope [
 	(self gtNodeStyler: aBlRope)
 		if: self doesReferenceExist
@@ -181,7 +181,7 @@ PRFigure >> styleTextWithoutInteractions: aBlRope [
 	self utility stylePreviewInText: aBlRope forNode: self.
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRFigure >> styleTextWithoutMarkup: aBlRope [
 	super styleTextWithoutMarkup: aBlRope.
 	self utility subtleMarkupsInText: aBlRope start: self start stop: self stop.

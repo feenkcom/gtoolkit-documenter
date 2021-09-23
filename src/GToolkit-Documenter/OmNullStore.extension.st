@@ -1,6 +1,6 @@
-Extension { #name : #OmNullStore }
+Extension { #name : 'OmNullStore' }
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 OmNullStore >> gtReset [
 	"noop"
 ]

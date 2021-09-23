@@ -1,6 +1,6 @@
-Extension { #name : #OmSessionStore }
+Extension { #name : 'OmSessionStore' }
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 OmSessionStore >> gtReset [
 	self store gtReset
 ]

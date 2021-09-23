@@ -1,6 +1,6 @@
 Class {
-	#name : #GtStyledNodeBuilder,
-	#superclass : #Object,
+	#name : 'GtStyledNodeBuilder',
+	#superclass : 'Object',
 	#traits : 'TGtDocumentConstants + TBlDebug',
 	#classTraits : 'TGtDocumentConstants classTrait + TBlDebug classTrait',
 	#instVars : [
@@ -9,20 +9,20 @@ Class {
 		'text',
 		'properties'
 	],
-	#category : #'GToolkit-Documenter-Styler Builder'
+	#category : 'GToolkit-Documenter-Styler Builder'
 }
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 GtStyledNodeBuilder >> action: anAction [
 	self properties action: anAction
 ]
 
-{ #category : #'style - cursor' }
+{ #category : 'style - cursor' }
 GtStyledNodeBuilder >> activateCursor [
 	self activateCursorFrom: self start to: self stop.
 ]
 
-{ #category : #'style - cursor' }
+{ #category : 'style - cursor' }
 GtStyledNodeBuilder >> activateCursorFrom: aStartPosition to: aStopPosition [
 	| anInitialPosition aFinalPosition |
 
@@ -35,14 +35,14 @@ GtStyledNodeBuilder >> activateCursorFrom: aStartPosition to: aStopPosition [
 			leaveAction: self properties cursorLeaveAction)
 ]
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 GtStyledNodeBuilder >> assertNode [
 	self
 		assert: [ self node isNotNil ] 
 		description: [ 'Pillar AST node must be initialized' ]
 ]
 
-{ #category : #'style - hide' }
+{ #category : 'style - hide' }
 GtStyledNodeBuilder >> autoHideNode [
 	"Hide node only if a cursor is far away"
 	self 
@@ -52,7 +52,7 @@ GtStyledNodeBuilder >> autoHideNode [
 	self installDisplayMarkupsHandler
 ]
 
-{ #category : #'style - hide' }
+{ #category : 'style - hide' }
 GtStyledNodeBuilder >> autoHideTextFrom: aStartPosition to: aStopPosition [
 	"Hide a text only if a cursor is far away"
 	self 
@@ -62,7 +62,7 @@ GtStyledNodeBuilder >> autoHideTextFrom: aStartPosition to: aStopPosition [
 	self installDisplayMarkupsHandlerFrom: aStartPosition to: aStopPosition
 ]
 
-{ #category : #'style - button' }
+{ #category : 'style - button' }
 GtStyledNodeBuilder >> buttonStencil: aStencil [
 	"Add button to a node"
 	| anAttribute |
@@ -74,12 +74,12 @@ GtStyledNodeBuilder >> buttonStencil: aStencil [
 		self clearAttribute: anAttribute from: self start to: self stop ].
 ]
 
-{ #category : #'style - clear' }
+{ #category : 'style - clear' }
 GtStyledNodeBuilder >> clearAction: aValuable [
 	self node addClearAction: aValuable
 ]
 
-{ #category : #'style - clear' }
+{ #category : 'style - clear' }
 GtStyledNodeBuilder >> clearAttribute: anAttribute from: aStartIndex to: aStopIndex [
 	"Clear attribute that was added dynamicly while hiding/revealing markups"
 	self clearAction: [ :aStyler | 
@@ -89,23 +89,23 @@ GtStyledNodeBuilder >> clearAttribute: anAttribute from: aStartIndex to: aStopIn
 			if: [ :eachAttribute | eachAttribute = anAttribute ] ]
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 GtStyledNodeBuilder >> clearIt [
 	"Clear what every is created, e.g, text attributes, by this builder"
 	self properties clearIt.
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 GtStyledNodeBuilder >> cursorEnterAction: anAction [
 	self properties cursorEnterAction: anAction
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 GtStyledNodeBuilder >> cursorLeaveAction: anAction [
 	self properties cursorLeaveAction: anAction
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStyledNodeBuilder >> document [
 	<return: #GtDocumenter>
 	self
@@ -114,7 +114,7 @@ GtStyledNodeBuilder >> document [
 	^ document
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStyledNodeBuilder >> document: aGtDocument [
 	self
 		assert: [ document isNil ] 
@@ -125,7 +125,7 @@ GtStyledNodeBuilder >> document: aGtDocument [
 	document := aGtDocument
 ]
 
-{ #category : #'style - button' }
+{ #category : 'style - button' }
 GtStyledNodeBuilder >> explanation [
 	"Add button to a node"
 	self nodeText 
@@ -155,24 +155,24 @@ GtStyledNodeBuilder >> explanation [
 				action: self properties action ])"
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 GtStyledNodeBuilder >> hide: aStartIndex to: aStopIndex [
 	self hideInterval: (aStartIndex to: aStopIndex)
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 GtStyledNodeBuilder >> hideInterval: anInterval [
 	"Hide given interval of a node text"
 	self properties hideInterval: anInterval
 ]
 
-{ #category : #'style - hide' }
+{ #category : 'style - hide' }
 GtStyledNodeBuilder >> hideNode [
 	"Hide node in the text"
 	self hideTextFrom: self start to: self stop
 ]
 
-{ #category : #'style - hide' }
+{ #category : 'style - hide' }
 GtStyledNodeBuilder >> hideTextFrom: aStartPosition to: aStopPosition [
 	"Execute clear actions"
 	self properties shouldClearIt ifTrue: [ 
@@ -195,12 +195,12 @@ GtStyledNodeBuilder >> hideTextFrom: aStartPosition to: aStopPosition [
 		attribute: GtHideAttribute uniqueInstance.
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 GtStyledNodeBuilder >> icon: aValuable [
 	self properties icon: aValuable
 ]
 
-{ #category : #'style - button' }
+{ #category : 'style - button' }
 GtStyledNodeBuilder >> iconButton [
 	"Add button to a node"
 	| anAttribute |
@@ -217,13 +217,13 @@ GtStyledNodeBuilder >> iconButton [
 		self clearAttribute: anAttribute from: self start to: self stop ].
 ]
 
-{ #category : #'style - condition' }
+{ #category : 'style - condition' }
 GtStyledNodeBuilder >> if: aConditionBlock do: aStylingBlock [
 	"Execute the styling block only if the condition block is true"
 	aConditionBlock value ifTrue: [ aStylingBlock cull: self ].
 ]
 
-{ #category : #'style - condition' }
+{ #category : 'style - condition' }
 GtStyledNodeBuilder >> if: aConditionBlock do: aStylingBlock otherwise: aSecondStylingBlock [
 	"Execute the styling block only if the condition block is true"
 	aConditionBlock value 
@@ -231,7 +231,7 @@ GtStyledNodeBuilder >> if: aConditionBlock do: aStylingBlock otherwise: aSecondS
 		ifFalse: [ aSecondStylingBlock cull: self ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtStyledNodeBuilder >> initialize [
 	super initialize.
 	document := nil.
@@ -240,13 +240,13 @@ GtStyledNodeBuilder >> initialize [
 	text := nil.
 ]
 
-{ #category : #'style - hide' }
+{ #category : 'style - hide' }
 GtStyledNodeBuilder >> installDisplayMarkupsHandler [
 	"Display markups if a cursor is close to the node"
 	self installDisplayMarkupsHandlerFrom: self start to: self stop.
 ]
 
-{ #category : #'style - hide' }
+{ #category : 'style - hide' }
 GtStyledNodeBuilder >> installDisplayMarkupsHandlerFrom: aStartPosition to: aStopPosition [
 	"Display markups if a cursor is close to the node"
 
@@ -261,13 +261,13 @@ GtStyledNodeBuilder >> installDisplayMarkupsHandlerFrom: aStartPosition to: aSto
 	self activateCursorFrom: aStartPosition to: aStopPosition
 ]
 
-{ #category : #'style - hide' }
+{ #category : 'style - hide' }
 GtStyledNodeBuilder >> installHideAttribute: aStartPosition to: aStopPosition [
 	(self text from: aStartPosition to: aStopPosition)
 		attribute: GtHideAttribute uniqueInstance.
 ]
 
-{ #category : #'style - cursor' }
+{ #category : 'style - cursor' }
 GtStyledNodeBuilder >> isCursorClose [
 	"Return true if a cursor is close to the node"
 
@@ -275,7 +275,7 @@ GtStyledNodeBuilder >> isCursorClose [
 	^ self isCursorCloseTo: self start and: self stop
 ]
 
-{ #category : #'style - cursor' }
+{ #category : 'style - cursor' }
 GtStyledNodeBuilder >> isCursorCloseTo: aStartPosition and: aStopPosition [
 	"Return true if a cursor is close to the position interval"
 
@@ -290,12 +290,12 @@ GtStyledNodeBuilder >> isCursorCloseTo: aStartPosition and: aStopPosition [
 		ifNone: [ false ]
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 GtStyledNodeBuilder >> keepChildDisplayed: aPRDocumentItem [
 	self properties keepChildDisplayed: aPRDocumentItem
 ]
 
-{ #category : #'style - button' }
+{ #category : 'style - button' }
 GtStyledNodeBuilder >> linkButton [
 	"Add button to a node"
 	self nodeText 
@@ -341,7 +341,7 @@ GtStyledNodeBuilder >> linkButton [
 				anElements ])
 ]
 
-{ #category : #'style - text' }
+{ #category : 'style - text' }
 GtStyledNodeBuilder >> maySplitString: aString [
 	"Split a string according to specific split and reject actions (if they are defined)"
 	<return: #Collection of: #String>
@@ -354,7 +354,7 @@ GtStyledNodeBuilder >> maySplitString: aString [
 	^ aSplitText reject: self properties rejectParts.
 ]
 
-{ #category : #'style - text' }
+{ #category : 'style - text' }
 GtStyledNodeBuilder >> maySplitString: aString collect: aBlock [
 	"Split a string according to specific split and reject actions (if they are defined)
 	and collect an element for every string"
@@ -362,7 +362,7 @@ GtStyledNodeBuilder >> maySplitString: aString collect: aBlock [
 	^ (self maySplitString: aString) collect: aBlock
 ]
 
-{ #category : #'style - text' }
+{ #category : 'style - text' }
 GtStyledNodeBuilder >> maySplitString: aString collect: aBlock shareEvents: aCollectionOfEvents [
 	"Split a string according to specific split and reject actions (if they are defined)
 	and collect an element for every string"
@@ -375,12 +375,12 @@ GtStyledNodeBuilder >> maySplitString: aString collect: aBlock shareEvents: aCol
 	^ aCollection
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 GtStyledNodeBuilder >> name: aValuable [
 	self properties name: aValuable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStyledNodeBuilder >> node [
 	<return: #PRDocumentItem>
 	self
@@ -389,7 +389,7 @@ GtStyledNodeBuilder >> node [
 	^ node
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStyledNodeBuilder >> node: aPRDocumentItem [
 	self
 		assert: [ node isNil ] 
@@ -400,55 +400,55 @@ GtStyledNodeBuilder >> node: aPRDocumentItem [
 	node := aPRDocumentItem
 ]
 
-{ #category : #'accessing - node' }
+{ #category : 'accessing - node' }
 GtStyledNodeBuilder >> nodeText [
 	^ self text from: self start to: self stop
 ]
 
-{ #category : #'accessing - document' }
+{ #category : 'accessing - document' }
 GtStyledNodeBuilder >> normalFontSize [
 	^ self document normalFontSize
 ]
 
-{ #category : #'style - cursor' }
+{ #category : 'style - cursor' }
 GtStyledNodeBuilder >> possibleMaxCursorPosition: aStopPosition [
 	^ aStopPosition min: self textStop
 ]
 
-{ #category : #'style - cursor' }
+{ #category : 'style - cursor' }
 GtStyledNodeBuilder >> possibleMinCursorPosition: aStartPosition [
 	^ aStartPosition - 1 max: self textStart
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStyledNodeBuilder >> properties [
 	<return: #GtStyledNodeBuilderProperties>
 	^ properties
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 GtStyledNodeBuilder >> rejectParts: aRejectBlock [
 	"Reject text parts as a result of a split action"
 	self properties rejectParts: aRejectBlock
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 GtStyledNodeBuilder >> rejectSeparatorParts [
 	self rejectParts: [ :aString | aString trimBoth isEmpty ]
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 GtStyledNodeBuilder >> revealAction: anAction [
 	self properties revealAction: anAction
 ]
 
-{ #category : #'style - hide' }
+{ #category : 'style - hide' }
 GtStyledNodeBuilder >> revealNode [
 	"Reveal node in the text that was hidden"
 	self revealTextFrom: self start to: self stop.
 ]
 
-{ #category : #'style - hide' }
+{ #category : 'style - hide' }
 GtStyledNodeBuilder >> revealTextFrom: aStartPosition to: aStopPosition [
 	"Reveal a text that was hidden"
 	(self text from: aStartPosition to: aStopPosition) clearAttributes: [ :eachAttribute | 
@@ -465,36 +465,36 @@ GtStyledNodeBuilder >> revealTextFrom: aStartPosition to: aStopPosition [
 			eachAction cull: self ] ].
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 GtStyledNodeBuilder >> spawnObject: anAction [
 	^ self action: [ :aButton | aButton phlow spawnObject: anAction value ]
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 GtStyledNodeBuilder >> spawnTool: anAction [
 	^ self action: [ :aButton | aButton phlow spawnTool: anAction value ]
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 GtStyledNodeBuilder >> splitBy: aSplitBlock [
 	"Split text into parts and reject some parts"
 	self properties splitBy: aSplitBlock
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 GtStyledNodeBuilder >> splitBy: aSplitBlock rejectParts: aRejectBlock [
 	"Split text into parts (words) and reject some resulting text parts"
 	self splitBy: aSplitBlock.
 	self rejectParts: aRejectBlock.
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 GtStyledNodeBuilder >> splitByWords [
 	self splitBy: [ :aString | 
 		[ :eachCharacter | eachCharacter isSeparator ] split: aString ]
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 GtStyledNodeBuilder >> splitCamelCase [
 	self splitBy: [ :aString | 
 		Array streamContents: [ :anArrayStream | 
@@ -519,7 +519,7 @@ GtStyledNodeBuilder >> splitCamelCase [
 					anArrayStream nextPut: aContent ] ] ] ]
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 GtStyledNodeBuilder >> splitURI [
 	self splitBy: [ :aString | 
 		Array streamContents: [ :anArrayStream | 
@@ -538,26 +538,26 @@ GtStyledNodeBuilder >> splitURI [
 					anArrayStream nextPut: aContent ] ] ] ]
 ]
 
-{ #category : #'accessing - node' }
+{ #category : 'accessing - node' }
 GtStyledNodeBuilder >> start [
 	"Return starting position of a node"
 	<return: #Integer>
 	^ self node start
 ]
 
-{ #category : #'accessing - node' }
+{ #category : 'accessing - node' }
 GtStyledNodeBuilder >> stop [
 	"Return ending position of a node"
 	<return: #Integer>
 	^ self node stop
 ]
 
-{ #category : #'style - text link' }
+{ #category : 'style - text link' }
 GtStyledNodeBuilder >> styleKnownLink [
 	self styleKnownLinkFrom: self textStart to: self textStop
 ]
 
-{ #category : #'style - text link' }
+{ #category : 'style - text link' }
 GtStyledNodeBuilder >> styleKnownLinkFrom: aStartIndex to: aStopIndex [
 	self 
 		styleLinkWithColor: self constants linkColor 
@@ -565,13 +565,13 @@ GtStyledNodeBuilder >> styleKnownLinkFrom: aStartIndex to: aStopIndex [
 		to: aStopIndex
 ]
 
-{ #category : #'style - text link' }
+{ #category : 'style - text link' }
 GtStyledNodeBuilder >> styleLinkWithColor: aColor from: aStartIndex to: aStopIndex [
 	(self text from: aStartIndex to: aStopIndex)
 		foreground: aColor
 ]
 
-{ #category : #'style - text link' }
+{ #category : 'style - text link' }
 GtStyledNodeBuilder >> styleUnknownLinkFrom: aStartIndex to: aStopIndex [
 	self 
 		styleLinkWithColor: self constants linkWithErrorColor 
@@ -579,7 +579,7 @@ GtStyledNodeBuilder >> styleUnknownLinkFrom: aStartIndex to: aStopIndex [
 		to: aStopIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStyledNodeBuilder >> text [
 	<return: #BlRope>
 	self
@@ -588,7 +588,7 @@ GtStyledNodeBuilder >> text [
 	^ text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStyledNodeBuilder >> text: aBlRope [
 	self
 		assert: [ text isNil ] 
@@ -599,19 +599,19 @@ GtStyledNodeBuilder >> text: aBlRope [
 	text := aBlRope
 ]
 
-{ #category : #'accessing - text' }
+{ #category : 'accessing - text' }
 GtStyledNodeBuilder >> textStart [
 	<return: #Integer>
 	^ self text size isZero ifTrue: [ 0 ] ifFalse: [ 1 ]
 ]
 
-{ #category : #'accessing - text' }
+{ #category : 'accessing - text' }
 GtStyledNodeBuilder >> textStop [
 	<return: #Integer>
 	^ self text size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStyledNodeBuilder >> updateText: aBlRope [
 	self
 		assert: [ text isNotNil ] 

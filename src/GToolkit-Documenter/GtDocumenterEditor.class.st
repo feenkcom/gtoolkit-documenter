@@ -9,8 +9,8 @@ I extend ${class:BrEditor}$ by:
 
 "
 Class {
-	#name : #GtDocumenterEditor,
-	#superclass : #BrEditor,
+	#name : 'GtDocumenterEditor',
+	#superclass : 'BrEditor',
 	#traits : 'TGtDocumentConstants',
 	#classTraits : 'TGtDocumentConstants classTrait',
 	#instVars : [
@@ -19,36 +19,36 @@ Class {
 		'subscriptionModel',
 		'variableBindindsModel'
 	],
-	#category : #'GToolkit-Documenter-! Editor - UI'
+	#category : 'GToolkit-Documenter-! Editor - UI'
 }
 
-{ #category : #'api - announcer' }
+{ #category : 'api - announcer' }
 GtDocumenterEditor >> announce: anAnnouncement [
 	^ subscriptionModel announce: anAnnouncement
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditor >> basename [
 	<return: #String>
 	^ storageModel basename
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditor >> classComment: aClass [
 	storageModel classComment: aClass
 ]
 
-{ #category : #'api - styling' }
+{ #category : 'api - styling' }
 GtDocumenterEditor >> decreaseNormalFontSize [
 	^ normalFontSizeModel decreaseNormalFontSize
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 GtDocumenterEditor >> defaultParser [
 	^ GtDocumenterParser new
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 GtDocumenterEditor >> defaultStyler [
 	^ GtDocumenterStyler new 
 		document: self; 
@@ -56,12 +56,12 @@ GtDocumenterEditor >> defaultStyler [
 		hideMarkup
 ]
 
-{ #category : #'api - initialization' }
+{ #category : 'api - initialization' }
 GtDocumenterEditor >> document: aGtDocumenter [
 	self styler document: aGtDocumenter.
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditor >> evaluationReceiver [
 	"Return an object that is used as a receiver (self) in a codeblock (code snippet) evalution.
 	It is typically a class in case of class comment, file in case of file content, and nil in other cases."
@@ -69,18 +69,18 @@ GtDocumenterEditor >> evaluationReceiver [
 	^ storageModel evaluationReceiver
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditor >> exists [
 	<return: #Boolean>
 	^ storageModel exists
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditor >> fileReference: aFileReference [ 
 	storageModel fileReference: aFileReference
 ]
 
-{ #category : #'gt-extensions' }
+{ #category : 'gt-extensions' }
 GtDocumenterEditor >> gtVariableBindingsFor: aView [
 	<gtView>
 	variableBindindsModel ifNil: [ ^ aView empty ].
@@ -91,12 +91,12 @@ GtDocumenterEditor >> gtVariableBindingsFor: aView [
 		view: #gtVariableBindingsFor:
 ]
 
-{ #category : #'api - styling' }
+{ #category : 'api - styling' }
 GtDocumenterEditor >> increaseNormalFontSize [
 	^ normalFontSizeModel increaseNormalFontSize
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocumenterEditor >> initialize [
 	super initialize.
 	self viewModel add: (normalFontSizeModel := GtDocumenterEditorNormalFontSizeModel new).
@@ -110,53 +110,53 @@ GtDocumenterEditor >> initialize [
 	self styler: self defaultStyler.
 ]
 
-{ #category : #'api - announcer' }
+{ #category : 'api - announcer' }
 GtDocumenterEditor >> isSubscribedToSystem [
 	<return: #Boolean>
 	^ subscriptionModel isSubscribedToSystem
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditor >> name [
 	<return: #String>
 	^ storageModel name
 ]
 
-{ #category : #'api - styling' }
+{ #category : 'api - styling' }
 GtDocumenterEditor >> normalFontSize [
 	<rerturn: #Number>
 	^ normalFontSizeModel normalFontSize
 ]
 
-{ #category : #'api - styling' }
+{ #category : 'api - styling' }
 GtDocumenterEditor >> normalFontSize: aNumber [
 	normalFontSizeModel normalFontSize: aNumber
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditor >> read [
 	^ storageModel read
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditor >> rootDirectory [
 	"Return root directory to access external data, e.g., images, change files"
 	<return: #FileReference>
 	^ storageModel rootDirectory
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditor >> save [
 	^ storageModel save
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditor >> storage [
 	<return: #GtStorageStrategy>
 	^ storageModel storage
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditor >> store [
 	self
 		deprecated: 'Please use save method instead.'
@@ -166,34 +166,34 @@ GtDocumenterEditor >> store [
 	self save
 ]
 
-{ #category : #'api - styling' }
+{ #category : 'api - styling' }
 GtDocumenterEditor >> styleTextRequest [
 	self editor styleText
 ]
 
-{ #category : #'api - announcer' }
+{ #category : 'api - announcer' }
 GtDocumenterEditor >> systemAnnouncer [
 	<return: #Announcer>
 	^ subscriptionModel systemAnnouncer
 ]
 
-{ #category : #'api - announcer' }
+{ #category : 'api - announcer' }
 GtDocumenterEditor >> systemSubscriber [
 	^ subscriptionModel systemSubscriber
 ]
 
-{ #category : #'api - announcer' }
+{ #category : 'api - announcer' }
 GtDocumenterEditor >> unsubscribe: aSubscriber [
 	^ subscriptionModel unsubscribe: aSubscriber
 ]
 
-{ #category : #'api - variables' }
+{ #category : 'api - variables' }
 GtDocumenterEditor >> variableBindings [
 	<return: #GtSnippetBindings>
 	^ variableBindindsModel variableBindings
 ]
 
-{ #category : #'api - variables' }
+{ #category : 'api - variables' }
 GtDocumenterEditor >> variableBindings: aGtSnippetBindings [
 	variableBindindsModel variableBindings: aGtSnippetBindings
 ]

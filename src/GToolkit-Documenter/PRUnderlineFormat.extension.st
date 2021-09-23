@@ -1,6 +1,6 @@
-Extension { #name : #PRUnderlineFormat }
+Extension { #name : 'PRUnderlineFormat' }
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRUnderlineFormat >> styleSubText: aBlRope [
 	^ aBlRope underline
 ]

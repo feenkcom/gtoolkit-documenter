@@ -1,19 +1,19 @@
 Trait {
-	#name : #TGt2DocumentConstants,
-	#category : #'GToolkit-Documenter-Utility'
+	#name : 'TGt2DocumentConstants',
+	#category : 'GToolkit-Documenter-Utility'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TGt2DocumentConstants classSide >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TGt2DocumentConstants classSide >> isDeprecated [
 	^ self name = #TGt2DocumentConstants
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TGt2DocumentConstants >> constants [
 	^ GtDocumentConstants
 ]

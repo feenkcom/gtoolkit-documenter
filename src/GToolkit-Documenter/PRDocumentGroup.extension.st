@@ -1,11 +1,11 @@
-Extension { #name : #PRDocumentGroup }
+Extension { #name : 'PRDocumentGroup' }
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRDocumentGroup >> gtChildren [
 	^ self children
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRDocumentGroup >> gtChildrenFor: aView [
 	<gtView>
 	self children ifNil: [ ^ aView empty ].

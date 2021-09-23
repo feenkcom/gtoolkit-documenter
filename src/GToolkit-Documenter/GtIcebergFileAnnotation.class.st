@@ -1,10 +1,10 @@
 Class {
-	#name : #GtIcebergFileAnnotation,
-	#superclass : #GtAnnotation,
-	#category : #'GToolkit-Documenter-Annotations'
+	#name : 'GtIcebergFileAnnotation',
+	#superclass : 'GtAnnotation',
+	#category : 'GToolkit-Documenter-Annotations'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtIcebergFileAnnotation class >> possibleParameters [
 	^ {
 		self constants pathParameterName.
@@ -14,29 +14,29 @@ GtIcebergFileAnnotation class >> possibleParameters [
 		}
 ]
 
-{ #category : #protected }
+{ #category : 'protected' }
 GtIcebergFileAnnotation class >> tag [
 	^ self constants icebergFileAnnotationName 
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 GtIcebergFileAnnotation >> accept: aVisitor [
 	^ aVisitor visitGt2IcebergFileAnnotation: self
 ]
 
-{ #category : #'private - actions' }
+{ #category : 'private - actions' }
 GtIcebergFileAnnotation >> browseReferenceFrom: aBlClickEvent [ 
 	aBlClickEvent modifiers isShift ifTrue: [ ^ self ].
 	self doesReferenceExist ifFalse: [ ^ self inform: 'Input file does not exist' ].
 	aBlClickEvent target phlow spawnObject: self fileReference
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtIcebergFileAnnotation >> doesReferenceExist [
 	^ self fileReference ifNotNil: #exists ifNil: false
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : 'accessing - parameter values' }
 GtIcebergFileAnnotation >> fileReference [
 	<return: #FileReference or: nil>
 	^ self utility 
@@ -53,22 +53,22 @@ GtIcebergFileAnnotation >> fileReference [
 		defaultValue: [ nil ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtIcebergFileAnnotation >> isPreviewDefined [
 	^ self doesReferenceExist
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtIcebergFileAnnotation >> isReferenceDefined [
 	^ self fileReference notNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtIcebergFileAnnotation >> objectToPreview [
 	^ self fileReference
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : 'accessing - parameter values' }
 GtIcebergFileAnnotation >> path [
 	<return: #String or: nil>
 	^ self utility 
@@ -82,13 +82,13 @@ GtIcebergFileAnnotation >> path [
 		defaultValue: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtIcebergFileAnnotation >> referenceParameterName [
 	"Return an annotation parameter name that holds a referenced object"
 	^ self constants pathParameterName
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : 'accessing - parameter values' }
 GtIcebergFileAnnotation >> referenceParameterValue [
 	<return: #String>
 	^ self utility 
@@ -99,7 +99,7 @@ GtIcebergFileAnnotation >> referenceParameterValue [
 		defaultValue: [ 'N/A' ]
 ]
 
-{ #category : #'api - style' }
+{ #category : 'api - style' }
 GtIcebergFileAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
@@ -113,7 +113,7 @@ GtIcebergFileAnnotation >> styleTextWithMarkup: aBlRope [
 	self styleExpandingPreviewInText: aBlRope.
 ]
 
-{ #category : #'api - style' }
+{ #category : 'api - style' }
 GtIcebergFileAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.

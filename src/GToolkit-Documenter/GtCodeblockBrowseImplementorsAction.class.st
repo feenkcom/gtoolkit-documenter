@@ -1,13 +1,13 @@
 Class {
-	#name : #GtCodeblockBrowseImplementorsAction,
-	#superclass : #GtCodeblockAction,
+	#name : 'GtCodeblockBrowseImplementorsAction',
+	#superclass : 'GtCodeblockAction',
 	#instVars : [
 		'element'
 	],
-	#category : #'GToolkit-Documenter-Code Snippet'
+	#category : 'GToolkit-Documenter-Code Snippet'
 }
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtCodeblockBrowseImplementorsAction >> browseImplementors [
 	"Browse a selected implementors"
 	| aSymbol |
@@ -19,7 +19,7 @@ GtCodeblockBrowseImplementorsAction >> browseImplementors [
 	self element phlow spawnObject: (GtSearchImplementorsFilter selector: aSymbol).
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockBrowseImplementorsAction >> element [
 	<return: #BlElement>
 	self 
@@ -28,7 +28,7 @@ GtCodeblockBrowseImplementorsAction >> element [
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockBrowseImplementorsAction >> element: aBlElement [
 	self 
 		assert: [ aBlElement isNotNil ] 
@@ -36,7 +36,7 @@ GtCodeblockBrowseImplementorsAction >> element: aBlElement [
 	element := aBlElement
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 GtCodeblockBrowseImplementorsAction >> execute [
 	"Perform a default action"
 	self browseImplementors

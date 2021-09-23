@@ -4,8 +4,8 @@ I exemplify Documenter project. The main class is ${class:GtDocumenter}$.
 I use ${class:GtDocumenterExamplesUtility}$ to simplify examples.
 "
 Class {
-	#name : #GtDocumenterExamples,
-	#superclass : #Object,
+	#name : 'GtDocumenterExamples',
+	#superclass : 'Object',
 	#traits : 'TGtDocumentConstants + TGtExampleAssertable',
 	#classTraits : 'TGtDocumentConstants classTrait + TGtExampleAssertable classTrait',
 	#instVars : [
@@ -13,20 +13,20 @@ Class {
 		'tempDirectory',
 		'documents'
 	],
-	#category : #'GToolkit-Documenter-Examples'
+	#category : 'GToolkit-Documenter-Examples'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocumenterExamples class >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #'examples - supporting methods' }
+{ #category : 'examples - supporting methods' }
 GtDocumenterExamples class >> differentLabel [
 	^ 'document example class'
 ]
 
-{ #category : #changes }
+{ #category : 'changes' }
 GtDocumenterExamples >> addEpiceaEvent [
 	<gtExample>
 	| anEpicea anAnnouncements |
@@ -41,7 +41,7 @@ GtDocumenterExamples >> addEpiceaEvent [
 	^ anEpicea
 ]
 
-{ #category : #'document updates' }
+{ #category : 'document updates' }
 GtDocumenterExamples >> addingAndRemovingClass [
 	<gtExample>
 	| aDocument aClassName anElement |
@@ -60,12 +60,12 @@ GtDocumenterExamples >> addingAndRemovingClass [
 	^ aDocument
 ]
 
-{ #category : #'input file' }
+{ #category : 'input file' }
 GtDocumenterExamples >> anotherFileName [
 	^ 'another.pillar'
 ]
 
-{ #category : #'input file' }
+{ #category : 'input file' }
 GtDocumenterExamples >> anotherFileReferenceWithFigure [
 	<gtExample>
 	| aFigure |
@@ -77,7 +77,7 @@ GtDocumenterExamples >> anotherFileReferenceWithFigure [
 		withContent: self contentWithFigure
 ]
 
-{ #category : #stencils }
+{ #category : 'stencils' }
 GtDocumenterExamples >> basicResizablePreviewStencil [
 	<gtExample>
 	| aStencil |
@@ -87,7 +87,7 @@ GtDocumenterExamples >> basicResizablePreviewStencil [
 	^ aStencil
 ]
 
-{ #category : #figure }
+{ #category : 'figure' }
 GtDocumenterExamples >> brokenFigureContent [
 	| aByteArray |
 	aByteArray := self figureContent.
@@ -95,13 +95,13 @@ GtDocumenterExamples >> brokenFigureContent [
 	^ aByteArray
 ]
 
-{ #category : #figure }
+{ #category : 'figure' }
 GtDocumenterExamples >> brokenFigureFileReference [
 	<gtExample>
 	^ memorySystem addFileNamed: self figureFileName  withContent: self brokenFigureContent
 ]
 
-{ #category : #changes }
+{ #category : 'changes' }
 GtDocumenterExamples >> changesContentWithClassDefinition [
 	<gtExample>
 	^ 'OmEntry {
@@ -193,7 +193,7 @@ GtDocumenterExamples >> changesContentWithClassDefinition [
 '
 ]
 
-{ #category : #changes }
+{ #category : 'changes' }
 GtDocumenterExamples >> changesDirectory [
 	<gtExample>
 	| epiceaDir |
@@ -203,17 +203,17 @@ GtDocumenterExamples >> changesDirectory [
 	^ epiceaDir
 ]
 
-{ #category : #changes }
+{ #category : 'changes' }
 GtDocumenterExamples >> changesDirectoryName [
 	^ 'changes'
 ]
 
-{ #category : #changes }
+{ #category : 'changes' }
 GtDocumenterExamples >> changesFileNameWithClassDefinition [
 	^ 'class-definition.ombu'
 ]
 
-{ #category : #changes }
+{ #category : 'changes' }
 GtDocumenterExamples >> changesFileReferenceWithClassDefinition [
 	<gtExample>
 	^ memorySystem 
@@ -222,35 +222,35 @@ GtDocumenterExamples >> changesFileReferenceWithClassDefinition [
 			withContent: self changesContentWithClassDefinition.
 ]
 
-{ #category : #'file reference document' }
+{ #category : 'file reference document' }
 GtDocumenterExamples >> classToDocument [
 	<gtExample>
 	^ self class
 ]
 
-{ #category : #slides }
+{ #category : 'slides' }
 GtDocumenterExamples >> connectorSlideClass [
 	<gtExample>
 	^ GtConnectorForExampleLiveSlide
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocumenterExamples >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #'non technical people' }
+{ #category : 'non technical people' }
 GtDocumenterExamples >> contentBoldForNonTechnicalPeople [
 	^ '""bold""    '
 ]
 
-{ #category : #changes }
+{ #category : 'changes' }
 GtDocumenterExamples >> contentWithClassDefinitionChanges [
 	^ '${', self constants changesAnnotationName, ':', 
 			self changesDirectoryName, '/', self changesFileNameWithClassDefinition , '}$'
 ]
 
-{ #category : #codeblock }
+{ #category : 'codeblock' }
 GtDocumenterExamples >> contentWithCodeblock [
 	^ '[[[label=Evaluate
 aBook := GtDocument new.
@@ -258,7 +258,7 @@ aBook := GtDocument new.
 
 ]
 
-{ #category : #codeblock }
+{ #category : 'codeblock' }
 GtDocumenterExamples >> contentWithCodeblockAndEmptyLineAfter [
 	^ '[[[label=Evaluate
 4 factorial.
@@ -267,7 +267,7 @@ GtDocumenterExamples >> contentWithCodeblockAndEmptyLineAfter [
 
 ]
 
-{ #category : #codeblock }
+{ #category : 'codeblock' }
 GtDocumenterExamples >> contentWithCodeblockOnException [
 	^ '[[[
 1/0
@@ -275,12 +275,12 @@ GtDocumenterExamples >> contentWithCodeblockOnException [
 
 ]
 
-{ #category : #'commented line' }
+{ #category : 'commented line' }
 GtDocumenterExamples >> contentWithCommentedLine [
 	^ '%% a commented line'
 ]
 
-{ #category : #codeblock }
+{ #category : 'codeblock' }
 GtDocumenterExamples >> contentWithEmptyCodeblock [
 	^ '[[[label=Evaluate
    
@@ -288,18 +288,18 @@ GtDocumenterExamples >> contentWithEmptyCodeblock [
 
 ]
 
-{ #category : #'formats, header, and lists' }
+{ #category : 'formats, header, and lists' }
 GtDocumenterExamples >> contentWithEmptyHeader [
 	^ '!'
 ]
 
-{ #category : #changes }
+{ #category : 'changes' }
 GtDocumenterExamples >> contentWithEpiceaChanges [
 	^ '${', self constants changesAnnotationName, ':', self referencesChangesFile , '}$'
 
 ]
 
-{ #category : #'example - existing one' }
+{ #category : 'example - existing one' }
 GtDocumenterExamples >> contentWithExampleHiddenPreview [
 	^ '${', self constants exampleAnnotationName, ':', 
 		self referencedMethod printString,
@@ -309,7 +309,7 @@ GtDocumenterExamples >> contentWithExampleHiddenPreview [
 		'|', self constants codeExpandedParameterName, '=', true asString, '}$'
 ]
 
-{ #category : #'example - existing one' }
+{ #category : 'example - existing one' }
 GtDocumenterExamples >> contentWithExampleParameters [
 	^ '${', self constants exampleAnnotationName, ':', 
 		self referencedMethod printString,
@@ -321,7 +321,7 @@ GtDocumenterExamples >> contentWithExampleParameters [
 		'|', self constants alignmentParameterName , '=', FullWidthAlignmentStrategy strategyName, '}$'
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 GtDocumenterExamples >> contentWithExamples [
 	^ '${', self constants examplesAnnotationName, ':', 
 		self constants classesParameterName , '=#(', 
@@ -333,33 +333,33 @@ GtDocumenterExamples >> contentWithExamples [
 
 ]
 
-{ #category : #class }
+{ #category : 'class' }
 GtDocumenterExamples >> contentWithExistingClass [
 	^ '${', self constants classAnnotationName, ':', self referencedClass , '}$'
 
 ]
 
-{ #category : #class }
+{ #category : 'class' }
 GtDocumenterExamples >> contentWithExistingClassAndCustomizedNameUsingString [
 	^ 'This is a ${', self constants classAnnotationName, ':', self referencedClass , 
 		'|', self constants labelParameterName, '=class',
 	'}$ with customized name'
 ]
 
-{ #category : #class }
+{ #category : 'class' }
 GtDocumenterExamples >> contentWithExistingClassAndCustomizedNameUsingSymbol [
 	^ 'This is a ${', self constants classAnnotationName, ':', self referencedClass , 
 		'|', self constants labelParameterName, '=#differentLabel',
 	'}$ with customized name'
 ]
 
-{ #category : #'example - existing one' }
+{ #category : 'example - existing one' }
 GtDocumenterExamples >> contentWithExistingExample [
 	^ '${', self constants exampleAnnotationName, ':', self referencedExampleMethod printString, '}$'
 
 ]
 
-{ #category : #'example - with return variable name' }
+{ #category : 'example - with return variable name' }
 GtDocumenterExamples >> contentWithExistingExampleAndReturnVariableName [
 	^ '${', self constants exampleAnnotationName, ':', 
 		self referencedExampleMethod printString, '|',
@@ -368,13 +368,13 @@ GtDocumenterExamples >> contentWithExistingExampleAndReturnVariableName [
 		'[[[', String crlf, String crlf, self returnVariableName asString, String crlf, ']]]', String crlf
 ]
 
-{ #category : #'method - existing one' }
+{ #category : 'method - existing one' }
 GtDocumenterExamples >> contentWithExistingMethod [
 	^ 'This is the ${', self constants methodAnnotationName, ':', self referencedMethod printString, '}$ method.'
 
 ]
 
-{ #category : #'method - different name' }
+{ #category : 'method - different name' }
 GtDocumenterExamples >> contentWithExistingMethodAndChangedLabelUsingString [
 	^ 'This is the ${', self constants methodAnnotationName, ':', self referencedMethod printString, 
 	'|', self constants labelParameterName, '=example',
@@ -382,7 +382,7 @@ GtDocumenterExamples >> contentWithExistingMethodAndChangedLabelUsingString [
 
 ]
 
-{ #category : #'method - different name' }
+{ #category : 'method - different name' }
 GtDocumenterExamples >> contentWithExistingMethodAndChangedLabelUsingSymbol [
 	^ 'This is the ${', self constants methodAnnotationName, ':', self referencedMethod printString, 
 	'|', self constants labelParameterName, '=#selector',
@@ -390,7 +390,7 @@ GtDocumenterExamples >> contentWithExistingMethodAndChangedLabelUsingSymbol [
 
 ]
 
-{ #category : #'example - parametrized one' }
+{ #category : 'example - parametrized one' }
 GtDocumenterExamples >> contentWithExistingParametrizedExampleSumNumber [
 "GtDummyExamplesWithParametrizedExampleA>>#parametrizedExample:withTwoArguments:|variables=#(aVariableOne aVariableTwo)|result=aResult}$"
 	^ '[[[', String crlf, String crlf, 
@@ -406,7 +406,7 @@ GtDocumenterExamples >> contentWithExistingParametrizedExampleSumNumber [
 		'[[[', String crlf, String crlf, self returnVariableName asString, String crlf, ']]]', String crlf
 ]
 
-{ #category : #slides }
+{ #category : 'slides' }
 GtDocumenterExamples >> contentWithExistingSlides [
 	^ '${', self constants slidesAnnotationName, ':', 
 		self constants slidesParameterName , '=#(',
@@ -415,7 +415,7 @@ GtDocumenterExamples >> contentWithExistingSlides [
 
 ]
 
-{ #category : #'example - parametrized one' }
+{ #category : 'example - parametrized one' }
 GtDocumenterExamples >> contentWithExistingTwoParametrizedExamples [
 	^	self contentWithExistingParametrizedExampleSumNumber, String crlf, String crlf, 
 		'${', self constants parametrizedExampleAnnotationName, ':', 
@@ -427,14 +427,14 @@ GtDocumenterExamples >> contentWithExistingTwoParametrizedExamples [
 		'[[[', String crlf, String crlf, self secondReturnVariableName asString, String crlf, ']]]', String crlf
 ]
 
-{ #category : #'external link' }
+{ #category : 'external link' }
 GtDocumenterExamples >> contentWithExternalLink [
 	^ '*Feenk>https://feenk.com*', String cr, 
 		'*https://feenk.com*', String cr,
 		'Here you can see a link that can be split into two lines *https://www.google.com/search?q=how+do+you+feenk+today%3F&oq=how+do+you+feenk+today%3F*.'
 ]
 
-{ #category : #figure }
+{ #category : 'figure' }
 GtDocumenterExamples >> contentWithFigure [
 	"^ '! Glamorous Toolkit
 	The Glamorous Toolkit (GT) is the moldable integrated development environment.
@@ -447,7 +447,7 @@ The Glamorous Toolkit (GT) is the moldable integrated development environment.
 
 ]
 
-{ #category : #'formats, header, and lists' }
+{ #category : 'formats, header, and lists' }
 GtDocumenterExamples >> contentWithHeaders [
 	^ '! Header One
 !! Header Two
@@ -458,14 +458,14 @@ GtDocumenterExamples >> contentWithHeaders [
 !!!!!!! Header Seven'
 ]
 
-{ #category : #'iceberg file' }
+{ #category : 'iceberg file' }
 GtDocumenterExamples >> contentWithIcebergFile [
 	^ '${', self constants icebergFileAnnotationName, ':', 
 			self constants pathParameterName, '=', self icebergFileName, '}$'
 
 ]
 
-{ #category : #'example - inlined in text' }
+{ #category : 'example - inlined in text' }
 GtDocumenterExamples >> contentWithInlinedExample [
 	"The www.example.com website is accessed 60 times every hour by 3 unique users."
 	^ 'The ',
@@ -481,7 +481,7 @@ GtDocumenterExamples >> contentWithInlinedExample [
 	'}$ unique users.'
 ]
 
-{ #category : #'example - inlined in text' }
+{ #category : 'example - inlined in text' }
 GtDocumenterExamples >> contentWithInlinedLoremIpsum300 [
 	^ 'I include a very long text: ',
 	'${', self constants exampleAnnotationName, ':', self referencedExampleLoremIpsum300Method printString, 
@@ -490,32 +490,32 @@ GtDocumenterExamples >> contentWithInlinedLoremIpsum300 [
 	'}$ that should be split spread over couple of lines.'
 ]
 
-{ #category : #'input file' }
+{ #category : 'input file' }
 GtDocumenterExamples >> contentWithInputFileToFigure [
 	^ '${', self constants inputFileAnnotationName, ':', self anotherFileName , '}$'
 
 ]
 
-{ #category : #'example - existing one' }
+{ #category : 'example - existing one' }
 GtDocumenterExamples >> contentWithInvalidParameter [
 	^ '${', self constants exampleAnnotationName, ':', 
 		self referencedMethod printString,
 		'|hi|', '=true', '}$'
 ]
 
-{ #category : #'example - existing one' }
+{ #category : 'example - existing one' }
 GtDocumenterExamples >> contentWithInvalidParameter2 [
 	^ '${', self constants exampleAnnotationName, ':', 
 		self referencedMethod printString,
 		'||' , '}$'
 ]
 
-{ #category : #'example - existing one' }
+{ #category : 'example - existing one' }
 GtDocumenterExamples >> contentWithInvalidParameter3 [
 	^ '${', self constants exampleAnnotationName, ':', '}$'
 ]
 
-{ #category : #'formats, header, and lists' }
+{ #category : 'formats, header, and lists' }
 GtDocumenterExamples >> contentWithLists [
 	^ '
 Ordered list:
@@ -552,12 +552,12 @@ Another definition list:
 '
 ]
 
-{ #category : #'formats, header, and lists' }
+{ #category : 'formats, header, and lists' }
 GtDocumenterExamples >> contentWithMarkups [
 	^ '""bold"" ''''italic'''' ==monospace== --strikethrought-- @@subscript@@ ^^superscript^^ __underline__ {{{raw}}}'
 ]
 
-{ #category : #'method - multiple' }
+{ #category : 'method - multiple' }
 GtDocumenterExamples >> contentWithMultipleMethods [
 	^ '${', self constants methodAnnotationName, 
 			':', self referencedMethod printString,
@@ -569,13 +569,13 @@ GtDocumenterExamples >> contentWithMultipleMethods [
 			'|', self constants showParameterName, '=gtSourceFor:', '}$', String cr, String cr
 ]
 
-{ #category : #class }
+{ #category : 'class' }
 GtDocumenterExamples >> contentWithNotExistingClass [
 	^ '${', self constants classAnnotationName, ':', self referencedNotExistingClass , '}$'
 
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 GtDocumenterExamples >> contentWithNotExistingExamples [
 	^ '${', self constants examplesAnnotationName, ':', 
 		self constants classesParameterName , '=#(', 
@@ -583,7 +583,7 @@ GtDocumenterExamples >> contentWithNotExistingExamples [
 
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 GtDocumenterExamples >> contentWithNotExistingPackageExamples [
 	^ '${', self constants examplesAnnotationName, ':', 
 		self constants packagesParameterName , '=#(''', 
@@ -591,7 +591,7 @@ GtDocumenterExamples >> contentWithNotExistingPackageExamples [
 
 ]
 
-{ #category : #codeblock }
+{ #category : 'codeblock' }
 GtDocumenterExamples >> contentWithSelfCodeblock [
 	^ '[[[
 self
@@ -599,24 +599,24 @@ self
 
 ]
 
-{ #category : #'input file' }
+{ #category : 'input file' }
 GtDocumenterExamples >> contentWithSelfReferencedInputFile [
 	^ '${', self constants inputFileAnnotationName, ':', memorySystem pillarFileName, '}$'
 
 ]
 
-{ #category : #'pillar parser' }
+{ #category : 'pillar parser' }
 GtDocumenterExamples >> contentWithTextSpaceClassAnnotationSpaceText [
 	^ 'hello  ${', self constants classAnnotationName, ':', Object name asString, '}$ or hi'
 ]
 
-{ #category : #'example - two same in one document' }
+{ #category : 'example - two same in one document' }
 GtDocumenterExamples >> contentWithTwoExistingExamples [
 	^ self contentWithExistingExample, String cr, String cr, 
 		self contentWithExistingExample, String cr, String cr
 ]
 
-{ #category : #variable }
+{ #category : 'variable' }
 GtDocumenterExamples >> contentWithVariable [
 	^ '${variable:name=aVariableOne|value=43|previewShow=}$
 
@@ -630,7 +630,7 @@ ${variable:name=aVariableOne|expression=Smalltalk os|previewShow=}$
 '
 ]
 
-{ #category : #'empty document' }
+{ #category : 'empty document' }
 GtDocumenterExamples >> defaultDocument [
 	<gtExample>
 	<after: #useDefaultStylerStrategy>
@@ -646,7 +646,7 @@ GtDocumenterExamples >> defaultDocument [
 	^ aDocument
 ]
 
-{ #category : #'method - existing one' }
+{ #category : 'method - existing one' }
 GtDocumenterExamples >> documentDeleteAll [
 	<gtExample>
 	| aDocument |
@@ -663,7 +663,7 @@ GtDocumenterExamples >> documentDeleteAll [
 	^ aDocument
 ]
 
-{ #category : #'method - existing one' }
+{ #category : 'method - existing one' }
 GtDocumenterExamples >> documentDeleteMethodAnnotation [
 	<gtExample>
 	| aDocument |
@@ -680,7 +680,7 @@ GtDocumenterExamples >> documentDeleteMethodAnnotation [
 	^ aDocument
 ]
 
-{ #category : #'file reference document' }
+{ #category : 'file reference document' }
 GtDocumenterExamples >> documentFromClassComment [
 	<gtExample>
 	| aDocument |
@@ -694,7 +694,7 @@ GtDocumenterExamples >> documentFromClassComment [
 	^ aDocument
 ]
 
-{ #category : #'file reference document' }
+{ #category : 'file reference document' }
 GtDocumenterExamples >> documentFromFileReference [
 	<gtExample>
 	| aDocument |
@@ -709,7 +709,7 @@ GtDocumenterExamples >> documentFromFileReference [
 	^ aDocument
 ]
 
-{ #category : #'formats, header, and lists' }
+{ #category : 'formats, header, and lists' }
 GtDocumenterExamples >> documentInEditingModeWithMarkups [
 	<gtExample>
 	| aDocument |
@@ -721,7 +721,7 @@ GtDocumenterExamples >> documentInEditingModeWithMarkups [
 	^ aDocument
 ]
 
-{ #category : #'formats, header, and lists' }
+{ #category : 'formats, header, and lists' }
 GtDocumenterExamples >> documentInReadingModeWithMarkups [
 	<gtExample>
 	| aDocument |
@@ -733,7 +733,7 @@ GtDocumenterExamples >> documentInReadingModeWithMarkups [
 	^ aDocument
 ]
 
-{ #category : #figure }
+{ #category : 'figure' }
 GtDocumenterExamples >> documentWithBrokenFigure [
 	<gtExample>
 	| aDocument aFigureFile |
@@ -746,13 +746,13 @@ GtDocumenterExamples >> documentWithBrokenFigure [
 	^ aDocument
 ]
 
-{ #category : #resourcer }
+{ #category : 'resourcer' }
 GtDocumenterExamples >> documentWithClassComment [
 	<gtExample>
 	^ GtDocumenter forClass: self class
 ]
 
-{ #category : #changes }
+{ #category : 'changes' }
 GtDocumenterExamples >> documentWithClassDefinitionChanges [
 	<gtExample>
 	| aDocument aChangesFile |
@@ -767,7 +767,7 @@ GtDocumenterExamples >> documentWithClassDefinitionChanges [
 	^ aDocument
 ]
 
-{ #category : #codeblock }
+{ #category : 'codeblock' }
 GtDocumenterExamples >> documentWithCodeblock [
 	<gtExample>
 	| aDocument |
@@ -778,7 +778,7 @@ GtDocumenterExamples >> documentWithCodeblock [
 	^ aDocument
 ]
 
-{ #category : #codeblock }
+{ #category : 'codeblock' }
 GtDocumenterExamples >> documentWithCodeblockAndEmptyLineAfter [
 	<gtExample>
 	| aDocument |
@@ -789,7 +789,7 @@ GtDocumenterExamples >> documentWithCodeblockAndEmptyLineAfter [
 	^ aDocument
 ]
 
-{ #category : #codeblock }
+{ #category : 'codeblock' }
 GtDocumenterExamples >> documentWithCodeblockOnException [
 	<gtExample>
 	<noText>
@@ -801,7 +801,7 @@ GtDocumenterExamples >> documentWithCodeblockOnException [
 	^ aDocument
 ]
 
-{ #category : #'commented line' }
+{ #category : 'commented line' }
 GtDocumenterExamples >> documentWithCommentedLine [
 	<gtExample>
 	| aDocument |
@@ -811,7 +811,7 @@ GtDocumenterExamples >> documentWithCommentedLine [
 	^ aDocument
 ]
 
-{ #category : #'method - existing one' }
+{ #category : 'method - existing one' }
 GtDocumenterExamples >> documentWithEditedExistingMethodAnnotation [
 	<gtExample>
 	| aDocument |
@@ -828,7 +828,7 @@ GtDocumenterExamples >> documentWithEditedExistingMethodAnnotation [
 	^ aDocument
 ]
 
-{ #category : #codeblock }
+{ #category : 'codeblock' }
 GtDocumenterExamples >> documentWithEmptyCodeblock [
 	<gtExample>
 	| aDocument |
@@ -839,7 +839,7 @@ GtDocumenterExamples >> documentWithEmptyCodeblock [
 	^ aDocument
 ]
 
-{ #category : #'formats, header, and lists' }
+{ #category : 'formats, header, and lists' }
 GtDocumenterExamples >> documentWithEmptyHeader [
 	<gtExample>
 	| aDocument |
@@ -848,7 +848,7 @@ GtDocumenterExamples >> documentWithEmptyHeader [
 	^ aDocument
 ]
 
-{ #category : #changes }
+{ #category : 'changes' }
 GtDocumenterExamples >> documentWithEpiceaChanges [
 	<gtExample>
 	| aDocument |
@@ -861,7 +861,7 @@ GtDocumenterExamples >> documentWithEpiceaChanges [
 	^ aDocument
 ]
 
-{ #category : #'example - existing one' }
+{ #category : 'example - existing one' }
 GtDocumenterExamples >> documentWithExampleHiddenPreview [
 	<gtExample>
 	| aDocument |
@@ -872,7 +872,7 @@ GtDocumenterExamples >> documentWithExampleHiddenPreview [
 	^ aDocument
 ]
 
-{ #category : #'example - existing one' }
+{ #category : 'example - existing one' }
 GtDocumenterExamples >> documentWithExampleParameters [
 	<gtExample>
 	| aDocument |
@@ -883,7 +883,7 @@ GtDocumenterExamples >> documentWithExampleParameters [
 	^ aDocument
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 GtDocumenterExamples >> documentWithExamples [
 	<gtExample>
 	| aDocument |
@@ -894,7 +894,7 @@ GtDocumenterExamples >> documentWithExamples [
 	^ aDocument
 ]
 
-{ #category : #class }
+{ #category : 'class' }
 GtDocumenterExamples >> documentWithExistingClass [
 	<gtExample>
 	| aDocument |
@@ -905,7 +905,7 @@ GtDocumenterExamples >> documentWithExistingClass [
 	^ aDocument
 ]
 
-{ #category : #class }
+{ #category : 'class' }
 GtDocumenterExamples >> documentWithExistingClassAndCustomizedNameUsingString [
 	<gtExample>
 	| aDocument |
@@ -916,7 +916,7 @@ GtDocumenterExamples >> documentWithExistingClassAndCustomizedNameUsingString [
 	^ aDocument
 ]
 
-{ #category : #class }
+{ #category : 'class' }
 GtDocumenterExamples >> documentWithExistingClassAndCustomizedNameUsingSymbol [
 	<gtExample>
 	| aDocument |
@@ -927,7 +927,7 @@ GtDocumenterExamples >> documentWithExistingClassAndCustomizedNameUsingSymbol [
 	^ aDocument
 ]
 
-{ #category : #'example - existing one' }
+{ #category : 'example - existing one' }
 GtDocumenterExamples >> documentWithExistingExample [
 	<gtExample>
 	| aDocument |
@@ -938,7 +938,7 @@ GtDocumenterExamples >> documentWithExistingExample [
 	^ aDocument
 ]
 
-{ #category : #'example - with return variable name' }
+{ #category : 'example - with return variable name' }
 GtDocumenterExamples >> documentWithExistingExampleAndReturnVariableName [
 	<gtExample>
 	| aDocument |
@@ -950,7 +950,7 @@ GtDocumenterExamples >> documentWithExistingExampleAndReturnVariableName [
 	^ aDocument
 ]
 
-{ #category : #'method - existing one' }
+{ #category : 'method - existing one' }
 GtDocumenterExamples >> documentWithExistingMethod [
 	<gtExample>
 	| aDocument |
@@ -961,7 +961,7 @@ GtDocumenterExamples >> documentWithExistingMethod [
 	^ aDocument
 ]
 
-{ #category : #'method - different name' }
+{ #category : 'method - different name' }
 GtDocumenterExamples >> documentWithExistingMethodAndChangedLabelUsingString [
 	<gtExample>
 	| aDocument |
@@ -972,7 +972,7 @@ GtDocumenterExamples >> documentWithExistingMethodAndChangedLabelUsingString [
 	^ aDocument
 ]
 
-{ #category : #'method - different name' }
+{ #category : 'method - different name' }
 GtDocumenterExamples >> documentWithExistingMethodAndChangedLabelUsingSymbol [
 	<gtExample>
 	| aDocument |
@@ -983,7 +983,7 @@ GtDocumenterExamples >> documentWithExistingMethodAndChangedLabelUsingSymbol [
 	^ aDocument
 ]
 
-{ #category : #'example - parametrized one' }
+{ #category : 'example - parametrized one' }
 GtDocumenterExamples >> documentWithExistingParametrizedExampleSumNumber [
 	<gtExample>
 	| aDocument |
@@ -995,7 +995,7 @@ GtDocumenterExamples >> documentWithExistingParametrizedExampleSumNumber [
 	^ aDocument
 ]
 
-{ #category : #slides }
+{ #category : 'slides' }
 GtDocumenterExamples >> documentWithExistingSlides [
 	<gtExample>
 	| aDocument |
@@ -1006,7 +1006,7 @@ GtDocumenterExamples >> documentWithExistingSlides [
 	^ aDocument
 ]
 
-{ #category : #'example - parametrized one' }
+{ #category : 'example - parametrized one' }
 GtDocumenterExamples >> documentWithExistingTwoParametrizedExamples [
 	<gtExample>
 	| aDocument |
@@ -1018,7 +1018,7 @@ GtDocumenterExamples >> documentWithExistingTwoParametrizedExamples [
 	^ aDocument
 ]
 
-{ #category : #'external link' }
+{ #category : 'external link' }
 GtDocumenterExamples >> documentWithExternalLink [
 	<gtExample>
 	| aDocument |
@@ -1028,7 +1028,7 @@ GtDocumenterExamples >> documentWithExternalLink [
 	^ aDocument
 ]
 
-{ #category : #'external link' }
+{ #category : 'external link' }
 GtDocumenterExamples >> documentWithExternalLinkInEditingMode [
 	<gtExample>
 	| aDocument |
@@ -1041,7 +1041,7 @@ GtDocumenterExamples >> documentWithExternalLinkInEditingMode [
 	^ aDocument
 ]
 
-{ #category : #'external link' }
+{ #category : 'external link' }
 GtDocumenterExamples >> documentWithExternalLinkInReadingMode [
 	<gtExample>
 	| aDocument |
@@ -1052,7 +1052,7 @@ GtDocumenterExamples >> documentWithExternalLinkInReadingMode [
 	^ aDocument
 ]
 
-{ #category : #figure }
+{ #category : 'figure' }
 GtDocumenterExamples >> documentWithFigure [
 	<gtExample>
 	| aDocument aFigureFile |
@@ -1064,7 +1064,7 @@ GtDocumenterExamples >> documentWithFigure [
 	^ aDocument
 ]
 
-{ #category : #figure }
+{ #category : 'figure' }
 GtDocumenterExamples >> documentWithFigureCache [
 	<gtExample>
 	<noTest>
@@ -1086,7 +1086,7 @@ GtDocumenterExamples >> documentWithFigureCache [
 	^ aDocument
 ]
 
-{ #category : #'formats, header, and lists' }
+{ #category : 'formats, header, and lists' }
 GtDocumenterExamples >> documentWithHeadersInEditingMode [
 	<gtExample>
 	| aDocument |
@@ -1098,7 +1098,7 @@ GtDocumenterExamples >> documentWithHeadersInEditingMode [
 	^ aDocument
 ]
 
-{ #category : #'formats, header, and lists' }
+{ #category : 'formats, header, and lists' }
 GtDocumenterExamples >> documentWithHeadersInReadingMode [
 	<gtExample>
 	| aDocument |
@@ -1110,7 +1110,7 @@ GtDocumenterExamples >> documentWithHeadersInReadingMode [
 	^ aDocument
 ]
 
-{ #category : #'iceberg file' }
+{ #category : 'iceberg file' }
 GtDocumenterExamples >> documentWithIcebergFile [
 	<gtExample>
 	| aDocument |
@@ -1119,7 +1119,7 @@ GtDocumenterExamples >> documentWithIcebergFile [
 	^ aDocument
 ]
 
-{ #category : #'example - inlined in text' }
+{ #category : 'example - inlined in text' }
 GtDocumenterExamples >> documentWithInlinedExample [
 	<gtExample>
 	| aDocument |
@@ -1130,7 +1130,7 @@ GtDocumenterExamples >> documentWithInlinedExample [
 	^ aDocument
 ]
 
-{ #category : #'example - inlined in text' }
+{ #category : 'example - inlined in text' }
 GtDocumenterExamples >> documentWithInlinedLoremIpsum300 [
 	<gtExample>
 	| aDocument |
@@ -1141,7 +1141,7 @@ GtDocumenterExamples >> documentWithInlinedLoremIpsum300 [
 	^ aDocument
 ]
 
-{ #category : #'input file' }
+{ #category : 'input file' }
 GtDocumenterExamples >> documentWithInputFileToFigure [
 	<gtExample>
 	| anAnotherFileReference aDocument |
@@ -1153,7 +1153,7 @@ GtDocumenterExamples >> documentWithInputFileToFigure [
 	^ aDocument
 ]
 
-{ #category : #'example - existing one' }
+{ #category : 'example - existing one' }
 GtDocumenterExamples >> documentWithInvalidParameter [
 	<gtExample>
 	| aDocument |
@@ -1164,7 +1164,7 @@ GtDocumenterExamples >> documentWithInvalidParameter [
 	^ aDocument
 ]
 
-{ #category : #'example - existing one' }
+{ #category : 'example - existing one' }
 GtDocumenterExamples >> documentWithInvalidParameter2 [
 	<gtExample>
 	| aDocument |
@@ -1175,7 +1175,7 @@ GtDocumenterExamples >> documentWithInvalidParameter2 [
 	^ aDocument
 ]
 
-{ #category : #'example - existing one' }
+{ #category : 'example - existing one' }
 GtDocumenterExamples >> documentWithInvalidParameter3 [
 	<gtExample>
 	| aDocument |
@@ -1186,7 +1186,7 @@ GtDocumenterExamples >> documentWithInvalidParameter3 [
 	^ aDocument
 ]
 
-{ #category : #'formats, header, and lists' }
+{ #category : 'formats, header, and lists' }
 GtDocumenterExamples >> documentWithLists [
 	<gtExample>
 	| aDocument |
@@ -1196,7 +1196,7 @@ GtDocumenterExamples >> documentWithLists [
 	^ aDocument
 ]
 
-{ #category : #'formats, header, and lists' }
+{ #category : 'formats, header, and lists' }
 GtDocumenterExamples >> documentWithMarkups [
 	<gtExample>
 	| aDocument |
@@ -1206,7 +1206,7 @@ GtDocumenterExamples >> documentWithMarkups [
 	^ aDocument
 ]
 
-{ #category : #'method - multiple' }
+{ #category : 'method - multiple' }
 GtDocumenterExamples >> documentWithMultipleMethods [
 	<gtExample>
 	| aDocument |
@@ -1217,7 +1217,7 @@ GtDocumenterExamples >> documentWithMultipleMethods [
 	^ aDocument
 ]
 
-{ #category : #class }
+{ #category : 'class' }
 GtDocumenterExamples >> documentWithNotExistingClass [
 	<gtExample>
 	| aClassName aDocument aClass |
@@ -1233,7 +1233,7 @@ GtDocumenterExamples >> documentWithNotExistingClass [
 	^ aDocument
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 GtDocumenterExamples >> documentWithNotExistingExamples [
 	<gtExample>
 	| aDocument |
@@ -1244,7 +1244,7 @@ GtDocumenterExamples >> documentWithNotExistingExamples [
 	^ aDocument
 ]
 
-{ #category : #figure }
+{ #category : 'figure' }
 GtDocumenterExamples >> documentWithNotExistingFigure [
 	<gtExample>
 	| aDocument |
@@ -1254,7 +1254,7 @@ GtDocumenterExamples >> documentWithNotExistingFigure [
 	^ aDocument
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 GtDocumenterExamples >> documentWithNotExistingPackageExamples [
 	<gtExample>
 	| aDocument |
@@ -1265,7 +1265,7 @@ GtDocumenterExamples >> documentWithNotExistingPackageExamples [
 	^ aDocument
 ]
 
-{ #category : #codeblock }
+{ #category : 'codeblock' }
 GtDocumenterExamples >> documentWithSelfCodeblock [
 	<gtExample>
 	| aDocument |
@@ -1277,7 +1277,7 @@ GtDocumenterExamples >> documentWithSelfCodeblock [
 	^ aDocument
 ]
 
-{ #category : #codeblock }
+{ #category : 'codeblock' }
 GtDocumenterExamples >> documentWithSelfCodeblockOnClass [
 	<gtExample>
 	| aDocument |
@@ -1288,7 +1288,7 @@ GtDocumenterExamples >> documentWithSelfCodeblockOnClass [
 	^ aDocument
 ]
 
-{ #category : #codeblock }
+{ #category : 'codeblock' }
 GtDocumenterExamples >> documentWithSelfCodeblockOnFileReference [
 	<gtExample>
 	| aDocument aFileReference |
@@ -1300,7 +1300,7 @@ GtDocumenterExamples >> documentWithSelfCodeblockOnFileReference [
 	^ aDocument
 ]
 
-{ #category : #'input file' }
+{ #category : 'input file' }
 GtDocumenterExamples >> documentWithSelfReferencedInputFile [
 	<gtExample>
 	| aDocument |
@@ -1310,7 +1310,7 @@ GtDocumenterExamples >> documentWithSelfReferencedInputFile [
 	^ aDocument
 ]
 
-{ #category : #'example - two same in one document' }
+{ #category : 'example - two same in one document' }
 GtDocumenterExamples >> documentWithTwoExistingExamples [
 	<gtExample>
 	| aDocument aCache |
@@ -1331,13 +1331,13 @@ GtDocumenterExamples >> documentWithTwoExistingExamples [
 	^ aDocument
 ]
 
-{ #category : #'empty document' }
+{ #category : 'empty document' }
 GtDocumenterExamples >> emptyContent [
 	^ ''
 
 ]
 
-{ #category : #'empty document' }
+{ #category : 'empty document' }
 GtDocumenterExamples >> emptyDocument [
 	<gtExample>
 	| aDocument |
@@ -1348,14 +1348,14 @@ GtDocumenterExamples >> emptyDocument [
 	^ aDocument
 ]
 
-{ #category : #slides }
+{ #category : 'slides' }
 GtDocumenterExamples >> emptyDocumentSlideClass [
 	<gtExample>
 	^ GtDocumenterLiveSlide new
 		document: GtDocumenter new.
 ]
 
-{ #category : #changes }
+{ #category : 'changes' }
 GtDocumenterExamples >> epicea [
 	<gtExample>
 	| aChangesFile anEpicea anAnnouncements |
@@ -1373,114 +1373,114 @@ GtDocumenterExamples >> epicea [
 	^ anEpicea
 ]
 
-{ #category : #'example - inlined in text' }
+{ #category : 'example - inlined in text' }
 GtDocumenterExamples >> exampleComAccessPerHour [
 	<gtExample>
 	^ (1 to: 60) collect: [ :eachNumber | 'Access No. ', eachNumber asString ]
 ]
 
-{ #category : #'example - inlined in text' }
+{ #category : 'example - inlined in text' }
 GtDocumenterExamples >> exampleComUniqueAccessPerHour [
 	<gtExample>
 	^ (1 to: 3) collect: [ :eachNumber | 'Unique Access No. ', eachNumber asString, ' at ', self exampleComUrl asString ]
 ]
 
-{ #category : #'example - inlined in text' }
+{ #category : 'example - inlined in text' }
 GtDocumenterExamples >> exampleComUrl [
 	"I return a URL instance"
 	<gtExample>
 	^ 'https://example.com/index.html' asZnUrl
 ]
 
-{ #category : #'example - inlined in text' }
+{ #category : 'example - inlined in text' }
 GtDocumenterExamples >> exampleLoremIpsum300 [
 	<gtExample>
 	^ String loremIpsum: 300
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocumenterExamples >> examplesUtility [
 	^ GtDocumenterExamplesUtility
 ]
 
-{ #category : #figure }
+{ #category : 'figure' }
 GtDocumenterExamples >> figureContent [
 	<gtExample>
 	(GtResourcesUtility resourceAtPath: Path * 'feenkcom' / 'gtoolkit-inspector' / 'doc' / 'gt.png') 
 		binaryReadStreamDo: [ :stream | ^ stream contents ].
 ]
 
-{ #category : #figure }
+{ #category : 'figure' }
 GtDocumenterExamples >> figureFileName [
 	<gtExample>
 	^ 'gt-logo.png'
 
 ]
 
-{ #category : #figure }
+{ #category : 'figure' }
 GtDocumenterExamples >> figureFileReference [
 	<gtExample>
 	^ memorySystem addFileNamed: self figureFileName withContent: self figureContent
 ]
 
-{ #category : #figure }
+{ #category : 'figure' }
 GtDocumenterExamples >> figureFileUri [
 	<gtExample>
 	^ 'file://', self figureFileName
 ]
 
-{ #category : #'file reference document' }
+{ #category : 'file reference document' }
 GtDocumenterExamples >> fileReference [
 	<gtExample>
 	^ memorySystem addPillarFileWithContent: self contentWithMultipleMethods
 ]
 
-{ #category : #figure }
+{ #category : 'figure' }
 GtDocumenterExamples >> fileReferenceWithFigure [
 	<gtExample>
 	^ memorySystem addPillarFileWithContent: self contentWithFigure
 ]
 
-{ #category : #'input file' }
+{ #category : 'input file' }
 GtDocumenterExamples >> fileReferenceWithInputFileToFigure [
 	<gtExample>
 	^ memorySystem addPillarFileWithContent: self contentWithInputFileToFigure
 ]
 
-{ #category : #'input file' }
+{ #category : 'input file' }
 GtDocumenterExamples >> fileReferenceWithSelfReferencedInputFile [
 	<gtExample>
 	^ memorySystem addPillarFileWithContent: self contentWithSelfReferencedInputFile
 ]
 
-{ #category : #'example - parametrized one' }
+{ #category : 'example - parametrized one' }
 GtDocumenterExamples >> firstInputVariableName [
 	^ #aVariableOne
 ]
 
-{ #category : #'example - parametrized one' }
+{ #category : 'example - parametrized one' }
 GtDocumenterExamples >> firstInputVariableValue [
 	^ 11
 ]
 
-{ #category : #basic }
+{ #category : 'basic' }
 GtDocumenterExamples >> fooString [
 	<gtExample>
 	^ 'Exemplifing'
 ]
 
-{ #category : #basic }
+{ #category : 'basic' }
 GtDocumenterExamples >> fooText [
 	<gtExample>
 	^ self fooString asRopedText
 ]
 
-{ #category : #'iceberg file' }
+{ #category : 'iceberg file' }
 GtDocumenterExamples >> icebergFileName [
 	^ 'feenkcom/gtoolkit-documenter/doc/index.pillar'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocumenterExamples >> initialize [
 	"We do define a globaly unique repository name because 
 	${class:OmStoreFactory} uses full file name as an unique key."
@@ -1490,12 +1490,12 @@ GtDocumenterExamples >> initialize [
 	documents := OrderedCollection new.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocumenterExamples >> initializeUsingPhysicalDisk [
 	memorySystem initializeUsingPhysicalDisk
 ]
 
-{ #category : #'file reference document' }
+{ #category : 'file reference document' }
 GtDocumenterExamples >> modifyAndStoreToClassComment [
 	<gtExample>
 	| aDocument aPreviousComment |
@@ -1518,7 +1518,7 @@ GtDocumenterExamples >> modifyAndStoreToClassComment [
 	^ aDocument
 ]
 
-{ #category : #'file reference document' }
+{ #category : 'file reference document' }
 GtDocumenterExamples >> modifyAndStoreToFileReference [
 	<gtExample>
 	| aDocument |
@@ -1538,7 +1538,7 @@ GtDocumenterExamples >> modifyAndStoreToFileReference [
 	^ aDocument
 ]
 
-{ #category : #space }
+{ #category : 'space' }
 GtDocumenterExamples >> newSpace [
 	<gtExample>
 	| aSpace |
@@ -1550,7 +1550,7 @@ GtDocumenterExamples >> newSpace [
 	^ aSpace
 ]
 
-{ #category : #changes }
+{ #category : 'changes' }
 GtDocumenterExamples >> ombuEntry [
 	<gtExample>
 	| anEpLog |
@@ -1559,7 +1559,7 @@ GtDocumenterExamples >> ombuEntry [
 	^ anEpLog entries first
 ]
 
-{ #category : #'example - parametrized one' }
+{ #category : 'example - parametrized one' }
 GtDocumenterExamples >> parametrizedExampleSumNumber: aNumber with: anotherNumber [
 	<gtExample>
 	| aResult |
@@ -1568,7 +1568,7 @@ GtDocumenterExamples >> parametrizedExampleSumNumber: aNumber with: anotherNumbe
 	^ aResult
 ]
 
-{ #category : #'pillar parser' }
+{ #category : 'pillar parser' }
 GtDocumenterExamples >> parseContentWithTextSpaceClassAnnotationSpaceText [ 
 	<gtExample>
 	| aPillarDocument aText |
@@ -1579,7 +1579,7 @@ GtDocumenterExamples >> parseContentWithTextSpaceClassAnnotationSpaceText [
 	^ aPillarDocument
 ]
 
-{ #category : #'pillar parser' }
+{ #category : 'pillar parser' }
 GtDocumenterExamples >> parseRopedTextContent [
 	<gtExample>
 	"This one does not work yet. We need to improve Petit Parser to delegate string comparision."
@@ -1590,7 +1590,7 @@ GtDocumenterExamples >> parseRopedTextContent [
 	^ aPRDocument
 ]
 
-{ #category : #'pillar parser' }
+{ #category : 'pillar parser' }
 GtDocumenterExamples >> parseStringContent [
 	<gtExample>
 	| aPRDocument |
@@ -1600,19 +1600,19 @@ GtDocumenterExamples >> parseStringContent [
 	^ aPRDocument
 ]
 
-{ #category : #'pillar parser' }
+{ #category : 'pillar parser' }
 GtDocumenterExamples >> pillarParser [
 	<gtExample>
 	^ PRPillarParser new optimize.
 	
 ]
 
-{ #category : #basic }
+{ #category : 'basic' }
 GtDocumenterExamples >> previewHeightHudredValue [
 	^ 100
 ]
 
-{ #category : #space }
+{ #category : 'space' }
 GtDocumenterExamples >> putInSpace: aBlElement [
 	<gtExample>
 	| aSpace |
@@ -1624,72 +1624,72 @@ GtDocumenterExamples >> putInSpace: aBlElement [
 	^ aSpace
 ]
 
-{ #category : #class }
+{ #category : 'class' }
 GtDocumenterExamples >> referencedClass [
 	<gtExample>
 	^ self className
 ]
 
-{ #category : #'example - inlined in text' }
+{ #category : 'example - inlined in text' }
 GtDocumenterExamples >> referencedExampleComAccessPerHourMethod [
 	<gtExample>
 	^ self class >> #exampleComAccessPerHour
 ]
 
-{ #category : #'example - inlined in text' }
+{ #category : 'example - inlined in text' }
 GtDocumenterExamples >> referencedExampleComUniqueAccessPerHour [
 	<gtExample>
 	^ self class >> #exampleComUniqueAccessPerHour
 ]
 
-{ #category : #'example - inlined in text' }
+{ #category : 'example - inlined in text' }
 GtDocumenterExamples >> referencedExampleComUrlMethod [
 	"I return a compiled method that reference to an example"
 	<gtExample>
 	^ self class >> #exampleComUrl
 ]
 
-{ #category : #'example - inlined in text' }
+{ #category : 'example - inlined in text' }
 GtDocumenterExamples >> referencedExampleLoremIpsum300Method [
 	<gtExample>
 	^ self class >> #exampleLoremIpsum300
 ]
 
-{ #category : #'example - existing one' }
+{ #category : 'example - existing one' }
 GtDocumenterExamples >> referencedExampleMethod [
 	^ self class >> #documentWithMultipleMethods
 ]
 
-{ #category : #'method - existing one' }
+{ #category : 'method - existing one' }
 GtDocumenterExamples >> referencedMethod [
 	<gtExample>
 	^ self class >> #referencedMethod
 ]
 
-{ #category : #'example - parametrized one' }
+{ #category : 'example - parametrized one' }
 GtDocumenterExamples >> referencedMethodOfParametrizedExampleSumNumber [
 	^ self class >> #parametrizedExampleSumNumber:with:
 ]
 
-{ #category : #class }
+{ #category : 'class' }
 GtDocumenterExamples >> referencedNotExistingClass [
 	<gtExample>
 	^ self className, self fooString
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 GtDocumenterExamples >> referencedNotExistingPackageName [
 	<gtExample>
 	^ self fooString, self class package name
 ]
 
-{ #category : #changes }
+{ #category : 'changes' }
 GtDocumenterExamples >> referencesChangesFile [
 	<gtExample>
 	^ '01-changes.ombu'
 ]
 
-{ #category : #'empty document' }
+{ #category : 'empty document' }
 GtDocumenterExamples >> registeredDocument [
 	<gtExample>
 	| aDocument |
@@ -1709,7 +1709,7 @@ GtDocumenterExamples >> registeredDocument [
 	^ aDocument
 ]
 
-{ #category : #changes }
+{ #category : 'changes' }
 GtDocumenterExamples >> removeEpiceaEvent [
 	<gtExample>
 	| anEpicea anAnnouncements |
@@ -1724,7 +1724,7 @@ GtDocumenterExamples >> removeEpiceaEvent [
 	^ anEpicea
 ]
 
-{ #category : #stencils }
+{ #category : 'stencils' }
 GtDocumenterExamples >> resizablePreviewStencilOnClass [
 	<gtExample>
 	| aStencil aClass |
@@ -1738,7 +1738,7 @@ GtDocumenterExamples >> resizablePreviewStencilOnClass [
 	^ aStencil
 ]
 
-{ #category : #stencils }
+{ #category : 'stencils' }
 GtDocumenterExamples >> resizablePreviewStencilOnMethod [
 	<gtExample>
 	| aStencil aMethod |
@@ -1752,7 +1752,7 @@ GtDocumenterExamples >> resizablePreviewStencilOnMethod [
 	^ aStencil
 ]
 
-{ #category : #stencils }
+{ #category : 'stencils' }
 GtDocumenterExamples >> resizablePreviewStencilOnMethodAsElement [
 	<gtExample>
 	| aStencil anElement |
@@ -1762,7 +1762,7 @@ GtDocumenterExamples >> resizablePreviewStencilOnMethodAsElement [
 	^ anElement
 ]
 
-{ #category : #resourcer }
+{ #category : 'resourcer' }
 GtDocumenterExamples >> resourcerWithAllDepthInfiniteRecursion [
 	<gtExample>
 	| aDocument aCollectionOfFigures anInputFile |
@@ -1773,7 +1773,7 @@ GtDocumenterExamples >> resourcerWithAllDepthInfiniteRecursion [
 	^ aDocument
 ]
 
-{ #category : #resourcer }
+{ #category : 'resourcer' }
 GtDocumenterExamples >> resourcerWithClasses [
 	<gtExample>
 	| aDocumenter aClassResource aClass |
@@ -1794,7 +1794,7 @@ GtDocumenterExamples >> resourcerWithClasses [
 	^ aClassResource
 ]
 
-{ #category : #resourcer }
+{ #category : 'resourcer' }
 GtDocumenterExamples >> resourcerWithClassesMaxDepth [
 	<gtExample>
 	| aDocument aClassResource aClass |
@@ -1815,7 +1815,7 @@ GtDocumenterExamples >> resourcerWithClassesMaxDepth [
 	^ aClassResource
 ]
 
-{ #category : #resourcer }
+{ #category : 'resourcer' }
 GtDocumenterExamples >> resourcerWithFigure [
 	<gtExample>
 	| aDocument aCollectionOfFigures aFigure |
@@ -1831,7 +1831,7 @@ GtDocumenterExamples >> resourcerWithFigure [
 	^ aFigure
 ]
 
-{ #category : #resourcer }
+{ #category : 'resourcer' }
 GtDocumenterExamples >> resourcerWithIcebergFile [
 	<gtExample>
 	| aDocument aCollectionOfIcebergFiles anIcebergFile |
@@ -1847,7 +1847,7 @@ GtDocumenterExamples >> resourcerWithIcebergFile [
 	^ anIcebergFile
 ]
 
-{ #category : #resourcer }
+{ #category : 'resourcer' }
 GtDocumenterExamples >> resourcerWithInputFile [
 	<gtExample>
 	| aDocument aCollectionOfInputFiles |
@@ -1858,7 +1858,7 @@ GtDocumenterExamples >> resourcerWithInputFile [
 	^ aDocument
 ]
 
-{ #category : #resourcer }
+{ #category : 'resourcer' }
 GtDocumenterExamples >> resourcerWithInputFileToFigure [
 	<gtExample>
 	| aDocument aCollectionOfResources anInputFile anFigureFile |
@@ -1879,12 +1879,12 @@ GtDocumenterExamples >> resourcerWithInputFileToFigure [
 	^ aCollectionOfResources
 ]
 
-{ #category : #'example - with return variable name' }
+{ #category : 'example - with return variable name' }
 GtDocumenterExamples >> returnVariableName [
 	^ #aResult
 ]
 
-{ #category : #'non technical people' }
+{ #category : 'non technical people' }
 GtDocumenterExamples >> ropeHiddenBoldMarkupForNonTechnicalPeople [
 	<gtExample>
 	| aRope anElement aSwitchAttribute |
@@ -1907,23 +1907,23 @@ GtDocumenterExamples >> ropeHiddenBoldMarkupForNonTechnicalPeople [
 	^ aRope
 ]
 
-{ #category : #'example - parametrized one' }
+{ #category : 'example - parametrized one' }
 GtDocumenterExamples >> secondInputVariableName [
 	^ #aVariableTwo
 ]
 
-{ #category : #'example - parametrized one' }
+{ #category : 'example - parametrized one' }
 GtDocumenterExamples >> secondInputVariableValue [
 	^ 10
 ]
 
-{ #category : #'example - with return variable name' }
+{ #category : 'example - with return variable name' }
 GtDocumenterExamples >> secondReturnVariableName [
 	<gtExample>
 	^ #aResultTwo
 ]
 
-{ #category : #'empty document' }
+{ #category : 'empty document' }
 GtDocumenterExamples >> useDefaultStylerStrategy [
 	documents do: [ :eachDocument | eachDocument editor useDefaultStylerStrategy ]
 ]

@@ -1,24 +1,24 @@
 Class {
-	#name : #GtExplanationAnnotation,
-	#superclass : #PRAbstractAnnotation,
+	#name : 'GtExplanationAnnotation',
+	#superclass : 'PRAbstractAnnotation',
 	#traits : 'TBlDebug + TGtDocumentConstants',
 	#classTraits : 'TBlDebug classTrait + TGtDocumentConstants classTrait',
-	#category : #'GToolkit-Documenter-Annotations'
+	#category : 'GToolkit-Documenter-Annotations'
 }
 
-{ #category : #protected }
+{ #category : 'protected' }
 GtExplanationAnnotation class >> possibleParameters [
 	^ {
 		self constants nameParameterName.
 		}
 ]
 
-{ #category : #protected }
+{ #category : 'protected' }
 GtExplanationAnnotation class >> tag [
 	^ self constants explanationAnnotationName
 ]
 
-{ #category : #'api - style' }
+{ #category : 'api - style' }
 GtExplanationAnnotation >> nameParameterValue [
 	^ self utility 
 			valueOf: self constants nameParameterName
@@ -28,7 +28,7 @@ GtExplanationAnnotation >> nameParameterValue [
 			defaultValue: [ nil ]
 ]
 
-{ #category : #'api - style' }
+{ #category : 'api - style' }
 GtExplanationAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	(self gtNodeStyler: aBlRope) 
@@ -36,7 +36,7 @@ GtExplanationAnnotation >> styleTextWithMarkup: aBlRope [
 		explanation
 ]
 
-{ #category : #'api - style' }
+{ #category : 'api - style' }
 GtExplanationAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.

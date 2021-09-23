@@ -1,13 +1,13 @@
 Class {
-	#name : #GtCodeblockActionVisitor,
-	#superclass : #GtDocumentVisitor,
+	#name : 'GtCodeblockActionVisitor',
+	#superclass : 'GtDocumentVisitor',
 	#instVars : [
 		'action'
 	],
-	#category : #'GToolkit-Documenter-Code Snippet'
+	#category : 'GToolkit-Documenter-Code Snippet'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockActionVisitor >> action [
 	<return: #GtCodeblockAction>
 	self 
@@ -16,7 +16,7 @@ GtCodeblockActionVisitor >> action [
 	^ action
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockActionVisitor >> action: aGtCodeblockAction [
 	self 
 		assert: [ aGtCodeblockAction isNotNil ] 
@@ -24,14 +24,14 @@ GtCodeblockActionVisitor >> action: aGtCodeblockAction [
 	action := aGtCodeblockAction
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtCodeblockActionVisitor >> performAction: aCodeBlock [
 	self action
 		node: aCodeBlock;
 		value
 ]
 
-{ #category : #'visiting-document' }
+{ #category : 'visiting-document' }
 GtCodeblockActionVisitor >> visitCodeblock: aCodeBlock [
 	super visitCodeblock: aCodeBlock.
 	self performAction: aCodeBlock.

@@ -1,20 +1,20 @@
 Class {
-	#name : #GtEpiceaDiffAttribute,
-	#superclass : #BrTextAdornmentAttribute,
+	#name : 'GtEpiceaDiffAttribute',
+	#superclass : 'BrTextAdornmentAttribute',
 	#traits : 'TGtDocumentConstants',
 	#classTraits : 'TGtDocumentConstants classTrait',
 	#instVars : [
 		'text'
 	],
-	#category : #'GToolkit-Documenter-Epicea'
+	#category : 'GToolkit-Documenter-Epicea'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpiceaDiffAttribute class >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpiceaDiffAttribute >> affect: aTBrTextEditorTextualPiece in: anEditorElement [
 	^ BrLabel new
 		text: self text;
@@ -23,42 +23,42 @@ GtEpiceaDiffAttribute >> affect: aTBrTextEditorTextualPiece in: anEditorElement 
 		padding: (BlInsets all: 3)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtEpiceaDiffAttribute >> asInsert [
 	self text: self constants insertLineIdentificator asRopedText.
 	self text foreground: self constants insertLineColor.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtEpiceaDiffAttribute >> asMatch [
 	self text: self constants matchLineIdentificator asRopedText glamorousCodeFontAndSize.
 	self text foreground: self constants matchLineColor.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtEpiceaDiffAttribute >> asRemove [
 	self text: self constants removeLineIdentificator asRopedText glamorousCodeFontAndSize.
 	self text foreground: self constants removeLineColor.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpiceaDiffAttribute >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtEpiceaDiffAttribute >> initialize [
 	super initialize.
 	self asMatch.
 	self beAppend.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpiceaDiffAttribute >> text [
 	^ text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpiceaDiffAttribute >> text: anObject [
 	text := anObject
 ]

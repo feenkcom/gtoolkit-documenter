@@ -1,6 +1,6 @@
 Class {
-	#name : #GtCodeblockAction,
-	#superclass : #Object,
+	#name : 'GtCodeblockAction',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -10,16 +10,16 @@ Class {
 		'document',
 		'conditions'
 	],
-	#category : #'GToolkit-Documenter-Code Snippet'
+	#category : 'GToolkit-Documenter-Code Snippet'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtCodeblockAction >> allConditionsSatisfied [
 	<return: #Boolean>
 	^ self conditions allSatisfy: [ :eachCondition | eachCondition cull: self ]
 ]
 
-{ #category : #'accessing - pharo code' }
+{ #category : 'accessing - pharo code' }
 GtCodeblockAction >> assertSourceCode: aString [
 	self 
 		assert: [ aString isNotNil ]
@@ -29,25 +29,25 @@ GtCodeblockAction >> assertSourceCode: aString [
 		description: [ 'Pharo source code must be a string' ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockAction >> condition: aBlock [
 	"Add condition that must be satisfied to evaluate a code snippet"
 	conditions addLast: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockAction >> conditions [
 	"Return conditions that must be satisfied to evaluate a code snippet"
 	<return: #OrderedCollection>
 	^ conditions
 ]
 
-{ #category : #'accessing - cursor' }
+{ #category : 'accessing - cursor' }
 GtCodeblockAction >> cursorPositionDo: aBlock [
 	self editor cursors do: [ :eachCursor | ^ aBlock value: eachCursor position ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockAction >> document [
 	<return: #GtDocumenter>
 	self
@@ -56,7 +56,7 @@ GtCodeblockAction >> document [
 	^ document
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockAction >> document: aGtDocument [
 	self
 		assert: [ document isNil ] 
@@ -67,24 +67,24 @@ GtCodeblockAction >> document: aGtDocument [
 	document := aGtDocument
 ]
 
-{ #category : #'accessing - document' }
+{ #category : 'accessing - document' }
 GtCodeblockAction >> editor [
 	<return: #BrTextEditor>
 	^ self document editor
 ]
 
-{ #category : #'accessing - document' }
+{ #category : 'accessing - document' }
 GtCodeblockAction >> evaluationReceiver [
 	^ self document evaluationReceiver
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 GtCodeblockAction >> execute [
 	"Perform a default action"
 	self subclassResponsibility
 ]
 
-{ #category : #'accessing - pharo code' }
+{ #category : 'accessing - pharo code' }
 GtCodeblockAction >> extractBehavior [
 	<return: #Behavior or: nil>
 	| aVariableNode aVariableName aBehavior |
@@ -98,7 +98,7 @@ GtCodeblockAction >> extractBehavior [
 	^ aBehavior
 ]
 
-{ #category : #'accessing - pharo code' }
+{ #category : 'accessing - pharo code' }
 GtCodeblockAction >> extractSelectorFromString: aString [
 	"Return selector name or nil"
 	<return: #Symbol or: nil>
@@ -121,7 +121,7 @@ GtCodeblockAction >> extractSelectorFromString: aString [
 	^ nil
 ]
 
-{ #category : #'accessing - pharo code' }
+{ #category : 'accessing - pharo code' }
 GtCodeblockAction >> extractSelectorSymbol [
 	<return: #Symbol or: nil>
 	| aSelectorSymbol |
@@ -132,7 +132,7 @@ GtCodeblockAction >> extractSelectorSymbol [
 	^ aSelectorSymbol
 ]
 
-{ #category : #'accessing - pharo code' }
+{ #category : 'accessing - pharo code' }
 GtCodeblockAction >> extractVariableNodeFromString: aString [
 	"Return a Pharo source code AST node or nil"
 	<return: #GtPharoProgramNode or: nil>
@@ -149,7 +149,7 @@ GtCodeblockAction >> extractVariableNodeFromString: aString [
 	^ nil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtCodeblockAction >> hasNodeBody [
 	"Return true if the given codeblock has a text body (code snippet to evaluate)"
 	| aString |
@@ -157,7 +157,7 @@ GtCodeblockAction >> hasNodeBody [
 	^ aString isNotNil and: [ aString trimBoth isNotEmpty ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtCodeblockAction >> initialize [
 	super initialize.
 	document := nil.
@@ -166,14 +166,14 @@ GtCodeblockAction >> initialize [
 	conditions := OrderedCollection new: 1.
 ]
 
-{ #category : #'accessing - cursor' }
+{ #category : 'accessing - cursor' }
 GtCodeblockAction >> isCursorPlacedInTheBody [
 	"Return true if a editor cursor is placed inside of the node body (code snippet)"
 	<return: #Boolean>
 	^ self nodeBodyCursor isNotNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockAction >> node [
 	<return: #PRDocumentItem>
 	self
@@ -182,7 +182,7 @@ GtCodeblockAction >> node [
 	^ node
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockAction >> node: aPRDocumentItem [
 	self
 		assert: [ aPRDocumentItem isNotNil ] 
@@ -190,7 +190,7 @@ GtCodeblockAction >> node: aPRDocumentItem [
 	node := aPRDocumentItem
 ]
 
-{ #category : #'accessing - pharo code' }
+{ #category : 'accessing - pharo code' }
 GtCodeblockAction >> nodeAtCursor [
 	<return: #GtPharoProgramNode or: nil>
 	self cursorPositionDo: [ :aPosition |
@@ -206,7 +206,7 @@ GtCodeblockAction >> nodeAtCursor [
 	^ nil
 ]
 
-{ #category : #'accessing - node' }
+{ #category : 'accessing - node' }
 GtCodeblockAction >> nodeBody [
 	<return: #GtCodeblockSelection>
 	"Return codeblocks's text body (code snippet)"
@@ -217,7 +217,7 @@ GtCodeblockAction >> nodeBody [
 		interval: (1 to: self stopNodeBody - aStart - 1)
 ]
 
-{ #category : #'accessing - cursor' }
+{ #category : 'accessing - cursor' }
 GtCodeblockAction >> nodeBodyCursor [
 	"Return node cursor position if inside of the node body (code snippet) or nil"
 	<return: #BrTextEditorSingleCursor or: nil>
@@ -231,7 +231,7 @@ GtCodeblockAction >> nodeBodyCursor [
 		ifNone: [ nil ]
 ]
 
-{ #category : #'accessing - selection' }
+{ #category : 'accessing - selection' }
 GtCodeblockAction >> nodeBodySelection [
 	"Return node body (code snippet) selection or nil"
 	<return: #GtCodeblockSelection or: nil>
@@ -248,7 +248,7 @@ GtCodeblockAction >> nodeBodySelection [
 	^ nil
 ]
 
-{ #category : #'accessing - node' }
+{ #category : 'accessing - node' }
 GtCodeblockAction >> nodeBodyString [
 	<return: #String>
 	"Return codeblocks's text body (code snippet)"
@@ -260,19 +260,19 @@ GtCodeblockAction >> nodeBodyString [
 	^ aString
 ]
 
-{ #category : #'accessing - pharo code' }
+{ #category : 'accessing - pharo code' }
 GtCodeblockAction >> parserStartingState [
 	^ GtPharoParser startingStateForMethodSequence
 ]
 
-{ #category : #'accessing - selection' }
+{ #category : 'accessing - selection' }
 GtCodeblockAction >> selectedCode [
 	"Return explicitly set selected code snippet part"
 	<return: #GtCodeblockSelection or: nil>
 	^ selectedCode
 ]
 
-{ #category : #'accessing - selection' }
+{ #category : 'accessing - selection' }
 GtCodeblockAction >> selectedCode: aGtCodeblockSelection [
 	"Explicitly set selected code snippet part"
 	self 
@@ -284,7 +284,7 @@ GtCodeblockAction >> selectedCode: aGtCodeblockSelection [
 	selectedCode := aGtCodeblockSelection
 ]
 
-{ #category : #'accessing - selection' }
+{ #category : 'accessing - selection' }
 GtCodeblockAction >> selectedTextInterval [
 	"Return selected text interval"
 	<return: #Interval or: nil>
@@ -293,54 +293,54 @@ GtCodeblockAction >> selectedTextInterval [
 	^ nil
 ]
 
-{ #category : #'accessing - selection' }
+{ #category : 'accessing - selection' }
 GtCodeblockAction >> selectionOrNodeBody [
 	<return: #GtCodeblockSelection>
 	^ self selectedCode ifNil: [ self nodeBody ]
 ]
 
-{ #category : #'accessing - pharo code' }
+{ #category : 'accessing - pharo code' }
 GtCodeblockAction >> selectorAtCursor [
 	<return: #Symbol or: nil>
 	^ self symbolFor: self nodeAtCursor
 ]
 
-{ #category : #'accessing - pharo code' }
+{ #category : 'accessing - pharo code' }
 GtCodeblockAction >> sourceAst [
 	^ GtPharoParser 
 		parseWithErrors: self nodeBodyString
 		startingAt: self parserStartingState
 ]
 
-{ #category : #'accessing - node' }
+{ #category : 'accessing - node' }
 GtCodeblockAction >> start [
 	"Return starting position of a node"
 	<return: #Integer>
 	^ self node start
 ]
 
-{ #category : #'accessing - node' }
+{ #category : 'accessing - node' }
 GtCodeblockAction >> startNodeBody [
 	"Return node's body starting position"
 	<return: #Integer>
 	^ self node scriptStartPositionInText: self text
 ]
 
-{ #category : #'accessing - node' }
+{ #category : 'accessing - node' }
 GtCodeblockAction >> stop [
 	"Return ending position of a node"
 	<return: #Integer>
 	^ self node stop
 ]
 
-{ #category : #'accessing - node' }
+{ #category : 'accessing - node' }
 GtCodeblockAction >> stopNodeBody [
 	"Return node's body stop position"
 	<return: #Integer>
 	^ self node scriptStopPositionInText: self text
 ]
 
-{ #category : #'accessing - pharo code' }
+{ #category : 'accessing - pharo code' }
 GtCodeblockAction >> symbolFor: aProgramNode [
 	<return: #Symbol or: nil>
 	| aCurrentNode |
@@ -357,7 +357,7 @@ GtCodeblockAction >> symbolFor: aProgramNode [
 	^ nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockAction >> text [
 	<return: #BlRope>
 	self
@@ -366,7 +366,7 @@ GtCodeblockAction >> text [
 	^ text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockAction >> text: aBlRope [
 	self
 		assert: [ text isNil ] 
@@ -377,12 +377,12 @@ GtCodeblockAction >> text: aBlRope [
 	text := aBlRope
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 GtCodeblockAction >> value [
 	self execute
 ]
 
-{ #category : #'accessing - pharo code' }
+{ #category : 'accessing - pharo code' }
 GtCodeblockAction >> variableNodeAtCursor [
 	<return: #GtPharoVariableNode or: nil>
 	self cursorPositionDo: [ :aPosition |

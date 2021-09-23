@@ -1,25 +1,25 @@
 Class {
-	#name : #GtDocumentElement,
-	#superclass : #BlElement,
+	#name : 'GtDocumentElement',
+	#superclass : 'BlElement',
 	#traits : 'TBrLayoutResizable',
 	#classTraits : 'TBrLayoutResizable classTrait',
 	#instVars : [
 		'document'
 	],
-	#category : #'GToolkit-Documenter-! Core'
+	#category : 'GToolkit-Documenter-! Core'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtDocumentElement class >> isDeprecated [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocumentElement >> document [
 	^ document
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocumentElement >> document: aGtDocument [
 	| anEditorElement |
 
@@ -49,7 +49,7 @@ GtDocumentElement >> document: aGtDocument [
 		inherit: anEditorElement)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocumentElement >> initialize [
 	super initialize.
 	

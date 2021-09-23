@@ -1,10 +1,10 @@
 Class {
-	#name : #FullWidthAlignmentStrategy,
-	#superclass : #AlignmentStrategy,
-	#category : #'GToolkit-Documenter-Strategies'
+	#name : 'FullWidthAlignmentStrategy',
+	#superclass : 'AlignmentStrategy',
+	#category : 'GToolkit-Documenter-Strategies'
 }
 
-{ #category : #naming }
+{ #category : 'naming' }
 FullWidthAlignmentStrategy class >> strategyName [
 	^ 'fullWidth'
 ]

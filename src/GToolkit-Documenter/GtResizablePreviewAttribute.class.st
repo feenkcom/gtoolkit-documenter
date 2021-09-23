@@ -1,10 +1,10 @@
 Class {
-	#name : #GtResizablePreviewAttribute,
-	#superclass : #GtPreviewAttribute,
-	#category : #'GToolkit-Documenter-Text - Attributes'
+	#name : 'GtResizablePreviewAttribute',
+	#superclass : 'GtPreviewAttribute',
+	#category : 'GToolkit-Documenter-Text - Attributes'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtResizablePreviewAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 	^ GtResizablePreviewStencil new
 		result: self result;

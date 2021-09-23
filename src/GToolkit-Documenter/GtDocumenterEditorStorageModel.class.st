@@ -4,21 +4,21 @@ I am used by ${class:GtDocumenterEditor}$.
 
 "
 Class {
-	#name : #GtDocumenterEditorStorageModel,
-	#superclass : #BrWidgetModel,
+	#name : 'GtDocumenterEditorStorageModel',
+	#superclass : 'BrWidgetModel',
 	#instVars : [
 		'storage'
 	],
-	#category : #'GToolkit-Documenter-! Editor - Model'
+	#category : 'GToolkit-Documenter-! Editor - Model'
 }
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditorStorageModel >> basename [
 	<return: #String>
 	^ self storage basename
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditorStorageModel >> classComment: aClass [ 
 	self 
 		assert: [ aClass notNil ]
@@ -26,25 +26,25 @@ GtDocumenterEditorStorageModel >> classComment: aClass [
 	self storage: (GtStorageStrategy classComment: aClass)
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 GtDocumenterEditorStorageModel >> defaultStorage [
 	^ GtStorageStrategy null
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditorStorageModel >> evaluationReceiver [
 	"Return an object that is used as a receiver (self) in a codeblock (code snippet) evalution"
 	<return: #Object>
 	^ self storage evaluationReceiver
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditorStorageModel >> exists [
 	<return: #Boolean>
 	^ self storage exists
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditorStorageModel >> fileReference: aFileReference [ 
 	self 
 		assert: [ aFileReference notNil ]
@@ -52,13 +52,13 @@ GtDocumenterEditorStorageModel >> fileReference: aFileReference [
 	self storage: (GtStorageStrategy fileReference: aFileReference)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocumenterEditorStorageModel >> initialize [
 	super initialize.
 	storage := self defaultStorage.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocumenterEditorStorageModel >> initializeListeners [
 	super initializeListeners.
 	
@@ -67,43 +67,43 @@ GtDocumenterEditorStorageModel >> initializeListeners [
 		reply: [ :aResponse | aResponse storage: self storage ].
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditorStorageModel >> name [
 	<return: #String>
 	^ self storage name
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 GtDocumenterEditorStorageModel >> notifyStorageChanged [
 	self dispatchEvent: (GtDocumenterStorageChanged new 
 		storage: self storage)
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditorStorageModel >> read [
 	self widgetDo: [ :aDocumenter |
 		self storage read: aDocumenter ]
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditorStorageModel >> rootDirectory [
 	"Return root directory to access external data, e.g., images, change files"
 	<return: #FileReference>
 	^ self storage rootDirectory
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditorStorageModel >> save [
 	self widgetDo: [ :aDocumenter | self storage save: aDocumenter ]
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditorStorageModel >> storage [
 	<return: #GtStorageStrategy>
 	^ storage
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenterEditorStorageModel >> storage: aGtStorageStrategy [
 	self 
 		assert: [ aGtStorageStrategy isNotNil ] 

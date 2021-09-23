@@ -1,13 +1,13 @@
 Class {
-	#name : #GtPhlowDocumentView,
-	#superclass : #GtPhlowViewDecorator,
+	#name : 'GtPhlowDocumentView',
+	#superclass : 'GtPhlowViewDecorator',
 	#instVars : [
 		'textBuilder'
 	],
-	#category : #'GToolkit-Documenter-Phlow'
+	#category : 'GToolkit-Documenter-Phlow'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 GtPhlowDocumentView >> asElementDo: aBlock [
 	| anElement aText |
 	anElement := GtDocumenter new.
@@ -16,18 +16,18 @@ GtPhlowDocumentView >> asElementDo: aBlock [
 	^ aBlock value: anElement
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtPhlowDocumentView >> initialize [
 	super initialize.
 	textBuilder := [ :anElement :anDocument | '' ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtPhlowDocumentView >> text: aValuable [
 	textBuilder := aValuable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtPhlowDocumentView >> textBuilder [
 	^ textBuilder
 ]

@@ -2,8 +2,8 @@
 This was deprecated. See ${class:name=GtDocumenter}$ instead.
 "
 Class {
-	#name : #GtDocument,
-	#superclass : #Object,
+	#name : 'GtDocument',
+	#superclass : 'Object',
 	#traits : 'TBlDebug + TGtAnnouncer + TGtDocumentConstants',
 	#classTraits : 'TBlDebug classTrait + TGtAnnouncer classTrait + TGtDocumentConstants classTrait',
 	#instVars : [
@@ -17,43 +17,43 @@ Class {
 		'pillarParser',
 		'addOns'
 	],
-	#category : #'GToolkit-Documenter-! Core'
+	#category : 'GToolkit-Documenter-! Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocument class >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 GtDocument class >> forClass: aClass [
 	^ self new classComment: aClass; read
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 GtDocument class >> forFile: aFileReference [
 	^ self new fileReference: aFileReference; read
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtDocument class >> isDeprecated [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocument >> addOns [
 	<return: #GtTextualCoderAddOns>
 	^ addOns
 ]
 
-{ #category : #announcer }
+{ #category : 'announcer' }
 GtDocument >> announcer [
 	<return: #Announcer>
 	self subscribeToSystem.
 	^ announcer
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 GtDocument >> asElement [
 	<return: #BlElement>
 	| aDocumentElement aToolbar |
@@ -79,7 +79,7 @@ GtDocument >> asElement [
 	^ aDocumentElement
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 GtDocument >> asElementWithoutSaveAction [
 	<return: #BlElement>
 	| aDocumentElement |
@@ -94,20 +94,20 @@ GtDocument >> asElementWithoutSaveAction [
 	^ aDocumentElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocument >> ast [
 	"Message #isPetit2Failure helps to distinguish between a parsed document or a parser error"
 	<return: #PRDocument or: #PP2Failure>
 	^ self parse
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocument >> basename [
 	<return: #String>
 	^ self storage basename
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtDocument >> browseClass: anEditorElement [
 	| aPRDocumentOrError |
 	aPRDocumentOrError := self ast. 
@@ -120,7 +120,7 @@ GtDocument >> browseClass: anEditorElement [
 				element: anEditorElement))
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtDocument >> browseImplementors: anEditorElement [
 	| aPRDocumentOrError |
 	aPRDocumentOrError := self ast. 
@@ -133,7 +133,7 @@ GtDocument >> browseImplementors: anEditorElement [
 				element: anEditorElement))
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtDocument >> browseReferences: anEditorElement [
 	| aPRDocumentOrError |
 	aPRDocumentOrError := self ast. 
@@ -146,7 +146,7 @@ GtDocument >> browseReferences: anEditorElement [
 				element: anEditorElement))
 ]
 
-{ #category : #cache }
+{ #category : 'cache' }
 GtDocument >> cache [
 	"It is not recommended to use this method outside of this object.
 	You should use #cachAt:... relevant methods."
@@ -154,17 +154,17 @@ GtDocument >> cache [
 	^ cache
 ]
 
-{ #category : #cache }
+{ #category : 'cache' }
 GtDocument >> cacheAt: aKey ifPresent: aPresentBlock ifAbsent: anAbsentBlock [
 	^ cache at: aKey ifPresent: aPresentBlock ifAbsent: anAbsentBlock
 ]
 
-{ #category : #cache }
+{ #category : 'cache' }
 GtDocument >> cacheAt: aKey ifPresent: aPresentBlock ifAbsentPut: anAbsentBlock [
 	^ cache at: aKey ifPresent: aPresentBlock ifAbsentPut: anAbsentBlock
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocument >> classComment: aClass [ 
 	self 
 		assert: [ aClass notNil ]
@@ -172,12 +172,12 @@ GtDocument >> classComment: aClass [
 	self strategy: (GtStorageStrategy classComment: aClass)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocument >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocument >> defaultStyler [
 	^ GtDocumenterStyler new 
 		document: self; 
@@ -185,17 +185,17 @@ GtDocument >> defaultStyler [
 		hideMarkup
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocument >> defaultText [
 	^ ''
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocument >> displayMarkup [
 	self showMarkup
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtDocument >> doItAndGoSelectionOrAll: anEditorElement [
 	| aPRDocumentOrError |
 	aPRDocumentOrError := self ast. 
@@ -207,7 +207,7 @@ GtDocument >> doItAndGoSelectionOrAll: anEditorElement [
 			condition: [ :anEvaluator | anEvaluator isCursorPlacedInTheBody ]))
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtDocument >> doItSelectionOrAll: anEditorElement [
 	| aPRDocumentOrError |
 	aPRDocumentOrError := self ast. 
@@ -220,31 +220,31 @@ GtDocument >> doItSelectionOrAll: anEditorElement [
 			condition: [ :anEvaluator | anEvaluator isCursorPlacedInTheBody ]))
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocument >> editor [
 	<return: #BrTextEditor>
 	^ editor
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GtDocument >> ensureStyleTextProcess [
 	styleTextProcess start
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocument >> evaluationReceiver [
 	"Return an object that is used as a receiver (self) in a codeblock (code snippet) evalution"
 	<return: #Object>
 	^ self storage evaluationReceiver
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtDocument >> exists [
 	<return: #Boolean>
 	^ self storage exists
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocument >> fileReference: aFileReference [ 
 	self 
 		assert: [ aFileReference notNil ]
@@ -252,7 +252,7 @@ GtDocument >> fileReference: aFileReference [
 	self strategy: (GtStorageStrategy fileReference: aFileReference)
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GtDocument >> fileReferencesFrom: aCollectionOfStringsOrPaths referencedIn: aRootDirectory [
 	<return: #Set of: #FileReference>
 	^ aCollectionOfStringsOrPaths 
@@ -264,7 +264,7 @@ GtDocument >> fileReferencesFrom: aCollectionOfStringsOrPaths referencedIn: aRoo
 		thenSelect: #notNil
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 GtDocument >> gtResourcesFor: aView [
 	<gtView>
 	^ aView mondrian
@@ -299,7 +299,7 @@ GtDocument >> gtResourcesFor: aView [
 				levelDistance: 50; nodeDistance: 10) ] 
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 GtDocument >> gtSaveActionFor: anAction [
 	<gtAction>
 	^ anAction button
@@ -310,7 +310,7 @@ GtDocument >> gtSaveActionFor: anAction [
 		action: [ self save ]
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 GtDocument >> gtShowMarkupActionFor: anAction [
 	<gtAction>
 	^ anAction toggle
@@ -322,7 +322,7 @@ GtDocument >> gtShowMarkupActionFor: anAction [
 		deactivatedAction: [ self hideMarkup ]
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 GtDocument >> gtTextFor: aView [
 	<gtView>
 	self editor ifNil: [ ^ aView empty ].
@@ -335,24 +335,24 @@ GtDocument >> gtTextFor: aView [
 			action: [ :aWidget | aWidget phlow spawnObject: self parse ]
 ]
 
-{ #category : #'announcement handling' }
+{ #category : 'announcement handling' }
 GtDocument >> handleSystemChangeAnnouncement: aSystemAnnouncement [
 	announcer announce: aSystemAnnouncement
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtDocument >> hasDocumentSubscriptions [
 	^ announcer numberOfSubscriptions isZero not
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocument >> hideMarkup [
 	self editor styler mode isReading ifTrue: [ ^ self ].
 	self editor styler hideMarkup.
 	self styleTextRequest
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocument >> initialize [
 	super initialize.
 	styleTextProcess := GtStyleTextProcess new document: self.
@@ -369,13 +369,13 @@ GtDocument >> initialize [
 	self initializeAddOns.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocument >> initializeAddOns [
 	addOns := GtTextualCoderAddOns new.
 	self initializeShortcuts.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocument >> initializeShortcuts [
 
 	addOns
@@ -396,7 +396,7 @@ GtDocument >> initializeShortcuts [
 			action: [ :anEvent | self doItAndGoSelectionOrAll: anEvent currentTarget ])
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GtDocument >> installCompleterForEditorElement: anEditorElement [
 	| aCompletionStrategy aCompletionController |
 	aCompletionStrategy := GtDocumentCompletionStrategy new.
@@ -406,17 +406,17 @@ GtDocument >> installCompleterForEditorElement: anEditorElement [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtDocument >> isReadingMode [
 	^ self editor styler mode isReading
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtDocument >> isSubscribedToSystem [
 	^ isSubscribedToSystem
 ]
 
-{ #category : #subscriptions }
+{ #category : 'subscriptions' }
 GtDocument >> mayRequestDocumentUpdate [
 	self isSubscribedToSystem ifFalse: [ ^ self ].
 	self hasDocumentSubscriptions ifFalse: [ ^ self ].
@@ -424,37 +424,37 @@ GtDocument >> mayRequestDocumentUpdate [
 	self announcer announce: (GtDocumentUpdateRequestedAnnouncement new document: self)
 ]
 
-{ #category : #subscriptions }
+{ #category : 'subscriptions' }
 GtDocument >> maySubscribeToSystem [
 	self hasDocumentSubscriptions ifFalse: [ ^ self ].
 	self subscribeToSystem
 ]
 
-{ #category : #subscriptions }
+{ #category : 'subscriptions' }
 GtDocument >> mayUnsubscribeFromSystem [
 	self hasDocumentSubscriptions ifTrue: [ ^ self ].
 	self unsubscribeFromSystem
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocument >> name [
 	<return: #String>
 	^ self storage name
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocument >> noInteractions [
 	self editor styler mode isNoInteractions ifTrue: [ ^ self ].
 	self editor styler noInteractions.
 	self styleTextRequest
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocument >> normalFontSize [
 	^ 12
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtDocument >> parse [
 	"Message #isPetit2Failure helps to distinguish between a parsed document or a parser error"
 	<return: #PRDocument or: #PP2Failure>
@@ -462,56 +462,56 @@ GtDocument >> parse [
 		self pillarParser parse: self string ].
 ]
 
-{ #category : #utility }
+{ #category : 'utility' }
 GtDocument >> pillarParser [
 	<return: #PRPillarParser>
 
 	^ pillarParser ifNil: [ pillarParser := GtDocumenterParser new ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GtDocument >> privateStyleText [
 	"This method is used only for examples.
 	Do not use it in other places."
 	self editor styleText
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtDocument >> read [
 	storageStrategy read: self
 ]
 
-{ #category : #utility }
+{ #category : 'utility' }
 GtDocument >> resourcer [
 	^ GtResourceVisitor new document: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocument >> rootDirectory [
 	"Return root directory to access external data, e.g., images, change files"
 	<return: #FileReference>
 	^ self storage rootDirectory
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtDocument >> save [
 	storageStrategy save: self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocument >> showMarkup [
 	self editor styler mode isEditing ifTrue: [ ^ self ].
 	self editor styler displayMarkup.
 	self styleTextRequest.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocument >> storage [
 	<return: #GtStorageStrategy>
 	^ storageStrategy
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtDocument >> store [
 	self
 		deprecated: 'Please use save method instead.'
@@ -521,7 +521,7 @@ GtDocument >> store [
 	self save
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocument >> strategy: aGt2StorageStrategy [ 
 	self 
 		assert: [ aGt2StorageStrategy notNil ]
@@ -529,22 +529,22 @@ GtDocument >> strategy: aGt2StorageStrategy [
 	storageStrategy := aGt2StorageStrategy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocument >> string [
 	<return: #String>
 	^ self text asString
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtDocument >> styleTextRequest [
 	styleTextProcess request.
 ]
 
-{ #category : #subscriptions }
+{ #category : 'subscriptions' }
 GtDocument >> subscribeToEditorChanges [
 ]
 
-{ #category : #subscriptions }
+{ #category : 'subscriptions' }
 GtDocument >> subscribeToSystem [
 	self isSubscribedToSystem
 		ifTrue: [ ^ self ].
@@ -555,18 +555,18 @@ GtDocument >> subscribeToSystem [
 	isSubscribedToSystem := true
 ]
 
-{ #category : #announcer }
+{ #category : 'announcer' }
 GtDocument >> systemAnnouncer [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocument >> text [
 	<return: #BlText>
 	^ self editor text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocument >> text: aStringOrRope [
 	self 
 		assert: [ aStringOrRope notNil ] 
@@ -574,7 +574,7 @@ GtDocument >> text: aStringOrRope [
 	editor text: aStringOrRope asRopedText.
 ]
 
-{ #category : #'announcer - subscription' }
+{ #category : 'announcer - subscription' }
 GtDocument >> unsubscribe: anObject [
 	"Unsubscribe all subscriptions of anObject from the receiver"
 	| theRemovedSubscriptions |
@@ -583,26 +583,26 @@ GtDocument >> unsubscribe: anObject [
 	^ theRemovedSubscriptions
 ]
 
-{ #category : #subscriptions }
+{ #category : 'subscriptions' }
 GtDocument >> unsubscribeFromSystem [
 	self isSubscribedToSystem ifFalse: [ ^ self ].
 	SystemAnnouncer uniqueInstance unsubscribe: self.
 	isSubscribedToSystem := false.
 ]
 
-{ #category : #subscriptions }
+{ #category : 'subscriptions' }
 GtDocument >> updateAndSubscribeToSystem [
 	self 
 		maySubscribeToSystem;
 		mayRequestDocumentUpdate
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocument >> variableBindings [
 	^ variableBindings
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocument >> variableBindings: anObject [
 	variableBindings := anObject
 ]

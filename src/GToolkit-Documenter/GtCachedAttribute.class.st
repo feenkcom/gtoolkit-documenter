@@ -1,20 +1,20 @@
 Class {
-	#name : #GtCachedAttribute,
-	#superclass : #BrTextAdornmentAttribute,
+	#name : 'GtCachedAttribute',
+	#superclass : 'BrTextAdornmentAttribute',
 	#instVars : [
 		'attribute',
 		'onCachingAction',
 		'cachedElement'
 	],
-	#category : #'GToolkit-Documenter-Text - Attributes'
+	#category : 'GToolkit-Documenter-Text - Attributes'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtCachedAttribute class >> isDeprecated [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCachedAttribute >> affect: aTBrTextEditorTextualPiece in: anEditorElement [
 	^ self hasCache 
 			ifTrue: [ self cache removeFromParent ]
@@ -24,45 +24,45 @@ GtCachedAttribute >> affect: aTBrTextEditorTextualPiece in: anEditorElement [
 				anElement ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCachedAttribute >> attribute [
 	^ attribute
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCachedAttribute >> attribute: anObject [
 	attribute := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCachedAttribute >> beAppend [
 	super beAppend.
 	self attribute beAppend.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCachedAttribute >> beReplace [
 	super beReplace.
 	self attribute beReplace.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCachedAttribute >> cache [
 	<return: #BlElement or: nil>
 	^ cachedElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCachedAttribute >> cache: aBlElement [
 	cachedElement := aBlElement.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtCachedAttribute >> hasCache [
 	^ self cache notNil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtCachedAttribute >> initialize [
 	super initialize.
 	attribute := GtPreviewAttribute new.
@@ -70,7 +70,7 @@ GtCachedAttribute >> initialize [
 	onCachingAction := [ :aCachedElement :theAttribute | "do nothing" ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCachedAttribute >> onCachingDo: aBlock [
 	self 
 		assert: [ aBlock notNil ]
@@ -78,23 +78,23 @@ GtCachedAttribute >> onCachingDo: aBlock [
 	onCachingAction := aBlock
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 GtCachedAttribute >> printOn: aStream [
 	aStream nextPutAll: 'cached '.
 	self attribute printOn: aStream
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtCachedAttribute >> shouldAppend [
 	^ self attribute shouldAppend
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtCachedAttribute >> shouldReplace [
 	^ self attribute shouldReplace
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtCachedAttribute >> storeOn: aStream [
 	super storeOn: aStream.
 	
@@ -105,7 +105,7 @@ GtCachedAttribute >> storeOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GtCachedAttribute >> updateCache: aBlElement [
 	self cache: aBlElement.
 	onCachingAction glamourValueWithArgs: { aBlElement. self }

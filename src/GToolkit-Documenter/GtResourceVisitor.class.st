@@ -1,6 +1,6 @@
 Class {
-	#name : #GtResourceVisitor,
-	#superclass : #PRVisitor,
+	#name : 'GtResourceVisitor',
+	#superclass : 'PRVisitor',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -15,10 +15,10 @@ Class {
 		'includeExampleAnnotations',
 		'includeChanges'
 	],
-	#category : #'GToolkit-Documenter-Resourcer'
+	#category : 'GToolkit-Documenter-Resourcer'
 }
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 GtResourceVisitor >> addDocumentResource: aGt2DocumentResource [
 	(self addToVisitedDocumentResources: aGt2DocumentResource) ifTrue: [ ^ self ].
 	self addResource: aGt2DocumentResource.
@@ -26,12 +26,12 @@ GtResourceVisitor >> addDocumentResource: aGt2DocumentResource [
 	self computeResources: aGt2DocumentResource
 ]
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 GtResourceVisitor >> addResource: aGt2Resource [
 	self documentResource addResource: aGt2Resource.
 ]
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 GtResourceVisitor >> addResource: aFileReference named: aString as: aDocumentResourceClass or: aResourceClass [
 	(GtFileUtility mimeTypeOfFileReference: aFileReference) 
 		= GtFileUtilityConstants pillarMimeType 
@@ -45,7 +45,7 @@ GtResourceVisitor >> addResource: aFileReference named: aString as: aDocumentRes
 					asResource: aResourceClass ]
 ]
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 GtResourceVisitor >> addResource: aFileReference named: aString asDocument: aDocumentResourceClass [
 	| aResource |
 	aResource := aDocumentResourceClass new 
@@ -55,7 +55,7 @@ GtResourceVisitor >> addResource: aFileReference named: aString asDocument: aDoc
 	self addDocumentResource: aResource.
 ]
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 GtResourceVisitor >> addResource: aFileReference named: aString asResource: aResourceClass [
 	| aResource |
 	aResource := aResourceClass new 
@@ -65,7 +65,7 @@ GtResourceVisitor >> addResource: aFileReference named: aString asResource: aRes
 	self addResource: aResource.
 ]
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 GtResourceVisitor >> addToVisitedDocumentResources: aGt2DocumentResource [
 	"Return true if the resource was already visited"
 	<return: #Boolean>
@@ -75,18 +75,18 @@ GtResourceVisitor >> addToVisitedDocumentResources: aGt2DocumentResource [
 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtResourceVisitor >> allDepth [
 	self maxDepth: self meaningfulMaxDepth.
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 GtResourceVisitor >> compute [
 	self start: self document parse.
 	^ self resources
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GtResourceVisitor >> computeResources: aGt2NodeReference [
 	| aVisitor |
 	aVisitor := self class new.
@@ -101,13 +101,13 @@ GtResourceVisitor >> computeResources: aGt2NodeReference [
 	aVisitor get
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtResourceVisitor >> document [
 	<return: #GtDocumenter>
 	^ documentResource document
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtResourceVisitor >> document: aGtDocument [
 	self 
 		assert: [ aGtDocument isNotNil ] 
@@ -117,13 +117,13 @@ GtResourceVisitor >> document: aGtDocument [
 		name: aGtDocument name)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtResourceVisitor >> documentResource [
 	<return: #GtNodeResource>
 	^ documentResource
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtResourceVisitor >> documentResource: aGt2NodeResource [
 	self 
 		assert: [ aGt2NodeResource isNotNil ] 
@@ -132,30 +132,30 @@ GtResourceVisitor >> documentResource: aGt2NodeResource [
 	self addToVisitedDocumentResources: aGt2NodeResource
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 GtResourceVisitor >> get [
 	self start: self document parse.
 	^ documentResource
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtResourceVisitor >> includeAll [
 	self 
 		includeFigures;
 		includeDocuments.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtResourceVisitor >> includeChanges [
 	includeChanges := true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtResourceVisitor >> includeClasses [
 	includeClasses := true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtResourceVisitor >> includeDocuments [
 	self 
 		includeIcebergFiles;
@@ -163,22 +163,22 @@ GtResourceVisitor >> includeDocuments [
 		includeClasses.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtResourceVisitor >> includeFigures [
 	includeFigures := true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtResourceVisitor >> includeIcebergFiles [
 	includeIcebergFiles := true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtResourceVisitor >> includeInputFiles [
 	includeInputFiles := true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtResourceVisitor >> initialize [
 	super initialize.
 	includeFigures := false.
@@ -190,7 +190,7 @@ GtResourceVisitor >> initialize [
 	visitedDocumentResources := OrderedCollection new.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtResourceVisitor >> maxDepth: anInteger [
 	self 
 		assert: [ anInteger isNumber ] 
@@ -201,24 +201,24 @@ GtResourceVisitor >> maxDepth: anInteger [
 	maxDepth := anInteger
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtResourceVisitor >> meaningfulMaxDepth [
 	^ 20
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtResourceVisitor >> resources [
 	<return: #OrderedCollection of: #GtResource>
 	^ self documentResource allResources
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 GtResourceVisitor >> visit: anObject [
 	anObject gtDocument: self document.
 	super visit: anObject.
 ]
 
-{ #category : #'visiting-document' }
+{ #category : 'visiting-document' }
 GtResourceVisitor >> visitFigure: aPRFigure [ 
 	| aFileReferenceOrNil aFigure aFileName |
 	includeFigures ifFalse: [ ^ super visitFigure: aPRFigure ].
@@ -234,7 +234,7 @@ GtResourceVisitor >> visitFigure: aPRFigure [
 	super visitFigure: aPRFigure.
 ]
 
-{ #category : #'visiting-annotations' }
+{ #category : 'visiting-annotations' }
 GtResourceVisitor >> visitGt2ChangesAnnotation: aGt2ChangesAnnotation [
 	| aFileReferenceOrNil aResource |
 	includeChanges ifFalse: [ ^ super visitGt2ChangesAnnotation: aGt2ChangesAnnotation ].
@@ -249,7 +249,7 @@ GtResourceVisitor >> visitGt2ChangesAnnotation: aGt2ChangesAnnotation [
 	super visitGt2ChangesAnnotation: aGt2ChangesAnnotation
 ]
 
-{ #category : #'visiting-annotations' }
+{ #category : 'visiting-annotations' }
 GtResourceVisitor >> visitGt2ClassAnnotation: aGt2ClassAnnotation [
 	| aRGClassDefinitionOrNil aResource |
 	includeClasses ifFalse: [ ^ super visitGt2ClassAnnotation: aGt2ClassAnnotation ].
@@ -266,7 +266,7 @@ GtResourceVisitor >> visitGt2ClassAnnotation: aGt2ClassAnnotation [
 	super visitGt2ClassAnnotation: aGt2ClassAnnotation
 ]
 
-{ #category : #'visiting-annotations' }
+{ #category : 'visiting-annotations' }
 GtResourceVisitor >> visitGt2IcebergFileAnnotation: aGt2IcebergFileAnnotation [
 	| aFileReferenceOrNil |
 	includeIcebergFiles ifFalse: [ ^ super visitGt2IcebergFileAnnotation: aGt2IcebergFileAnnotation ].
@@ -281,7 +281,7 @@ GtResourceVisitor >> visitGt2IcebergFileAnnotation: aGt2IcebergFileAnnotation [
 	super visitGt2IcebergFileAnnotation: aGt2IcebergFileAnnotation
 ]
 
-{ #category : #'visiting-annotations' }
+{ #category : 'visiting-annotations' }
 GtResourceVisitor >> visitInputFileAnnotation: anInputFileAnnotation [
 	| aFileReferenceOrNil |
 	includeInputFiles ifFalse: [ ^ super visitInputFileAnnotation: anInputFileAnnotation ].
@@ -296,7 +296,7 @@ GtResourceVisitor >> visitInputFileAnnotation: anInputFileAnnotation [
 	super visitInputFileAnnotation: anInputFileAnnotation
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtResourceVisitor >> visitedDocumentResources: aCollection [
 	visitedDocumentResources := aCollection
 ]

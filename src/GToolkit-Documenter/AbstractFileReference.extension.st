@@ -1,6 +1,6 @@
-Extension { #name : #AbstractFileReference }
+Extension { #name : 'AbstractFileReference' }
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 AbstractFileReference >> gtDocumentFor: aView [
 	<gtView>
 	(#('pier' 'pillar') includes: self extension) ifFalse: [ ^ 
@@ -27,7 +27,7 @@ aView empty ].
 			action: [ :aToggle :aTab | aTab viewContentElement increaseNormalFontSize ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 AbstractFileReference >> gtEventsFor: aView [
 	<gtView>
 	(self isFile and: [ self extension asLowercase = 'ombu' ])
@@ -41,7 +41,7 @@ AbstractFileReference >> gtEventsFor: aView [
 		view: #gtEventsFor:
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 AbstractFileReference >> parseWithGt2Documenter [
 	| encoding |
 	encoding := [ self binaryReadStreamDo: [ :in | (ZnCharacterEncoder detectEncoding: in upToEnd) identifier ] ]
