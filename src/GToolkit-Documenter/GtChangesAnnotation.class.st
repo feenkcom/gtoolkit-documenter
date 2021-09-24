@@ -1,10 +1,10 @@
 Class {
-	#name : #GtChangesAnnotation,
-	#superclass : #GtAnnotation,
-	#category : #'GToolkit-Documenter-Annotations'
+	#name : 'GtChangesAnnotation',
+	#superclass : 'GtAnnotation',
+	#category : 'GToolkit-Documenter-Annotations'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtChangesAnnotation class >> possibleParameters [
 	^ {
 		self constants pathParameterName.
@@ -14,22 +14,22 @@ GtChangesAnnotation class >> possibleParameters [
 		}
 ]
 
-{ #category : #protected }
+{ #category : 'protected' }
 GtChangesAnnotation class >> tag [
 	^ self constants changesAnnotationName
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 GtChangesAnnotation >> accept: aVisitor [
 	^ aVisitor visitGt2ChangesAnnotation: self
 ]
 
-{ #category : #'private - cache' }
+{ #category : 'private - cache' }
 GtChangesAnnotation >> annotationCacheValueClass [
 	^ GtChangesAnnotationCacheValue
 ]
 
-{ #category : #'private - styling' }
+{ #category : 'private - styling' }
 GtChangesAnnotation >> applyButtonAttribute [
 	^ GtButtonAttribute new
 		beAppend;
@@ -39,18 +39,18 @@ GtChangesAnnotation >> applyButtonAttribute [
 			action: [ self applyChanges ])
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 GtChangesAnnotation >> applyChanges [
 	self cachedChanges applyChanges
 ]
 
-{ #category : #'private - actions' }
+{ #category : 'private - actions' }
 GtChangesAnnotation >> browseReferenceFrom: aBlClickEvent [ 
 	aBlClickEvent modifiers isShift ifTrue: [ ^ self ].
 	aBlClickEvent target phlow spawnObject: self cachedChanges
 ]
 
-{ #category : #'private - cache' }
+{ #category : 'private - cache' }
 GtChangesAnnotation >> cachedChanges [
 	<return: #GtEpicea>
 	| aNewEpicea |
@@ -69,7 +69,7 @@ GtChangesAnnotation >> cachedChanges [
 	^ aNewEpicea
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : 'accessing - parameter values' }
 GtChangesAnnotation >> changeFile [
 	<return: #FileReference or: nil>
 	^ self utility 
@@ -89,13 +89,13 @@ GtChangesAnnotation >> changeFile [
 		defaultValue: [ nil ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtChangesAnnotation >> changeFileExists [
 	^ self isChangeFileDefined and: [ 
 		self changeFile exists ]
 ]
 
-{ #category : #'private - styling' }
+{ #category : 'private - styling' }
 GtChangesAnnotation >> createButtonAttribute [
 	^ GtButtonAttribute new
 		beAppend;
@@ -106,28 +106,28 @@ GtChangesAnnotation >> createButtonAttribute [
 					aButton phlow spawnObject: self cachedChanges ])
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : 'accessing - parameter values' }
 GtChangesAnnotation >> defaultShowSelector [
 	^ self constants defaultChangesShowSelector
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtChangesAnnotation >> doesReferenceExist [
 	^ self hasChanges
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : 'accessing - parameter values' }
 GtChangesAnnotation >> expandedDefaultValue [
 	^ true
 ]
 
-{ #category : #'announcement handling' }
+{ #category : 'announcement handling' }
 GtChangesAnnotation >> handleEpiceaUpdate: aGt2EpiceaUpdatedAnnouncement [
 	aGt2EpiceaUpdatedAnnouncement impactChangedOrNumberOfEventsChanged ifFalse: [ ^ self ].
 	self gtDocument styleTextRequest
 ]
 
-{ #category : #'announcement handling' }
+{ #category : 'announcement handling' }
 GtChangesAnnotation >> handleSystemChange: anAnnoucement [
 	| aChanges |
 	aChanges := self cachedChanges.
@@ -135,39 +135,39 @@ GtChangesAnnotation >> handleSystemChange: anAnnoucement [
 	aChanges updateImpact
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtChangesAnnotation >> hasChanges [
 	^ self cachedChanges hasChanges
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtChangesAnnotation >> isApplied [
 	^ self cachedChanges hasImpact not
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtChangesAnnotation >> isChangeFileDefined [
 	self changeFile ifNil: [ ^ false ].
 	self changeFile exists ifFalse: [ ^ true ].
 	^ self changeFile isFile 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtChangesAnnotation >> isPreviewDefined [
 	^ self hasChanges
 ]
 
-{ #category : #'private - cache' }
+{ #category : 'private - cache' }
 GtChangesAnnotation >> newEpicea [
 	^ GtEpicea new ombuFile: self changeFile
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtChangesAnnotation >> objectToPreview [
 	^ self cachedChanges
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : 'accessing - parameter values' }
 GtChangesAnnotation >> pathParameterValue [
 	<return: #String or: nil>
 	^ self utility 
@@ -180,12 +180,12 @@ GtChangesAnnotation >> pathParameterValue [
 		defaultValue: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtChangesAnnotation >> referenceParameterName [
 	^ self constants pathParameterName
 ]
 
-{ #category : #subscriptions }
+{ #category : 'subscriptions' }
 GtChangesAnnotation >> registerToSystemChanges [
 	self gtDocument systemAnnouncer
 		when:
@@ -202,27 +202,27 @@ GtChangesAnnotation >> registerToSystemChanges [
 		for: self gtSubscriber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtChangesAnnotation >> sourceDirectory [
 	<return: #FileReference>
 	^ self gtDocument rootDirectory
 ]
 
-{ #category : #'private - styling' }
+{ #category : 'private - styling' }
 GtChangesAnnotation >> styleApplyButtonInText: aBlRope [
 	self isApplied ifTrue: [ ^ self ].
 	(aBlRope from: self start to: self stop) 
 		attribute: self applyButtonAttribute
 ]
 
-{ #category : #'private - styling' }
+{ #category : 'private - styling' }
 GtChangesAnnotation >> styleCreateButtonInText: aBlRope [
 	self hasChanges ifTrue: [ ^ self ].
 	(aBlRope from: self start to: self stop) 
 		attribute: self createButtonAttribute
 ]
 
-{ #category : #'api - style' }
+{ #category : 'api - style' }
 GtChangesAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
@@ -238,7 +238,7 @@ GtChangesAnnotation >> styleTextWithMarkup: aBlRope [
 	self registerToSystemChanges
 ]
 
-{ #category : #'api - style' }
+{ #category : 'api - style' }
 GtChangesAnnotation >> styleTextWithoutInteractions: aBlRope [
 	"Enforce Code view only"
 	self parameters 
@@ -249,7 +249,7 @@ GtChangesAnnotation >> styleTextWithoutInteractions: aBlRope [
 	self registerToSystemChanges.
 ]
 
-{ #category : #'api - style' }
+{ #category : 'api - style' }
 GtChangesAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.

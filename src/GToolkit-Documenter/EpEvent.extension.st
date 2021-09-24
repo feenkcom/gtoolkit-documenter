@@ -1,6 +1,6 @@
-Extension { #name : #EpEvent }
+Extension { #name : 'EpEvent' }
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 EpEvent >> gtDefinitionFor: aView [
 	<gtView>
 	^ aView textEditor
@@ -9,7 +9,7 @@ EpEvent >> gtDefinitionFor: aView [
 		text: [ (self accept: GtEpiceaNewStateVisitor new) asRopedText foreground: GtDocumentConstants matchLineColor ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 EpEvent >> gtSystemFor: aView [
 	<gtView>
 	^ aView textEditor

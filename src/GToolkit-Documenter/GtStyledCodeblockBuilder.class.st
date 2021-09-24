@@ -1,10 +1,10 @@
 Class {
-	#name : #GtStyledCodeblockBuilder,
-	#superclass : #GtStyledNodeBuilder,
-	#category : #'GToolkit-Documenter-Styler Builder'
+	#name : 'GtStyledCodeblockBuilder',
+	#superclass : 'GtStyledNodeBuilder',
+	#category : 'GToolkit-Documenter-Styler Builder'
 }
 
-{ #category : #'style - code snippet' }
+{ #category : 'style - code snippet' }
 GtStyledCodeblockBuilder >> embedResult [
 	"Put a circle button with a code snippet result"
 	| aResult aSnippetInterval aGlobalInterval |
@@ -20,7 +20,7 @@ GtStyledCodeblockBuilder >> embedResult [
 				self document styleTextRequest ])
 ]
 
-{ #category : #'accessing - node' }
+{ #category : 'accessing - node' }
 GtStyledCodeblockBuilder >> endMarkupText [
 	"Return sub-text of the `]]]`"
 	<return: #BlRope>
@@ -31,7 +31,7 @@ GtStyledCodeblockBuilder >> endMarkupText [
 		to: aStopEndMarkup
 ]
 
-{ #category : #'style - code snippet' }
+{ #category : 'style - code snippet' }
 GtStyledCodeblockBuilder >> highlightEvaluatedCode [
 	"Highlight evaluated code snippet part"
 	| aSnippetInterval aGlobalInterval |
@@ -43,7 +43,7 @@ GtStyledCodeblockBuilder >> highlightEvaluatedCode [
 				paint: (Color fromHexString: #'90CAF9'))
 ]
 
-{ #category : #'style - button' }
+{ #category : 'style - button' }
 GtStyledCodeblockBuilder >> playButton [
 	"Add play button to a node"
 	self endMarkupText 
@@ -57,14 +57,14 @@ GtStyledCodeblockBuilder >> playButton [
 				action: self properties action ])
 ]
 
-{ #category : #'accessing - code snippet' }
+{ #category : 'accessing - code snippet' }
 GtStyledCodeblockBuilder >> startNodeBody [
 	"Return node's body starting position"
 	<return: #Integer>
 	^ self node scriptStartPositionInText: self text
 ]
 
-{ #category : #'accessing - node' }
+{ #category : 'accessing - node' }
 GtStyledCodeblockBuilder >> stopEndMarkup [
 	"Return position of the starting part of the end markup `]]]`"
 	<return: #Number>

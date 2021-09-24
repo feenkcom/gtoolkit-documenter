@@ -1,6 +1,6 @@
 Class {
-	#name : #GtPreviewAttribute,
-	#superclass : #BrTextAdornmentAttribute,
+	#name : 'GtPreviewAttribute',
+	#superclass : 'BrTextAdornmentAttribute',
 	#traits : 'TGtDocumentConstants',
 	#classTraits : 'TGtDocumentConstants classTrait',
 	#instVars : [
@@ -8,25 +8,25 @@ Class {
 		'showSelector',
 		'height'
 	],
-	#category : #'GToolkit-Documenter-Text - Attributes'
+	#category : 'GToolkit-Documenter-Text - Attributes'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtPreviewAttribute class >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtPreviewAttribute >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtPreviewAttribute >> defaultHeight [
 	^ self constants defaultPreviewHeight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtPreviewAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 	^ GtPreviewStencil new
 		result: self result;
@@ -34,13 +34,13 @@ GtPreviewAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 		asElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtPreviewAttribute >> height [
 	<return: #Number or: nil>
 	^ height
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtPreviewAttribute >> height: anInteger [
 	self 
 		assert: [ anInteger notNil ] 
@@ -51,7 +51,7 @@ GtPreviewAttribute >> height: anInteger [
 	height := anInteger
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtPreviewAttribute >> initialize [
 	super initialize.
 	
@@ -62,7 +62,7 @@ GtPreviewAttribute >> initialize [
 	height := self defaultHeight.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtPreviewAttribute >> initializeLazyElement: aBlLazyElement [
 	aBlLazyElement 
 		layout: BlLinearLayout vertical;
@@ -74,22 +74,22 @@ GtPreviewAttribute >> initializeLazyElement: aBlLazyElement [
 			theLazyElement constraintsDo: [ :c | c vertical fitContent ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtPreviewAttribute >> result [
 	^ result
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtPreviewAttribute >> result: anObject [
 	result := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtPreviewAttribute >> showSelector [
 	^ showSelector
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtPreviewAttribute >> showSelector: aSymbol [
 	self 
 		assert: [ aSymbol notNil ] 

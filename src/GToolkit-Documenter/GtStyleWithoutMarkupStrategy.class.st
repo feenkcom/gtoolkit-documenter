@@ -1,15 +1,15 @@
 Class {
-	#name : #GtStyleWithoutMarkupStrategy,
-	#superclass : #GtStylerStrategy,
-	#category : #'GToolkit-Documenter-Styler'
+	#name : 'GtStyleWithoutMarkupStrategy',
+	#superclass : 'GtStylerStrategy',
+	#category : 'GToolkit-Documenter-Styler'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtStyleWithoutMarkupStrategy >> isReading [
 	^ true
 ]
 
-{ #category : #dispatch }
+{ #category : 'dispatch' }
 GtStyleWithoutMarkupStrategy >> styleText: aBlRope withNode: aPRDocumentItem [
 	aPRDocumentItem styleTextWithoutMarkup: aBlRope
 ]

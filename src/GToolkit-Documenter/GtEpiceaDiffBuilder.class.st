@@ -1,29 +1,29 @@
 Class {
-	#name : #GtEpiceaDiffBuilder,
-	#superclass : #TextDiffBuilder,
+	#name : 'GtEpiceaDiffBuilder',
+	#superclass : 'TextDiffBuilder',
 	#instVars : [
 		'isMethod'
 	],
-	#category : #'GToolkit-Documenter-Epicea'
+	#category : 'GToolkit-Documenter-Epicea'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtEpiceaDiffBuilder >> initialize [
 	super initialize.
 	isMethod := true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpiceaDiffBuilder >> isMethod [
 	^ isMethod
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpiceaDiffBuilder >> isMethod: aBoolean [
 	isMethod := aBoolean
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 GtEpiceaDiffBuilder >> newStyler [
 	^ GtEpiceaRBTextStyler new
 		isForWorkspace: isMethod not;

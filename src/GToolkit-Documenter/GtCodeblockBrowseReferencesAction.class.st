@@ -1,13 +1,13 @@
 Class {
-	#name : #GtCodeblockBrowseReferencesAction,
-	#superclass : #GtCodeblockAction,
+	#name : 'GtCodeblockBrowseReferencesAction',
+	#superclass : 'GtCodeblockAction',
 	#instVars : [
 		'element'
 	],
-	#category : #'GToolkit-Documenter-Code Snippet'
+	#category : 'GToolkit-Documenter-Code Snippet'
 }
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtCodeblockBrowseReferencesAction >> browseReferences [
 	"Browse a selected references"
 	| aFilter |
@@ -19,7 +19,7 @@ GtCodeblockBrowseReferencesAction >> browseReferences [
 	self element phlow spawnObject: aFilter.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockBrowseReferencesAction >> element [
 	<return: #BlElement>
 	self 
@@ -28,7 +28,7 @@ GtCodeblockBrowseReferencesAction >> element [
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockBrowseReferencesAction >> element: aBlElement [
 	self 
 		assert: [ aBlElement isNotNil ] 
@@ -36,13 +36,13 @@ GtCodeblockBrowseReferencesAction >> element: aBlElement [
 	element := aBlElement
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 GtCodeblockBrowseReferencesAction >> execute [
 	"Perform a default action"
 	self browseReferences
 ]
 
-{ #category : #'accessing - pharo code' }
+{ #category : 'accessing - pharo code' }
 GtCodeblockBrowseReferencesAction >> extractReferencesFilter [
 	<return: #GtSearchReferencesFilter or: nil>
 	^ self nodeBodySelection
@@ -51,7 +51,7 @@ GtCodeblockBrowseReferencesAction >> extractReferencesFilter [
 			self extractReferencesFilterFromString: aSelectedString asString ].
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GtCodeblockBrowseReferencesAction >> extractReferencesFilterFromString: aSelectedString [
 	| aPharoNode |
 	aPharoNode := GtPharoParser 
@@ -69,7 +69,7 @@ GtCodeblockBrowseReferencesAction >> extractReferencesFilterFromString: aSelecte
 	^ nil
 ]
 
-{ #category : #'accessing - pharo code' }
+{ #category : 'accessing - pharo code' }
 GtCodeblockBrowseReferencesAction >> referencesFilterAtCursor [
 	<return: #GtSearchReferencesFilter or: nil>
 	| aPharoNode |
@@ -88,12 +88,12 @@ GtCodeblockBrowseReferencesAction >> referencesFilterAtCursor [
 	^ nil
 ]
 
-{ #category : #'accessing - pharo code' }
+{ #category : 'accessing - pharo code' }
 GtCodeblockBrowseReferencesAction >> referencesFilterForSymbol: aSymbol [
 	^ GtSearchReferencesFilter literal: aSymbol
 ]
 
-{ #category : #'accessing - pharo code' }
+{ #category : 'accessing - pharo code' }
 GtCodeblockBrowseReferencesAction >> referencesFilterForVariable: aString [
 	<return: #GtSearchReferencesFilter or: nil>
 	| aBinding |

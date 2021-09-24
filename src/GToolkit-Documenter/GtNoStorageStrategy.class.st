@@ -1,65 +1,65 @@
 Class {
-	#name : #GtNoStorageStrategy,
-	#superclass : #GtStorageStrategy,
+	#name : 'GtNoStorageStrategy',
+	#superclass : 'GtStorageStrategy',
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'GToolkit-Documenter-Storage'
+	#category : 'GToolkit-Documenter-Storage'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 GtNoStorageStrategy class >> cleanUp [
 	^ self resetUniqueInstance
 ]
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 GtNoStorageStrategy class >> resetUniqueInstance [
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtNoStorageStrategy class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtNoStorageStrategy >> basename [
 	"Return a string representing the document filename"
 	<return: #String>
 	^ 'index.', GtFileUtilityConstants pillarExtension
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtNoStorageStrategy >> evaluationReceiver [
 	"Return an object that is used as a receiver (self) in a codeblock (code snippet) evalution"
 	<return: #Object>
 	^ nil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtNoStorageStrategy >> exists [
 	<return: #Boolean>
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtNoStorageStrategy >> name [
 	"Return a string representing the stored document"
 	<return: #String>
 	^ ''
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtNoStorageStrategy >> read: aGt2Document [ 
 	"ignore"
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtNoStorageStrategy >> rootDirectory [
 	^ Smalltalk imageDirectory
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtNoStorageStrategy >> save: aGt2Document [ 
 	"ignore"
 ]

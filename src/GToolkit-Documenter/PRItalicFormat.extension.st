@@ -1,6 +1,6 @@
-Extension { #name : #PRItalicFormat }
+Extension { #name : 'PRItalicFormat' }
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRItalicFormat >> styleSubText: aBlRope [
 	^ aBlRope italic
 ]

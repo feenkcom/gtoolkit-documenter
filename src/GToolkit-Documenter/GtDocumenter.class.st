@@ -10,42 +10,42 @@ I am used for:
 
 "
 Class {
-	#name : #GtDocumenter,
-	#superclass : #BlElement,
+	#name : 'GtDocumenter',
+	#superclass : 'BlElement',
 	#traits : 'TBrLayoutResizable + TGtDocumentConstants + TGtPagerPageInstantiator',
 	#classTraits : 'TBrLayoutResizable classTrait + TGtDocumentConstants classTrait + TGtPagerPageInstantiator classTrait',
 	#instVars : [
 		'titleNotifier'
 	],
-	#category : #'GToolkit-Documenter-! Core'
+	#category : 'GToolkit-Documenter-! Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 GtDocumenter class >> forClass: aClass [
 	^ self new classComment: aClass; read
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 GtDocumenter class >> forFile: aFileReference [
 	^ self new fileReference: aFileReference; read
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 GtDocumenter class >> forText: aStringOrText [
 	^ self new text: aStringOrText
 ]
 
-{ #category : #'api - toolbar' }
+{ #category : 'api - toolbar' }
 GtDocumenter >> addToolbarItem: anElement [
 	self toolbar addItem: anElement
 ]
 
-{ #category : #'api - announcer' }
+{ #category : 'api - announcer' }
 GtDocumenter >> announce: anAnnouncement [
 	^ self editorElement announce: anAnnouncement
 ]
 
-{ #category : #'api - ast' }
+{ #category : 'api - ast' }
 GtDocumenter >> ast [
 	"Message #isPetit2Failure helps to distinguish between a parsed document or a parser error"
 	<return: #PRDocument or: #PP2Failure>
@@ -53,13 +53,13 @@ GtDocumenter >> ast [
 		self parser parse: self text characters ].
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenter >> basename [
 	<return: #String>
 	^ self editorElement basename
 ]
 
-{ #category : #'api - user actions' }
+{ #category : 'api - user actions' }
 GtDocumenter >> browseClass [
 	| aPRDocumentOrError |
 	aPRDocumentOrError := self ast. 
@@ -72,7 +72,7 @@ GtDocumenter >> browseClass [
 				element: self editorElement))
 ]
 
-{ #category : #'api - user actions' }
+{ #category : 'api - user actions' }
 GtDocumenter >> browseImplementors [
 	| aPRDocumentOrError |
 	aPRDocumentOrError := self ast. 
@@ -85,7 +85,7 @@ GtDocumenter >> browseImplementors [
 				element: self editorElement))
 ]
 
-{ #category : #'api - user actions' }
+{ #category : 'api - user actions' }
 GtDocumenter >> browseReferences [
 	| aPRDocumentOrError |
 	aPRDocumentOrError := self ast. 
@@ -98,7 +98,7 @@ GtDocumenter >> browseReferences [
 				element: self editorElement))
 ]
 
-{ #category : #'api - cache' }
+{ #category : 'api - cache' }
 GtDocumenter >> cache [
 	"Text attributes can cache values.
 	It is not recommended to use this method outside of this object.
@@ -107,38 +107,38 @@ GtDocumenter >> cache [
 	^ self userData at: #documenterCache ifAbsentPut: [ Dictionary new ].
 ]
 
-{ #category : #'api - cache' }
+{ #category : 'api - cache' }
 GtDocumenter >> cacheAt: aKey ifPresent: aPresentBlock ifAbsent: anAbsentBlock [
 	^ self cache at: aKey ifPresent: aPresentBlock ifAbsent: anAbsentBlock
 ]
 
-{ #category : #'api - cache' }
+{ #category : 'api - cache' }
 GtDocumenter >> cacheAt: aKey ifPresent: aPresentBlock ifAbsentPut: anAbsentBlock [
 	^ self cache at: aKey ifPresent: aPresentBlock ifAbsentPut: anAbsentBlock
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenter >> classComment: aClass [
 	self editorElement classComment: aClass.
 	self updateTitleLabel.
 ]
 
-{ #category : #'api - styling' }
+{ #category : 'api - styling' }
 GtDocumenter >> decreaseNormalFontSize [
 	^ self editorElement decreaseNormalFontSize
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 GtDocumenter >> defaultEditorChildName [
 	^ #editor
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 GtDocumenter >> defaultStorage [
 	^ GtStorageStrategy null
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 GtDocumenter >> defaultToolbar [
 	^ BrToolbar new
 		aptitude: BrGlamorousToolbarAptitude;
@@ -151,12 +151,12 @@ GtDocumenter >> defaultToolbar [
 	
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 GtDocumenter >> defaultToolbarChildName [
 	^ #toolbar
 ]
 
-{ #category : #'api - styling' }
+{ #category : 'api - styling' }
 GtDocumenter >> displayMarkup [
 	self
 		deprecated: 'Please use showMarkup method instead.'
@@ -166,7 +166,7 @@ GtDocumenter >> displayMarkup [
 	self showMarkup
 ]
 
-{ #category : #'api - user actions' }
+{ #category : 'api - user actions' }
 GtDocumenter >> doItAndGoSelectionOrAll [
 	| aPRDocumentOrError |
 	aPRDocumentOrError := self ast. 
@@ -178,7 +178,7 @@ GtDocumenter >> doItAndGoSelectionOrAll [
 			condition: [ :anEvaluator | anEvaluator isCursorPlacedInTheBody ]))
 ]
 
-{ #category : #'api - user actions' }
+{ #category : 'api - user actions' }
 GtDocumenter >> doItSelectionOrAll [
 	| aPRDocumentOrError |
 	aPRDocumentOrError := self ast. 
@@ -191,19 +191,19 @@ GtDocumenter >> doItSelectionOrAll [
 			condition: [ :anEvaluator | anEvaluator isCursorPlacedInTheBody ]))
 ]
 
-{ #category : #'private - editor' }
+{ #category : 'private - editor' }
 GtDocumenter >> editor [
 	<return: #BrTextEditor>
 	^ self editorElement editor
 ]
 
-{ #category : #'private - editor' }
+{ #category : 'private - editor' }
 GtDocumenter >> editorElement [
 	<return: #BrEditor>
 	^ self childNamed: self defaultEditorChildName
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenter >> evaluationReceiver [
 	"Return an object that is used as a receiver (self) in a codeblock (code snippet) evalution.
 	It is typically a class in case of class comment, file in case of file content, and nil in other cases."
@@ -211,19 +211,19 @@ GtDocumenter >> evaluationReceiver [
 	^ self editorElement evaluationReceiver
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenter >> exists [
 	<return: #Boolean>
 	^ self editorElement exists
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenter >> fileReference: aFileReference [ 
 	self editorElement fileReference: aFileReference.
 	self updateTitleLabel.
 ]
 
-{ #category : #'gt-extensions' }
+{ #category : 'gt-extensions' }
 GtDocumenter >> gtLiveFor: aView [
 	<gtView>
 	^ (super gtLiveFor: aView)
@@ -232,7 +232,7 @@ GtDocumenter >> gtLiveFor: aView [
 			action: [ :aWidget | aWidget phlow spawnObject: self parse ]
 ]
 
-{ #category : #'gt-extensions' }
+{ #category : 'gt-extensions' }
 GtDocumenter >> gtResourcesFor: aView [
 	<gtView>
 	^ aView mondrian
@@ -264,7 +264,7 @@ GtDocumenter >> gtResourcesFor: aView [
 				levelDistance: 50; nodeDistance: 10) ] 
 ]
 
-{ #category : #'gt-extensions' }
+{ #category : 'gt-extensions' }
 GtDocumenter >> gtSaveActionFor: anAction [
 	<gtAction>
 	^ anAction button
@@ -275,7 +275,7 @@ GtDocumenter >> gtSaveActionFor: anAction [
 		action: [ self save ]
 ]
 
-{ #category : #'gt-extensions' }
+{ #category : 'gt-extensions' }
 GtDocumenter >> gtShowMarkupActionFor: anAction [
 	<gtAction>
 	^ anAction toggle
@@ -287,7 +287,7 @@ GtDocumenter >> gtShowMarkupActionFor: anAction [
 		deactivatedAction: [ self hideMarkup ]
 ]
 
-{ #category : #'gt-extensions' }
+{ #category : 'gt-extensions' }
 GtDocumenter >> gtVariableBindingsFor: aView [
 	<gtView>
 	self 
@@ -301,24 +301,24 @@ GtDocumenter >> gtVariableBindingsFor: aView [
 		view: #gtVariableBindingsFor:
 ]
 
-{ #category : #'api - styling' }
+{ #category : 'api - styling' }
 GtDocumenter >> hideMarkup [
 	self styler mode isReading ifTrue: [ ^ self ].
 	self styler hideMarkup.
 	self styleTextRequest
 ]
 
-{ #category : #'api - toolbar' }
+{ #category : 'api - toolbar' }
 GtDocumenter >> hideToolbar [
 	self toolbar visibility: BlVisibility gone.
 ]
 
-{ #category : #'api - styling' }
+{ #category : 'api - styling' }
 GtDocumenter >> increaseNormalFontSize [
 	^ self editorElement increaseNormalFontSize
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocumenter >> initialize [
 	super initialize.
 	self initializeEditor.
@@ -333,7 +333,7 @@ GtDocumenter >> initialize [
 	self matchParent.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocumenter >> initializeEditor [
 	| anEditor |
 	anEditor := GtDocumenterEditor new
@@ -344,7 +344,7 @@ GtDocumenter >> initializeEditor [
 	anEditor document: self.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocumenter >> initializeShortcuts [
 
 	self editorElement
@@ -365,7 +365,7 @@ GtDocumenter >> initializeShortcuts [
 			action: [ :anEvent | self doItAndGoSelectionOrAll ])
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocumenter >> initializeTitleNotifier [
 	titleNotifier := (GtPhlowTitleIconAndLabelNotifier new
 		longLabel: [ self name ifEmpty: [ 'Documenter' ] ];
@@ -373,53 +373,53 @@ GtDocumenter >> initializeTitleNotifier [
 	self addEventHandler: titleNotifier.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocumenter >> initializeToolbar [
 	self addChild: self defaultToolbar as: self defaultToolbarChildName
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocumenter >> initializeVariableBindings [
 	self variableBindings
-			at: self constants thisDocument 
+			localAt: self constants thisDocument 
 			put: self.
 ]
 
-{ #category : #'api - announcer' }
+{ #category : 'api - announcer' }
 GtDocumenter >> isSubscribedToSystem [
 	<return: #Boolean>
 	^ self editorElement isSubscribedToSystem
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenter >> name [
 	<return: #String>
 	^ self editorElement name
 ]
 
-{ #category : #'api - styling' }
+{ #category : 'api - styling' }
 GtDocumenter >> normalFontSize [
 	<rerturn: #Number>
 	^ self editorElement normalFontSize
 ]
 
-{ #category : #'api - styling' }
+{ #category : 'api - styling' }
 GtDocumenter >> normalFontSize: aNumber [
 	self editorElement normalFontSize: aNumber.
 ]
 
-{ #category : #'api - ast' }
+{ #category : 'api - ast' }
 GtDocumenter >> parse [
 	^ self ast
 ]
 
-{ #category : #'api - ast' }
+{ #category : 'api - ast' }
 GtDocumenter >> parser [
 	<return: #GtDocumenterParser>
 	^ self styler parser
 ]
 
-{ #category : #'api - styling' }
+{ #category : 'api - styling' }
 GtDocumenter >> privateStyleText [
 	"self
 		deprecated: 'Please use styleTextRequest method instead.'
@@ -429,57 +429,57 @@ GtDocumenter >> privateStyleText [
 	self styleTextRequest
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenter >> read [
 	self editorElement read
 ]
 
-{ #category : #'api - toolbar' }
+{ #category : 'api - toolbar' }
 GtDocumenter >> removeToolbarItem: anElement [
 	self toolbar removeItem: anElement
 ]
 
-{ #category : #'api - toolbar' }
+{ #category : 'api - toolbar' }
 GtDocumenter >> removeToolbarItemAt: anIndex [
 	self toolbar removeItemAt: anIndex
 ]
 
-{ #category : #'api - resourcer' }
+{ #category : 'api - resourcer' }
 GtDocumenter >> resourcer [
 	^ GtResourceVisitor new document: self
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenter >> rootDirectory [
 	"Return root directory to access external data, e.g., images, change files"
 	<return: #FileReference>
 	^ self editorElement rootDirectory
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenter >> save [
 	self editorElement save
 ]
 
-{ #category : #'api - styling' }
+{ #category : 'api - styling' }
 GtDocumenter >> showMarkup [
 	self editorElement styler mode isEditing ifTrue: [ ^ self ].
 	self editorElement styler displayMarkup.
 	self styleTextRequest.
 ]
 
-{ #category : #'api - toolbar' }
+{ #category : 'api - toolbar' }
 GtDocumenter >> showToolbar [
 	self toolbar visibility: BlVisibility visible.
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenter >> storage [
 	<return: #GtStorageStrategy>
 	^ self editorElement storage
 ]
 
-{ #category : #'api - storage' }
+{ #category : 'api - storage' }
 GtDocumenter >> store [
 	self
 		deprecated: 'Please use save method instead.'
@@ -489,81 +489,81 @@ GtDocumenter >> store [
 	self save
 ]
 
-{ #category : #'api - content' }
+{ #category : 'api - content' }
 GtDocumenter >> string [
 	<return: #String>
 	^ self text asString
 ]
 
-{ #category : #'api - styling' }
+{ #category : 'api - styling' }
 GtDocumenter >> styleTextRequest [
 	self editorElement enqueueTask: (BlTaskAction new action: [
 		self editorElement styleTextRequest ])
 ]
 
-{ #category : #'private - editor' }
+{ #category : 'private - editor' }
 GtDocumenter >> styler [
 	<return: #GtDocumenterStyler>
 	^ self editorElement styler.
 ]
 
-{ #category : #'api - announcer' }
+{ #category : 'api - announcer' }
 GtDocumenter >> systemAnnouncer [
 	<return: #Announcer>
 	^ self editorElement systemAnnouncer
 ]
 
-{ #category : #'api - announcer' }
+{ #category : 'api - announcer' }
 GtDocumenter >> systemSubscriber [
 	^ self editorElement systemSubscriber
 ]
 
-{ #category : #'api - content' }
+{ #category : 'api - content' }
 GtDocumenter >> text [
 	<rerturn: #BlText>
 	^ self editorElement text
 ]
 
-{ #category : #'api - content' }
+{ #category : 'api - content' }
 GtDocumenter >> text: aText [
 	self editorElement text: aText.
 	self updateTitleLabel.
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 GtDocumenter >> titleNotifier [
 	<return: #GtPhlowTitleNotifier>
 	^ titleNotifier
 ]
 
-{ #category : #'private - toobar' }
+{ #category : 'private - toobar' }
 GtDocumenter >> toolbar [
 	<return: #BrToolbar>
 	^ self childNamed: self defaultToolbarChildName
 ]
 
-{ #category : #'api - announcer' }
+{ #category : 'api - announcer' }
 GtDocumenter >> unsubscribe: aSubscriber [
 	^ self editorElement unsubscribe: aSubscriber
 ]
 
-{ #category : #'private - updating' }
+{ #category : 'private - updating' }
 GtDocumenter >> updateTitleLabel [
 	self titleNotifier notifyIfFocused
 ]
 
-{ #category : #'api - variables' }
+{ #category : 'api - variables' }
 GtDocumenter >> variableBindings [
-	<return: #GtSnippetBindings>
+	<return: #TGtVariablesBindings>
 	^ self editorElement variableBindings
 ]
 
-{ #category : #'api - variables' }
+{ #category : 'api - variables' }
 GtDocumenter >> variableBindings: aGtSnippetBindings [
 	self editorElement variableBindings: aGtSnippetBindings
 ]
 
-{ #category : #'api - toolbar' }
+{ #category : 'api - toolbar' }
 GtDocumenter >> withDefaultToolbar [
 	self gtActions do: [ :eachAction | 
 		(eachAction target isForViewDefinedIn: #gtLiveFor:) ifTrue: [ 

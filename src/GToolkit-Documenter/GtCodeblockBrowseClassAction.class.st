@@ -1,13 +1,13 @@
 Class {
-	#name : #GtCodeblockBrowseClassAction,
-	#superclass : #GtCodeblockAction,
+	#name : 'GtCodeblockBrowseClassAction',
+	#superclass : 'GtCodeblockAction',
 	#instVars : [
 		'element'
 	],
-	#category : #'GToolkit-Documenter-Code Snippet'
+	#category : 'GToolkit-Documenter-Code Snippet'
 }
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtCodeblockBrowseClassAction >> browseClass [
 	"Browse a selected class"
 	| aBehavior |
@@ -20,7 +20,7 @@ GtCodeblockBrowseClassAction >> browseClass [
 	self element phlow spawnTool: (GtClassCoderTool observedClass: aBehavior).
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockBrowseClassAction >> element [
 	<return: #BlElement>
 	self 
@@ -29,7 +29,7 @@ GtCodeblockBrowseClassAction >> element [
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCodeblockBrowseClassAction >> element: aBlElement [
 	self 
 		assert: [ aBlElement isNotNil ] 
@@ -37,7 +37,7 @@ GtCodeblockBrowseClassAction >> element: aBlElement [
 	element := aBlElement
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 GtCodeblockBrowseClassAction >> execute [
 	"Perform a default action"
 	self browseClass

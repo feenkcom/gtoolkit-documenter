@@ -1,6 +1,6 @@
 Class {
-	#name : #GtDocumentVisitor,
-	#superclass : #PRVisitor,
+	#name : 'GtDocumentVisitor',
+	#superclass : 'PRVisitor',
 	#traits : 'TBlDebug + TGtDocumentConstants',
 	#classTraits : 'TBlDebug classTrait + TGtDocumentConstants classTrait',
 	#instVars : [
@@ -8,10 +8,10 @@ Class {
 		'codeblockCounter',
 		'figureCounter'
 	],
-	#category : #'GToolkit-Documenter-Styler'
+	#category : 'GToolkit-Documenter-Styler'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocumentVisitor >> document [
 	<return: #GtDocumenter>
 	self
@@ -20,7 +20,7 @@ GtDocumentVisitor >> document [
 	^ document
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocumentVisitor >> document: aGtDocument [
 	self
 		assert: [ document isNil ] 
@@ -31,21 +31,21 @@ GtDocumentVisitor >> document: aGtDocument [
 	document := aGtDocument
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocumentVisitor >> initialize [
 	super initialize.
 	codeblockCounter := 0.
 	figureCounter := 0.
 ]
 
-{ #category : #'visiting-document' }
+{ #category : 'visiting-document' }
 GtDocumentVisitor >> visitCodeblock: aPRCodeblock [
 	codeblockCounter := codeblockCounter + 1.
 	aPRCodeblock counter: codeblockCounter.
 	super visitCodeblock: aPRCodeblock
 ]
 
-{ #category : #'visiting-document' }
+{ #category : 'visiting-document' }
 GtDocumentVisitor >> visitFigure: aPRFigure [
 	figureCounter := figureCounter + 1.
 	aPRFigure counter: figureCounter.

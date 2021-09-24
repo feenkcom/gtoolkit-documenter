@@ -1,15 +1,15 @@
 Class {
-	#name : #GtStyleWithoutInteractionsStrategy,
-	#superclass : #GtStylerStrategy,
-	#category : #'GToolkit-Documenter-Styler'
+	#name : 'GtStyleWithoutInteractionsStrategy',
+	#superclass : 'GtStylerStrategy',
+	#category : 'GToolkit-Documenter-Styler'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtStyleWithoutInteractionsStrategy >> isNoInteractions [
 	^ true
 ]
 
-{ #category : #dispatch }
+{ #category : 'dispatch' }
 GtStyleWithoutInteractionsStrategy >> styleText: aBlRope withNode: aPRDocumentItem [
 	aPRDocumentItem styleTextWithoutInteractions: aBlRope
 ]

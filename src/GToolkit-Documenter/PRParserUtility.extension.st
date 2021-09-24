@@ -1,6 +1,6 @@
-Extension { #name : #PRParserUtility }
+Extension { #name : 'PRParserUtility' }
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRParserUtility class >> gtFixAndValidateParameters: aPRParameters for: anInstance [
 	| aDictionary |
 	self fixFirstParameter: aPRParameters for: anInstance.
@@ -14,7 +14,7 @@ PRParserUtility class >> gtFixAndValidateParameters: aPRParameters for: anInstan
 		yourself
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRParserUtility class >> gtValidateParameters: aPRParameters dictionary: parametersDictionary in: anAnnotation [
 	| usedKeys |
 	usedKeys := parametersDictionary keys.

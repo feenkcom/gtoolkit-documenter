@@ -1,50 +1,50 @@
 Class {
-	#name : #GtFileReferenceStorageStrategy,
-	#superclass : #GtStorageStrategy,
+	#name : 'GtFileReferenceStorageStrategy',
+	#superclass : 'GtStorageStrategy',
 	#instVars : [
 		'file'
 	],
-	#category : #'GToolkit-Documenter-Storage'
+	#category : 'GToolkit-Documenter-Storage'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtFileReferenceStorageStrategy >> basename [
 	"Return a string representing the document filename"
 	<return: #String>
 	^ self name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtFileReferenceStorageStrategy >> evaluationReceiver [
 	"Return an object that is used as a receiver (self) in a codeblock (code snippet) evalution"
 	<return: #Object>
 	^ self file
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtFileReferenceStorageStrategy >> exists [
 	<return: #Boolean>
 	^ self file exists
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtFileReferenceStorageStrategy >> file [
 	^ file
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtFileReferenceStorageStrategy >> file: aFileReference [
 	file := aFileReference asFileReference
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtFileReferenceStorageStrategy >> name [
 	"Return a string representing the stored document"
 	<return: #String>
 	^ self file basename
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtFileReferenceStorageStrategy >> read: aGt2Document [ 
 	self 
 		assert: [ self file notNil ]
@@ -55,7 +55,7 @@ GtFileReferenceStorageStrategy >> read: aGt2Document [
 	aGt2Document text: self file contents
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtFileReferenceStorageStrategy >> rootDirectory [
 	self 
 		assert: [ self file notNil ]
@@ -63,7 +63,7 @@ GtFileReferenceStorageStrategy >> rootDirectory [
 	^ self file parent
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtFileReferenceStorageStrategy >> save: aGt2Document [ 
 	| aNewContent aBackupFile |
 	self 

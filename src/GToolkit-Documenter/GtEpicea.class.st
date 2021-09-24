@@ -1,6 +1,6 @@
 Class {
-	#name : #GtEpicea,
-	#superclass : #Object,
+	#name : 'GtEpicea',
+	#superclass : 'Object',
 	#traits : 'TBlDebug + TGtDocumentConstants + TGtAnnouncer',
 	#classTraits : 'TBlDebug classTrait + TGtDocumentConstants classTrait + TGtAnnouncer classTrait',
 	#instVars : [
@@ -15,10 +15,10 @@ Class {
 	#classVars : [
 		'DebugMode'
 	],
-	#category : #'GToolkit-Documenter-Epicea'
+	#category : 'GToolkit-Documenter-Epicea'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpicea class >> allInSessionStore [
 	<script>
 	| monitor directory currentGlobalName |
@@ -37,23 +37,23 @@ GtEpicea class >> allInSessionStore [
 				yourself ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpicea class >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #modification }
+{ #category : 'modification' }
 GtEpicea >> addEvent: anEpEvent [
 	self log addEntryWith: anEpEvent tags: [ :tags | "ignore" ].
 	self log store flush.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpicea >> announcer [
 	^ announcer
 ]
 
-{ #category : #modification }
+{ #category : 'modification' }
 GtEpicea >> applyChanges [
 	self 
 		assert: [ self log notNil ] 
@@ -67,7 +67,7 @@ GtEpicea >> applyChanges [
 	self notifyEpiceaChanged.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GtEpicea >> computeImpact [
 	"Return true if impact changed"
 
@@ -86,12 +86,12 @@ GtEpicea >> computeImpact [
 	^ changed
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpicea >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpicea >> diff [
 	<return: #BlRope>
 	^ diff ifNil: [ 
@@ -106,7 +106,7 @@ GtEpicea >> diff [
 						foreground: self constants subtleColor ] ]
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 GtEpicea >> diffElements [
 	| elements |
 	elements := OrderedCollection new.
@@ -145,19 +145,19 @@ GtEpicea >> diffElements [
 	^ elements
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpicea >> entries [
 	<return: #OrderedeCollection of: #OmEntry>
 	^ self log entries
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpicea >> events [
 	<return: #OrderedeCollection of: #EpEvent>
 	^ events
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 GtEpicea >> gtDiffFor: aView [
 	"<gtView>
 	<gtViewChanges>"
@@ -169,7 +169,7 @@ GtEpicea >> gtDiffFor: aView [
 		text: [ :anEditor | self diff ]
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 GtEpicea >> gtDiffsFor: aView [
 	<gtView>
 	<gtViewChanges>
@@ -216,7 +216,7 @@ GtEpicea >> gtDiffsFor: aView [
 			element ]
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 GtEpicea >> gtEventsFor: aView [
 	<gtView>
 	^ aView explicit
@@ -270,7 +270,7 @@ GtEpicea >> gtEventsFor: aView [
 			aList ]
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 GtEpicea >> gtGlobalEntriesIn: aView [
 	<gtView>
 	^ aView explicit
@@ -319,7 +319,7 @@ GtEpicea >> gtGlobalEntriesIn: aView [
 			aList ]
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 GtEpicea >> gtPreviewFor: aView [
 	^ aView composite
 		title: 'Document Preview';
@@ -330,7 +330,7 @@ GtEpicea >> gtPreviewFor: aView [
 				fromObject: self ]
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 GtEpicea >> gtTutorialFor: aView [
 	<gtView>
 	<gtViewChanges>
@@ -344,26 +344,26 @@ GtEpicea >> gtTutorialFor: aView [
 		text: [ :anEditor | self tutorialStateRope ]
 ]
 
-{ #category : #'announcement handling' }
+{ #category : 'announcement handling' }
 GtEpicea >> handleEpEntryAddedAnnouncement: anEpEntryAdded [
 	self privateAddEvent: anEpEntryAdded entry content.
 	self notifyEpiceaChanged.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtEpicea >> hasChanges [
 	<return: #Boolean>
 	^ self numberOfEvents isZero not
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpicea >> hasImpact [
 	"Return true, if changes have impact to the current system state"
 	<return: #Boolean>
 	^ impacted notEmpty
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtEpicea >> initialize [
 	super initialize.
 	announcer := Announcer new.
@@ -376,13 +376,13 @@ GtEpicea >> initialize [
 		self inform: message ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpicea >> log [
 	<return: #EpLog>
 	^ epiceaLog
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpicea >> log: anEpLog [
 	self log ifNotNil: [ self log announcer unsubscribe: self ].
 	epiceaLog := anEpLog.
@@ -394,14 +394,14 @@ GtEpicea >> log: anEpLog [
 	self notifyEpiceaChanged
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 GtEpicea >> notifyEpiceaChanged [
 	| anImpactChanged |
 	anImpactChanged := self computeImpact.
 	self notifyEpiceaChangedWithImpactState: self hasImpact impactChanged: anImpactChanged.
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 GtEpicea >> notifyEpiceaChangedWithImpactState: anImpactStateBoolean impactChanged: anImpactChangeBoolean [
 	| anAnnouncement |
 	anAnnouncement := (GtEpiceaUpdatedAnnouncement new 
@@ -413,30 +413,30 @@ GtEpicea >> notifyEpiceaChangedWithImpactState: anImpactStateBoolean impactChang
 	self announce: anAnnouncement.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpicea >> numberOfEvents [
 	<return: #Integer>
 	^ events ifNotNil: #size ifNil: 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpicea >> ombuFile [
 	<return: #FileReference>
 	^ self log store writingFileReference
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpicea >> ombuFile: aFileReference [
 	self log: (EpLog fromFile: aFileReference)
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtEpicea >> ombuFileExists [
 	<return: #Boolean>
 	^ self ombuFile notNil and: [ self ombuFile exists ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpicea >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
@@ -444,19 +444,19 @@ GtEpicea >> printOn: aStream [
 	aStream nextPut: $)
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GtEpicea >> privateAddEvent: anEpEvent [
 	events addLast: anEpEvent.
 	diff := nil.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GtEpicea >> privateEvents: aCollection [
 	events := aCollection.
 	diff := nil.
 ]
 
-{ #category : #modification }
+{ #category : 'modification' }
 GtEpicea >> removeEvent: anEpEvent [
 	| aNewEvents |
 	aNewEvents := self events reject: [ :eachEvent | eachEvent = anEpEvent ].
@@ -468,7 +468,7 @@ GtEpicea >> removeEvent: anEpEvent [
 	self notifyEpiceaChanged.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpicea >> systemState [
 	<return: #String>
 	^ String streamContents: [ :aStream | 
@@ -481,12 +481,12 @@ GtEpicea >> systemState [
 			separatedBy: [ aStream cr; cr ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpicea >> theEnvironment [
 	^ self class environment
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpicea >> tutorialState [
 	<return: #String>
 	^ String streamContents: [ :aStream | 
@@ -498,7 +498,7 @@ GtEpicea >> tutorialState [
 			separatedBy: [ aStream cr; cr ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtEpicea >> tutorialStateRope [
 	<return: #BlRope>
 	^ self tutorialState asRopedText
@@ -506,7 +506,7 @@ GtEpicea >> tutorialStateRope [
 			foreground: self constants matchLineColor
 ]
 
-{ #category : #modification }
+{ #category : 'modification' }
 GtEpicea >> updateImpact [
 	"Return true if impact changed"
 	<return: #Boolean>

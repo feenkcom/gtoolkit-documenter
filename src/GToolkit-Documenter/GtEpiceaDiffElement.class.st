@@ -1,10 +1,10 @@
 Class {
-	#name : #GtEpiceaDiffElement,
-	#superclass : #GtDiffElement,
-	#category : #'GToolkit-Documenter-Epicea'
+	#name : 'GtEpiceaDiffElement',
+	#superclass : 'GtDiffElement',
+	#category : 'GToolkit-Documenter-Epicea'
 }
 
-{ #category : #initialize }
+{ #category : 'initialize' }
 GtEpiceaDiffElement >> initialize [
 	super initialize.
 	leftElement geometry: (BlRoundedRectangleGeometry cornerRadius: 4).

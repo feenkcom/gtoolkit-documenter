@@ -1,6 +1,6 @@
-Extension { #name : #PRCodeblock }
+Extension { #name : 'PRCodeblock' }
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> cacheKey [
 	^ GtCodeblockCacheKey new
 		parameters: self parameters;
@@ -9,7 +9,7 @@ PRCodeblock >> cacheKey [
 		caption: self caption
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> cachedDisplayPreview [
 	<return: #Boolean>
 	^ self gtDocument 
@@ -18,7 +18,7 @@ PRCodeblock >> cachedDisplayPreview [
 		ifAbsent: [ true ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> cachedDisplayPreview: aBoolean [
 	self gtDocument 
 		cacheAt: self cacheKey
@@ -28,7 +28,7 @@ PRCodeblock >> cachedDisplayPreview: aBoolean [
 				displayResult: aBoolean ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> cachedEvaluatedInterval [
 	^ self gtDocument 
 		cacheAt: self cacheKey 
@@ -36,7 +36,7 @@ PRCodeblock >> cachedEvaluatedInterval [
 		ifAbsent: [ nil ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> cachedPreview [
 	<return: #BlElement or: nil>
 
@@ -46,7 +46,7 @@ PRCodeblock >> cachedPreview [
 		ifAbsent: [ nil ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> cachedPreview: anElement [
 	self gtDocument 
 		cacheAt: self cacheKey
@@ -56,7 +56,7 @@ PRCodeblock >> cachedPreview: anElement [
 				preview: anElement ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> cachedResult [
 	^ self gtDocument 
 		cacheAt: self cacheKey 
@@ -64,7 +64,7 @@ PRCodeblock >> cachedResult [
 		ifAbsent: [ nil ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> cachedSymbols [
 	<return: #GtCodeblockSymbols or: nil>
 	^ self gtDocument 
@@ -73,7 +73,7 @@ PRCodeblock >> cachedSymbols [
 		ifAbsent: [ nil ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> cachedSymbols: aGt2CodeblockSymbols [
 	self gtDocument 
 		cacheAt: self cacheKey
@@ -83,17 +83,17 @@ PRCodeblock >> cachedSymbols: aGt2CodeblockSymbols [
 				symbols: aGt2CodeblockSymbols ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> endMarkup [
 	^ PRPillarGrammar endMarkups at: self class
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> endMarkupSize [
 	^ self endMarkup size
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> evaluateCodeblock [
 	GtCodeblockEvaluator new
 		document: self gtDocument;
@@ -102,7 +102,7 @@ PRCodeblock >> evaluateCodeblock [
 		evaluateSelection
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> evaluationAction [ 
 	^ [ :aWidget :aButtonModel | 
 		"create a `once` subscription to restyle text once code snippet is executed.
@@ -116,12 +116,12 @@ PRCodeblock >> evaluationAction [
 		self evaluateCodeblock ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> gtIsSmalltalkLanguage [
 	^ self gtLanguageOrSmalltalk = PRSmalltalkScriptLanguage default
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> gtLanguageOrSmalltalk [
 	| aLanguage |
 	aLanguage := self language.
@@ -131,7 +131,7 @@ PRCodeblock >> gtLanguageOrSmalltalk [
 		ifFalse: [ aLanguage ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> gtNodeStyler: aBlText [
 	^ GtStyledCodeblockBuilder new 
 		document: self gtDocument; 
@@ -139,7 +139,7 @@ PRCodeblock >> gtNodeStyler: aBlText [
 		text: aBlText
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> handleClassAddedOrRemovedAnnouncement: aClassAdded [ 
 	| aSymbols |
 	aSymbols := self cachedSymbols.
@@ -149,7 +149,7 @@ PRCodeblock >> handleClassAddedOrRemovedAnnouncement: aClassAdded [
 	self gtDocument styleTextRequest
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> handleClassRenamedAnnouncement: aClassRenamed [ 
 	| aSymbols |
 	aSymbols := self cachedSymbols.
@@ -160,7 +160,7 @@ PRCodeblock >> handleClassRenamedAnnouncement: aClassRenamed [
 	self gtDocument styleTextRequest
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> handleMethodAnnouncement: aMethodModified [ 
 	| aSymbols |
 	aSymbols := self cachedSymbols.
@@ -171,7 +171,7 @@ PRCodeblock >> handleMethodAnnouncement: aMethodModified [
 	self gtDocument styleTextRequest
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> hasResult [
 	^ self gtDocument 
 		cacheAt: self cacheKey 
@@ -179,12 +179,12 @@ PRCodeblock >> hasResult [
 		ifAbsent: [ false ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> hasSourceCode [
 	^ self text trimBoth isNotEmpty
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> heightParameterValue [
 	^ GtDocumentUtility
 		valueOf: GtDocumentConstants heightParameterName
@@ -196,7 +196,7 @@ PRCodeblock >> heightParameterValue [
 		defaultValue: [ GtDocumentConstants defaultPreviewHeight ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> newRunButtonAttribute [
 	^ GtButtonAttribute new
 		beAppend;
@@ -205,7 +205,7 @@ PRCodeblock >> newRunButtonAttribute [
 			action: self evaluationAction) ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> parameterStopPositionInText: aBlRope [
 	| aLineBreakIndex |
 	aLineBreakIndex := (aBlRope from: self start to: self stop) finder
@@ -214,7 +214,7 @@ PRCodeblock >> parameterStopPositionInText: aBlRope [
 	^ aLineBreakIndex + self start - 1
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> parsePharoCode [
 	| anAst aVisitor |
 	anAst := GtPharoParser 
@@ -228,7 +228,7 @@ PRCodeblock >> parsePharoCode [
 	self registerToSystemChanges.
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> registerToSystemChanges [
 	self gtDocument systemAnnouncer
 		when: MethodAdded , MethodRemoved
@@ -245,7 +245,7 @@ PRCodeblock >> registerToSystemChanges [
 			for: self gtSubscriber
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> resultPreviewAttributes [
 	^ {
 		GtResizablePreviewAttribute new
@@ -256,7 +256,7 @@ PRCodeblock >> resultPreviewAttributes [
 		}
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> runButtonLabel [
 	<return: #String or: nil>
 	(self label isString and: [ self label isEmpty not ])
@@ -264,12 +264,12 @@ PRCodeblock >> runButtonLabel [
 	^ nil
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> scriptStartPositionInText: aBlText [
 	^ (self parameterStopPositionInText: aBlText) + 1
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> scriptStopPositionInText: aBlRope [
 	"Answer the index of the last character of the code (before the line end)"
 
@@ -288,7 +288,7 @@ PRCodeblock >> scriptStopPositionInText: aBlRope [
 
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> showParameterValue [
 	<return: #Symbol>
 	^ GtDocumentUtility 
@@ -301,14 +301,14 @@ PRCodeblock >> showParameterValue [
 		defaultValue: [ GtDocumentConstants defaultShowSelector ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> stopEndMarkupInText: aBlRope [
 	"Answer the index of the last character of the code block marker (before the final line-end)"
 
 	^ self stop - 1
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> styleClosingBracketsInText: aBlRope [
 	| aStopEndMarkup |
 	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
@@ -318,7 +318,7 @@ PRCodeblock >> styleClosingBracketsInText: aBlRope [
 			foreground: GtDocumentConstants subtleColor
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> styleParametersInText: aBlRope [
 	(aBlRope
 		from: self start
@@ -326,7 +326,7 @@ PRCodeblock >> styleParametersInText: aBlRope [
 			foreground: GtDocumentConstants subtleColor
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> styleResultPreviewInText: aBlRope [
 	| aStopEndMarkup |
 	self cachedDisplayPreview ifFalse: [ ^ self ].
@@ -335,7 +335,7 @@ PRCodeblock >> styleResultPreviewInText: aBlRope [
 		attributes: self resultPreviewAttributes
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> styleRunButtonInText: aBlRope [
 	| aStopEndMarkup |
 	aStopEndMarkup := self stopEndMarkupInText: aBlRope.
@@ -343,7 +343,7 @@ PRCodeblock >> styleRunButtonInText: aBlRope [
 		attribute: self newRunButtonAttribute
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> styleScriptInText: aBlText [
 	(aBlText
 		from: (self scriptStartPositionInText: aBlText)
@@ -351,14 +351,12 @@ PRCodeblock >> styleScriptInText: aBlText [
 		glamorousCodeFontAndSize
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> styleSmalltalkInText: aBlRope [
-	| styler strategy |
-	styler := BrRBTextStyler new.
-	strategy := GtHighlightingBindingStrategy new
-		bindings: self gtDocument variableBindings.
-	styler workspace: strategy.
-	styler
+	| aStyler |
+	aStyler := BrRBTextStyler new.
+	aStyler workspace: self gtDocument variableBindings.
+	aStyler
 		style:
 			(aBlRope
 				from: (self scriptStartPositionInText: aBlRope)
@@ -366,7 +364,7 @@ PRCodeblock >> styleSmalltalkInText: aBlRope [
 	self styleScriptInText: aBlRope.
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> styleTextWithMarkup: aBlRope [ 
 	super styleTextWithMarkup: aBlRope.
 	self styleParametersInText: aBlRope.
@@ -393,7 +391,7 @@ PRCodeblock >> styleTextWithMarkup: aBlRope [
 	self hasResult ifTrue: [ self styleResultPreviewInText: aBlRope ].
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> styleTextWithoutInteractions: aBlRope [ 
 	| aStopEndMarkup |
 	self styleParametersInText: aBlRope.
@@ -405,7 +403,7 @@ PRCodeblock >> styleTextWithoutInteractions: aBlRope [
 	self styleScriptInText: aBlRope.
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRCodeblock >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.

@@ -1,6 +1,6 @@
-Extension { #name : #PRObject }
+Extension { #name : 'PRObject' }
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRObject >> gtProperties: aView [
 	<gtView>
 	properties ifNil: [ ^ aView empty ].

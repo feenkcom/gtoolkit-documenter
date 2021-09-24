@@ -1,6 +1,6 @@
-Extension { #name : #PRHeader }
+Extension { #name : 'PRHeader' }
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRHeader >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	(aBlRope
@@ -13,7 +13,7 @@ PRHeader >> styleTextWithMarkup: aBlRope [
 			paragraphMargin: (self constants headerMarginForLevel: self level).
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRHeader >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithMarkup: aBlRope.

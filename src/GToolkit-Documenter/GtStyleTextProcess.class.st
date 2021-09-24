@@ -1,6 +1,6 @@
 Class {
-	#name : #GtStyleTextProcess,
-	#superclass : #Object,
+	#name : 'GtStyleTextProcess',
+	#superclass : 'Object',
 	#traits : 'TBlDebug + TGtDocumentConstants',
 	#classTraits : 'TBlDebug classTrait + TGtDocumentConstants classTrait',
 	#instVars : [
@@ -10,32 +10,32 @@ Class {
 		'mutex',
 		'delay'
 	],
-	#category : #'GToolkit-Documenter-Styler'
+	#category : 'GToolkit-Documenter-Styler'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStyleTextProcess class >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStyleTextProcess >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStyleTextProcess >> delay [
 	<return: #Duration>
 	^ delay
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStyleTextProcess >> document [
 	<return: #GtDocumenter>
 	^ document
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStyleTextProcess >> document: aGt2Document [
 	self 
 		assert: [ aGt2Document notNil ] 
@@ -43,7 +43,7 @@ GtStyleTextProcess >> document: aGt2Document [
 	document := aGt2Document
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtStyleTextProcess >> initialize [
 	super initialize.
 	document := nil.
@@ -53,21 +53,21 @@ GtStyleTextProcess >> initialize [
 	updateRequested := Semaphore new.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtStyleTextProcess >> isActive [
 	^ process notNil and: [ 
 		process isTerminated not and: [ 
 			process isTerminating not ] ]
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 GtStyleTextProcess >> request [
 	mutex critical: [ 
 		updateRequested signal.
 		self isActive ifFalse: [ self start ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GtStyleTextProcess >> start [
 	process := [ 
 		updateRequested wait.
@@ -82,7 +82,7 @@ GtStyleTextProcess >> start [
 			named: 'Documenter Text Styler'
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GtStyleTextProcess >> styleText [
 	self document editor styleText
 ]

@@ -8,24 +8,24 @@ ${example:GtDocumenterExamples>>#documentWithCodeblock|noCode=true|previewExpand
 
 "
 Class {
-	#name : #GtDocumenterEditorVariableBindingsModel,
-	#superclass : #BrWidgetModel,
+	#name : 'GtDocumenterEditorVariableBindingsModel',
+	#superclass : 'BrWidgetModel',
 	#traits : 'TGtDocumentConstants',
 	#classTraits : 'TGtDocumentConstants classTrait',
 	#instVars : [
 		'variableBindings'
 	],
-	#category : #'GToolkit-Documenter-! Editor - Model'
+	#category : 'GToolkit-Documenter-! Editor - Model'
 }
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 GtDocumenterEditorVariableBindingsModel >> defaultVariableBindings [
-	^ GtSnippetBindings new
-			at: self constants thisDocument 
+	^ GtLocalVariablesBindings new
+			localAt: self constants thisDocument 
 			put: self.
 ]
 
-{ #category : #'gt-extensions' }
+{ #category : 'gt-extensions' }
 GtDocumenterEditorVariableBindingsModel >> gtVariableBindingsFor: aView [
 	<gtView>
 	variableBindings ifNil: [ ^ aView empty ].
@@ -37,20 +37,21 @@ GtDocumenterEditorVariableBindingsModel >> gtVariableBindingsFor: aView [
 		actionUpdateButtonTooltip: 'Update variable list'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocumenterEditorVariableBindingsModel >> initialize [
 	super initialize.
 	variableBindings := self defaultVariableBindings.
 	
 ]
 
-{ #category : #'api - variables' }
+{ #category : 'api - variables' }
 GtDocumenterEditorVariableBindingsModel >> variableBindings [
-	<return: #GtSnippetBindings>
+	<return: #TGtVariablesBindings>
+
 	^ variableBindings
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocumenterEditorVariableBindingsModel >> variableBindings: aGtSnippetBindings [
 	self 
 		assert: [ aGtSnippetBindings isNotNil ] 

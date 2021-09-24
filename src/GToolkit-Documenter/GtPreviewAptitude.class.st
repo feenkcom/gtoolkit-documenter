@@ -1,10 +1,10 @@
 Class {
-	#name : #GtPreviewAptitude,
-	#superclass : #BrAptitude,
-	#category : #'GToolkit-Documenter-Brick - Looks'
+	#name : 'GtPreviewAptitude',
+	#superclass : 'BrAptitude',
+	#category : 'GToolkit-Documenter-Brick - Looks'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtPreviewAptitude >> initialize [
 	super initialize.
 	self add: BrShadowAptitude new.

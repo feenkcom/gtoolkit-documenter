@@ -1,11 +1,11 @@
-Extension { #name : #EpLog }
+Extension { #name : 'EpLog' }
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 EpLog >> gtReset [
 	store gtReset
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 EpLog >> theLog [
 	^ self
 ]

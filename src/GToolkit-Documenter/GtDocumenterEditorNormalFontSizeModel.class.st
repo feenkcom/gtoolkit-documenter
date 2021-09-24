@@ -4,36 +4,36 @@ I am used by ${class:GtDocumenterEditor}$.
 
 "
 Class {
-	#name : #GtDocumenterEditorNormalFontSizeModel,
-	#superclass : #BrWidgetModel,
+	#name : 'GtDocumenterEditorNormalFontSizeModel',
+	#superclass : 'BrWidgetModel',
 	#instVars : [
 		'normalFontSize'
 	],
-	#category : #'GToolkit-Documenter-! Editor - Model'
+	#category : 'GToolkit-Documenter-! Editor - Model'
 }
 
-{ #category : #'api - font size' }
+{ #category : 'api - font size' }
 GtDocumenterEditorNormalFontSizeModel >> decreaseNormalFontSize [
 	self resizeNormalFontSizeBy: -2
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 GtDocumenterEditorNormalFontSizeModel >> defaultFontSize [
 	^ 16
 ]
 
-{ #category : #'api - font size' }
+{ #category : 'api - font size' }
 GtDocumenterEditorNormalFontSizeModel >> increaseNormalFontSize [
 	self resizeNormalFontSizeBy: 2
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocumenterEditorNormalFontSizeModel >> initialize [
 	super initialize.
 	normalFontSize := self defaultFontSize.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtDocumenterEditorNormalFontSizeModel >> initializeListeners [
 	super initializeListeners.
 	
@@ -42,13 +42,13 @@ GtDocumenterEditorNormalFontSizeModel >> initializeListeners [
 		reply: [ :aResponse | aResponse normalFontSize: self normalFontSize ].
 ]
 
-{ #category : #'api - font size' }
+{ #category : 'api - font size' }
 GtDocumenterEditorNormalFontSizeModel >> normalFontSize [
 	"Return a normal text font size"
 	^ normalFontSize
 ]
 
-{ #category : #'api - font size' }
+{ #category : 'api - font size' }
 GtDocumenterEditorNormalFontSizeModel >> normalFontSize: aNumber [
 	self 
 		assert: [ aNumber isNotNil ] 
@@ -61,13 +61,13 @@ GtDocumenterEditorNormalFontSizeModel >> normalFontSize: aNumber [
 	self notifyNormalFontSizeChanged.
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 GtDocumenterEditorNormalFontSizeModel >> notifyNormalFontSizeChanged [
 	self dispatchEvent: (GtDocumenterNormalFontSizeChanged new 
 		normalFontSize: self normalFontSize)
 ]
 
-{ #category : #'api - font size' }
+{ #category : 'api - font size' }
 GtDocumenterEditorNormalFontSizeModel >> resizeNormalFontSizeBy: anInteger [
 	| aNewFontSize |
 	self 

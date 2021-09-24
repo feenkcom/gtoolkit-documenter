@@ -2,29 +2,29 @@
 I am used by ${class:GtDocumenterExamples}$.
 "
 Class {
-	#name : #GtDocumenterExamplesUtility,
-	#superclass : #Object,
+	#name : 'GtDocumenterExamplesUtility',
+	#superclass : 'Object',
 	#traits : 'TGtDocumentConstants + TBlDebug',
 	#classTraits : 'TGtDocumentConstants classTrait + TBlDebug classTrait',
-	#category : #'GToolkit-Documenter-Examples'
+	#category : 'GToolkit-Documenter-Examples'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocumenterExamplesUtility class >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #'api - text' }
+{ #category : 'api - text' }
 GtDocumenterExamplesUtility class >> deleteText: aBlRope from: aFromIndex to: aToIndex [ 
 	aBlRope delete: aFromIndex to: aToIndex
 ]
 
-{ #category : #'api - text' }
+{ #category : 'api - text' }
 GtDocumenterExamplesUtility class >> insertText: anInsertingBlRope at: anIndex in: anEditedBlRope [ 
 	anEditedBlRope insertText: anInsertingBlRope at: anIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtDocumenterExamplesUtility >> constants [
 	^ GtDocumentConstants
 ]

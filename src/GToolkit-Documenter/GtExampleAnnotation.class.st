@@ -1,14 +1,14 @@
 Class {
-	#name : #GtExampleAnnotation,
-	#superclass : #GtAnnotation,
+	#name : 'GtExampleAnnotation',
+	#superclass : 'GtAnnotation',
 	#instVars : [
 		'referencedExample',
 		'example'
 	],
-	#category : #'GToolkit-Documenter-Annotations'
+	#category : 'GToolkit-Documenter-Annotations'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtExampleAnnotation class >> possibleParameters [
 	^ {
 		self constants nameParameterName.
@@ -28,17 +28,17 @@ GtExampleAnnotation class >> possibleParameters [
 		}
 ]
 
-{ #category : #protected }
+{ #category : 'protected' }
 GtExampleAnnotation class >> tag [
 	^ self constants exampleAnnotationName
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 GtExampleAnnotation >> accept: aVisitor [
 	^ aVisitor visitGt2ExampleAnnotation: self
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : 'accessing - parameter values' }
 GtExampleAnnotation >> alignmentParameterValue [
 	^ GtDocumentUtility
 			valueOf: GtDocumentConstants alignmentParameterName
@@ -50,19 +50,19 @@ GtExampleAnnotation >> alignmentParameterValue [
 			defaultValue: [ GtDocumentConstants defaultAlignment ]
 ]
 
-{ #category : #'private - cache' }
+{ #category : 'private - cache' }
 GtExampleAnnotation >> annotationCacheValueClass [
 	^ GtExampleAnnotationCacheValue
 ]
 
-{ #category : #'private - actions' }
+{ #category : 'private - actions' }
 GtExampleAnnotation >> browseReferenceFrom: anEvent [ 
 	anEvent modifiers isShift ifTrue: [ ^ self ].
 	self isExampleDefined ifFalse: [ ^ self inform: 'Example method does not exist' ].
 	anEvent target phlow spawnObject: self referencedExample.
 ]
 
-{ #category : #'private - cache' }
+{ #category : 'private - cache' }
 GtExampleAnnotation >> cachedExample [
 	<return: #GtExampleWithResult>
 	| anExampleOrNil |
@@ -81,13 +81,13 @@ GtExampleAnnotation >> cachedExample [
 	^ anExampleOrNil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtExampleAnnotation >> canBeExecuted [
 	"Return true if the example can be executed"
 	^ self isPreviewDefined and: [ self cachedExample canBeExecuted ]
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : 'accessing - parameter values' }
 GtExampleAnnotation >> codeExpanded [
 	<return: #Boolean>
 	^ self utility 
@@ -97,18 +97,18 @@ GtExampleAnnotation >> codeExpanded [
 		defaultValue: [ true ]
 ]
 
-{ #category : #compatibility }
+{ #category : 'compatibility' }
 GtExampleAnnotation >> doNotDisplaySourceCodeParameterValue [
 	<compatibility>
 	^ self noCode
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtExampleAnnotation >> doesReferenceExist [
 	^ self isExampleDefined
 ]
 
-{ #category : #'private - cache' }
+{ #category : 'private - cache' }
 GtExampleAnnotation >> example [
 	"You should use #cachedExample method by default, not this one."
 
@@ -120,24 +120,24 @@ GtExampleAnnotation >> example [
 	^ example
 ]
 
-{ #category : #'private - styling' }
+{ #category : 'private - styling' }
 GtExampleAnnotation >> examplePreviewAttributeClass [
 	^ GtExamplePreviewAttribute
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 GtExampleAnnotation >> exampleReturnValue [
 	"Return an example return value."
 	self canBeExecuted ifFalse: [ ^ '<cannot execute>' ].
 	^ self cachedExample returnValue.
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : 'accessing - parameter values' }
 GtExampleAnnotation >> expandedDefaultValue [
 	^ true
 ]
 
-{ #category : #'announcement handling' }
+{ #category : 'announcement handling' }
 GtExampleAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAdded [ 
 	(self referencedExample notNil and: [ 
 		aClassAdded classAffected originalName = self referencedExample parentName ])
@@ -145,7 +145,7 @@ GtExampleAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAdded [
 	self gtDocument styleTextRequest
 ]
 
-{ #category : #'announcement handling' }
+{ #category : 'announcement handling' }
 GtExampleAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [ 
 	(self referencedExample notNil and: [ 
 			aClassRenamed newName = self referencedExample parentName or: [ 
@@ -154,16 +154,16 @@ GtExampleAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [
 	self gtDocument styleTextRequest
 ]
 
-{ #category : #'announcement handling' }
+{ #category : 'announcement handling' }
 GtExampleAnnotation >> handleExampleExecuted: aGtExampleExecuted [
 	self shouldSetResultVariable ifFalse: [ ^ self ].
 	aGtExampleExecuted hasResult ifFalse: [ ^ self ].
 	self gtDocument variableBindings 
-		at: self resultVariableName put: aGtExampleExecuted returnValue.
+		localAt: self resultVariableName put: aGtExampleExecuted returnValue.
 	self gtDocument styleTextRequest
 ]
 
-{ #category : #'announcement handling' }
+{ #category : 'announcement handling' }
 GtExampleAnnotation >> handleMethodAnnouncement: aMethodModified [ 
 	(self referencedExample notNil and: [ 
 		aMethodModified classAffected name = self referencedExample parentName  
@@ -172,19 +172,19 @@ GtExampleAnnotation >> handleMethodAnnouncement: aMethodModified [
 	self gtDocument styleTextRequest
 ]
 
-{ #category : #compatibility }
+{ #category : 'compatibility' }
 GtExampleAnnotation >> hasCaption [
 	<compatibility>
 	^ false
 ]
 
-{ #category : #compatibility }
+{ #category : 'compatibility' }
 GtExampleAnnotation >> hasLabel [
 	<compatibility>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtExampleAnnotation >> isAlignmentParameterValueDefined [
 	"Return true if an alignment parameter is properly defined"
 	<return: #Boolean>
@@ -196,7 +196,7 @@ GtExampleAnnotation >> isAlignmentParameterValueDefined [
 		defaultValue: [ false ].
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtExampleAnnotation >> isExampleDefined [
 	"Return true if an example method is defined in the system"
 	^ self referencedExample notNil and: [ 
@@ -205,14 +205,14 @@ GtExampleAnnotation >> isExampleDefined [
 				self referencedExample compiledMethod gtExample isNotNil ] ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtExampleAnnotation >> isInlinedValueExpected [
 	"Return true if an inlined value is expected and can be provided (example executed)"
 	<return: #Boolean>
 	^ self isLabelParameterValueDefined and: [ self canBeExecuted ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtExampleAnnotation >> isLabelParameterValueDefined [
 	"Return true if an inlined parameter is properly defined"
 	<return: #Boolean>
@@ -224,18 +224,18 @@ GtExampleAnnotation >> isLabelParameterValueDefined [
 		defaultValue: [ false ].
 ]
 
-{ #category : #compatibility }
+{ #category : 'compatibility' }
 GtExampleAnnotation >> isMethodDefined [
 	<compatibility>
 	^ self isExampleDefined
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtExampleAnnotation >> isPreviewDefined [
 	^ self isExampleDefined
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : 'accessing - parameter values' }
 GtExampleAnnotation >> labelParameterValue [
 	<return: #Symbol>
 	^ self utility 
@@ -248,7 +248,7 @@ GtExampleAnnotation >> labelParameterValue [
 		defaultValue: [ nil ]
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 GtExampleAnnotation >> labelText [
 	"Return a string that represents an example return value. 
 	This string is supposed to be inlined in a document text."
@@ -267,19 +267,19 @@ GtExampleAnnotation >> labelText [
 		do: [ :anException | anException printString ]
 ]
 
-{ #category : #compatibility }
+{ #category : 'compatibility' }
 GtExampleAnnotation >> methodDefinition [
 	<compatibility>
 	^ self referencedExample
 ]
 
-{ #category : #compatibility }
+{ #category : 'compatibility' }
 GtExampleAnnotation >> methodName [
 	<compatibility>
 	^ self referencedExample fullName
 ]
 
-{ #category : #'private - styling' }
+{ #category : 'private - styling' }
 GtExampleAnnotation >> newExamplePreviewAttribute [
 	^ self examplePreviewAttributeClass new
 		withCache: self selector: #cachedPreview;
@@ -292,7 +292,7 @@ GtExampleAnnotation >> newExamplePreviewAttribute [
 		previewHeight: self previewHeight
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : 'accessing - parameter values' }
 GtExampleAnnotation >> noCode [
 	<return: #Boolean>
 	^ self utility 
@@ -302,17 +302,17 @@ GtExampleAnnotation >> noCode [
 		defaultValue: [ false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtExampleAnnotation >> objectToPreview [
 	^ self cachedExample
 ]
 
-{ #category : #'private - styling' }
+{ #category : 'private - styling' }
 GtExampleAnnotation >> previewAttributes [
 	^ { self newExamplePreviewAttribute }
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : 'accessing - parameter values' }
 GtExampleAnnotation >> previewExpanded [
 	<return: #Boolean>
 	^ self utility 
@@ -322,7 +322,7 @@ GtExampleAnnotation >> previewExpanded [
 		defaultValue: [ false ]
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : 'accessing - parameter values' }
 GtExampleAnnotation >> previewHeight [
 	^ self utility 
 		valueOf: self constants previewHeightParameterName
@@ -334,7 +334,7 @@ GtExampleAnnotation >> previewHeight [
 		defaultValue: [ self constants defaultPreviewHeight ]
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : 'accessing - parameter values' }
 GtExampleAnnotation >> previewShowSelector [
 	<return: #Symbol>
 	^ self utility 
@@ -347,12 +347,12 @@ GtExampleAnnotation >> previewShowSelector [
 		defaultValue: [ self defaultShowSelector ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtExampleAnnotation >> referenceParameterName [
 	^ self constants nameParameterName 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtExampleAnnotation >> referencedExample [
 	<return: #RGMethodDefinition or: nil>
 	^ referencedExample ifNil: [ referencedExample := self utility 
@@ -366,7 +366,7 @@ GtExampleAnnotation >> referencedExample [
 		defaultValue: [ nil ] ]
 ]
 
-{ #category : #subscriptions }
+{ #category : 'subscriptions' }
 GtExampleAnnotation >> registerToSystemChanges [
 	self gtDocument systemAnnouncer
 		when: MethodAdded , MethodRemoved
@@ -387,7 +387,7 @@ GtExampleAnnotation >> registerToSystemChanges [
 			for: self gtSubscriber
 ]
 
-{ #category : #'accessing - parameter values' }
+{ #category : 'accessing - parameter values' }
 GtExampleAnnotation >> resultVariableName [
 	<return: #Symbol or: nil>
 	^ self utility 
@@ -400,13 +400,13 @@ GtExampleAnnotation >> resultVariableName [
 		defaultValue: [ nil ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GtExampleAnnotation >> shouldSetResultVariable [
 	<return: #Boolean>
 	^ self resultVariableName isNotNil
 ]
 
-{ #category : #'api - style' }
+{ #category : 'api - style' }
 GtExampleAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
@@ -414,7 +414,7 @@ GtExampleAnnotation >> styleTextWithMarkup: aBlRope [
 	self registerToSystemChanges
 ]
 
-{ #category : #'api - style' }
+{ #category : 'api - style' }
 GtExampleAnnotation >> styleTextWithoutInteractions: aBlRope [
 	| aLinkNode |
 	aLinkNode := self utility linkNodeForAnnotation: self.
@@ -422,7 +422,7 @@ GtExampleAnnotation >> styleTextWithoutInteractions: aBlRope [
 	self utility hideAllButLinkInText: aBlRope forAnnotation: self.
 ]
 
-{ #category : #'api - style' }
+{ #category : 'api - style' }
 GtExampleAnnotation >> styleTextWithoutMarkup: aBlRope [ 
 	super styleTextWithoutMarkup: aBlRope.
 	self utility subtleMarkupsInText: aBlRope start: self start stop: self stop.
@@ -448,7 +448,7 @@ GtExampleAnnotation >> styleTextWithoutMarkup: aBlRope [
 				self utility stylePreviewInText: aBlRope forNode: self ].
 ]
 
-{ #category : #subscriptions }
+{ #category : 'subscriptions' }
 GtExampleAnnotation >> subscribeToExample [
 	^ example announcer
 		when: GtExampleExecuted

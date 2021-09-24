@@ -1,21 +1,21 @@
 Class {
-	#name : #GtCacheValue,
-	#superclass : #Object,
+	#name : 'GtCacheValue',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'clearActions'
 	],
-	#category : #'GToolkit-Documenter-Cache'
+	#category : 'GToolkit-Documenter-Cache'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCacheValue >> clearAction: aValuable [
 	"Add a clear action that should be performed by GtStyledNodeBuilder"
 	self clearActions addLast: aValuable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtCacheValue >> clearActions [
 	^ clearActions ifNil: [ clearActions := OrderedCollection new: 2 ]
 ]

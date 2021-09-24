@@ -1,6 +1,6 @@
 Class {
-	#name : #GtStylerVisitor,
-	#superclass : #GtDocumentVisitor,
+	#name : 'GtStylerVisitor',
+	#superclass : 'GtDocumentVisitor',
 	#instVars : [
 		'text',
 		'subscriber',
@@ -11,43 +11,43 @@ Class {
 		'symbolStyler',
 		'mode'
 	],
-	#category : #'GToolkit-Documenter-Styler'
+	#category : 'GToolkit-Documenter-Styler'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStylerVisitor class >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GtStylerVisitor class >> utility [
 	^ GtDocumentUtility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStylerVisitor >> colorStyler [
 	^ colorStyler ifNil: [ colorStyler := GtColorStyler new ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStylerVisitor >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtStylerVisitor >> initialize [
 	super initialize.
 	annotationCounter := 0.
 	listItemStyler := GtNullListItemStyler uniqueInstance.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStylerVisitor >> mode [
 	<return: #GtStylerStrategy>
 	^ mode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStylerVisitor >> mode: aGt2StylerStrategy [
 	self 
 		assert: [ aGt2StylerStrategy notNil ] 
@@ -55,7 +55,7 @@ GtStylerVisitor >> mode: aGt2StylerStrategy [
 	mode := aGt2StylerStrategy
 ]
 
-{ #category : #'private - styling' }
+{ #category : 'private - styling' }
 GtStylerVisitor >> styleNode: aPRDocumentItem [
 	aPRDocumentItem
 		gtDocument: self document;
@@ -63,28 +63,28 @@ GtStylerVisitor >> styleNode: aPRDocumentItem [
 		styleText: self text using: self mode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStylerVisitor >> subscriber [
 	^ subscriber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStylerVisitor >> subscriber: anObject [
 	subscriber := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStylerVisitor >> symbolStyler [
 	^ symbolStyler ifNil: [ symbolStyler := GtSymbolStyler new ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStylerVisitor >> text [
 	<return: #BlRope>
 	^ text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtStylerVisitor >> text: aBlRope [
 	self
 		assert: [ aBlRope notNil ] 
@@ -92,25 +92,25 @@ GtStylerVisitor >> text: aBlRope [
 	text := aBlRope
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GtStylerVisitor >> utility [
 	^ GtDocumentUtility
 ]
 
-{ #category : #'visiting-annotations' }
+{ #category : 'visiting-annotations' }
 GtStylerVisitor >> visitAnnotation: anAnnotation [
 	annotationCounter := annotationCounter + 1.
 	anAnnotation counter: annotationCounter.
 	super visitAnnotation: anAnnotation
 ]
 
-{ #category : #'visiting-document' }
+{ #category : 'visiting-document' }
 GtStylerVisitor >> visitCommentedLine: aPRCommentedLine [
 	self styleNode: aPRCommentedLine.
 	super visitCommentedLine: aPRCommentedLine
 ]
 
-{ #category : #'visiting-document' }
+{ #category : 'visiting-document' }
 GtStylerVisitor >> visitDefinitionList: aPRDefinitionList [
 	| aPreviousListStyler |
 	aPreviousListStyler := listItemStyler.
@@ -119,32 +119,32 @@ GtStylerVisitor >> visitDefinitionList: aPRDefinitionList [
 	listItemStyler := aPreviousListStyler.
 ]
 
-{ #category : #'visiting-document' }
+{ #category : 'visiting-document' }
 GtStylerVisitor >> visitDocumentGroup: aPRDocumentGroup [
 	self styleNode: aPRDocumentGroup.
 	super visitDocumentGroup: aPRDocumentGroup.
 ]
 
-{ #category : #'visiting-document' }
+{ #category : 'visiting-document' }
 GtStylerVisitor >> visitDocumentItem: aPRDocumentItem [
 	self styleNode: aPRDocumentItem.
 	super visitDocumentItem: aPRDocumentItem.
 ]
 
-{ #category : #'visiting-document' }
+{ #category : 'visiting-document' }
 GtStylerVisitor >> visitList: aPRList [
 	"(self text from: aPRList start to: aPRList stop)
 		paragraphMargin: (BlInsets top: 15 left: 20 bottom: 15 right: 20)."
 	super visitList: aPRList.
 ]
 
-{ #category : #'visiting-document' }
+{ #category : 'visiting-document' }
 GtStylerVisitor >> visitListItem: aPRListItem [
 	aPRListItem gtListItemStyler: listItemStyler updateForNewListItem copy.
 	super visitListItem: aPRListItem
 ]
 
-{ #category : #'visiting-document' }
+{ #category : 'visiting-document' }
 GtStylerVisitor >> visitOrderedList: aPROrderedList [
 	| aPreviousListStyler |
 	aPreviousListStyler := listItemStyler.
@@ -153,7 +153,7 @@ GtStylerVisitor >> visitOrderedList: aPROrderedList [
 	listItemStyler := aPreviousListStyler.
 ]
 
-{ #category : #'visiting-parameters' }
+{ #category : 'visiting-parameters' }
 GtStylerVisitor >> visitParameter: aPRParameter [
 	aPRParameter isValid ifFalse: [ 
 		(self text
@@ -163,14 +163,14 @@ GtStylerVisitor >> visitParameter: aPRParameter [
 	super visitParameter: aPRParameter
 ]
 
-{ #category : #'visiting-document' }
+{ #category : 'visiting-document' }
 GtStylerVisitor >> visitRaw: aPRRaw [
 	aPRRaw start ifNil: [ ^ self ].
 	self flag: 'fix Pillar'.
 	super visitRaw: aPRRaw
 ]
 
-{ #category : #'visiting-document' }
+{ #category : 'visiting-document' }
 GtStylerVisitor >> visitUndefinedAnnotation: anAnnotation [
 	(self text
 		from: anAnnotation start 
@@ -179,7 +179,7 @@ GtStylerVisitor >> visitUndefinedAnnotation: anAnnotation [
 	super visitUndefinedAnnotation: anAnnotation
 ]
 
-{ #category : #'visiting-document' }
+{ #category : 'visiting-document' }
 GtStylerVisitor >> visitUnorderedList: aPRUnorderedList [
 	| aPreviousListStyler |
 	aPreviousListStyler := listItemStyler.

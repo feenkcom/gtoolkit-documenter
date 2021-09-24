@@ -1,6 +1,6 @@
-Extension { #name : #PRInputFileAnnotation }
+Extension { #name : 'PRInputFileAnnotation' }
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRInputFileAnnotation >> alignmentParameterValue [
 	^ GtDocumentUtility
 			valueOf: GtDocumentConstants alignmentParameterName
@@ -12,29 +12,29 @@ PRInputFileAnnotation >> alignmentParameterValue [
 			defaultValue: [ GtDocumentConstants defaultAlignment ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRInputFileAnnotation >> browseReferenceFrom: anEvent [
 	anEvent modifiers isShift ifTrue: [ ^ self ].
 	self doesReferenceExist ifFalse: [ ^ self inform: 'Input file does not exist' ].
 	anEvent target phlow spawnObject: self fileReference.
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRInputFileAnnotation class >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRInputFileAnnotation >> defaultShowSelector [
 	^ GtDocumentConstants defaultShowSelector
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRInputFileAnnotation >> doesReferenceExist [
 	^ self fileReference ifNotNil: #exists ifNil: false
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRInputFileAnnotation >> fileReference [
 	<return: #FileReference or: nil>
 	^ self 
@@ -60,7 +60,7 @@ PRInputFileAnnotation >> fileReference [
 				defaultValue: [ nil ] ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRInputFileAnnotation class >> gtDocumenterParameters [
 	^ {
 		#path.
@@ -68,7 +68,7 @@ PRInputFileAnnotation class >> gtDocumenterParameters [
 	}.
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRInputFileAnnotation >> heightParameterValue [
 	^ GtDocumentUtility
 			valueOf: GtDocumentConstants heightParameterName
@@ -80,17 +80,17 @@ PRInputFileAnnotation >> heightParameterValue [
 			defaultValue: [ GtDocumentConstants defaultPreviewHeight ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRInputFileAnnotation >> isPreviewDefined [
 	^ self doesReferenceExist
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRInputFileAnnotation >> objectToPreview [
 	^ self fileReference
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRInputFileAnnotation >> previewAttributes [
 	^ { 
 		GtResizablePreviewAttribute new
@@ -101,13 +101,13 @@ PRInputFileAnnotation >> previewAttributes [
 	}
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRInputFileAnnotation >> referenceParameterName [
 	"Return an annotation parameter name that holds a referenced object"
 	^ GtDocumentConstants pathParameterName
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRInputFileAnnotation >> referenceParameterValue [
 	<return: #String>
 	^ self utility 
@@ -118,12 +118,12 @@ PRInputFileAnnotation >> referenceParameterValue [
 		defaultValue: [ 'N/A' ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRInputFileAnnotation >> showEmptyValue [
 	^ self defaultShowSelector
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRInputFileAnnotation >> showParameterValue [
 	<return: #Symbol>
 	^ GtDocumentUtility
@@ -136,12 +136,12 @@ PRInputFileAnnotation >> showParameterValue [
 		defaultValue: [ self defaultShowSelector ]
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRInputFileAnnotation >> styleExpandingPreviewInText: aBlRope [
 	GtDocumentUtility styleExpandingPreviewInText: aBlRope forNode: self
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRInputFileAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self utility styleLinkInText: aBlRope forAnnotationNode: self.
@@ -156,7 +156,7 @@ PRInputFileAnnotation >> styleTextWithMarkup: aBlRope [
 	
 ]
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRInputFileAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.

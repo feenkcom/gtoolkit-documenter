@@ -1,6 +1,6 @@
-Extension { #name : #PRBasicObject }
+Extension { #name : 'PRBasicObject' }
 
-{ #category : #'*GToolkit-Documenter' }
+{ #category : '*GToolkit-Documenter' }
 PRBasicObject >> gtChildren [
 	^ #()
 ]

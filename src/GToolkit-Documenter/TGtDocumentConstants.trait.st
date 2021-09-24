@@ -1,14 +1,14 @@
 Trait {
-	#name : #TGtDocumentConstants,
-	#category : #'GToolkit-Documenter-Utility'
+	#name : 'TGtDocumentConstants',
+	#category : 'GToolkit-Documenter-Utility'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TGtDocumentConstants classSide >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TGtDocumentConstants >> constants [
 	^ GtDocumentConstants
 ]

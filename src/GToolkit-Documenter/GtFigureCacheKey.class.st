@@ -1,35 +1,35 @@
 Class {
-	#name : #GtFigureCacheKey,
-	#superclass : #GtCacheKey,
+	#name : 'GtFigureCacheKey',
+	#superclass : 'GtCacheKey',
 	#instVars : [
 		'fileName'
 	],
-	#category : #'GToolkit-Documenter-Cache'
+	#category : 'GToolkit-Documenter-Cache'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 GtFigureCacheKey >> = anObject [
 	^ super = anObject and: [
 		self fileName = anObject fileName ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtFigureCacheKey >> fileName [
 	^ fileName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtFigureCacheKey >> fileName: anObject [
 	fileName := anObject
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 GtFigureCacheKey >> hash [
 	^ super hash
 		bitXor: self fileName hash
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 GtFigureCacheKey >> printOn: aStream [
 	aStream 
 		nextPutAll: 'figure key';
