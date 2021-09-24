@@ -104,7 +104,7 @@ GtDocumenterEditor >> initialize [
 	self viewModel add: (subscriptionModel := GtDocumenterEditorSystemSubscriptionModel new).
 	self viewModel add: (variableBindindsModel := GtDocumenterEditorVariableBindingsModel new).
 	self variableBindings
-			at: self constants thisDocument 
+			localAt: self constants thisDocument 
 			put: self.
 	self editor stylerStrategy: GtDocumenterTimeLimitedTextStylerTaskItStrategy new.
 	self styler: self defaultStyler.

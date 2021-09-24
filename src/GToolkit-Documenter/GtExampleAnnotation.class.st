@@ -159,7 +159,7 @@ GtExampleAnnotation >> handleExampleExecuted: aGtExampleExecuted [
 	self shouldSetResultVariable ifFalse: [ ^ self ].
 	aGtExampleExecuted hasResult ifFalse: [ ^ self ].
 	self gtDocument variableBindings 
-		at: self resultVariableName put: aGtExampleExecuted returnValue.
+		localAt: self resultVariableName put: aGtExampleExecuted returnValue.
 	self gtDocument styleTextRequest
 ]
 

@@ -381,7 +381,7 @@ GtDocumenter >> initializeToolbar [
 { #category : 'initialization' }
 GtDocumenter >> initializeVariableBindings [
 	self variableBindings
-			at: self constants thisDocument 
+			localAt: self constants thisDocument 
 			put: self.
 ]
 
