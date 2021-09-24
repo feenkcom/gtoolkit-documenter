@@ -189,7 +189,7 @@ GtDocumenterEditor >> unsubscribe: aSubscriber [
 
 { #category : 'api - variables' }
 GtDocumenterEditor >> variableBindings [
-	<return: #GtSnippetBindings>
+	<return: #TGtVariablesBindings>
 	^ variableBindindsModel variableBindings
 ]
 

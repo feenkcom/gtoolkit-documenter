@@ -554,7 +554,7 @@ GtDocumenter >> updateTitleLabel [
 
 { #category : 'api - variables' }
 GtDocumenter >> variableBindings [
-	<return: #GtSnippetBindings>
+	<return: #TGtVariablesBindings>
 	^ self editorElement variableBindings
 ]
 

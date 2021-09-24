@@ -358,8 +358,8 @@ GtDocument >> initialize [
 	styleTextProcess := GtStyleTextProcess new document: self.
 	announcer := Announcer new.
 	isSubscribedToSystem := false.
-	variableBindings := GtSnippetBindings new.
-	variableBindings at: self constants thisDocument put: self.
+	variableBindings := GtLocalVariablesBindings new.
+	variableBindings localAt: self constants thisDocument put: self.
 	cache := Dictionary new.
 	editor := BrTextEditor new.
 	editor styler: self defaultStyler.

@@ -20,8 +20,8 @@ Class {
 
 { #category : 'defaults' }
 GtDocumenterEditorVariableBindingsModel >> defaultVariableBindings [
-	^ GtSnippetBindings new
-			at: self constants thisDocument 
+	^ GtLocalVariablesBindings new
+			localAt: self constants thisDocument 
 			put: self.
 ]
 
@@ -46,7 +46,8 @@ GtDocumenterEditorVariableBindingsModel >> initialize [
 
 { #category : 'api - variables' }
 GtDocumenterEditorVariableBindingsModel >> variableBindings [
-	<return: #GtSnippetBindings>
+	<return: #TGtVariablesBindings>
+
 	^ variableBindings
 ]
 

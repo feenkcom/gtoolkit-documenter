@@ -41,7 +41,7 @@ GtCodeblockEvaluator >> evaluateBody [
 	| aCommand anErrorCatchingCommand aSelection |
 	self hasNodeBody ifFalse: [ ^ self ].
 	self allConditionsSatisfied ifFalse: [ ^ self ].
-	aSelection := self selectionOrNodeBody.
+	"aSelection := self selectionOrNodeBody.
 	aCommand := GtEvaluateSourceCodeCommand new.
 	aCommand requestor: self node.
 	aCommand sourceCode: aSelection text.
@@ -49,7 +49,7 @@ GtCodeblockEvaluator >> evaluateBody [
 	aCommand receiver: self evaluationReceiver.
 	anErrorCatchingCommand := aCommand asErrorCatchingCommand.
 	anErrorCatchingCommand execute.
-	self onFinishedEvaluation: anErrorCatchingCommand selection: aSelection
+	self onFinishedEvaluation: anErrorCatchingCommand selection: aSelection"
 ]
 
 { #category : 'actions' }
@@ -111,6 +111,6 @@ GtCodeblockEvaluator >> shouldDisplayResult [
 
 { #category : 'accessing - document' }
 GtCodeblockEvaluator >> variableBindings [
-	<return: #GtSnippetBindings>
+	<return: #TGtVariablesBindings>
 	^ self document variableBindings
 ]
