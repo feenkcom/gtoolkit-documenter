@@ -68,14 +68,14 @@ GtEpiceaCurrentStateVisitor >> stringForBehavior: aClassOrTrait [
 
 { #category : 'visitor' }
 GtEpiceaCurrentStateVisitor >> stringForExistingBehavior: aClassOrTrait [
-	^ String
-		streamContents: [ :stream | 
-			stream
-				nextPutAll: aClassOrTrait definition;
-				nextPut: $.;
-				cr;
-				cr;
-				nextPutAll: aClassOrTrait classSide definition ]
+
+	^ String streamContents: [ :stream | 
+		  stream
+			  nextPutAll: aClassOrTrait definitionString;
+			  nextPut: $.;
+			  cr;
+			  cr;
+			  nextPutAll: aClassOrTrait classSide definitionString ]
 ]
 
 { #category : 'visitor' }
