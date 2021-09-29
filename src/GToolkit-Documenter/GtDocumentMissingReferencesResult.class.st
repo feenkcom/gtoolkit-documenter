@@ -58,32 +58,39 @@ GtDocumentMissingReferencesResult >> gtDisplayOn: aStream [
 
 { #category : 'ui' }
 GtDocumentMissingReferencesResult >> gtViewMissingClassesListFor: aView [
+
 	<gtView>
-	^ aView list 
-		title: 'Classes';
-		items: [ classAnnotations ];
-		itemFormat: [ :aClassAnnotation | aClassAnnotation referencedClass name ];
-		send:  [ :aClassAnnotation | aClassAnnotation referencedClass ]
+	^ aView list
+		  title: 'Classes';
+		  items: [ classAnnotations ];
+		  itemText: [ :aClassAnnotation | 
+			  aClassAnnotation referencedClass name ];
+		  send: [ :aClassAnnotation | aClassAnnotation referencedClass ]
 ]
 
 { #category : 'ui' }
 GtDocumentMissingReferencesResult >> gtViewMissingExamplesListFor: aView [
+
 	<gtView>
-	^ aView list 
-		title: 'Examples';
-		items: [ exampleAnnotations ];
-		itemFormat: [ :anExampleAnnotation | anExampleAnnotation referencedExample gtDisplayString ];
-		send: [ :anExampleAnnotation | anExampleAnnotation referencedExample ]
+	^ aView list
+		  title: 'Examples';
+		  items: [ exampleAnnotations ];
+		  itemText: [ :anExampleAnnotation | 
+			  anExampleAnnotation referencedExample gtDisplayString ];
+		  send: [ :anExampleAnnotation | 
+			  anExampleAnnotation referencedExample ]
 ]
 
 { #category : 'ui' }
 GtDocumentMissingReferencesResult >> gtViewMissingMethodsListFor: aView [
+
 	<gtView>
-	^ aView list 
-		title: 'Methods';
-		items: [ methodAnnotations ];
-		itemFormat: [ :aMethodAnnotation | aMethodAnnotation referencedMethod gtDisplayString ];
-		send: [ :aMethodAnnotation | aMethodAnnotation referencedMethod ]
+	^ aView list
+		  title: 'Methods';
+		  items: [ methodAnnotations ];
+		  itemText: [ :aMethodAnnotation | 
+			  aMethodAnnotation referencedMethod gtDisplayString ];
+		  send: [ :aMethodAnnotation | aMethodAnnotation referencedMethod ]
 ]
 
 { #category : 'initialization' }
