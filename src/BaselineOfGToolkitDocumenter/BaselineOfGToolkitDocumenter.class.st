@@ -12,33 +12,33 @@ ${icebergFile:path=feenkcom/gtoolkit-demos/doc/tutorial/esug-2018-documenter/doc
 
 "
 Class {
-	#name : 'BaselineOfGToolkitDocumenter',
-	#superclass : 'BaselineOf',
-	#category : 'BaselineOfGToolkitDocumenter'
+	#name : #BaselineOfGToolkitDocumenter,
+	#superclass : #BaselineOf,
+	#category : #BaselineOfGToolkitDocumenter
 }
 
-{ #category : 'baseline' }
+{ #category : #baseline }
 BaselineOfGToolkitDocumenter >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
 		spec
 			baseline: 'GToolkitCompleter' with: [
-				spec repository: 'github://feenkcom/gtoolkit-completer:v0.8.409/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-completer:v0.8.410/src' ].
 		spec
 			baseline: 'GToolkitCoder' with: [
-				spec repository: 'github://feenkcom/gtoolkit-coder:v0.8.502/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-coder:v0.8.503/src' ].
 		spec
 			baseline: 'GToolkitUtility' with: [
-				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.71/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.72/src' ].
 		spec
 			baseline: 'GToolkitVisualizerPhlow' with: [
-				spec repository: 'github://feenkcom/gtoolkit-visualizer:v0.8.450/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-visualizer:v0.8.451/src' ].
 		spec
 			baseline: 'GToolkitExamples' with: [
 				spec repository: 'github://feenkcom/gtoolkit-examples:v0.8.33/src' ].
 		spec
 			baseline: 'GToolkitInspector' with: [
-				spec repository: 'github://feenkcom/gtoolkit-inspector:v0.8.542/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-inspector:v0.8.543/src' ].
 		spec
 			baseline: 'PillarExporter' with: [
 				spec repository: 'github://feenkcom/pillar:v7.3.25/src' ].
@@ -47,7 +47,7 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 				spec repository: 'github://feenkcom/DeepTraverser:v1.1.88/src' ].
 		spec
 			baseline: 'XdocClient' with: [
-				spec repository: 'github://feenkcom/xdoc:v0.8.437/src' ].
+				spec repository: 'github://feenkcom/xdoc:v0.8.438/src' ].
 
 		spec package: 'GToolkit-Documenter' with: [
 			spec requires: #('PillarExporter' 'GToolkitCoder' 'GToolkitCompleter' 'GToolkitUtility' 'GToolkitExamples' 'GToolkitInspector') ].
