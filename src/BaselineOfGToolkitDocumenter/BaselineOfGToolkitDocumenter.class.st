@@ -32,7 +32,7 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.72/src' ].
 		spec
 			baseline: 'GToolkitVisualizerPhlow' with: [
-				spec repository: 'github://feenkcom/gtoolkit-visualizer:v0.8.457/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-visualizer:v0.8.458/src' ].
 		spec
 			baseline: 'GToolkitExamples' with: [
 				spec repository: 'github://feenkcom/gtoolkit-examples:v0.8.33/src' ].
