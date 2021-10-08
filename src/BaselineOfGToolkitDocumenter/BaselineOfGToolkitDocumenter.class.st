@@ -47,7 +47,7 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 				spec repository: 'github://feenkcom/DeepTraverser:v1.1.88/src' ].
 		spec
 			baseline: 'XdocClient' with: [
-				spec repository: 'github://feenkcom/xdoc:v0.8.444/src' ].
+				spec repository: 'github://feenkcom/xdoc:v0.8.445/src' ].
 
 		spec package: 'GToolkit-Documenter' with: [
 			spec requires: #('PillarExporter' 'GToolkitCoder' 'GToolkitCompleter' 'GToolkitUtility' 'GToolkitExamples' 'GToolkitInspector') ].
