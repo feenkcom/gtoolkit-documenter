@@ -23,31 +23,31 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 	spec for: #'common' do: [
 		spec
 			baseline: 'GToolkitCompleter' with: [
-				spec repository: 'github://feenkcom/gtoolkit-completer:v0.8.433/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-completer:v0.8.434/src' ].
 		spec
 			baseline: 'GToolkitCoder' with: [
-				spec repository: 'github://feenkcom/gtoolkit-coder:v0.8.541/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-coder:v0.8.542/src' ].
 		spec
 			baseline: 'GToolkitUtility' with: [
 				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.81/src' ].
 		spec
 			baseline: 'GToolkitVisualizerPhlow' with: [
-				spec repository: 'github://feenkcom/gtoolkit-visualizer:v0.8.480/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-visualizer:v0.8.481/src' ].
 		spec
 			baseline: 'GToolkitExamples' with: [
-				spec repository: 'github://feenkcom/gtoolkit-examples:v0.8.33/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-examples:v0.8.34/src' ].
 		spec
 			baseline: 'GToolkitInspector' with: [
-				spec repository: 'github://feenkcom/gtoolkit-inspector:v0.8.599/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-inspector:v0.8.600/src' ].
 		spec
 			baseline: 'PillarExporter' with: [
 				spec repository: 'github://feenkcom/pillar:v7.3.25/src' ].
 		spec
 			baseline: 'DeepTraverser' with: [
-				spec repository: 'github://feenkcom/DeepTraverser:v1.1.88/src' ].
+				spec repository: 'github://feenkcom/DeepTraverser:v1.1.89/src' ].
 		spec
 			baseline: 'XdocClient' with: [
-				spec repository: 'github://feenkcom/xdoc:v0.8.461/src' ].
+				spec repository: 'github://feenkcom/xdoc:v0.8.462/src' ].
 
 		spec package: 'GToolkit-Documenter' with: [
 			spec requires: #('PillarExporter' 'GToolkitCoder' 'GToolkitCompleter' 'GToolkitUtility' 'GToolkitExamples' 'GToolkitInspector') ].
