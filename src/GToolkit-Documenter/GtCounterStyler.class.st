@@ -1,13 +1,13 @@
 Class {
-	#name : 'GtCounterStyler',
-	#superclass : 'GtListItemStyler',
+	#name : #GtCounterStyler,
+	#superclass : #GtListItemStyler,
 	#instVars : [
 		'counter'
 	],
 	#category : 'GToolkit-Documenter-Styler'
 }
 
-{ #category : 'style' }
+{ #category : #style }
 GtCounterStyler >> adornListItemSymbolInMarkupViewModeInContext: aGtStyledListItemBuilder [
 	| anItemIndex |
 	anItemIndex := counter asString asRopedText
@@ -24,7 +24,7 @@ GtCounterStyler >> adornListItemSymbolInMarkupViewModeInContext: aGtStyledListIt
 							editorMeasurement ] }.
 ]
 
-{ #category : 'style' }
+{ #category : #style }
 GtCounterStyler >> adornListItemSymbolInNoMarkupViewModeInContext: aGtStyledListItemBuilder [
 	| anItemIndex |
 	anItemIndex := (counter asString, '.') asRopedText
@@ -40,13 +40,13 @@ GtCounterStyler >> adornListItemSymbolInNoMarkupViewModeInContext: aGtStyledList
 							editorMeasurement ] }.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtCounterStyler >> initialize [
 	super initialize.
 	counter := 0.
 ]
 
-{ #category : 'style' }
+{ #category : #style }
 GtCounterStyler >> updateForNewListItem [
 	"Update what every is needed to style new list item"
 	counter := counter + 1.

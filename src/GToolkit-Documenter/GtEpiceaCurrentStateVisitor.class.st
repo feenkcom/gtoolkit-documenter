@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtEpiceaCurrentStateVisitor',
-	#superclass : 'EpOldStateVisitor',
+	#name : #GtEpiceaCurrentStateVisitor,
+	#superclass : #EpOldStateVisitor,
 	#instVars : [
 		'theEnvironment',
 		'showClassNameInMethodSource'
@@ -8,7 +8,7 @@ Class {
 	#category : 'GToolkit-Documenter-Epicea'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 GtEpiceaCurrentStateVisitor class >> inEnvironment: anEnvironment [
 
 	^ self basicNew 
@@ -16,7 +16,7 @@ GtEpiceaCurrentStateVisitor class >> inEnvironment: anEnvironment [
 		yourself
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtEpiceaCurrentStateVisitor >> behaviorNamed: aSymbol ifPresent: presentBlock [
 
 	^ (theEnvironment classOrTraitNamed: aSymbol) 
@@ -24,14 +24,14 @@ GtEpiceaCurrentStateVisitor >> behaviorNamed: aSymbol ifPresent: presentBlock [
 		ifNotNil: presentBlock
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtEpiceaCurrentStateVisitor >> initializeWith: anEnvironment [
 
 	self initialize.
 	theEnvironment := anEnvironment.
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 GtEpiceaCurrentStateVisitor >> printProtocol: aProtocol behaviorName: aBehaviorName sourceCode: aSourceCode [
 	^ String
 		streamContents: [ :stream | 
@@ -48,17 +48,17 @@ GtEpiceaCurrentStateVisitor >> printProtocol: aProtocol behaviorName: aBehaviorN
 			stream nextPutAll: aSourceCode ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtEpiceaCurrentStateVisitor >> showClassNameInMethodSource [
 	^ showClassNameInMethodSource ifNil: [ true ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtEpiceaCurrentStateVisitor >> showClassNameInMethodSource: aBoolean [
 	showClassNameInMethodSource := aBoolean
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaCurrentStateVisitor >> stringForBehavior: aClassOrTrait [
 	^ theEnvironment
 		at: aClassOrTrait name
@@ -66,7 +66,7 @@ GtEpiceaCurrentStateVisitor >> stringForBehavior: aClassOrTrait [
 		ifAbsent: [ '' ]
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaCurrentStateVisitor >> stringForExistingBehavior: aClassOrTrait [
 
 	^ String streamContents: [ :stream | 
@@ -78,12 +78,12 @@ GtEpiceaCurrentStateVisitor >> stringForExistingBehavior: aClassOrTrait [
 			  nextPutAll: aClassOrTrait classSide definitionString ]
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaCurrentStateVisitor >> visitBehaviorChange: aChange [
 	^ self stringForBehavior: aChange behaviorAffected
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaCurrentStateVisitor >> visitBehaviorCommentChange: aEpBehaviorCommentChange [
 	self
 		behaviorNamed: aEpBehaviorCommentChange behaviorAffectedName
@@ -92,7 +92,7 @@ GtEpiceaCurrentStateVisitor >> visitBehaviorCommentChange: aEpBehaviorCommentCha
 	^ ''
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaCurrentStateVisitor >> visitMethodChange: aChange [
 	"Addition and Modification come here"
 	self 
@@ -109,12 +109,12 @@ GtEpiceaCurrentStateVisitor >> visitMethodChange: aChange [
 	^ '' "If class is not present"
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 GtEpiceaCurrentStateVisitor >> visitMethodModification: aMethodModification [
 	^ self visitMethodChange: aMethodModification
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 GtEpiceaCurrentStateVisitor >> visitMethodRemoval: aMethodRemoval [
 	^ self visitMethodChange: aMethodRemoval
 ]

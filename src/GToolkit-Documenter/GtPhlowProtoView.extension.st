@@ -1,6 +1,6 @@
-Extension { #name : 'GtPhlowProtoView' }
+Extension { #name : #GtPhlowProtoView }
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 GtPhlowProtoView >> document [
 	^ GtPhlowDocumentView new 
 		originalView: self;

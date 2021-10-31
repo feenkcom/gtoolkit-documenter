@@ -1,6 +1,6 @@
-Extension { #name : 'BlCharacterText' }
+Extension { #name : #BlCharacterText }
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 BlCharacterText >> asPetit2Stream [
 	^ PP2Stream on: self
 ]

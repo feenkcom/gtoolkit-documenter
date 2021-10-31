@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtDocumentCompletionStrategy',
-	#superclass : 'GtCompletionStrategy',
+	#name : #GtDocumentCompletionStrategy,
+	#superclass : #GtCompletionStrategy,
 	#traits : 'TGtDocumentConstants',
 	#classTraits : 'TGtDocumentConstants classTrait',
 	#instVars : [
@@ -21,12 +21,12 @@ Class {
 	#category : 'GToolkit-Documenter-Completer'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumentCompletionStrategy class >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : 'class initialization' }
+{ #category : #'class initialization' }
 GtDocumentCompletionStrategy class >> initialize [
 	ParameterValueCompletionSelectors := Dictionary new.
 	ParameterValueCompletionSelectors
@@ -69,7 +69,7 @@ GtDocumentCompletionStrategy class >> initialize [
 		
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> alignmentValueStartingWith: aString [
 	| aName |
 	aName := aString asString.
@@ -83,12 +83,12 @@ GtDocumentCompletionStrategy >> alignmentValueStartingWith: aString [
 				prefixSize: aName size ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumentCompletionStrategy >> allAlignmentValues [
 	^ allAlignments ifNil: [ allAlignments := GtPrefixTree withAll: (AlignmentStrategy allSubclasses collect: [ :each | each strategyName ]) ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> allAnnotationActions [
 	^ (annotationTags first: max startingWith: '$')
 		collect: [ :each | 
@@ -100,12 +100,12 @@ GtDocumentCompletionStrategy >> allAnnotationActions [
 				prefixSize: 1 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumentCompletionStrategy >> allClasses [
 	^ allClasses ifNil: [ allClasses := GtPrefixTree withAll: (ProtoObject withAllSubclasses collect: [ :each | each name ]) ]
 ]
 
-{ #category : 'private-annotations' }
+{ #category : #'private-annotations' }
 GtDocumentCompletionStrategy >> annotationActionsIn: aString startAt: annotationStart [
 	self annotationRegex
 		matchesIn: aString
@@ -121,14 +121,14 @@ GtDocumentCompletionStrategy >> annotationActionsIn: aString startAt: annotation
 	^ #()
 ]
 
-{ #category : 'private-annotations' }
+{ #category : #'private-annotations' }
 GtDocumentCompletionStrategy >> annotationClass [
 	^ PRAbstractAnnotation withAllSubclasses
 		detect: [ :each | each tag = tagName ]
 		ifNone: [ nil ]
 ]
 
-{ #category : 'private-annotations' }
+{ #category : #'private-annotations' }
 GtDocumentCompletionStrategy >> annotationParameterActionsFor: parameterString startAt: parameterStart [
 	self parameterRegex
 		matchesIn: parameterString
@@ -156,7 +156,7 @@ GtDocumentCompletionStrategy >> annotationParameterActionsFor: parameterString s
 	^ #()
 ]
 
-{ #category : 'private-annotations' }
+{ #category : #'private-annotations' }
 GtDocumentCompletionStrategy >> annotationParametersActionsFor: parametersString startAt: parametersStart [
 	| char |
 	(self parameterRegex matchingRangesIn: parametersString)
@@ -169,12 +169,12 @@ GtDocumentCompletionStrategy >> annotationParametersActionsFor: parametersString
 	^ #()
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> annotationRegex [
 	^ '(\$\{([^$:| \s}]*))(([:|](([-a-zA-Z0-9]+=)?[^|}[:cntrl:]]+)*)*)(}?\$?)' asRegex
 ]
 
-{ #category : 'private-annotations' }
+{ #category : #'private-annotations' }
 GtDocumentCompletionStrategy >> annotationTagActionsFor: tagString startAt: annotationStart [
 	| prefix |
 	prefix := tagString first: position - annotationStart + 1.
@@ -188,7 +188,7 @@ GtDocumentCompletionStrategy >> annotationTagActionsFor: tagString startAt: anno
 				prefixSize: prefix size ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> classesStartingWith: aString [
 	^ (self allClasses first: max startingWith: aString)
 		collect: [ :each | 
@@ -200,7 +200,7 @@ GtDocumentCompletionStrategy >> classesStartingWith: aString [
 				prefixSize: aString size ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> complete: label with: insertedText deleting: deleteSize at: positionInteger prefixSize: prefixSize [
 	| insertionAction deleteAction |
 	insertionAction := GtInsertTextCompletionAction
@@ -217,7 +217,7 @@ GtDocumentCompletionStrategy >> complete: label with: insertedText deleting: del
 		yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumentCompletionStrategy >> completionActionsFor: aText at: positionInteger max: maxSize [
 	(positionInteger < 1 or: [ positionInteger > aText size ])
 		ifTrue: [ ^ #() ].
@@ -238,22 +238,22 @@ GtDocumentCompletionStrategy >> completionActionsFor: aText at: positionInteger 
 	^ #()
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumentCompletionStrategy >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : 'private-annotations' }
+{ #category : #'private-annotations' }
 GtDocumentCompletionStrategy >> defaultParameterValueActionsFor: class startingWith: aString [
 	^ self parameterValueActionsForClass: class name: class defaultParameterName startingWith: aString
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumentCompletionStrategy >> directoryReference [
 	^ directory ifNil: [ FileLocator imageDirectory asFileReference ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> exampleClasses [
 	^ exampleClasses
 		ifNil: [ exampleClasses := GtPrefixTree
@@ -262,7 +262,7 @@ GtDocumentCompletionStrategy >> exampleClasses [
 						collect: [ :each | each name ]) ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> exampleClassesStartingWith: aString [
 	^ (self exampleClasses first: max startingWith: aString)
 		collect: [ :each | 
@@ -274,17 +274,17 @@ GtDocumentCompletionStrategy >> exampleClassesStartingWith: aString [
 				prefixSize: aString size ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> exampleMethodsIn: aClass [
 	^ GtPrefixTree withAll: ((aClass selectors select: [ :each | aClass >> each hasPragmaNamed: #gtExample ]) collect: [ :each | each ])
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> exampleMethodsStartingWith: aString [
 	^ self methodsStartingWith: aString classes: self exampleClasses methods: [ :class | self exampleMethodsIn: class ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> examplePreviewShowMethodsStartingWith: aString [
 	| name |
 	name := (aString notEmpty and: [ aString first = $# ])
@@ -300,29 +300,29 @@ GtDocumentCompletionStrategy >> examplePreviewShowMethodsStartingWith: aString [
 				prefixSize: name size ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtDocumentCompletionStrategy >> fileReference: aFileReference [
 	directory := (aFileReference exists and: [ aFileReference isDirectory ])
 		ifTrue: [ aFileReference ]
 		ifFalse: [ aFileReference parent ]
 ]
 
-{ #category : 'private-annotations' }
+{ #category : #'private-annotations' }
 GtDocumentCompletionStrategy >> fileReferenceActionsIn: aString [
 	^ self filenamesStartingWith: (aString allButFirst: 8)
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> fileRegex [
 	^ '\+file\://[^[:cntrl:]+]*\+?' asRegex
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> filenamesStartingWith: aString [
 	^ self filenamesStartingWith: aString in: self directoryReference
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> filenamesStartingWith: aString in: aFileReference [ 
 	| fileReference segments currentDirectory filenamePart names |
 	currentDirectory := aFileReference.
@@ -359,7 +359,7 @@ GtDocumentCompletionStrategy >> filenamesStartingWith: aString in: aFileReferenc
 			action ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> gtViewSelectors [
 	^ gtViewSelectors
 		ifNil: [ gtViewSelectors := GtPrefixTree new.
@@ -372,17 +372,17 @@ GtDocumentCompletionStrategy >> gtViewSelectors [
 			gtViewSelectors ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtDocumentCompletionStrategy >> hasCompletionEntryFor: aString [
 	^ true
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtDocumentCompletionStrategy >> hasCompletionsAt: anInteger in: aText [
 	^ true
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> icebergFilenamesStartingWith: aString [
 	| inIcebergRepositories inLocalGtDirectory anExtraCompletionActions |
 	inIcebergRepositories := self filenamesStartingWith: aString in: self constants icebergRepositoriesLocation.
@@ -393,7 +393,7 @@ GtDocumentCompletionStrategy >> icebergFilenamesStartingWith: aString [
 	^ inIcebergRepositories
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtDocumentCompletionStrategy >> initialize [
 	super initialize.
 	annotationTags := GtPrefixTree new.
@@ -403,17 +403,17 @@ GtDocumentCompletionStrategy >> initialize [
 				ifFalse: [ annotationTags add: '${' , class tag ] ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> methodsIn: aClass [
 	^ GtPrefixTree withAll: aClass selectors
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> methodsStartingWith: aString [
 	^ self methodsStartingWith: aString classes: self allClasses methods: [ :class | self methodsIn: class ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> methodsStartingWith: aString classes: classesTree methods: methodBlock [
 	| index spaceIndex class name prefix |
 	index := aString indexOfSubCollection: '>>#'.
@@ -445,12 +445,12 @@ GtDocumentCompletionStrategy >> methodsStartingWith: aString classes: classesTre
 			action ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> parameterRegex [
 	^ '([-a-zA-Z0-9]+=)?([^:|}[:cntrl:]]+)' asRegex
 ]
 
-{ #category : 'private-annotations' }
+{ #category : #'private-annotations' }
 GtDocumentCompletionStrategy >> parameterValueActionsForClass: class name: parameterName startingWith: aString [
 	| selector |
 	selector := (ParameterValueCompletionSelectors at: class ifAbsent: [ Dictionary new ]) at: parameterName asSymbol ifAbsent: [ nil ].
@@ -459,7 +459,7 @@ GtDocumentCompletionStrategy >> parameterValueActionsForClass: class name: param
 	^ #()
 ]
 
-{ #category : 'private-annotations' }
+{ #category : #'private-annotations' }
 GtDocumentCompletionStrategy >> parametersStartingWith: aString delete: anInteger includeDefaultValues: aBoolean [
 	self annotationClass
 		ifNotNil: [ :class | 
@@ -478,7 +478,7 @@ GtDocumentCompletionStrategy >> parametersStartingWith: aString delete: anIntege
 	^ #()
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> scriptCompletionsFor: source at: anIndex [
 	| startIndex endIndex actions |
 	(self scriptStartRegex matchingRangesIn: source)
@@ -499,12 +499,12 @@ GtDocumentCompletionStrategy >> scriptCompletionsFor: source at: anIndex [
 	^ actions
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> scriptEndRegex [
 	^ '(|r|\n)\]\]\] *(\r|\n)?' asRegex
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumentCompletionStrategy >> scriptStartRegex [
 	^ '\[\[\[(([^[:space:]]+[ 	]*)*[ 	]*(\r\n?|\n))' asRegex
 ]

@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtEpiceaDiffStencil',
-	#superclass : 'BrStencil',
+	#name : #GtEpiceaDiffStencil,
+	#superclass : #BrStencil,
 	#traits : 'TGtDocumentConstants',
 	#classTraits : 'TGtDocumentConstants classTrait',
 	#instVars : [
@@ -10,17 +10,17 @@ Class {
 	#category : 'GToolkit-Documenter-Epicea'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtEpiceaDiffStencil class >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtEpiceaDiffStencil >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 GtEpiceaDiffStencil >> create [
 	<return: #BlRope>
 	| aBuilder aRopedText |
@@ -57,29 +57,29 @@ GtEpiceaDiffStencil >> create [
 	^ aRopedText
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtEpiceaDiffStencil >> from [
 	^ from
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtEpiceaDiffStencil >> from: anObject [
 	from := anObject
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtEpiceaDiffStencil >> initialize [
 	super initialize.
 	from := #'From text'.
 	to := #'To text'.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtEpiceaDiffStencil >> to [
 	^ to
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtEpiceaDiffStencil >> to: anObject [
 	to := anObject
 ]

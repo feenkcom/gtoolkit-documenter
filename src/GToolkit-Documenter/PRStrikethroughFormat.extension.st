@@ -1,6 +1,6 @@
-Extension { #name : 'PRStrikethroughFormat' }
+Extension { #name : #PRStrikethroughFormat }
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRStrikethroughFormat >> styleSubText: aBlRope [
 	^ aBlRope foreground: self constants subtleColor
 ]

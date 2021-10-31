@@ -1,12 +1,12 @@
 Class {
-	#name : 'GtDocumentUtility',
-	#superclass : 'Object',
+	#name : #GtDocumentUtility,
+	#superclass : #Object,
 	#traits : 'TGtDocumentConstants',
 	#classTraits : 'TGtDocumentConstants classTrait',
 	#category : 'GToolkit-Documenter-Utility'
 }
 
-{ #category : 'pillar - parameter values' }
+{ #category : #'pillar - parameter values' }
 GtDocumentUtility class >> booleanValueOf: aString in: aDictionary emptyValue: emptyBooleanOrBlock defaultValue: defaultBooleanOrBlock [
 	^ self 
 		valueOf: aString
@@ -16,7 +16,7 @@ GtDocumentUtility class >> booleanValueOf: aString in: aDictionary emptyValue: e
 		defaultValue: defaultBooleanOrBlock
 ]
 
-{ #category : 'pillar - parameter values' }
+{ #category : #'pillar - parameter values' }
 GtDocumentUtility class >> classDefinitionsFromArray: aCollection [ 
 	<return: #Array of: #RGClassDefinition>
 	self 
@@ -30,12 +30,12 @@ GtDocumentUtility class >> classDefinitionsFromArray: aCollection [
 		] ].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumentUtility class >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : 'pillar - parameter values' }
+{ #category : #'pillar - parameter values' }
 GtDocumentUtility class >> convertToBoolean: aStringOrBoolean [ 
 	<return: #Boolean or: nil>
 	| aValue |
@@ -47,13 +47,13 @@ GtDocumentUtility class >> convertToBoolean: aStringOrBoolean [
 	^ nil
 ]
 
-{ #category : 'text styling - nearby cursor' }
+{ #category : #'text styling - nearby cursor' }
 GtDocumentUtility class >> cursorNeabyInText: aBlRope forNode: aNode [
 	(aBlRope from: aNode start to: aNode stop)
 		clearAttributes: [ :eachAttribute | eachAttribute = GtHideAttribute uniqueInstance ]
 ]
 
-{ #category : 'text styling - nearby cursor' }
+{ #category : #'text styling - nearby cursor' }
 GtDocumentUtility class >> cursorNearbyStartDistanceInText: aBlRope forNode: aNode [
 	| aPosition aSeparatorPosition |
 	aPosition := (aNode start - self constants cursorNearbyDistance) max: 1.
@@ -68,7 +68,7 @@ GtDocumentUtility class >> cursorNearbyStartDistanceInText: aBlRope forNode: aNo
 		ifFalse: [ aSeparatorPosition ]
 ]
 
-{ #category : 'text styling - nearby cursor' }
+{ #category : #'text styling - nearby cursor' }
 GtDocumentUtility class >> cursorNearbyStopDistanceInText: aBlRope forNode: aNode [
 	| aPosition aSeparatorPosition |
 	aPosition := (aNode stop + self constants cursorNearbyDistance) min: aBlRope size.
@@ -82,12 +82,12 @@ GtDocumentUtility class >> cursorNearbyStopDistanceInText: aBlRope forNode: aNod
 		ifFalse: [ aSeparatorPosition - 1 ]
 ]
 
-{ #category : 'text markups' }
+{ #category : #'text markups' }
 GtDocumentUtility class >> endMarkupFor: aNode [
 	^ PRPillarGrammar endMarkups at: aNode class
 ]
 
-{ #category : 'text styling - hide attribute' }
+{ #category : #'text styling - hide attribute' }
 GtDocumentUtility class >> hideAllButLinkInText: aBlRope forAnnotation: aNode [
 	"Return true if hiding action happens"
 	<return: #Boolean>
@@ -98,13 +98,13 @@ GtDocumentUtility class >> hideAllButLinkInText: aBlRope forAnnotation: aNode [
 	^ true
 ]
 
-{ #category : 'text styling - hide attribute' }
+{ #category : #'text styling - hide attribute' }
 GtDocumentUtility class >> hideMarkupsInText: aBlRope forAnnotation: aNode exceptOfChild: aChildNode [
 	self hideMarkupsInText: aBlRope start: aNode start stop: aChildNode start - 1.
 	self hideMarkupsInText: aBlRope start: aChildNode stop + 1 stop: aNode stop
 ]
 
-{ #category : 'text styling - hide attribute' }
+{ #category : #'text styling - hide attribute' }
 GtDocumentUtility class >> hideMarkupsInText: aBlRope start: aStartIndex stop: aStopIndex [
 	(aBlRope 
 		from: aStartIndex
@@ -112,7 +112,7 @@ GtDocumentUtility class >> hideMarkupsInText: aBlRope start: aStartIndex stop: a
 			attribute: GtHideAttribute uniqueInstance.
 ]
 
-{ #category : 'pillar - parameter values' }
+{ #category : #'pillar - parameter values' }
 GtDocumentUtility class >> icebergFileReferenceFrom: aString [
 	<return: #FileReference>
 	| aFile |
@@ -128,7 +128,7 @@ GtDocumentUtility class >> icebergFileReferenceFrom: aString [
 	^ aFile
 ]
 
-{ #category : 'text styling' }
+{ #category : #'text styling' }
 GtDocumentUtility class >> linkColor: aBoolean [
 	"aBoolean = true means that a link is valid.
 	aBoolean = false means that a link is invalid."
@@ -137,14 +137,14 @@ GtDocumentUtility class >> linkColor: aBoolean [
 		ifFalse: [ self constants linkWithErrorColor ].
 ]
 
-{ #category : 'text styling' }
+{ #category : #'text styling' }
 GtDocumentUtility class >> linkNodeForAnnotation: aNode [
 	^ self
 		parameterValueNodeNamed: aNode referenceParameterName
 		forAnnotation: aNode
 ]
 
-{ #category : 'text styling - hide attribute' }
+{ #category : #'text styling - hide attribute' }
 GtDocumentUtility class >> mayHideAllButLinkInText: aBlRope forAnnotation: aNode [
 	"Return true if hiding action happens"
 	<return: #Boolean>
@@ -156,7 +156,7 @@ GtDocumentUtility class >> mayHideAllButLinkInText: aBlRope forAnnotation: aNode
 	^ true
 ]
 
-{ #category : 'text styling - hide attribute' }
+{ #category : #'text styling - hide attribute' }
 GtDocumentUtility class >> mayHideMarkupsInText: aBlRope forAnnotation: aNode exceptOfChild: aChildNode [
 	"Return true if hiding action happens"
 	<return: #Boolean>
@@ -165,7 +165,7 @@ GtDocumentUtility class >> mayHideMarkupsInText: aBlRope forAnnotation: aNode ex
 	^ true
 ]
 
-{ #category : 'text styling - hide attribute' }
+{ #category : #'text styling - hide attribute' }
 GtDocumentUtility class >> mayHideMarkupsInText: aBlRope start: aStartIndex stop: aStopIndex forNode: aNode [
 	"Return true if hiding action happens"
 	<return: #Boolean>
@@ -174,7 +174,7 @@ GtDocumentUtility class >> mayHideMarkupsInText: aBlRope start: aStartIndex stop
 	^ true
 ]
 
-{ #category : 'pillar - parameter values' }
+{ #category : #'pillar - parameter values' }
 GtDocumentUtility class >> methodDefinitionsFromArray: aCollection [ 
 	<return: #Array of: #RGMethodDefinition>
 	| aStep anIndex |
@@ -195,7 +195,7 @@ GtDocumentUtility class >> methodDefinitionsFromArray: aCollection [
 		] ].
 ]
 
-{ #category : 'pillar - parameter values' }
+{ #category : #'pillar - parameter values' }
 GtDocumentUtility class >> packageDefinitionsFromArray: aCollection [ 
 	<return: #Array of: #RGPackage>
 	self 
@@ -209,7 +209,7 @@ GtDocumentUtility class >> packageDefinitionsFromArray: aCollection [
 		] ].
 ]
 
-{ #category : 'text styling' }
+{ #category : #'text styling' }
 GtDocumentUtility class >> parameterValueNodeNamed: aParameterName forAnnotation: anAnnotation [
 	"Return annotation's parameter AST node if exists.
 	Return the given annotation otherwise"
@@ -222,7 +222,7 @@ GtDocumentUtility class >> parameterValueNodeNamed: aParameterName forAnnotation
 		ifNone: [ anAnnotation ].
 ]
 
-{ #category : 'text styling - hide attribute' }
+{ #category : #'text styling - hide attribute' }
 GtDocumentUtility class >> shouldHideMarkupsInText: aBlRope forNode: aNode [
 	"Return true if hiding action should happen"
 	<return: #Boolean>
@@ -235,17 +235,17 @@ GtDocumentUtility class >> shouldHideMarkupsInText: aBlRope forNode: aNode [
 		ifNone: [ true ]
 ]
 
-{ #category : 'text styling' }
+{ #category : #'text styling' }
 GtDocumentUtility class >> shouldOpenReference: anEvent [
 	^ anEvent modifiers isShift not
 ]
 
-{ #category : 'text markups' }
+{ #category : #'text markups' }
 GtDocumentUtility class >> startMarkupFor: aNode [
 	^ PRPillarGrammar markups at: (aNode isClass ifTrue: [ aNode ] ifFalse: [ aNode class ])
 ]
 
-{ #category : 'text styling' }
+{ #category : #'text styling' }
 GtDocumentUtility class >> styleExpandingPreviewInText: aBlRope forNode: aNode [
 	| anAttribute |
 	aNode isPreviewDefined ifFalse: [ ^ self ].
@@ -256,19 +256,19 @@ GtDocumentUtility class >> styleExpandingPreviewInText: aBlRope forNode: aNode [
 	(aBlRope from: aNode start to: aNode stop) attribute: anAttribute
 ]
 
-{ #category : 'text styling' }
+{ #category : #'text styling' }
 GtDocumentUtility class >> styleLinkInText: aBlRope forAnnotationNode: aNode [
 	| aNodeToStyle |
 	aNodeToStyle := self linkNodeForAnnotation: aNode.
 	self styleLinkInText: aBlRope forNode: aNode withLinkAt: aNodeToStyle
 ]
 
-{ #category : 'text styling' }
+{ #category : #'text styling' }
 GtDocumentUtility class >> styleLinkInText: aBlRope forNode: aNode [
 	self styleLinkInText: aBlRope forNode: aNode withLinkAt: aNode
 ]
 
-{ #category : 'text styling' }
+{ #category : #'text styling' }
 GtDocumentUtility class >> styleLinkInText: aBlRope forNode: aNode start: aStartIndex stop: aStopIndex [
 	| aLinkColor theAttributes |
 	aLinkColor := self linkColor: aNode doesReferenceExist.
@@ -286,18 +286,18 @@ GtDocumentUtility class >> styleLinkInText: aBlRope forNode: aNode start: aStart
 		attributes: theAttributes
 ]
 
-{ #category : 'text styling' }
+{ #category : #'text styling' }
 GtDocumentUtility class >> styleLinkInText: aBlRope forNode: aNode withLinkAt: aLinkNode [
 	self styleLinkInText: aBlRope forNode: aNode start: aLinkNode start stop: aLinkNode stop
 ]
 
-{ #category : 'text styling' }
+{ #category : #'text styling' }
 GtDocumentUtility class >> stylePreviewInText: aBlRope forNode: aNode [
 	aNode isPreviewDefined ifFalse: [ ^ self ].
 	(aBlRope from: aNode start to: aNode stop) attributes: aNode previewAttributes
 ]
 
-{ #category : 'text styling' }
+{ #category : #'text styling' }
 GtDocumentUtility class >> subtleMarkupsInText: aBlRope start: aStartIndex stop: aStopIndex [
 	(aBlRope 
 		from: aStartIndex
@@ -305,7 +305,7 @@ GtDocumentUtility class >> subtleMarkupsInText: aBlRope start: aStartIndex stop:
 			foreground: self constants subtleColor
 ]
 
-{ #category : 'pillar - parameter values' }
+{ #category : #'pillar - parameter values' }
 GtDocumentUtility class >> valueOf: aString in: aDictionary value: aValueBlock emptyValue: anEmptyBlock defaultValue: aDefaultBlock [
 	^ aDictionary
 		at: aString
@@ -316,7 +316,7 @@ GtDocumentUtility class >> valueOf: aString in: aDictionary value: aValueBlock e
 		ifAbsent: [ aDefaultBlock value ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumentUtility >> constants [
 	^ GtDocumentConstants
 ]

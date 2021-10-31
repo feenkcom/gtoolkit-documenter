@@ -1,25 +1,25 @@
 Class {
-	#name : 'GtParametrizedExampleAnnotation',
-	#superclass : 'GtExampleAnnotation',
+	#name : #GtParametrizedExampleAnnotation,
+	#superclass : #GtExampleAnnotation,
 	#category : 'GToolkit-Documenter-Annotations'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtParametrizedExampleAnnotation class >> possibleParameters [
 	^ super possibleParameters , { self constants inputVariablesParameterName }
 ]
 
-{ #category : 'protected' }
+{ #category : #protected }
 GtParametrizedExampleAnnotation class >> tag [
 	^ self constants parametrizedExampleAnnotationName
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtParametrizedExampleAnnotation >> accept: aVisitor [
 	^ aVisitor visitGtParametrizedExampleAnnotation: self
 ]
 
-{ #category : 'private - cache' }
+{ #category : #'private - cache' }
 GtParametrizedExampleAnnotation >> example [
 	example ifNil: [ 
 		example := self referencedExample compiledMethod gtParametrizedExample asExampleWithResult.
@@ -27,7 +27,7 @@ GtParametrizedExampleAnnotation >> example [
 	^ example
 ]
 
-{ #category : 'accessing - parameter values' }
+{ #category : #'accessing - parameter values' }
 GtParametrizedExampleAnnotation >> inputVariableNames [
 	<return: #Collection of: #Symbol>
 	^ self utility 
@@ -45,13 +45,13 @@ GtParametrizedExampleAnnotation >> inputVariableNames [
 		defaultValue: [ #() ]
 ]
 
-{ #category : 'api - styling' }
+{ #category : #'api - styling' }
 GtParametrizedExampleAnnotation >> styleText: aBlRope using: aGt2StylerStrategy [
 	super styleText: aBlRope using: aGt2StylerStrategy.
 	self updateExampleArguments.
 ]
 
-{ #category : 'private - cache' }
+{ #category : #'private - cache' }
 GtParametrizedExampleAnnotation >> updateExampleArguments [
 	| theVariableValues |
 	theVariableValues := OrderedCollection new: self inputVariableNames size.

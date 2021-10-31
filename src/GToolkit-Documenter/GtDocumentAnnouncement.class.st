@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtDocumentAnnouncement',
-	#superclass : 'Announcement',
+	#name : #GtDocumentAnnouncement,
+	#superclass : #Announcement,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -9,12 +9,12 @@ Class {
 	#category : 'GToolkit-Documenter-Announcements'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumentAnnouncement >> document [
 	^ document
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumentAnnouncement >> document: aGtDocument [
 	self 
 		assert: [ aGtDocument isNotNil ] 

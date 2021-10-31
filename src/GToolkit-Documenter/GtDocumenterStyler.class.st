@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtDocumenterStyler',
-	#superclass : 'BlTextStyler',
+	#name : #GtDocumenterStyler,
+	#superclass : #BlTextStyler,
 	#traits : 'TBlTextStyleable',
 	#classTraits : 'TBlTextStyleable classTrait',
 	#instVars : [
@@ -13,25 +13,25 @@ Class {
 	#category : 'GToolkit-Documenter-Styler'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumenterStyler >> attributesBuilder [
 	<return: #BlTextAttributesBuilder>
 	
 	^ attributesBuilder
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtDocumenterStyler >> displayMarkup [
 	self mode: GtStylerStrategy displayMarkup
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumenterStyler >> document [
 	<return: #GtDocumenter>
 	^ document
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumenterStyler >> document: aGt2Document [
 	document ifNotNil: [ :anOldDocument | anOldDocument editor removeEventHandler: self ].
 	self 
@@ -44,12 +44,12 @@ GtDocumenterStyler >> document: aGt2Document [
 	
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtDocumenterStyler >> hideMarkup [
 	self mode: GtStylerStrategy hideMarkup
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtDocumenterStyler >> initialize [
 	super initialize.
 	editorEventHandler := GtStylerEventHandler new subscriber: self.
@@ -58,13 +58,13 @@ GtDocumenterStyler >> initialize [
 	attributesBuilder := BlTextDelegatedAttributesBuilder new.	
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumenterStyler >> mode [
 	<return: #GtStylerStrategy>
 	^ mode
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumenterStyler >> mode: aGt2StylerStrategy [
 	self 
 		assert: [ aGt2StylerStrategy notNil ] 
@@ -72,18 +72,18 @@ GtDocumenterStyler >> mode: aGt2StylerStrategy [
 	mode := aGt2StylerStrategy
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtDocumenterStyler >> noInteractions [
 	self mode: GtStylerStrategy noInteractions
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumenterStyler >> parser [
 	<return: #PRPillarParser>
 	^ parser ifNil: [ parser := PRPillarParser new optimize ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumenterStyler >> parser: aPRPillarParser [
 	self 
 		assert: [ aPRPillarParser notNil ]
@@ -91,7 +91,7 @@ GtDocumenterStyler >> parser: aPRPillarParser [
 	parser := aPRPillarParser
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumenterStyler >> privateStyle: aText [
 	<return: #BlRope>
 	| aPRDocument |

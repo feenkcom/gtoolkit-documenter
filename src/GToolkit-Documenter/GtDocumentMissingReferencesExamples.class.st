@@ -1,10 +1,10 @@
 Class {
-	#name : 'GtDocumentMissingReferencesExamples',
-	#superclass : 'Object',
+	#name : #GtDocumentMissingReferencesExamples,
+	#superclass : #Object,
 	#category : 'GToolkit-Documenter-Validation'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumentMissingReferencesExamples >> documentTextWithMissingMethod [
 	^ '
 	Present class annotation:
@@ -18,7 +18,7 @@ GtDocumentMissingReferencesExamples >> documentTextWithMissingMethod [
 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumentMissingReferencesExamples >> documentTextWithMultipleMissingReferences [
 	^ '
 	Missing class annotation:
@@ -35,7 +35,7 @@ GtDocumentMissingReferencesExamples >> documentTextWithMultipleMissingReferences
 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumentMissingReferencesExamples >> documentTextWithNoMissingReferences [
 	^ '
 	Present class annotation:
@@ -49,7 +49,7 @@ GtDocumentMissingReferencesExamples >> documentTextWithNoMissingReferences [
 
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 GtDocumentMissingReferencesExamples >> emptyMissingReferences [
 	<gtExample>
 	| documentText visitor missingReferences |
@@ -67,13 +67,13 @@ GtDocumentMissingReferencesExamples >> emptyMissingReferences [
 	^ missingReferences
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 GtDocumentMissingReferencesExamples >> missingReferencesGroup [
 	<gtExample>
 	
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 GtDocumentMissingReferencesExamples >> missingReferencesResultWithMissingMethod [
 	<gtExample>
 	| documentText visitor missingReferences |
@@ -91,7 +91,7 @@ GtDocumentMissingReferencesExamples >> missingReferencesResultWithMissingMethod 
 	^ missingReferences
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 GtDocumentMissingReferencesExamples >> missingReferencesResultWithMultipleReferenceTypes [
 	<gtExample>
 	| documentText visitor missingReferences |

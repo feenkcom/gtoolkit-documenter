@@ -1,9 +1,9 @@
 Trait {
-	#name : 'TGtDocumentInvalidCommentsConstraint',
+	#name : #TGtDocumentInvalidCommentsConstraint,
 	#category : 'GToolkit-Documenter-Validation'
 }
 
-{ #category : 'examples' }
+{ #category : #examples }
 TGtDocumentInvalidCommentsConstraint >> issues [
 	| parser results packages |
 	parser := PRPillarParser new optimize.
@@ -19,7 +19,7 @@ TGtDocumentInvalidCommentsConstraint >> issues [
 	^ results
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 TGtDocumentInvalidCommentsConstraint >> packagesToAnalyse [
 	self explicitRequirement
 ]

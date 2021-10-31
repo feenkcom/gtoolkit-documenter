@@ -1,6 +1,6 @@
-Extension { #name : 'PREmptyParagraph' }
+Extension { #name : #PREmptyParagraph }
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PREmptyParagraph >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	(aBlRope
@@ -9,7 +9,7 @@ PREmptyParagraph >> styleTextWithMarkup: aBlRope [
 			paragraphMargin: self constants paragraphMargin.
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PREmptyParagraph >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithMarkup: aBlRope.

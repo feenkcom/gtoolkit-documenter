@@ -1,6 +1,6 @@
-Extension { #name : 'PRCommentedLine' }
+Extension { #name : #PRCommentedLine }
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRCommentedLine >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	(aBlRope
@@ -9,7 +9,7 @@ PRCommentedLine >> styleTextWithMarkup: aBlRope [
 			foreground: self constants subtleColor
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRCommentedLine >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope
 ]

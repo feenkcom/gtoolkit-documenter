@@ -1,10 +1,10 @@
 Class {
-	#name : 'DocumentWidthAlignmentStrategy',
-	#superclass : 'AlignmentStrategy',
+	#name : #DocumentWidthAlignmentStrategy,
+	#superclass : #AlignmentStrategy,
 	#category : 'GToolkit-Documenter-Strategies'
 }
 
-{ #category : 'naming' }
+{ #category : #naming }
 DocumentWidthAlignmentStrategy class >> strategyName [
 	^ 'documentWidth'
 ]

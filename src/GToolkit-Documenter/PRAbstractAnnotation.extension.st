@@ -1,11 +1,11 @@
-Extension { #name : 'PRAbstractAnnotation' }
+Extension { #name : #PRAbstractAnnotation }
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRAbstractAnnotation >> annotationCacheValueClass [
 	^ GtAnnotationCacheValue
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRAbstractAnnotation >> cacheKey [
 	^ GtAnnotationCacheKey new
 		name: self tag;
@@ -13,7 +13,7 @@ PRAbstractAnnotation >> cacheKey [
 		counter: self counter
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRAbstractAnnotation >> cachedIsExpanded [
 	<return: #Boolean>
 	self gtDocument
@@ -25,7 +25,7 @@ PRAbstractAnnotation >> cachedIsExpanded [
 	^ self expandedParameterValue
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRAbstractAnnotation >> cachedIsExpanded: aBoolean [
 	self gtDocument 
 		cacheAt: self cacheKey
@@ -34,7 +34,7 @@ PRAbstractAnnotation >> cachedIsExpanded: aBoolean [
 			self annotationCacheValueClass new isExpanded: aBoolean ]
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRAbstractAnnotation >> cachedPreview [
 	<return: #BlElement or: nil>
 	^ self gtDocument 
@@ -43,7 +43,7 @@ PRAbstractAnnotation >> cachedPreview [
 		ifAbsent: [ nil ]
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRAbstractAnnotation >> cachedPreview: anElement [
 	self gtDocument 
 		cacheAt: self cacheKey
@@ -54,17 +54,17 @@ PRAbstractAnnotation >> cachedPreview: anElement [
 				isExpanded: true ]
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRAbstractAnnotation >> expandedDefaultValue [
 	^ false
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRAbstractAnnotation >> expandedEmptyValue [
 	^ true
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRAbstractAnnotation >> expandedParameterValue [
 	^ GtDocumentUtility
 		booleanValueOf: GtDocumentConstants expandedParameterName 
@@ -73,17 +73,17 @@ PRAbstractAnnotation >> expandedParameterValue [
 		defaultValue: [ self expandedDefaultValue ]
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRAbstractAnnotation >> gtDocumenterParameters [
 	^ self class gtDocumenterParameters
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRAbstractAnnotation class >> gtDocumenterParameters [
 	^ self possibleParameters
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRAbstractAnnotation class >> gtWithParameters: aPRParameters [
 	| anInstance |
 	anInstance := self with: aPRParameters.
@@ -91,7 +91,7 @@ PRAbstractAnnotation class >> gtWithParameters: aPRParameters [
 	^ anInstance
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRAbstractAnnotation >> styleTextWithMarkup: aBlRope [
 	"Subclasses can add more styling"
 	super styleTextWithMarkup: aBlRope.

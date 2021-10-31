@@ -4,8 +4,8 @@ I am used by ${class:GtDocumenterEditor}$.
 
 "
 Class {
-	#name : 'GtDocumenterEditorCompleterAptitude',
-	#superclass : 'BrAptitude',
+	#name : #GtDocumenterEditorCompleterAptitude,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'storage',
 		'completionStrategy',
@@ -14,7 +14,7 @@ Class {
 	#category : 'GToolkit-Documenter-! Editor - Look'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtDocumenterEditorCompleterAptitude >> initialize [
 	super initialize.
 	completionStrategy := GtDocumentCompletionStrategy new.
@@ -29,7 +29,7 @@ GtDocumenterEditorCompleterAptitude >> initialize [
 				down: [ :aLook | self uninstallControllerOn: aLook widget ])
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtDocumenterEditorCompleterAptitude >> initializeListeners [
 	super initializeListeners.
 	
@@ -38,32 +38,32 @@ GtDocumenterEditorCompleterAptitude >> initializeListeners [
 		do: [ :anEvent | self storage: anEvent storage ].
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtDocumenterEditorCompleterAptitude >> initializeRequests [
 	super initializeRequests.
 
 	self request: GtDocumenterStorageRequest new.
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumenterEditorCompleterAptitude >> installControllerOn: aDocumenterEditor [
 	completionController textElement: aDocumenterEditor.
 	completionController install.
 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumenterEditorCompleterAptitude >> onStorageChange [
 	completionStrategy fileReference: self storage rootDirectory.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumenterEditorCompleterAptitude >> storage [
 	<return: #GtStorageStrategy>
 	^ storage
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumenterEditorCompleterAptitude >> storage: aGtStorageStrategy [
 	self 
 		assert: [ aGtStorageStrategy isNotNil ] 
@@ -72,7 +72,7 @@ GtDocumenterEditorCompleterAptitude >> storage: aGtStorageStrategy [
 	self onStorageChange.
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtDocumenterEditorCompleterAptitude >> uninstallControllerOn: anElement [
 	completionController uninstall.
 	completionController textElement: nil.

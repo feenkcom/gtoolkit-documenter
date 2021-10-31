@@ -1,30 +1,30 @@
 Class {
-	#name : 'GtEpiceaBrickFactory',
-	#superclass : 'Object',
+	#name : #GtEpiceaBrickFactory,
+	#superclass : #Object,
 	#classInstVars : [
 		'defaultInstance'
 	],
 	#category : 'GToolkit-Documenter-Epicea'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtEpiceaBrickFactory class >> default [
 	^ defaultInstance ifNil: [ defaultInstance := self new ]
 ]
 
-{ #category : 'strings' }
+{ #category : #strings }
 GtEpiceaBrickFactory >> emphasizedStringFor: aString [
 	
 	^ self stringFor: (aString asRopedText bold; glamorousRegularFont)
 ]
 
-{ #category : 'colors' }
+{ #category : #colors }
 GtEpiceaBrickFactory >> softerTextColor [
 
 	^ self textColor mixed: 0.1 with: Color gray
 ]
 
-{ #category : 'strings' }
+{ #category : #strings }
 GtEpiceaBrickFactory >> stringFor: aString [
 
 	^ BlTextElement new 
@@ -34,13 +34,13 @@ GtEpiceaBrickFactory >> stringFor: aString [
 			c linear vertical alignCenter ]
 ]
 
-{ #category : 'strings' }
+{ #category : #strings }
 GtEpiceaBrickFactory >> stringFor: aString color: aColor [
 
 	^ self stringFor: (aString asRopedText foreground: aColor; glamorousRegularFont)
 ]
 
-{ #category : 'colors' }
+{ #category : #colors }
 GtEpiceaBrickFactory >> textColor [
 
 	^ Smalltalk ui theme textColor

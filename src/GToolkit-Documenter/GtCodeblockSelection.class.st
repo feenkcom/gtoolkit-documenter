@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtCodeblockSelection',
-	#superclass : 'Object',
+	#name : #GtCodeblockSelection,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -10,12 +10,12 @@ Class {
 	#category : 'GToolkit-Documenter-Code Snippet'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtCodeblockSelection >> asString [
 	^ self text asString
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtCodeblockSelection >> interval [
 	<return: #Interval>
 	self 
@@ -24,7 +24,7 @@ GtCodeblockSelection >> interval [
 	^ interval
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtCodeblockSelection >> interval: anInterval [
 	self 
 		assert: [ interval isNil ] 
@@ -38,14 +38,14 @@ GtCodeblockSelection >> interval: anInterval [
 	interval := anInterval
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtCodeblockSelection >> isNotEmpty [
 	"Return true if there is a non-empty text"
 	<return: #Boolean>
 	^ text isNotNil and: [ text isNotEmpty ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtCodeblockSelection >> text [
 	<return: #String>
 	self 
@@ -54,7 +54,7 @@ GtCodeblockSelection >> text [
 	^ text
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtCodeblockSelection >> text: aString [
 	self 
 		assert: [ text isNil ] 

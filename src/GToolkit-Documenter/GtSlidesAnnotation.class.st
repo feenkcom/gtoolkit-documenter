@@ -1,13 +1,13 @@
 Class {
-	#name : 'GtSlidesAnnotation',
-	#superclass : 'GtAnnotation',
+	#name : #GtSlidesAnnotation,
+	#superclass : #GtAnnotation,
 	#instVars : [
 		'slides'
 	],
 	#category : 'GToolkit-Documenter-Annotations'
 }
 
-{ #category : 'protected' }
+{ #category : #protected }
 GtSlidesAnnotation class >> possibleParameters [
 	^ {
 		self constants slidesParameterName.
@@ -17,24 +17,24 @@ GtSlidesAnnotation class >> possibleParameters [
 		}
 ]
 
-{ #category : 'protected' }
+{ #category : #protected }
 GtSlidesAnnotation class >> tag [
 	^ self constants slidesAnnotationName
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtSlidesAnnotation >> hasSlidesDefined [
 	<return: #Boolean>
 	^ self slides isNotNil
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtSlidesAnnotation >> isPreviewDefined [
 	"Return true if a preview object is defined"
 	^ self hasSlidesDefined
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtSlidesAnnotation >> objectToPreview [
 	"Subclasses should define what object to preview"
 
@@ -45,13 +45,13 @@ GtSlidesAnnotation >> objectToPreview [
 		asElement
 ]
 
-{ #category : 'accessing - parameter values' }
+{ #category : #'accessing - parameter values' }
 GtSlidesAnnotation >> slides [
 	<return: #Collection of: #GtSlide>
 	^ slides ifNil: [ slides := self slidesParameterValues ]
 ]
 
-{ #category : 'accessing - parameter values' }
+{ #category : #'accessing - parameter values' }
 GtSlidesAnnotation >> slidesParameterValues [
 	<return: #Collection of: #GtSlide>
 	^ self utility
@@ -71,7 +71,7 @@ GtSlidesAnnotation >> slidesParameterValues [
 		defaultValue: [ nil ]
 ]
 
-{ #category : 'api - style' }
+{ #category : #'api - style' }
 GtSlidesAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self utility subtleMarkupsInText: aBlRope start: self start stop: self stop.
@@ -80,7 +80,7 @@ GtSlidesAnnotation >> styleTextWithMarkup: aBlRope [
 	
 ]
 
-{ #category : 'api - style' }
+{ #category : #'api - style' }
 GtSlidesAnnotation >> styleTextWithoutMarkup: aBlRope [ 
 	super styleTextWithoutMarkup: aBlRope.
 	self utility subtleMarkupsInText: aBlRope start: self start stop: self stop.

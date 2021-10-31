@@ -1,13 +1,13 @@
 Class {
-	#name : 'GtMethodAnnotation',
-	#superclass : 'GtAnnotation',
+	#name : #GtMethodAnnotation,
+	#superclass : #GtAnnotation,
 	#instVars : [
 		'referencedMethod'
 	],
 	#category : 'GToolkit-Documenter-Annotations'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtMethodAnnotation class >> possibleParameters [
 	^ {
 		self constants nameParameterName.
@@ -20,35 +20,35 @@ GtMethodAnnotation class >> possibleParameters [
 		}
 ]
 
-{ #category : 'rendering' }
+{ #category : #rendering }
 GtMethodAnnotation class >> tag [
 	^ self constants methodAnnotationName
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtMethodAnnotation >> accept: aVisitor [
 	^ aVisitor visitGt2MethodAnnotation: self
 ]
 
-{ #category : 'private - actions' }
+{ #category : #'private - actions' }
 GtMethodAnnotation >> browseReferenceFrom: anEvent [
 	anEvent modifiers isShift ifTrue: [ ^ self ].
 	self isMethodDefined ifFalse: [ ^ self inform: 'Method does not exist' ].
 	anEvent target phlow spawnObject: self referencedMethod
 ]
 
-{ #category : 'accessing - parameter values' }
+{ #category : #'accessing - parameter values' }
 GtMethodAnnotation >> defaultShowSelector [
 	^ self constants defaultMethodShowSelector
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtMethodAnnotation >> doesReferenceExist [
 	"Return true if a referenced object is defined"
 	^ self isMethodDefined 
 ]
 
-{ #category : 'announcement handling' }
+{ #category : #'announcement handling' }
 GtMethodAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAdded [ 
 	(self referencedMethod notNil and: [ 
 		aClassAdded classAffected originalName = self referencedMethod parentName ])
@@ -56,7 +56,7 @@ GtMethodAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAdded [
 	self gtDocument styleTextRequest
 ]
 
-{ #category : 'announcement handling' }
+{ #category : #'announcement handling' }
 GtMethodAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [ 
 	(self referencedMethod notNil and: [ 
 			aClassRenamed newName = self referencedMethod parentName or: [ 
@@ -65,7 +65,7 @@ GtMethodAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [
 	self gtDocument styleTextRequest
 ]
 
-{ #category : 'announcement handling' }
+{ #category : #'announcement handling' }
 GtMethodAnnotation >> handleMethodAnnouncement: aMethodModified [ 
 	(self referencedMethod notNil and: [ 
 		aMethodModified classAffected name = self referencedMethod parentName  
@@ -74,7 +74,7 @@ GtMethodAnnotation >> handleMethodAnnouncement: aMethodModified [
 	self gtDocument styleTextRequest
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtMethodAnnotation >> isLabelParameterValueDefined [
 	"Return true if an inlined parameter is properly defined"
 	<return: #Boolean>
@@ -86,19 +86,19 @@ GtMethodAnnotation >> isLabelParameterValueDefined [
 		defaultValue: [ false ].
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtMethodAnnotation >> isMethodDefined [
 	"Return true if a method is defined in the system"
 	^ self referencedMethod notNil and: [ self referencedMethod isDefined ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtMethodAnnotation >> isPreviewDefined [
 	"Return true if a preview object is defined"
 	^ self isMethodDefined
 ]
 
-{ #category : 'accessing - parameter values' }
+{ #category : #'accessing - parameter values' }
 GtMethodAnnotation >> labelParameterValue [
 	<return: #Symbol>
 	^ self utility 
@@ -111,7 +111,7 @@ GtMethodAnnotation >> labelParameterValue [
 		defaultValue: [ self constants defaultInlineValue ]
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 GtMethodAnnotation >> labelText [
 	"Return a displayed class name (that can be anything)"
 	<return: #String>
@@ -123,19 +123,19 @@ GtMethodAnnotation >> labelText [
 		do: [ :anException | anException printString ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtMethodAnnotation >> objectToPreview [
 	"Subclasses should define what object to preview"
 	^ self referencedMethod
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtMethodAnnotation >> referenceParameterName [
 	"Return an annotation parameter name that holds a referenced object"
 	^ self constants nameParameterName
 ]
 
-{ #category : 'accessing - parameter values' }
+{ #category : #'accessing - parameter values' }
 GtMethodAnnotation >> referencedMethod [
 	<return: #RGMethodDefinition or: nil>
 	^ referencedMethod ifNil: [ referencedMethod := self utility 
@@ -146,7 +146,7 @@ GtMethodAnnotation >> referencedMethod [
 		defaultValue: [ nil ] ]
 ]
 
-{ #category : 'subscriptions' }
+{ #category : #subscriptions }
 GtMethodAnnotation >> registerToSystemChanges [
 	self gtDocument systemAnnouncer
 		when: MethodAdded , MethodRemoved
@@ -167,7 +167,7 @@ GtMethodAnnotation >> registerToSystemChanges [
 			for: self gtSubscriber
 ]
 
-{ #category : 'api - style' }
+{ #category : #'api - style' }
 GtMethodAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
@@ -183,7 +183,7 @@ GtMethodAnnotation >> styleTextWithMarkup: aBlRope [
 	self registerToSystemChanges
 ]
 
-{ #category : 'api - style' }
+{ #category : #'api - style' }
 GtMethodAnnotation >> styleTextWithoutInteractions: aBlRope [
 	| aLinkNode |
 	aLinkNode := self utility linkNodeForAnnotation: self.
@@ -191,7 +191,7 @@ GtMethodAnnotation >> styleTextWithoutInteractions: aBlRope [
 	self utility hideAllButLinkInText: aBlRope forAnnotation: self.
 ]
 
-{ #category : 'api - style' }
+{ #category : #'api - style' }
 GtMethodAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.

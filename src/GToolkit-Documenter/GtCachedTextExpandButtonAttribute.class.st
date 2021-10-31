@@ -1,25 +1,25 @@
 Class {
-	#name : 'GtCachedTextExpandButtonAttribute',
-	#superclass : 'BrGlamorousTrangleExpanderTextAttribute',
+	#name : #GtCachedTextExpandButtonAttribute,
+	#superclass : #BrGlamorousTrangleExpanderTextAttribute,
 	#instVars : [
 		'onCachingAction'
 	],
 	#category : 'GToolkit-Documenter-Text - Attributes'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtCachedTextExpandButtonAttribute >> initialize [
 	super initialize.
 	onCachingAction := [ :aBoolean :theAttribute | "do nothing" ].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtCachedTextExpandButtonAttribute >> isExpanded: aBoolean [
 	super isExpanded: aBoolean.
 	onCachingAction glamourValueWithArgs: { aBoolean. self }
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtCachedTextExpandButtonAttribute >> onCachingDo: aBlock [
 	self 
 		assert: [ aBlock notNil ]

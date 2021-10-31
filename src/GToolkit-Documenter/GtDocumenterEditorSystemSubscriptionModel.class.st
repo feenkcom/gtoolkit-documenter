@@ -5,8 +5,8 @@ I am used by ${class:GtDocumenterEditor}$.
 
 "
 Class {
-	#name : 'GtDocumenterEditorSystemSubscriptionModel',
-	#superclass : 'BrWidgetModel',
+	#name : #GtDocumenterEditorSystemSubscriptionModel,
+	#superclass : #BrWidgetModel,
 	#traits : 'TGtDocumentConstants',
 	#classTraits : 'TGtDocumentConstants classTrait',
 	#instVars : [
@@ -19,23 +19,23 @@ Class {
 	#category : 'GToolkit-Documenter-! Editor - Model'
 }
 
-{ #category : 'api - announcer' }
+{ #category : #'api - announcer' }
 GtDocumenterEditorSystemSubscriptionModel >> announce: anAnnouncement [
 	self announcer announce: anAnnouncement
 ]
 
-{ #category : 'api - announcer' }
+{ #category : #'api - announcer' }
 GtDocumenterEditorSystemSubscriptionModel >> announcer [
 	<return: #Announcer>
 	^ announcer
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 GtDocumenterEditorSystemSubscriptionModel >> defaultAnnouncer [
 	^ GtAnnouncer new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumenterEditorSystemSubscriptionModel >> gtSubscriptionsFor: aView [
 	<gtView>
 	self announcer ifNil: [ ^ aView empty ].
@@ -46,7 +46,7 @@ GtDocumenterEditorSystemSubscriptionModel >> gtSubscriptionsFor: aView [
 		view: #gtSubscriptionsFor:
 ]
 
-{ #category : 'private - announcement handling' }
+{ #category : #'private - announcement handling' }
 GtDocumenterEditorSystemSubscriptionModel >> handleSystemChangeAnnouncement: aSystemAnnouncement [
 	self hasDocumentSubscriptions ifFalse: [ ^ self ].
 	self isInSceneGraph 
@@ -54,12 +54,12 @@ GtDocumenterEditorSystemSubscriptionModel >> handleSystemChangeAnnouncement: aSy
 		ifFalse: [ shouldUpdateWhenInSceneGraph := true ]
 ]
 
-{ #category : 'private - testing' }
+{ #category : #'private - testing' }
 GtDocumenterEditorSystemSubscriptionModel >> hasDocumentSubscriptions [
 	^ self announcer numberOfSubscriptions isZero not
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtDocumenterEditorSystemSubscriptionModel >> initialize [
 	super initialize.
 	mutexSubscription := Mutex new.
@@ -69,7 +69,7 @@ GtDocumenterEditorSystemSubscriptionModel >> initialize [
 	announcer := self defaultAnnouncer.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtDocumenterEditorSystemSubscriptionModel >> initializeListeners [
 	super initializeListeners.
 	self 
@@ -80,18 +80,18 @@ GtDocumenterEditorSystemSubscriptionModel >> initializeListeners [
 		do: [ :anEvent | self onRemovedFromSceneGraph ].
 ]
 
-{ #category : 'private - testing' }
+{ #category : #'private - testing' }
 GtDocumenterEditorSystemSubscriptionModel >> isInSceneGraph [
 	^ isInSceneGraph ifNil: [ false ]
 ]
 
-{ #category : 'api - announcer' }
+{ #category : #'api - announcer' }
 GtDocumenterEditorSystemSubscriptionModel >> isSubscribedToSystem [
 	<return: #Boolean>
 	^ mutexSubscription critical: [ isSubscribedToSystem ]
 ]
 
-{ #category : 'private - updating' }
+{ #category : #'private - updating' }
 GtDocumenterEditorSystemSubscriptionModel >> mayRequestDocumentUpdate [
 	self isSubscribedToSystem ifFalse: [ ^ self ].
 	self hasDocumentSubscriptions ifFalse: [ ^ self ].
@@ -101,13 +101,13 @@ GtDocumenterEditorSystemSubscriptionModel >> mayRequestDocumentUpdate [
 			document: aDocumenter) ]
 ]
 
-{ #category : 'private - subscriptions' }
+{ #category : #'private - subscriptions' }
 GtDocumenterEditorSystemSubscriptionModel >> mayUnsubscribeFromSystem [
 	self hasDocumentSubscriptions ifTrue: [ ^ self ].
 	self unsubscribeFromSystem
 ]
 
-{ #category : 'private - event handling' }
+{ #category : #'private - event handling' }
 GtDocumenterEditorSystemSubscriptionModel >> onAddedToSceneGraph [
 	isInSceneGraph := true.
 	shouldUpdateWhenInSceneGraph ifFalse: [ ^ self ].
@@ -115,12 +115,12 @@ GtDocumenterEditorSystemSubscriptionModel >> onAddedToSceneGraph [
 	self mayRequestDocumentUpdate.
 ]
 
-{ #category : 'private - event handling' }
+{ #category : #'private - event handling' }
 GtDocumenterEditorSystemSubscriptionModel >> onRemovedFromSceneGraph [
 	isInSceneGraph := false
 ]
 
-{ #category : 'private - subscriptions' }
+{ #category : #'private - subscriptions' }
 GtDocumenterEditorSystemSubscriptionModel >> setSubscribedIfAlreadySubscribedDo: aBlock [
 	| wantEvaluateBlock |
 	wantEvaluateBlock := false.
@@ -131,7 +131,7 @@ GtDocumenterEditorSystemSubscriptionModel >> setSubscribedIfAlreadySubscribedDo:
 	wantEvaluateBlock ifTrue: [ aBlock ]
 ]
 
-{ #category : 'private - subscriptions' }
+{ #category : #'private - subscriptions' }
 GtDocumenterEditorSystemSubscriptionModel >> subscribeToSystem [
 	self setSubscribedIfAlreadySubscribedDo: [ ^ self ].
 	SystemAnnouncer uniqueInstance weak
@@ -140,19 +140,19 @@ GtDocumenterEditorSystemSubscriptionModel >> subscribeToSystem [
 		to: self.
 ]
 
-{ #category : 'api - announcer' }
+{ #category : #'api - announcer' }
 GtDocumenterEditorSystemSubscriptionModel >> systemAnnouncer [
 	<return: #Announcer>
 	self subscribeToSystem.
 	^ self announcer
 ]
 
-{ #category : 'api - announcer' }
+{ #category : #'api - announcer' }
 GtDocumenterEditorSystemSubscriptionModel >> systemSubscriber [
 	^ self
 ]
 
-{ #category : 'api - announcer' }
+{ #category : #'api - announcer' }
 GtDocumenterEditorSystemSubscriptionModel >> unsubscribe: anObject [
 	"Unsubscribe all subscriptions of anObject from the receiver"
 	| theRemovedSubscriptions |
@@ -161,7 +161,7 @@ GtDocumenterEditorSystemSubscriptionModel >> unsubscribe: anObject [
 	^ theRemovedSubscriptions
 ]
 
-{ #category : 'private - subscriptions' }
+{ #category : #'private - subscriptions' }
 GtDocumenterEditorSystemSubscriptionModel >> unsubscribeFromSystem [
 	mutexSubscription critical: [ 
 		self isSubscribedToSystem ifFalse: [ ^ self ].

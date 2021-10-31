@@ -1,11 +1,11 @@
-Extension { #name : 'PRRaw' }
+Extension { #name : #PRRaw }
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRRaw >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRRaw >> styleTextWithoutMarkup: aBlRope [
 	| aMarkup |
 	self styleTextWithMarkup: aBlRope.

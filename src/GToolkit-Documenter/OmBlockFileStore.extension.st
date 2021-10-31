@@ -1,6 +1,6 @@
-Extension { #name : 'OmBlockFileStore' }
+Extension { #name : #OmBlockFileStore }
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 OmBlockFileStore >> gtReset [
 	super gtReset.
 	blocks removeAll

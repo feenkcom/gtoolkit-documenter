@@ -1,6 +1,6 @@
-Extension { #name : 'PRSuperscriptFormat' }
+Extension { #name : #PRSuperscriptFormat }
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRSuperscriptFormat >> styleSubText: aBlRope [
 	^ aBlRope
 			foreground: self constants subtleColor;

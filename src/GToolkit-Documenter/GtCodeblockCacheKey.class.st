@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtCodeblockCacheKey',
-	#superclass : 'GtCacheKey',
+	#name : #GtCodeblockCacheKey,
+	#superclass : #GtCacheKey,
 	#instVars : [
 		'text',
 		'caption',
@@ -9,7 +9,7 @@ Class {
 	#category : 'GToolkit-Documenter-Cache'
 }
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 GtCodeblockCacheKey >> = anObject [
 	^ super = anObject and: [ 
 		(self parameters = anObject parameters) and: [ 
@@ -17,17 +17,17 @@ GtCodeblockCacheKey >> = anObject [
 				self caption = anObject caption ] ] ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtCodeblockCacheKey >> caption [
 	^ caption
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtCodeblockCacheKey >> caption: anObject [
 	caption := anObject
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 GtCodeblockCacheKey >> hash [
 	^ ((super hash
 		bitXor: self parameters hash)
@@ -35,17 +35,17 @@ GtCodeblockCacheKey >> hash [
 				bitXor: self caption hash
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtCodeblockCacheKey >> parameters [
 	^ parameters
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtCodeblockCacheKey >> parameters: anObject [
 	parameters := anObject
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 GtCodeblockCacheKey >> printOn: aStream [
 	aStream 
 		nextPutAll: 'codeblock key';
@@ -54,12 +54,12 @@ GtCodeblockCacheKey >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtCodeblockCacheKey >> text [
 	^ text
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtCodeblockCacheKey >> text: anObject [
 	text := anObject
 ]

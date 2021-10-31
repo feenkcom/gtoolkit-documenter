@@ -3,24 +3,24 @@ This is a hack that partially fixes this issue: *https://github.com/feenkcom/gto
 
 "
 Class {
-	#name : 'GtDocumenterParser',
-	#superclass : 'PRPillarGrammar',
+	#name : #GtDocumenterParser,
+	#superclass : #PRPillarGrammar,
 	#category : 'GToolkit-Documenter-Styler'
 }
 
-{ #category : 'parsing' }
+{ #category : #parsing }
 GtDocumenterParser class >> parse: aStream [
 	^ self new parse: aStream
 ]
 
-{ #category : 'grammar - Anchor' }
+{ #category : #'grammar - Anchor' }
 GtDocumenterParser >> anchor [
 	"An anchor is just a line that begin with the character $@ and contains a text that we trim."
 
 	^ super anchor ==> [ :array | PRAnchor named: array second ]
 ]
 
-{ #category : 'grammar - Paragraph' }
+{ #category : #'grammar - Paragraph' }
 GtDocumenterParser >> annotatedParagraph [
 	^ super annotatedParagraph
 		==> [ :array | 
@@ -33,7 +33,7 @@ GtDocumenterParser >> annotatedParagraph [
 						stop: array last stop ]
 ]
 
-{ #category : 'grammar - Annotation' }
+{ #category : #'grammar - Annotation' }
 GtDocumenterParser >> annotation [
 	^ super annotation ==> [ :array | 
 			self flag: 'This is specific change for Documenter'.
@@ -42,12 +42,12 @@ GtDocumenterParser >> annotation [
 				stop: array sixth stop ]
 ]
 
-{ #category : 'grammar - Annotation' }
+{ #category : #'grammar - Annotation' }
 GtDocumenterParser >> annotationParameters [
 	^ super annotationParameters ==> [ :array | self parametersObjectFrom: array ]
 ]
 
-{ #category : 'grammar - Annotation' }
+{ #category : #'grammar - Annotation' }
 GtDocumenterParser >> annotationTag [
 	^ super annotationTag
 		==> [ :array | | aTagName |
@@ -57,17 +57,17 @@ GtDocumenterParser >> annotationTag [
 					ifNone: [ PRValidation strategy missingAnnotationSupport: aTagName ] ]
 ]
 
-{ #category : 'grammar - Format' }
+{ #category : #'grammar - Format' }
 GtDocumenterParser >> boldFormat [
 	^ super boldFormat ==> [ :array | self formatForArray: array ]
 ]
 
-{ #category : 'grammar - Format' }
+{ #category : #'grammar - Format' }
 GtDocumenterParser >> boldMarkup [
 	^ super boldMarkup ==> [ :token | PRBoldFormat ]
 ]
 
-{ #category : 'grammar - Text' }
+{ #category : #'grammar - Text' }
 GtDocumenterParser >> commentedLine [
 	^ super commentedLine ==> [ :array | 
 		(PRCommentedLine content: array third)
@@ -75,12 +75,12 @@ GtDocumenterParser >> commentedLine [
 			stop: array last stop ]
 ]
 
-{ #category : 'grammar - Document' }
+{ #category : #'grammar - Document' }
 GtDocumenterParser >> content [
 	^ super content ==> [ :array | array second ifNil: [ {array first} ] ifNotNil: [ array ] ]
 ]
 
-{ #category : 'grammar - Document' }
+{ #category : #'grammar - Document' }
 GtDocumenterParser >> contents [
 	^ super contents
 		==> [ :array | 
@@ -94,7 +94,7 @@ GtDocumenterParser >> contents [
 			result ]
 ]
 
-{ #category : 'grammar - List' }
+{ #category : #'grammar - List' }
 GtDocumenterParser >> dataListItem [
 	^ super dataListItem ==> [ :array | 
 		| item |
@@ -111,12 +111,12 @@ GtDocumenterParser >> dataListItem [
 		item ]
 ]
 
-{ #category : 'grammar - List' }
+{ #category : #'grammar - List' }
 GtDocumenterParser >> dataMarkup [
 	^ super dataMarkup ==> [ :token | PRDataItem ]
 ]
 
-{ #category : 'grammar - List' }
+{ #category : #'grammar - List' }
 GtDocumenterParser >> dataSubListItem [
 	^ super dataSubListItem
 		==>
@@ -131,7 +131,7 @@ GtDocumenterParser >> dataSubListItem [
 			result contents ]
 ]
 
-{ #category : 'grammar - List' }
+{ #category : #'grammar - List' }
 GtDocumenterParser >> definitionList [
 	^ super definitionList ==> [ :array | 
 			(PRDefinitionList withAll: array second)
@@ -139,20 +139,20 @@ GtDocumenterParser >> definitionList [
 				stop: array last stop ]
 ]
 
-{ #category : 'grammar - Document' }
+{ #category : #'grammar - Document' }
 GtDocumenterParser >> document [
 	"I build a PRDocument. I get a collection with all the children of the PRDocument and I dd them one by one."
 
 	^ super document ==> [ :array | PRDocument withAll: array ]
 ]
 
-{ #category : 'grammar - Paragraph' }
+{ #category : #'grammar - Paragraph' }
 GtDocumenterParser >> emptyParagraph [
 	^ super emptyParagraph ==> [ :array |
 		PREmptyParagraph new start: array first start; stop: array third stop ]
 ]
 
-{ #category : 'grammar - Reference' }
+{ #category : #'grammar - Reference' }
 GtDocumenterParser >> figure [
 	^ super figure ==> [ :array | 
 			| fig |
@@ -163,7 +163,7 @@ GtDocumenterParser >> figure [
 			fig ]
 ]
 
-{ #category : 'grammar - Reference' }
+{ #category : #'grammar - Reference' }
 GtDocumenterParser >> figureAlias [
 	^ super figureAlias ==> [ :anArray | 
 			anArray second
@@ -176,7 +176,7 @@ GtDocumenterParser >> figureAlias [
 						each stop: each stop + anArray first start - 1 ] ] ]
 ]
 
-{ #category : 'from markdown' }
+{ #category : #'from markdown' }
 GtDocumenterParser >> formatContent [
 	^ super formatContent ==> [ :array | 
 		(PRText content: (self stringFrom: array second))
@@ -184,14 +184,14 @@ GtDocumenterParser >> formatContent [
 			stop: array third stop ]
 ]
 
-{ #category : 'grammar - Format' }
+{ #category : #'grammar - Format' }
 GtDocumenterParser >> formatForArray: array [
 	^ (array second withAll: (array third collect: [ :each | each second ]))
 		start: array first start;
 		stop: array last stop
 ]
 
-{ #category : 'grammar - Header' }
+{ #category : #'grammar - Header' }
 GtDocumenterParser >> header [
 	"I create a PRHeader"
 
@@ -203,27 +203,27 @@ GtDocumenterParser >> header [
 			stop: array last stop ]
 ]
 
-{ #category : 'grammar - HorizontalRule' }
+{ #category : #'grammar - HorizontalRule' }
 GtDocumenterParser >> horizontalRule [
 	^ super horizontalRule ==> [ :array | PRHorizontalRule new ]
 ]
 
-{ #category : 'grammar - Format' }
+{ #category : #'grammar - Format' }
 GtDocumenterParser >> italicFormat [
 	^ super italicFormat ==> [ :array | self formatForArray: array ]
 ]
 
-{ #category : 'grammar - Format' }
+{ #category : #'grammar - Format' }
 GtDocumenterParser >> italicMarkup [
 	^ super italicMarkup ==> [ :token | PRItalicFormat ]
 ]
 
-{ #category : 'grammar - Document' }
+{ #category : #'grammar - Document' }
 GtDocumenterParser >> lineBreak [
 	^ super lineBreak ==> [ :array | PRLineBreak new ]
 ]
 
-{ #category : 'grammar - Reference' }
+{ #category : #'grammar - Reference' }
 GtDocumenterParser >> link [
 	^ super link
 		==>
@@ -236,7 +236,7 @@ GtDocumenterParser >> link [
 			linkRes ]
 ]
 
-{ #category : 'grammar - Reference' }
+{ #category : #'grammar - Reference' }
 GtDocumenterParser >> linkAlias [
 	^ super linkAlias ==> [ :anArray | 
 			anArray second
@@ -249,7 +249,7 @@ GtDocumenterParser >> linkAlias [
 						each stop: each stop + anArray first start - 1 ] ] ]
 ]
 
-{ #category : 'helpers' }
+{ #category : #helpers }
 GtDocumenterParser >> listsParser [
 	"We cache the lists parser to be faster"
 	"Attention: we refer to PRPillarParser explicitely here instead of using ==self== so that the PRPillarCompiled parser, if it exists, can work."
@@ -258,22 +258,22 @@ GtDocumenterParser >> listsParser [
 		ifAbsentPut: [ (PRPillarParser newStartingAt: #lists) optimize ]
 ]
 
-{ #category : 'helpers' }
+{ #category : #helpers }
 GtDocumenterParser >> literalFrom: characterArray [
 	^ PRParserUtility convertToPharoObject: (self stringFrom: characterArray)
 ]
 
-{ #category : 'grammar - Format' }
+{ #category : #'grammar - Format' }
 GtDocumenterParser >> monospaceFormat [
 	^ super monospaceFormat ==> [ :array | self formatForArray: array ]
 ]
 
-{ #category : 'grammar - Format' }
+{ #category : #'grammar - Format' }
 GtDocumenterParser >> monospaceMarkup [
 	^ super monospaceMarkup ==> [ :token | PRMonospaceFormat ]
 ]
 
-{ #category : 'grammar - List' }
+{ #category : #'grammar - List' }
 GtDocumenterParser >> orderedList [
 	^ super orderedList ==> [ :array | 
 			(PROrderedList withAll: array second)
@@ -281,7 +281,7 @@ GtDocumenterParser >> orderedList [
 				stop: array last stop ]
 ]
 
-{ #category : 'grammar - List' }
+{ #category : #'grammar - List' }
 GtDocumenterParser >> orderedListItem [
 	^ super orderedListItem ==> [ :array | 
 		| item |
@@ -298,7 +298,7 @@ GtDocumenterParser >> orderedListItem [
 		item ]
 ]
 
-{ #category : 'grammar - List' }
+{ #category : #'grammar - List' }
 GtDocumenterParser >> orderedSubListItem [
 	^ super orderedSubListItem
 		==>
@@ -313,7 +313,7 @@ GtDocumenterParser >> orderedSubListItem [
 			result contents ]
 ]
 
-{ #category : 'grammar - Paragraph' }
+{ #category : #'grammar - Paragraph' }
 GtDocumenterParser >> paragraph [
 	^ super paragraph ==> [ :array | 
 		(PRParagraph withAll: array second)
@@ -321,7 +321,7 @@ GtDocumenterParser >> paragraph [
 			stop: array last stop ]
 ]
 
-{ #category : 'grammar - Parameter' }
+{ #category : #'grammar - Parameter' }
 GtDocumenterParser >> parameterFrom: array [
 	^ (PRParameter 
 			keyNode: array second 
@@ -330,73 +330,73 @@ GtDocumenterParser >> parameterFrom: array [
 		stop: array last stop
 ]
 
-{ #category : 'grammar - Parameter' }
+{ #category : #'grammar - Parameter' }
 GtDocumenterParser >> parameterKeyFrom: array [
 	^ (PRParameterKey named: (self stringFrom: array second))
 		start: array first start;
 		stop: array last stop
 ]
 
-{ #category : 'grammar - Parameter' }
+{ #category : #'grammar - Parameter' }
 GtDocumenterParser >> parameterKeyUntilEndAnnotation [
 	^ super parameterKeyUntilEndAnnotation ==> [ :array | self parameterKeyFrom: array ]
 ]
 
-{ #category : 'grammar - Parameter' }
+{ #category : #'grammar - Parameter' }
 GtDocumenterParser >> parameterKeyUntilEndFigure [
 	^ super parameterKeyUntilEndFigure ==> [ :array | self stringFrom: array second ]
 ]
 
-{ #category : 'grammar - Parameter' }
+{ #category : #'grammar - Parameter' }
 GtDocumenterParser >> parameterKeyUntilEndLink [
 	^ super parameterKeyUntilEndLink ==> [ :array | self stringFrom: array second ]
 ]
 
-{ #category : 'grammar - Parameter' }
+{ #category : #'grammar - Parameter' }
 GtDocumenterParser >> parameterKeyUntilNewline [
 	^ super parameterKeyUntilNewline ==> [ :array | self stringFrom: array second ]
 ]
 
-{ #category : 'grammar - Parameter' }
+{ #category : #'grammar - Parameter' }
 GtDocumenterParser >> parameterUntilEndAnnotation [
 	^ super parameterUntilEndAnnotation ==>
 			[ :array | self parameterFrom: array ]
 ]
 
-{ #category : 'grammar - Parameter' }
+{ #category : #'grammar - Parameter' }
 GtDocumenterParser >> parameterUntilNewline [
 	^ super parameterUntilNewline "==>
 			[ :array | self parameterFrom: array ]"
 ]
 
-{ #category : 'grammar - Parameter' }
+{ #category : #'grammar - Parameter' }
 GtDocumenterParser >> parameterValueFrom: array [
 	^ (PRParameterValue value: (self literalFrom: array third))
 		start: array second start;
 		stop: array last stop
 ]
 
-{ #category : 'grammar - Parameter' }
+{ #category : #'grammar - Parameter' }
 GtDocumenterParser >> parameterValueUntilEndAnnotation [
 	^ super parameterValueUntilEndAnnotation ==> [ :array | self parameterValueFrom: array ]
 ]
 
-{ #category : 'grammar - Parameter' }
+{ #category : #'grammar - Parameter' }
 GtDocumenterParser >> parameterValueUntilEndFigure [
 	^ super parameterValueUntilEndFigure ==> [ :array | self stringFrom: array third ]
 ]
 
-{ #category : 'grammar - Parameter' }
+{ #category : #'grammar - Parameter' }
 GtDocumenterParser >> parameterValueUntilEndLink [
 	^ super parameterValueUntilEndLink ==> [ :array | self stringFrom: array third ]
 ]
 
-{ #category : 'grammar - Parameter' }
+{ #category : #'grammar - Parameter' }
 GtDocumenterParser >> parameterValueUntilNewline [
 	^ super parameterValueUntilNewline ==> [ :array | self stringFrom: array third ]
 ]
 
-{ #category : 'grammar - Parameter' }
+{ #category : #'grammar - Parameter' }
 GtDocumenterParser >> parametersConvertToPharoObject: aString [
 	"Convert if possible the aString argument into a Pharo object, we also replace nil by true"
 	"We assume that aString represents only one possible value"
@@ -417,12 +417,12 @@ GtDocumenterParser >> parametersConvertToPharoObject: aString [
 			aString ]"
 ]
 
-{ #category : 'grammar - Reference' }
+{ #category : #'grammar - Reference' }
 GtDocumenterParser >> parametersFigure [
 	^ super parametersFigure ==> [ :array | self parametersFrom: array ]
 ]
 
-{ #category : 'grammar - Parameter' }
+{ #category : #'grammar - Parameter' }
 GtDocumenterParser >> parametersFrom: array [
 	| result |
 	result := OrderedDictionary new.
@@ -437,39 +437,39 @@ GtDocumenterParser >> parametersFrom: array [
 	^ result
 ]
 
-{ #category : 'grammar - Reference' }
+{ #category : #'grammar - Reference' }
 GtDocumenterParser >> parametersLink [
 	^ super parametersLink ==> [ :array | self parametersFrom: array ]
 ]
 
-{ #category : 'grammar - Parameter' }
+{ #category : #'grammar - Parameter' }
 GtDocumenterParser >> parametersObjectFrom: array [
 	^ (PRParameters with: array fourth first withAll: array fourth second)
 			start: array third start;
 			stop: array fifth stop
 ]
 
-{ #category : 'grammar - Parameter' }
+{ #category : #'grammar - Parameter' }
 GtDocumenterParser >> parametersUntilNewline [
 	^ super parametersUntilNewline
 ]
 
-{ #category : 'helpers' }
+{ #category : #helpers }
 GtDocumenterParser >> parse: anObject startingAt: aRule [
 	^ (self class newStartingAt: aRule) parse: anObject
 ]
 
-{ #category : 'grammar - Text' }
+{ #category : #'grammar - Text' }
 GtDocumenterParser >> preformatedLine [
 	^ super preformatedLine ==> [ :array | PRText content: array second ]
 ]
 
-{ #category : 'grammar - Text' }
+{ #category : #'grammar - Text' }
 GtDocumenterParser >> preformatedText [
 	^ super preformatedText ==> [ :array | PRPreformatted withAll: array ]
 ]
 
-{ #category : 'grammar - Raw' }
+{ #category : #'grammar - Raw' }
 GtDocumenterParser >> raw [
 	^ super raw
 		==>
@@ -480,23 +480,23 @@ GtDocumenterParser >> raw [
 			PRRaw content: contentRaw contents type: array second ]
 ]
 
-{ #category : 'from markdown' }
+{ #category : #'from markdown' }
 GtDocumenterParser >> referenceContent [
 	^ super referenceContent ==> [ :array | PRText content: (self stringFrom: array) ]
 ]
 
-{ #category : 'grammar - Reference' }
+{ #category : #'grammar - Reference' }
 GtDocumenterParser >> referenceFigure [
 	self flag: #todo. "We should maybe check for a :// inside the reference and maybe an extension."
 	^ super referenceFigure ==> [ :array | self stringFrom: array ]
 ]
 
-{ #category : 'grammar - Reference' }
+{ #category : #'grammar - Reference' }
 GtDocumenterParser >> referenceLink [
 	^ super referenceLink ==> [ :array | self stringFrom: array ]
 ]
 
-{ #category : 'grammar - Script' }
+{ #category : #'grammar - Script' }
 GtDocumenterParser >> script [
 	"I create a PRScript."
 
@@ -506,52 +506,52 @@ GtDocumenterParser >> script [
 			stop: array last stop ]
 ]
 
-{ #category : 'grammar - Script' }
+{ #category : #'grammar - Script' }
 GtDocumenterParser >> scriptParameters [
 	^ super scriptParameters ==> [ :array | self parametersFrom: array ]
 ]
 
-{ #category : 'grammar - Format' }
+{ #category : #'grammar - Format' }
 GtDocumenterParser >> strikethroughFormat [
 	^ super strikethroughFormat ==> [ :array | self formatForArray: array ]
 ]
 
-{ #category : 'grammar - Format' }
+{ #category : #'grammar - Format' }
 GtDocumenterParser >> strikethroughMarkup [
 	^ super strikethroughMarkup ==> [ :token | PRStrikethroughFormat ]
 ]
 
-{ #category : 'helpers' }
+{ #category : #helpers }
 GtDocumenterParser >> stringFrom: characterArray [
 	^ String streamContents: [ :stream | characterArray do: [ :character | stream nextPut: character ] ]
 ]
 
-{ #category : 'grammar - Format' }
+{ #category : #'grammar - Format' }
 GtDocumenterParser >> subscriptFormat [
 	^ super subscriptFormat ==> [ :array | self formatForArray: array ]
 ]
 
-{ #category : 'grammar - Format' }
+{ #category : #'grammar - Format' }
 GtDocumenterParser >> subscriptMarkup [
 	^ super subscriptMarkup ==> [ :token | PRSubscriptFormat ]
 ]
 
-{ #category : 'grammar - Format' }
+{ #category : #'grammar - Format' }
 GtDocumenterParser >> superscriptFormat [
 	^ super superscriptFormat ==> [ :array | self formatForArray: array ]
 ]
 
-{ #category : 'grammar - Format' }
+{ #category : #'grammar - Format' }
 GtDocumenterParser >> superscriptMarkup [
 	^ super superscriptMarkup ==> [ :token | PRSuperscriptFormat ]
 ]
 
-{ #category : 'grammar - Table' }
+{ #category : #'grammar - Table' }
 GtDocumenterParser >> table [
 	^ super table ==> [ :array | PRTable withAll: array ]
 ]
 
-{ #category : 'grammar - Table' }
+{ #category : #'grammar - Table' }
 GtDocumenterParser >> tableCell [
 	^ super tableCell
 		==>
@@ -566,22 +566,22 @@ GtDocumenterParser >> tableCell [
 							[ :string | self parse: string startingAt: #oneLineContent ]) ]
 ]
 
-{ #category : 'grammar - Table' }
+{ #category : #'grammar - Table' }
 GtDocumenterParser >> tableCenterMarkup [
 	^ super tableCenterMarkup ==> [ :token | #center ]
 ]
 
-{ #category : 'grammar - Table' }
+{ #category : #'grammar - Table' }
 GtDocumenterParser >> tableHeadingMarkup [
 	^ super tableHeadingMarkup ==> [ :token | true ]
 ]
 
-{ #category : 'grammar - Table' }
+{ #category : #'grammar - Table' }
 GtDocumenterParser >> tableLeftMarkup [
 	^ super tableLeftMarkup ==> [ :token | #left ]
 ]
 
-{ #category : 'grammar - Table' }
+{ #category : #'grammar - Table' }
 GtDocumenterParser >> tableMarkups [
 	^ super tableMarkups
 		==> [ :array | 
@@ -599,12 +599,12 @@ GtDocumenterParser >> tableMarkups [
 			result ]
 ]
 
-{ #category : 'grammar - Table' }
+{ #category : #'grammar - Table' }
 GtDocumenterParser >> tableRightMarkup [
 	^ super tableRightMarkup ==> [ :token | #right ]
 ]
 
-{ #category : 'grammar - Table' }
+{ #category : #'grammar - Table' }
 GtDocumenterParser >> tableRow [
 	^ super tableRow
 		==> [ :array | 
@@ -614,7 +614,7 @@ GtDocumenterParser >> tableRow [
 			result ]
 ]
 
-{ #category : 'grammar - List' }
+{ #category : #'grammar - List' }
 GtDocumenterParser >> termListItem [
 	^ super termListItem ==> [ :array | 
 		| item |
@@ -631,12 +631,12 @@ GtDocumenterParser >> termListItem [
 		item ]
 ]
 
-{ #category : 'grammar - List' }
+{ #category : #'grammar - List' }
 GtDocumenterParser >> termMarkup [
 	^ super termMarkup ==> [ :token | PRTermItem ]
 ]
 
-{ #category : 'grammar - List' }
+{ #category : #'grammar - List' }
 GtDocumenterParser >> termSubListItem [
 	^ super termSubListItem
 		==>
@@ -651,7 +651,7 @@ GtDocumenterParser >> termSubListItem [
 			result contents ]
 ]
 
-{ #category : 'grammar - Text' }
+{ #category : #'grammar - Text' }
 GtDocumenterParser >> text [
 	"A text is a PRText with a string that contains any character inside."
 
@@ -661,17 +661,17 @@ GtDocumenterParser >> text [
 				stop: array third start - 1 ]
 ]
 
-{ #category : 'grammar - Format' }
+{ #category : #'grammar - Format' }
 GtDocumenterParser >> underlineFormat [
 	^ super underlineFormat ==> [ :array | self formatForArray: array ]
 ]
 
-{ #category : 'grammar - Format' }
+{ #category : #'grammar - Format' }
 GtDocumenterParser >> underlineMarkup [
 	^ super underlineMarkup ==> [ :token | PRUnderlineFormat ]
 ]
 
-{ #category : 'grammar - List' }
+{ #category : #'grammar - List' }
 GtDocumenterParser >> unorderedList [
 	^ super unorderedList ==> [ :array | 
 			(PRUnorderedList withAll: array second)
@@ -679,7 +679,7 @@ GtDocumenterParser >> unorderedList [
 				stop: array last stop ]
 ]
 
-{ #category : 'grammar - List' }
+{ #category : #'grammar - List' }
 GtDocumenterParser >> unorderedListItem [
 	^ super unorderedListItem ==> [ :array | 
 		| item |
@@ -698,7 +698,7 @@ GtDocumenterParser >> unorderedListItem [
 		item ]
 ]
 
-{ #category : 'grammar - List' }
+{ #category : #'grammar - List' }
 GtDocumenterParser >> unorderedSubListItem [
 	^ super unorderedSubListItem
 		==>

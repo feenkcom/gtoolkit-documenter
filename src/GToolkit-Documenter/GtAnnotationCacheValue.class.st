@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtAnnotationCacheValue',
-	#superclass : 'GtCacheValue',
+	#name : #GtAnnotationCacheValue,
+	#superclass : #GtCacheValue,
 	#instVars : [
 		'preview',
 		'isExpanded'
@@ -8,34 +8,34 @@ Class {
 	#category : 'GToolkit-Documenter-Cache'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtAnnotationCacheValue >> initialize [
 	super initialize.
 	isExpanded := false.
 	preview := nil.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtAnnotationCacheValue >> isExpanded [
 	^ isExpanded
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtAnnotationCacheValue >> isExpanded: anObject [
 	isExpanded := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtAnnotationCacheValue >> preview [
 	^ preview
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtAnnotationCacheValue >> preview: anObject [
 	preview := anObject
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 GtAnnotationCacheValue >> printOn: aStream [
 	self isExpanded ifNil: [ ^ super printOn: aStream ].
 	self isExpanded 

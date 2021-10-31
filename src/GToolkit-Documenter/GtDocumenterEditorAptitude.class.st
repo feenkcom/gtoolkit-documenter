@@ -5,20 +5,20 @@ I am used by ${class:GtDocumenterEditor}$.
 
 "
 Class {
-	#name : 'GtDocumenterEditorAptitude',
-	#superclass : 'BrGlamorousEditorAptitude',
+	#name : #GtDocumenterEditorAptitude,
+	#superclass : #BrGlamorousEditorAptitude,
 	#instVars : [
 		'normalFontSize'
 	],
 	#category : 'GToolkit-Documenter-! Editor - Look'
 }
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 GtDocumenterEditorAptitude >> defaultFontSize [
 	^ 16
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtDocumenterEditorAptitude >> initialize [
 	super initialize.
 	normalFontSize := self defaultFontSize.
@@ -28,7 +28,7 @@ GtDocumenterEditorAptitude >> initialize [
 	self add: BrLayoutResizerAptitude inherit.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtDocumenterEditorAptitude >> initializeListeners [
 	super initializeListeners.
 	
@@ -37,25 +37,25 @@ GtDocumenterEditorAptitude >> initializeListeners [
 		do: [ :anEvent | self normalFontSize: anEvent normalFontSize ].
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtDocumenterEditorAptitude >> initializeRequests [
 	super initializeRequests.
 
 	self request: GtDocumenterNormalFontSizeRequest new.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumenterEditorAptitude >> normalFontSize [
 	^ normalFontSize
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumenterEditorAptitude >> normalFontSize: aNumber [
 	normalFontSize := aNumber.
 	self onNormalFontSizeChanged.
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 GtDocumenterEditorAptitude >> onNormalFontSizeChanged [
 	self widgetDo: [ :aWidget | 
 		aWidget styler fontSize: self normalFontSize.

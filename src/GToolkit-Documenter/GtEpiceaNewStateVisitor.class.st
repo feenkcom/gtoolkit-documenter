@@ -1,10 +1,10 @@
 Class {
-	#name : 'GtEpiceaNewStateVisitor',
-	#superclass : 'EpNewStateVisitor',
+	#name : #GtEpiceaNewStateVisitor,
+	#superclass : #EpNewStateVisitor,
 	#category : 'GToolkit-Documenter-Epicea'
 }
 
-{ #category : 'printing' }
+{ #category : #printing }
 GtEpiceaNewStateVisitor >> printProtocol: aProtocol behaviorName: aBehaviorName sourceCode: aSourceCode [
 
 	^ String streamContents: [ :stream |
@@ -17,7 +17,7 @@ GtEpiceaNewStateVisitor >> printProtocol: aProtocol behaviorName: aBehaviorName 
 			nextPutAll: aSourceCode ]	
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaNewStateVisitor >> visitMethodAddition: aMethodCreatedChange [
 	^ self 
 		printProtocol: aMethodCreatedChange protocol
@@ -25,7 +25,7 @@ GtEpiceaNewStateVisitor >> visitMethodAddition: aMethodCreatedChange [
 		sourceCode: aMethodCreatedChange sourceCode
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaNewStateVisitor >> visitMethodModification: aMethodModification [
 	^ self 
 		printProtocol: aMethodModification newProtocol

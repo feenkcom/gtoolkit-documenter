@@ -1,14 +1,14 @@
 Class {
-	#name : 'GtColorStyler',
-	#superclass : 'GtListItemStyler',
+	#name : #GtColorStyler,
+	#superclass : #GtListItemStyler,
 	#instVars : [
 		'colorIndex',
 		'colors'
 	],
-	#category : 'GToolkit-Documenter-Styler'
+	#category : #'GToolkit-Documenter-Styler'
 }
 
-{ #category : 'style' }
+{ #category : #style }
 GtColorStyler >> adornListItemSymbolInMarkupViewModeInContext: aGtStyledListItemBuilder [
 	| aColor |
 	aColor := self currentColor.
@@ -18,12 +18,12 @@ GtColorStyler >> adornListItemSymbolInMarkupViewModeInContext: aGtStyledListItem
 				beAppend; 
 				stencil: [
 					BlElement new
-						geometry: BlCircle new;
+						geometry: BlCircleGeometry new;
 						size: 5@5;
 						background: aColor ] }.
 ]
 
-{ #category : 'style' }
+{ #category : #style }
 GtColorStyler >> adornListItemSymbolInNoMarkupViewModeInContext: aGtStyledListItemBuilder [
 	"Style a list item symbol in no-markup view mode 
 	(as it should be visible in a VISIWIG editor).
@@ -31,19 +31,19 @@ GtColorStyler >> adornListItemSymbolInNoMarkupViewModeInContext: aGtStyledListIt
 	In this case do no thing"
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 GtColorStyler >> changeColor [
 	colorIndex := (colorIndex = colors size)
 		ifTrue: [ 1 ] 
 		ifFalse: [ colorIndex + 1 ].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtColorStyler >> currentColor [
 	^ colors at: colorIndex
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtColorStyler >> initialize [
 	super initialize.
 	colors := { Color purple. Color lightOrange. }.

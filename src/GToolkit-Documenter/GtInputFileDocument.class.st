@@ -1,5 +1,5 @@
 Class {
-	#name : 'GtInputFileDocument',
-	#superclass : 'GtNodeResource',
+	#name : #GtInputFileDocument,
+	#superclass : #GtNodeResource,
 	#category : 'GToolkit-Documenter-Resourcer'
 }

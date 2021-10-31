@@ -3,20 +3,20 @@ I inform about ${class:GtStorageStrategy}$ changes in ${class:GtDocumenterEditor
 
 "
 Class {
-	#name : 'GtDocumenterStorageChanged',
-	#superclass : 'BrEditorChangedEvent',
+	#name : #GtDocumenterStorageChanged,
+	#superclass : #BrEditorChangedEvent,
 	#instVars : [
 		'storage'
 	],
 	#category : 'GToolkit-Documenter-! Editor - Events'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumenterStorageChanged >> storage [
 	^ storage
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumenterStorageChanged >> storage: anObject [
 	storage := anObject
 ]

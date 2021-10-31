@@ -1,10 +1,10 @@
 Class {
-	#name : 'GtResizablePreviewStencil',
-	#superclass : 'GtPreviewStencil',
+	#name : #GtResizablePreviewStencil,
+	#superclass : #GtPreviewStencil,
 	#category : 'GToolkit-Documenter-Brick - Stencils'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 GtResizablePreviewStencil >> newContainerFor: aWrappedElement [
 	| aResult |
 	aResult := aWrappedElement asVerticallyResizableDo: [ :anElement | 

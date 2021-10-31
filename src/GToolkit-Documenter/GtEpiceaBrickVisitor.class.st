@@ -1,34 +1,34 @@
 Class {
-	#name : 'GtEpiceaBrickVisitor',
-	#superclass : 'EpEntryContentVisitor',
+	#name : #GtEpiceaBrickVisitor,
+	#superclass : #EpEntryContentVisitor,
 	#category : 'GToolkit-Documenter-Epicea'
 }
 
-{ #category : 'private' }
+{ #category : #private }
 GtEpiceaBrickVisitor >> brickFactory [
 
 	^ GtEpiceaBrickFactory default
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtEpiceaBrickVisitor >> displayBehavior: aString [ 
 
 	^ { self brickFactory emphasizedStringFor: aString }
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtEpiceaBrickVisitor >> displayBehavior: aClassName method: aSelector [
 
 	^ (self displayBehavior: aClassName), (self displayOperation: '»'), (self displayString: aSelector)
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtEpiceaBrickVisitor >> displayBehaviorComment: aClassName [
 
 	^ (self displayBehavior: aClassName), (self displayOperation: 'comment')
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtEpiceaBrickVisitor >> displayBrowserOperation: aBrowserOperationEvent [
 
 	^ self displayOperation: (
@@ -36,20 +36,20 @@ GtEpiceaBrickVisitor >> displayBrowserOperation: aBrowserOperationEvent [
 			stream nextPutAll: aBrowserOperationEvent title ])
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtEpiceaBrickVisitor >> displayCategory: aCategoryName [
 
 	^ (self displayOperation: 'Package tag'), (self displayString: aCategoryName asString)
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtEpiceaBrickVisitor >> displayClass: aClassName protocol: aProtocolName [
 
 	^ (self displayBehavior: aClassName), (self displayOperation: 'protocol'), (self displayString: aProtocolName)
 
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtEpiceaBrickVisitor >> displayOperation: aString [ 
 
 	^ self 
@@ -57,19 +57,19 @@ GtEpiceaBrickVisitor >> displayOperation: aString [
 		color: self brickFactory softerTextColor
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtEpiceaBrickVisitor >> displayString: aString [
 
 	^ { self brickFactory stringFor: aString }
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtEpiceaBrickVisitor >> displayString: aString color: aColor [
 
 	^ { self brickFactory stringFor: aString color: aColor }
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitBehaviorCategoryChange: aClassRecategorizationChange [
 
 	^	(self displayOperation: 'Move'),
@@ -80,19 +80,19 @@ GtEpiceaBrickVisitor >> visitBehaviorCategoryChange: aClassRecategorizationChang
 		(self displayString: aClassRecategorizationChange newCategory)
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitBehaviorCommentChange: aChange [
 
 	^ self displayBehaviorComment: aChange behaviorAffectedName
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitBehaviorCopy: aClassCopy [
 
 	^ (self displayBehavior: aClassCopy definition name), (self displayOperation: 'copyNamed:'), (self displayBehavior: '#', aClassCopy newName)
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitBehaviorNameChange: aClassRenamedChange [
 
 	^	(self displayOperation: 'Rename'), 
@@ -101,19 +101,19 @@ GtEpiceaBrickVisitor >> visitBehaviorNameChange: aClassRenamedChange [
 		(self displayString: aClassRenamedChange newName)
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitCategoryAddition: aCategoryChange [
 
 	^ self displayCategory: aCategoryChange categoryName
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitCategoryRemoval: aCategoryChange [
 
 	^ self displayCategory: aCategoryChange categoryName
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitCategoryRename: aCategoryChange [
 
 	^	(self displayOperation: 'Rename tag'),
@@ -122,19 +122,19 @@ GtEpiceaBrickVisitor >> visitCategoryRename: aCategoryChange [
 		(self displayString: aCategoryChange newCategoryName )
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitClassChange: aChange [
 
 	^ self displayBehavior: aChange behaviorAffectedName
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitEvent: anEvent [
 
 	^ self displayString: ''
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitExpressionEvaluation: anExpressionEvaluation [
 
 	^ (self displayOperation: 'DoIt:'), (self displayString:
@@ -142,13 +142,13 @@ GtEpiceaBrickVisitor >> visitExpressionEvaluation: anExpressionEvaluation [
 			withSeparatorsCompacted)
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitLogCommentModification: aLogCommentModification [ 
 
 	^ self displayString: aLogCommentModification comment printString
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitMethodAddition: aMethodCreatedChange [
 
 	^ self 
@@ -156,7 +156,7 @@ GtEpiceaBrickVisitor >> visitMethodAddition: aMethodCreatedChange [
 		method: aMethodCreatedChange methodAdded selector
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitMethodModification: aMethodModified [
 
 	^ self 
@@ -164,7 +164,7 @@ GtEpiceaBrickVisitor >> visitMethodModification: aMethodModified [
 		method: aMethodModified oldMethod selector
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitMethodRemoval: aMethodRemoved [
 
 	^ self 
@@ -172,7 +172,7 @@ GtEpiceaBrickVisitor >> visitMethodRemoval: aMethodRemoved [
 		method: aMethodRemoved methodRemoved selector
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitMonticelloVersionSave: aChange [
 
 	^	(self displayOperation: 'MC save'), 
@@ -181,14 +181,14 @@ GtEpiceaBrickVisitor >> visitMonticelloVersionSave: aChange [
 		(self displayString: aChange repositoryDescription asString)
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitMonticelloVersionsLoad: aMonticelloVersionLoaded [ 
 
 	^	(self displayOperation: 'MC load'), 
 		(self displayString: aMonticelloVersionLoaded versionNames asCommaStringAnd)
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitProtocolAddition: aProtocolChange [
 
 	^ self 
@@ -196,7 +196,7 @@ GtEpiceaBrickVisitor >> visitProtocolAddition: aProtocolChange [
 		protocol: aProtocolChange protocol asString
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitProtocolRemoval: aProtocolChange [
 
 	^ self 
@@ -204,13 +204,13 @@ GtEpiceaBrickVisitor >> visitProtocolRemoval: aProtocolChange [
 		protocol: aProtocolChange protocol asString
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitRedo: aRedoEvent [
 
 	^ self displayBrowserOperation: aRedoEvent
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitRefactoring: aRefactoring [ 
 
 	^  (self displayOperation: 'Refactoring: '), 
@@ -218,34 +218,34 @@ GtEpiceaBrickVisitor >> visitRefactoring: aRefactoring [
 			aRefactoring summaryOn: aStream ]))
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitSessionEnd: anEvent [
 
 	^ (self displayOperation: 'End:'), 
 		(self displayString: anEvent imageName)
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitSessionSnapshot: anEvent [
 
 	^ (self displayOperation: 'Snapshot:'), 
 		(self displayString: anEvent imageName)
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitSessionStart: anEvent [
 
 	^ (self displayOperation: 'Start:'), 
 		(self displayString: anEvent imageName)
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitTraitChange: aChange [
 
 	^ self displayBehavior: aChange behaviorAffectedName
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtEpiceaBrickVisitor >> visitUndo: anUndoEvent [
 
 	^ self displayBrowserOperation: anUndoEvent
