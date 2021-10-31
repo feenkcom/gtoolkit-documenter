@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtExamplesStatusLabelAttribute',
-	#superclass : 'BrTextAdornmentAttribute',
+	#name : #GtExamplesStatusLabelAttribute,
+	#superclass : #BrTextAdornmentAttribute,
 	#traits : 'TGtDocumentConstants',
 	#classTraits : 'TGtDocumentConstants classTrait',
 	#instVars : [
@@ -12,17 +12,17 @@ Class {
 	#category : 'GToolkit-Documenter-Text - Attributes'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplesStatusLabelAttribute class >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplesStatusLabelAttribute >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplesStatusLabelAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 
 	| anElement |
@@ -39,7 +39,7 @@ GtExamplesStatusLabelAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEdi
 	^ anElement
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtExamplesStatusLabelAttribute >> initialize [
 	super initialize.
 	issues := 0.
@@ -48,7 +48,7 @@ GtExamplesStatusLabelAttribute >> initialize [
 	total := 0.
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtExamplesStatusLabelAttribute >> insertIssuesTo: aRope [
 	| aStartIndex |
 	self issues isZero ifTrue: [ ^ self ].
@@ -61,7 +61,7 @@ GtExamplesStatusLabelAttribute >> insertIssuesTo: aRope [
 			foreground: self constants errorColor
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtExamplesStatusLabelAttribute >> insertSkippedTo: aRope [
 	| aSkipped aStartIndex |
 	aSkipped := (self total - self results).
@@ -75,7 +75,7 @@ GtExamplesStatusLabelAttribute >> insertSkippedTo: aRope [
 			foreground: self constants notAvailableColor
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtExamplesStatusLabelAttribute >> insertSuccessTo: aRope [
 	| aStartIndex |
 	self successes isZero ifTrue: [ ^ self ].
@@ -88,17 +88,17 @@ GtExamplesStatusLabelAttribute >> insertSuccessTo: aRope [
 			foreground: self constants successColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplesStatusLabelAttribute >> issues [
 	^ issues
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplesStatusLabelAttribute >> issues: anObject [
 	issues := anObject
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtExamplesStatusLabelAttribute >> mayInsertSpace: aRope [
 	aRope size isZero ifTrue: [ ^ self ].
 	aRope 
@@ -106,7 +106,7 @@ GtExamplesStatusLabelAttribute >> mayInsertSpace: aRope [
 		at: aRope size.
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtExamplesStatusLabelAttribute >> resultLabel [
 	| aRope |
 	aRope := '' asRopedText.
@@ -118,32 +118,32 @@ GtExamplesStatusLabelAttribute >> resultLabel [
 		ifTrue: [ 'N/A' asRopedText foreground: self constants notAvailableColor ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplesStatusLabelAttribute >> results [
 	^ results
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplesStatusLabelAttribute >> results: anObject [
 	results := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplesStatusLabelAttribute >> successes [
 	^ successes
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplesStatusLabelAttribute >> successes: anObject [
 	successes := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplesStatusLabelAttribute >> total [
 	^ total
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplesStatusLabelAttribute >> total: anObject [
 	total := anObject
 ]

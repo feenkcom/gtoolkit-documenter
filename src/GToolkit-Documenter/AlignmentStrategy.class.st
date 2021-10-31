@@ -1,10 +1,10 @@
 Class {
-	#name : 'AlignmentStrategy',
-	#superclass : 'Object',
+	#name : #AlignmentStrategy,
+	#superclass : #Object,
 	#category : 'GToolkit-Documenter-Strategies'
 }
 
-{ #category : 'naming' }
+{ #category : #naming }
 AlignmentStrategy class >> strategyName [
 	self subclassResponsibility.
 ]

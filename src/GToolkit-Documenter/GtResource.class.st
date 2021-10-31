@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtResource',
-	#superclass : 'Object',
+	#name : #GtResource,
+	#superclass : #Object,
 	#instVars : [
 		'source',
 		'name'
@@ -8,7 +8,7 @@ Class {
 	#category : 'GToolkit-Documenter-Resourcer'
 }
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 GtResource >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -17,34 +17,34 @@ GtResource >> = anObject [
 	^ name = anObject name
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 GtResource >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ name hash
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtResource >> isDocument [
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtResource >> isFigure [
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtResource >> isFile [
 	^ false
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtResource >> name [
 	^ name
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtResource >> name: aString [
 	self 
 		assert: [ aString notNil ]
@@ -52,7 +52,7 @@ GtResource >> name: aString [
 	name := aString
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 GtResource >> printOn: aStream [
 	super printOn: aStream.
 	self name ifNil: [ ^ self ].
@@ -62,13 +62,13 @@ GtResource >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtResource >> source [
 	<return: #GtDocumenter>
 	^ source
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtResource >> source: aGtDocument [
 	self 
 		assert: [ aGtDocument isNotNil ] 

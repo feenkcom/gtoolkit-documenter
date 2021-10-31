@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtDocumentMissingReferencesResult',
-	#superclass : 'Object',
+	#name : #GtDocumentMissingReferencesResult,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -12,42 +12,42 @@ Class {
 	#category : 'GToolkit-Documenter-Validation'
 }
 
-{ #category : 'adding' }
+{ #category : #adding }
 GtDocumentMissingReferencesResult >> addMissingClassAnnotation: aClassAnnotation [
 	classAnnotations add: aClassAnnotation
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 GtDocumentMissingReferencesResult >> addMissingExampleAnnotation: anExampleAnnotation [
 	exampleAnnotations add: anExampleAnnotation
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 GtDocumentMissingReferencesResult >> addMissingMethodAnnotation: aClassAnnotation [
 	methodAnnotations add: aClassAnnotation
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumentMissingReferencesResult >> classAnnotations [
 	^ classAnnotations 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumentMissingReferencesResult >> documentSource [
 	^ documentSource
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumentMissingReferencesResult >> documentSource: anObject [
 	documentSource := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumentMissingReferencesResult >> exampleAnnotations [
 	^ exampleAnnotations
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 GtDocumentMissingReferencesResult >> gtDisplayOn: aStream [
 	super gtDisplayOn: aStream.
 	documentSource ifNotNil: [ 
@@ -56,7 +56,7 @@ GtDocumentMissingReferencesResult >> gtDisplayOn: aStream [
 		aStream nextPut: $) ]
 ]
 
-{ #category : 'ui' }
+{ #category : #ui }
 GtDocumentMissingReferencesResult >> gtViewMissingClassesListFor: aView [
 
 	<gtView>
@@ -68,7 +68,7 @@ GtDocumentMissingReferencesResult >> gtViewMissingClassesListFor: aView [
 		  send: [ :aClassAnnotation | aClassAnnotation referencedClass ]
 ]
 
-{ #category : 'ui' }
+{ #category : #ui }
 GtDocumentMissingReferencesResult >> gtViewMissingExamplesListFor: aView [
 
 	<gtView>
@@ -81,7 +81,7 @@ GtDocumentMissingReferencesResult >> gtViewMissingExamplesListFor: aView [
 			  anExampleAnnotation referencedExample ]
 ]
 
-{ #category : 'ui' }
+{ #category : #ui }
 GtDocumentMissingReferencesResult >> gtViewMissingMethodsListFor: aView [
 
 	<gtView>
@@ -93,7 +93,7 @@ GtDocumentMissingReferencesResult >> gtViewMissingMethodsListFor: aView [
 		  send: [ :aMethodAnnotation | aMethodAnnotation referencedMethod ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtDocumentMissingReferencesResult >> initialize [
 	super initialize.
 	classAnnotations := OrderedCollection new.
@@ -103,14 +103,14 @@ GtDocumentMissingReferencesResult >> initialize [
 	
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtDocumentMissingReferencesResult >> isNotEmpty [ 
 	^ classAnnotations notEmpty or: [ 
 		methodAnnotations notEmpty or: [ 
 			exampleAnnotations notEmpty ] ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumentMissingReferencesResult >> methodAnnotations [
 	^ methodAnnotations 
 ]

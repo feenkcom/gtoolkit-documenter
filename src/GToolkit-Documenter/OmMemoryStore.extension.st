@@ -1,6 +1,6 @@
-Extension { #name : 'OmMemoryStore' }
+Extension { #name : #OmMemoryStore }
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 OmMemoryStore >> gtReset [
 	entries removeAll
 ]

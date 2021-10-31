@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtExamplePreviewAttribute',
-	#superclass : 'BrTextAdornmentAttribute',
+	#name : #GtExamplePreviewAttribute,
+	#superclass : #BrTextAdornmentAttribute,
 	#traits : 'TGtDocumentConstants',
 	#classTraits : 'TGtDocumentConstants classTrait',
 	#instVars : [
@@ -16,48 +16,48 @@ Class {
 	#category : 'GToolkit-Documenter-Text - Attributes'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewAttribute class >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewAttribute >> codeExpanded [
 	^ codeExpanded
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewAttribute >> codeExpanded: anObject [
 	codeExpanded := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewAttribute >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 	^ self newExamplePreviewStencil asElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewAttribute >> document [
 	^ document
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewAttribute >> document: anObject [
 	self traceCr.
 	document := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewAttribute >> example [
 	^ example
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewAttribute >> example: aGtExample [
 	self 
 		assert: [ aGtExample isNotNil ] 
@@ -65,12 +65,12 @@ GtExamplePreviewAttribute >> example: aGtExample [
 	example := aGtExample
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 GtExamplePreviewAttribute >> examplePreviewStencilClass [
 	^ GtExamplePreviewStencil
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtExamplePreviewAttribute >> initialize [
 	super initialize.
 	self beLazy.
@@ -83,7 +83,7 @@ GtExamplePreviewAttribute >> initialize [
 	
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtExamplePreviewAttribute >> initializeLazyElement: aBlLazyElement [
 	aBlLazyElement 
 		layout: BlLinearLayout vertical;
@@ -96,7 +96,7 @@ GtExamplePreviewAttribute >> initializeLazyElement: aBlLazyElement [
 			theLazyElement constraintsDo: [ :c | c vertical fitContent ] ]
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 GtExamplePreviewAttribute >> newExamplePreviewStencil [
 	^ self examplePreviewStencilClass new
 		example: self example;
@@ -107,57 +107,57 @@ GtExamplePreviewAttribute >> newExamplePreviewStencil [
 		previewHeight: self previewHeight
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewAttribute >> noCode [
 	^ noCode
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewAttribute >> noCode: anObject [
 	noCode := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewAttribute >> previewExpanded [
 	^ previewExpanded
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewAttribute >> previewExpanded: anObject [
 	previewExpanded := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewAttribute >> previewHeight [
 	^ previewHeight
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewAttribute >> previewHeight: anObject [
 	previewHeight := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewAttribute >> previewShowSelector [
 	^ previewShowSelector
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewAttribute >> previewShowSelector: anObject [
 	previewShowSelector := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewAttribute >> resultVariableName [
 	^ resultVariableName
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewAttribute >> resultVariableName: anObject [
 	resultVariableName := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewAttribute >> totalHeight [
 	"only preview"
 	self noCode ifTrue: [ ^ self previewHeight ].

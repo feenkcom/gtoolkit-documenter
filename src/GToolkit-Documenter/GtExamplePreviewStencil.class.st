@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtExamplePreviewStencil',
-	#superclass : 'BrStencil',
+	#name : #GtExamplePreviewStencil,
+	#superclass : #BrStencil,
 	#traits : 'TGtDocumentConstants',
 	#classTraits : 'TGtDocumentConstants classTrait',
 	#instVars : [
@@ -16,27 +16,27 @@ Class {
 	#category : 'GToolkit-Documenter-Brick - Stencils'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewStencil class >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewStencil >> codeExpanded [
 	^ codeExpanded
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewStencil >> codeExpanded: anObject [
 	codeExpanded := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewStencil >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 GtExamplePreviewStencil >> create [
 	<return: #BlElement>
 
@@ -60,22 +60,22 @@ GtExamplePreviewStencil >> create [
 	^ aContainer
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewStencil >> example [
 	^ example
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewStencil >> example: aGtExample [
 	example := aGtExample
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewStencil >> exampleWithResult [
 	^ exampleWithResult ifNil: [ exampleWithResult := self example run ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtExamplePreviewStencil >> initialize [
 	super initialize.
 	codeExpanded := true.
@@ -86,12 +86,12 @@ GtExamplePreviewStencil >> initialize [
 	previewShowSelector := self constants defaultShowSelector.
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtExamplePreviewStencil >> isPreviewExpected [
 	^ self previewExpanded or: [ self noCode ]
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 GtExamplePreviewStencil >> newArrowElement [
 	"Instantiate and return a new element playing a role of an arrow
 	used to show / hide a preview"
@@ -108,13 +108,13 @@ GtExamplePreviewStencil >> newArrowElement [
 			c linear vertical alignCenter ].
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 GtExamplePreviewStencil >> newCodeElement [
 	<return: #BlElement>
 	^ ((GtPharoMethodCoder forExample: self example) withHeader) asCoderUIModel expanded: self codeExpanded; asElement
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 GtExamplePreviewStencil >> newContainerWithHeight: aHeightNumber [
 	| aContainer |
 	aContainer := BlElement new.
@@ -135,7 +135,7 @@ GtExamplePreviewStencil >> newContainerWithHeight: aHeightNumber [
 			c vertical exact: aHeightNumber ]
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 GtExamplePreviewStencil >> newPreviewElementFor: anObject [
 	<return: #BlElement>
 	| aView |
@@ -143,52 +143,52 @@ GtExamplePreviewStencil >> newPreviewElementFor: anObject [
 	^ aView asElementDo: [ :anElement | anElement ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewStencil >> noCode [
 	^ noCode
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewStencil >> noCode: anObject [
 	noCode := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewStencil >> previewExpanded [
 	^ previewExpanded
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewStencil >> previewExpanded: anObject [
 	previewExpanded := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewStencil >> previewHeight [
 	^ previewHeight
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewStencil >> previewHeight: anObject [
 	previewHeight := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewStencil >> previewShowSelector [
 	^ previewShowSelector
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewStencil >> previewShowSelector: anObject [
 	previewShowSelector := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplePreviewStencil >> result [
 	^ self exampleWithResult returnValueOrExampleException
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtExamplePreviewStencil >> updatePreviewElement: aPreviewContainerElement in: aWholeContainer with: anObject [
 	| aNewPreview |
 	aNewPreview := self newPreviewElementFor: anObject.

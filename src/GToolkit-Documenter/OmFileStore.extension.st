@@ -1,6 +1,6 @@
-Extension { #name : 'OmFileStore' }
+Extension { #name : #OmFileStore }
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 OmFileStore >> gtReset [
 	self
 		ensureDeleteFile;

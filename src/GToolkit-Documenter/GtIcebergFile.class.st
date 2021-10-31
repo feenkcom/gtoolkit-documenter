@@ -1,10 +1,10 @@
 Class {
-	#name : 'GtIcebergFile',
-	#superclass : 'GtLeaveResource',
+	#name : #GtIcebergFile,
+	#superclass : #GtLeaveResource,
 	#category : 'GToolkit-Documenter-Resourcer'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtIcebergFile >> isFile [
 	^ true
 ]

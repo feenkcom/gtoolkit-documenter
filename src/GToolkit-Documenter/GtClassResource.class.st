@@ -1,5 +1,5 @@
 Class {
-	#name : 'GtClassResource',
-	#superclass : 'GtNodeResource',
+	#name : #GtClassResource,
+	#superclass : #GtNodeResource,
 	#category : 'GToolkit-Documenter-Resourcer'
 }

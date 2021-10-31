@@ -1,13 +1,13 @@
 Class {
-	#name : 'GtClassAnnotation',
-	#superclass : 'GtAnnotation',
+	#name : #GtClassAnnotation,
+	#superclass : #GtAnnotation,
 	#instVars : [
 		'referencedClass'
 	],
 	#category : 'GToolkit-Documenter-Annotations'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtClassAnnotation class >> possibleParameters [
 	^ {
 		self constants nameParameterName.
@@ -21,35 +21,35 @@ GtClassAnnotation class >> possibleParameters [
 		}
 ]
 
-{ #category : 'protected' }
+{ #category : #protected }
 GtClassAnnotation class >> tag [
 	^ self constants classAnnotationName
 ]
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 GtClassAnnotation >> accept: aVisitor [
 	^ aVisitor visitGt2ClassAnnotation: self
 ]
 
-{ #category : 'private - actions' }
+{ #category : #'private - actions' }
 GtClassAnnotation >> browseReferenceFrom: anEvent [
 	anEvent modifiers isShift ifTrue: [ ^ self ].
 	self isClassDefined ifFalse: [ ^ self inform: 'Class does not exist' ].
 	anEvent target phlow spawnTool: (GtClassCoderTool observedClass: self referencedClass realClass)
 ]
 
-{ #category : 'accessing - parameter values' }
+{ #category : #'accessing - parameter values' }
 GtClassAnnotation >> defaultShowSelector [
 	^ self constants defaultClassShowSelector
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtClassAnnotation >> doesReferenceExist [
 	"Return true if a referenced object is defined"
 	^ self isClassDefined
 ]
 
-{ #category : 'announcement handling' }
+{ #category : #'announcement handling' }
 GtClassAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAnnouncement [ 
 	(self referencedClass notNil and: [ 
 		(aClassAnnouncement classAffected name = self referencedClass name) or: [ 
@@ -58,7 +58,7 @@ GtClassAnnotation >> handleClassAddedOrRemovedAnnouncement: aClassAnnouncement [
 	self gtDocument styleTextRequest
 ]
 
-{ #category : 'announcement handling' }
+{ #category : #'announcement handling' }
 GtClassAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [ 
 	(self referencedClass notNil and: [ 
 			aClassRenamed newName = self referencedClass name or: [ 
@@ -67,12 +67,12 @@ GtClassAnnotation >> handleClassRenamedAnnouncement: aClassRenamed [
 	self gtDocument styleTextRequest
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtClassAnnotation >> isClassDefined [
 	^ self referencedClass notNil and: [ self referencedClass isDefined ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtClassAnnotation >> isLabelParameterValueDefined [
 	"Return true if an inlined parameter is properly defined"
 	<return: #Boolean>
@@ -84,13 +84,13 @@ GtClassAnnotation >> isLabelParameterValueDefined [
 		defaultValue: [ false ].
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtClassAnnotation >> isPreviewDefined [
 	"Return true if a preview object is defined"
 	^ self isClassDefined
 ]
 
-{ #category : 'accessing - parameter values' }
+{ #category : #'accessing - parameter values' }
 GtClassAnnotation >> labelParameterValue [
 	<return: #Symbol>
 	^ self utility 
@@ -103,7 +103,7 @@ GtClassAnnotation >> labelParameterValue [
 		defaultValue: [ self constants defaultInlineValue ]
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 GtClassAnnotation >> labelText [
 	"Return a displayed class name (that can be anything)"
 	<return: #String>
@@ -115,19 +115,19 @@ GtClassAnnotation >> labelText [
 		do: [ :anException | anException printString ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtClassAnnotation >> objectToPreview [
 	"Subclasses should define what object to preview"
 	^ self referencedClass realClass
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtClassAnnotation >> referenceParameterName [
 	"Return an annotation parameter name that holds a referenced object"
 	^ self constants nameParameterName
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtClassAnnotation >> referencedClass [
 	<return: #RGClassDefinition or: nil>
 	^ referencedClass ifNil: [ referencedClass := 
@@ -139,7 +139,7 @@ GtClassAnnotation >> referencedClass [
 			defaultValue: [ nil ] ]
 ]
 
-{ #category : 'subscriptions' }
+{ #category : #subscriptions }
 GtClassAnnotation >> registerToSystemChanges [
 	self gtDocument systemAnnouncer
 		when: ClassAdded , ClassRemoved
@@ -156,7 +156,7 @@ GtClassAnnotation >> registerToSystemChanges [
 			for: self gtSubscriber
 ]
 
-{ #category : 'api - style' }
+{ #category : #'api - style' }
 GtClassAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	self styleLinkInText: aBlRope.
@@ -174,7 +174,7 @@ GtClassAnnotation >> styleTextWithMarkup: aBlRope [
 	self registerToSystemChanges
 ]
 
-{ #category : 'api - style' }
+{ #category : #'api - style' }
 GtClassAnnotation >> styleTextWithoutInteractions: aBlRope [
 	| aLinkNode |
 	aLinkNode := self utility linkNodeForAnnotation: self.
@@ -182,7 +182,7 @@ GtClassAnnotation >> styleTextWithoutInteractions: aBlRope [
 	self utility hideAllButLinkInText: aBlRope forAnnotation: self.
 ]
 
-{ #category : 'api - style' }
+{ #category : #'api - style' }
 GtClassAnnotation >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.

@@ -1,11 +1,11 @@
-Extension { #name : 'PRFormat' }
+Extension { #name : #PRFormat }
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRFormat >> styleSubText: aBlRope [
 	^ self subclassResponsibility
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRFormat >> styleTextWithMarkup: aBlRope [
 	self styleSubText: (aBlRope
 		from: self start
@@ -13,7 +13,7 @@ PRFormat >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRFormat >> styleTextWithoutMarkup: aBlRope [
 
 	self styleTextWithMarkup: aBlRope.

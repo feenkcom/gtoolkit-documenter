@@ -1,18 +1,18 @@
 Class {
-	#name : 'GtPlaygroundEvaluatedCodeHighlightedAttribute',
-	#superclass : 'BlTextAttribute',
+	#name : #GtPlaygroundEvaluatedCodeHighlightedAttribute,
+	#superclass : #BlTextAttribute,
 	#instVars : [
 		'paint'
 	],
 	#category : 'GToolkit-Documenter'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 GtPlaygroundEvaluatedCodeHighlightedAttribute class >> paint: aBlPaint [
 	^ self new paint: aBlPaint
 ]
 
-{ #category : 'drawing' }
+{ #category : #drawing }
 GtPlaygroundEvaluatedCodeHighlightedAttribute >> drawBelowOnSpartaCanvas: aCanvas with: aSpan [
 	"I render background under text span"
 	
@@ -23,24 +23,24 @@ GtPlaygroundEvaluatedCodeHighlightedAttribute >> drawBelowOnSpartaCanvas: aCanva
 		draw
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 GtPlaygroundEvaluatedCodeHighlightedAttribute >> equals: anAnotherAttribute [
 	^ self paint = anAnotherAttribute paint
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 GtPlaygroundEvaluatedCodeHighlightedAttribute >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ super hash bitXor: self paint hash
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtPlaygroundEvaluatedCodeHighlightedAttribute >> paint [
 	^ paint
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtPlaygroundEvaluatedCodeHighlightedAttribute >> paint: aPaint [
 	self
 		assert: [ paint isNil ]
@@ -49,7 +49,7 @@ GtPlaygroundEvaluatedCodeHighlightedAttribute >> paint: aPaint [
 	paint := aPaint
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 GtPlaygroundEvaluatedCodeHighlightedAttribute >> printOn: aStream [
 	aStream
 		nextPutAll: 'evaluated-code: ';

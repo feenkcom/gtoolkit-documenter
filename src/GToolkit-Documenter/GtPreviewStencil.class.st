@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtPreviewStencil',
-	#superclass : 'BrStencil',
+	#name : #GtPreviewStencil,
+	#superclass : #BrStencil,
 	#traits : 'TGtDocumentConstants',
 	#classTraits : 'TGtDocumentConstants classTrait',
 	#instVars : [
@@ -11,17 +11,17 @@ Class {
 	#category : 'GToolkit-Documenter-Brick - Stencils'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtPreviewStencil class >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtPreviewStencil >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 GtPreviewStencil >> create [
 	<return: #BlElement>
 	| aView |
@@ -30,18 +30,18 @@ GtPreviewStencil >> create [
 		[ :anElement | self newContainerFor: anElement ]
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 GtPreviewStencil >> defaultHeight [
 	^ self constants defaultPreviewHeight
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtPreviewStencil >> height [
 	<return: #Number or: nil>
 	^ height
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtPreviewStencil >> height: anInteger [
 	self 
 		assert: [ anInteger notNil ] 
@@ -52,7 +52,7 @@ GtPreviewStencil >> height: anInteger [
 	height := anInteger
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtPreviewStencil >> initialize [
 	super initialize.
 
@@ -61,7 +61,7 @@ GtPreviewStencil >> initialize [
 	height := self defaultHeight.
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 GtPreviewStencil >> newContainerFor: anElement [
 	^ BlElement new
 		addChild: anElement;
@@ -72,22 +72,22 @@ GtPreviewStencil >> newContainerFor: anElement [
 			c vertical exact: self height ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtPreviewStencil >> result [
 	^ result
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtPreviewStencil >> result: anObject [
 	result := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtPreviewStencil >> showSelector [
 	^ showSelector
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtPreviewStencil >> showSelector: aSymbol [
 	self 
 		assert: [ aSymbol notNil ] 

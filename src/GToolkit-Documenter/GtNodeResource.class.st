@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtNodeResource',
-	#superclass : 'GtResource',
+	#name : #GtNodeResource,
+	#superclass : #GtResource,
 	#instVars : [
 		'resources',
 		'document'
@@ -8,12 +8,12 @@ Class {
 	#category : 'GToolkit-Documenter-Resourcer'
 }
 
-{ #category : 'adding' }
+{ #category : #adding }
 GtNodeResource >> addResource: aGt2Resource [
 	self resources add: aGt2Resource.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtNodeResource >> allResources [
 	^ OrderedCollection streamContents: [ :aStream | 
 		self resources do: [ :each | 
@@ -21,13 +21,13 @@ GtNodeResource >> allResources [
 			aStream nextPutAll: each allResources ] ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtNodeResource >> document [
 	<return: #GtDocumenter>
 	^ document
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtNodeResource >> document: aGtDocument [
 	self 
 		assert: [ aGtDocument isNotNil ] 
@@ -35,14 +35,14 @@ GtNodeResource >> document: aGtDocument [
 	document := aGtDocument
 ]
 
-{ #category : 'gt-extension' }
+{ #category : #'gt-extension' }
 GtNodeResource >> gtResourcesFor: aView [
 	<gtView>
 	^ (self resources gtItemsFor: aView)
 		title: 'Resources'
 ]
 
-{ #category : 'gt-extension' }
+{ #category : #'gt-extension' }
 GtNodeResource >> gtTextFor: aView [
 	<gtView>
 	self document ifNil: [ ^ aView empty ].
@@ -51,23 +51,23 @@ GtNodeResource >> gtTextFor: aView [
 		stencil: [ self document ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtNodeResource >> initialize [
 	super initialize.
 	resources := OrderedCollection new.
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtNodeResource >> isDocument [
 	^ true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtNodeResource >> resources [
 	^ resources
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtNodeResource >> withAllResources [
 	^ Array with: self withAll: self allResources
 ]

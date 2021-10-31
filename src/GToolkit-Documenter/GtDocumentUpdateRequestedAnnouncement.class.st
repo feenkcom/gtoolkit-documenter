@@ -1,5 +1,5 @@
 Class {
-	#name : 'GtDocumentUpdateRequestedAnnouncement',
-	#superclass : 'GtDocumentAnnouncement',
+	#name : #GtDocumentUpdateRequestedAnnouncement,
+	#superclass : #GtDocumentAnnouncement,
 	#category : 'GToolkit-Documenter-Announcements'
 }

@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtDocumentMissingReferencesVisitor',
-	#superclass : 'PRVisitor',
+	#name : #GtDocumentMissingReferencesVisitor,
+	#superclass : #PRVisitor,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -9,7 +9,7 @@ Class {
 	#category : 'GToolkit-Documenter-Validation'
 }
 
-{ #category : 'actions' }
+{ #category : #actions }
 GtDocumentMissingReferencesVisitor >> missingReferencesInClassCommentFor: aClass [
 	| parser |
 	parser := PRPillarParser new optimize.
@@ -18,7 +18,7 @@ GtDocumentMissingReferencesVisitor >> missingReferencesInClassCommentFor: aClass
 		usingParser: parser
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 GtDocumentMissingReferencesVisitor >> missingReferencesInClassCommentFor: aClass usingParser: aParser [
 	| result |
 	result := self 
@@ -28,7 +28,7 @@ GtDocumentMissingReferencesVisitor >> missingReferencesInClassCommentFor: aClass
 	^ result
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 GtDocumentMissingReferencesVisitor >> missingReferencesInString: aString usingParser: aParser [ 
 	| pillarDoc result |
 	PRValidation beSilentDuring: [ 
@@ -38,24 +38,24 @@ GtDocumentMissingReferencesVisitor >> missingReferencesInString: aString usingPa
 	^ result
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumentMissingReferencesVisitor >> result [
 	^ missingReferences ifNil: [ missingReferences := GtDocumentMissingReferencesResult new ]
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 GtDocumentMissingReferencesVisitor >> visitGt2ClassAnnotation: aGtClassAnnotation [  
 	aGtClassAnnotation doesReferenceExist ifFalse: [ 
 		self result addMissingClassAnnotation: aGtClassAnnotation ]
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 GtDocumentMissingReferencesVisitor >> visitGt2ExampleAnnotation: aGtExampleAnnotation [ 
 	aGtExampleAnnotation doesReferenceExist ifFalse: [ 
 		self result addMissingExampleAnnotation: aGtExampleAnnotation ]
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 GtDocumentMissingReferencesVisitor >> visitGt2MethodAnnotation: aGtMethodAnnotation [ 
 	aGtMethodAnnotation doesReferenceExist ifFalse: [ 
 		self result addMissingMethodAnnotation: aGtMethodAnnotation ]

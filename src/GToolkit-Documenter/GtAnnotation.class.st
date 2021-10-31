@@ -1,54 +1,54 @@
 Class {
-	#name : 'GtAnnotation',
-	#superclass : 'PRAbstractAnnotation',
+	#name : #GtAnnotation,
+	#superclass : #PRAbstractAnnotation,
 	#traits : 'TBlDebug + TGtDocumentConstants + TGtDocumentUtility',
 	#classTraits : 'TBlDebug classTrait + TGtDocumentConstants classTrait + TGtDocumentUtility classTrait',
 	#category : 'GToolkit-Documenter-Annotations'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtAnnotation class >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtAnnotation class >> isAbstract [
 	^ self name = #GtAnnotation 
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtAnnotation class >> utility [
 	^ GtDocumentUtility
 ]
 
-{ #category : 'private - actions' }
+{ #category : #'private - actions' }
 GtAnnotation >> browseReferenceFrom: anEvent [
 	"Subclasses should define actual action"
 	self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtAnnotation >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : 'accessing - parameter values' }
+{ #category : #'accessing - parameter values' }
 GtAnnotation >> defaultShowSelector [
 	^ self constants defaultShowSelector
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtAnnotation >> doesReferenceExist [
 	"Return true if a referenced object is defined"
 	^ self subclassResponsibility
 ]
 
-{ #category : 'announcement handling' }
+{ #category : #'announcement handling' }
 GtAnnotation >> handleDocumentUpdateRequestedAnnouncement: aGt2DocumentUpdateRequestedAnnouncement [
 	
 ]
 
-{ #category : 'accessing - parameter values' }
+{ #category : #'accessing - parameter values' }
 GtAnnotation >> heightParameterValue [
 	^ self utility 
 		valueOf: self constants heightParameterName
@@ -60,19 +60,19 @@ GtAnnotation >> heightParameterValue [
 		defaultValue: [ self constants defaultPreviewHeight ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtAnnotation >> isPreviewDefined [
 	"Return true if a preview object is defined"
 	^ self subclassResponsibility
 ]
 
-{ #category : 'api - style' }
+{ #category : #'api - style' }
 GtAnnotation >> nodeFinder [
 	^ GtNodeNodeFinder new
 		node: self
 ]
 
-{ #category : 'api - style' }
+{ #category : #'api - style' }
 GtAnnotation >> nodeStyler: aBlText [
 	^ GtStyledNodeBuilder new
 		document: self gtDocument;
@@ -80,13 +80,13 @@ GtAnnotation >> nodeStyler: aBlText [
 		text: aBlText
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtAnnotation >> objectToPreview [
 	"Subclasses should define what object to preview"
 	^ self subclassResponsibility
 ]
 
-{ #category : 'private - styling' }
+{ #category : #'private - styling' }
 GtAnnotation >> previewAttributes [
 	^ {
 		GtResizablePreviewAttribute new
@@ -97,18 +97,18 @@ GtAnnotation >> previewAttributes [
 		}
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtAnnotation >> referenceParameterName [
 	"Return an annotation parameter name that holds a referenced object"
 	^ self constants nameParameterName
 ]
 
-{ #category : 'accessing - parameter values' }
+{ #category : #'accessing - parameter values' }
 GtAnnotation >> showEmptyValue [
 	^ self defaultShowSelector
 ]
 
-{ #category : 'accessing - parameter values' }
+{ #category : #'accessing - parameter values' }
 GtAnnotation >> showParameterValue [
 	<return: #Symbol>
 	^ self utility 
@@ -121,23 +121,23 @@ GtAnnotation >> showParameterValue [
 		defaultValue: [ self defaultShowSelector ]
 ]
 
-{ #category : 'private - styling' }
+{ #category : #'private - styling' }
 GtAnnotation >> styleExpandingPreviewInText: aBlRope [
 	self utility styleExpandingPreviewInText: aBlRope forNode: self
 ]
 
-{ #category : 'private - styling' }
+{ #category : #'private - styling' }
 GtAnnotation >> styleLinkInText: aBlRope [
 	self utility styleLinkInText: aBlRope forAnnotationNode: self
 ]
 
-{ #category : 'api - style' }
+{ #category : #'api - style' }
 GtAnnotation >> styleTextWithMarkup: aBlRope [
 	"Subclasses can add more styling"
 	self utility subtleMarkupsInText: aBlRope start: self start stop: self stop
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtAnnotation >> utility [
 	^ GtDocumentUtility
 ]

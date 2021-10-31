@@ -1,17 +1,17 @@
-Extension { #name : 'PRListItem' }
+Extension { #name : #PRListItem }
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRListItem >> gtListItemStyler [
 	<return: #GtListItemStyler>
 	^ self propertyAt: #gtListItemStyler
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRListItem >> gtListItemStyler: aGt2ListItemStyler [
 	self propertyAt: #gtListItemStyler put: aGt2ListItemStyler
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRListItem >> gtNodeStyler: aBlText [
 	^ GtStyledListItemBuilder new 
 		document: self gtDocument; 
@@ -20,19 +20,19 @@ PRListItem >> gtNodeStyler: aBlText [
 		text: aBlText
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRListItem >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	(self gtNodeStyler: aBlRope)
 		adornListItemSymbolInMarkupViewMode.
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRListItem >> styleTextWithoutInteractions: aBlRope [
 	"Do nothing"
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRListItem >> styleTextWithoutMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	(self gtNodeStyler: aBlRope)

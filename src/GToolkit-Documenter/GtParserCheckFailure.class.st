@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtParserCheckFailure',
-	#superclass : 'Error',
+	#name : #GtParserCheckFailure,
+	#superclass : #Error,
 	#instVars : [
 		'source',
 		'messages'
@@ -8,7 +8,7 @@ Class {
 	#category : 'GToolkit-Documenter-Styler'
 }
 
-{ #category : 'signalling' }
+{ #category : #signalling }
 GtParserCheckFailure class >> signalSource: sourceText messages: messageCollection [
 
 	^self new 
@@ -16,7 +16,7 @@ GtParserCheckFailure class >> signalSource: sourceText messages: messageCollecti
 		signal.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtParserCheckFailure >> initializeSource: sourceText messages: messageCollection [
 
 	source := sourceText.
@@ -25,7 +25,7 @@ GtParserCheckFailure >> initializeSource: sourceText messages: messageCollection
 
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtParserCheckFailure >> isResumable [
 	"It's OK to continue after this error has been signaled.
 	The parser might just go in to an infinite loop."

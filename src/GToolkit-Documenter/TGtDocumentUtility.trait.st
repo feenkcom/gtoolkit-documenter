@@ -1,14 +1,14 @@
 Trait {
-	#name : 'TGtDocumentUtility',
+	#name : #TGtDocumentUtility,
 	#category : 'GToolkit-Documenter-Utility'
 }
 
-{ #category : 'private' }
+{ #category : #private }
 TGtDocumentUtility classSide >> utility [
 	^ GtDocumentUtility
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 TGtDocumentUtility >> utility [
 	^ GtDocumentUtility
 ]

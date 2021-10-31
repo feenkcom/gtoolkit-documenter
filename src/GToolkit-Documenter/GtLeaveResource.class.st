@@ -1,23 +1,23 @@
 Class {
-	#name : 'GtLeaveResource',
-	#superclass : 'GtResource',
+	#name : #GtLeaveResource,
+	#superclass : #GtResource,
 	#instVars : [
 		'resource'
 	],
 	#category : 'GToolkit-Documenter-Resourcer'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtLeaveResource >> allResources [
 	^ #()
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtLeaveResource >> resource [
 	^ resource
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtLeaveResource >> resource: anObject [
 	self 
 		assert: [ anObject notNil ]
@@ -25,7 +25,7 @@ GtLeaveResource >> resource: anObject [
 	resource := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtLeaveResource >> resources [
 	^ #()
 ]

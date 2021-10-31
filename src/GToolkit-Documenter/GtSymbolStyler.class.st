@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtSymbolStyler',
-	#superclass : 'GtListItemStyler',
+	#name : #GtSymbolStyler,
+	#superclass : #GtListItemStyler,
 	#instVars : [
 		'symbols',
 		'symbolIndex'
@@ -8,7 +8,7 @@ Class {
 	#category : 'GToolkit-Documenter-Styler'
 }
 
-{ #category : 'style' }
+{ #category : #style }
 GtSymbolStyler >> adornListItemSymbolInMarkupViewModeInContext: aGtStyledListItemBuilder [
 	| aSymbol |
 	aSymbol := self currentSymbol.
@@ -27,7 +27,7 @@ GtSymbolStyler >> adornListItemSymbolInMarkupViewModeInContext: aGtStyledListIte
 						editorMeasurement ] }.
 ]
 
-{ #category : 'style' }
+{ #category : #style }
 GtSymbolStyler >> adornListItemSymbolInNoMarkupViewModeInContext: aGtStyledListItemBuilder [
 	"Style a list item symbol in no-markup view mode 
 	(as it should be visible in a VISIWIG editor).
@@ -35,19 +35,19 @@ GtSymbolStyler >> adornListItemSymbolInNoMarkupViewModeInContext: aGtStyledListI
 	Do nothing in this case"
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 GtSymbolStyler >> changeSymbol [
 	symbolIndex := (symbolIndex = symbols size)
 		ifTrue: [ 1 ] 
 		ifFalse: [ symbolIndex + 1 ].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtSymbolStyler >> currentSymbol [
 	^ symbols at: symbolIndex
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtSymbolStyler >> initialize [
 	super initialize.
 	symbols := '*-+'.

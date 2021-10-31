@@ -1,12 +1,12 @@
 Class {
-	#name : 'GtSplitTextStencilExamples',
-	#superclass : 'Object',
+	#name : #GtSplitTextStencilExamples,
+	#superclass : #Object,
 	#traits : 'TGt2DocumentConstants + TBlDebug',
 	#classTraits : 'TGt2DocumentConstants classTrait + TBlDebug classTrait',
 	#category : 'GToolkit-Documenter-Examples'
 }
 
-{ #category : 'examples - basic' }
+{ #category : #'examples - basic' }
 GtSplitTextStencilExamples >> basicStencil [
 	<gtExample>
 	| aStencil |
@@ -15,7 +15,7 @@ GtSplitTextStencilExamples >> basicStencil [
 	^ aStencil
 ]
 
-{ #category : 'examples - text samples' }
+{ #category : #'examples - text samples' }
 GtSplitTextStencilExamples >> helloFeenkCollection [
 	<gtExample>
 	| aString aCollection |
@@ -25,13 +25,13 @@ GtSplitTextStencilExamples >> helloFeenkCollection [
 	^ aCollection
 ]
 
-{ #category : 'examples - text samples' }
+{ #category : #'examples - text samples' }
 GtSplitTextStencilExamples >> helloFeenkString [
 	<gtExample>
 	^ 'Hello Feenk'
 ]
 
-{ #category : 'examples - elements' }
+{ #category : #'examples - elements' }
 GtSplitTextStencilExamples >> splitHelloFeenkIntoElements [
 	<gtExample>
 	<noTest>
@@ -43,7 +43,7 @@ GtSplitTextStencilExamples >> splitHelloFeenkIntoElements [
 	^ theElements
 ]
 
-{ #category : 'examples - elements' }
+{ #category : #'examples - elements' }
 GtSplitTextStencilExamples >> splitQuestionIntoElements [
 	<gtExample>
 	<noTest>
@@ -57,19 +57,19 @@ GtSplitTextStencilExamples >> splitQuestionIntoElements [
 	^ theElements
 ]
 
-{ #category : 'examples - text samples' }
+{ #category : #'examples - text samples' }
 GtSplitTextStencilExamples >> stringLoremIpsum300 [
 	<gtExample>
 	^ String loremIpsum: 300.
 ]
 
-{ #category : 'examples - text samples' }
+{ #category : #'examples - text samples' }
 GtSplitTextStencilExamples >> stringQuestion [
 	<gtExample>
 	^ 'How do you feenk today?'
 ]
 
-{ #category : 'examples - text samples' }
+{ #category : #'examples - text samples' }
 GtSplitTextStencilExamples >> stringWordHello [
 	<gtExample>
 	^ 'Hello'

@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtDocumentMissingReferencesGroup',
-	#superclass : 'Object',
+	#name : #GtDocumentMissingReferencesGroup,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -9,17 +9,17 @@ Class {
 	#category : 'GToolkit-Documenter-Validation'
 }
 
-{ #category : 'adding' }
+{ #category : #adding }
 GtDocumentMissingReferencesGroup >> addMissingReferences: aMissingReferencesResult [
 	missingReferences add: aMissingReferencesResult
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 GtDocumentMissingReferencesGroup >> collect: aBlock [
 	^ missingReferences collect: aBlock
 ]
 
-{ #category : 'ui' }
+{ #category : #ui }
 GtDocumentMissingReferencesGroup >> gtItemsFor: aView [
 	<gtView>
 	^ aView list
@@ -29,18 +29,18 @@ GtDocumentMissingReferencesGroup >> gtItemsFor: aView [
 		send: [ :aResult | aResult documentSource ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtDocumentMissingReferencesGroup >> initialize [
 	super initialize.
 	missingReferences := OrderedCollection new.
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtDocumentMissingReferencesGroup >> isEmpty [
 	^ missingReferences isEmpty
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDocumentMissingReferencesGroup >> size [
 	^ missingReferences size
 ]

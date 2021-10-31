@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtNodeNodeFinder',
-	#superclass : 'Object',
+	#name : #GtNodeNodeFinder,
+	#superclass : #Object,
 	#traits : 'TGtDocumentConstants + TBlDebug',
 	#classTraits : 'TGtDocumentConstants classTrait + TBlDebug classTrait',
 	#instVars : [
@@ -9,7 +9,7 @@ Class {
 	#category : 'GToolkit-Documenter-Styler Builder'
 }
 
-{ #category : 'find' }
+{ #category : #find }
 GtNodeNodeFinder >> annotationParameter: aParameterName [
 	"Return annotation's parameter AST node if exists.
 	Return the given annotation otherwise"
@@ -22,12 +22,12 @@ GtNodeNodeFinder >> annotationParameter: aParameterName [
 		ifNone: [ self node ].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtNodeNodeFinder >> node [
 	^ node
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtNodeNodeFinder >> node: anObject [
 	node := anObject
 ]

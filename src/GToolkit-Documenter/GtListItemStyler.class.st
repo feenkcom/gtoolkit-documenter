@@ -1,34 +1,34 @@
 Class {
-	#name : 'GtListItemStyler',
-	#superclass : 'Object',
+	#name : #GtListItemStyler,
+	#superclass : #Object,
 	#traits : 'TBlDebug + TGtDocumentConstants',
 	#classTraits : 'TBlDebug classTrait + TGtDocumentConstants classTrait',
 	#category : 'GToolkit-Documenter-Styler'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtListItemStyler class >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 GtListItemStyler class >> utility [
 	^ GtDocumentUtility
 ]
 
-{ #category : 'style' }
+{ #category : #style }
 GtListItemStyler >> adornListItemSymbolInMarkupViewModeInContext: aGtStyledListItemBuilder [
 	self subclassResponsibility
 ]
 
-{ #category : 'style' }
+{ #category : #style }
 GtListItemStyler >> adornListItemSymbolInNoMarkupViewModeInContext: aGtStyledListItemBuilder [
 	"Style a list item symbol in no-markup view mode 
 	(as it should be visible in a VISIWIG editor)"
 	self subclassResponsibility
 ]
 
-{ #category : 'style - cursor' }
+{ #category : #'style - cursor' }
 GtListItemStyler >> clearAdornmentsInContext: aGtStyledListItemBuilder [
 	"Clear all list item symbol adornments"
 	(aGtStyledListItemBuilder listItemSymbolText)
@@ -36,12 +36,12 @@ GtListItemStyler >> clearAdornmentsInContext: aGtStyledListItemBuilder [
 				eachAttribute class = BrTextAdornmentDynamicAttribute ].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtListItemStyler >> constants [
 	^ GtDocumentConstants
 ]
 
-{ #category : 'style' }
+{ #category : #style }
 GtListItemStyler >> updateForNewListItem [
 	"Update what every is needed to style new list item"
 ]

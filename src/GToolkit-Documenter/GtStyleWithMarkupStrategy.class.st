@@ -1,15 +1,15 @@
 Class {
-	#name : 'GtStyleWithMarkupStrategy',
-	#superclass : 'GtStylerStrategy',
+	#name : #GtStyleWithMarkupStrategy,
+	#superclass : #GtStylerStrategy,
 	#category : 'GToolkit-Documenter-Styler'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtStyleWithMarkupStrategy >> isEditing [
 	^ true
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 GtStyleWithMarkupStrategy >> styleText: aBlRope withNode: aPRDocumentItem [
 	aPRDocumentItem styleTextWithMarkup: aBlRope
 ]

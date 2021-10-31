@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtStylerStrategy',
-	#superclass : 'Object',
+	#name : #GtStylerStrategy,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#classInstVars : [
@@ -9,52 +9,52 @@ Class {
 	#category : 'GToolkit-Documenter-Styler'
 }
 
-{ #category : 'cleanup' }
+{ #category : #cleanup }
 GtStylerStrategy class >> cleanUp [
 	self resetUniqueInstance
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 GtStylerStrategy class >> displayMarkup [
 	^ GtStyleWithMarkupStrategy uniqueInstance
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 GtStylerStrategy class >> hideMarkup [
 	^ GtStyleWithoutMarkupStrategy uniqueInstance
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 GtStylerStrategy class >> noInteractions [
 	^ GtStyleWithoutInteractionsStrategy uniqueInstance
 ]
 
-{ #category : 'cleanup' }
+{ #category : #cleanup }
 GtStylerStrategy class >> resetUniqueInstance [
 	uniqueInstance := nil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtStylerStrategy class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtStylerStrategy >> isEditing [
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtStylerStrategy >> isNoInteractions [
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtStylerStrategy >> isReading [
 	^ false
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 GtStylerStrategy >> styleText: aBlRope withNode: aPRDocumentItem [
 	self subclassResponsibility
 ]

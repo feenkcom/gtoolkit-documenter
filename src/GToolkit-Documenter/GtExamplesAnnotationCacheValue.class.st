@@ -1,18 +1,18 @@
 Class {
-	#name : 'GtExamplesAnnotationCacheValue',
-	#superclass : 'GtAnnotationCacheValue',
+	#name : #GtExamplesAnnotationCacheValue,
+	#superclass : #GtAnnotationCacheValue,
 	#instVars : [
 		'exampleGroup'
 	],
 	#category : 'GToolkit-Documenter-Cache'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplesAnnotationCacheValue >> exampleGroup [
 	^ exampleGroup
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtExamplesAnnotationCacheValue >> exampleGroup: anObject [
 	exampleGroup := anObject
 ]

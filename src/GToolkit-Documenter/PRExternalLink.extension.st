@@ -1,16 +1,16 @@
-Extension { #name : 'PRExternalLink' }
+Extension { #name : #PRExternalLink }
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRExternalLink >> doesReferenceExist [
 	^ self url isString and: [ self url isNotEmpty ]
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRExternalLink >> startMarkup [
 	^ self utility startMarkupFor: PRLink
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRExternalLink >> styleTextWithMarkup: aBlRope [
 	self utility
 		subtleMarkupsInText: aBlRope 
@@ -32,7 +32,7 @@ PRExternalLink >> styleTextWithMarkup: aBlRope [
 				styleUnknownLinkFrom: self start + 1 to: self stop - 1 ].
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRExternalLink >> styleTextWithoutInteractions: aBlRope [
 	self utility
 		subtleMarkupsInText: aBlRope 
@@ -44,7 +44,7 @@ PRExternalLink >> styleTextWithoutInteractions: aBlRope [
 		stop: self stop
 ]
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRExternalLink >> styleTextWithoutMarkup: aBlRope [
 	self styleTextWithMarkup: aBlRope.
 	super styleTextWithoutMarkup: aBlRope.

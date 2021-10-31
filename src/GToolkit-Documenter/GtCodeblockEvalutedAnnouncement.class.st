@@ -1,18 +1,18 @@
 Class {
-	#name : 'GtCodeblockEvalutedAnnouncement',
-	#superclass : 'GtDocumentAnnouncement',
+	#name : #GtCodeblockEvalutedAnnouncement,
+	#superclass : #GtDocumentAnnouncement,
 	#instVars : [
 		'codeSnippet'
 	],
 	#category : 'GToolkit-Documenter-Announcements'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtCodeblockEvalutedAnnouncement >> codeSnippet [
 	^ codeSnippet
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtCodeblockEvalutedAnnouncement >> codeSnippet: anObject [
 	codeSnippet := anObject
 ]

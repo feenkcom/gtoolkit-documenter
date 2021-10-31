@@ -1,10 +1,10 @@
 Class {
-	#name : 'GtEpiceaRBTextStyler',
-	#superclass : 'BrRBTextStyler',
+	#name : #GtEpiceaRBTextStyler,
+	#superclass : #BrRBTextStyler,
 	#category : 'GToolkit-Documenter-Epicea'
 }
 
-{ #category : 'private' }
+{ #category : #private }
 GtEpiceaRBTextStyler >> resolveStyleFor: aVariableNode [
 	| value |
 	value := super resolveStyleFor: aVariableNode.

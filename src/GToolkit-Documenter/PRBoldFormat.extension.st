@@ -1,6 +1,6 @@
-Extension { #name : 'PRBoldFormat' }
+Extension { #name : #PRBoldFormat }
 
-{ #category : '*GToolkit-Documenter' }
+{ #category : #'*GToolkit-Documenter' }
 PRBoldFormat >> styleSubText: aBlRope [
 	^ aBlRope bold
 ]
