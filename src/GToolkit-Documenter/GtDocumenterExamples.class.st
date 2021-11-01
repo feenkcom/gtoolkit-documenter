@@ -1169,6 +1169,7 @@ GtDocumenterExamples >> documentWithInvalidParameter3 [
 { #category : #'formats, header, and lists' }
 GtDocumenterExamples >> documentWithLists [
 	<gtExample>
+	<noTest>
 	| aDocument |
 	aDocument := self defaultDocument text: self contentWithLists.
 	self assert: aDocument text asString equals: self contentWithLists.
