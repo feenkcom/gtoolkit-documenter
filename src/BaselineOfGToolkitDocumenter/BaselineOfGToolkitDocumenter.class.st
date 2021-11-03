@@ -12,12 +12,12 @@ ${icebergFile:path=feenkcom/gtoolkit-demos/doc/tutorial/esug-2018-documenter/doc
 
 "
 Class {
-	#name : 'BaselineOfGToolkitDocumenter',
-	#superclass : 'BaselineOf',
-	#category : 'BaselineOfGToolkitDocumenter'
+	#name : #BaselineOfGToolkitDocumenter,
+	#superclass : #BaselineOf,
+	#category : #BaselineOfGToolkitDocumenter
 }
 
-{ #category : 'baseline' }
+{ #category : #baseline }
 BaselineOfGToolkitDocumenter >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
@@ -38,11 +38,13 @@ BaselineOfGToolkitDocumenter >> baseline: spec [
 				spec repository: 'github://feenkcom/pillar:v7.3.25/src' ];
 			baseline: 'DeepTraverser' with: [
 				spec repository: 'github://feenkcom/DeepTraverser:main/src' ];
+			baseline: 'LepiterEngineCore' with: [
+				spec repository: 'github://feenkcom/lepiter:main/src' ];
 			baseline: 'XdocClient' with: [
 				spec repository: 'github://feenkcom/xdoc:main/src' ].
 		spec 
 			package: 'GToolkit-Documenter' with: [
-				spec requires: #('PillarExporter' 'GToolkitCoder' 'GToolkitCompleter' 'GToolkitUtility' 'GToolkitExamples' 'GToolkitInspector' ). ];
+				spec requires: #('PillarExporter' 'GToolkitCoder' 'GToolkitCompleter' 'GToolkitUtility' 'GToolkitExamples' 'GToolkitInspector' 'LepiterEngineCore' ). ];
 			package: 'GToolkit-Documenter-XDoc' with: [
 				spec requires: #('GToolkit-Documenter' 'GToolkitUtility' 'XdocClient' ). ]. ].
 
