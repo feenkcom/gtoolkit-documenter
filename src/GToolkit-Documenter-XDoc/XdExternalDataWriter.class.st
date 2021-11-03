@@ -1,8 +1,8 @@
 Class {
 	#name : #XdExternalDataWriter,
 	#superclass : #Object,
-	#traits : 'TGtDocumentConstants',
-	#classTraits : 'TGtDocumentConstants classTrait',
+	#traits : 'TLepiterConstants',
+	#classTraits : 'TLepiterConstants classTrait',
 	#instVars : [
 		'associatedNames',
 		'counter',
