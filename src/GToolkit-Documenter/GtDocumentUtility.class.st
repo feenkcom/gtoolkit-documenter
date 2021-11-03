@@ -1,9 +1,9 @@
 Class {
 	#name : #GtDocumentUtility,
 	#superclass : #Object,
-	#traits : 'TGtDocumentConstants',
-	#classTraits : 'TGtDocumentConstants classTrait',
-	#category : 'GToolkit-Documenter-Utility'
+	#traits : 'TLepiterConstants',
+	#classTraits : 'TLepiterConstants classTrait',
+	#category : #'GToolkit-Documenter-Utility'
 }
 
 { #category : #'pillar - parameter values' }

@@ -1,8 +1,8 @@
 Class {
 	#name : #GtDocumentCompletionStrategy,
 	#superclass : #GtCompletionStrategy,
-	#traits : 'TGtDocumentConstants',
-	#classTraits : 'TGtDocumentConstants classTrait',
+	#traits : 'TLepiterConstants',
+	#classTraits : 'TLepiterConstants classTrait',
 	#instVars : [
 		'directory',
 		'annotationTags',
@@ -18,7 +18,7 @@ Class {
 	#classVars : [
 		'ParameterValueCompletionSelectors'
 	],
-	#category : 'GToolkit-Documenter-Completer'
+	#category : #'GToolkit-Documenter-Completer'
 }
 
 { #category : #accessing }

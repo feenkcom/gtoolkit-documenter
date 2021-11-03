@@ -1,15 +1,15 @@
 Class {
 	#name : #GtExamplesStatusLabelAttribute,
 	#superclass : #BrTextAdornmentAttribute,
-	#traits : 'TGtDocumentConstants',
-	#classTraits : 'TGtDocumentConstants classTrait',
+	#traits : 'TLepiterConstants',
+	#classTraits : 'TLepiterConstants classTrait',
 	#instVars : [
 		'total',
 		'results',
 		'successes',
 		'issues'
 	],
-	#category : 'GToolkit-Documenter-Text - Attributes'
+	#category : #'GToolkit-Documenter-Text - Attributes'
 }
 
 { #category : #accessing }

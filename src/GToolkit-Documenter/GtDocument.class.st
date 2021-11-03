@@ -4,8 +4,8 @@ This was deprecated. See ${class:name=GtDocumenter}$ instead.
 Class {
 	#name : #GtDocument,
 	#superclass : #Object,
-	#traits : 'TBlDebug + TGtAnnouncer + TGtDocumentConstants',
-	#classTraits : 'TBlDebug classTrait + TGtAnnouncer classTrait + TGtDocumentConstants classTrait',
+	#traits : 'TBlDebug + TGtAnnouncer + TLepiterConstants',
+	#classTraits : 'TBlDebug classTrait + TGtAnnouncer classTrait + TLepiterConstants classTrait',
 	#instVars : [
 		'editor',
 		'announcer',
@@ -17,7 +17,7 @@ Class {
 		'pillarParser',
 		'addOns'
 	],
-	#category : 'GToolkit-Documenter-! Core'
+	#category : #'GToolkit-Documenter-! Core'
 }
 
 { #category : #accessing }

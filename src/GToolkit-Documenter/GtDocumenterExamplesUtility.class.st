@@ -4,9 +4,9 @@ I am used by ${class:GtDocumenterExamples}$.
 Class {
 	#name : #GtDocumenterExamplesUtility,
 	#superclass : #Object,
-	#traits : 'TGtDocumentConstants + TBlDebug',
-	#classTraits : 'TGtDocumentConstants classTrait + TBlDebug classTrait',
-	#category : 'GToolkit-Documenter-Examples'
+	#traits : 'TLepiterConstants + TBlDebug',
+	#classTraits : 'TLepiterConstants classTrait + TBlDebug classTrait',
+	#category : #'GToolkit-Documenter-Examples'
 }
 
 { #category : #accessing }

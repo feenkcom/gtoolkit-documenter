@@ -1,14 +1,14 @@
 Class {
 	#name : #GtPreviewStencil,
 	#superclass : #BrStencil,
-	#traits : 'TGtDocumentConstants',
-	#classTraits : 'TGtDocumentConstants classTrait',
+	#traits : 'TLepiterConstants',
+	#classTraits : 'TLepiterConstants classTrait',
 	#instVars : [
 		'result',
 		'showSelector',
 		'height'
 	],
-	#category : 'GToolkit-Documenter-Brick - Stencils'
+	#category : #'GToolkit-Documenter-Brick - Stencils'
 }
 
 { #category : #accessing }

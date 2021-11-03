@@ -10,12 +10,12 @@ ${example:GtDocumenterExamples>>#documentWithCodeblock|noCode=true|previewExpand
 Class {
 	#name : #GtDocumenterEditorVariableBindingsModel,
 	#superclass : #BrWidgetModel,
-	#traits : 'TGtDocumentConstants',
-	#classTraits : 'TGtDocumentConstants classTrait',
+	#traits : 'TLepiterConstants',
+	#classTraits : 'TLepiterConstants classTrait',
 	#instVars : [
 		'variableBindings'
 	],
-	#category : 'GToolkit-Documenter-! Editor - Model'
+	#category : #'GToolkit-Documenter-! Editor - Model'
 }
 
 { #category : #defaults }

@@ -6,8 +6,8 @@ I use ${class:GtDocumenterExamplesUtility}$ to simplify examples.
 Class {
 	#name : #GtDocumenterExamples,
 	#superclass : #Object,
-	#traits : 'TGtDocumentConstants + TGtExampleAssertable',
-	#classTraits : 'TGtDocumentConstants classTrait + TGtExampleAssertable classTrait',
+	#traits : 'TLepiterConstants + TGtExampleAssertable',
+	#classTraits : 'TLepiterConstants classTrait + TGtExampleAssertable classTrait',
 	#instVars : [
 		'memorySystem',
 		'tempDirectory',
