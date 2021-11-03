@@ -185,7 +185,7 @@ GtExamplePreviewStencil >> previewShowSelector: anObject [
 
 { #category : #accessing }
 GtExamplePreviewStencil >> result [
-	^ self exampleWithResult returnValueOrExampleException
+	^ self exampleWithResult returnValue
 ]
 
 { #category : #private }
