@@ -1,8 +1,8 @@
 Class {
 	#name : #GtStyleTextProcess,
 	#superclass : #Object,
-	#traits : 'TBlDebug + TGtDocumentConstants',
-	#classTraits : 'TBlDebug classTrait + TGtDocumentConstants classTrait',
+	#traits : 'TBlDebug + TLepiterConstants',
+	#classTraits : 'TBlDebug classTrait + TLepiterConstants classTrait',
 	#instVars : [
 		'document',
 		'process',
@@ -10,7 +10,7 @@ Class {
 		'mutex',
 		'delay'
 	],
-	#category : 'GToolkit-Documenter-Styler'
+	#category : #'GToolkit-Documenter-Styler'
 }
 
 { #category : #accessing }

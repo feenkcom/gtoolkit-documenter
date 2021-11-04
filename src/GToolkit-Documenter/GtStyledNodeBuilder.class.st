@@ -1,15 +1,15 @@
 Class {
 	#name : #GtStyledNodeBuilder,
 	#superclass : #Object,
-	#traits : 'TGtDocumentConstants + TBlDebug',
-	#classTraits : 'TGtDocumentConstants classTrait + TBlDebug classTrait',
+	#traits : 'TLepiterConstants + TBlDebug',
+	#classTraits : 'TLepiterConstants classTrait + TBlDebug classTrait',
 	#instVars : [
 		'document',
 		'node',
 		'text',
 		'properties'
 	],
-	#category : 'GToolkit-Documenter-Styler Builder'
+	#category : #'GToolkit-Documenter-Styler Builder'
 }
 
 { #category : #'accessing - properties' }

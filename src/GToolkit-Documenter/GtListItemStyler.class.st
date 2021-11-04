@@ -1,9 +1,9 @@
 Class {
 	#name : #GtListItemStyler,
 	#superclass : #Object,
-	#traits : 'TBlDebug + TGtDocumentConstants',
-	#classTraits : 'TBlDebug classTrait + TGtDocumentConstants classTrait',
-	#category : 'GToolkit-Documenter-Styler'
+	#traits : 'TBlDebug + TLepiterConstants',
+	#classTraits : 'TBlDebug classTrait + TLepiterConstants classTrait',
+	#category : #'GToolkit-Documenter-Styler'
 }
 
 { #category : #accessing }

@@ -12,12 +12,12 @@ I am used for:
 Class {
 	#name : #GtDocumenter,
 	#superclass : #BlElement,
-	#traits : 'TBrLayoutResizable + TGtDocumentConstants + TGtPagerPageInstantiator',
-	#classTraits : 'TBrLayoutResizable classTrait + TGtDocumentConstants classTrait + TGtPagerPageInstantiator classTrait',
+	#traits : 'TBrLayoutResizable + TLepiterConstants + TGtPagerPageInstantiator',
+	#classTraits : 'TBrLayoutResizable classTrait + TLepiterConstants classTrait + TGtPagerPageInstantiator classTrait',
 	#instVars : [
 		'titleNotifier'
 	],
-	#category : 'GToolkit-Documenter-! Core'
+	#category : #'GToolkit-Documenter-! Core'
 }
 
 { #category : #'instance creation' }

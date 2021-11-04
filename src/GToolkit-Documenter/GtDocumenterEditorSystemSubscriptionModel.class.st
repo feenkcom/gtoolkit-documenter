@@ -7,8 +7,8 @@ I am used by ${class:GtDocumenterEditor}$.
 Class {
 	#name : #GtDocumenterEditorSystemSubscriptionModel,
 	#superclass : #BrWidgetModel,
-	#traits : 'TGtDocumentConstants',
-	#classTraits : 'TGtDocumentConstants classTrait',
+	#traits : 'TLepiterConstants',
+	#classTraits : 'TLepiterConstants classTrait',
 	#instVars : [
 		'announcer',
 		'mutexSubscription',
@@ -16,7 +16,7 @@ Class {
 		'isInSceneGraph',
 		'shouldUpdateWhenInSceneGraph'
 	],
-	#category : 'GToolkit-Documenter-! Editor - Model'
+	#category : #'GToolkit-Documenter-! Editor - Model'
 }
 
 { #category : #'api - announcer' }

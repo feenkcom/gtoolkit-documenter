@@ -1,12 +1,12 @@
 Class {
 	#name : #GtNodeNodeFinder,
 	#superclass : #Object,
-	#traits : 'TGtDocumentConstants + TBlDebug',
-	#classTraits : 'TGtDocumentConstants classTrait + TBlDebug classTrait',
+	#traits : 'TLepiterConstants + TBlDebug',
+	#classTraits : 'TLepiterConstants classTrait + TBlDebug classTrait',
 	#instVars : [
 		'node'
 	],
-	#category : 'GToolkit-Documenter-Styler Builder'
+	#category : #'GToolkit-Documenter-Styler Builder'
 }
 
 { #category : #find }

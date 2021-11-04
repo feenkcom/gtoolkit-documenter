@@ -21,37 +21,31 @@ Class {
 BaselineOfGToolkitDocumenter >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
-		spec
+		spec 
 			baseline: 'GToolkitCompleter' with: [
-				spec repository: 'github://feenkcom/gtoolkit-completer:v0.8.439/src' ].
-		spec
+				spec repository: 'github://feenkcom/gtoolkit-completer:main/src' ];
 			baseline: 'GToolkitCoder' with: [
-				spec repository: 'github://feenkcom/gtoolkit-coder:v0.8.548/src' ].
-		spec
+				spec repository: 'github://feenkcom/gtoolkit-coder:main/src' ];
 			baseline: 'GToolkitUtility' with: [
-				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.81/src' ].
-		spec
+				spec repository: 'github://feenkcom/gtoolkit-utility:main/src' ];
 			baseline: 'GToolkitVisualizerPhlow' with: [
-				spec repository: 'github://feenkcom/gtoolkit-visualizer:v0.8.487/src' ].
-		spec
+				spec repository: 'github://feenkcom/gtoolkit-visualizer:main/src' ];
 			baseline: 'GToolkitExamples' with: [
-				spec repository: 'github://feenkcom/gtoolkit-examples:v0.8.34/src' ].
-		spec
+				spec repository: 'github://feenkcom/gtoolkit-examples:main/src' ];
 			baseline: 'GToolkitInspector' with: [
-				spec repository: 'github://feenkcom/gtoolkit-inspector:v0.8.612/src' ].
-		spec
+				spec repository: 'github://feenkcom/gtoolkit-inspector:main/src' ];
 			baseline: 'PillarExporter' with: [
-				spec repository: 'github://feenkcom/pillar:v7.3.25/src' ].
-		spec
+				spec repository: 'github://feenkcom/pillar:v7.3.25/src' ];
 			baseline: 'DeepTraverser' with: [
-				spec repository: 'github://feenkcom/DeepTraverser:v1.1.89/src' ].
-		spec
+				spec repository: 'github://feenkcom/DeepTraverser:main/src' ];
+			baseline: 'LepiterEngineCore' with: [
+				spec repository: 'github://feenkcom/lepiter:main/src' ];
 			baseline: 'XdocClient' with: [
-				spec repository: 'github://feenkcom/xdoc:v0.8.462/src' ].
+				spec repository: 'github://feenkcom/xdoc:main/src' ].
+		spec 
+			package: 'GToolkit-Documenter' with: [
+				spec requires: #('PillarExporter' 'GToolkitCoder' 'GToolkitCompleter' 'GToolkitUtility' 'GToolkitExamples' 'GToolkitInspector' 'LepiterEngineCore' ). ];
+			package: 'GToolkit-Documenter-XDoc' with: [
+				spec requires: #('GToolkit-Documenter' 'GToolkitUtility' 'XdocClient' ). ]. ].
 
-		spec package: 'GToolkit-Documenter' with: [
-			spec requires: #('PillarExporter' 'GToolkitCoder' 'GToolkitCompleter' 'GToolkitUtility' 'GToolkitExamples' 'GToolkitInspector') ].
-		spec package: 'GToolkit-Documenter-XDoc' with: [
-			spec requires: #('GToolkit-Documenter' 'GToolkitUtility' 'XdocClient') ].
-	]
 ]

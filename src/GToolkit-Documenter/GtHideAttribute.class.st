@@ -1,12 +1,12 @@
 Class {
 	#name : #GtHideAttribute,
 	#superclass : #BrTextAdornmentAttribute,
-	#traits : 'TGtDocumentConstants',
-	#classTraits : 'TGtDocumentConstants classTrait',
+	#traits : 'TLepiterConstants',
+	#classTraits : 'TLepiterConstants classTrait',
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'GToolkit-Documenter-Text - Attributes'
+	#category : #'GToolkit-Documenter-Text - Attributes'
 }
 
 { #category : #cleanup }

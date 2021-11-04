@@ -1,9 +1,9 @@
 Class {
 	#name : #GtExplanationAnnotation,
 	#superclass : #PRAbstractAnnotation,
-	#traits : 'TBlDebug + TGtDocumentConstants',
-	#classTraits : 'TBlDebug classTrait + TGtDocumentConstants classTrait',
-	#category : 'GToolkit-Documenter-Annotations'
+	#traits : 'TBlDebug + TLepiterConstants',
+	#classTraits : 'TBlDebug classTrait + TLepiterConstants classTrait',
+	#category : #'GToolkit-Documenter-Annotations'
 }
 
 { #category : #protected }

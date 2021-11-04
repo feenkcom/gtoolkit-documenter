@@ -11,15 +11,15 @@ I extend ${class:BrEditor}$ by:
 Class {
 	#name : #GtDocumenterEditor,
 	#superclass : #BrEditor,
-	#traits : 'TGtDocumentConstants',
-	#classTraits : 'TGtDocumentConstants classTrait',
+	#traits : 'TLepiterConstants',
+	#classTraits : 'TLepiterConstants classTrait',
 	#instVars : [
 		'normalFontSizeModel',
 		'storageModel',
 		'subscriptionModel',
 		'variableBindindsModel'
 	],
-	#category : 'GToolkit-Documenter-! Editor - UI'
+	#category : #'GToolkit-Documenter-! Editor - UI'
 }
 
 { #category : #'api - announcer' }

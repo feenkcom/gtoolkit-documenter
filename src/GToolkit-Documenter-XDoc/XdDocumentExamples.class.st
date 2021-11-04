@@ -1,8 +1,8 @@
 Class {
 	#name : #XdDocumentExamples,
 	#superclass : #Object,
-	#traits : 'TGtDocumentConstants',
-	#classTraits : 'TGtDocumentConstants classTrait',
+	#traits : 'TLepiterConstants',
+	#classTraits : 'TLepiterConstants classTrait',
 	#instVars : [
 		'documentExamples',
 		'xdocExamples'
