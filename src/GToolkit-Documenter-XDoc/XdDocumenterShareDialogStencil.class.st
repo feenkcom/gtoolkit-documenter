@@ -11,7 +11,7 @@ Class {
 XdDocumenterShareDialogStencil >> create [
 	<return: #Object>
 	| anInformation anActions |
-	anInformation := XdDocumenterShareInformation default last.
+	anInformation := LeShareInformation default last.
 	anActions := XdShareActions new.
 	anActions 
 		publishAction: [ self document xdocPublisher information: anInformation; publish ];
